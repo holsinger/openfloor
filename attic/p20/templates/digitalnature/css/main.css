@@ -1,0 +1,1151 @@
+
+
+/* CSS design by Digital Nature | gfx@digitalnature.ro */
+
+/* global properties */
+*{
+ margin:0;
+ padding:0;
+ list-style-type:none;
+}
+
+body{
+ width:100%;
+ margin:0 auto;
+ font-family:Arial, Geneva, Helvetica, sans-serif;
+ font-size:12px;
+ color:#4C4C4C;
+}
+
+html, body{
+ height:100%;
+}
+
+a{
+ color:#407fac;
+ text-decoration:none;
+}
+
+a:hover{
+
+ text-decoration:underline;
+}
+
+fieldset{
+ padding:0 10px;
+ display:block;
+ border:1px solid #CCCCCC;
+}
+
+legend{
+ font-weight:bold;
+ padding:0 4px;
+ color:#407fac;
+}
+
+#wrapper {
+ position: relative;
+ min-height:100%;
+ height:auto !important; /* ie ignores it */
+ height:100%; /* fix */
+ min-width:780px; /* if anyone finds a acceptable solution to emulate this in IE, please let me know... */
+}
+
+/*** HEADER ***/
+
+#header{
+ background:#B7E366 url(../images/header-bg.gif) repeat-x left top;
+ height:73px;
+}
+
+#header ul#nav{
+ text-align:right;
+}
+
+#header ul#nav li{
+ background:transparent url(../images/nav-div.gif) no-repeat right top;
+ width:auto;
+ height:72px; 
+ float:left;
+} 
+
+#header ul#nav li a.main{
+ font-family:"Lucida Sans Unicode", Geneva, Arial, Helvetica, sans-serif;
+ font-size:18px;
+ font-weight:normal;
+ color:#fff;
+ text-decoration:none;
+ text-transform:lowercase;
+ background:none;
+ width:140px;
+ height:72px; 
+ display:block;
+ margin:0 1px;
+}
+
+/* home nav is wider */
+#header ul#nav li#navhome a.main{
+ width:199px;
+}
+
+#header ul#nav li a.main span{
+ display:block;
+ padding-top:32px;
+ padding-right:8px;
+}
+
+#header ul#nav li a.main:hover,
+/* set menu colors based on active page */
+#home #header ul#nav li#navhome a.main,
+#login #header ul#nav li#navlogin a.main,
+#register #header ul#nav li#navregister a.main,
+#faq #header ul#nav li#navfaq a.main{
+ background:transparent url(../images/nav-active.gif) repeat-x left top;
+}
+
+/* submenus */
+
+/* submenus (css based, might not work properly in IE) */
+#header ul#nav ul {
+ position: absolute;
+ z-index:101;
+ border:4px solid #b7e366;
+ text-align:left;
+ width:170px;
+ padding:6px 0;
+ height:auto;
+ top:67px;
+ background:#FFFFFF;
+}
+
+#header ul#nav ul ul {
+ top: 0;
+ left: 100%;
+}
+
+#header ul#nav ul li{
+ float:none;
+ background:none;
+ background-image:none;
+ height:18px;
+ display:inline;
+}
+
+#header ul#nav ul,
+#header ul#nav li:hover ul ul,
+#header ul#nav ul li:hover ul ul{
+ display: none;
+}
+
+#header ul#nav li:hover ul,
+#header ul#nav ul li:hover ul,
+#header ul#nav ul ul li:hover ul{
+ display: block;
+}
+
+#header ul#nav ul a{
+ color:#212123;
+ text-decoration:none;
+ width:auto;
+ height:14px;
+ padding:4px 0 4px 20px;
+ margin:0;
+ font-weight:normal;
+ display:block; 
+ text-align:left;
+}
+
+#header ul#nav ul a:hover{
+ color:#fff;
+ font-weight:bold; 
+ background:#b7e366;
+ display:block;
+}
+
+
+#header a#logo{
+ position:absolute;
+ top:8px;
+ left:25px;
+ width:100px;
+ height:60px;
+ display:block;
+ background:transparent url(../images/logo.png) no-repeat left top; 
+}
+
+#header a#logo span{
+ display:none; /* hide, this is for accessibiliy only */
+}
+
+#header #search{
+ position:absolute;
+ width:auto;
+ height:18px;
+ top:55px;
+ right:0;
+}
+
+#header #search .go{
+ float:left;
+ border:0;
+ margin:0;
+ padding:0;
+}
+
+#header #search .text{
+ background:transparent url(../images/search-bg.gif) repeat-x left top;
+ float:left;
+ width:190px;
+ padding:2px 5px 4px 5px;
+ margin:0;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ color:#617346;
+ border:0;
+}
+
+/*** CONTENT ***/
+
+#content{
+ background:transparent url(../images/content.gif) repeat-x left top;
+ min-height:250px;
+ height:auto !important;
+ height:250px;
+ padding-bottom:80px; /* 66+14 */
+}
+
+#breadcrumb{
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ color:#666666;
+ position:absolute;
+ top:86px;
+}
+
+
+/* sidebar */
+
+#sidebar{
+ background:transparent url(../images/sidebar.gif) repeat-x left top;
+ float:left;
+ width:200px;
+ min-height:250px;
+ height:auto !important;
+ height:250px; 
+ border-right:1px solid #fff;
+ padding-top:36px;
+}
+
+#sidebar .box{
+ padding:10px;
+}
+
+#sidebar .box h1{
+ font-family:"Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+ font-size:18px;
+ font-weight:normal;
+ text-transform:uppercase;
+ text-align:right;
+ color:#c0c0c0;
+ border-bottom:1px solid #cdcdcd;
+ margin-bottom:8px;
+}
+
+#sidebar .box h1 a{
+ color:#c0c0c0;
+ background:none;
+ text-decoration:none;
+}
+
+#sidebar .box h1 a:hover{
+ background:none;
+ color:#FF6600;
+}
+
+#sidebar .box h1 span.expand a.expand-down{
+ background:transparent url(../images/expand.gif) no-repeat left top;
+ width:17px;
+ height:9px;
+ display:block;
+ float:left;
+ margin-top:8px;
+ cursor:pointer;
+}
+
+#sidebar .box h1 span.expand a.expand-up{
+ background:transparent url(../images/expand-back.gif) no-repeat left top;
+ width:17px;
+ height:9px;
+ display:block;
+ float:left;
+ margin-top:8px;
+ cursor:pointer;  
+}
+
+#sidebar .box h1 a.htitle{
+ cursor:move;
+}
+
+#sidebar .box li a{
+ background:transparent url(../images/b1.gif) no-repeat 100% 50%;
+ color:#5b6055;
+ text-decoration:none;
+ display:block;
+ padding-right:16px;
+}
+ 
+#sidebar input.text{
+ width:100%;
+ margin-bottom:6px;
+ border:1px solid #CCCCCC;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ padding:2px 0; 
+}
+
+#sidebar input.check{
+ border:0;
+ text-align:right;
+}
+
+/* box frame */
+
+#sidebar .box2{
+ background:transparent url(../images/box2top.gif) repeat-y left top;
+}
+
+#sidebar .box2 .wrap{
+ border-top:1px solid #e3e3e3;
+ border-right:1px solid #e3e3e3;
+ background:transparent url(../images/box2sub-bg.gif) repeat-x left bottom;
+}
+
+#sidebar .box2 .content{
+ background:transparent url(../images/box2sub-left.gif) no-repeat left bottom;
+ text-align:right; 
+}
+
+#sidebar .box2 .content div{
+ height:auto !important;
+ height:40px;
+}
+
+#sidebar .box2 a{
+ color:#3b87a6;
+ text-decoration:none;
+}
+
+#sidebar .box2 a:hover{
+text-decoration:underline;
+}
+
+/* categories */
+
+#sidebar ul#categorynav{ 
+ font-weight:bold;
+ color:#5b6055;
+}
+
+#sidebar ul#categorynav li{
+ border-bottom:1px solid #f1f1f1;
+ padding:3px 0;
+}
+
+#sidebar ul#categorynav li a{
+ background:transparent url(../images/cat01.gif) no-repeat right top; /* category colors here */
+ color:#5b6055;
+ text-decoration:none;
+ display:block;
+ padding:2px 10px 2px 0;
+}
+
+#sidebar ul#categorynav li a:hover{
+ background:transparent url(../images/cat01.gif) repeat-x right top;
+ color:#fff;
+}
+
+#categories_rss{
+ margin-bottom:-16px;
+ margin-left:-15px;
+}
+
+/* queued news */
+
+#sidebar ul#queuednews{
+ text-align:right;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ color:#5b6055;
+}
+
+#sidebar ul#queuednews li{
+ padding:2px 0;
+}
+
+#sidebar ul#queuednews li a{
+ background:transparent url(../images/news.gif) repeat-y right top; 
+ color:#5b6055;
+ text-decoration:none;
+ display:block;
+ padding:2px 4px;
+}
+
+#sidebar ul#queuednews li a:hover{
+ background:transparent url(../images/news-active.gif) repeat-y right top;
+ color:#407fac;
+}
+
+/* left main navigation */
+
+#sidebar ul#sidenav{
+ text-align:right;
+ font-weight:normal;
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:18px;
+ color:#407fac;
+}
+
+#sidebar ul#sidenav li{
+ padding:0;
+ padding-bottom:2px;
+ background:transparent url(../images/leftnav-div.gif) no-repeat right bottom;
+
+}
+
+#sidebar ul#sidenav li a{
+ background:transparent url(../images/leftnav.gif) repeat-y right top;
+ color:#407fac;
+ text-decoration:none;
+ display:block;
+ padding:4px 6px;
+ border-right:4px solid #e5e5e5;  
+}
+
+#sidebar ul#sidenav li a:hover{
+ background:#fff;
+ border-right:4px solid #999999;  
+ color:#407fac;
+}
+
+/* rss */
+
+#sidebar ul#rss{
+ text-align:right;
+ color:#5b6055;
+}
+
+#sidebar ul#rss li{
+ padding:2px 0;
+}
+
+#sidebar ul#rss li a{
+ background:transparent url(../images/rss.gif) no-repeat 100% 50%;
+ color:#5b6055;
+ text-decoration:none;
+ display:block;
+ padding-right:16px;
+}
+
+#sidebar ul#rss li a:hover{
+ color:#dc0d0d;
+}
+
+/* login */
+
+#sidebar .login{
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+}
+
+#sidebar .login p#register{
+ padding-top:10px;
+}
+
+#sidebar h3{
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:16px;
+ color:#92978d;
+}
+
+#sidebar h3 img.welcome-avatar{
+ float:right;
+ display:block;
+ padding-left:4px;
+}
+
+/* right (main) */
+
+#main{
+ padding:35px 16px 0px 218px;
+ display:block;
+}
+
+#main h2{
+ font-family:"Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+ font-size:22px;
+ font-weight:normal;
+ font-variant:small-caps;
+ color:#aaa9a9;
+ border-bottom:1px solid #aaa9a9;
+ margin-bottom:30px;
+}
+
+#user h2{
+ font-family:"Lucida Sans Unicode", Arial, Helvetica, sans-serif;
+ font-size:19px;
+ font-weight:normal;
+ font-variant:small-caps;
+ color:#aaa9a9;
+ border-bottom:1px solid #aaa9a9;
+ margin-bottom:30px;
+}
+
+/* forms */
+
+#main label, #main input, #main form fieldset span {
+ display: block;
+ margin-right:5px;
+ float: left;
+ margin-bottom: 10px;
+}
+
+#main form{
+ margin-bottom:10px;
+}
+
+#main input.check{
+ width:auto;
+}
+
+#main label {
+ text-align: right;
+ width:auto;
+ padding-right: 20px;
+}
+
+#main form fieldset br {
+ clear: left;
+}
+
+/* content tab menus */
+
+#main .tabs{
+ float:right;
+ width:100%;
+ margin-bottom:15px;
+ border-bottom:2px solid #90c036;
+}
+
+#main .tabs ul {
+ margin:0;
+ list-style:none;
+ padding-right:12px;
+ 
+}
+
+#main .tabs li {
+ display:inline;
+}
+
+#main .tabs a {
+ float:right;
+ background: transparent url("../images/tab-left.gif") no-repeat left top;
+ padding:0 0 0 10px;
+ margin-right:4px;
+ text-decoration:none;
+ font-size:10px;
+ font-weight:bold;
+}
+	  
+#main .tabs a span {
+ float:left;
+ display:block;
+ background: transparent url("../images/tab-right.gif") no-repeat right top;
+ padding:3px 15px 4px 6px;
+ color:#5b6055;
+}
+
+/* Commented Backslash Hack hides rule from IE5-Mac \*/
+#main .tabs a span{
+ float:none;
+}
+
+/* End IE5-Mac hack */
+
+#main .tabs a:hover span {
+  color:#5b6055;
+}
+
+#main .tabs a:hover {
+ background-position:0% -58px;
+}
+
+#main .tabs a:hover span {
+ background-position:100% -58px;
+ color:#FFFFFF;
+}
+
+#main .tabs li.active a, #main .tabs li.active a:hover{
+ background-position:0% -58px;
+ color:#FFFFFF;
+ font-weight:bold;
+}
+
+#main .tabs li.active a span, #main .tabs li.active a:hover span  {
+ background-position:100% -58px;
+ color:#FFFFFF;
+}
+
+/* story entry */
+
+.entry{
+ background:transparent url(../images/info-bg.gif) repeat-x 0px 29px;
+ margin-top:4px;
+ margin-bottom:36px;
+}
+
+.entry .vote a{
+ display:block;
+ float:left;
+ width:80px;
+ height:80px;
+ text-align:center;
+ text-decoration:none;
+ background:transparent url(../images/vote.gif) no-repeat left top;
+ cursor:pointer;
+ margin-left:-5px;
+}
+
+.entry .vote a:hover{
+ background:transparent url(../images/vote-active.gif) no-repeat left top;
+}
+
+.entry .vote a b.nv{
+ font-family:Arial Black, Arial, Helvetica, sans-serif;
+ font-size:24px;
+ font-weight:normal;
+ color:#ccdaba;
+ display:block;
+ margin-top:12px;
+}
+
+.entry .vote a:hover b.nv{
+ color:#e6f9d7;
+}
+
+.entry .vote a b.go{
+ font-family:"Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+ font-size:11px;
+ font-weight:bold;
+ text-transform:uppercase;
+ color:#ccdaba;
+ margin:0;
+ padding:0;
+ height:auto !important;
+ height:1px; /* fix for IE */
+}
+
+.entry .vote a:hover b.go{
+ color:#e6f9d7;
+}
+
+.entry .voted a{
+ display:block;
+ float:left;
+ width:80px;
+ height:80px;
+ text-align:center;
+ text-decoration:none;
+ background:transparent url(../images/vote-active.gif) no-repeat left top;
+ cursor:pointer;
+ margin-left:-5px;
+}
+
+.entry .voted a:hover{
+ background:transparent url(../images/vote-active.gif) no-repeat left top;
+}
+
+.entry .voted a b.nv{
+ font-family:Arial Black, Arial, Helvetica, sans-serif;
+ font-size:24px;
+ font-weight:normal;
+ color:#e6f9d7;
+ display:block;
+ margin-top:12px;
+}
+
+.entry .voted a:hover b.nv{
+ color:#e6f9d7;
+}
+
+.entry .voted a b.go{
+ font-family:"Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+ font-size:11px;
+ font-weight:bold;
+ text-transform:uppercase;
+ color:#e6f9d7;
+ display:block;
+ margin:0;
+ padding:0;
+ height:auto !important;
+ height:1px; /* fix for IE */
+}
+
+.entry .voted a:hover b.go{
+ color:#e6f9d7;
+}
+
+
+.entry .info{
+ height:80px;
+}
+
+.entry .info h4{
+ font-family:Arial, Helvetica, sans-serif;
+ font-size:18px;
+ font-weight:normal;
+ color:#8dc042;
+ display:block;
+ padding-top:8px;
+ padding-bottom:8px;
+}
+
+.entry .info h4 a{
+ color:#8dc042;
+ text-decoration:none;
+}
+
+.entry .info h4 a:hover{
+ color: #CC6600;
+ background:none;
+ text-decoration:none;
+}
+
+.entry .info a.avatar{
+ float:left;
+}
+
+.entry .info a.avatar img{
+ margin-left:3px;
+}
+
+.entry .info p.infotext{
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ color:#4c4c4c;
+ display:block;
+ margin-top:3px;
+ margin-left:5px;
+ float:left;
+}
+
+.entry .info p.infotext a{
+ color:#407fac;
+ text-decoration:none;
+}
+
+.entry .info p.infotext a:hover{
+
+ text-decoration:underline;
+}
+
+.entry .content{
+ display:block;
+ margin:4px 0;
+}
+
+.entry .tools{
+ background:transparent url(../images/tools-bg.gif) repeat-x left top;
+ height:22px;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px; 
+}
+
+.entry .tools p.left{
+ background:transparent url(../images/tools-left.gif) no-repeat left top;
+ width:13px;
+ height:22px;
+ display:block;
+ float:left;
+}
+
+.entry .tools p.right{
+ background:transparent url(../images/tools-right.gif) no-repeat right top;
+ width:15px;
+ height:22px;
+ display:block;
+ float:right;
+}
+
+.entry .tools p.links{
+ float:left;
+ display:block;
+ margin-top:4px;
+}
+
+.entry .tools p.links a{
+ color:#407fac;
+ text-decoration:none;
+}
+
+.entry .tools p.links a:hover{
+ background:none;
+ text-decoration:underline;
+}
+
+.entry .tools p.links a.comments, .entry .tools a.discuss{
+ padding-left:12px;
+ font-weight:bold;
+}
+
+.entry .tools a.discuss{
+ background:transparent url(../images/comments.gif) no-repeat 0px 2px;
+}
+
+.entry .tools p.links a.discuss:hover{
+ background:transparent url(../images/comments.gif) no-repeat 0px 2px;
+}
+
+
+.entry .tools p.links a.comments{
+ background:transparent url(../images/comments-2.gif) no-repeat 0px 2px;
+ color:#FF6600;
+} 
+
+.entry .tools p.links a.comments:hover{
+ background:transparent url(../images/comments-2.gif) no-repeat 0px 2px;
+}
+
+
+#tools{
+ background:transparent url(../images/tools-bg.gif) repeat-x left top;
+ width:auto;
+ height:22px;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px; 
+ 
+}
+
+#tools p.left{
+ background:transparent url(../images/tools-right2.gif) no-repeat left top;
+ width:13px;
+ height:22px;
+ display:block;
+ float:left;
+}
+
+#tools p.links{
+ float:left;
+ display:block;
+ padding-top:3px;
+}
+
+#tools p.links a{
+ color:#407fac;
+ text-decoration:none;
+}
+
+#tools p.links a:hover{
+ text-decoration:underline;
+}
+
+.error {
+color:#c00;font-weight:bold;border:1px solid #ff0000;padding:5px;
+}
+
+/* Thumbnails */
+ 	  	 
+a.screen b {
+ position:absolute;
+ visibility:hidden; /* hide the image */
+}
+ 	  	 
+a.screen:hover {
+ text-decoration:none;
+ z-index:1000;
+}
+ 	  	 
+a.screen:hover b {
+ visibility:visible; /* make the image visible */
+ z-index:500;
+ }
+
+ a.screen:hover b img {
+ margin:0px;
+ border:solid 1px #ccc;
+ }
+ 
+
+/* comments */
+
+ul#comments-list ul{
+ margin-left:40px;
+}
+
+.comment-head{
+ background:transparent url(../images/commenthead-bg.gif) repeat-x left top;
+ color:#fff;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ height:16px;
+}
+
+.comment-head a{
+ font-weight:bold;
+ color:#FFCC00;
+}
+.comment-head a:hover{
+ color: #FFFF00;
+ background:none;
+}
+
+.comment-head .cleft{
+ background:transparent url(../images/commenthead-left.gif) no-repeat left top;
+ height:16px;
+ padding:0 10px;
+}
+
+.comment-head .details{
+ padding-top:1px;
+ display:block;
+}
+
+.comment-body{
+
+ background:transparent url(../images/commentbody.gif) repeat-x left top;
+ padding:0 10px;
+ margin-top:1px;
+ padding-bottom:10px;
+}
+
+.comment-info p.links{
+ padding:6px 10px;
+}
+
+.comment-info p.links a{
+ font-weight:bold;
+}
+
+
+/* pagination */
+
+.pagination{
+ background:transparent url(../images/div-h.gif) repeat-x left top;
+ padding:10px 0;
+ margin:20px 0 0;
+ text-align:right;
+}
+
+.pagination a{
+ padding:1px 4px;
+ text-decoration:none;
+ background:transparent url(../images/pagination.gif) repeat-x left bottom;
+ border:1px solid #ccc;
+ margin:0 2px;
+ color:#666666;
+}
+
+.pagination a:hover{
+ background: #fff;
+ color:#666666; 
+ border:1px solid #aaa; 
+}
+
+.pagination span, .pagination span.nextprev{
+ background:#FFFFFF;
+ border:1px solid #CCCCCC;
+ color:#CCCCCC;
+ padding:1px 4px; 
+ margin:0 2px; 
+}
+
+.pagination span.current{
+ background:#546E8C;
+ border:1px solid #A49979;
+ color:#FFFFFF;
+ margin:0 2px; 
+ font-weight:bold;
+}
+
+ .pagination h4 {
+ margin-top:-1.45em;padding:0;border:none
+ } /* In html1.php, pages links:EITHER span OR a */
+
+
+/*** FOOTER ***/
+
+#footer{
+ position:absolute;
+ bottom:0 !important;
+ width:100%;
+ height:46px;
+ background:transparent url(../images/footer-bg.gif) repeat-x left bottom; 
+}
+
+#footer p{
+ padding:20px 25px 0 25px;
+ color:#E0EECB;
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+}
+
+#footer a{
+ font-weight:bold;
+ color:#fff;
+ background:none;
+ text-decoration:none;
+}
+
+#footer a:hover{
+ background:none;
+ text-decoration:underline;
+}
+
+a#dn{
+ width:133px;
+ height:7px;
+ display:block;
+}
+
+a#dn, a#dn:hover{
+ background:transparent url(../images/dn.gif) no-repeat left top;
+}
+
+a#dn span{
+ display:none;
+}
+
+#stats {
+width: 49%;
+float: right;
+ }
+ 
+#personal_info {
+width: 49%;
+float: left;
+}
+
+#bookmarklet {
+float:left;
+width:100%;
+padding-top:15px;
+}
+
+
+/*** MISC ***/
+
+.left{
+ float:left;
+}
+
+.right{
+ float:right;
+}
+
+/* tooltip (thumb) */
+
+.tooltip img{
+ border:2px solid #999999;
+}
+
+input.submit, .submit-s, .log2,
+#main form input.submit, #main form .submit-s, #main form .log2{
+ font-family:Verdana, Arial, Helvetica, sans-serif;
+ font-size:10px;
+ color:#767676;
+ border:1px solid #d4d4d4;
+ padding:0px 32px 2px 18px !important;
+ padding:0px 0px 2px 18px; /* stupid IE */
+ text-transform:capitalize;
+ text-align:left;
+ width:auto;
+ float:none;
+ background:transparent url(../images/button.gif) no-repeat left top; 
+}
+
+input.submit:hover, .submit-s:hover, .log2:hover,
+#main form input.submit:hover, #main form .submit-s:hover, #main form .log2:hover{
+ background:transparent url(../images/button-active.gif) no-repeat left top; 
+ border:1px solid #ffd9bf;
+}
+
+#main table.listing{
+ width:95%;
+}
+
+#main table.listing td, #main table.listing th{
+ padding:0 4px;
+ text-align:left;
+}
+
+#main table.listing th{
+ background: #EEEEEA;
+ padding:4px;
+}
+
+#main table.listing th a:hover{
+ background:none;
+ color:#CC0000;
+}
+
+
+/* Live2 */
+
+.live2 strong {
+	font-size: 95%;
+	color: #c00;
+}
+
+.live2-item {
+    width:95%;
+	border-bottom: 1px solid #ccc;
+	padding: 5px 2px 0px 2px;
+	min-height: 25px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.live2-ts, .live2-type, .live2-votes, .live2-story, .live2-who, .live2-status {
+	float: left;
+	display: block;
+}
+
+.live2-ts {
+	width: 10%;
+	text-align: left;
+}
+
+.live2-type {
+	width: 10%;
+    text-align: left;
+}
+
+.live2-type img {
+	border: none;
+	margin: 0 0 0 0;
+	vertical-align: middle;
+}
+
+.live2-votes {
+	width: 10%;
+        text-align: left;
+}
+
+.live2-story {
+	width: 35%;
+	text-align: left;
+}
+
+.live2-who {
+	width: 16%;
+        text-align: left;
+}
+
+.live2-status {
+	width: 14%;
+	text-align: left;
+}
+
+.live2-problem {
+	color: #F00;
+}

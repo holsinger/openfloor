@@ -1,0 +1,15 @@
+.box-bottom{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-box-bottom.png', sizingMethod='crop');
+}
+#right h3{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/bg-h3.png', sizingMethod='crop');
+}
+body{
+	width:expression(document.documentElement.clientWidth < 1024 ? "967px" : "auto");
+}
+a.what span{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='images/a-what-this.png', sizingMethod='crop');
+}

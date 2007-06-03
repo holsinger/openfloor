@@ -1,0 +1,17 @@
+#header ul#nav ul {
+ margin-left:-140px;
+}
+
+input.submit, .submit-s, .log2,
+#main form input.submit, #main form .submit-s, #main form .log2{
+ padding:0px 0px 2px 18px !important; /* holy shit IE7 know !important */
+}
+
+/* IE 7 has a hard time formatting the rss icons next to categories in the sidebar so we're disabling them */
+#category_rss {
+ display:none;
+}
+
+#category_rss li {
+ border-bottom:none;
+}

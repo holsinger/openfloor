@@ -1,0 +1,1 @@
+<?php $this->config_load("/libs/lang.conf", null, null); ?>

@@ -1,0 +1,93 @@
+/*THIS PART IS FOR THE NAVIGATION LINKS*/
+.nav1 a:link, .nav1 a:visited, .nav2 a:link, .nav2 a:visited, .nav3 a:link, .nav3 a:visited, .nav4 a:link, .nav4 a:visited{
+	color: #4E4E4E;
+	width: 80px;
+	height: 20px;
+	line-height: 20px;
+	background: url(../img/01_linkbg2.gif) top repeat-y;
+	padding: 0;
+}
+.nav1 a:link, .nav1 a:visited{
+	position: absolute;
+	top: 2px;
+	left: 14px;
+}
+.nav2 a:link, .nav2 a:visited{
+	position: absolute;
+	top: 2px;
+	left: 96px;
+}
+.nav3 a:link, .nav3 a:visited{
+	position: absolute;
+	top: 2px;
+	left: 178px;
+}
+.nav4 a:link, .nav4 a:visited{
+	position: absolute;
+	top: 2px;
+	left: 260px;
+}
+/*HOVER EFFECTS*/
+.nav1 a:hover, .nav1 a:active, .nav2 a:hover, .nav2 a:active, .nav3 a:hover, .nav3 a:active, .nav4 a:hover, .nav4 a:active{
+	background: url(../img/01_linkbg1.gif) top repeat-y;
+	margin: 1px 0 0 0;
+}
+/*USE A DIFFERENT COLOR WHEN USER IS ON THAT PAGE*/
+#home .nav1 a:link, #home .nav1 a:visited, #itempage .nav1 a:link, #itempage .nav1 a:visited, #archives .nav2 a:link, #archives .nav2 a:visited{
+	background: url(../img/01_linkbg1.gif) top repeat-y;
+}
+/*THE FOLLOWING PART IS FOR THE FONT CONTROL*/
+#fontcontrol{
+	background: none;
+	width: 66px;
+	height: 18px;
+	position: absolute;
+	top: 18px;
+	left: 615px;
+}
+#fontcontrol ul{
+	background: none;
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#fontcontrol li{
+	background: none;
+}
+#fontcontrol i{
+	display: block;
+	visibility: hidden;
+}
+.font1 a:link, .font1 a:visited{
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	background: url(../img/01_font1.gif) no-repeat;
+}
+.font2 a:link, .font2 a:visited{
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: 0;
+	left: 22px;
+	background: url(../img/01_font2.gif) no-repeat;
+}
+.font3 a:link, .font3 a:visited{
+	width: 18px;
+	height: 18px;
+	position: absolute;
+	top: 0;
+	left: 44px;
+	background: url(../img/01_font3.gif) no-repeat;
+}
+.font1 a:hover, .font1 a:active{
+	background-position: 0 -18px;
+}
+.font2 a:hover, .font2 a:active{
+	background-position: 0 -18px;
+}
+.font3 a:hover, .font3 a:active{
+	background-position: 0 -18px;
+}

@@ -1,0 +1,112 @@
+/*
+-------------------------
+Steef de Winter (CC) 2006
+-------------------------
+- Make sure all your category id's have a color (look in your database at category id's for the id's you use)
+- It's easier to put the names of the categories in the comments (look in your database at category id's for the names)
+- Make sure your own colors are the same for .cat#, #catcol# and #cat 
+*/
+  
+#sidebar ul#categorynav li.cat a{
+ background:none;
+}
+#sidebar ul#categorynav li.cat a:hover{
+ background:none;
+ color:#CC0000;
+}
+
+#sidebar ul#categorynav li.cat1 a{
+ background:transparent url(../images/cat01.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat1 a:hover{
+ background:transparent url(../images/cat01.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat2 a{
+ background:transparent url(../images/cat02.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat2 a:hover{
+ background:transparent url(../images/cat02.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat3 a{
+ background:transparent url(../images/cat03.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat3 a:hover{
+ background:transparent url(../images/cat03.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat4 a{
+ background:transparent url(../images/cat04.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat4 a:hover{
+ background:transparent url(../images/cat04.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat5 a{
+ background:transparent url(../images/cat05.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat5 a:hover{
+ background:transparent url(../images/cat05.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat6 a{
+ background:transparent url(../images/cat06.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat6 a:hover{
+ background:transparent url(../images/cat06.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat7 a{
+ background:transparent url(../images/cat07.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat7 a:hover{
+ background:transparent url(../images/cat07.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat8 a{
+ background:transparent url(../images/cat08.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat8 a:hover{
+ background:transparent url(../images/cat08.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat9 a{
+ background:transparent url(../images/cat09.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat9 a:hover{
+ background:transparent url(../images/cat09.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat10 a{
+ background:transparent url(../images/cat10.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat10 a:hover{
+ background:transparent url(../images/cat10.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat11 a{
+ background:transparent url(../images/cat11.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat11 a:hover{
+ background:transparent url(../images/cat11.gif) repeat-x right top;
+ color:#fff;
+}
+
+#sidebar ul#categorynav li.cat12 a{
+ background:transparent url(../images/cat12.gif) no-repeat right top;
+}
+#sidebar ul#categorynav li.cat12 a:hover{
+ background:transparent url(../images/cat12.gif) repeat-x right top;
+ color:#fff;
+}

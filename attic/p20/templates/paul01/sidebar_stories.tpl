@@ -1,0 +1,1 @@
+<a href="{$story_url}">{$title_short|truncate:22}</a><br>

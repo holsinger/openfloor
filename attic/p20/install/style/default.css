@@ -1,0 +1,353 @@
+/*This is the LEAF skin, made by Ivan for Nucleus CMS*/
+/*I am not a pro in CSS - If you are one and if you think it can be done better, by all means go ahead and adjust to your needs*/
+/*I've tried my best to comment on most of the styles*/
+
+/*BASIC STUFF*/
+/*Link styling*/
+a:link, a:visited{
+	color: #23598C;
+	text-decoration: none;
+}
+a:hover, a:active{
+	color: black;
+}
+/*Image*/
+img{
+	border: none;
+}
+/*This is used for hidden stuff, stuff that you don't want people to see with CSS enabled*/
+/*Try disabling CSS and you'll see some messages that you don't see with CSS enabled*/
+.hidden{
+	display: none;
+}
+/*Use this to centerize any image/text*/
+.centerize{
+	text-align: center;
+}
+/*MAIN STRUCTURE*/
+/*Don't edit if you know what's good for you*/
+body{
+	color: #4C4C4C;
+	font-size: 11px;
+	font-family: Trebuchet MS, "Lucida Sans Unicode", Arial, Lucida Sans, Tahoma, Sans-Serif;
+	background: #123454 url('../img/01_bg.gif') repeat-x top;
+	text-align: center; padding-left:0; padding-right:0; padding-top:20px; padding-bottom:20px
+}
+#wrapper{
+	width: 700px;
+	margin: auto;
+	background: white url('../img/01_bodybg.jpg') repeat-y;
+	text-align: left
+}
+/*The header image*/
+#header{
+	position: relative;
+	width: 700px;
+	height: 151px;
+	margin: auto;
+	background: url('../img/01_header01.jpg') no-repeat;
+}
+/*The container - edit "230" to your desired width for the sidebar (lines 55, 58, 62)*/
+#container{
+	width: 100%;
+	float: left;
+	margin-right: -230px;
+}
+#content{
+	margin-right: 230px;
+	padding: 25px 0;
+}
+#sidebar{
+	width: 230px;
+	float: right;
+	padding: 25px 0;
+	text-align: left;
+}
+#footer{
+	width: 700px;
+	margin: auto;
+	background: url('../img/01_footer.jpg') no-repeat top;; padding-left:0; padding-right:0; padding-top:20px; padding-bottom:0
+}
+/*Credits part is where the copyrights/xhtml/css validation stuff will be*/
+#credits{
+	font-size: 10px;
+	text-align: center;
+	color: #F7F7F7;
+}
+#credits a:link, #credits a:visited{
+	color: #CFE6FD;
+}
+#credits a:hover, #credits a:active{
+	color: white;
+}
+/*Ignore this*/
+.clearing{
+	height: 0;
+	clear: both;
+}
+/*THE MAIN TITLE - YOUR BLOG NAME ON TOP OF THE HEADER*/
+#header h1{
+	position: absolute;
+	top: 16px;
+	left: 24px;
+	font-size: 20px;
+	line-height: 20px;
+	margin: 0;
+}
+/*THE NAVIGATION - More detailed stuff in 01_navigation.css*/
+#navigation{
+	font-size: 11px;
+	width: 694px;
+	height: 22px;
+	position: absolute;
+	top: 129px;
+	left: 3px;
+}
+#navigation ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+#navigation li{
+	background: none;
+}
+/*THE HEADERS (h2: Main titles, h3: Blog and Sidebar titles, h4: Comment names/userlinks)*/
+h2{
+	color: #3E565F;
+	margin: 0 0 3px 0;
+	font-size: 16px;
+}
+h3{
+	color: #3E565F;
+	margin: 0 0 8px 0;
+	font-size: 14px;
+}
+h4{
+	font-size: 11px;
+}
+/*Sub structure - To create the margins of the body (where text will be placed)*/
+.contentdiv{
+	margin: 0 15px 0 22px;
+}
+.sidebardiv{
+	margin: 0 22px 0 15px;
+}
+/*The image styling of your blog*/
+.contentbody img{
+	border: 1px solid black;
+}
+/*COMMENTS STYLING*/
+.c_commentbody{
+	background: url('../img/01_hdot.gif') repeat-x bottom;; padding-left:0; padding-right:0; padding-top:0; padding-bottom:5px
+}
+/*User links on comments made (eg. Ivan wrote:)*/
+.c_userlink{
+	margin: 0 0 5px 0;
+}
+/*Time stamp info in comments made*/
+.c_commentinfo{
+	font-size: 10px;
+	background: url('../img/01_item1.gif') no-repeat 0 1px;; margin-left:0; margin-right:0; margin-top:3px; margin-bottom:0; padding-left:13px; padding-right:0; padding-top:0; padding-bottom:0
+}
+/*THE STYLING OF THE BODY OF CONTENTS AND SIDEBAR*/
+.contentbody{
+	margin: 0;
+	padding: 0 0 30px 43px;
+	text-align: justify;
+}
+.sidebarbody{
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+/*THIS PART IS THE SIDEBAR'S INDIVIDUAL DIVS*/
+/*Note that it doesn't have any styling, but it's here in case you want to add some styles*/
+.sidebarin{
+	padding: 0;
+	margin: 0;
+}
+/*THIS PART IS TO STYLE THE BACKGROUND IMAGES (THE QUOTE ON THE LEFT)*/
+/*You can create different image on your on, but only if you know what you're doing should you edit this part*/
+.divweblog .contentbody, .divarchives .contentbody, .divarchivelist .contentbody, .diverror .contentbody, .divmemberinfo .contentbody,
+.divsendmessage .contentbody, .divcommentitem .contentbody, .divsearch .contentbody{
+	background: url('../img/01_quote.gif') no-repeat 0 3px;
+}
+/*A different background for comments made*/
+.divcommentsmade .contentbody{
+	background: url('../img/01_quote1.gif') no-repeat 0 3px;
+}
+.divcommentsmademe .contentbody{
+	background: url('../img/01_quote4.gif') no-repeat 0 3px;
+}
+
+/*Add comment form's background*/
+.divaddcommentbg{
+	background: url('../img/01_quote3.gif') no-repeat 0 3px;
+}
+/*MORE DETAILED STUFF - Item details of your blog items*/
+.itemdetails{
+	text-align: right;
+	background: url('../img/01_hdot.gif') repeat-x top;; padding-left:0; padding-right:0; padding-top:5px; padding-bottom:0
+}
+/*Posted by*/
+.item1{
+	background: url('../img/01_item1.gif') no-repeat 0 1px;; margin-left:12px; margin-right:0; margin-top:0; margin-bottom:0; padding-left:13px; padding-right:0; padding-top:0; padding-bottom:0
+}
+/*Category*/
+.item2{
+	background: url('../img/01_item2.gif') no-repeat 0 3px;; margin-left:12px; margin-right:0; margin-top:0; margin-bottom:0; padding-left:13px; padding-right:0; padding-top:0; padding-bottom:0
+}
+/*Comments*/
+.item3{
+	background: url('../img/01_item3.gif') no-repeat 0 3px;; margin-left:12px; margin-right:0; margin-top:0; margin-bottom:0; padding-left:15px; padding-right:0; padding-top:0; padding-bottom:0
+}
+/*STYLING OF SIDE TITLES*/
+/*You can remove all parts here if you do not wish to use images as your side titles*/
+.about h3{
+	height: 23px;
+	text-indent: -9999px;
+	background: url('../img/01_s_about.gif') no-repeat;; margin-left:0; margin-right:0; margin-top:0; margin-bottom:2px
+}
+.login h3{
+	height: 23px;
+	text-indent: -9999px;
+	background: url('../img/01_s_login.gif') no-repeat;; margin-left:0; margin-right:0; margin-top:0; margin-bottom:2px
+}
+.categories h3{
+	height: 23px;
+	text-indent: -9999px;
+	background: url('../img/01_s_categories.gif') no-repeat;; margin-left:0; margin-right:0; margin-top:0; margin-bottom:2px
+}
+.search h3{
+	height: 23px;
+	text-indent: -9999px;
+	background: url('../img/01_s_search.gif') no-repeat;; margin-left:0; margin-right:0; margin-top:0; margin-bottom:2px
+}
+.links h3{
+	height: 23px;
+	text-indent: -9999px;
+	background: url('../img/01_s_links.gif') no-repeat;; margin-left:0; margin-right:0; margin-top:0; margin-bottom:2px
+}
+/*MAIN TITLES*/
+/*You can remove all parts here if you do not wish to use images as your main titles*/
+h2.weblog, h2.comments, h2.commentsmade, h2.addcomment, h2.archives, h2.error, h2.member, h2.sendmessage, h2.searchpage{
+	height: 23px;
+	text-indent: -9999px;
+	margin: 0 0 5px 0;
+}
+h2.weblog{
+	background: url('../img/01_m_weblog.gif') no-repeat;
+}
+h2.comments{
+	background: url('../img/01_m_comments.gif') no-repeat;
+}
+h2.commentsmade{
+	background: url('../img/01_m_commentsmade.gif') no-repeat;
+}
+h2.addcomment{
+	background: url('../img/01_m_addcomment.gif') no-repeat;
+}
+h2.archives{
+	background: url('../img/01_m_archives.gif') no-repeat;
+}
+h2.error{
+	background: url('../img/01_m_error.gif') no-repeat;
+}
+h2.member{
+	background: url('../img/01_m_member.gif') no-repeat;
+}
+h2.sendmessage{
+	background: url('../img/01_m_sendmessage.gif') no-repeat;
+}
+h2.searchpage{
+	background: url('../img/01_m_search.gif') no-repeat;
+}
+/*FORM STYLING*/
+form{
+	margin: 0;
+	text-align: left;
+}
+/*Styling for all form fields*/
+.txpCommentInputMessage{
+	width: 130px;
+	font-size: 11px;
+	font-family: Trebuchet MS, "Lucida Sans Unicode", Arial, Lucida Sans, Tahoma, Sans-Serif;
+	margin: 0 0 2px 0;
+	color: #494949;
+	border-top: 1px solid #868686;
+	border-left: 1px solid #868686;
+	border-bottom: 1px solid #D4D2CF;
+	border-right: 1px solid #D4D2CF;
+}
+/*Form fields on focus effect (when user click on that input field)*/
+.txpCommentInputMessage:focus{
+	border: 1px solid black;
+}
+/*Form's buttons*/
+.button{
+	font-size: 11px;
+	font-family: Trebuchet MS, "Lucida Sans Unicode", Arial, Lucida Sans, Tahoma, Sans-Serif;
+	margin: 1px 0 0 0;
+	padding: 1px 10px;
+	color: #494949;
+	background: white;
+	border-top: 1px solid #D4D2CF;
+	border-left: 1px solid #D4D2CF;
+	border-bottom: 1px solid #868686;
+	border-right: 1px solid #868686;
+}
+/*Don't show textarea scrollbar on IE*/
+textarea{
+	overflow: hidden;
+}
+/*Wider formfields for comment and mailform*/
+.commentform .txpCommentInputMessage, .mailform .txpCommentInputMessage{
+	width: 240px;
+}
+/*Add background to comment textarea*/
+.commentform textarea{
+	background: white url('../img/01_txbg.gif') no-repeat center;
+}
+/*STYLING OF THE FORMS BACKGROUND, AND THE LITTLE ROUNDED TOPS*/
+/*Add comment form and mailform (same size)*/
+.divaddcomment, .divsendmessage form{
+	width: 390px;
+	margin-left: 40px;
+	background: #E2EDF0 url('../img/01_mountaintop.gif') no-repeat top;
+}
+.commentform, .mailform{
+	padding: 10px 20px;
+}
+/*Login form and search form (same size)*/
+.login form, #searchform{
+	width: 164px;
+	background: #E2EDF0 url('../img/01_mountaintop2.gif') no-repeat top;
+}
+.loginform, #searchform{
+	padding: 10px
+}
+/*THE LIST STYLES*/
+ul{
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+li{
+	background: url('../img/01_arrow.gif') no-repeat 0 6px;; margin-left:0; margin-right:0; margin-top:0; margin-bottom:2px; padding-left:9px; padding-right:0; padding-top:0; padding-bottom:0
+}
+/*THE SEARCH HIGHLIGHT*/
+.highlight{
+	font-weight: bold;
+	text-decoration: underline;
+}
+/* RSS LIVE SEARCH STYLES */
+#LSResult {}
+
+#LSShadow { padding: 2px; }
+
+#LSRes { background-color: #fff}
+.LSRow { padding: 0 5px; }
+
+#LSHighlight { background-color: #aaa; }
+
+#LSHeader { padding: 1px 1px 1px; }
+.lsDate { display: block; color: #555; }

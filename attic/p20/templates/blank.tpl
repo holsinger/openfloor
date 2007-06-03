@@ -1,0 +1,1 @@
+{config_load file="/libs/lang.conf"}

@@ -1,0 +1,102 @@
+BODY {
+  /*behavior:url("csshover.htc");*/
+	color: #444444;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: normal;
+	font-size: 60%;
+	line-height: 1.5em;
+	background:#0067B3;
+}
+
+p {
+font-size: 75%;
+}
+
+.whiterounded {
+  	background:center url(whiterounded.png) no-repeat;
+	height: 581px;
+	width: 686px;
+	behavior: url(iepngfix.htc);
+}
+
+.ticker {
+  	/*background:#0157AC url(ticker.png);*/
+	background:#0157AC;
+	background-repeat: repeat-y;
+	background-attachment: fixed; z-index: 1100;
+	width:35px;
+	height:100%;
+}
+
+hr {
+border: 0;
+color: #B7EBFF;
+background-color: #B7EBFF;
+height: 3px;
+width: 510px;
+text-align: center;
+}
+
+.blue {
+	color: #0092CE;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: bold;
+}
+.red {
+	color: #EB2733;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: bold;
+}
+.small {
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: normal;
+	font-size:60%;
+}
+
+
+#flag {
+	background:center url(flag.png) no-repeat;
+	height:150;
+	width:688;
+	position:relative;
+}
+#flag:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+#contactInput {
+  position:relative;
+	background: #BED2EA;
+	color: #444444;
+	border-left: solid 1px #4C6699;
+	border-top: solid 1px #4C6699;
+	font: normal 10pt/1.8em "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+}
+#contactButton {
+	position:relative;
+	background: #EB2733;
+	height: 25px;
+	color: #FFFFFF;
+	border-right: solid 2px #CF2635;
+	border-bottom: solid 2px #CF2635;
+	font: bold 8pt "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	cursor:pointer;
+	bottom: 1px;
+}
+.cf:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.cf { display:inline-block; } /*this trips hasLayout for ie7*/
+.cf { display:block; } /*this returns it back to normal*/
+
+/* Hides from IE-mac \*/
+* html .cf {height: 1%;}
+/* End hide from IE-mac */

@@ -1,0 +1,1 @@
+<br /><span class="error">Error: User "{$user}" was not found. <a href="{$my_pligg_base}/admin_users.php">Return to User Management</a></span>

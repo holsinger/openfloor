@@ -1,0 +1,243 @@
+body {
+  /*behavior:url("csshover.htc");*/
+	color: #444444;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: normal;
+	font-size: 60%;
+	line-height: 1.5em;
+	background:#0067B3;
+}
+
+a
+{
+	color:			rgb(0, 103, 179);
+}
+
+a:visited
+{
+	color:			rgb(1, 76, 150);
+}
+
+a:hover
+{
+	text-decoration:	none;
+}
+
+p {
+font-size: 75%;
+}
+
+#content_div
+{
+	padding:		5px;
+}
+
+.whiterounded {
+	width:	886px;
+}
+
+.whiterounded_top {
+  	background:center url("../images/rounded_top.png") no-repeat;
+	height: 24px;
+	width: 886px;
+	behavior: url("../javascript/iepngfix.htc");
+}
+
+.whiterounded_bottom {
+  	background:center url("../images/rounded_bottom.png") no-repeat;
+	height: 24px;
+	width: 886px;
+	behavior: url("../javascript/iepngfix.htc");
+}
+
+.whiterounded_middle {
+  	background:center url("../images/rounded_middle.png") repeat-y;
+	width: 886px;
+	behavior: url("../javascript/iepngfix.htc");
+}
+
+.ticker {
+  	/*background:#0157AC url(ticker.png);*/
+	background:#0157AC;
+	background-repeat: repeat-y;
+	background-attachment: fixed; z-index: 1100;
+	width:35px;
+	height:100%;
+}
+
+/*hr {
+border: 0;
+color: #B7EBFF;
+background-color: #B7EBFF;
+height: 3px;
+width: 710px;
+text-align: center;
+}*/
+
+.blue {
+	color: #0092CE;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: bold;
+}
+.red {
+	color: #EB2733;
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: bold;
+}
+.small {
+	padding: 0px;
+	border: 0px;
+	margin: 0px;
+	font-family: "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	font-weight: normal;
+	font-size:60%;
+}
+
+
+#flag {
+	background:center url("../images/flag.png") no-repeat;
+	height:150;
+	width:688;
+	position:relative;
+}
+#flag:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+
+#contactInput {
+  position:relative;
+	background: #BED2EA;
+	color: #444444;
+	border-left: solid 1px #4C6699;
+	border-top: solid 1px #4C6699;
+	font: normal 10pt/1.8em "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+}
+#contactButton {
+	position:relative;
+	background: #EB2733;
+	height: 25px;
+	color: #FFFFFF;
+	border-right: solid 2px #CF2635;
+	border-bottom: solid 2px #CF2635;
+	font: bold 8pt "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	cursor:pointer;
+	bottom: 1px;
+}
+.cf:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.cf { display:inline-block; } /*this trips hasLayout for ie7*/
+.cf { display:block; } /*this returns it back to normal*/
+
+/* Hides from IE-mac \*/
+* html .cf {height: 1%;}
+/* End hide from IE-mac */
+
+.proBox
+{
+	width:			217px;
+	height:			420px;
+	overflow:		scroll;
+	font-size:		10pt;
+}
+
+.conBox
+{
+	width:			210px;
+	height:			420px;
+	overflow:		scroll;
+	font-size:		10pt;
+}
+
+.tjBox
+{
+	height:			435px;
+	overflow:		scroll;
+}
+
+.searchTitle
+{
+	font-size:		18pt;
+	font-weight:	bold;
+}
+
+a.searchResTitle
+{
+	font-size:		12pt;
+	font-weight:	bold;
+	color:			rgb(0, 103, 179);
+}
+
+a.searchResTitle:visited
+{
+	font-size:		12pt;
+	font-weight:	bold;
+	color:			rgb(1, 76, 150);
+}
+
+a.searchResTitle:hover
+{
+	text-decoration:	none;
+}
+
+.searchDesc
+{
+	font-size:			10pt;
+}
+.button {
+	position:relative;
+	background: #EB2733;
+	height: 25px;
+	color: #FFFFFF;
+	border-right: solid 2px #CF2635;
+	border-bottom: solid 2px #CF2635;
+	font: bold 8pt "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	cursor:pointer;
+	bottom: 1px;
+}
+#p20head {
+	margin-left:25px;
+}
+#headbarp20 {
+background:#004EA6 scroll 0pt 100%;
+margin:0pt 20px;
+padding:0px 0px 2px;
+vertical-align:middle;
+text-align:center;
+color:#FFFFFF;
+}
+#headbarp20 a, #headbarp20 a:active,
+#headbarp20 a:link, #headbarp20 a:visited{
+font: bold 10pt "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+color:#FFFFFF;
+text-decoration:none;
+font-size:90%;
+}
+ #headbarp20 a:hover{
+font: bold 10pt "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+color:#FFFFFF;
+text-decoration:underline;
+font-size:90%;
+}
+.headbarblue {
+	color:#41B3DF;
+}
+#searchsite {
+	width:200px;
+}
+.inputp20 {
+  position:relative;
+	background: #BED2EA;
+	color: #444444;
+	border-left: solid 1px #4C6699;
+	border-top: solid 1px #4C6699;
+	font: normal 10pt/1.8em "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+}
+.proBox, .conBox, .tjBox {
+	cursor:pointer;
+}

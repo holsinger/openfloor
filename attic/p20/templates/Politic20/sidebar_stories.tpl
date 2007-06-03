@@ -1,0 +1,1 @@
+<li><a href="{$story_url}" class="switchurl">{$title_short}</a></li>

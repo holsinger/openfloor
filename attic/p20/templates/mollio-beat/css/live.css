@@ -1,0 +1,97 @@
+/***
+NOTICE: this CSS is based on the Digg.com CSS, the basic structure and some
+	class names have been kept. All images referenced by the CSS and
+	distributed in the tar file are copyrighted by Benjamí Villoslada
+	and published under a CC license: 
+	http://creativecommons.org/licenses/by-sa/2.5/
+
+	Source code was developed by Ricardo Galli, it's published 
+	under the Affero GPL License (http://meneame.net/COPYING) unless
+	stated otherwise in individual files.
+
+	The whole tar package available at http://meneame.net/archives/meneame-src.tgz
+	and used at http://meneame.net have been comprehensively audited by Ricardo Galli. 
+	No third party image or source code was included without the authorisation or 
+	license of their respective owners.
+
+	Any code or image mistakenly included in the package is under Ricardo Galli's responsibility. 
+	Please, tell/complain him about any problem: gallir at uib.es [1]
+	
+	
+	This was taken from mnm04.css on 2006/02/06 by the pligg team. http://www.pligg.com/forum/
+
+
+***/
+#livecenter {
+	float:left;
+	margin-bottom: 20px;
+}
+
+/* live2 */
+
+.live2 {
+	margin: 10px 10px 10px 10px;
+	background-image: url(../../img/common/elmnm-live-reverse02.png);
+	background-repeat: no-repeat;
+	background-position: bottom right;
+}
+
+.live2 strong {
+	font-size: 95%;
+	color: #c00;
+}
+
+.live2-item {
+	width: 100%;
+	clear: both;
+	border-bottom: 1px solid #ccc;
+	padding: 5px 2px 0px 2px;
+	min-height: 25px;
+	text-align: center;
+	overflow: hidden;
+}
+
+.live2-ts, .live2-type, .live2-votes, .live2-story, .live2-who, .live2-status {
+	float: left;
+	display: block;
+}
+
+.live2-ts {
+	width: 10%;
+	text-align: left;
+}
+
+.live2-type {
+	width: 10%;
+        text-align: left;
+}
+
+.live2-type img {
+	border: none;
+	margin: 0 0 0 0;
+	vertical-align: middle;
+}
+
+.live2-votes {
+	width: 10%;
+        text-align: left;
+}
+
+.live2-story {
+	width: 37%;
+	text-align: left;
+}
+
+.live2-who {
+	width: 18%;
+        text-align: left;
+}
+
+.live2-status {
+	width: 15%;
+	text-align: left;
+}
+
+.live2-problem {
+	color: #F00;
+}

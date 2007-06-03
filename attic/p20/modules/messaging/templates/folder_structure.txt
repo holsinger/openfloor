@@ -1,0 +1,18 @@
+Folder structure for /modules/messaging/templates/
+
+messaging_footer.tpl
+ - is included in Pligg's footer.tpl for lightbox. if it's included in other areas, lightbox isn't centered. it has to be outside all the other div's
+messaging_inbox.tpl
+ - the messaging inbox
+messaging_index.tpl
+ - the "quickview" box that shows on the index page
+messaging_lightbox.tpl
+ - contains the javascript for messaging and lightbox
+small_compose_message.tpl
+ - create a message 
+small_confirm_delete_message.tpl
+ - confirm message delete
+small_deleted_message.tpl
+ - show message has been deleted
+small_show_message.tpl
+ - view a message
