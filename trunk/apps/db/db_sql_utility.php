@@ -115,7 +115,7 @@ class db_sql_utility extends db_mysql {
         //reintro James ENGEB w/MD5
         if ($this->fields[key($this->fields)]["password"]) $query.= "MD5(".$quotes.$this->fields[key($this->fields)]["set"].$quotes.")";
         else $query.= $quotes.$this->fields[key($this->fields)]["set"].$quotes;
-        $query.= $quotes.$this->fields[key($this->fields)]["set"].$quotes;
+        //$query.= $quotes.$this->fields[key($this->fields)]["set"].$quotes;
         $first = true;
       }
     } while (next($this->fields));
@@ -196,7 +196,7 @@ class db_sql_utility extends db_mysql {
         //reintro James ENGEB w/MD5
         if ($this->fields[key($this->fields)]["password"]) $query.= "MD5(".$quotes.$this->fields[key($this->fields)]["set"].$quotes.")";
         else $query.= $quotes.$this->fields[key($this->fields)]["set"].$quotes;
-        $query.= $quotes.$this->fields[key($this->fields)]["set"].$quotes;
+        //$query.= $quotes.$this->fields[key($this->fields)]["set"].$quotes;
         $first = true;
       }
     } while (next($this->fields));
@@ -271,7 +271,7 @@ class db_sql_utility extends db_mysql {
             //reintro James ENGEB w/MD5
             if ($this->fields[key($this->fields)]["password"]) $query.= "MD5(".$quotes.$this->fields[key($this->fields)]["where"].$quotes.")";
             else $query.= $quotes.$this->fields[key($this->fields)]["where"].$quotes;
-            $query.= $quotes.$this->fields[key($this->fields)]["where"].$quotes;
+            //$query.= $quotes.$this->fields[key($this->fields)]["where"].$quotes;
           } else {
             $query.= " ".key($this->fields)." like ";
             $query.= $quotes.$this->fields[key($this->fields)]["where"].$quotes;
