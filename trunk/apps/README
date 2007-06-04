@@ -1,0 +1,6 @@
+The file admin_session.php contains global session and security
+ information.  This file also sets the global error reporting
+ variable.
+  sys_log.php and exceptions.php should be configured
+ with default e-mail for fatal errors and a path to the log
+ file for this application
