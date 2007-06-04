@@ -1,0 +1,6 @@
+These files provide database functionality.  As such they require
+ information about the database, which is in the XML
+ configuration files.  This information should be included with this
+ zip archive.  In particular db_connection.php and db_table.php
+ will need to be modified to point to the correct location of these
+ XML configuration files.
