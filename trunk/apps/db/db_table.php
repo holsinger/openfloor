@@ -11,7 +11,7 @@
   Dec 2003
   **************************************************/
 
-define ("DATABASE_XML_FILE", "C:/wamp/www/temp/conf/p20_table_conf.xml");
+define ("DATABASE_XML_FILE", "/php5/htdocs/p20/trunk/conf/p20_table_conf.xml");
 require_once(APPS_ROOT."/db/db_sql_utility.php");
 
 class db_table extends db_sql_utility {
@@ -66,6 +66,9 @@ class db_table extends db_sql_utility {
 						case "DATETIME":
 							$this->fields[(string)$field['fname']]["quotes"] = true;
 							break;
+						case "TIMESTAMP":
+							$this->fields[(string)$field['fname']]["quotes"] = true;
+							break;
 						default:
 							$this->element.= "";
 							break;
@@ -73,6 +76,8 @@ class db_table extends db_sql_utility {
 
 					if ($field->field_formtype == "PASSWORD") {
 						$this->fields[(string)$field['fname']]["password"] = true;
+					} else {
+						$this->fields[(string)$field['fname']]["password"] = false;
 					}
 
 					if ($this->debug_level>1) printf("\nDATATYPE: %s <br>\n",$field->field_datatype);
