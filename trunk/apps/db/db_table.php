@@ -11,7 +11,7 @@
   Dec 2003
   **************************************************/
 
-define ("DATABASE_XML_FILE", "/php5/htdocs/p20/trunk/conf/p20_table_conf.xml");
+//define ("DATABASE_XML_FILE", "/php5/htdocs/p20/trunk/conf/p20_table_conf.xml");
 require_once(APPS_ROOT."/db/db_sql_utility.php");
 
 class db_table extends db_sql_utility {

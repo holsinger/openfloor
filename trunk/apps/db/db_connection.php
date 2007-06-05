@@ -9,7 +9,7 @@
   Dec 2003
   ************************************************************/
 
-define ("CONFIG_XML_FILE", "C:/wamp/www/temp/conf/p20_conf.xml");
+//define ("CONFIG_XML_FILE", "/php5/htdocs/p20/trunk/conf/p20_conf.xml");
 require_once(APPS_ROOT."/exceptions.php");
 
 class db_connection extends exceptions {
