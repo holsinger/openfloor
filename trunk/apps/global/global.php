@@ -1,17 +1,45 @@
 <?php
 
-//instantiate script objects
-$guids = new db_table ("p20_guids",1);
+## functions
+function getGUID()
+{
+	global $dal;
+	
+	if (isset($_COOKIE['guid']))
+		return $dal->isValidGUID($_COOKIE['guid'])?$_COOKIE['guid']:false;
+	else
+		return false;
+}
 
-//register script variables
-$error = false;	//used primarily with password validation
-$content = "";	//used primarily with file uploads
-$action = "";	//used primarily with file uploads
+function dropGUIDCookie()
+{
+	global $dal;
+	
+	/* one year cookie */
+	$guid = $dal->newGUID();
+	setcookie('guid',$guid,time() + 86400*365);
+	return $guid;
+}
 
-$guids->setField ("GUID_ID",7,"S");
-$guids->setField ("DATE_CREATED",time(),"S");
-$guids->setField ("GUID_HASH","hash","S");
+function recordZip($zip)
+{
+	global $dal;
+	if (isset($_COOKIE['PHPSESSID']) && isset($_COOKIE['guid']))
+		$dal->recordZip($zip);
+}
 
-$guids->insert();
+## entry point
+require_once('./dal/dal.php');
 
-?>
+$dal = new dal();
+
+/* if there's no current guid, drop one */
+if(!$guid = getGUID())
+	$guid = dropGUIDCookie();
+
+	
+/* if there's no current session, create one and record it */
+if ($_COOKIE['PHPSESSID']==null) {
+	session_start();
+	$dal->recordSession(session_id(), $guid);	
+}
