@@ -20,8 +20,8 @@
 
 // this constant is used to send an e-mail to the address
 // given as its value for critical errors
-define ("ADMIN_EMAIL", "james@engeb.com");
-define ("LOG_FILE", "/var/www/logs/php_app_log");
+//define ("ADMIN_EMAIL", "james@engeb.com");
+//define ("LOG_FILE", "/var/www/logs/php_app_log");
 
 // this is to set $php_errormsg on errors
 $error_tracking = ini_set("track_errors","1");
