@@ -1,5 +1,3 @@
 <?php
 
-include './apps/admin_session.php';
-
-?>
+require_once './apps/global/global.php';

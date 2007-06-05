@@ -5,7 +5,7 @@ define ("APPS_ROOT", dirname(__FILE__));
 //define ("ENFORCE_SECURITY_LEVELS", false);
 
 // set error reporting level globally
-error_reporting(E_ALL);
+error_reporting(E_WARNING | E_ERROR);
 //error_reporting(E_WARNING | E_ERROR);
 
 // initialize sessions normally

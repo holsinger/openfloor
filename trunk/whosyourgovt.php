@@ -1,8 +1,10 @@
 <? 
-include_once "apps/admin_session.php";
+//include_once "apps/admin_session.php";
+include_once './apps/global/global.php';
 include_once 'includes/header.php'; 
 
-
+/* record the zip being searched */
+recordZip($_GET['zip']);
 ?>
   		
   		<div id="content_div">

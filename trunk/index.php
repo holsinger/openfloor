@@ -1,5 +1,6 @@
 <? 
-include_once "apps/admin_session.php";
+//include_once "apps/admin_session.php";
+include_once './apps/global/global.php';
 include_once 'includes/header.php'; 
 
 
