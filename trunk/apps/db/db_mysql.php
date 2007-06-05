@@ -138,7 +138,8 @@ class db_mysql extends exceptions {
   }
 
   function free_result() {
-    if ($this->query_id) mysql_free_result($this->query_id);
+    //var_dump($this->query_id);
+    if ( is_resource($this->query_id) ) mysql_free_result($this->query_id);
   }
 
 }
