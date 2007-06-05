@@ -1,4 +1,9 @@
-<? include_once 'includes/header.php'; ?>
+<? 
+include_once "apps/admin_session.php";
+include_once 'includes/header.php'; 
+
+
+?>
   		
   				<div id="content_div">
             <h3>Welcome</h3>
@@ -10,7 +15,7 @@
             <br><br>
             <div id="zip_form">
               <h2>Start by entering your zip code below.</h3>
-              <form action="http://localhost/p20">
+              <form action="whosyourgovt.php" method='get'>
         				<div>
         					<input type="text" name='zip' class="txt" />
         					<input type="image" src="images/btn-go.gif" alt="search" />
