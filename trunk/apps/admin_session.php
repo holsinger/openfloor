@@ -19,6 +19,9 @@ require_once(APPS_ROOT."/db/db_mysql.php");
 require_once(APPS_ROOT."/db/db_sql_utility.php");
 require_once(APPS_ROOT."/db/db_vsql_utility.php");
 
+//special apps
+require_once(APPS_ROOT."/api_data.php");
+
 $db =& new db_connection();
 
 // consider including global authorization code here
