@@ -34,6 +34,49 @@ class dal
 		return mysqli_real_escape_string($this->dbc, $data);
 	}
 	
+	## private functions
+	private function getGUIDFromHash($hash)
+	{
+		$hash = $this->escape_data($hash);
+		
+		$result = $this->dbc->query("SELECT guid_id FROM p20_guids WHERE guid_hash='$hash'");
+		list($id) = $result->fetch_row();
+		return $id;
+	}
+	
+	private function getVisitId($guid, $session_id)
+	{
+		$guid = $this->escape_data($guid);
+		$session_id = $this->escape_data($session_id);
+		
+		$result = $this->dbc->query("SELECT visit_id FROM p20_visits WHERE fk_guid_id='$guid' AND session_id='$session_id'");
+		list($id) = $result->fetch_row();
+		return $id;
+	}
+	
+	private function getIP() 
+	{ 
+		$ip;
+		
+		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP"); 
+		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR"); 
+		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR"); 
+		else $ip = "UNKNOWN"; 		
+		
+		return $ip;	
+	}
+	
+	private function getReferer()
+	{
+		// not sure if this function works properly
+		$referer;
+		
+		if (getenv('HTTP_REFERER')) $referer = getenv('HTTP_REFERER');
+		else $referer = 'UNKNOWN';
+		
+		return $referer;
+	}
+	
 	## data access function
 	function newGUID()
 	{
@@ -47,28 +90,22 @@ class dal
 	
 	function isValidGUID($guid)
 	{
+		$guid = $this->escape_data($guid);
+		
 		$result = $this->dbc->query("SELECT guid_hash FROM p20_guids WHERE guid_hash='$guid' LIMIT 1");
 		return $result->num_rows==1?true:false;
 	}
 	
 	function recordSession($session_id, $hash)
 	{
+		$session_id = $this->escape_data($session_id);
+		$hash = $this->escape_data($hash);
+		
+		$ip = $this->getIP();
+		$referer = $this->getReferer();
 		$guid = $this->getGUIDFromHash($hash);
-		return $this->dbc->query("INSERT INTO p20_visits VALUES (NULL, $guid, '', '$session_id', '', null)");
-	}
-	
-	function getGUIDFromHash($hash)
-	{
-		$result = $this->dbc->query("SELECT guid_id FROM p20_guids WHERE guid_hash='$hash'");
-		list($id) = $result->fetch_row();
-		return $id;
-	}
-	
-	function getVisitId($guid, $session_id)
-	{
-		$result = $this->dbc->query("SELECT visit_id FROM p20_visits WHERE fk_guid_id='$guid' AND session_id='$session_id'");
-		list($id) = $result->fetch_row();
-		return $id;
+		
+		return $this->dbc->query("INSERT INTO p20_visits VALUES (NULL, $guid, '$ip', '$session_id', '$referer', null)");
 	}
 	
 	function recordZip($zip)
