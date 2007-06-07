@@ -41,7 +41,7 @@ class dal
 		
 		$result = $this->dbc->query("SELECT guid_id FROM p20_guids WHERE guid_hash='$hash'");
 		list($id) = $result->fetch_row();
-		return $id;
+		return $this->escape_data($id);
 	}
 	
 	private function getVisitId($guid, $session_id)
@@ -113,7 +113,19 @@ class dal
 		$guid = $this->getGUIDFromHash($_COOKIE['guid']);
 		$visit_id = $this->getVisitId($guid, $_COOKIE['PHPSESSID']);
 		$zip = $this->escape_data($zip);
+		//echo "INSERT INTO p20_zipsearch VALUES (NULL, $guid, $visit_id, '$zip'')";
+		$this->dbc->query("INSERT INTO p20_zipsearch VALUES (NULL, $guid, $visit_id, '$zip')");
+	}
+
+	function makeDefaultZip($zip)
+	{
+		$zip = $this->escape_data($zip);
+		$guid = $this->getGUIDFromHash($_COOKIE['guid']);
 		
-		$this->dbc->query("INSERT INTO p20_zipsearch VALUES (NULL, $guid, $visit_id, $zip)");
+		$result = $this->dbc->query("SELECT fk_guid_id FROM p20_preferences WHERE fk_guid_id=$guid LIMIT 1");
+		if ($result->num_rows==1)
+			$this->dbc->query("UPDATE p20_preferences SET default_zip='$zip' WHERE fk_guid_id=$guid");
+		else
+			$this->dbc->query("INSERT INTO p20_preferences VALUES (NULL, $guid, '$zip')");
 	}
 }

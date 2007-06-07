@@ -28,8 +28,16 @@ function recordZip($zip)
 		$dal->recordZip($zip);
 }
 
+function makeDefaultZip($zip)
+{
+	// could add zip code validation here
+	global $dal;
+	
+	if (isset($_COOKIE['guid']))
+		$dal->makeDefaultZip($zip);
+}
 ## entry point
-require_once('./dal/dal.php');
+//require_once('./dal/dal.php');
 
 $dal = new dal();
 
@@ -39,7 +47,18 @@ if(!$guid = getGUID())
 
 	
 /* if there's no current session, create one and record it */
-if ($_COOKIE['PHPSESSID']==null) {
+/*if ($_COOKIE['PHPSESSID']==null) {
 	session_start();
 	$dal->recordSession(session_id(), $guid);	
-}
+}*/
+if ($first_visit)
+	$dal->recordSession(session_id(), $guid);
+
+/* Debug */
+/*
+echo 	'<p style="color: maroon; font-weight: bold">
+			**GLOBAL INCLUDED**<br/>
+			GUID: ' . $_COOKIE['guid'] . '<br/>
+			SESSID: ' . $_COOKIE['PHPSESSID'] .
+		'</p>';
+*/

@@ -1,3 +1,7 @@
 <?php
 
-require_once './apps/global/global.php';
+include_once './apps/admin_session.php'; 
+
+$dal = new dal2();
+
+$dal->TestGetGuids();
