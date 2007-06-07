@@ -12,6 +12,8 @@ require_once(APPS_ROOT."/exceptions.php");
 class db_mysql extends exceptions {
 
   var $query_id = 0;  // Result of most recent mysql_query().
+  var $debug_level = 0;  // debug level
+  
   var $record   = array();  // current mysql_fetch_array()-result.
   var $row;           // current row number.
 
@@ -20,7 +22,14 @@ class db_mysql extends exceptions {
 
 /****** class methods are found below ******/
 
+  function __construct ($debug_level=0) {
+  	$this->debug_level = $debug_level;
+  }
 
+  function __destruct () {
+  	$this->free_result();
+  }
+  
   //pretty date function
   function pretty_date ($date) {
   	if ($date==null) return "Unknown";
@@ -39,7 +48,11 @@ class db_mysql extends exceptions {
  ***********************************************************************/
   function last_id() {
     if ($GLOBALS['connection']) {
-      return mysql_insert_id ($GLOBALS['connection']);
+      
+      $last_id = mysql_insert_id ($GLOBALS['connection']);
+      if ($this->debug_level>0) printf("\n<b style='color:#FF0000'>LAST ID:</b> %s <br>\n",(string)$last_id);
+      return $last_id;
+      
     } else {
       $this->set_error (mysql_error());
       $this->set_errno (mysql_errno());
@@ -61,7 +74,9 @@ class db_mysql extends exceptions {
       $this->set_message ("Invalid Result Set");
       $this->log_halt ("Invalid Result Set");
     }
-    return mysql_num_rows ($this->query_id);
+    $num_records = mysql_num_rows ($this->query_id);
+    if ($this->debug_level>0) printf("\n<b style='color:#FF0000'>NUM RECORDS:</b> %s <br>\n",(string)$num_records);
+    return $num_records;
   }
 
 
@@ -71,7 +86,7 @@ class db_mysql extends exceptions {
   will undo
  ***********************************************************************/
   function begin() {
-  	# echo "<font size=6>BEGIN WORK</font>";
+  	if ($this->debug_level>0) echo "<font size=6>BEGIN WORK</font>";
     return $this->query("BEGIN WORK");
   }
 
@@ -81,7 +96,7 @@ class db_mysql extends exceptions {
   be preceded by a call to the begin function.
  ***********************************************************************/
   function commit() {
-  	# echo "<font size=6>COMMIT</font>";
+  	if ($this->debug_level>0) echo "<font size=6>COMMIT</font>";
     return $this->query("COMMIT");
   }
 
@@ -91,7 +106,7 @@ class db_mysql extends exceptions {
   undo and SQL queried from the time the begin function is called.
  ***********************************************************************/
   function rollback() {
-  	# echo "<font size=6>ROLLBACK</font>";
+  	if ($this->debug_level>0) echo "<font size=6>ROLLBACK</font>";
     return $this->query("ROLLBACK");
   }
 
@@ -101,6 +116,9 @@ class db_mysql extends exceptions {
   using the connection established in the 'connect' method.
  ***********************************************************************/
   function query($query_string) {
+  	//added by james
+  	if ($this->debug_level>0) printf("\n<b style='color:#FF0000'>SQL QUERY:</b> %s <br>\n",(string)$query_string);
+  	
     $this->query_id = mysql_query($query_string,$GLOBALS['connection']);
     //echo "<br>\n".$this->query_id."<br>\n";
     $this->row   = 0;

@@ -37,7 +37,8 @@ class db_connection extends exceptions {
   //var $GLOBALS['connection'] = null;	//MySQL Resource
 
 	//*****  class constructor
-	function db_connection ($debug_level=0) {
+	function __construct ($debug_level=0) {
+		$php_errormsg = '';
 		if ($debug_level) $this->debug_level = $debug_level;
 		if ($this->debug_level>0) printf("\nDEBUG_LEVEL: %s <br>\n",$this->debug_level);
 		$this->exceptions();
@@ -70,7 +71,7 @@ class db_connection extends exceptions {
 
 		register_shutdown_function(array(&$this, 'close'));
 	}
-
+	
   //*****  int connect() method
   // This connect method is used to establish a  connection
   // with a specific MySQL database as defined in the config.xml
