@@ -7,7 +7,7 @@
  
  
  
- class api_data extends db_table {
+ class api_data extends db_mysql {
     var $error = false;
     var $debugLevel = 0;
     var $zip = 0;
@@ -17,8 +17,8 @@
     var $districtsArray = array();
     
     function __construct ($debug=0) {
-    	$this->debug_level = $debug;
-    	$this->event = new db_table ("p20_guids",$debug);
+    	$this->debugLevel = $debug;
+    	$this->table = new db_mysql ($debug);
     }
     
     //sets
@@ -58,14 +58,9 @@
      * @param string id a sunlight id
      */
     function buildHTMLLink ($id) {
-    	$resultsArray = $this->callAPI ('http://api.sunlightlabs.com/people.getDataItem.php?code=firstname&id='.$id);
-    	$firstname = $resultsArray['firstname'];
-    	$resultsArray = $this->callAPI ('http://api.sunlightlabs.com/people.getDataItem.php?code=lastname&id='.$id);
-    	$lastname = $resultsArray['lastname'];
-    	$resultsArray = $this->callAPI ('http://api.sunlightlabs.com/people.getDataItem.php?code=URL&id='.$id);
-    	$url = $resultsArray['URL'];
-    	
-    	return "<a href={$url}>{$firstname} {$lastname}</a>";
+    	$resultsArray = $this->callAPI ('http://api.sunlightlabs.com/people.getPersonInfo.php?id='.$id);
+    	    	
+    	return "<a href=".$resultsArray['URL'].">".$resultsArray['firstname']." ".$resultsArray['lastname']."</a>";
     }
     
     /**
