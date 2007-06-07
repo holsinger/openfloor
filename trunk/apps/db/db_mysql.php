@@ -159,7 +159,21 @@ class db_mysql extends exceptions {
     //var_dump($this->query_id);
     if ( is_resource($this->query_id) ) mysql_free_result($this->query_id);
   }
-
+  
+	/**
+	 * This fuction prevents SQL injection attacks
+	 * by escaping problematic SQL characters.
+	 */
+	function escape_data($data)
+	{
+		if (ini_get('magic_quotes_gpc'))
+			$data = stripslashes($data);
+			
+		return mysql_escape_string($data);
+	}
 }
+
+
+
 
 ?>

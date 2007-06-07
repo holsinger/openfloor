@@ -1,7 +1,7 @@
 <?php
-
+//echo 'freakin hi!';
 include_once './apps/admin_session.php'; 
 
-$dal = new dal2();
+$dbf = new Guid();
+$dbf->test();
 
-$dal->TestGetGuids();
