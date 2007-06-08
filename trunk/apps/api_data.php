@@ -15,6 +15,7 @@
     var $city = '';
     var $county = '';
     var $districtsArray = array();
+    var $cacheData = true;
     
     function __construct ($debug=0) {
     	$this->debugLevel = $debug;
@@ -58,7 +59,7 @@
      * @param string id a sunlight id
      */
     function buildHTMLLink ($id) {
-    	$resultsArray = $this->callAPI ('http://api.sunlightlabs.com/people.getPersonInfo.php?id='.$id);
+    	$resultsArray = $this->callAPI ('http://api.sunlightlabs.com/people.getPersonInfo.php?id='.$id,'getPersonInfo');
     	    	
     	return "<a href=".$resultsArray['URL'].">".$resultsArray['firstname']." ".$resultsArray['lastname']."</a>";
     }
@@ -80,7 +81,7 @@
 			$url='http://api.sunlightlabs.com/places.getDistrictsFromZip.php?zip='.$zip;
 
 			//parse results
-			$resultsArray = $this->callAPI ($url);
+			$resultsArray = $this->callAPI ($url,'getDistrictsFromZip');
 			
 			//set state
 			$this->state = $resultsArray['districts'][0]['state'];
@@ -105,7 +106,7 @@
 			$url='http://api.sunlightlabs.com/people.reps.getRepFromDistrict.php?state='.$this->state.'&district='.$value;
 
 			//parse results
-			$resultsArray = $this->callAPI ($url);
+			$resultsArray = $this->callAPI ($url,'getRepFromDistrict');
 			//exit(var_dump($resultsArray));
 						
 			return $resultsArray['entity_id'];
@@ -133,7 +134,7 @@
 			$url='http://api.sunlightlabs.com/people.reps.getRepsFromCityState.php?city='.$city.'&state='.$state;
 
 			//parse results
-			$resultsArray = $this->callAPI ($url);
+			$resultsArray = $this->callAPI ($url,'getRepsFromCityState');
 			//exit(var_dump($resultsArray));
 						
 			//set return array
@@ -161,7 +162,7 @@
 			$url='http://api.sunlightlabs.com/people.sens.getSensFromState.php?state='.$state;
 
 			//parse results
-			$resultsArray = $this->callAPI ($url);
+			$resultsArray = $this->callAPI ($url,'getSensFromState');
 			//exit(var_dump($resultsArray));
 						
 			//set return array
@@ -175,13 +176,34 @@
 	 * this function will handle calling api and error checking
 	 * 
 	 * @param string url the url of the api call
+	 * @param string debugName the name to pass as a debug title
 	 * @return array associative array of results
 	 * @author James Kleinschnitz
 	 */
-	 function callAPI ($url) {
+	 function callAPI ($url,$debugName='') {
 	 	//get api contents decose with json to an array
-	 	$resultsArray = json_decode(file_get_contents($url),true);
+	 	if (file_exists("./cache/$url")) $resultsArray = json_decode(file_get_contents("./cache/$url"),true); 
+	 	else {
+	 		$contents = file_get_contents($url);
+	 		$resultsArray = json_decode($contents,true);
+	 		//if we want to cache the data write the data to a file
+	 		if ($this->cacheData) {
+	 			file_put_contents("./cache/$url",$contents,LOCK_EX);
+	 		}	
+	 		
+	 	}
 	 	//do some kind of error checking here and return false		
+		
+		if ( $this->debugLevel > 0 ) { 
+			echo "<b style='color:#FF0000;'>".$debugName.":</b><br />";
+			foreach ($resultsArray as $key => $val) {
+				if ( is_array($val) ) {
+					echo $key."<br />";
+					foreach ($val as $index => $value) echo "  $index => $value <br />";
+				} else  echo "$key => $val <br />";
+			}
+			echo "<br />";
+		}
 		
 		return $resultsArray;
 	 }
