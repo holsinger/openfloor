@@ -171,6 +171,14 @@ class db_mysql extends exceptions {
 			
 		return mysql_escape_string($data);
 	}
+	
+   // ***** set field sub-routine function
+  function get ($field_name) {
+    return $this->record[strtoupper($field_name)];
+  }
+  function getField ($field_name) {
+    return $this->record[strtoupper($field_name)];
+  }
 }
 
 
