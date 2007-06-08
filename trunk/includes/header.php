@@ -28,9 +28,9 @@
 		<!-- top navigation start here -->
 		<div class="body">
       <ul class="top-nav">
-  			<li><span><a href="#">Home</a></span></li>
+  			<li><span><a href="http://www.politic20.com">Home</a></span></li>
   			<li><a href="#">About Us</a></li>
-  			<li><a href="#">Blog</a></li>
+  			<li><a href="http://blog.politic20.com">Blog</a></li>
   
   		</ul>
   		<div class="slogan"><strong class="slogan">populace politic change</strong></div>
