@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 # checkout from SVN into this directory ...
 #
 #  practice.politic20.com
