@@ -13,7 +13,7 @@ cd /home/politic20
 echo "Running SVN CHECKOUT:<br><br>"
 echo "<TEXTAREA NAME="SVN Update Output" COLS=80 ROWS=20>"
 pwd
-svn co http://engeb.svnrepository.com/svn/politic20/trunk/practice/
+svn co http://engeb.svnrepository.com/svn/politic20/trunk/ practice/
 echo "</TEXTAREA><br>"
 echo "<b>NOTE:</b> Make sure to look and see that it worked!<br>"
 
