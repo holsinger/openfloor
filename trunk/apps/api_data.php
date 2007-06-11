@@ -188,7 +188,7 @@
 	 		$resultsArray = json_decode($contents,true);
 	 		//if we want to cache the data write the data to a file
 	 		if ($this->cacheData) {
-	 			file_put_contents("./cache/$url",$contents,LOCK_EX);
+	 			//file_put_contents("./cache/$url",$contents,LOCK_EX);
 	 		}	
 	 		
 	 	}

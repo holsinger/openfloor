@@ -19,6 +19,16 @@ if (isset($_GET['defaultzip']))
 			?>
 
 		</div>
-  				
+		
+		<div id="zip_form">
+			<h2>Want to search a different zip code?</h3>
+			<form action="whosyourgovt.php" method='get'>
+				<div>
+					<input type="text" name='zip' class="txt" />
+					<input type="image" src="images/btn-go.gif" alt="search" />
+					<input type="checkbox" name="defaultzip" value="true" /> Make this my default zip code.
+				</div>
+			</form>            
+		</div>  				
   			
 <? include_once 'includes/footer.php'; ?>

@@ -27,5 +27,19 @@ class Zip extends dbfunctions
 			$this->query("UPDATE p20_preferences SET default_zip='$zip' WHERE fk_guid_id=$guid");
 		else
 			$this->query("INSERT INTO p20_preferences VALUES (NULL, $guid, '$zip')");
-	}	
+	}
+
+	function getDefaultZip($guid)
+	{
+		if (!isset($_COOKIE['guid']) || !isset($_COOKIE['PHPSESSID']))
+			return false;
+			
+		if ($this->query("SELECT default_zip FROM p20_preferences WHERE fk_guid_id=$guid")){
+			$result = $this->next();
+			return $result['default_zip'];
+		} else {
+			return false;
+		}
+				
+	}
 }

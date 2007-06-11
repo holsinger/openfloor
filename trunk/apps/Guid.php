@@ -39,7 +39,7 @@ class Guid extends dbfunctions
 	{
 		/* one year cookie */
 		$guid = $this->newGUID();
-		setcookie('guid',$guid,time() + 86400*365);
+		setcookie('guid',$guid,2147483647);
 		return $guid;
 	}
 }
