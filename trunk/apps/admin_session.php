@@ -9,7 +9,7 @@ error_reporting(E_WARNING | E_ERROR);
 
 // initialize sessions normally
 $first_visit;
-if ($_COOKIE['PHPSESSID'] == null)
+if (isset($_COOKIE['PHPSESSID']) == null)
 	$first_visit = true;
 
 session_start ();
@@ -26,7 +26,6 @@ require_once(APPS_ROOT.'/Zip.php');
 $db = new db_connection();
 //special apps
 require_once(APPS_ROOT."/api_data.php");
-require_once(APPS_ROOT.'/../conf/dbconn.php');
 require_once(APPS_ROOT.'/../dal/dal.php');
 require_once(APPS_ROOT.'/global/global.php');
 

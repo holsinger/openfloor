@@ -1,5 +1,4 @@
 <?php
-require_once './conf/dbconn.php';
 
 class dal
 {

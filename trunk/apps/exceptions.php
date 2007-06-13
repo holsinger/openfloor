@@ -28,8 +28,14 @@ class exceptions extends sys_log {
   //private
   //needs to be explicitly called from extending function
   function exceptions () {
+  	
+  	if(isset($_SERVER['SERVER_NAME']))
+  		$ServerName = $_SERVER['SERVER_NAME'];
+  	else
+  		$ServerName = "";	
+  	
     $this->sys_log ();	//call constructor for parent object
-    $this->location = $_SERVER["REQUEST_METHOD"].": ".$_SERVER["SERVER_NAME"].$_SERVER["PHP_SELF"];
+    $this->location = $_SERVER["REQUEST_METHOD"].": ".$ServerName.$_SERVER["PHP_SELF"];
   }
 
   /*

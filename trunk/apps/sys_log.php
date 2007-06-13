@@ -50,6 +50,7 @@ class sys_log {
   //needs to be explicitly called from extending function
   function sys_log () {
     $this->location = $_SERVER["REQUEST_METHOD"].": ".$_SERVER["SCRIPT_FILENAME"];
+    date_default_timezone_set('America/Denver');
     $this->date = date("r");
     if ($this->error) $info_array["error"] = $this->error;
     if ($this->errno) $info_array["errno"] = $this->errno;
