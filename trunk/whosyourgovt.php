@@ -4,7 +4,7 @@ include_once "apps/admin_session.php";
 include_once 'includes/header.php'; 
 
 /* record the zip being searched */
-$libZip->recordZip($_GET['zip']);
+if(!isset($_GET['r'])) $libZip->recordZip($_GET['zip']);
 
 if (isset($_GET['defaultzip']))
 	$libZip->makeDefaultZip($_GET['zip']);
