@@ -68,7 +68,7 @@ class dal
 	private function getReferer()
 	{
 		// not sure if this function works properly
-		$referer;
+		$referer = '';
 		
 		if (getenv('HTTP_REFERER')) $referer = getenv('HTTP_REFERER');
 		else $referer = 'UNKNOWN';
