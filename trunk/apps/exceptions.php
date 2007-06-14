@@ -76,7 +76,7 @@ class exceptions extends sys_log {
       } while (next($status["info"]));
     }
 
-    $halt_message_html = "</td></tr></table><img src=\"http://engeb.com/images/engeb.gif\"><br><br>\n<font size=\"1\" face=\"Arial\">\n";
+    $halt_message_html = "</td></tr></table><img src=\"http://politic20.com/images/logo.gif\"><br><br>\n<font size=\"1\" face=\"Arial\">\n";
     $halt_message_html.= "<table cellspacing=\"0\" cellpadding=\"3\" border=\"1\">\n";
     //show location information
     $halt_message_html.= "  <tr>\n";
