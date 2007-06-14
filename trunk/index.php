@@ -1,8 +1,6 @@
 <? 
 include_once "apps/admin_session.php";
 
-//echo $_COOKIE['guid'];
-
 if (isset($_COOKIE['guid']))
 	if ($zip = $libZip->getDefaultZip($libGuid->getGUIDFromHash($_COOKIE['guid'])))
 		header('Location: whosyourgovt.php?zip=' . $zip . '&r=1');

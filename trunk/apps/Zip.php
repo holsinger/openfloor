@@ -35,11 +35,13 @@ class Zip extends dbfunctions
 			return false;
 			
 		if ($this->query("SELECT default_zip FROM p20_preferences WHERE fk_guid_id=$guid")){
-			$result = $this->next();
-			return $result['default_zip'];
-		} else {
-			return false;
+			if($result = $this->next())	{return $result['default_zip'];}
 		}
-				
+		
+		if ($this->query("SELECT zip FROM p20_zipsearch WHERE fk_guid_id=$guid ORDER BY zipsearch_ID DESC LIMIT 1")) {
+			if($result = $this->next()) {return $result['zip'];}
+		}
+		
+		return false;		
 	}
 }

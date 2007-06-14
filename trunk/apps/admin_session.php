@@ -8,8 +8,8 @@ define ("APPS_ROOT", dirname(__FILE__));
 error_reporting(E_WARNING | E_ERROR);
 
 // initialize sessions normally
-$first_visit;
-if (isset($_COOKIE['PHPSESSID']) == null)
+$first_visit = false;
+if (!isset($_COOKIE['PHPSESSID']))
 	$first_visit = true;
 
 session_start ();
