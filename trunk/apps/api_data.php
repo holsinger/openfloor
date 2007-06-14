@@ -182,13 +182,23 @@
 	 */
 	 function callAPI ($url,$debugName='') {
 	 	//get api contents decose with json to an array
-	 	if (file_exists("./cache/$url")) $resultsArray = json_decode(file_get_contents("./cache/$url"),true); 
-	 	else {
+		$cachedFileName = './cache/' . str_replace(array(':', '/', '?', '&'), '', substr($url, 28, strlen($url)));
+	 	
+	 	if (file_exists($cachedFileName)) {
+	 		$resultsArray = json_decode(file_get_contents($cachedFileName),true); 
+	 	} else {
 	 		$contents = file_get_contents($url);
 	 		$resultsArray = json_decode($contents,true);
 	 		//if we want to cache the data write the data to a file
 	 		if ($this->cacheData) {
-	 			//file_put_contents("./cache/$url",$contents,LOCK_EX);
+	 			// delete the file if it already exists
+	 			if (file_exists($cachedFileName)) unlink($cachedFileName);
+
+	 			// recreate file and recache data
+	 			if ($file = fopen($cachedFileName, 'wb')) {
+		 			fwrite($file, $contents);
+		 			fclose($file);
+	 			}
 	 		}	
 	 		
 	 	}
