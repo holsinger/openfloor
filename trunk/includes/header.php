@@ -337,7 +337,7 @@
 			<h1><a href="http://www.politic20.com">Politic20</a></h1>
 			<form action="whosyourgovt.php" method="get">
 				<div>
-					<input type="text" class="txt" name="zip" value="<?= $_GET['zip']; ?>"/>
+					<input type="text" class="txt" name="zip" value="<?= isset($_GET['zip'])?$_GET['zip']:'' ?>"/>
 					<input type="image" src="images/btn-go.gif" alt="search" />
 
 				</div>
