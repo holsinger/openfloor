@@ -1,5 +1,0 @@
-MOVE THESE CONFIGURATION FILES OUTSIDE OF A VIEWABLE DIRECTORY
-THESE FILES SHOULD BE BEHIND THE DOCUMENT ROOT.
- Additionally, the file p20_conf.xml may require
- additional information, including your database
- username and password
