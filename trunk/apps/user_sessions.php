@@ -19,6 +19,7 @@ require_once(APPS_ROOT."/local_settings.php");
 require_once(APPS_ROOT."/db/db_connection.php");
 require_once(APPS_ROOT."/db/db_mysql.php");
 require_once(APPS_ROOT.'/dbfunctions.php');
+require_once(APPS_ROOT.'/htmlfunctions.php');
 require_once(APPS_ROOT.'/Guid.php');
 require_once(APPS_ROOT.'/Visit.php');
 require_once(APPS_ROOT.'/Zip.php');
@@ -26,10 +27,7 @@ require_once(APPS_ROOT.'/Zip.php');
 $db = new db_connection();
 //special apps
 require_once(APPS_ROOT."/api_data.php");
-require_once(APPS_ROOT.'/../dal/dal.php');
 require_once(APPS_ROOT.'/global/global.php');
-
-//$db = new db_connection();
 
 
 // consider including global authorization code here
