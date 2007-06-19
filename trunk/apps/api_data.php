@@ -184,6 +184,7 @@
 	 	//get api contents decose with json to an array
 		$cachedFileName = './cache/' . str_replace(array(':', '/', '?', '&'), '', substr($url, 28, strlen($url)));
 	 	
+		#TODO check if file past cache limit
 	 	if (file_exists($cachedFileName)) {
 	 		$resultsArray = json_decode(file_get_contents($cachedFileName),true); 
 	 	} else {
