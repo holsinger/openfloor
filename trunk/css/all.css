@@ -785,3 +785,21 @@ input.txt {
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA url(../images/bg-header-input.gif);
 }
+
+/*****************login*********************/
+#userLogin {
+	float:right;
+	margin-right:35px;
+	margin-top:5px;
+	text-align: right;
+}
+#userLogin span{
+	color:#F04A54;
+	text-decoration:underline;
+	cursor:pointer;
+}
+#userLogin span:hover {
+	color:#F04A54;
+	text-decoration:none;
+	cursor:pointer;
+}
