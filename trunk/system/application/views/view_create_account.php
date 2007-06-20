@@ -2,8 +2,9 @@
 
 <div id="content_div">
   <h3>Create Account</h3>	
+  	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
-	<?= form_open('create_account/createUser'); ?>
+	<?= form_open('user/create'); ?>
 	
 	<?= form_format("Username: ",form_input('user_name','','class="txt"') ); ?>
 	<?= form_format("Password: ",form_password('user_password','','class="txt"') ); ?>
