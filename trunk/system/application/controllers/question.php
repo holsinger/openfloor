@@ -5,20 +5,46 @@ class Question extends Controller
 	{
 		parent::Controller();
 		$this->load->model('CN_Model','question');
+		$this->load->library('validation');
+		$this->load->helper('url');//for redirect
 	}
 	
 	function index()
-	{
-		if(!empty($_POST['question']) && $_POST['event']!='0') 
-		{			
-			if($this->addQuestion()) $data['success'] = true;		
+	{				
+		$data['error'] = '';
+		#FORM VALIDATE
+		if (isset($_POST['event']) && $_POST['event']=='0') $data['error'] .= 'Please select an Event.<br />';
+
+		$rules['event'] = "required";
+		$rules['question'] = "trim|required|min_length[10]|max_length[150]|xss_clean";
+		$rules['desc'] = "trim|required|max_length[250]|xss_clean";
+		$rules['tags'] = "trim|strtolower|xss_clean";
+		
+		$this->validation->set_rules($rules);
 				
-			$data['events'] = $this->populateEventsSelect();
-			$this->load->view('view_submit_question', $data);
+		if ($this->validation->run() == FALSE) {
+			$data['error'] .= $this->validation->error_string;
 		} else {
-			$data['events'] = $this->populateEventsSelect();
-			$this->load->view('view_submit_question', $data);
+			$questionID = $this->addQuestion();
+			if( is_numeric($questionID) ) {
+				//redirect to question view page
+				redirect('question/view/'.$questionID);
+				ob_clean();
+				exit();
+			} else {
+				$data['error'] = 'Error Adding Question';
+			}
 		}
+		
+		//this makes the info sticky 
+		$fields['event']	= ( isset($_POST['event']) ) ? $_POST['event']:"";
+		$fields['question']	= ( isset($_POST['question']) ) ? $_POST['question']:"";
+		$fields['desc']	= ( isset($_POST['desc']) ) ? $_POST['desc']:"";
+		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
+		$this->validation->set_fields($fields);
+		
+		$data['events'] = $this->populateEventsSelect();
+		$this->load->view('view_submit_question', $data);
 	}
 
 	function addQuestion()
@@ -37,8 +63,8 @@ class Question extends Controller
 		
 		$query = $this->question->getTagsInSet($tags);
 		
-		$existingKs;
-		$existingVs;
+		$existingKs = array();
+		$existingVs = array();
 		foreach($query->result_array() as $row)
 		{
 			$existingKs[] = $row['tag_id'];
@@ -58,7 +84,7 @@ class Question extends Controller
 		/* insert proper associations */
 		if(isset($questionID)) foreach($newKs as $v) $this->question->insertTagAssociation($questionID, $v, $userID);
 	
-		return true;
+		return $questionID;
 	}
 
 	function populateEventsSelect()
@@ -66,8 +92,12 @@ class Question extends Controller
 		$events = $this->question->getEvents();
 		
 		$output='';
-		foreach($events as $v) $output .= "<option value=\"{$v['event_id']}\">{$v['event_name']}</option>";
+		foreach($events as $v) $output .= "<option value=\"{$v['event_id']}\" ". $this->validation->set_select('event', $v['event_id']) .">{$v['event_name']}</option>";
 		return $output;
+	}
+	
+	function view () {
+		echo $this->uri->segment(3);
 	}
 }
 ?>
