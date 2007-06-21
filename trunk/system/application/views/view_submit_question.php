@@ -1,25 +1,56 @@
 <? $this->load->view('view_includes/header.php'); ?>
 
-<div align="center">
-	<form method="post" action="index.php/question">
-		<?= isset($data['vars']['success'])?'<h3>SUCCESS!</h3>':'' ?>
-		<h3>Event</h3>
-		<select name="event">
-			<option value="0"></option>
+<div id="content_div">
+	<h2>Submit a Question</h2>	
+	<?= form_open('question'); ?>
+		<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
+		<label>Event</label>
+		<select name="event" class="txt">
+			<option value="0">-- Select an Event --</option>
 			<?=$data['vars']['events']?>
 		</select>
-		<h3>Question</h3>
-		Enter a question you would like asked.<br/>
-		<input type="text" name="question" maxlength="100"/>
-		<h3>Description</h3>
-		Write a brief description explaining your question (limit 250 chars).<br/>
-		<textarea rows="2" cols="20" name="desc">y helo thar</textarea>
-		<h3>Tags</h3>
-		Short, generic words separated by ',' (commas) ex...<br/>
-		<input type="text" name="tags"/><br/><br/>
-		<input type="submit" value="Submit Question"/>
-		<input type="hidden" name="submitted" value="true"/>
-	</form>
+		<br />
+		<?
+		$format = array(
+              'name'        => 'question',
+              'id'          => 'question',
+              'value'       => $this->validation->question,
+              'maxlength'   => '150',
+              'size'        => '100',
+              'class'       => 'txt'
+            );
+		echo form_format("Question: ",form_input($format),'Enter a question you would like asked.' ); 
+		?>
+		<br />
+		<?
+		$format = array(
+              'name'        => 'desc',
+              'id'          => 'desc',
+              'value'       => $this->validation->desc,
+              'maxlength'   => '250',
+              'rows'        => '3',
+              'cols'        => '75',
+              'class'       => 'txt'
+            );
+		echo form_format("Description: ",form_textarea($format),'Write a brief description explaining your question (limit 250 chars).' ); 
+		?>
+		<br />
+		<?
+		$format = array(
+              'name'        => 'tags',
+              'id'          => 'tags',
+              'value'       => $this->validation->tags,
+              'size'        => '75',
+              'class'       => 'txt',
+			  'style'	    => 'text-transform:lowercase'
+            );
+		echo form_format("Tags: ",form_input($format),'Short, generic words separated by \',\' (commas) example: abortion, lgbt, war' ); 
+		?>
+		<br />
+		<br />
+		<?= form_hidden('submitted','true'); ?>
+		<?= form_submit('','Submit Question','class="button"'); ?>
+	<?= form_close(); ?>
 </div>
 
 <? $this->load->view('view_includes/footer.php'); ?>
