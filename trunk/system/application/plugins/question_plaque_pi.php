@@ -2,7 +2,7 @@
 
 function create_plaque($question)
 {
-	$baseurl		= "http://localhost/~Rob/Politic20/index.php/test";
+	$baseurl		= "http://localhost/~Rob/Politic20/index.php/question";
 	$voteUpURL 		= "$baseurl/voteup/{$question['question_id']}";
 	$voteDownURL 	= "$baseurl/votedown/{$question['question_id']}";
 	

@@ -111,14 +111,14 @@ class Question extends Controller
 	{
 		$id = $this->uri->segment(3);
 		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, 1, $id)");
-		$this->index();
+		$this->queue();
 	}
 	
 	function votedown()
 	{
 		$id = $this->uri->segment(3);
 		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, 1, $id)");
-		$this->index();
+		$this->queue();
 	}
 }
 ?>
