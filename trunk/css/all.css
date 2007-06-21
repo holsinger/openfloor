@@ -774,16 +774,48 @@ form label{
 	display: block;
 	font-weight: bold;
 	padding-bottom: 5px;
+	padding-top: 7px;
 }
 input.txt {
-	width:168px;
+	/*width:168px;*/
 	height:19px;
-	border:none;
+	border:2px solid #CCCCCC;
 	position:relative;
-	margin:-2px 7px 0 0;
 	padding:5px 0 0 4px;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
-	background:#BED3EA url(../images/bg-header-input.gif);
+	/*background:#BED3EA url(../images/bg-header-input.gif);*/
+	background:#BED3EA;
+}
+
+select.txt {
+	border:2px solid #CCCCCC;
+	position:relative;
+	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background:#BED3EA;
+}
+textarea.txt {
+	border:2px solid #CCCCCC;
+	position:relative;
+	padding:5px 0 0 4px;
+	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background:#BED3EA;
+}
+.errorArea {
+	color: #FF0000;	
+	font-weight: bold;
+}
+
+.button {
+  	top: 5px;
+	background: #F04A54;
+	color: #FFFFFF;
+	border-right: solid 2px #651F23;
+	border-bottom: solid 2px #651F23;
+	border-left: solid 0px #FFFFFF;
+	border-top: solid 0px #FFFFFF;
+	padding: 3px;
+	font: bold 8pt "Verdana", "Helvetica", "Arial", "Geneva", sans-serif;
+	cursor:pointer;
 }
 
 /*****************login*********************/
