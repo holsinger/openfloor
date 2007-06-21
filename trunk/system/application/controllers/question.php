@@ -99,5 +99,26 @@ class Question extends Controller
 	function view () {
 		echo $this->uri->segment(3);
 	}
+	
+	function queue()
+	{
+		$query = $this->db->query('SELECT question_id, (SELECT format(sum(vote_value)/10,0) AS number FROM cn_votes WHERE fk_question_id=question_id GROUP BY fk_question_id) as votes, question_name, question_desc, user_name, event_name FROM cn_questions, cn_events, cn_users WHERE fk_user_id=user_id AND fk_event_id=event_id ORDER BY votes DESC');
+		$data['results'] = $query->result_array();
+		$this->load->view('queue_view',$data);
+	}
+	
+	function voteup()
+	{
+		$id = $this->uri->segment(3);
+		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, 1, $id)");
+		$this->index();
+	}
+	
+	function votedown()
+	{
+		$id = $this->uri->segment(3);
+		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, 1, $id)");
+		$this->index();
+	}
 }
 ?>
