@@ -28,7 +28,7 @@ class Question extends Controller
 			$questionID = $this->addQuestion();
 			if( is_numeric($questionID) ) {
 				//redirect to question view page
-				redirect('question/view/'.$questionID);
+				redirect('question/queue');
 				ob_clean();
 				exit();
 			} else {
@@ -104,7 +104,7 @@ class Question extends Controller
 	{
 		$query = $this->db->query('SELECT question_id, (SELECT format(sum(vote_value)/10,0) AS number FROM cn_votes WHERE fk_question_id=question_id GROUP BY fk_question_id) as votes, question_name, question_desc, user_name, event_name FROM cn_questions, cn_events, cn_users WHERE fk_user_id=user_id AND fk_event_id=event_id ORDER BY votes DESC');
 		$data['results'] = $query->result_array();
-		$this->load->view('queue_view',$data);
+		$this->load->view('view_queue',$data);
 	}
 	
 	function voteup()
