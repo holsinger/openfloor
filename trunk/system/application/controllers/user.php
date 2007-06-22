@@ -1,12 +1,16 @@
 <?php
 class User extends Controller {
 
+	var $error = '';
+	
 	function __construct()
 	{
 		parent::Controller();
 		$this->load->helper('url');
 		
 		$this->load->model('User_model','user');
+		
+		$this->load->library('validation');
 		
 		$this->load->scaffolding('cn_users');
 	}
@@ -20,24 +24,26 @@ class User extends Controller {
 	}
 	
 	function login () {
-		if (!isset($_POST['user_name']) || !isset($_POST['user_password'])) {
-			$data['error'] = '';
+		$rules['user_name'] = "trim|required|min_length[5]|max_length[12]|xss_clean";
+		$rules['user_password'] = "trim|required|md5";
+		$this->validation->set_rules($rules);
+					
+		if ($this->validation->run() == FALSE) {
+			$data['error'] = $this->validation->error_string;
+			$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";	
+			$this->validation->set_fields($fields);
 			$this->load->view('view_login',$data);
 		} else if ( $this->user->check_user_login() ) {//check if user login is correct
 			//set user session
-			$data['user_name'] = $this->user->user_name;
-			$data['user_avatar'] = $this->user->user_avatar;
-			$data['user_display_name'] = $this->user->user_display_name;
-			$data['logged_in'] = "asdjfhlak#adsfLKJHJ";
-			
-			$this->session->set_userdata($data);
+			$this->user->login_user($this->user->user_name,$this->user->user_id);			
 			
 			//redirect somewhere
-			redirect('user/profile/'.$this->session->userdata('user_name'));
+			if (isset($_POST['redirect'])) redirect($_POST['redirect']); 
+			else redirect('user/profile/'.$this->session->userdata('user_name'));
 			ob_clean();
 			exit();
 		} else {
-			$data['error'] = 'Login Error';
+			$data['error'] = 'Login Failed, Please Try Again';
 			$this->load->view('view_login',$data);
 		}
 	}
@@ -51,21 +57,67 @@ class User extends Controller {
 		exit();
 	}
 	function createAccount ($error='') {
-		$data['error'] = $error;
+		$data['error'] = str_replace('_',' ',$error);		
+		//build captch
+		$this->load->plugin('captcha');
+		$vals = array(
+						'img_path'	 => './captcha/',
+						'img_url'	 => 'captcha/'
+					);
+		
+		$cap = create_captcha($vals);
+	
+		$image = array(
+						'captcha_id'	=> '',
+						'captcha_time'	=> $cap['time'],
+						'ip_address'	=> $this->input->ip_address(),
+						'word'			=> $cap['word']
+					);
+	
+		$query = $this->db->insert_string('captcha', $image);
+		$this->db->query($query);
+	
+		//add image to data
+		$data['capimage'] = $cap['image'];
+		
+		//set field values
+		$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";
+		$fields['user_email']	= ( isset($_POST['user_email']) ) ? $_POST['user_email']:"";	
+		$this->validation->set_fields($fields);
+		
 		$this->load->view('view_create_account',$data);
 	}
 	
 	function create () {
-		$last_id = $this->user->insert_user_form();
-		//make sure a new id was inserted
-		if ( is_numeric($last_id) ) {
-			//forward to a user page
-			redirect('user/profile/'.$_POST['user_name']);
-			ob_clean();
-			exit();
-		} else {
-			$this->createAccount();
-		}
+		$error = false;
+		
+		$rules['user_name'] = "trim|required|min_length[5]|max_length[12]|xss_clean";
+		$rules['user_password'] = "trim|required|matches[password_confirm]|md5";
+		$rules['password_confirm'] = "trim|required";
+		$rules['user_email'] = "trim|required|valid_email";
+		$rules['captcha'] = "callback_check_captcha";
+		
+		$this->validation->set_rules($rules);
+					
+		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
+		
+		if ( !$error ) {
+			$last_id = $this->user->insert_user_form();
+			//make sure a new id was inserted
+			if ( is_numeric($last_id) ) {
+				//set sessions
+				$this->user->login_user($this->user->user_name,$this->user->user_id);
+				//forward to a user page
+				redirect('user/profile/'.$_POST['user_name']);
+				ob_clean();
+				exit();
+			} else {
+				$error = 'Error Creating Account';
+			}
+		} //if no error
+				
+		//send back the error
+		$this->createAccount($error);
 	}
 	
 	function loginOpenID () {		
@@ -85,9 +137,62 @@ class User extends Controller {
 	}
 	
 	function profile () {
-		$user_name = $this->uri->segment(3);
-		echo "user: {$user_name}";
-		
+		//allow segment 3 to be an id or username
+		$error = $this->error;
+		$user_id = '';
+		$user_name = '';
+		if ( is_numeric($this->uri->segment(3)) ) $user_id = $this->uri->segment(3);
+		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
+		$data = $this->user->get_user($user_id,$user_name);
+		//set error if there is one
+		$data['error'] = (count($data) > 0)?$error:'No user record round for: '.$this->uri->segment(3);
+		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
+		//exit(var_dump($data));
+		$this->load->view('view_user_profile',$data);
+	}
+	
+	function update () {
+		$config['upload_path'] = './avatars/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '250';
+		$config['max_width']  = '640';
+		$config['max_height']  = '480';
+		$config['encrypt_name']  = TRUE;
+				
+		$this->load->library('upload', $config);
+	
+		if ( ! $this->upload->do_upload('user_avatar'))
+		{
+			$error = array('error' => $this->upload->display_errors());
+			
+			$this->load->view('view_user_profile', $error);
+		}	
+		else
+		{
+			$data = array('upload_data' => $this->upload->data());
+			
+			$this->load->view('upload_success', $data);
+		}
+	}
+	/**
+	 * this function will check the captcha
+	 **/
+	function check_captcha ($str) {
+	 	// First, delete old captchas
+		$expiration = time()-7200; // Two hour limit
+		$this->db->query("DELETE FROM captcha WHERE captcha_time < ".$expiration);		
+	
+		// Then see if a captcha exists:
+		$sql = "SELECT COUNT(*) AS count FROM captcha WHERE word = ? AND ip_address = ? AND captcha_time > ?";
+		$binds = array($str, $this->input->ip_address(), $expiration);
+		$query = $this->db->query($sql, $binds);
+		$row = $query->row();
+		if ($row->count == 0) {
+			$this->validation->set_message('check_captcha', 'You must submit the characters that appears in the image');
+			return FALSE;
+		} else {
+			return TRUE;
+		}
 	}
 }
 ?>
