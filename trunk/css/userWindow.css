@@ -16,7 +16,7 @@
         src="/images/overlay.png", sizingMethod="scale");
 }
 
-.box{
+.ajax_box{
     min-width:300px;
     background:#C6C6C6;
     padding:10px;
