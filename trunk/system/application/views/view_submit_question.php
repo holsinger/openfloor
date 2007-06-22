@@ -4,7 +4,7 @@
 	<h2>Submit a Question</h2>	
 	<?= form_open('question'); ?>
 		<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
-		<label>Event</label>
+		<label>Event: *</label>
 		<select name="event" class="txt">
 			<option value="0">-- Select an Event --</option>
 			<?=$data['vars']['events']?>
@@ -16,10 +16,10 @@
               'id'          => 'question',
               'value'       => $this->validation->question,
               'maxlength'   => '150',
-              'size'        => '100',
+              'size'        => '78',
               'class'       => 'txt'
             );
-		echo form_format("Question: ",form_input($format),'Enter a question you would like asked.' ); 
+		echo form_format("Question: *",form_input($format),'Enter a question you would like asked.' ); 
 		?>
 		<br />
 		<?
@@ -32,7 +32,7 @@
               'cols'        => '75',
               'class'       => 'txt'
             );
-		echo form_format("Description: ",form_textarea($format),'Write a brief description explaining your question (limit 250 chars).' ); 
+		echo form_format("Description: *",form_textarea($format),'Write a brief description explaining your question (limit 250 chars).' ); 
 		?>
 		<br />
 		<?
@@ -49,7 +49,10 @@
 		<br />
 		<br />
 		<?= form_hidden('submitted','true'); ?>
-		<?= form_submit('','Submit Question','class="button"'); ?>
+		<?= form_submit('','Submit Question','class="button"'); ?>		
+		<br />
+		<br />
+		<small>* required fields</small>
 	<?= form_close(); ?>
 </div>
 
