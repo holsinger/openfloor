@@ -220,7 +220,7 @@ function create_captcha($data = '', $img_path = '', $img_url = '', $font_path = 
 	
    if ($word == '')
    {
-		$pool = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+		$pool = '123456789abcdefghijklmnpqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ';
 
 		$str = '';
 		for ($i = 0; $i < 8; $i++)
