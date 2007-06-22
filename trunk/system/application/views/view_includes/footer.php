@@ -1,7 +1,5 @@
-<?php
-
-?>
-        </div>
+<? $this->load->view('view_includes/view_center_foot.php'); ?>
+        </div><!-- end class frame -->
   		</div>
   		
     </div>
