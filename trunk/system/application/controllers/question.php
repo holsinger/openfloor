@@ -57,32 +57,36 @@ class Question extends Controller
 		
 		/* deal with tags first */
 		$tags = str_replace(array(' ', "\t"), '', $tags);
-		$a = explode(',',$tags);
-		$tags = array();
-		foreach($a as $v) if(!empty($v)) $tags[] = $v;
-		
-		$query = $this->question->getTagsInSet($tags);
-		
-		$existingKs = array();
-		$existingVs = array();
-		foreach($query->result_array() as $row)
-		{
-			$existingKs[] = $row['tag_id'];
-			$existingVs[] = $row['value'];
+		if (!empty($tags)) {
+			$tagsExist = true;
+			$a = explode(',',$tags);
+			$tags = array();
+			foreach($a as $v) if(!empty($v)) $tags[] = $v;
+
+			$query = $this->question->getTagsInSet($tags);
+
+			$existingKs = array();
+			$existingVs = array();
+			foreach($query->result_array() as $row)
+			{
+				$existingKs[] = $row['tag_id'];
+				$existingVs[] = $row['value'];
+			}
+
+			$diff = array_diff($tags, $existingVs);
+
+			$newKs = array();
+			if(!empty($diff)) foreach($diff as $v) if($k=$this->question->insertTag($v)) $newKs[] = $k;
+
+			$newKs = array_merge($newKs, $existingKs);
 		}
 		
-		$diff = array_diff($tags, $existingVs);
-		
-		$newKs = array();
-		if(!empty($diff)) foreach($diff as $v) if($k=$this->question->insertTag($v)) $newKs[] = $k;
-		
-		$newKs = array_merge($newKs, $existingKs);
 		
 		/* insert the question*/
 		$questionID = $this->question->insertQuestion($questionName, $questionDesc, $userID, $eventID);
 			
 		/* insert proper associations */
-		if(isset($questionID)) foreach($newKs as $v) $this->question->insertTagAssociation($questionID, $v, $userID);
+		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->question->insertTagAssociation($questionID, $v, $userID);
 	
 		return $questionID;
 	}
