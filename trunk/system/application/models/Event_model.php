@@ -27,10 +27,7 @@ class Event_model extends Model
 
 	function update_event_form($event_id)
     {
-        foreach($_POST as $k=>$v)
-			$_POST[$k] = $this->db->escape($v);
-			
-		$this->db->where('event_id', (int) $event_id);
+        $this->db->where('event_id', (int) $event_id);
 		$this->db->update('cn_events', $_POST);
 		
 		return $this->db->affected_rows();

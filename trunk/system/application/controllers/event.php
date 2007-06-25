@@ -90,11 +90,8 @@ class Event extends Controller
 		
 		if ( !$error ) {
 			$affected_rows = $this->event->update_event_form($event_id);
-			//make sure a new id was inserted
+			//make sure a row was affected
 			if ( $affected_rows > 0 ) {
-				//set sessions
-				//$this->user->login_user($this->user->user_name,$this->user->user_id);
-				//forward to a user page
 				redirect('event/on_edit_success');
 				ob_clean();
 				exit();
@@ -104,7 +101,7 @@ class Event extends Controller
 		} //if no error
 				
 		//send back the error
-		$this->create_event($event_id, $error);
+		$this->edit_event($event_id, $error);
 	}
 	
 	public function on_edit_success()

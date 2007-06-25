@@ -19,7 +19,7 @@ class User extends Controller {
 	function index()
 	{
 		//default show create account form
-		$this->createAccount();
+		$this->view_users();
 	
 	}
 	
@@ -193,6 +193,86 @@ class User extends Controller {
 		} else {
 			return TRUE;
 		}
+	}
+	
+	// ============
+	// = User CMS =
+	// ============
+	
+	/**
+	 * View Users
+	 */
+	public function view_users()
+	{
+		$this->load->helper('url');
+		$this->load->library('table');
+		
+		$users = $this->db->get('cn_users')->result_array();
+		foreach($users as $k=>$v)
+			$users[$k]['edit'] = anchor("user/edit_user/{$v['user_id']}", 'Edit');
+			
+		$data['users'] = $users;	
+		
+		$this->table->set_heading('id', 'name', 'password', 'avatar', 'display_name', 'edit');
+    	
+		$this->load->view('view_users',$data);
+	}
+	
+	/**
+	 * Edit User
+	 */
+	public function edit_user($user_id, $error='')
+	{
+		$data['user_id'] = $user_id;
+		$data['error'] = str_replace('_',' ',$error);		
+		
+		$user = $this->db->getwhere('cn_users', array('user_id'=>$user_id))->row();
+		
+		foreach($user as $k=>$v)
+			$_POST[$k] = $v;
+		
+		$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";
+		$fields['user_password']	= ( isset($_POST['user_password']) ) ? $_POST['user_password']:"";
+		$fields['user_avatar']	= ( isset($_POST['user_avatar']) ) ? $_POST['user_avatar']:"";
+		$fields['user_display_name']	= ( isset($_POST['user_display_name']) ) ? $_POST['user_display_name']:"";
+		
+		$this->validation->set_fields($fields);
+		$this->load->view('view_edit_user',$data);
+	}
+	
+	public function edit_user_action($user_id)
+	{
+		$error = false;
+		
+		$rules['user_name'] = "";
+		$rules['user_password'] = "";
+		$rules['user_avatar'] = "";
+		$rules['user_display_name'] = "";
+		
+		$this->validation->set_rules($rules);
+					
+		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
+		
+		if ( !$error ) {
+			$affected_rows = $this->user->update_user_form_admin($user_id);
+			//make sure a row was affected
+			if ( $affected_rows > 0 ) {
+				redirect('user/on_edit_success');
+				ob_clean();
+				exit();
+			} else {
+				$error = 'Error Editing User';
+			}
+		} //if no error
+				
+		//send back the error
+		$this->edit_user($user_id, $error);
+	}
+	
+	public function on_edit_success()
+	{
+		echo 'User successfully edited!';
+		$this->view_users();
 	}
 }
 ?>

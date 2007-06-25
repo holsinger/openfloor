@@ -140,5 +140,13 @@ class User_model extends Model {
 		$this->session->set_userdata($data);
 		return true;
 	}
+	
+	function update_user_form_admin($user_id)
+    {
+        $this->db->where('user_id', (int) $user_id);
+		$this->db->update('cn_users', $_POST);
+		
+		return $this->db->affected_rows();
+    }
 }
 ?>
