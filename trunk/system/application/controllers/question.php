@@ -4,7 +4,9 @@ class Question extends Controller
 	function __construct()
 	{
 		parent::Controller();
-		$this->load->model('CN_Model','question');
+		$this->load->model('Tag_model','tag');
+		$this->load->model('Question_model','question');
+		$this->load->model('Event_model','event');
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
 	}
@@ -50,20 +52,21 @@ class Question extends Controller
 	function addQuestion()
 	{
 		$eventID = $_POST['event'];
-		$userID = 1;
+		$userID = $this->session->userdata('user_id');
 		$questionName = $_POST['question'];
 		$questionDesc = $_POST['desc'];
 		$tags = $_POST['tags'];		
 		
 		/* deal with tags first */
 		$tags = str_replace(array(' ', "\t"), '', $tags);
+		//make sure we have some tags
 		if (!empty($tags)) {
 			$tagsExist = true;
 			$a = explode(',',$tags);
 			$tags = array();
 			foreach($a as $v) if(!empty($v)) $tags[] = $v;
 
-			$query = $this->question->getTagsInSet($tags);
+			$query = $this->tag->getTagsInSet($tags);
 
 			$existingKs = array();
 			$existingVs = array();
@@ -76,7 +79,7 @@ class Question extends Controller
 			$diff = array_diff($tags, $existingVs);
 
 			$newKs = array();
-			if(!empty($diff)) foreach($diff as $v) if($k=$this->question->insertTag($v)) $newKs[] = $k;
+			if(!empty($diff)) foreach($diff as $v) if($k=$this->tag->insertTag($v)) $newKs[] = $k;
 
 			$newKs = array_merge($newKs, $existingKs);
 		}
@@ -86,14 +89,14 @@ class Question extends Controller
 		$questionID = $this->question->insertQuestion($questionName, $questionDesc, $userID, $eventID);
 			
 		/* insert proper associations */
-		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->question->insertTagAssociation($questionID, $v, $userID);
+		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->tag->insertTagAssociation($questionID, $v, $userID);
 	
 		return $questionID;
 	}
 
 	function populateEventsSelect()
 	{
-		$events = $this->question->getEvents();
+		$events = $this->event->getEvents();
 		
 		$output='';
 		foreach($events as $v) $output .= "<option value=\"{$v['event_id']}\" ". $this->validation->set_select('event', $v['event_id']) .">{$v['event_name']}</option>";
@@ -106,13 +109,16 @@ class Question extends Controller
 	
 	function queue()
 	{
-		$query = $this->db->query('SELECT question_id, (SELECT format(sum(vote_value)/10,0) AS number FROM cn_votes WHERE fk_question_id=question_id GROUP BY fk_question_id) as votes, question_name, question_desc, user_name, event_name FROM cn_questions, cn_events, cn_users WHERE fk_user_id=user_id AND fk_event_id=event_id ORDER BY votes DESC');
-		$data['results'] = $query->result_array();
+		$this->load->model('Question_model','question2');
+		//set restrictions
+		$data['results'] = $this->question2->questionQue();
 		$this->load->view('view_queue',$data);
 	}
 	
 	function voteup()
 	{
+		#TODO validation and trending need to be considered
+		#TODO move db to a voting controller
 		$id = $this->uri->segment(3);
 		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, 1, $id)");
 		$this->queue();
@@ -120,6 +126,8 @@ class Question extends Controller
 	
 	function votedown()
 	{
+		#TODO validation and trending need to be considered
+		#TODO move db to a voting controller
 		$id = $this->uri->segment(3);
 		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, 1, $id)");
 		$this->queue();
