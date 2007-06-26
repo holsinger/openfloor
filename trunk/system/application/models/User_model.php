@@ -100,7 +100,7 @@ class User_model extends Model {
 		if ( $user_email ) $this->db->where('user_email',$user_email);
 		if ( $user_openid ) $this->db->where('user_openid',$user_openid);
 		$query = $this->db->get('cn_users');
-		log_message('debug', $this->db->last_query());
+		log_message('debug', "GET_USER:".$this->db->last_query());
 		if ($query->num_rows() > 0) {
 			$user_array = $query->result_array();
 			//var_dump($user_array);
@@ -152,6 +152,40 @@ class User_model extends Model {
 		$this->db->update('cn_users', $_POST);
 		
 		return $this->db->affected_rows();
+    }
+    
+    /**
+     * this will check if the user has param status
+     * user)id is optional other wise it will get it from the session
+     * 
+     * @param int security_level the security levle in question
+     * @param int user_id the id of the user in question
+     */
+    public function check_status ($security_level,$user_id=0)
+    {
+    	$user_array = array();
+    	#make sure we have a user id to use
+    	if ($this->session->userdata('user_id')) $this->db->where('user_id', (int) $this->session->userdata('user_id'));
+    	else if ($user_id) $this->db->where('user_id', (int) $user_id);
+    	else 
+    	{
+    		log_message('error','USER:CHECK_STATUS:no user id found');
+    		return FALSE;
+    	}
+    	#get user record
+    	$query = $this->db->get('cn_users');
+		log_message('debug', "GET_USER:".$this->db->last_query());
+		if ($query->num_rows() > 0) {
+			$user_array = $query->result_array();
+			//var_dump($user_array);
+			
+			#now check user security level
+			if ( $user_array[0]['user_security_level'] <= $security_level ) return TRUE;
+			else return FALSE;
+		} else {
+			return FALSE;
+		}//end if else results
+    	
     }
 }
 ?>
