@@ -19,12 +19,16 @@
 	
 	<br /><br />
 	<?= form_open('user/loginOpenID'); ?>
-	<?= form_format("OpenID Login: ",form_input('openid_url','','class="txt"') ); ?>
+	<?= form_format("<img src='images/openid-icon-small.gif'> OpenID Login: ",form_input('openid_url','','class="txt"') ); ?>
 	<?= form_hidden('openid_action','login'); ?>
 	<?= form_hidden('redirect',$this->uri->uri_string()); ?>
-	<br /><br /><?= form_submit('','Login','class="button"'); ?>
+	<?= form_hidden('openid_action','login'); ?>
+	<br />
+	<div>
+		<a href="http://www.myopenid.com/" class="link" target='_top'>Get an OpenID</a>
+	</div>
+	<br /><?= form_submit('','Login','class="button"'); ?>
 	<?= form_close(); ?>
-	<div><a href="http://www.myopenid.com/" class="link" target='_top'>Get an OpenID</a></div>
 
 	
          
