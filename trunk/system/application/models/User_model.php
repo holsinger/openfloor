@@ -6,6 +6,7 @@ class User_model extends Model {
     var $user_password = '';
     var $user_avatar = '';
     var $user_display_name = '';
+    var $default_security_level = 3;
 
     function __construct()
     {
@@ -29,6 +30,8 @@ class User_model extends Model {
 		if ( isset($_POST['user_password']) ) $this->db->set('user_password',$_POST['user_password']);
 		if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
 		if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
+		if ( isset($_POST['user_openid']) ) $this->db->set('user_openid',$_POST['user_openid']);
+		$this->db->set('user_security_level',$this->default_security_level);
 		$this->db->insert('cn_users');
 		
 		$user_id = $this->db->insert_id();
@@ -97,8 +100,10 @@ class User_model extends Model {
 		if ( $user_email ) $this->db->where('user_email',$user_email);
 		if ( $user_openid ) $this->db->where('user_openid',$user_openid);
 		$query = $this->db->get('cn_users');
+		log_message('debug', $this->db->last_query());
 		if ($query->num_rows() > 0) {
 			$user_array = $query->result_array();
+			//var_dump($user_array);
 			unset ($user_array[0]['user_password']);
 			return $user_array[0];
 		} else {
