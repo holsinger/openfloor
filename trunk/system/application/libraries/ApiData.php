@@ -248,12 +248,15 @@ class ApiData {
 			}			
 		
 			foreach ($resultsArray as $k => $v) {
-				$url = "http://api.sunlightlabs.com/people.getDataItem.php?id=$v&code=firstname";
-				$result = $this->callAPI ($url,'getDataItem');
+				
+				$url = "http://api.sunlightlabs.com/people.getPersonInfo.php?id=".$v;
+				$result = $this->callAPI ($url,'getPersonInfo');
+				#$url = "http://api.sunlightlabs.com/people.getDataItem.php?id=$v&code=firstname";
+				#$result = $this->callAPI ($url,'getDataItem');
 				$firstname = $result['firstname'];
 			
-				$url = "http://api.sunlightlabs.com/people.getDataItem.php?id=$v&code=lastname";
-				$result = $this->callAPI ($url,'getDataItem');
+				//$url = "http://api.sunlightlabs.com/people.getDataItem.php?id=$v&code=lastname";
+				//$result = $this->callAPI ($url,'getDataItem');
 				$lastname = $result['lastname'];
 				
 				$entity_id = $result['entity_id'];
