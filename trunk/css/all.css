@@ -851,3 +851,11 @@ textarea.txt {
 	text-decoration:none;
 	cursor:pointer;
 }
+/**************Calendar**************/
+.calendar {
+	cursor:pointer;
+}
+.calendar td:hover,
+.caldaycells:hover {
+	color: #F04A54;
+}
