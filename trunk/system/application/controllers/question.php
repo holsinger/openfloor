@@ -33,7 +33,7 @@ class Question extends Controller
 			$questionID = $this->addQuestion();
 			if( is_numeric($questionID) ) {
 				//redirect to question view page
-				redirect('question/queue');
+				redirect('question/voteup/'.$questionID);
 				ob_clean();
 				exit();
 			} else {
@@ -117,32 +117,47 @@ class Question extends Controller
 	{
 		$this->load->model('Question_model','question2');
 		//set restrictions
-		$data['results'] = $this->question2->questionQue();
+		$data['results'] = $this->question2->questionQueue();
 		$this->load->view('view_queue',$data);
 	}
 	
 	function voteup()
 	{
 		#check that user is allowed
-		$this->userauth->check();
+		if(!$this->userauth->check() || $this->alreadyVoted()) {
+			$this->queue();
+			return;
+		}
 		
 		#TODO validation and trending need to be considered
 		#TODO move db to a voting controller
 		$id = $this->uri->segment(3);
-		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, 1, $id)");
+		$this->question->voteup($this->session->userdata('user_id'), $id);
+		//$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, {$this->session->userdata('user_id')}, $id)");
 		$this->queue();
 	}
 	
 	function votedown()
 	{
 		#check that user is allowed
-		$this->userauth->check();
+		if(!$this->userauth->check() || $this->alreadyVoted()) {
+			$this->queue();
+			return;
+		}
 		
 		#TODO validation and trending need to be considered
 		#TODO move db to a voting controller
 		$id = $this->uri->segment(3);
-		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, 1, $id)");
+		$this->question->votedown($this->session->userdata('user_id'), $id);
+		//$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, {$this->session->userdata('user_id')}, $id)");
 		$this->queue();
+	}
+	
+	public function alreadyVoted()
+	{
+		$question_id = $this->uri->segment(3);
+		$user_id = $this->session->userdata('user_id');
+		return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_question_id=$question_id")->num_rows() > 0) ? true : false ;		
 	}
 }
 ?>
