@@ -168,6 +168,7 @@ class SimpleOpenID{
 	}
 	
 	function array2url($arr){ // converts associated array to URL Query String
+		$query = '';
 		if (!is_array($arr)){
 			return false;
 		}
@@ -242,7 +243,7 @@ class SimpleOpenID{
 			$this->ErrorStore('OPENID_NOSERVERSFOUND');
 			return false;
 		}
-		if ($delegates[0] != ""){
+		if ( isset($delegates[0]) && $delegates[0] != ""){
 			$this->openid_url_identity = $delegates[0];
 		}
 		$this->SetOpenIDServer($servers[0]);
