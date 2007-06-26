@@ -8,8 +8,8 @@
 	
 	<?= form_format("User Name: *",form_input('user_name',$this->validation->user_name,'class="txt"') ); ?>
 	<?= form_format("Password: *",form_input('user_password',$this->validation->user_password,'class="txt"') ); ?>
-	<?= form_format("Avatar: *",form_input('user_avatar',$this->validation->user_avatar,'class="txt"') ); ?>
-	<?= form_format("Display Name: *",form_input('user_display_name',$this->validation->user_display_name,'class="txt"') ); ?>
+	<?= form_format("Avatar:",form_input('user_avatar',$this->validation->user_avatar,'class="txt"') ); ?>
+	<?= form_format("Display Name:",form_input('user_display_name',$this->validation->user_display_name,'class="txt"') ); ?>
 	
 	<br /><br />
 	<br /><br />

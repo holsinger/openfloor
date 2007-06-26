@@ -182,9 +182,9 @@ class ApiData {
 	 	
 		#TODO check if file past cache limit
 	 	if (file_exists($cachedFileName)) {
-	 		$resultsArray = json_decode(file_get_contents($cachedFileName),true); 
+			$resultsArray = json_decode(file_get_contents($cachedFileName),true); 
 	 	} else {
-	 		$contents = file_get_contents($url);
+			$contents = file_get_contents($url);
 	 		$resultsArray = json_decode($contents,true);
 	 		//if we want to cache the data write the data to a file
 	 		if ($this->cacheData) {
@@ -228,6 +228,47 @@ class ApiData {
   		//build the district array
   		foreach ($zipArray as $key => $value) array_merge($this->districtsArray,$this->getDistrictsFromZip ($value));
     }*/
+
+	function getAllNames()
+	{
+		$cachedPoliticians = './system/cache/politicians';
+		$politicians = array('' => '');
+		
+		if (file_exists($cachedPoliticians)) {
+			$politicians = unserialize(file_get_contents($cachedPoliticians));
+		} else {
+			$resultsArray = array();
+			$parties = array('D', 'R', 'I');
+		
+			foreach ($parties as $v) {
+				$url = "http://api.sunlightlabs.com/people.getDataCondition.php?party=$v";
+				$array = $this->callAPI ($url,'getDataCondition');
+			
+				$resultsArray = array_merge($resultsArray, $array['entity_ids']);
+			}			
+		
+			foreach ($resultsArray as $k => $v) {
+				$url = "http://api.sunlightlabs.com/people.getDataItem.php?id=$v&code=firstname";
+				$result = $this->callAPI ($url,'getDataItem');
+				$firstname = $result['firstname'];
+			
+				$url = "http://api.sunlightlabs.com/people.getDataItem.php?id=$v&code=lastname";
+				$result = $this->callAPI ($url,'getDataItem');
+				$lastname = $result['lastname'];
+				
+				$entity_id = $result['entity_id'];
+				$politicians[$entity_id] = "$lastname, $firstname";
+			}
+			
+			asort($politicians);
+			
+			if ($file = fopen($cachedPoliticians, 'wb')) {
+	 			fwrite($file, serialize($politicians));
+	 			fclose($file);
+ 			}			
+		}
+		return $politicians;
+	}
 }
 
 ?>

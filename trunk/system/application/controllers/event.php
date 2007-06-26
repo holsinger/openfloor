@@ -17,6 +17,8 @@ class Event extends Controller
 		$this->load->model('Event_model','event');
 		
 		$this->load->library('validation');
+		$this->load->library('ApiData');
+		$this->load->plugin('js_calendar');
 		
 		$this->load->scaffolding('cn_events');
 	}
@@ -55,7 +57,8 @@ class Event extends Controller
 	public function edit_event($event_id, $error='')
 	{
 		$data['event_id'] = $event_id;
-		$data['error'] = str_replace('_',' ',$error);		
+		$data['error'] = str_replace('_',' ',$error);
+		$data['politicians'] = $this->apidata->getAllNames();		
 		
 		$event = $this->db->getwhere('cn_events', array('event_id'=>$event_id))->row();
 		
@@ -64,7 +67,7 @@ class Event extends Controller
 		
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
 		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
-		$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";
+		$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
 		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
 		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";
@@ -77,12 +80,12 @@ class Event extends Controller
 	{
 		$error = false;
 		
-		$rules['event_name'] = "";
-		$rules['event_desc'] = "";
-		$rules['event_avatar'] = "";
+		$rules['event_name'] = "trim|required|max_length[100]";
+		$rules['event_desc'] = "trim|required|max_length[255]";
+		$rules['event_avatar'] = "trim|max_length[255]";
 		$rules['sunlight_id'] = "";
-		$rules['event_date'] = "";
-		$rules['location'] = "";
+		$rules['event_date'] = "trim|required";
+		$rules['location'] = "trim|max_length[100]";
 		
 		$this->validation->set_rules($rules);
 					
@@ -115,10 +118,17 @@ class Event extends Controller
 	 */	
 	public function create_event($error='')
 	{
-		$data['error'] = str_replace('_',' ',$error);		
-		//print_r($_POST);
+		$data['politicians'] = $this->apidata->getAllNames();		
+		$data['error'] = str_replace('_',' ',$error);
+		
+		$_POST['event_date'] = '0000-00-00 00:00:00';		
+		
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
-		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";	
+		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
+		$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
+		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
+		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
+		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";	
 		$this->validation->set_fields($fields);
 		
 		$this->load->view('view_manage_events',$data);
@@ -131,15 +141,14 @@ class Event extends Controller
 	}
 	
 	public function create_event_action() {
-		// print_r($_POST); exit();
 		$error = false;
 		
-		$rules['event_name'] = "";
-		$rules['event_desc'] = "";
-		$rules['event_avatar'] = "";
+		$rules['event_name'] = "trim|required|max_length[100]";
+		$rules['event_desc'] = "trim|required|max_length[255]";
+		$rules['event_avatar'] = "trim|max_length[255]";
 		$rules['sunlight_id'] = "";
-		$rules['event_date'] = "";
-		$rules['location'] = "";
+		$rules['event_date'] = "trim|required";
+		$rules['location'] = "trim|max_length[100]";
 		
 		$this->validation->set_rules($rules);
 					
@@ -149,9 +158,6 @@ class Event extends Controller
 			$last_id = $this->event->insert_event_form();
 			//make sure a new id was inserted
 			if ( is_numeric($last_id) ) {
-				//set sessions
-				//$this->user->login_user($this->user->user_name,$this->user->user_id);
-				//forward to a user page
 				redirect('event/on_create_success');
 				ob_clean();
 				exit();

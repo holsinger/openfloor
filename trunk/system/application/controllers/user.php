@@ -244,10 +244,10 @@ class User extends Controller {
 	{
 		$error = false;
 		
-		$rules['user_name'] = "";
-		$rules['user_password'] = "";
-		$rules['user_avatar'] = "";
-		$rules['user_display_name'] = "";
+		$rules['user_name'] = "trim|required";
+		$rules['user_password'] = "trim|required";
+		$rules['user_avatar'] = "trim";
+		$rules['user_display_name'] = "trim";
 		
 		$this->validation->set_rules($rules);
 					
@@ -261,7 +261,7 @@ class User extends Controller {
 				ob_clean();
 				exit();
 			} else {
-				$error = 'Error Editing User';
+				$error = 'Error Editing User or no updates were made';
 			}
 		} //if no error
 				
