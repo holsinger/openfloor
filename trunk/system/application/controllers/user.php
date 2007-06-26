@@ -57,28 +57,10 @@ class User extends Controller {
 		exit();
 	}
 	function createAccount ($error='') {
-		$data['error'] = str_replace('_',' ',$error);		
-		//build captch
-		$this->load->plugin('captcha');
-		$vals = array(
-						'img_path'	 => './captcha/',
-						'img_url'	 => 'captcha/'
-					);
-		
-		$cap = create_captcha($vals);
-	
-		$image = array(
-						'captcha_id'	=> '',
-						'captcha_time'	=> $cap['time'],
-						'ip_address'	=> $this->input->ip_address(),
-						'word'			=> $cap['word']
-					);
-	
-		$query = $this->db->insert_string('captcha', $image);
-		$this->db->query($query);
+		$data['error'] = str_replace('_',' ',$error);
 	
 		//add image to data
-		$data['capimage'] = $cap['image'];
+		$data['capimage'] = $this->createCaptcha();
 		
 		//set field values
 		$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";
@@ -92,8 +74,9 @@ class User extends Controller {
 		$error = false;
 		
 		$rules['user_name'] = "trim|required|min_length[5]|max_length[12]|xss_clean";
-		$rules['user_password'] = "trim|required|matches[password_confirm]|md5";
-		$rules['password_confirm'] = "trim|required";
+		//open require if no open id
+		if (!isset($_POST['user_openid'])) $rules['user_password'] = "trim|required|matches[password_confirm]|md5";
+		if (!isset($_POST['user_openid'])) $rules['password_confirm'] = "trim|required";
 		$rules['user_email'] = "trim|required|valid_email";
 		$rules['captcha'] = "callback_check_captcha";
 		
@@ -120,20 +103,117 @@ class User extends Controller {
 		$this->createAccount($error);
 	}
 	
-	function loginOpenID () {		
-		$this->load->library('SimpleOpenId');
-		$this->simpleopenid->SetIdentity($_POST['openid_url']);
-		$this->simpleopenid->SetTrustRoot($this->config->site_url() );
-		$this->simpleopenid->SetRequiredFields(array('email','fullname'));
-		$this->simpleopenid->SetOptionalFields(array('dob','gender','postcode','country','language','timezone'));
-		if ($this->simpleopenid->GetOpenIDServer()){
-			$this->simpleopenid->SetApprovedURL($this->config->site_url() . "/user/loginOpenID/");  	// Send Response from OpenID server to this script
-			$this->simpleopenid->Redirect(); 	// This will redirect user to OpenID Server
-		}else{
-			$error = $this->simpleopenid->GetError();
-			echo "ERROR CODE: " . $error['code'] . "<br>";
-			echo "ERROR DESCRIPTION: " . $error['description'] . "<br>";
+	function loginOpenID () {	
+		$data['error'] = "OpenID Error";
+		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "login"){ // Get identity from user and redirect browser to OpenID Server
+			$this->load->library('SimpleOpenId');
+			$this->simpleopenid->SetIdentity($_POST['openid_url']);
+			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_ADDR'].'/p20/' );
+			$this->simpleopenid->SetRequiredFields(array('email'));
+			$this->simpleopenid->SetOptionalFields(array('fullname','dob','gender','postcode','country','language','timezone'));
+			if ($this->simpleopenid->GetOpenIDServer()){
+				//$this->simpleopenid->SetApprovedURL($this->config->site_url() . "/user/loginOpenID/");  	// Send Response from OpenID server to this script
+				
+				$this->simpleopenid->SetApprovedURL($this->config->site_url() . "?c=user&m=loginOpenID");  	// Send Response from OpenID server to this script
+				$this->simpleopenid->Redirect(); 	// This will redirect user to OpenID Server
+			}else{
+				$error = $this->simpleopenid->GetError();
+				$date['error'] = "OpenID ERROR CODE: " . $error['code'] . "<br>";
+				$date['error'] .= "OpenID ERROR DESCRIPTION: " . $error['description'] . "<br>";
+				$this->load->view('view_login',$data);
+			}
+		}//end if post login
+
+		if(isset($_GET['openid_mode']) && $_GET['openid_mode'] == 'id_res'){ 	// Perform HTTP Request to OpenID server to validate key
+			
+			$this->load->library('SimpleOpenId');
+			$this->simpleopenid->SetIdentity($_GET['openid_identity']);
+			$openid_validation_result = $this->simpleopenid->ValidateWithServer();
+			if ($openid_validation_result == true){ 		// OK HERE KEY IS VALID
+				log_message('debug', 'VALID OpenID '.$_GET['openid_identity']);
+				//foreach ($_GET as $key => $val) echo "$key => $val <br />";
+				
+				//get user data
+				$data = $this->user->get_user(0,'','',$_GET['openid_identity']);
+				//set error if there is one
+				if (count($data) > 0) {
+					$this->user->login_user($data['user_name'],$data['user_id']);
+					redirect('user/profile/'.$this->session->userdata('user_name'));
+					ob_clean();
+					exit();						
+				} else {
+					$data['error'] = 'No user record found for: '.$_GET['openid_identity'];
+					//$this->load->view('view_login',$data);
+				}
+				
+				
+			}else if($this->simpleopenid->IsError() == true){			// ON THE WAY, WE GOT SOME ERROR
+				$error = $this->simpleopenid->GetError();
+				$data['error'] = "OpenID ERROR CODE: " . $error['code'] . "<br>";
+				$data['error'] .= "OpenID ERROR DESCRIPTION: " . $error['description'] . "<br>";
+				//$this->load->view('view_login',$data);
+			}else{											// Signature Verification Failed
+				$data['error'] = "OpenID INVALID AUTHORIZATION";
+				//$this->load->view('view_login',$data);
+			}
+		} else if (isset($_GET['openid_mode']) && $_GET['openid_mode'] == 'cancel'){ // User Canceled your Request
+			$data['error'] = "OpenID USER CANCELED REQUEST";
+			//$this->load->view('view_login',$data);
 		}
+		//$data['error'] = "OpenID Error";
+		$this->load->view('view_login',$data);
+	}
+	
+	//this function is used with openID and ceate account
+	function createOpenID () {	
+		$data['error'] = "OpenID Error";
+		//add image to data
+		$data['capimage'] = $this->createCaptcha();
+		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "create"){ // Get identity from user and redirect browser to OpenID Server
+			$this->load->library('SimpleOpenId');
+			$this->simpleopenid->SetIdentity($_POST['openid_url']);
+			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_ADDR'].'/p20/' );
+			$this->simpleopenid->SetRequiredFields(array('email'));
+			$this->simpleopenid->SetOptionalFields(array('fullname','dob','gender','postcode','country','language','timezone'));
+			if ($this->simpleopenid->GetOpenIDServer()){
+				//$this->simpleopenid->SetApprovedURL($this->config->site_url() . "/user/loginOpenID/");  	// Send Response from OpenID server to this script
+				
+				$this->simpleopenid->SetApprovedURL($this->config->site_url() . "?c=user&m=createOpenID");  	// Send Response from OpenID server to this script
+				$this->simpleopenid->Redirect(); 	// This will redirect user to OpenID Server
+			}else{
+				$error = $this->simpleopenid->GetError();
+				$date['error'] = "OpenID ERROR CODE: " . $error['code'] . "<br>";
+				$date['error'] .= "OpenID ERROR DESCRIPTION: " . $error['description'] . "<br>";
+				$this->load->view('view_login',$data);
+			}
+		}//end if post login
+
+		if(isset($_GET['openid_mode']) && $_GET['openid_mode'] == 'id_res'){ 	// Perform HTTP Request to OpenID server to validate key
+			
+			$this->load->library('SimpleOpenId');
+			$this->simpleopenid->SetIdentity($_GET['openid_identity']);
+			$openid_validation_result = $this->simpleopenid->ValidateWithServer();
+			if ($openid_validation_result == true){ 		// OK HERE KEY IS VALID
+				log_message('debug', 'VALID OpenID '.$_GET['openid_identity']);
+				//foreach ($_GET as $key => $val) echo "$key => $val <br />";
+				
+				//get user data
+				$data['openID'] = $_GET['openid_identity'];
+				$data['openID_email'] = $_GET['openid_sreg_email']; 
+				$data['error'] = "";
+				
+			}else if($this->simpleopenid->IsError() == true){			// ON THE WAY, WE GOT SOME ERROR
+				$error = $this->simpleopenid->GetError();
+				$data['error'] = "OpenID ERROR CODE: " . $error['code'] . "<br>";
+				$data['error'] .= "OpenID ERROR DESCRIPTION: " . $error['description'] . "<br>";
+			}else{											// Signature Verification Failed
+				$data['error'] = "OpenID INVALID AUTHORIZATION";
+			}
+		} else if (isset($_GET['openid_mode']) && $_GET['openid_mode'] == 'cancel'){ // User Canceled your Request
+			$data['error'] = "OpenID USER CANCELED REQUEST";
+		}
+		//$data['error'] = "OpenID Error";
+		$this->load->view('view_create_account',$data);
 	}
 	
 	function profile () {
@@ -145,7 +225,7 @@ class User extends Controller {
 		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
 		$data = $this->user->get_user($user_id,$user_name);
 		//set error if there is one
-		$data['error'] = (count($data) > 0)?$error:'No user record round for: '.$this->uri->segment(3);
+		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
 		//exit(var_dump($data));
 		$this->load->view('view_user_profile',$data);
@@ -267,6 +347,30 @@ class User extends Controller {
 				
 		//send back the error
 		$this->edit_user($user_id, $error);
+	}
+	
+	function createCaptcha () {
+		//build captch
+		$this->load->plugin('captcha');
+		$vals = array(
+						'img_path'	 => './captcha/',
+						'img_url'	 => 'captcha/'
+					);
+		
+		$cap = create_captcha($vals);
+	
+		$image = array(
+						'captcha_id'	=> '',
+						'captcha_time'	=> $cap['time'],
+						'ip_address'	=> $this->input->ip_address(),
+						'word'			=> $cap['word']
+					);
+	
+		$query = $this->db->insert_string('captcha', $image);
+		$this->db->query($query);
+	
+		//add image to data
+		return $cap['image'];
 	}
 	
 	public function on_edit_success()
