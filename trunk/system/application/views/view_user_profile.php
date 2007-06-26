@@ -3,9 +3,15 @@
 <div id="content_div">
   <h2>User Profile</h2>	
   	<div class='errorArea'><?=$error;?></div>
-  	<br />
-	
+	<?
+	echo "<br /><strong> Username: </strong> ".$user_name;
+	echo "<br /><strong> Email: </strong> ".$user_email;
+	echo "<br /><strong> Display Name: </strong> ".$user_display_name;
+	echo "<br /><strong> OpenID: </strong> ".$user_openid;
+	echo "<br /><strong> Avatar: </strong> ".$user_avatar;	
+	?>
 	<? if ($owner) { ?>
+	<h2>Edit Profile</h2>	
 	<div id="user_form">
 	<?= form_open_multipart('user/create'); ?>
 	
