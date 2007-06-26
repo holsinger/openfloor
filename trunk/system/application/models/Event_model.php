@@ -32,5 +32,11 @@ class Event_model extends Model
 		
 		return $this->db->affected_rows();
     }
+    
+	public function getEvents()
+	{
+		$query = $this->db->query('SELECT * FROM cn_events');
+		return $query->result_array();
+	}
 }
 ?>
