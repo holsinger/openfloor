@@ -42,7 +42,7 @@ class Event extends Controller
 		
 		$events = $this->db->get('cn_events')->result_array();
 		foreach($events as $k=>$v)
-			$events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit');
+			if ($this->userauth->isAdmin()) $events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit');
 			
 		$data['events'] = $events;	
 		
@@ -56,6 +56,9 @@ class Event extends Controller
 	 */
 	public function edit_event($event_id, $error='')
 	{
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$data['event_id'] = $event_id;
 		$data['error'] = str_replace('_',' ',$error);
 		$data['politicians'] = $this->apidata->getAllNames();		
@@ -78,6 +81,9 @@ class Event extends Controller
 	
 	public function edit_event_action($event_id)
 	{
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$error = false;
 		
 		$rules['event_name'] = "trim|required|max_length[100]";
@@ -118,6 +124,9 @@ class Event extends Controller
 	 */	
 	public function create_event($error='')
 	{
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$data['politicians'] = $this->apidata->getAllNames();		
 		$data['error'] = str_replace('_',' ',$error);
 		
@@ -141,6 +150,9 @@ class Event extends Controller
 	}
 	
 	public function create_event_action() {
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$error = false;
 		
 		$rules['event_name'] = "trim|required|max_length[100]";

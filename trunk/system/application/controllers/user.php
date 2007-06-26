@@ -284,6 +284,9 @@ class User extends Controller {
 	 */
 	public function view_users()
 	{
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$this->load->helper('url');
 		$this->load->library('table');
 		
@@ -303,6 +306,9 @@ class User extends Controller {
 	 */
 	public function edit_user($user_id, $error='')
 	{
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$data['user_id'] = $user_id;
 		$data['error'] = str_replace('_',' ',$error);		
 		
@@ -322,6 +328,9 @@ class User extends Controller {
 	
 	public function edit_user_action($user_id)
 	{
+		#check that user is allowed
+		$this->userauth->check(SL_ADMIN);
+		
 		$error = false;
 		
 		$rules['user_name'] = "trim|required";

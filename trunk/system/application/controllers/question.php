@@ -13,6 +13,9 @@ class Question extends Controller
 	
 	function index()
 	{				
+		#check that user is allowed
+		$this->userauth->check();
+		
 		$data['error'] = '';
 		#FORM VALIDATE
 		if (isset($_POST['event']) && $_POST['event']=='0') $data['error'] .= 'Please select an Event.<br />';
@@ -51,6 +54,9 @@ class Question extends Controller
 
 	function addQuestion()
 	{
+		#check that user is allowed
+		$this->userauth->check();
+		
 		$eventID = $_POST['event'];
 		$userID = $this->session->userdata('user_id');
 		$questionName = $_POST['question'];
@@ -117,6 +123,9 @@ class Question extends Controller
 	
 	function voteup()
 	{
+		#check that user is allowed
+		$this->userauth->check();
+		
 		#TODO validation and trending need to be considered
 		#TODO move db to a voting controller
 		$id = $this->uri->segment(3);
@@ -126,6 +135,9 @@ class Question extends Controller
 	
 	function votedown()
 	{
+		#check that user is allowed
+		$this->userauth->check();
+		
 		#TODO validation and trending need to be considered
 		#TODO move db to a voting controller
 		$id = $this->uri->segment(3);
