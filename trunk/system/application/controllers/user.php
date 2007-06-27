@@ -103,6 +103,60 @@ class User extends Controller {
 		$this->createAccount($error);
 	}
 	
+	public function updateProfile()
+	{
+		//echo '<pre>'; print_r($_POST); echo'</pre>'; exit();
+		// =====================================
+		// = insert profile updating code here =
+		// =====================================
+		
+		$error = $this->error;
+		$user_id = '';
+		$user_name = '';
+		if ( is_numeric($this->uri->segment(3)) ) $user_id = $this->uri->segment(3);
+		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
+		$data = $this->user->get_user($user_id,$user_name);
+		$userdata = $data;
+		//set error if there is one
+		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
+		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
+		//exit(var_dump($data));
+		
+		// ==================
+		// = uploading code =
+		// ==================
+		$config['upload_path'] = './avatars/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '1024';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload())
+		{
+			$data['error'] = $this->upload->display_errors();
+		}	
+		else
+		{
+			$data['upload_data'] = $this->upload->data();
+			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
+			
+		}
+		
+		foreach($_POST as $k=>$v) $userdata[$k] = $v;
+		if(isset($data['upload_data'])) $userdata['user_avatar'] = serialize($data['upload_data']);
+		
+		$this->db->where('user_id', $userdata['user_id']);
+		$this->db->update('cn_users', $userdata);
+		
+		echo 'Update complete!';
+		$data = $this->user->get_user($user_id,$user_name);
+		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
+		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
+		$this->load->view('view_user_profile', $data);		
+	}
+	
 	function loginOpenID () {	
 		$data['error'] = "OpenID Error";
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "login"){ // Get identity from user and redirect browser to OpenID Server
