@@ -33,13 +33,13 @@ class Question_model extends Model
 		$where = '';
 		$where .= (isset($this->date_begin)) ? " AND event_date >= $this->date_begin" : '' ;
 		$where .= (isset($this->date_end)) ? " AND event_date <= $this->date_end" : '' ;
-		$where = (isset($this->user_id)) ? " AND user_id = $this->user_id" : '' ;
-		$where = (isset($this->question_status)) ? " AND question_status = $this->question_status" : '' ;
-		$where = (isset($this->event_id)) ? " AND event_id = $this->event_id" : '' ;
-		$where = (isset($this->question_id)) ? " AND question_id = $this->question_id" : '' ;
-		$where = (isset($this->tag_id)) ? " AND user_id = $this->tag_id" : '' ;
+		$where .= (isset($this->user_id)) ? " AND user_id = $this->user_id" : '' ;
+		$where .= (isset($this->question_status)) ? " AND question_status = $this->question_status" : '' ;
+		$where .= (isset($this->event_id)) ? " AND event_id = $this->event_id" : '' ;
+		$where .= (isset($this->question_id)) ? " AND question_id = $this->question_id" : '' ;
+		$where .= (isset($this->tag_id)) ? " AND tag_id = $this->tag_id" : '' ;
 		
-		return $this->db->query(
+		$query = $this->db->query(
 			"SELECT 
 				question_id, 
 				(SELECT 
@@ -50,7 +50,8 @@ class Question_model extends Model
 					fk_question_id=question_id 
 				GROUP BY fk_question_id) as votes, 
 				question_name, 
-				question_desc, 
+				question_desc,
+				cn_questions.timestamp as date, 
 				user_name, 
 				event_name 
 			FROM 
@@ -64,7 +65,9 @@ class Question_model extends Model
 				fk_event_id=event_id 
 			ORDER BY 
 				$this->order_by 
-			DESC")->result_array();
+			DESC");
+		log_message('debug', "questionQueue:".trim($this->db->last_query()));
+		return $query->result_array();
 	}
 	
 	public function voteup($fk_user_id, $fk_question_id)
