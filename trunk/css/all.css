@@ -246,9 +246,9 @@ a.close{
 #right h3 span{
 	display:block;
 	height:12px;
-	overflow:hidden;
-	text-indent:-999px;
-	margin:8px 0 0 18px;
+	margin:4px 0 8px 18px;
+	color: #FFFFFF;
+	line-height: 15px;
 }
 #right h3 span.login{
 	width:49px;
@@ -637,7 +637,7 @@ ul.sort-questions li.rss a{
 .local-nav li.active a.published-questions{background-position:0 0;}
 .local-nav li.active a.unpublished-questions{background-position:-196px 0;}
 .local-nav li.active a.submit-questions{background-position:-413px 0;}
-strong.questions{
+strong.read_head{
 	width:206px;
 	height:22px;
 	position:absolute;
@@ -837,7 +837,7 @@ textarea.txt {
 /*****************login*********************/
 #userLogin {
 	float:right;
-	margin-right:35px;
+	margin-right:50px;
 	margin-top:5px;
 	text-align: right;
 }
@@ -858,4 +858,8 @@ textarea.txt {
 .calendar td:hover,
 .caldaycells:hover {
 	color: #F04A54;
+}
+/************Event*****************/
+.event-summary {
+	width:100%;
 }
