@@ -38,7 +38,11 @@ class Event extends Controller
 	public function view_events()
 	{
 		$this->load->helper('url');
-		$this->load->library('table');
+		//$this->load->library('table');
+		
+		$data['desc'] = 'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Proin condimentum varius lorem. Phasellus sodales, enim nec scelerisque egestas, tortor massa blandit ipsum, at rhoncus velit pede et velit. Sed ultricies, libero eget tincidunt vehicula, eros urna sollicitudin nisl, a viverra neque leo in elit. Etiam ut nibh. Duis bibendum tristique metus. Pellentesque at felis. Donec pretium, tortor vel blandit elementum, pede massa rhoncus turpis, sed sagittis massa mauris et enim. Aenean vel erat ac nulla blandit tincidunt. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean rhoncus sapien non urna. Nullam augue libero, viverra ac, semper elementum, dapibus et, sem. Suspendisse adipiscing risus eu libero. Phasellus consectetuer, mi blandit semper porta, lacus justo rutrum nisl, vel facilisis est pede nec risus. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Praesent lacinia malesuada eros. Integer eleifend posuere quam. Suspendisse at lectus. Quisque cursus.
+						<br /><br />Nam sit amet tellus ac lorem dictum placerat. Phasellus lobortis enim sit amet turpis. Vivamus elit. Vivamus sed nulla. Donec ultrices cursus libero. Duis nec velit. Vestibulum rhoncus massa ac sem. Pellentesque imperdiet lectus id justo. Aliquam erat volutpat. Phasellus lacinia. Vivamus luctus est eu ligula. Aenean egestas. Donec vitae arcu ut risus ultrices eleifend. Ut elit risus, euismod id, lacinia nec, luctus vel, elit. Aenean neque. Mauris in enim. In pretium arcu et purus. Integer sodales viverra leo.
+						';
 		
 		$events = $this->db->get('cn_events')->result_array();
 		foreach($events as $k=>$v)
@@ -46,7 +50,7 @@ class Event extends Controller
 			
 		$data['events'] = $events;	
 		
-		$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
+		//$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
     	
 		$this->load->view('view_events',$data);
 	}
