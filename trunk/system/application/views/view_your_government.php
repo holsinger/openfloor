@@ -1,4 +1,5 @@
-<? $this->load->view('view_includes/header.php'); ?>
+<? $data['red_head'] = 'Results'; ?>
+<? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
   <h3>Who's Your Government</h3>	

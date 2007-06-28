@@ -1,4 +1,5 @@
-<? $this->load->view('view_includes/header.php'); ?>
+<? $data['red_head'] = 'Welcome'; ?>
+<? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
   <h2>Login</h2>	

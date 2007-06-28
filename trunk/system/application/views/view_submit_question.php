@@ -1,7 +1,13 @@
-<? $this->load->view('view_includes/header.php'); ?>
+<?
+$data['red_head'] = 'Questions';
+$data['tabs'] = TRUE;
+$data['tab_submit_question'] = 'active';
+?>
+
+<? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-	<h2>Submit a Question</h2>	
+	<h3>Submit a Question</h3>	
 	<?= form_open('question'); ?>
 		<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
 		<label>Event: *</label>

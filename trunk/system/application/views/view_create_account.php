@@ -1,7 +1,8 @@
-<? $this->load->view('view_includes/header.php'); ?>
+<? $data['red_head'] = 'Welcome'; ?>
+<? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <h2>Create Account</h2>	
+  <h3>Create Account</h3>	
   	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
 	

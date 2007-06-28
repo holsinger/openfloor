@@ -1,6 +1,11 @@
-<?$this->load->view('view_includes/header.php');?>
+<?
+$data['red_head'] = 'Questions';
+$data['tabs'] = TRUE;
+$data['tab_view_question'] = 'active';
+?>
+<?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
-	<h2>Questions</h2>
+	<h3>View Questions</h3>
 	<div id='queue'>
 	<?
 	foreach ($results as $row)
