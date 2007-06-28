@@ -32,7 +32,7 @@
               'cols'        => '75',
               'class'       => 'txt'
             );
-		echo form_format("Description: *",form_textarea($format),'Write a brief description explaining your question (limit 250 chars).' ); 
+		echo form_format("Description: ",form_textarea($format),'Write a brief description explaining your question (limit 250 chars).' ); 
 		?>
 		<br />
 		<?
