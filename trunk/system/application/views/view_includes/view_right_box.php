@@ -44,7 +44,7 @@
   <script type="text/javascript">
     function LoadVideoSearchControl() {
       var options = { twoRowMode : true };
-      var options = { largeResultSet : true };
+      //var options = { largeResultSet : true };
       var videoSearch = new GSvideoSearchControl(
                               document.getElementById("videoControl"),
                               [{ query : "politics"}, { query : "campaign 2008"}, { query : "u.s. senate"}, { query : "congress"}, { query : "liberal"}, { query : "democrat"}, { query : "republican"}], null, null, options);

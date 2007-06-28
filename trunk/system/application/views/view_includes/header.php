@@ -17,7 +17,11 @@ $this->load->view('view_includes/view_head_setup.php');
 
 <?
 //set vars for tab and box top links
-$this->load->view('view_includes/view_center_head.php'); 
+$data['tabs'] = (isset($tabs)) ? $tabs:FALSE;
+$data['tab_view_question'] = (isset($tab_view_question)) ? $tab_view_question:'';
+$data['tab_submit_question'] = (isset($tab_submit_question)) ? $tab_submit_question:'';
+$data['red_head'] = (isset($red_head)) ? $red_head:'';
+$this->load->view('view_includes/view_center_head.php',$data); 
 ?>
 
 <? 

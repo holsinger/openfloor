@@ -12,13 +12,15 @@
 											<div class="bg3">
 												<div class="bg">
 													<div class="top-box">
-														<strong class="questions"><!-- Questions --></strong>
+														<strong class="read_head"><?=$red_head;?></strong>
 														<!-- local (sub) navigation start here -->
 
+														<? if ($tabs) { ?>
 														<ul class="local-nav">
-																<li class="active"><a href="index.php/question/queue" class="published-questions">View Questions</a></li>
-																<li><a href="index.php/question" class="submit-questions">Submit a Question</a></li>
+																<li class="<?=$tab_view_question;?>"><a href="index.php/question/queue" class="published-questions">View Questions</a></li>
+																<li class="<?=$tab_submit_question;?>"><a href="index.php/question" class="submit-questions">Submit a Question</a></li>
 														</ul>
+														<? } ?>
 														<!-- sort questions list start here -->
 														<ul class="sort-questions">
 															<? /*
