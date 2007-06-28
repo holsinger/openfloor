@@ -8,18 +8,20 @@
 	echo "<br /><strong> Email: </strong> ".$user_email;
 	echo "<br /><strong> Display Name: </strong> ".$user_display_name;
 	echo "<br /><strong> OpenID: </strong> ".$user_openid;
-	echo "<br /><strong> Avatar: </strong> ".$user_avatar;	
+	echo "<br /><strong> Avatar: </strong> <img src='./avatars/{$avatar_image_name}'>";	
 	?>
 	<? if ($owner) { ?>
 	<h2>Edit Profile</h2>	
 	<div id="user_form">
 	<?= form_open_multipart("user/updateProfile/$user_name"); ?>
 	
-	<?= form_format("Username: ",form_input('user_name',$user_name,'class="txt"') ); ?>
+	<?= form_format("Username: ",$user_name); ?>
 	<?= form_format("Email: ",form_input('user_email',$user_email,'class="txt"') ); ?>
 	<?= form_format("Display Name: ",form_input('user_display_name',$user_display_name,'class="txt"') ); ?>
 	<?= form_format("OpenID: ",form_input('user_openid',$user_openid,'class="txt"') ); ?>
-	<?= form_format("Avatar: ",form_upload('userfile',$user_avatar,'class="txt"'),'must be less then 250 kb & 640x480px' ); ?>
+	<br /><img src='./avatars/<?=$avatar_image_name;?>'>
+	<?= form_format("Avatar: ",form_upload('userfile',$user_avatar,'class="txt"'),'must be less then 1024 kb & 1024px768px (image will be resized)' ); ?>
+	<?= form_hidden('old_avatar','./avatars/'.$avatar_image_name);?>
 	<br /><br />
 	<?= form_submit('','Update Profile','class="button"'); ?>
 	<?= form_close(); ?>
