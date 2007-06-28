@@ -130,33 +130,55 @@ class User extends Controller {
 		$config['max_size']	= '1024';
 		$config['max_width']  = '1024';
 		$config['max_height']  = '768';
+		$config['overwrite']  = FALSE;
+		$config['encrypt_name']  = TRUE;
 
 		$this->load->library('upload', $config);
 		
 		if ( ! $this->upload->do_upload())
 		{
-			$data['error'] = $this->upload->display_errors();
+			$this->error = $this->upload->display_errors();
 		}	
 		else
 		{
 			$data['upload_data'] = $this->upload->data();
 			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
 			
+			//resize image
+			$config = array();
+			$config['image_library'] = 'GD2';
+			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+			#$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['width'] = 75;
+			$config['height'] = 50;			
+			$this->load->library('image_lib', $config);			
+			$this->image_lib->resize();
+			if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
+			else $this->error = 'Update complete!';			
+		}
+		
+		#remove old image
+		if ($_POST['old_avatar'] ) 
+		{
+			$filename = $_POST['old_avatar'];
+			if ( file_exists($filename) && !is_string($this->error)) unlink ($filename);
+			unset($_POST['old_avatar']);
 		}
 		
 		foreach($_POST as $k=>$v) $userdata[$k] = $v;
 		if(isset($data['upload_data'])) $userdata['user_avatar'] = serialize($data['upload_data']);
 		
+		//add to db
+		#TODO move to model
 		$this->db->where('user_id', $userdata['user_id']);
 		$this->db->update('cn_users', $userdata);
+				
+		//send back to the profile
+		$this->profile();
 		
-		echo 'Update complete!';
-		$data = $this->user->get_user($user_id,$user_name);
-		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
-		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
-		$this->load->view('view_user_profile', $data);		
 	}
-	
+
 	function loginOpenID () {	
 		$data['error'] = "OpenID Error";
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "login"){ // Get identity from user and redirect browser to OpenID Server
@@ -281,33 +303,20 @@ class User extends Controller {
 		//set error if there is one
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
+		
+		if ( is_array(unserialize($data['user_avatar'])) )
+		{
+			$image_array = unserialize($data['user_avatar']);
+			
+			$data['avatar_image_name'] = $image_array['file_name'];
+			$data['avatar_image_height'] = $image_array['image_height'];
+			$data['avatar_image_width'] = $image_array['image_width'];
+		}
 		//exit(var_dump($data));
 		$this->load->view('view_user_profile',$data);
 	}
 	
-	function update () {
-		$config['upload_path'] = './avatars/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '250';
-		$config['max_width']  = '640';
-		$config['max_height']  = '480';
-		$config['encrypt_name']  = TRUE;
-				
-		$this->load->library('upload', $config);
-	
-		if ( ! $this->upload->do_upload('user_avatar'))
-		{
-			$error = array('error' => $this->upload->display_errors());
-			
-			$this->load->view('view_user_profile', $error);
-		}	
-		else
-		{
-			$data = array('upload_data' => $this->upload->data());
-			
-			$this->load->view('upload_success', $data);
-		}
-	}
+
 	/**
 	 * this function will check the captcha
 	 **/
@@ -346,11 +355,11 @@ class User extends Controller {
 		
 		$users = $this->db->get('cn_users')->result_array();
 		foreach($users as $k=>$v)
-			$users[$k]['edit'] = anchor("user/edit_user/{$v['user_id']}", 'Edit');
+			if ($this->userauth->isAdmin()) $users[$k]['edit'] = anchor("user/edit_user/{$v['user_id']}", 'Edit');
 			
 		$data['users'] = $users;	
 		
-		$this->table->set_heading('id', 'name', 'password', 'avatar', 'display_name', 'edit');
+		$this->table->set_heading('id', 'name', 'password', 'avatar', 'display_name','email','OpenID','security level','edit');
     	
 		$this->load->view('view_users',$data);
 	}
