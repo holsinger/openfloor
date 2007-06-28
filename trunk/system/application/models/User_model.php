@@ -6,7 +6,7 @@ class User_model extends Model {
     var $user_password = '';
     var $user_avatar = '';
     var $user_display_name = '';
-    var $default_security_level = 3;
+    var $default_security_level = SL_USER;
 
     function __construct()
     {
