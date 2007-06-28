@@ -182,7 +182,7 @@ class User extends Controller {
 	function loginOpenID () {	
 		$data['error'] = "OpenID Error";
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "login"){ // Get identity from user and redirect browser to OpenID Server
-			$this->load->library('SimpleOpenId');
+			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_POST['openid_url']);
 			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_ADDR'].'/p20/' );
 			$this->simpleopenid->SetRequiredFields(array('email'));
@@ -246,7 +246,7 @@ class User extends Controller {
 		//add image to data
 		$data['capimage'] = $this->createCaptcha();
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "create"){ // Get identity from user and redirect browser to OpenID Server
-			$this->load->library('SimpleOpenId');
+			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_POST['openid_url']);
 			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_ADDR'].'/p20/' );
 			$this->simpleopenid->SetRequiredFields(array('email'));
