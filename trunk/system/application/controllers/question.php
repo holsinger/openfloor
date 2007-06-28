@@ -11,7 +11,11 @@ class Question extends Controller
 		$this->load->helper('url');//for redirect
 	}
 	
-	function index()
+	function index () {
+		$this->add();
+	}
+	
+	function add()
 	{				
 		#check that user is allowed
 		$this->userauth->check();
