@@ -313,6 +313,8 @@ class User extends Controller {
 			$data['avatar_image_width'] = $image_array['image_width'];
 		}
 		//exit(var_dump($data));
+		//admin is also an owner
+		if ( $this->userauth->isAdmin() ) $data['owner'] = TRUE;
 		$this->load->view('view_user_profile',$data);
 	}
 	
@@ -348,18 +350,34 @@ class User extends Controller {
 	public function view_users()
 	{
 		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);
+		//$this->userauth->check(SL_ADMIN);
 		
 		$this->load->helper('url');
-		$this->load->library('table');
+		//$this->load->library('table');
 		
 		$users = $this->db->get('cn_users')->result_array();
-		foreach($users as $k=>$v)
+		foreach($users as $k=>$v) 
+		{
 			if ($this->userauth->isAdmin()) $users[$k]['edit'] = anchor("user/edit_user/{$v['user_id']}", 'Edit');
-			
+
+			if (is_string($users[$k]['user_avatar']) && is_array(unserialize($users[$k]['user_avatar'])) )
+			{
+				$image_array = unserialize($users[$k]['user_avatar']);
+				
+				$users[$k]['avatar_image_name'] = $image_array['file_name'];
+				$users[$k]['avatar_image_height'] = $image_array['image_height'];
+				$users[$k]['avatar_image_width'] = $image_array['image_width'];
+			} 
+			else
+			{
+				$users[$k]['avatar_image_name'] = '';
+				$users[$k]['avatar_image_height'] = '';
+				$users[$k]['avatar_image_width'] = '';
+			}
+		}
 		$data['users'] = $users;	
 		
-		$this->table->set_heading('id', 'name', 'password', 'avatar', 'display_name','email','OpenID','security level','edit');
+		//$this->table->set_heading('id', 'name', 'password', 'avatar', 'display_name','email','OpenID','security level','edit');
     	
 		$this->load->view('view_users',$data);
 	}
