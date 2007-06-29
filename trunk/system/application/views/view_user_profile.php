@@ -9,12 +9,9 @@
 	echo "<br /><strong> Username: </strong> ".$user_name;
 	echo "<br /><strong> Email: </strong> ".$user_email;
 	echo "<br /><strong> Display Name: </strong> ".$user_display_name;
-<<<<<<< .mine
 	echo "<br /><strong> OpenID: </strong> ".$user_openid;
 	echo isset($avatar_image_name)?"<br /><strong> Avatar: </strong> <img src='./avatars/{$avatar_image_name}'>":'';	
-=======
-	echo "<br /><strong> OpenID: </strong> ".$user_openid;	
->>>>>>> .r192
+
 	?>
 	<? if ($owner) { ?>
 	<h2>Edit Profile</h2>	
