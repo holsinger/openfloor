@@ -396,7 +396,7 @@ function prep_url($str = '')
  */
 function url_title($str, $separator = 'dash')
 {
-	if ($separator == 'dash')
+	if ($separator == '')
 	{
 		$search		= '_';
 		$replace	= '-';
