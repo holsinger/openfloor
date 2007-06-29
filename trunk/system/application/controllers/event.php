@@ -19,7 +19,7 @@ class Event extends Controller
 		$this->load->library('validation');
 		$this->load->library('ApiData');
 		$this->load->plugin('js_calendar');
-		
+				
 		$this->load->scaffolding('cn_events');
 	}
 	
@@ -35,7 +35,7 @@ class Event extends Controller
 	/**
 	 * View Events
 	 */
-	public function view_events()
+	public function view_events($error='')
 	{
 		$this->load->helper('url');
 		//$this->load->library('table');
@@ -48,7 +48,8 @@ class Event extends Controller
 		foreach($events as $k=>$v)
 			if ($this->userauth->isAdmin()) $events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit');
 			
-		$data['events'] = $events;	
+		$data['events'] = $events;
+		$data['error'] = $error;		
 		
 		//$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
     	
@@ -102,19 +103,19 @@ class Event extends Controller
 		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
 		
 		if ( !$error ) {
-			$affected_rows = $this->event->update_event_form($event_id);
+			//add event url name to array
+			$array = $_POST;
+			$array['event_url_name'] = url_title($_POST['event_name']);
+			$affected_rows = $this->event->update_event_form($event_id,$array);
 			//make sure a row was affected
 			if ( $affected_rows > 0 ) {
-				redirect('event/on_edit_success');
-				ob_clean();
-				exit();
+				$error = 'Event Updated!';
+				$this->view_events($error);
 			} else {
 				$error = 'Error Editing Event';
+				$this->edit_event($event_id, $error);
 			}
 		} //if no error
-				
-		//send back the error
-		$this->edit_event($event_id, $error);
 	}
 	
 	public function on_edit_success()
