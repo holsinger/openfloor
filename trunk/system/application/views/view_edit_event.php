@@ -4,11 +4,14 @@
   <h2>Edit Event </h2>	
   	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
-	<?= form_open('event/edit_event_action/' . $event_id, array('name'=>'my_form')); ?>
+	<?= form_open_multipart('event/edit_event_action/' . $event_id, array('name'=>'my_form')); ?>
 	
 	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
 	<?= form_format("Event Description: *",form_input('event_desc',$this->validation->event_desc,'class="txt"') ); ?>
-	<?= form_format("Event Avatar:",form_input('event_avatar',$this->validation->event_avatar,'class="txt"') ); ?>
+	<?= isset($avatar_image_name)?"<br /><img src=\"./avatars/<?=$avatar_image_name;/>\"":'' ?>
+	<? // echo form_format("Event Avatar:",form_input('event_avatar',$this->validation->event_avatar,'class="txt"') ); ?>
+	<?= form_format("Event Avatar: ",form_upload('userfile','$this->validation->event_avatar','class="txt"'),'must be less then 1024 kb & 1024px768px (image will be resized)' ); ?>
+	
 	
 	<label>Politician:</label>
 	<?= form_dropdown('sunlight_id', $politicians, $this->validation->sunlight_id, 'class="txt"')?>
@@ -25,6 +28,7 @@
 
 	<br /><br />
 	<br /><br />
+	<?= isset($avatar_image_name)?form_hidden('old_avatar','./avatars/'.$avatar_image_name):'';?>
 	<?= form_submit('','Edit Event','class="button"'); ?>
 	<br /><br />
 	<small>* required fields</small>

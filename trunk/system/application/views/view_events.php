@@ -16,6 +16,21 @@ $data['red_head'] = 'Events';
 
 	<p><? if ($this->userauth->isAdmin()) echo anchor('/event/create_event','Create an event');?></p>
 	<p class='errorArea'><?=(isset($error)?$error:'')?></p>
+<<<<<<< .mine
+	<? //echo $this->table->generate($events)?>
+	<? foreach ($events as $key => $array) {?>
+		<div id='event<?=$array['event_id'];?>' class='event-summary'>
+		<br /><strong><?=$array['event_name'];?></strong>
+		
+		<?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?>
+		
+		<!-- <span style"float:right;"><? //echo $array['event_avatar'];?></span> -->
+		<br /><b>When:</b> <?=$array['event_date'];?>
+		<br /><b>Where:</b> <?=$array['location'];?>
+		<br /><?=$array['event_desc'];?>
+		<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
+		</div>
+=======
 	<? //echo $this->table->generate($events)?>
 	<? foreach ($events as $key => $array) {?>
 		<div id='event<?=$array['event_id'];?>' class='event-summary'>
@@ -26,6 +41,7 @@ $data['red_head'] = 'Events';
 		<br /><b>Description:</b> <?=$array['event_desc'];?>
 		<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
 		</div>
+>>>>>>> .r192
 	<? }?>
 	</div>
 

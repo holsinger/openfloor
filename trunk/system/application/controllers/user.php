@@ -159,7 +159,7 @@ class User extends Controller {
 		}
 		
 		#remove old image
-		if ($_POST['old_avatar'] ) 
+		if (isset($_POST['old_avatar']) ) 
 		{
 			$filename = $_POST['old_avatar'];
 			if ( file_exists($filename) && !is_string($this->error)) unlink ($filename);
@@ -304,7 +304,11 @@ class User extends Controller {
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
 		
+<<<<<<< .mine
+		if ( is_array(@unserialize($data['user_avatar'])) )
+=======
 		if (is_string($data['user_avatar']) && is_array(unserialize($data['user_avatar'])) )
+>>>>>>> .r192
 		{
 			$image_array = unserialize($data['user_avatar']);
 			

@@ -45,8 +45,15 @@ class Event extends Controller
 						';
 		
 		$events = $this->db->get('cn_events')->result_array();
-		foreach($events as $k=>$v)
+		//echo '<pre>'; print_r($events); echo '</pre>'; exit();
+		
+		
+		foreach($events as $k=>$v) {
 			if ($this->userauth->isAdmin()) $events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit');
+			$file_name = '';
+			if (is_array($temp_array = unserialize($events[$k]['event_avatar']))) $file_name = $temp_array['file_name'];
+			$events[$k]['event_avatar'] = $file_name;
+		}
 			
 		$data['events'] = $events;
 		$data['error'] = $error;		
@@ -69,13 +76,15 @@ class Event extends Controller
 		$data['politicians'] = $this->apidata->getAllNames();		
 		
 		$event = $this->db->getwhere('cn_events', array('event_id'=>$event_id))->row();
+		//print_r($event); exit();
+		$data['avatar_image_name'] = (is_array($temp_array = unserialize($event->event_avatar))) ? $temp_array['file_name'] : '' ;
 		
 		foreach($event as $k=>$v)
 			$_POST[$k] = $v;
 		
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
 		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
-		$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
+		//$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
 		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
 		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";
@@ -86,14 +95,75 @@ class Event extends Controller
 	
 	public function edit_event_action($event_id)
 	{
+		
+		
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);
-		
 		$error = false;
+		
+		
+		// ==================
+		// = uploading code =
+		// ==================
+		$config['upload_path'] = './avatars/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '1024';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$config['overwrite']  = FALSE;
+		$config['encrypt_name']  = TRUE;
+
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload())
+		{
+			$this->error = $this->upload->display_errors();
+		}	
+		else
+		{
+			$data['upload_data'] = $this->upload->data();
+			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
+			
+			//resize image
+			$config = array();
+			$config['image_library'] = 'GD2';
+			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+			#$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['width'] = 75;
+			$config['height'] = 50;			
+			$this->load->library('image_lib', $config);			
+			$this->image_lib->resize();
+			if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
+			else $this->error = 'Update complete!';			
+		}
+		
+		#remove old image
+		if (isset($_POST['old_avatar']) ) 
+		{
+			$filename = $_POST['old_avatar'];
+			if ( file_exists($filename) && !is_string($this->error)) unlink ($filename);
+			unset($_POST['old_avatar']);
+		}
+		
+		// foreach($_POST as $k=>$v) $userdata[$k] = $v;
+		// if(isset($data['upload_data'])) $userdata['user_avatar'] = serialize($data['upload_data']);
+		
+		//add to db
+		#TODO move to model
+		// $this->db->where('user_id', $userdata['user_id']);
+		// $this->db->update('cn_users', $userdata);
+				
+		//send back to the profile
+		// $this->profile();  // Actually, send back to event_view
+		
+		// echo '<pre>'; print_r($data); echo '</pre>'; exit();
+		$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
+		
 		
 		$rules['event_name'] = "trim|required|max_length[100]";
 		$rules['event_desc'] = "trim|required|max_length[255]";
-		$rules['event_avatar'] = "trim|max_length[255]";
+		$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required";
 		$rules['location'] = "trim|max_length[100]";
@@ -116,6 +186,9 @@ class Event extends Controller
 				$this->edit_event($event_id, $error);
 			}
 		} //if no error
+		
+		
+		
 	}
 	
 	public function on_edit_success()
