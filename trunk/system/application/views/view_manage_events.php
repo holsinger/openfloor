@@ -4,8 +4,7 @@
   <h2>Create an event</h2>	
   	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
-	<?= form_open('event/create_event_action', array('name'=>'my_form')); ?>
-	
+	<?= form_open_multipart('event/create_event_action/', array('name'=>'my_form')); ?>
 	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
 	
 	<?
@@ -20,7 +19,7 @@
 		echo form_format("Event Description: *",form_textarea($format),'Write a description of the event.' ); 
 		?>
 	
-	<?= form_format("Event Avatar:",form_input('event_avatar',$this->validation->event_avatar,'class="txt"') ); ?>
+	<?= form_format("Event Avatar: ",form_upload('userfile','$this->validation->event_avatar','class="txt"'),'must be less then 1024 kb & 1024px768px (image will be resized)' ); ?>
 	
 	<label>Politician:</label>
 	<?= form_dropdown('sunlight_id', $politicians, null, 'class="txt"')?>
