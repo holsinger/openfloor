@@ -7,7 +7,19 @@
 	<?= form_open('event/create_event_action', array('name'=>'my_form')); ?>
 	
 	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
-	<?= form_format("Event Description: *",form_input('event_desc',$this->validation->event_desc,'class="txt"') ); ?>
+	
+	<?
+		$format = array(
+              'name'        => 'event_desc',
+              'id'          => 'event_desc',
+              'value'       => $this->validation->event_desc,
+              'rows'        => '3',
+              'cols'        => '75',
+              'class'       => 'txt'
+            );
+		echo form_format("Event Description: *",form_textarea($format),'Write a description of the event.' ); 
+		?>
+	
 	<?= form_format("Event Avatar:",form_input('event_avatar',$this->validation->event_avatar,'class="txt"') ); ?>
 	
 	<label>Politician:</label>
@@ -21,7 +33,19 @@
 	
 	<?//echo form_format("Sunlight ID:",form_input('sunlight_id','','class="txt"') ); ?>
 	<?//echo form_format("Event Date: *",form_input('event_date','','class="txt"') ); ?>
-	<?= form_format("Event Location:",form_input('location',$this->validation->location,'class="txt"') ); ?>	
+	
+	<?
+		$format = array(
+              'name'        => 'location',
+              'id'          => 'location',
+              'value'       => $this->validation->location,
+              'rows'        => '3',
+              'cols'        => '75',
+              'class'       => 'txt'
+            );
+		echo form_format("Event Location: *",form_textarea($format),'Write a description of the event location, directions etc.' ); 
+		?>
+	
 	
 	<br /><br />
 	<br /><br />
