@@ -1,11 +1,15 @@
 @CHARSET "ISO-8859-1";
 /**********video box**************/
+#blogBar-bar,
+#newsBar-bar,
 #videoControl {
 	width:80%;	
 	margin-left: 10px;
 	margin-right: 10px;
 }
 
+.statusBox_gsblb,
+.statusBox_gsnb,
 .tagStackBox_gsvsc {
 	text-align:center;
 }
