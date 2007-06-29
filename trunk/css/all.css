@@ -860,6 +860,7 @@ textarea.txt {
 	color: #F04A54;
 }
 /************Event*****************/
+.user-summary,
 .event-summary {
 	margin-left:20px;
 	width: 450px;
