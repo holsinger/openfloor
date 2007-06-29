@@ -20,7 +20,7 @@
 		<!-- top navigation start here -->
 		<div class="body">
       <ul class="top-nav">
-  			<li><span><a href="http://www.politic20.com">Home</a></span></li>
+  			<li><span><a href="<?= $this->config->site_url();?>">Home</a></span></li>
   			<li><a href="index.php/event/">Events</a></li>
   			<li><a href="#">About Us</a></li>
   			<li><a href="http://blog.politic20.com">Blog</a></li>
