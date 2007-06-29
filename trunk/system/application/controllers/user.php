@@ -184,7 +184,7 @@ class User extends Controller {
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "login"){ // Get identity from user and redirect browser to OpenID Server
 			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_POST['openid_url']);
-			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_ADDR'].'/p20/' );
+			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_NAME'].'/p20/' );
 			$this->simpleopenid->SetRequiredFields(array('email'));
 			$this->simpleopenid->SetOptionalFields(array('fullname','dob','gender','postcode','country','language','timezone'));
 			if ($this->simpleopenid->GetOpenIDServer()){
@@ -248,7 +248,7 @@ class User extends Controller {
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "create"){ // Get identity from user and redirect browser to OpenID Server
 			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_POST['openid_url']);
-			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_ADDR'].'/p20/' );
+			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_NAME'].'/p20/' );
 			$this->simpleopenid->SetRequiredFields(array('email'));
 			$this->simpleopenid->SetOptionalFields(array('fullname','dob','gender','postcode','country','language','timezone'));
 			if ($this->simpleopenid->GetOpenIDServer()){
@@ -304,7 +304,7 @@ class User extends Controller {
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
 		
-		if ( is_array(unserialize($data['user_avatar'])) )
+		if (is_string($data['user_avatar']) && is_array(unserialize($data['user_avatar'])) )
 		{
 			$image_array = unserialize($data['user_avatar']);
 			
