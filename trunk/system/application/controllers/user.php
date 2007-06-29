@@ -303,12 +303,9 @@ class User extends Controller {
 		//set error if there is one
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
-		
-<<<<<<< .mine
-		if ( is_array(@unserialize($data['user_avatar'])) )
-=======
+
 		if (is_string($data['user_avatar']) && is_array(unserialize($data['user_avatar'])) )
->>>>>>> .r192
+
 		{
 			$image_array = unserialize($data['user_avatar']);
 			
