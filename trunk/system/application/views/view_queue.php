@@ -2,6 +2,7 @@
 $data['red_head'] = 'Questions';
 $data['tabs'] = TRUE;
 $data['tab_view_question'] = 'active';
+$data['event_url'] = $event_url;
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
