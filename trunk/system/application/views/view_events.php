@@ -5,7 +5,11 @@ $data['red_head'] = 'Events';
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <p style="margin-left: 10px; margin-right: 30px;"><? if (!$this->userauth->isAdmin()) echo $desc;?></p>
+  <? if (!$this->userauth->isAdmin()) { ?>
+  	<h3>Convention Next</h3>
+  	<p style="margin-left: 10px; margin-right: 30px;"><?=$desc;?></p>
+  <? } ?>
+  
   <h3>Upcoming Events</h3>	
   
   	<div id="event_view">
