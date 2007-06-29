@@ -25,6 +25,8 @@
 		<br /><?= form_submit('','Validate','class="button"'); ?>
 		<?= form_close(); ?>
 		<br /><br />
+		<strong>- or -</strong>
+		<br /><br />
 		<?= form_open('user/create'); ?>
 	<? } ?>
 	
