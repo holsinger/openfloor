@@ -2,6 +2,7 @@
 $data['red_head'] = 'Questions';
 $data['tabs'] = TRUE;
 $data['tab_submit_question'] = 'active';
+$data['event_url'] = $event_url;
 ?>
 
 <? $this->load->view('view_includes/header.php',$data); ?>
@@ -11,10 +12,16 @@ $data['tab_submit_question'] = 'active';
 	<?= form_open('question'); ?>
 		<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
 		<label>Event: *</label>
-		<select name="event" class="txt">
-			<option value="0">-- Select an Event --</option>
-			<?=$data['vars']['events']?>
-		</select>
+		
+		<? if ($event_id>0) { ?>
+			<?=$event_name;?>
+			<?= form_hidden('event',$event_id); ?>
+		<? } else { ?>
+			<select name="event" class="txt">
+				<option value="0">-- Select an Event --</option>
+				<?=$data['vars']['events']?>
+			</select>
+		<? } ?>
 		<br />
 		<?
 		$format = array(
