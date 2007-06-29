@@ -861,5 +861,6 @@ textarea.txt {
 }
 /************Event*****************/
 .event-summary {
-	margin-left:45px;
+	margin-left:20px;
+	width: 450px;
 }
