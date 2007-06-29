@@ -221,11 +221,6 @@ class Event extends Controller
 		$this->load->view('view_manage_events',$data);
 	}
 	
-	public function on_create_success()
-	{
-		echo 'Event creation complete!';
-		$this->view_events();
-	}
 	
 	public function create_event_action() {
 		#check that user is allowed
@@ -244,15 +239,51 @@ class Event extends Controller
 					
 		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
 		
+		// ==================
+		// = uploading code =
+		// ==================
+		$config['upload_path'] = './avatars/';
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size']	= '1024';
+		$config['max_width']  = '1024';
+		$config['max_height']  = '768';
+		$config['overwrite']  = FALSE;
+		$config['encrypt_name']  = TRUE;
+
+		$this->load->library('upload', $config);
+		
+		if ( ! $this->upload->do_upload())
+		{
+			$error = $this->upload->display_errors();
+		}	
+		else
+		{
+			$data['upload_data'] = $this->upload->data();
+			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
+			
+			//resize image
+			$config = array();
+			$config['image_library'] = 'GD2';
+			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+			#$config['create_thumb'] = TRUE;
+			$config['maintain_ratio'] = TRUE;
+			$config['width'] = 75;
+			$config['height'] = 50;			
+			$this->load->library('image_lib', $config);			
+			$this->image_lib->resize();
+			if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
+			$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;		
+		}
+		
 		if ( !$error ) {
 			$last_id = $this->event->insert_event_form();
 			//make sure a new id was inserted
 			if ( is_numeric($last_id) ) {
-				redirect('event/on_create_success');
-				ob_clean();
-				exit();
+				$error = 'Event creation complete!';
+				$this->view_events($error);
 			} else {
 				$error = 'Error Creating Event';
+				$this->view_events($error);
 			}
 		} //if no error
 				
