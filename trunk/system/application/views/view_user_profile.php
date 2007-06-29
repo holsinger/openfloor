@@ -5,11 +5,11 @@
   <h2>User Profile</h2>	
   	<div class='errorArea'><?=$error?></div>
 	<?
+	echo "<br /><p style='float:right;margin-right:25px;'><img src='./avatars/{$avatar_image_name}'></p>";
 	echo "<br /><strong> Username: </strong> ".$user_name;
 	echo "<br /><strong> Email: </strong> ".$user_email;
 	echo "<br /><strong> Display Name: </strong> ".$user_display_name;
-	echo "<br /><strong> OpenID: </strong> ".$user_openid;
-	echo "<br /><strong> Avatar: </strong> <img src='./avatars/{$avatar_image_name}'>";	
+	echo "<br /><strong> OpenID: </strong> ".$user_openid;	
 	?>
 	<? if ($owner) { ?>
 	<h2>Edit Profile</h2>	
@@ -27,8 +27,6 @@
 	<?= form_submit('','Update Profile','class="button"'); ?>
 	<?= form_close(); ?>
 	</div>
-	<? } else {//end if owner ?>
-	show results
 	<? } ?>
 </div>
 <? $this->load->view('view_includes/footer.php'); ?>  				
