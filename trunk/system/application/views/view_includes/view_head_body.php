@@ -12,8 +12,10 @@
 			<? } ?>
 			<form action="whosyourgovt.php" method="get">
 				<div>
+					<!--
 					<input type="text" class="txt" name="zip" value="<?= isset($_GET['zip'])?$_GET['zip']:'' ?>"/>
 					<input type="image" src="images/btn-go.gif" alt="search" />
+					-->
 				</div>
 			</form>
 		</div>
