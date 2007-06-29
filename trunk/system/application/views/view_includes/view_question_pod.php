@@ -25,7 +25,7 @@
 								Event: <a href="index.php/event"><?=$event_name;?></a><span id="ls_adminlinks-5" style="display:none"></span>
 							</p>
 						</div>
-						<p><?=$question_desc;?><a href="index.php/question/queue/event/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
+						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/event/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
 						<ul class="options">
 							<li class="discuss"><a href="index.php/question/queue/event/<?= url_title($question_name); ?>">Discuss</a></li> 	
 							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
