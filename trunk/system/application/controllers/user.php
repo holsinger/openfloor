@@ -73,7 +73,7 @@ class User extends Controller {
 	function create () {
 		$error = false;
 		
-		$rules['user_name'] = "trim|required|min_length[5]|max_length[12]|xss_clean";
+		$rules['user_name'] = "trim|required|min_length[5]|max_length[45]|xss_clean";
 		//open require if no open id
 		if (!isset($_POST['user_openid'])) $rules['user_password'] = "trim|required|matches[password_confirm]|md5";
 		if (!isset($_POST['user_openid'])) $rules['password_confirm'] = "trim|required";
