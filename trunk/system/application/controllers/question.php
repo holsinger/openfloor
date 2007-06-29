@@ -20,6 +20,24 @@ class Question extends Controller
 		#check that user is allowed
 		$this->userauth->check();
 		
+		
+		//make sure there is an event id
+		//get the event id
+		$uri_array = $this->uri->uri_to_assoc(3);		
+		$data['event_url'] = $this->uri->assoc_to_uri($uri_array);
+		//event
+		if (isset($uri_array['event'])) 
+		{
+			$uri_array = $this->event->get_event(0,$uri_array['event']);
+			$data['event_id'] = $uri_array['event_id'];
+			$data['event_name'] = $uri_array['event_name']; 
+		}
+		else
+		{
+			$data['event_id'] = 0;
+			$data['event_name'] = '';
+		}
+
 		$data['error'] = '';
 		#FORM VALIDATE
 		if (isset($_POST['event']) && $_POST['event']=='0') $data['error'] .= 'Please select an Event.<br />';
@@ -96,7 +114,7 @@ class Question extends Controller
 		
 		
 		/* insert the question*/
-		$questionID = $this->question->insertQuestion($questionName, $questionDesc, $userID, $eventID);
+		$questionID = $this->question->insertQuestion($questionName, $questionDesc, $userID, $eventID,url_title($questionName));
 			
 		/* insert proper associations */
 		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->tag->insertTagAssociation($questionID, $v, $userID);
@@ -114,15 +132,54 @@ class Question extends Controller
 	}
 	
 	function view () {
-		echo $this->uri->segment(3);
+		if (!$this->uri->segment(3))
+		{
+			redirect('event/');
+			ob_clean();
+			exit();
+		} 
+		else 
+		{
+			$this->load->model('Question_model','question2');
+			//set restrictions
+			if (is_numeric($this->uri->segment(3))) $this->question2->question_id = $this->uri->segment(3); 
+			$data['results'] = $this->question2->questionQueue();
+			$this->load->view('view_queue',$data);	
+		}
 	}
 	
 	function queue()
-	{
-		$this->load->model('Question_model','question2');
-		//set restrictions
-		$data['results'] = $this->question2->questionQueue();
-		$this->load->view('view_queue',$data);
+	{		
+		//get data from url
+		$uri_array = $this->uri->uri_to_assoc(3);
+		if (!is_array($uri_array))
+		{
+			redirect('event/');
+			ob_clean();
+			exit();
+		} 
+		else 
+		{
+			$this->load->model('Question_model','question2');
+			//set restrictions
+			//event
+			if (isset($uri_array['event']) && is_numeric($uri_array['event'])) $this->question2->event_id = $uri_array['event'];
+			if (isset($uri_array['event']) && is_string($uri_array['event'])) $this->question2->event_id = $this->event->get_id_from_url($uri_array['event']); 
+			//questoin
+			if (isset($uri_array['question']) && is_numeric($uri_array['question'])) $this->question2->question_id = $uri_array['question'];
+			if (isset($uri_array['question']) && is_string($uri_array['question'])) $this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);
+			//user
+			if (isset($uri_array['user']) && is_numeric($uri_array['user'])) $this->question2->user_id = $uri_array['user'];
+			if (isset($uri_array['user']) && is_string($uri_array['user'])) $this->question2->user_id = $this->user->get_id_from_name($uri_array['user']); 
+			//tag
+			if (isset($uri_array['tag']) && is_numeric($uri_array['tag'])) $this->question2->tag_id = $uri_array['tag'];
+			if (isset($uri_array['tag']) && is_string($uri_array['tag'])) $this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
+			
+			$data['results'] = $this->question2->questionQueue();
+			$data['event_url'] = $this->uri->assoc_to_uri($uri_array);
+			$this->load->view('view_queue',$data);	
+		}		
+		
 	}
 	
 	function voteup()
