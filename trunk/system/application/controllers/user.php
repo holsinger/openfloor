@@ -202,7 +202,7 @@ class User extends Controller {
 
 		if(isset($_GET['openid_mode']) && $_GET['openid_mode'] == 'id_res'){ 	// Perform HTTP Request to OpenID server to validate key
 			
-			$this->load->library('SimpleOpenId');
+			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_GET['openid_identity']);
 			$openid_validation_result = $this->simpleopenid->ValidateWithServer();
 			if ($openid_validation_result == true){ 		// OK HERE KEY IS VALID
@@ -266,7 +266,7 @@ class User extends Controller {
 
 		if(isset($_GET['openid_mode']) && $_GET['openid_mode'] == 'id_res'){ 	// Perform HTTP Request to OpenID server to validate key
 			
-			$this->load->library('SimpleOpenId');
+			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_GET['openid_identity']);
 			$openid_validation_result = $this->simpleopenid->ValidateWithServer();
 			if ($openid_validation_result == true){ 		// OK HERE KEY IS VALID
