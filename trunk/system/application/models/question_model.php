@@ -19,10 +19,10 @@ class Question_model extends Model
         parent::Model();
     }
     
-	public function insertQuestion($questionName, $questionDesc, $userID, $eventID)
+	public function insertQuestion($questionName='', $questionDesc='', $userID='', $eventID='', $questionURLName='')
 	{
-		$query = "INSERT INTO cn_questions (question_name, question_desc, fk_user_id, fk_event_id) ";
-		$query .="VALUES ('$questionName', '$questionDesc', $userID, $eventID)";		
+		$query = "INSERT INTO cn_questions (question_name, question_url_name, question_desc, fk_user_id, fk_event_id) ";
+		$query .="VALUES ('$questionName', '$questionURLName', '$questionDesc', $userID, $eventID)";		
 		$this->db->query($query);
 		
 		return $this->db->insert_id();
@@ -83,6 +83,21 @@ class Question_model extends Model
 	public function alreadyVoted($question_id, $user_id)
 	{
 		return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_question_id=$question_id")->num_rows() > 0) ? true : false ;		
+	}
+	
+	/**
+	 * return the id from the question url name
+	 * 
+	 * @param string $url event url name
+	 * @author James Kleinschnitz
+	 */
+	public function get_id_from_url ($url)
+	{
+		 $result_array = array(); 
+		 $query = $this->db->getwhere('cn_questions', array('question_url_name' => $url));
+		 log_message('debug', "QUESTION:getIDfromURL:".trim($this->db->last_query()));
+		 $result_array = $query->result_array();
+		 return $result_array[0]['question_id'];
 	}
 }
 ?>
