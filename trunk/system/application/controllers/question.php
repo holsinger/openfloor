@@ -9,6 +9,8 @@ class Question extends Controller
 		$this->load->model('Event_model','event');
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
+
+		$this->load->scaffolding('cn_questions');
 	}
 	
 	function index () {
@@ -24,7 +26,7 @@ class Question extends Controller
 		//make sure there is an event id
 		//get the event id
 		$uri_array = $this->uri->uri_to_assoc(3);		
-		$data['event_url'] = $this->uri->assoc_to_uri($uri_array);
+		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
 		//event
 		if (isset($uri_array['event'])) 
 		{
@@ -143,6 +145,7 @@ class Question extends Controller
 			$this->load->model('Question_model','question2');
 			//set restrictions
 			if (is_numeric($this->uri->segment(3))) $this->question2->question_id = $this->uri->segment(3); 
+			if (is_string($this->uri->segment(3))) $this->question2->question_id = $this->question->get_id_from_url($this->uri->segment(3));
 			$data['results'] = $this->question2->questionQueue();
 			$this->load->view('view_queue',$data);	
 		}
@@ -176,7 +179,7 @@ class Question extends Controller
 			if (isset($uri_array['tag']) && is_string($uri_array['tag'])) $this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
 			
 			$data['results'] = $this->question2->questionQueue();
-			$data['event_url'] = $this->uri->assoc_to_uri($uri_array);
+			$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
 			$this->load->view('view_queue',$data);	
 		}		
 		
