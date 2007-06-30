@@ -9,6 +9,8 @@ class Question extends Controller
 		$this->load->model('Event_model','event');
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
+		$this->load->helper('html');
+		$this->load->helper('form');
 
 		$this->load->scaffolding('cn_questions');
 	}
@@ -122,6 +124,33 @@ class Question extends Controller
 		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->tag->insertTagAssociation($questionID, $v, $userID);
 	
 		return $questionID;
+	}
+	
+	function edit () 
+	{		
+		$data['error'] = "";
+		if (isset($_POST['question_id'])) 
+		{
+			$changed = $this->question->updateQuestion($_POST['question_id'],$_POST);
+			if ($changed > 0)
+			{
+				$data['error'] = "{$changed} record(s) updated.";
+			}
+		}
+		$question_id = $this->uri->segment(3);
+		$question_data = $this->question->get_question ($question_id);
+		$event_data = $this->event->get_event ($question_data['fk_event_id']);
+		$data['event'] = $event_data;
+		
+		$options = array(
+				'pending' => 'Pending',
+				'current' => 'Current',
+				'asked' => 'Asked',
+				'deleted'  => 'Delete'
+				);
+		$data['dropdown'] = form_dropdown('question_status', $options, $question_data['question_status']);
+		$data['question'] = $question_data;
+		$this->load->view('view_edit_question',$data);		
 	}
 
 	function populateEventsSelect()
