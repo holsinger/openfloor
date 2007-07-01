@@ -28,6 +28,19 @@ class Question_model extends Model
 		return $this->db->insert_id();
 	}
 	
+	public function updateQuestion ($question_id, $array) 
+	{
+		$this->db->where ('question_id',$question_id);
+		if (isset($array['question_name'])) $this->db->set ('question_name',$array['question_name']);
+		if (isset($array['question_url_name'])) $this->db->set ('question_url_name',$array['question_url_name']);
+		if (isset($array['question_desc'])) $this->db->set ('question_desc',$array['question_desc']);
+		if (isset($array['question_status'])) $this->db->set ('question_status',$array['question_status']);
+		if (isset($array['question_answer'])) $this->db->set ('question_answer',$array['question_answer']);
+		$this->db->update('cn_questions');
+		log_message('debug', "updateQuestion:".trim($this->db->last_query()));
+		return $this->db->affected_rows();
+	}
+	
 	public function questionQueue ()
 	{	
 		$where = '';
@@ -91,13 +104,27 @@ class Question_model extends Model
 	 * @param string $url event url name
 	 * @author James Kleinschnitz
 	 */
-	public function get_id_from_url ($url)
+	public function get_question ($id, $url='')
 	{
 		 $result_array = array(); 
-		 $query = $this->db->getwhere('cn_questions', array('question_url_name' => $url));
-		 log_message('debug', "QUESTION:getIDfromURL:".trim($this->db->last_query()));
+		 if ($id) $this->db->where('question_id',$id);
+		 if ($url) $this->db->where('question_url_name',$url);
+		 $query = $this->db->get('cn_questions');
+		 log_message('debug', "QUESTIONS:getQuestions:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
-		 return $result_array[0]['question_id'];
+		 return $result_array[0];
+	}
+	
+	/**
+	 * return the id from the question url name
+	 * 
+	 * @param string $url event url name
+	 * @author James Kleinschnitz
+	 */
+	public function get_id_from_url ($url)
+	{
+		 $result_array = $this->get_question(0,$url);
+		 return $result_array['question_id'];
 	}
 }
 ?>
