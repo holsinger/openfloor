@@ -16,6 +16,11 @@
 					<input type="text" class="txt" name="zip" value="<?= isset($_GET['zip'])?$_GET['zip']:'' ?>"/>
 					<input type="image" src="images/btn-go.gif" alt="search" />
 					-->
+					
+					<!-- AddThis Bookmark Button BEGIN -->
+					<a href="http://www.addthis.com/bookmark.php" onclick="addthis_url   = location.href; addthis_title = document.title; return addthis_click(this);" target="_blank"><img src="http://s9.addthis.com/button2-bm.png" width="160" height="24" border="0" alt="AddThis Social Bookmark Button" /></a> <script type="text/javascript">var addthis_pub = 'jimmysessions';</script><script type="text/javascript" src="http://s9.addthis.com/js/widget.php?v=10"></script>  
+					<!-- AddThis Bookmark Button END -->
+					
 				</div>
 			</form>
 		</div>
