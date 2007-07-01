@@ -10,7 +10,7 @@ $data['event_url'] = $event_url;
 	<div id='queue'>
 	<?
 	foreach ($results as $row)
-		$this->load->view('view_includes/view_question_pod.php',$row);
+		$this->load->view('view_includes/view_question_pod.php',$row);		
 	?>
 	</div>	
 </div>
