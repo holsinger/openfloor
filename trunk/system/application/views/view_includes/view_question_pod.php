@@ -36,4 +36,5 @@
 			</div>
 		</div>
 	</div>
+	<? if ($this->userauth->isAdmin()) echo "<div style='float:right;'>".anchor('question/edit/'.$question_id, 'edit')."</div>"; ?>
 </div>
