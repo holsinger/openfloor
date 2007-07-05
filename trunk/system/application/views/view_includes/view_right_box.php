@@ -62,7 +62,7 @@
 <div class="box-bottom"></div>
 
 <?php
-
+/*
 ?>
 
 <h3><a class="close" onclick="new Effect.toggle('news','blind', {queue: 'end'}); ">close</a><span>Political News</span></h3>
@@ -132,7 +132,7 @@
 
 
 <?php
-
+*/
 ?>
 
 <h3><a class="close" onclick="new Effect.toggle('blog','blind', {queue: 'end'}); ">close</a><span>Political Blog Posts</span></h3>

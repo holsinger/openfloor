@@ -6,11 +6,11 @@
 		<div id="header">
 			<h1><a href="http://www.politic20.com">Politic20</a></h1>
 			<? if ($this->session->userdata('user_name')) { ?>
-			<div id="userLogin">Welcome, <a href="index.php/user/profile/<?=$this->session->userdata('user_name');?>"><?=$this->session->userdata('user_name');?></a>&nbsp;|&nbsp;<a href="index.php/user/profile/<?=$this->session->userdata('user_name');?>">Manage Account</a>&nbsp;|&nbsp;<a href="index.php/user/logout/">Logout</a></div>
+			<div id="userLogin">Welcome, <a href="index.php/user/profile/<?=$this->session->userdata('user_name');?>"><?=$this->session->userdata('user_name');?></a>&nbsp;(<?=$this->userauth->user_karma;?>)&nbsp;|&nbsp;<a href="index.php/user/profile/<?=$this->session->userdata('user_name');?>">Manage Account</a>&nbsp;|&nbsp;<a href="index.php/user/logout/">Logout</a></div>
 			<? } else { ?>
 			<div id="userLogin"><span onClick="showBox('login');">Login</span>&nbsp;|&nbsp;<a href="index.php/user/createAccount/">Create Account</a></div>
 			<? } ?>
-			<form action="whosyourgovt.php" method="get">
+			<form action="yourgovernment/" method="get">
 				<div>
 					<!--
 					<input type="text" class="txt" name="zip" value="<?= isset($_GET['zip'])?$_GET['zip']:'' ?>"/>

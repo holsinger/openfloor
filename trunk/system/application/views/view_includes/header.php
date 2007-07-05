@@ -22,6 +22,8 @@ $data['tab_view_question'] = (isset($tab_view_question)) ? $tab_view_question:''
 $data['tab_submit_question'] = (isset($tab_submit_question)) ? $tab_submit_question:'';
 $data['event_url'] = (isset($event_url)) ? $event_url:'';
 $data['red_head'] = (isset($red_head)) ? $red_head:'';
+$data['sort_array'] = (isset($sort_array)) ? $sort_array:'';
+$data['breadcrumb'] = (isset($breadcrumb)) ? $breadcrumb:array('Home'=>$this->config->site_url());
 $this->load->view('view_includes/view_center_head.php',$data); 
 ?>
 

@@ -22,18 +22,19 @@
 														</ul>
 														<? } ?>
 														<!-- sort questions list start here -->
-														<ul class="sort-questions">
-															<? /*
-															<li><strong>Sort news by:</strong></li>
-															<li>Recently Popular</li>
-															<li><a href="/index.php?part=today">Top Today</a></li>
-															<li><a href="/index.php?part=yesterday">Yesterday</a></li>
-															<li><a href="/index.php?part=week">Week</a></li>
-															<li><a href="/index.php?part=month">Month</a></li>
-															<li class="rss"><a href="">rss</a></li>
-															*/?>
-														</ul>
+														<?
+														$attributes = array(
+											                    'class' => 'sort-questions',
+											                    'id'    => 'sort-questions'
+											                    );
+														if (is_array($sort_array)) echo ul($sort_array,$attributes);
+											      ?>
 														<h2><!--Published News --></h2>
+														
+														<?
+														echo nbs(6);
+														foreach ($breadcrumb as $key => $link) echo anchor($link,$key)."&nbsp;>&nbsp;";
+														?>
 													</div>
 													<div id="twocolumn">
 																			
