@@ -6,7 +6,7 @@ $data['event_url'] = $event_url;
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
-	<h3>View Questions</h3>
+	<h3><?=$queue_title;?></h3>
 	<div id='queue'>
 	<?
 	foreach ($results as $row)
