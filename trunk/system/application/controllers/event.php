@@ -59,7 +59,7 @@ class Event extends Controller
 		$data['error'] = $error;		
 		
 		//$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
-    	
+    $data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');	
 		$this->load->view('view_events',$data);
 	}
 	
@@ -90,6 +90,7 @@ class Event extends Controller
 		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";
 		
 		$this->validation->set_fields($fields);
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
 		$this->load->view('view_edit_event',$data);
 	}
 	
@@ -217,7 +218,7 @@ class Event extends Controller
 		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
 		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";	
 		$this->validation->set_fields($fields);
-		
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
 		$this->load->view('view_manage_events',$data);
 	}
 	
