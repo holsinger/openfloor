@@ -187,5 +187,117 @@ class User_model extends Model {
 		}//end if else results
     	
     }
+    
+    /**
+     * get stats need for karma
+     * 
+     * @param UNIXTIME $history_from time to kout user records till
+     * @param  int $user_id optional
+     * 
+     * @author James Kleinschnitz 
+     */
+    public function get_stats ($history_from,$user_id=0)
+    {
+    	$result_array = array();
+    	$user_array = array();
+    	
+    	//total questions submitted
+			$query = $this->db->query("SELECT count(*) as total, fk_user_id FROM cn_questions WHERE timestamp > FROM_UNIXTIME({$history_from}) AND question_status != 'deleted' group by fk_user_id");
+    	$result_array = $query->result_array();
+			//echo $this->db->last_query();
+			$query->free_result();
+			
+			foreach ($result_array as $array) 
+			{
+				$user_array[$array['fk_user_id']]['user_id'] = $array['fk_user_id'];
+				$user_array[$array['fk_user_id']]['question_count'] = $array['total']; 
+			}
+			
+			//total questions asked
+			$query = $this->db->query("SELECT count(*) as total, fk_user_id FROM cn_questions WHERE timestamp > FROM_UNIXTIME({$history_from}) AND question_status = 'asked' group by fk_user_id");
+			$result_array = $query->result_array();
+			$query->free_result();
+			
+    	foreach ($result_array as $array) 
+			{
+				$user_array[$array['fk_user_id']]['user_id'] = $array['fk_user_id'];
+				$user_array[$array['fk_user_id']]['question_asked_count'] = $array['total']; 
+			}
+			
+			//total num casted votes
+			$query = $this->db->query("SELECT count(*) as total, cn_votes.fk_user_id from cn_votes, cn_questions  WHERE cn_votes.timestamp > FROM_UNIXTIME({$history_from}) and cn_questions.question_id = cn_votes.fk_question_id and cn_questions.question_status = 'asked' group by cn_votes.fk_user_id");
+			$result_array = $query->result_array();
+			$query->free_result();
+			
+    	foreach ($result_array as $array) 
+			{
+				$user_array[$array['fk_user_id']]['user_id'] = $array['fk_user_id'];
+				$user_array[$array['fk_user_id']]['vote_count'] = $array['total']; 
+			}
+			
+			//total asked votes
+			$query = $this->db->query("select count(*) as total, user_id from cn_users,cn_questions where cn_questions.timestamp > FROM_UNIXTIME({$history_from}) and cn_questions.question_status != 'deleted' and cn_users.user_id = cn_questions.fk_user_id group by user_id");
+			$result_array = $query->result_array();
+			$query->free_result();
+			
+    	foreach ($result_array as $array) 
+			{
+				$user_array[$array['user_id']]['user_id'] = $array['fk_user_id'];
+				$user_array[$array['user_id']]['vote_asked_count'] = $array['total']; 
+			}
+			
+			//get last activity date
+			$this->db->select('fk_user_id,timestamp');
+			$this->db->groupby('fk_user_id');
+			$this->db->orderby('timestamp','desc');
+			$query = $this->db->get('cn_questions');
+			$result_array = $query->result_array();
+			$query->free_result();
+			
+    	foreach ($result_array as $array) 
+			{
+				$user_array[$array['fk_user_id']]['user_id'] = $array['fk_user_id'];
+				$user_array[$array['fk_user_id']]['last_activity'] = $array['timestamp']; 
+			}
+			
+    	$this->db->select('fk_user_id,timestamp');
+			$this->db->groupby('fk_user_id');
+			$this->db->orderby('timestamp','desc');
+			$query = $this->db->get('cn_votes');
+			$result_array = $query->result_array();
+			$query->free_result();
+			
+    	foreach ($result_array as $array) 
+			{
+				$user_array[$array['fk_user_id']]['user_id'] = $array['fk_user_id'];
+				//set only if is newer then past value
+				if ( strtotime($array['timestamp']) > strtotime($user_array[$array['fk_user_id']]['last_activity']) )
+				{
+					$user_array[$array['fk_user_id']]['last_activity'] = $array['timestamp'];
+				} 
+			}
+			
+			return $user_array;
+			
+    }//
+		
+    /**
+     * @param int $user_id 
+     * @param int $user_karma new karma score for a user
+     */
+		public function set_karma ($user_id,$user_karma) 
+		{
+			$this->db->where("user_id",$user_id);
+			$this->db->set("user_karma",$user_karma);
+			$this->db->update("cn_users");
+		}
+		
+		public function get_karma ($user_id) 
+		{
+			$this->db->where("user_id",$user_id);
+			$query = $this->db->get("cn_users");
+			$array = $query->result_array();
+			return $array[0]['user_karma'];			
+		}
 }
 ?>
