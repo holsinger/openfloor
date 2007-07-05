@@ -9,7 +9,7 @@ $data['event_url'] = $event_url;
 
 <div id="content_div">
 	<h3>Submit a Question</h3>	
-	<?= form_open('question'); ?>
+	<?= form_open('question/add/'.$event_url); ?>
 		<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
 		<label>Event: *</label>
 		
@@ -62,6 +62,7 @@ $data['event_url'] = $event_url;
 		<br />
 		<br />
 		<?= form_hidden('submitted','true'); ?>
+		<?= form_hidden('event_url',$event_url); ?>
 		<?= form_submit('','Submit Question','class="button"'); ?>		
 		<br />
 		<br />
