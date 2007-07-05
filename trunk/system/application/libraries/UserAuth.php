@@ -2,6 +2,9 @@
 
 class UserAuth {
 	
+	var $user_id = 0;
+	var $user_karma = 0;
+	
 	function __construct() {
 		
 		//we need to get access to the CI object
@@ -16,8 +19,21 @@ class UserAuth {
         log_message('debug', "FreakAuth Class Initialized");
 		$this->CI->load->model('User_model','user');
 		$this->CI->load->helper('url');
+		
+		//set user vars
+		$this->set_user();
 	}
 	
+	
+	function set_user()
+	{
+		if ( $this->isUser() )
+		{
+			$this->user_id = $this->CI->session->userdata('user_id');
+			//get karma score
+			$this->user_karma = $this->CI->user->get_karma($this->CI->session->userdata('user_id'));
+		}
+	}
 	/**
 	 * this function should check to that the user has the correct rights
 	 * if does not have correct rights send to login page
