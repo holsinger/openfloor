@@ -1,4 +1,4 @@
-<? $data['read_head'] = 'Users'; ?>
+<? $data['red_head'] = 'Users'; ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
