@@ -355,7 +355,7 @@ class User extends Controller {
 		
 		$this->load->helper('url');
 		//$this->load->library('table');
-		
+		$this->db->orderby("user_name", "asc");
 		$users = $this->db->get('cn_users')->result_array();
 		foreach($users as $k=>$v) 
 		{
