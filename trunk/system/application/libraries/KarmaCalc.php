@@ -4,7 +4,7 @@ class KarmaCalc {
 		
 	var $karma_base=10;
 	var $min_karma=6;
-	var $max_karma=20;
+	var $max_karma=30;
 	var $negative_per_day = 0.3;
 	var $history_from = 0;
 	var $points_question_user = 6;
