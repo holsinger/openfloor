@@ -14,7 +14,8 @@ class Event_model extends Model
 			$this->db->set('event_name',$_POST['event_name']);
 			$this->db->set('event_url_name',url_title($_POST['event_name']));
 		}
-        if ( isset($_POST['event_desc']) ) $this->db->set('event_desc',$_POST['event_desc']);
+    if ( isset($_POST['event_desc']) ) $this->db->set('event_desc',$_POST['event_desc']);
+    if ( isset($_POST['event_type']) ) $this->db->set('event_type',$_POST['event_type']);
 		if ( isset($_POST['event_avatar']) ) $this->db->set('event_avatar',$_POST['event_avatar']);
 		if ( isset($_POST['sunlight_id']) ) $this->db->set('sunlight_id',$_POST['sunlight_id']);
 		if ( isset($_POST['event_date']) ) $this->db->set('event_date',$_POST['event_date']);
@@ -71,5 +72,11 @@ class Event_model extends Model
 		 $result_array = $query->result_array();
 		 return $result_array[0];
 	}
+	
+ 	public function get_event_type ($id) 
+ 	{
+ 		$array = $this->get_event($id);
+ 		return $array['event_type'];
+ 	}
 }
 ?>
