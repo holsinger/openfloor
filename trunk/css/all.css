@@ -465,14 +465,16 @@ ul.tabs li.active span,ul.tabs li.active span{
 }
 .raiting{
 	width:85px;
-	height:70px;
+	height:67px;
 	float:left;
 	position:relative;
 	margin:0 0 0 -85px;
 	display:inline;
 	overflow:hidden;
-	background:url(../images/bg-raiting.gif);
+	background:url(../images/bg-raiting.png);
 }
+a.voteup,
+a.votedown,
 a.up,
 a.down{
 	width:18px;
@@ -483,8 +485,21 @@ a.down{
 	top:7px;
 	left:7px;
 	text-indent:-9999px;
+	background:url(../images/thumbsUp.png);
 }
-a.down{top:42px;}
+a.voteup
+{
+	background:url(../images/votedCheckBox.png);
+}
+a.down{
+	top:42px;
+	background:url(../images/thumbsDown.png);
+}
+a.votedown
+{		
+	top:42px;
+	background:url(../images/votedCheckBox.png);
+}
 a.vote_digit {
 	width:51px;
 	height:51px;
@@ -495,12 +510,12 @@ a.vote_digit {
 	text-decoration:none;
 	color:#053C7C;
 	position:absolute;
-	top:7px;
+	top:5px;
 	left:29px;
 	display:block;
 }
 a.vote_digit:hover {
-	text-decoration:underline;
+	text-decoration:none;
 }
 .describtion{background:#F0FAFF url(../images/bg-descr.gif) repeat-y 0 0;}
 .describtion-frame{background:url(../images/bg-descr.gif) repeat-y 100% 0;}
@@ -682,7 +697,7 @@ strong.slogan{
 	overflow:hidden;
 	text-indent:-9999px;
 	display:block;
-	background:url(../images/slogan.gif);
+	background:url(../images/slogan.png);
 }
 div.slogan{position:relative;}
 #header form{
@@ -864,4 +879,11 @@ textarea.txt {
 .event-summary {
 	margin-left:20px;
 	width: 450px;
+}
+/******************Content*******************/
+#admin_content {
+	margin:0 11px 0 9px;
+	background:#FFFFFF;
+	width:850px;
+	padding:10px;
 }
