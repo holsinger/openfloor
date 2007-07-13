@@ -5,8 +5,10 @@
 	<base href="<?= $this->config->site_url();?>" />
 	<style media="all" type="text/css">@import "css/all.css";</style>
 	<style media="all" type="text/css">@import "css/userWindow.css";</style>
-	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/lt7.css" media="screen"/><![endif]-->
-	
+	<? if ($browser == 'Internet Explorer' && $browserVer < 7) { ?>
+		<style media="all" type="text/css">@import "css/lt7.css";</style>	
+		<script type="text/javascript" src="javascript/IEFixes.js"></script>
+	<? } ?>
 	<script type="text/javascript" src="javascript/prototype.js"></script>
 	<script src="javascript/scriptaculous.js" type="text/javascript"></script>
 	<script src="javascript/effects.js" type="text/javascript"></script>

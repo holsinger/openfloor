@@ -27,14 +27,17 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<h3><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$question_name;?></a></h3>
+							<h3><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$user_name;?> Video Entry</a></h3>
 							<div class="autor">
-								<p>Posted by: <a href="/user/profile/<?=$user_name;?>"><?=$user_name;?></a> <!-- 72 days ago -->
-									<span id="ls_story_link-<?= $question_id; ?>"></span>
-								</p>
-								<p>
-									Event: <a href="index.php/event"><?=$event_name;?></a><span id="ls_adminlinks-5" style="display:none"></span>
-								</p>
+									<?
+									$array = explode('v=',trim($question_name));
+									$video_id = $array[1];
+									?>									
+									<object width="325" height="250">
+									<param name="movie" value="http://www.youtube.com/v/<?=$video_id;?>"></param>
+									<param name="wmode" value="transparent"></param>
+									<embed src="http://www.youtube.com/v/<?=$video_id;?>" type="application/x-shockwave-flash" wmode="transparent" width="325" height="250"></embed>
+								</object>
 							</div>
 						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
 						<ul class="options">
