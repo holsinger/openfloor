@@ -45,7 +45,7 @@ class UserAuth {
 	{
 		if ( $this->CI->user->check_status ($security_level) ) return TRUE;
 		else {
-			redirect('user/login/');
+			redirect('user/loginToDo/');
 			ob_clean();
 			exit();			
 		}
