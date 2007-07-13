@@ -33,9 +33,11 @@ class Question extends Controller
 		//event
 		if (isset($uri_array['event'])) 
 		{
+			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"question/queue/{$data['event_url']}");
 			$uri_array = $this->event->get_event(0,$uri_array['event']);
 			$data['event_id'] = $uri_array['event_id'];
-			$data['event_name'] = $uri_array['event_name']; 
+			$data['event_name'] = $uri_array['event_name'];
+			$data['event_type'] = $uri_array['event_type'];  
 		}
 		else
 		{
@@ -78,6 +80,7 @@ class Question extends Controller
 		$this->validation->set_fields($fields);
 		
 		$data['events'] = $this->populateEventsSelect();
+		
 		$this->load->view('view_submit_question', $data);
 	}
 
@@ -199,8 +202,16 @@ class Question extends Controller
 			$this->load->model('Question_model','question2');
 			//set restrictions
 			//event
-			if (isset($uri_array['event']) && is_numeric($uri_array['event'])) $this->question2->event_id = $uri_array['event'];
-			if (isset($uri_array['event']) && is_string($uri_array['event'])) $this->question2->event_id = $this->event->get_id_from_url($uri_array['event']); 
+			if (isset($uri_array['event']) && is_numeric($uri_array['event'])) 
+			{
+				$this->question2->event_id = $uri_array['event'];
+				$data['event_type'] = $this->event->get_event_type($uri_array['event']);
+			}
+			if (isset($uri_array['event']) && is_string($uri_array['event'])) 
+			{
+				$event_id = $this->question2->event_id = $this->event->get_id_from_url($uri_array['event']);
+				$data['event_type'] = $this->event->get_event_type($event_id); 
+			}
 			//questoin
 			if (isset($uri_array['question']) && is_numeric($uri_array['question'])) $this->question2->question_id = $uri_array['question'];
 			if (isset($uri_array['question']) && is_string($uri_array['question'])) $this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);
@@ -212,8 +223,9 @@ class Question extends Controller
 			if (isset($uri_array['tag']) && is_string($uri_array['tag'])) $this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
 			
 			//set default sort link
+			$type = ucfirst($data['event_type']);
 			$sort_active = 'upcoming';
-			$queue_title = 'Upcoming Questions';
+			$queue_title = 'Upcoming '.$type.'s';
 			//create sorting options
 			if (isset($uri_array['sort']) )
 			{
@@ -222,31 +234,39 @@ class Question extends Controller
 				{
 					$this->question2->order_by = 'date';
 					$sort_active = 'newest';
-					$queue_title = 'Newest Questions';
+					$queue_title = 'Newest '.$type.'s';
 				}
 				//limit to asked questions
 				if ( $uri_array['sort'] == 'asked')
 				{
 					$this->question2->question_status = 'asked';
 					$sort_active = 'asked';
-					$queue_title = 'Asked Questions';
+					$queue_title = 'Asked '.$type.'s';
 				}
 				//limit to current question
 				if ( $uri_array['sort'] == 'current')
 				{
 					$this->question2->question_status = 'current';
 					$sort_active = 'current';
-					$queue_title = 'Current Question';
+					$queue_title = 'Current '.$type;
 				}
 			}
 			
 			$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
 			//set a sorting array
-			$sort_array = array('<strong>Sort questions by:</strong>');
-			($sort_active == 'upcoming') ? array_push($sort_array,'Upcoming'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}",'Upcoming') );
-			($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/newest",'Newest') );
-			($sort_active == 'asked') ? array_push($sort_array,'Asked'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/asked",'Asked') );
-			($sort_active == 'current') ? array_push($sort_array,'Current'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/current",'Current') ); 
+			$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');
+			if ($data['event_type'] == 'video')
+			{
+				($sort_active == 'upcoming') ? array_push($sort_array,'Score'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}",'Score') );
+				($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/newest",'Newest') );
+			}
+			else 
+			{
+				($sort_active == 'upcoming') ? array_push($sort_array,'Upcoming'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}",'Upcoming') );
+				($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/newest",'Newest') );
+				($sort_active == 'asked') ? array_push($sort_array,'Asked'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/asked",'Asked') );
+				($sort_active == 'current') ? array_push($sort_array,'Current'):array_push( $sort_array,anchor("question/queue/{$data['event_url']}/sort/current",'Current') );
+			} 
 			$data['sort_array'] = $sort_array;
 			//var_dump($sort_array);
 
@@ -254,6 +274,15 @@ class Question extends Controller
 			$data['queue_title'] = $queue_title;
 			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"question/queue/{$data['event_url']}");
 			$data['results'] = $this->question2->questionQueue();
+			//set user score			
+			foreach ($data['results'] as $key => $row) {
+				if ($this->userauth->isUser()) {
+					$score = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
+					if ($score > 0) $data['results'][$key]['voted'] = 'up';
+					else if ($score < 0) $data['results'][$key]['voted'] = 'down';
+				} else $data['results'][$key]['voted'] = false;
+			}
+			//exit(var_dump($data['results']));
 			$this->load->view('view_queue',$data);	
 		}		
 		

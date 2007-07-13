@@ -22,12 +22,15 @@ class User extends Controller {
 		$this->view_users();
 	
 	}
-	
+	function loginToDo () {
+		$data['error'] = 'Please login to do that.';
+		$this->load->view('view_login',$data);
+	}
 	function login () {
 		$rules['user_name'] = "trim|required|min_length[5]|max_length[12]|xss_clean";
-		$rules['user_password'] = "trim|required|md5";
+		$rules['user_password'] = "trim|required|md5|xss_clean";
 		$this->validation->set_rules($rules);
-					
+							
 		if ($this->validation->run() == FALSE) {
 			$data['error'] = $this->validation->error_string;
 			$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";	
@@ -75,9 +78,9 @@ class User extends Controller {
 		
 		$rules['user_name'] = "trim|required|min_length[5]|max_length[45]|xss_clean";
 		//open require if no open id
-		if (!isset($_POST['user_openid'])) $rules['user_password'] = "trim|required|matches[password_confirm]|md5";
-		if (!isset($_POST['user_openid'])) $rules['password_confirm'] = "trim|required";
-		$rules['user_email'] = "trim|required|valid_email";
+		if (!isset($_POST['user_openid'])) $rules['user_password'] = "trim|required|matches[password_confirm]|md5|xss_clean";
+		if (!isset($_POST['user_openid'])) $rules['password_confirm'] = "trim|required|xss_clean";
+		$rules['user_email'] = "trim|required|valid_email|xss_clean";
 		$rules['captcha'] = "callback_check_captcha";
 		
 		$this->validation->set_rules($rules);
@@ -415,10 +418,10 @@ class User extends Controller {
 		
 		$error = false;
 		
-		$rules['user_name'] = "trim|required";
-		$rules['user_password'] = "trim|required";
+		$rules['user_name'] = "trim|required|xss_clean";
+		$rules['user_password'] = "trim|required|xss_clean";
 		$rules['user_avatar'] = "trim";
-		$rules['user_display_name'] = "trim";
+		$rules['user_display_name'] = "trim|xss_clean";
 		
 		$this->validation->set_rules($rules);
 					

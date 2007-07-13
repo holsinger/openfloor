@@ -83,6 +83,7 @@ class Event extends Controller
 			$_POST[$k] = $v;
 		
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
+		$fields['event_type']	= ( isset($_POST['event_type']) ) ? $_POST['event_type']:"";
 		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
 		//$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
@@ -162,12 +163,12 @@ class Event extends Controller
 		$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
 		
 		
-		$rules['event_name'] = "trim|required|max_length[100]";
-		$rules['event_desc'] = "trim|required|max_length[255]";
+		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
+		$rules['event_desc'] = "trim|required|max_length[255]|xss_clean";
 		$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
-		$rules['event_date'] = "trim|required";
-		$rules['location'] = "trim|max_length[100]";
+		$rules['event_date'] = "trim|required|xss_clean";
+		$rules['location'] = "trim|max_length[100]|xss_clean";
 		
 		$this->validation->set_rules($rules);
 					
@@ -212,6 +213,7 @@ class Event extends Controller
 		$_POST['event_date'] = '0000-00-00 00:00:00';		
 		
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
+		$fields['event_type']	= ( isset($_POST['event_type']) ) ? $_POST['event_type']:"";
 		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
 		$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
@@ -229,12 +231,13 @@ class Event extends Controller
 		
 		$error = false;
 		
-		$rules['event_name'] = "trim|required|max_length[100]";
-		$rules['event_desc'] = "trim|required|max_length[255]";
-		$rules['event_avatar'] = "trim|max_length[255]";
+		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
+		$rules['event_desc'] = "trim|required|max_length[255]|xss_clean";
+		//$rules['event_avatar'] = "trim|max_length[255]";
 		$rules['sunlight_id'] = "";
-		$rules['event_date'] = "trim|required";
-		$rules['location'] = "trim|max_length[100]";
+		$rules['event_date'] = "trim|required|xss_clean";
+		$rules['event_type'] = "required";
+		$rules['location'] = "trim|max_length[100]|xss_clean";
 		
 		$this->validation->set_rules($rules);
 					
