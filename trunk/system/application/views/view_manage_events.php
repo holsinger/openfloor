@@ -5,6 +5,8 @@
   	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
 	<?= form_open_multipart('event/create_event_action/', array('name'=>'my_form')); ?>
+	<label>Event Type:</label>
+	<?= form_dropdown('event_type', array('question' => 'Questions','video'=>'Videos'), null, 'class="txt"');?>
 	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
 	
 	<?

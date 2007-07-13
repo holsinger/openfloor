@@ -1,6 +1,6 @@
 <?
-$data['red_head'] = 'Questions';
-$data['tabs'] = TRUE;
+$data['red_head'] = $event_type.'s';
+$data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
 ?>
@@ -9,8 +9,16 @@ $data['event_url'] = $event_url;
 	<h3><?=$queue_title;?></h3>
 	<div id='queue'>
 	<?
-	foreach ($results as $row)
-		$this->load->view('view_includes/view_question_pod.php',$row);		
+	if ($event_type == 'video')
+	{
+		foreach ($results as $row)
+			$this->load->view('view_includes/view_video_pod.php',$row);
+	}
+	else 
+	{		
+		foreach ($results as $row)
+		$this->load->view('view_includes/view_question_pod.php',$row);
+	}		
 	?>
 	</div>	
 </div>

@@ -1,6 +1,6 @@
 <?
-$data['red_head'] = 'Questions';
-$data['tabs'] = TRUE;
+$data['red_head'] = $event_type.'s';
+$data['tabs'] = $event_type;
 $data['tab_submit_question'] = 'active';
 $data['event_url'] = $event_url;
 ?>
@@ -8,7 +8,7 @@ $data['event_url'] = $event_url;
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-	<h3>Submit a Question</h3>	
+	<h3>Submit a <?=ucfirst($event_type);?></h3>	
 	<?= form_open('question/add/'.$event_url); ?>
 		<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
 		<label>Event: *</label>
@@ -25,14 +25,21 @@ $data['event_url'] = $event_url;
 		<br />
 		<?
 		$format = array(
-              'name'        => 'question',
-              'id'          => 'question',
-              'value'       => $this->validation->question,
-              'maxlength'   => '150',
-              'size'        => '78',
-              'class'       => 'txt'
-            );
-		echo form_format("Question: *",form_input($format),'Enter a question you would like asked.' ); 
+	              'name'        => 'question',
+	              'id'          => 'question',
+	              'value'       => $this->validation->question,
+	              'maxlength'   => '150',
+	              'size'        => '78',
+	              'class'       => 'txt'
+	            );
+		if ($event_type == 'video') 
+		{			
+			echo form_format("YouTude Video URL: *",form_input($format),'Enter the URL for your <a href="http://www.youtube.com">YouTube</a> Video.  <a href="help">Help?</a>' );
+		}
+		else 
+		{			
+			echo form_format("Question: *",form_input($format),'Enter a question you would like asked.' );
+		} 
 		?>
 		<br />
 		<?
@@ -63,7 +70,7 @@ $data['event_url'] = $event_url;
 		<br />
 		<?= form_hidden('submitted','true'); ?>
 		<?= form_hidden('event_url',$event_url); ?>
-		<?= form_submit('','Submit Question','class="button"'); ?>		
+		<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
 		<br />
 		<br />
 		<small>* required fields</small>

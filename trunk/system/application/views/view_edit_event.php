@@ -5,7 +5,8 @@
   	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
 	<?= form_open_multipart('event/edit_event_action/' . $event_id, array('name'=>'my_form')); ?>
-	
+	<label>Event Type:</label>
+	<?= $this->validation->event_type;?>
 	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
 	<?
 		$format = array(
