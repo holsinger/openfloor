@@ -11,7 +11,7 @@
 |	http://www.your-site.com/
 |
 */
-$config['base_url']	= "http://127.0.0.1/p20/";
+$config['base_url']	= "http://localhost/~Rob/Politic20/";
 
 /*
 |--------------------------------------------------------------------------

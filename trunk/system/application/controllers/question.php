@@ -201,23 +201,35 @@ class Question extends Controller
 		{
 			$this->load->model('Question_model','question2');
 			//set restrictions
+			
 			//event
-			if (isset($uri_array['event']) && is_numeric($uri_array['event'])) 
+			if (isset($uri_array['event']) && is_numeric($uri_array['event'])) // if an event id was passed
 			{
 				$this->question2->event_id = $uri_array['event'];
 				$data['event_type'] = $this->event->get_event_type($uri_array['event']);
 			}
-			if (isset($uri_array['event']) && is_string($uri_array['event'])) 
+			if (isset($uri_array['event']) && is_string($uri_array['event'])) // if an event name was passed 
 			{
 				$event_id = $this->question2->event_id = $this->event->get_id_from_url($uri_array['event']);
 				$data['event_type'] = $this->event->get_event_type($event_id); 
 			}
-			//questoin
-			if (isset($uri_array['question']) && is_numeric($uri_array['question'])) $this->question2->question_id = $uri_array['question'];
-			if (isset($uri_array['question']) && is_string($uri_array['question'])) $this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);
+			
+			//question
+			if (isset($uri_array['question'])) {
+				if (is_numeric($uri_array['question'])) // change all is_numeric, is_string groups to if, elseif logic
+					$this->question2->question_id = $uri_array['question'];
+				elseif (is_string($uri_array['question']))
+					$this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);
+					
+				$data['question_view'] = true;
+			}
+			
 			//user
-			if (isset($uri_array['user']) && is_numeric($uri_array['user'])) $this->question2->user_id = $uri_array['user'];
-			if (isset($uri_array['user']) && is_string($uri_array['user'])) $this->question2->user_id = $this->user->get_id_from_name($uri_array['user']); 
+			if (isset($uri_array['user']) && is_numeric($uri_array['user'])) 
+				$this->question2->user_id = $uri_array['user'];
+			if (isset($uri_array['user']) && is_string($uri_array['user'])) $
+				$this->question2->user_id = $this->user->get_id_from_name($uri_array['user']); 
+				
 			//tag
 			if (isset($uri_array['tag']) && is_numeric($uri_array['tag'])) $this->question2->tag_id = $uri_array['tag'];
 			if (isset($uri_array['tag']) && is_string($uri_array['tag'])) $this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
@@ -226,6 +238,7 @@ class Question extends Controller
 			$type = ucfirst($data['event_type']);
 			$sort_active = 'upcoming';
 			$queue_title = 'Upcoming '.$type.'s';
+			
 			//create sorting options
 			if (isset($uri_array['sort']) )
 			{
