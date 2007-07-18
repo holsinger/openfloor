@@ -15,7 +15,7 @@
               'id'          => 'event_desc',
               'value'       => $this->validation->event_desc,
               'rows'        => '3',
-              'cols'        => '75',
+              'cols'        => '48',
               'class'       => 'txt'
             );
 		echo form_format("Event Description: *",form_textarea($format),'Write a description of the event.' ); 
@@ -41,7 +41,7 @@
               'id'          => 'location',
               'value'       => $this->validation->location,
               'rows'        => '3',
-              'cols'        => '75',
+              'cols'        => '48',
               'class'       => 'txt'
             );
 		echo form_format("Event Location: *",form_textarea($format),'Write a description of the event location, directions etc.' ); 
