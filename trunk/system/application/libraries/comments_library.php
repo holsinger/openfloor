@@ -2,6 +2,9 @@
 
 class Comments_library
 {
+	private $question_name;
+	private $event_name;
+	
 	public function __construct()
 	{
 		$this->CI =& get_instance();
@@ -12,7 +15,8 @@ class Comments_library
 	public function createComments($vars)
 	{
 		$question_id = $vars['results'][0]['question_id']; // do i still need this?
-		$question_name = $vars['results'][0]['question_name'];
+		$this->question_name = url_title($vars['results'][0]['question_name']);
+		$this->event_name = url_title($vars['results'][0]['event_name']);
 		
 		if (!$comments = $this->CI->comments_model->getCommentsByQuestion($question_id)) {
 			echo 'There are no comments.';
@@ -31,8 +35,8 @@ class Comments_library
 		
 		echo '<p>' . 
 		"$votes votes " . 
-		anchor("/comment/voteUp/{$info['comment_id']}/$question_id", '[+] ') . 
-		anchor("/comment/voteDown/{$info['comment_id']}/$question_id", '[-] ') . 
+		anchor("/comment/voteUp/{$info['comment_id']}/$this->question_name", '[+] ') . 
+		anchor("/comment/voteDown/{$info['comment_id']}/$this->question_name", '[-] ') . 
 		"<strong>Posted by:</strong> {$info['user_name']} <strong>Comment:</strong> {$info['comment']}</p>";
 	}
 }
