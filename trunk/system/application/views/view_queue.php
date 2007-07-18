@@ -5,7 +5,7 @@ $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
 
 
-// echo '<pre>'; print_r($data); echo '</pre>';
+echo '<pre>'; print_r($data); echo '</pre>';
 
 
 ?>
@@ -37,7 +37,7 @@ $data['event_url'] = $event_url;
 			echo form_open('comment/addCommentAction')
 			. form_format("Your comment: ",form_textarea($data) )
 			. form_hidden('fk_question_id', $results[0]['question_id'])
-			. form_hidden('event_type', $event_type)
+			. form_hidden('event_name', url_title($results[0]['event_name']))
 			. form_hidden('question_name', $results[0]['question_name'])
 			. '<input type="submit" value="Submit Comment"/>'
 			. form_close();

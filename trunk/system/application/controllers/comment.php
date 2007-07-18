@@ -27,8 +27,8 @@ class Comment extends Controller
 	
 	public function addCommentAction()
 	{
-		$event_type = $_POST['event_type'];
-		unset($_POST['event_type']);
+		$event_name = $_POST['event_name'];
+		unset($_POST['event_name']);
 		
 		$question_name = $_POST['question_name'];
 		unset($_POST['question_name']);
@@ -36,7 +36,7 @@ class Comment extends Controller
 		$this->load->model('comments_model');
 		$_POST['fk_user_id'] = $this->session->userdata('user_id');
 		if($this->comments_model->insertComment())
-			redirect("/question/queue/event/$event_type" . '_event' . "/question/$question_name");
+			redirect("/question/queue/event/$event_name/question/$question_name");
 	}
 	
 	public function voteUp($comment_id, $question_id)
