@@ -10,6 +10,8 @@ $data['red_head'] = 'Add comment';
 	echo form_open('comment/addCommentAction')
 	. form_format("Your comment: ",form_input('comment','','class="txt"') )
 	. form_hidden('fk_question_id', $question_id)
+	. form_hidden('event_type', $event_type)
+	. form_hidden('question_name', $question_name)
 	. '<input type="submit" value="Submit Comment"/>'
 	. form_close();
 	?>

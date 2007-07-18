@@ -18,7 +18,7 @@ class Comments_model extends Model
 				(SELECT 
 					format(sum(vote_value)/10,0) AS number 
 				FROM 
-					cn_votes_comments 
+					cn_votes 
 				WHERE 
 					fk_comment_id=comment_id 
 				GROUP BY fk_comment_id) as votes, 
@@ -48,21 +48,6 @@ class Comments_model extends Model
 			return true;
 		}
 		return false;
-	}
-	
-	public function voteup($fk_user_id, $fk_comment_id)
-	{
-		$this->db->query("INSERT INTO cn_votes_comments (vote_value, fk_user_id, fk_comment_id) VALUES (10, $fk_user_id, $fk_comment_id)");
-	}
-	
-	public function votedown($fk_user_id, $fk_comment_id)
-	{
-		$this->db->query("INSERT INTO cn_votes_comments (vote_value, fk_user_id, fk_comment_id) VALUES (-10, $fk_user_id, $fk_comment_id)");
-	}
-	
-	public function alreadyVoted($comment_id, $user_id)
-	{
-		return ($this->db->query("SELECT vote_id FROM cn_votes_comments WHERE fk_user_id=$user_id AND fk_comment_id=$comment_id")->num_rows() > 0) ? true : false ;		
 	}
 }
 

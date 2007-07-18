@@ -3,7 +3,7 @@
 class Vote_model extends Model 
 {
 	//vars
-
+	public $type = 'question';
 	
  	function __construct()
     {
@@ -12,19 +12,52 @@ class Vote_model extends Model
     }
     
 	
-	public function voteup($fk_user_id, $fk_question_id)
+	public function voteup($fk_user_id, $fk)
 	{
-		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, $fk_user_id, $fk_question_id)");
+		switch($this->type)
+		{
+			case 'question':			
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (10, $fk_user_id, $fk)");
+				break;
+			case 'comment':
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_comment_id) VALUES (10, $fk_user_id, $fk)");
+				break;
+			default:
+				exit(); // error
+				break;
+		}
 	}
 	
-	public function votedown($fk_user_id, $fk_question_id)
+	public function votedown($fk_user_id, $fk)
 	{
-		$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, $fk_user_id, $fk_question_id)");
+		switch($this->type)
+		{
+			case 'question':			
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_question_id) VALUES (-10, $fk_user_id, $fk)");
+				break;
+			case 'comment':
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_comment_id) VALUES (-10, $fk_user_id, $fk)");
+				break;
+			default:
+				exit(); // error
+				break;
+		}
 	}
 	
-	public function alreadyVoted($question_id, $user_id)
+	public function alreadyVoted($fk, $user_id)
 	{
-		return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_question_id=$question_id")->num_rows() > 0) ? true : false ;		
+		switch($this->type)
+		{
+			case 'question':			
+				return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_question_id=$fk")->num_rows() > 0) ? true : false;
+				break;
+			case 'comment':
+				return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_comment_id=$fk")->num_rows() > 0) ? true : false;
+				break;
+			default:
+				exit(); // error
+				break;
+		}		
 	}
 	
 	public function votedScore($question_id, $user_id)
@@ -39,4 +72,5 @@ class Vote_model extends Model
 		else return $voted;		
 	}
 }
+
 ?>

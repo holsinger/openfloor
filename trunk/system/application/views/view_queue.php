@@ -4,7 +4,8 @@ $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
 
-//echo '<pre>'; print_r($data); echo '</pre>';
+
+// echo '<pre>'; print_r($data); echo '</pre>';
 
 
 ?>
@@ -28,6 +29,21 @@ $data['event_url'] = $event_url;
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library($vars);
 		$comments_library->createComments($vars);
+		?>
+		<div id="content_div">
+			<h3>Add a comment</h3>
+			<?
+			$data = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 60);
+			echo form_open('comment/addCommentAction')
+			. form_format("Your comment: ",form_textarea($data) )
+			. form_hidden('fk_question_id', $results[0]['question_id'])
+			. form_hidden('event_type', $event_type)
+			. form_hidden('question_name', $results[0]['question_name'])
+			. '<input type="submit" value="Submit Comment"/>'
+			. form_close();
+			?>
+		</div>
+		<?
 	}		
 	?>
 	</div>	
