@@ -31,6 +31,8 @@ class Comments_model extends Model
 				cn_users 
 			WHERE 
 				fk_user_id=user_id
+			AND
+				fk_question_id = $id
 			ORDER BY 
 				votes
 			DESC");

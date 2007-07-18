@@ -36,10 +36,10 @@ class Comment extends Controller
 		$this->load->model('comments_model');
 		$_POST['fk_user_id'] = $this->session->userdata('user_id');
 		if($this->comments_model->insertComment())
-			redirect("/question/queue/event/$event_name/question/$question_name");
+			redirect('/question/queue/event/' . url_title($event_name) . '/question/' . url_title($question_name));
 	}
 	
-	public function voteUp($comment_id, $question_name)
+	public function voteUp($comment_id, $question_name, $event_name)
 	{
 		$this->userauth->check();
 		$user_id = $this->session->userdata('user_id');
@@ -53,10 +53,10 @@ class Comment extends Controller
 		if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
 			$this->vote_model->voteUp($user_id, $comment_id);
 			
-		redirect("/question/queue/event/question_event/question/$question_id");	
+		redirect("/question/queue/event/$event_name/question/" . url_title($question_name));	
 	}
 	
-	public function voteDown($comment_id, $question_name)
+	public function voteDown($comment_id, $question_name, $event_name)
 	{		
 		$this->userauth->check();
 		$user_id = $this->session->userdata('user_id');
@@ -70,7 +70,7 @@ class Comment extends Controller
 		if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
 			$this->vote_model->voteDown($user_id, $comment_id);
 			
-		redirect("/question/queue/event/question_event/question/$question_id");
+		redirect("/question/queue/event/$event_name/question/" . url_title($question_name));
 	}
 }
 

@@ -35,8 +35,8 @@ class Comments_library
 		
 		echo '<p>' . 
 		"$votes votes " . 
-		anchor("/comment/voteUp/{$info['comment_id']}/$this->question_name", '[+] ') . 
-		anchor("/comment/voteDown/{$info['comment_id']}/$this->question_name", '[-] ') . 
+		anchor("/comment/voteUp/{$info['comment_id']}/$this->question_name/$this->event_name", '[+] ') . 
+		anchor("/comment/voteDown/{$info['comment_id']}/$this->question_name/$this->event_name", '[-] ') . 
 		"<strong>Posted by:</strong> {$info['user_name']} <strong>Comment:</strong> {$info['comment']}</p>";
 	}
 }
