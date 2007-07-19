@@ -45,8 +45,9 @@ $data['event_url'] = $event_url;
 			?>
 		</div>
 		<?
-	}		
+	}	
 	?>
+	<p><?=isset($question_view)?'':$this->pagination->create_links()?></p>
 	</div>	
 </div>
 <?$this->load->view('view_includes/footer.php');?>

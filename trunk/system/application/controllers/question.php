@@ -286,7 +286,30 @@ class Question extends Controller
 			if ( isset($uri_array['sort']) ) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 			$data['queue_title'] = $queue_title;
 			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"question/queue/{$data['event_url']}");
+			
+			// pagination			
+			$segment_array = $this->uri->segment_array();
+			if(is_numeric($segment_array[$this->uri->total_segments()]))
+				array_pop($segment_array);				
+			$base_url = implode('/', $segment_array);
+			
+			$pagination_per_page = '4';			
+			$this->question2->limit = $pagination_per_page;
+			
+			if(is_numeric($this->uri->segment(5)))
+				$this->question2->offset = $this->uri->segment(5);	
+			
 			$data['results'] = $this->question2->questionQueue();
+			//echo $this->db->last_query();
+			
+			
+			$this->load->library('pagination');
+			$config['base_url'] = site_url($base_url);
+			$config['total_rows'] = $this->question2->numQuestions();
+			$config['per_page'] = $pagination_per_page;
+			$config['uri_segment'] = 5;
+			$this->pagination->initialize($config);
+			
 			//set user score			
 			foreach ($data['results'] as $key => $row) {
 				if ($this->userauth->isUser()) {

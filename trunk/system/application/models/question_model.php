@@ -12,6 +12,8 @@ class Question_model extends Model
 	var $question_id;
 	var $tag_id;
 	var $order_by = 'votes'; //date,votes,
+	var $offset;
+	var $limit;
 	
  	function __construct()
     {
@@ -52,6 +54,13 @@ class Question_model extends Model
 		$where .= (isset($this->question_id)) ? " AND question_id = $this->question_id" : '' ;
 		$where .= (isset($this->tag_id)) ? " AND tag_id = $this->tag_id" : '' ;
 		
+		$limit = '';
+		if (isset($this->limit) && isset ($this->offset)) {
+			$limit .= "LIMIT $this->offset, $this->limit";
+		} elseif (isset($this->limit)) {
+			$limit .= "LIMIT $this->limit";
+		}
+		
 		$query = $this->db->query(
 			"SELECT 
 				question_id, 
@@ -78,7 +87,8 @@ class Question_model extends Model
 				fk_event_id=event_id 
 			ORDER BY 
 				$this->order_by 
-			DESC");
+			DESC 
+				$limit");
 		log_message('debug', "questionQueue:".trim($this->db->last_query()));
 		return $query->result_array();
 	}
@@ -110,6 +120,11 @@ class Question_model extends Model
 	{
 		 $result_array = $this->get_question(0,$url);
 		 return $result_array['question_id'];
+	}
+	
+	public function numQuestions()
+	{
+		return $this->db->count_all('cn_questions');
 	}
 }
 ?>
