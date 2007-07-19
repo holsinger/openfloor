@@ -481,10 +481,33 @@ class CI_Loader {
 	 * Loads a language file
 	 *
 	 * @access	public
+	 * @param	array
 	 * @param	string
 	 * @return	void
 	 */
-	function language($file = '', $lang = '', $return = FALSE)
+	function language($file = array(), $lang = '')
+	{
+		$CI =& get_instance();
+
+		if ( ! is_array($file))
+		{
+			$file = array($file);
+		}
+
+		foreach ($file as $langfile)
+		{	
+			$CI->lang->load($langfile, $lang);
+		}
+	}
+
+	/**
+	 * Loads language files for scaffolding
+	 *
+	 * @access	public
+	 * @param	string
+	 * @return	arra
+	 */
+	function scaffold_language($file = '', $lang = '', $return = FALSE)
 	{
 		$CI =& get_instance();
 		return $CI->lang->load($file, $lang, $return);
@@ -681,17 +704,30 @@ class CI_Loader {
 		// We'll test for both lowercase and capitalized versions of the file name
 		foreach (array(ucfirst($class), strtolower($class)) as $class)
 		{
-			// Is this a class extension request?
-			if (file_exists(APPPATH.'libraries/'.config_item('subclass_prefix').$class.EXT))
+			$subclass = APPPATH.'libraries/'.config_item('subclass_prefix').$class.EXT;
+
+			// Is this a class extension request?			
+			if (file_exists($subclass))
 			{
-				if ( ! file_exists(BASEPATH.'libraries/'.ucfirst($class).EXT))
+				$baseclass = BASEPATH.'libraries/'.ucfirst($class).EXT;
+				
+				if ( ! file_exists($baseclass))
 				{
 					log_message('error', "Unable to load the requested class: ".$class);
 					show_error("Unable to load the requested class: ".$class);
 				}
+
+				// Safety:  Was the class already loaded by a previous call?
+				if (in_array($subclass, $this->_ci_classes))
+				{
+					$is_duplicate = TRUE;
+					log_message('debug', $class." class already loaded. Second attempt ignored.");
+					return;
+				}
 	
-				include(BASEPATH.'libraries/'.ucfirst($class).EXT);
-				include(APPPATH.'libraries/'.config_item('subclass_prefix').$class.EXT);
+				include($baseclass);				
+				include($subclass);
+				$this->_ci_classes[] = $subclass;
 	
 				return $this->_ci_init_class($class, config_item('subclass_prefix'), $params);			
 			}
@@ -701,24 +737,24 @@ class CI_Loader {
 			for ($i = 1; $i < 3; $i++)
 			{
 				$path = ($i % 2) ? APPPATH : BASEPATH;	
-				$fp = $path.'libraries/'.$class.EXT;
+				$filepath = $path.'libraries/'.$class.EXT;
 				
 				// Does the file exist?  No?  Bummer...
-				if ( ! file_exists($fp))
+				if ( ! file_exists($filepath))
 				{
 					continue;
 				}
 				
 				// Safety:  Was the class already loaded by a previous call?
-				if (in_array($fp, $this->_ci_classes))
+				if (in_array($filepath, $this->_ci_classes))
 				{
 					$is_duplicate = TRUE;
 					log_message('debug', $class." class already loaded. Second attempt ignored.");
 					return;
 				}
 				
-				include($fp);
-				$this->_ci_classes[] = $fp;
+				include($filepath);
+				$this->_ci_classes[] = $filepath;
 				return $this->_ci_init_class($class, '', $params);
 			}
 		} // END FOREACH
@@ -800,7 +836,7 @@ class CI_Loader {
 			return FALSE;
 		}
 		
-		// Load any custome config file
+		// Load any custom config file
 		if (count($autoload['config']) > 0)
 		{			
 			$CI =& get_instance();
@@ -810,15 +846,15 @@ class CI_Loader {
 			}
 		}		
 
-		// Load plugins, helpers, and scripts
-		foreach (array('helper', 'plugin', 'script') as $type)
-		{
+		// Autoload plugins, helpers, scripts and languages
+		foreach (array('helper', 'plugin', 'script', 'language') as $type)
+		{			
 			if (isset($autoload[$type]) AND count($autoload[$type]) > 0)
 			{
 				$this->$type($autoload[$type]);
 			}		
 		}
-		
+
 		// A little tweak to remain backward compatible
 		// The $autoload['core'] item was deprecated
 		if ( ! isset($autoload['libraries']))

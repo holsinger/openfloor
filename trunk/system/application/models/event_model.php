@@ -51,6 +51,7 @@ class Event_model extends Model
 	{
 		 $result_array = array(); 
 		 $query = $this->db->getwhere('cn_events', array('event_url_name' => $url));
+		//echo $this->db->last_query();
 		 log_message('debug', "EVENT:getIDfromURL:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
 		 return $result_array[0]['event_id'];

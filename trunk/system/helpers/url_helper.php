@@ -90,6 +90,8 @@ function index_page()
  */	
 function anchor($uri = '', $title = '', $attributes = '')
 {
+	$title = (string) $title;
+	
 	if ( ! is_array($uri))
 	{
 		$site_url = ( ! preg_match('!^\w+://!i', $uri)) ? site_url($uri) : $uri;
@@ -132,6 +134,8 @@ function anchor($uri = '', $title = '', $attributes = '')
  */
 function anchor_popup($uri = '', $title = '', $attributes = FALSE)
 {	
+	$title = (string) $title;
+	
 	$site_url = ( ! preg_match('!^\w+://!i', $uri)) ? site_url($uri) : $uri;
 	
 	if ($title == '')
@@ -170,6 +174,8 @@ function anchor_popup($uri = '', $title = '', $attributes = FALSE)
  */
 function mailto($email, $title = '', $attributes = '')
 {
+	$title = (string) $title;
+	
 	if ($title == "")
 	{
 		$title = $email;
@@ -195,6 +201,8 @@ function mailto($email, $title = '', $attributes = '')
  */
 function safe_mailto($email, $title = '', $attributes = '')
 {
+	$title = (string) $title;
+	
 	if ($title == "")
 	{
 		$title = $email;
@@ -394,9 +402,9 @@ function prep_url($str = '')
  * @param	string	the separator: dash, or underscore
  * @return	string
  */
-function url_title($str, $separator = 'dash')
+function url_title($str, $separator = '')
 {
-	if ($separator == '')
+	if ($separator == 'dash')
 	{
 		$search		= '_';
 		$replace	= '-';
