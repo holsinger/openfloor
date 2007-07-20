@@ -46,13 +46,19 @@ class Question_model extends Model
 	public function questionQueue ()
 	{	
 		$where = '';
+		$tag_append = '';
+		
 		$where .= (isset($this->date_begin)) ? " AND event_date >= $this->date_begin" : '' ;
 		$where .= (isset($this->date_end)) ? " AND event_date <= $this->date_end" : '' ;
 		$where .= (isset($this->user_id)) ? " AND user_id = $this->user_id" : '' ;
 		$where .= (isset($this->question_status)) ? " AND question_status = '$this->question_status'" : '' ;
 		$where .= (isset($this->event_id)) ? " AND event_id = $this->event_id" : '' ;
 		$where .= (isset($this->question_id)) ? " AND question_id = $this->question_id" : '' ;
-		$where .= (isset($this->tag_id)) ? " AND tag_id = $this->tag_id" : '' ;
+		
+		if(isset($this->tag_id)) {
+			$tag_append = ', cn_idx_tags_questions';
+			$where .= " AND	fk_tag_id=$this->tag_id	AND cn_idx_tags_questions.fk_question_id = question_id";
+		}
 		
 		$limit = '';
 		if (isset($this->limit) && isset ($this->offset)) {
@@ -79,9 +85,10 @@ class Question_model extends Model
 			FROM 
 				cn_questions, 
 				cn_events, 
-				cn_users 
+				cn_users
+				$tag_append 
 			WHERE 
-				fk_user_id=user_id 
+				cn_questions.fk_user_id=user_id 
 				$where
 			AND 
 				fk_event_id=event_id 
@@ -122,9 +129,10 @@ class Question_model extends Model
 		 return $result_array['question_id'];
 	}
 	
-	public function numQuestions()
+	public function numQuestions($event_id)
 	{
-		return $this->db->count_all('cn_questions');
+		$result = $this->db->query("SELECT count(*) as count FROM cn_questions WHERE fk_event_id=$event_id")->result_array();
+		return $result[0]['count'];
 	}
 }
 ?>

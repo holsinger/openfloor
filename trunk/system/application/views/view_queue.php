@@ -45,9 +45,12 @@ $data['event_url'] = $event_url;
 			?>
 		</div>
 		<?
-	}	
+	}
+	
 	?>
-	<p><?=isset($question_view)?'':$this->pagination->create_links()?></p>
+	<p><?=empty($results)?'There are no questions to display':''?>
+	<p><?=(!isset($question_view) && !empty($results))?$this->pagination->create_links():''?></p>
+	<p><?=(isset($cloud) && !isset($question_view))?$cloud:''?></p>
 	</div>	
 </div>
 <?$this->load->view('view_includes/footer.php');?>

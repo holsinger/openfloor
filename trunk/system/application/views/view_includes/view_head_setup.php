@@ -5,6 +5,11 @@
 	<base href="<?= $this->config->site_url();?>" />
 	<style media="all" type="text/css">@import "css/all.css";</style>
 	<style media="all" type="text/css">@import "css/userWindow.css";</style>
+	<style type="text/css">
+	    <!--
+	      @import url('css/wordcloud.css');
+	    //-->
+	</style>
 	<? if ($browser == 'Internet Explorer' && $browserVer < 7) { ?>
 		<style media="all" type="text/css">@import "css/lt7.css";</style>	
 		<script type="text/javascript" src="javascript/IEFixes.js"></script>

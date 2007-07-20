@@ -211,7 +211,7 @@ class Question extends Controller
 			if (isset($uri_array['event']) && is_string($uri_array['event'])) // if an event name was passed 
 			{
 				$event_id = $this->question2->event_id = $this->event->get_id_from_url($uri_array['event']);
-				$data['event_type'] = $this->event->get_event_type($event_id); 
+				$data['event_type'] = $this->event->get_event_type($event_id);
 			}
 			
 			//question
@@ -265,7 +265,9 @@ class Question extends Controller
 				}
 			}
 			
-			$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
+			$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
+			// retrieve the event_id so we can pull the right tags for the tag cloud
+			// $event_id = $this->event->get_id_from_url($data['event_url']);
 			//set a sorting array
 			$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');
 			if ($data['event_type'] == 'video')
@@ -287,28 +289,30 @@ class Question extends Controller
 			$data['queue_title'] = $queue_title;
 			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"question/queue/{$data['event_url']}");
 			
-			// pagination			
-			$segment_array = $this->uri->segment_array();
-			if(is_numeric($segment_array[$this->uri->total_segments()]))
-				array_pop($segment_array);				
-			$base_url = implode('/', $segment_array);
+			// pagination
+			if(isset($event_id))
+			{		
+				$segment_array = $this->uri->segment_array();
+				if(is_numeric($segment_array[$this->uri->total_segments()]))
+					array_pop($segment_array);				
+				$base_url = implode('/', $segment_array);
+				
+				$pagination_per_page = '4';			
+				$this->question2->limit = $pagination_per_page;
 			
-			$pagination_per_page = '4';			
-			$this->question2->limit = $pagination_per_page;
+				if(is_numeric($this->uri->segment($this->uri->total_segments())))
+					$this->question2->offset = $this->uri->segment($this->uri->total_segments());	
 			
-			if(is_numeric($this->uri->segment(5)))
-				$this->question2->offset = $this->uri->segment(5);	
+				$data['results'] = $this->question2->questionQueue();			
 			
-			$data['results'] = $this->question2->questionQueue();
-			//echo $this->db->last_query();
-			
-			
-			$this->load->library('pagination');
-			$config['base_url'] = site_url($base_url);
-			$config['total_rows'] = $this->question2->numQuestions();
-			$config['per_page'] = $pagination_per_page;
-			$config['uri_segment'] = 5;
-			$this->pagination->initialize($config);
+				$this->load->library('pagination');
+				$config['base_url'] = site_url($base_url);
+				$config['total_rows'] = $this->question2->numQuestions($event_id);
+				$config['per_page'] = $pagination_per_page;
+				$config['uri_segment'] = $this->uri->total_segments();
+				$this->pagination->initialize($config);
+				
+			}
 			
 			//set user score			
 			foreach ($data['results'] as $key => $row) {
@@ -318,7 +322,32 @@ class Question extends Controller
 					else if ($score < 0) $data['results'][$key]['voted'] = 'down';
 				} else $data['results'][$key]['voted'] = false;
 			}
-			//exit(var_dump($data['results']));
+			
+			// tag cloud - this section might need a little tweaking
+			if (isset($event_id) && !empty($data['results'])) {
+				$this->load->model('tag_model');
+				$this->load->library('wordcloud');
+				$words = $this->tag_model->getAllReferencedTags($event_id);
+
+				$cloud = new wordCloud($words);
+				$cloud_array = $cloud->showCloud('array');
+				
+				// build tag path
+				$tag_path = '/tag/' . $this->uri->uri_string();
+				
+				$cloud_string = '';
+				$segment_array = $this->uri->segment_array();
+				
+				$class = array_shift($segment_array);
+				$function = array_shift($segment_array);
+				if ($segment_array[0] == 'tag')
+					array_splice($segment_array, 0, 2);
+				$args = '/'.implode('/', $segment_array);
+				foreach ($cloud_array as $value)
+			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" style=\"font-size: 1.{$value['sizeRange']}em\">{$value['word']}</a> &nbsp;";
+				$data['cloud'] = $cloud_string;
+			}			
+			log_message('debug', 'Question::queue complete, now loading view_queue');
 			$this->load->view('view_queue',$data);	
 		}		
 		

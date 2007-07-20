@@ -28,5 +28,23 @@ class Tag_model extends Model
 		foreach($set as $k=>$v) $set[$k] = '\'' . $v . '\'';		
 		return $this->db->query('SELECT tag_id, value FROM cn_tags WHERE value IN (' . implode(',',$set) . ')');
 	}
+	
+	public function getAllReferencedTags($event_id = null)
+	{
+		$result = ($event_id === null) ? 
+		$this->db->query('SELECT value FROM cn_idx_tags_questions, cn_tags WHERE fk_tag_id = tag_id')->result_array() : 
+		$this->db->query("SELECT value FROM cn_idx_tags_questions, cn_tags WHERE fk_tag_id = tag_id AND fk_question_id IN (SELECT question_id FROM cn_questions WHERE fk_event_id=$event_id)")->result_array() ;
+		
+		$words = array();
+		foreach($result as $v)
+			$words[] = $v['value'];
+		return $words;	
+	}
+	
+	public function get_id_from_tag($value)
+	{
+		$result = $this->db->getwhere('cn_tags', array('value' => $value))->result_array();
+		return $result[0]['tag_id'];
+	}
 }
 ?>
