@@ -24,8 +24,8 @@ class Comments_library
 			foreach ($comments as $v)
 				echo $this->createCommentsPod($v, $question_id);
 		}
-		log_message('debug', 'craaaaash!!!');
-		$event_type = $this->CI->event_model->get_event_type($question_id);
+		//log_message('debug', 'craaaaash!!!');
+		//$event_type = $this->CI->event_model->get_event_type($question_id);
 		//echo '<p>' . anchor("/comment/addComment/$question_name/$event_type",'Add a comment') . '</p>';
 	}
 	
