@@ -27,39 +27,39 @@
   	padding: 4px 4px 4px 4px;
   	letter-spacing: 3px;
   }
-  span.size1 {
-  	color: #000;
+  a.size1 {
+  	color: #ff0000;
   	font-size: 2.4em;
   }
-  span.size2 {
-  	color: #333;
+  a.size2 {
+  	color: #ff3333;
   	font-size:2.2em;
   }
-  span.size3 {
-  	color: #666;
+  a.size3 {
+  	color: #ff6666;
   	font-size: 2.0em;
   }
-  span.size4 {
-  	color: #999;
+  a.size4 {
+  	color: #ff9999;
   	font-size: 1.0em;
   }
-  span.size5 {
-  	color: #aaa;
+  a.size5 {
+  	color: #ffaaaa;
   	font-size: 1.6em;
   }
-  span.size6 {
-  	color: #bbb;
+  a.size6 {
+  	color: #ffbbbb;
   	font-size: 1.4em;
   }
-  span.size7 {
-  	color: #ccc;
+  a.size7 {
+  	color: #ffcccc;
   	font-size: 1.2em;
   }
-  span.size8 {
-  	color: #ddd;
+  a.size8 {
+  	color: #ffdddd;
   	font-size: .8em;
   }
-  span.size0 {
-  	color: #ccc;
+  a.size0 {
+  	color: #ffcccc;
   	font-size: .6em;
   }

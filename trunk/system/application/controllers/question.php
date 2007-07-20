@@ -298,16 +298,22 @@ class Question extends Controller
 				$base_url = implode('/', $segment_array);
 				
 				$pagination_per_page = '4';			
-				$this->question2->limit = $pagination_per_page;
+				// $this->question2->limit = $pagination_per_page;
+				// 			
+				// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
+				// 					$this->question2->offset = $this->uri->segment($this->uri->total_segments());
+				$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
+				
 			
-				if(is_numeric($this->uri->segment($this->uri->total_segments())))
-					$this->question2->offset = $this->uri->segment($this->uri->total_segments());	
-			
-				$data['results'] = $this->question2->questionQueue();			
+				$data['results'] = $this->question2->questionQueue();
+				$total_rows = count($data['results']);
+				$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
+				
+				
 			
 				$this->load->library('pagination');
 				$config['base_url'] = site_url($base_url);
-				$config['total_rows'] = $this->question2->numQuestions($event_id);
+				$config['total_rows'] = $total_rows;//$this->question2->numQuestions($event_id);
 				$config['per_page'] = $pagination_per_page;
 				$config['uri_segment'] = $this->uri->total_segments();
 				$this->pagination->initialize($config);
@@ -332,19 +338,18 @@ class Question extends Controller
 				$cloud = new wordCloud($words);
 				$cloud_array = $cloud->showCloud('array');
 				
-				// build tag path
-				$tag_path = '/tag/' . $this->uri->uri_string();
-				
-				$cloud_string = '';
 				$segment_array = $this->uri->segment_array();
-				
+				if(is_numeric($segment_array[count($segment_array)]))
+					array_pop($segment_array);
 				$class = array_shift($segment_array);
 				$function = array_shift($segment_array);
 				if ($segment_array[0] == 'tag')
 					array_splice($segment_array, 0, 2);
 				$args = '/'.implode('/', $segment_array);
+				
+				$cloud_string = '';
 				foreach ($cloud_array as $value)
-			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" style=\"font-size: 1.{$value['sizeRange']}em\">{$value['word']}</a> &nbsp;";
+			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
 				$data['cloud'] = $cloud_string;
 			}			
 			log_message('debug', 'Question::queue complete, now loading view_queue');
