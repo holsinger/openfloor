@@ -28,8 +28,8 @@ $data['event_url'] = $event_url;
 	              'name'        => 'question',
 	              'id'          => 'question',
 	              'value'       => $this->validation->question,
-	              'maxlength'   => '150',
-	              'size'        => '78',
+	              'maxlength'   => '100',
+	              'size'        => '48',
 	              'class'       => 'txt'
 	            );
 		if ($event_type == 'video') 
@@ -49,7 +49,7 @@ $data['event_url'] = $event_url;
               'value'       => $this->validation->desc,
               'maxlength'   => '250',
               'rows'        => '3',
-              'cols'        => '75',
+              'cols'        => '48',
               'class'       => 'txt'
             );
 		echo form_format("Description: ",form_textarea($format),'Write a brief description explaining your question (limit 250 chars).' ); 
@@ -60,7 +60,7 @@ $data['event_url'] = $event_url;
               'name'        => 'tags',
               'id'          => 'tags',
               'value'       => $this->validation->tags,
-              'size'        => '75',
+              'size'        => '48',
               'class'       => 'txt',
 			  'style'	    => 'text-transform:lowercase'
             );
