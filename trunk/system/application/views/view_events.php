@@ -5,10 +5,9 @@ $data['red_head'] = 'Events';
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <? if (!$this->userauth->isAdmin()) { ?>
-  	<h3>Convention Next</h3>
-  	<p style="margin-left: 10px; margin-right: 30px;"><?=$desc;?></p>
-  <? } ?>
+  <h3>Convention Next</h3>
+  <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
+  <? if ($this->userauth->isAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
   
   <h3>Upcoming Events</h3>	
   
@@ -20,7 +19,7 @@ $data['red_head'] = 'Events';
 	<? //echo $this->table->generate($events)?>
 	<? foreach ($events as $key => $array) {?>
 		<div id='event<?=$array['event_id'];?>' class='event-summary'>
-		<br /><a href='index.php/question/queue/event/<?=url_title($array['event_name']);?>'><strong><?=$array['event_name'];?></strong></a>
+		<br /><?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>
 		<span style"float:right;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></span>
 		<br /><b>When:</b> <?=$array['event_date'];?>
 		<br /><b>Where:</b> <?=$array['location'];?>
