@@ -1,6 +1,6 @@
 #overlay{ 
     background-image: url(../images/overlay.png);
-    position: absolute;
+    position: fixed;
     top: 0px;
     left: 0px;
     z-index: 90;
@@ -11,16 +11,16 @@
 * html #overlay{
     background-color: #333;
     background-color: transparent;
-    background-image: url(blank.gif);
+    background-image: url(../images/blank.gif);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-        src="/images/overlay.png", sizingMethod="scale");
+        src="../images/overlay.png", sizingMethod="scale");
 }
 
 .ajax_box{
     min-width:300px;
     background:#FFFFFF;
     padding:10px;
-    border:2px solid #eee;
+    border:2px solid #0173BA;
 }
 
 #close{

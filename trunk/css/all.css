@@ -8,6 +8,8 @@ img{
 }
 a{color:#F04A54;}
 a:hover{text-decoration:none;}
+.link{color:#F04A54;cursor:pointer;}
+.link:hover{text-decoration:none;cursor:pointer;}
 body{
 	background:#0173BA;
 	font:11px Verdana, Geneva, Arial, Helvetica, sans-serif;
