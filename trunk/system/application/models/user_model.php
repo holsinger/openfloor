@@ -71,6 +71,11 @@ class User_model extends Model {
 		log_message('debug',"UserLogin: ".$this->db->last_query());
 		if ($query->num_rows() > 0) {
 		   $row = $query->row();
+		   if ($row->user_security_level > 4) 
+		   {
+			   return false;
+			   exit();
+		   }
 		   
 		   //set the class vars
 		   $this->user_id = $row->user_id;	
