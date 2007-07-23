@@ -79,7 +79,7 @@ class Question extends Controller
 		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
 		$this->validation->set_fields($fields);
 		
-		$data['events'] = $this->populateEventsSelect();
+		#$data['events'] = $this->populateEventsSelect();
 		
 		$this->load->view('view_submit_question', $data);
 	}
@@ -127,7 +127,7 @@ class Question extends Controller
 		$questionID = $this->question->insertQuestion($questionName, $questionDesc, $userID, $eventID,url_title($questionName));
 			
 		/* insert proper associations */
-		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->tag->insertTagAssociation($questionID, $v, $userID);
+		if(isset($tagsExist)) if(isset($questionID)) foreach($newKs as $v) $this->tag->insertTagAssociation($questionID,0, $v, $userID);
 	
 		return $questionID;
 	}
@@ -295,21 +295,22 @@ class Question extends Controller
 				$segment_array = $this->uri->segment_array();
 				if(is_numeric($segment_array[$this->uri->total_segments()]))
 					array_pop($segment_array);				
-				$base_url = implode('/', $segment_array);
-				
-				$pagination_per_page = '4';			
+				$base_url = implode('/', $segment_array);				
+
+				$pagination_per_page = '10';			
 				// $this->question2->limit = $pagination_per_page;
 				// 			
 				// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
 				// 					$this->question2->offset = $this->uri->segment($this->uri->total_segments());
 				$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
 				
-			
+
 				$data['results'] = $this->question2->questionQueue();
 				$total_rows = count($data['results']);
 				$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
 				
 				
+
 			
 				$this->load->library('pagination');
 				$config['base_url'] = site_url($base_url);
