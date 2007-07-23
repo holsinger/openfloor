@@ -16,10 +16,15 @@ class Tag_model extends Model
 			return false;	
 	}
 	
-	public function insertTagAssociation($questionID, $tagID, $userID)
+	public function insertTagAssociation($questionID, $videoID, $tagID, $userID)
 	{
-		$query = "INSERT INTO cn_idx_tags_questions (fk_question_id, fk_tag_id, fk_user_id) ";
-		$query .="VALUES ($questionID, $tagID, $userID)";
+		if ($questionID) {
+			$query = "INSERT INTO cn_idx_tags_questions (fk_question_id, fk_tag_id, fk_user_id) ";
+			$query .="VALUES ($questionID, $tagID, $userID)";
+		} else if ($videoID) {
+			$query = "INSERT INTO cn_idx_tags_questions (fk_video_id, fk_tag_id, fk_user_id) ";
+			$query .="VALUES ($videoID, $tagID, $userID)";
+		}
 		$this->db->query($query);
 	}
 	
