@@ -9,7 +9,7 @@
 		{
 			echo anchor('admin/cms/'.$val['cms_url'],'edit');
 			echo "&nbsp;&nbsp;".$val['cms_name']."&nbsp;&nbsp;"; 
-			echo anchor('welcome/view/'.$val['cms_url'], 'view');
+			echo anchor('information/view/'.$val['cms_url'], 'view');
 			echo '<br />';
 		}
 		?>
