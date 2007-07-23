@@ -31,15 +31,8 @@ $data['event_url'] = $event_url;
 	              'maxlength'   => '100',
 	              'size'        => '48',
 	              'class'       => 'txt'
-	            );
-		if ($event_type == 'video') 
-		{			
-			echo form_format("YouTude Video URL: *",form_input($format),'Enter the URL for your <a href="http://www.youtube.com">YouTube</a> Video.  <a href="help">Help?</a>' );
-		}
-		else 
-		{			
-			echo form_format("Question: *",form_input($format),'Enter a question you would like asked.' );
-		} 
+	            );		
+		echo form_format("Question: *",form_input($format),'Enter a question you would like asked.' );
 		?>
 		<br />
 		<?
