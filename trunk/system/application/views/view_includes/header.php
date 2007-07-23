@@ -12,6 +12,7 @@ $this->load->view('view_includes/view_head_setup.php',$data);
 <?}?>
 <!--  load AJAX views -->
 <div id="overlay" onclick="hideBox()" style="display:none"></div>
+<div id="hijax" style="display:none"></div>
 <? //$this->load->view('ajax/aview_zip_nine.php'); ?>
 <? $this->load->view('ajax/aview_login.php'); ?>
 

@@ -17,8 +17,12 @@
 
 														<? if ($tabs) { ?>
 														<ul class="local-nav">
-																<li class="<?=$tab_view_question;?>"><a href="index.php/question/queue/<?=$event_url;?>" class="published-questions">View <?=$tabs;?>s</a></li>
-																<li class="<?=$tab_submit_question;?>"><a href="index.php/question/add/<?=$event_url;?>" class="submit-questions">Submit a <?=$tabs;?></a></li>
+																<li class="<?=$tab_view_question;?>"><?=anchor("conventionnext/queue/{$event_url}","View {$tabs}s","class='published-questions'");?></li>
+																<?if (strtolower($tabs) == 'question') { ?>
+																	<li class="<?=$tab_submit_question;?>"><?=anchor("question/add/{$event_url}","Submit a {$tabs}","class='submit-questions'");?></li>
+																<?} else if (strtolower($tabs) == 'video') { ?>
+																	<li class="<?=$tab_submit_question;?>"><?=anchor("video/add/{$event_url}","Submit a {$tabs}","class='submit-questions'");?></li>
+																<?}?>	
 														</ul>
 														<? } ?>
 														<!-- sort questions list start here -->

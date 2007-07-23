@@ -32,12 +32,17 @@
 									<?
 									$array = explode('v=',trim($question_name));
 									$video_id = $array[1];
+																		
+									$this->load->library('YouTubeApi');
+									$youtube_api = new YouTubeApi();
+									$thumb_url = $youtube_api->videoThumb($video_id);
 									?>									
-									<object width="325" height="250">
+									<!--  <object width="325" height="250">
 									<param name="movie" value="http://www.youtube.com/v/<?=$video_id;?>"></param>
 									<param name="wmode" value="transparent"></param>
 									<embed src="http://www.youtube.com/v/<?=$video_id;?>" type="application/x-shockwave-flash" wmode="transparent" width="325" height="250"></embed>
-								</object>
+									</object> -->
+									<img src='<?=$thumb_url;?>'>
 							</div>
 						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
 						<ul class="options">
