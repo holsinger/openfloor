@@ -72,7 +72,9 @@ class Event_model extends Model
 		 $query = $this->db->get('cn_events');
 		 log_message('debug', "EVENT:getEvent:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
-		 return $result_array[0];
+		 if (count($result_array)> 0) return $result_array[0];
+		 else return false; 
+		 
 	}
 	
  	public function get_event_type ($id) 
