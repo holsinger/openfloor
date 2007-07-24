@@ -18,7 +18,7 @@
 				<a href="index.php/question/votedown/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="down">down</a>
 			<? } ?>
 		</span>
-		<a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a>
+		<a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit" title='Who Voted?'><?=(is_numeric($votes))?$votes:0;?></a>
 		<!-- <a id="xvotes-<?= $question_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a> -->
 	</div>
 																					
@@ -29,11 +29,11 @@
 					<div class="descr-br">
 							<h3><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$question_name;?></a></h3>
 							<div class="autor">
-								<p>Posted by: <a href="/user/profile/<?=$user_name;?>"><?=$user_name;?></a> <!-- 72 days ago -->
+								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name);?> <!-- 72 days ago -->
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
-									Event: <a href="index.php/event"><?=$event_name;?></a><span id="ls_adminlinks-5" style="display:none"></span>
+									Event: <?=anchor("conventionnext/queue/event/".url_title($question_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 							</div>
 						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
