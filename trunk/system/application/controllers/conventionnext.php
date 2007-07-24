@@ -114,35 +114,46 @@ class Conventionnext extends Controller
 		$data['queue_title'] = $queue_title;
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
 		
-		// pagination			
-		$segment_array = $this->uri->segment_array();
-		if(is_numeric($segment_array[$this->uri->total_segments()]))
-			array_pop($segment_array);				
-		$base_url = implode('/', $segment_array);
+		// pagination
+		if(isset($event_id))
+		{		
+			$segment_array = $this->uri->segment_array();
+			if(is_numeric($segment_array[$this->uri->total_segments()]))
+				array_pop($segment_array);				
+			$base_url = implode('/', $segment_array);				
+
+			$pagination_per_page = '10';			
+			// $this->question2->limit = $pagination_per_page;
+			// 			
+			// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
+			// 					$this->question2->offset = $this->uri->segment($this->uri->total_segments());
+			$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
+			
+
+			$data['results'] = $this->question2->questionQueue();
+			$total_rows = count($data['results']);
+			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
+			
+			
+
 		
-		$pagination_per_page = '10';			
-		$this->question2->limit = $pagination_per_page;
-		
-		if(is_numeric($this->uri->segment(5)))
-			$this->question2->offset = $this->uri->segment(5);	
-		
-		$data['results'] = $this->question2->questionQueue();
-		//echo $this->db->last_query();
-		
-		
-		$this->load->library('pagination');
-		$config['base_url'] = site_url($base_url);
-		$config['total_rows'] = $this->question2->numQuestions();
-		$config['per_page'] = $pagination_per_page;
-		$config['uri_segment'] = 5;
-		$this->pagination->initialize($config);
+			$this->load->library('pagination');
+			$config['base_url'] = site_url($base_url);
+			$config['total_rows'] = $total_rows;//$this->question2->numQuestions($event_id);
+			$config['per_page'] = $pagination_per_page;
+			$config['uri_segment'] = $this->uri->total_segments();
+			$this->pagination->initialize($config);
+			
+		}
 		
 		//set user score			
 		foreach ($data['results'] as $key => $row) {
 			if ($this->userauth->isUser()) {
+				$this->vote->type='question';
 				$score = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
 				if ($score > 0) $data['results'][$key]['voted'] = 'up';
 				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
+				else $data['results'][$key]['voted'] = false;
 			} else $data['results'][$key]['voted'] = false;
 		}
 		//exit(var_dump($data['results']));
@@ -219,35 +230,41 @@ class Conventionnext extends Controller
 		$data['queue_title'] = $queue_title;
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
 		
-		// pagination			
-		$segment_array = $this->uri->segment_array();
-		if(is_numeric($segment_array[$this->uri->total_segments()]))
-			array_pop($segment_array);				
-		$base_url = implode('/', $segment_array);
+		// pagination
+		if(isset($event_id))
+		{		
+			$segment_array = $this->uri->segment_array();
+			if(is_numeric($segment_array[$this->uri->total_segments()]))
+				array_pop($segment_array);				
+			$base_url = implode('/', $segment_array);				
+
+			$pagination_per_page = '10';			
+			// $this->video2->limit = $pagination_per_page;
+			// 			
+			// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
+			// 					$this->video2->offset = $this->uri->segment($this->uri->total_segments());
+			$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
 		
-		$pagination_per_page = '10';			
-		$this->video2->limit = $pagination_per_page;
+			$data['results'] = $this->video2->videoQueue();
+			$total_rows = count($data['results']);
+			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
 		
-		if(is_numeric($this->uri->segment(5)))
-			$this->video2->offset = $this->uri->segment(5);	
-		
-		$data['results'] = $this->video2->videoQueue();
-		//echo $this->db->last_query();
-		
-		
-		$this->load->library('pagination');
-		$config['base_url'] = site_url($base_url);
-		$config['total_rows'] = $this->video2->numVideos();
-		$config['per_page'] = $pagination_per_page;
-		$config['uri_segment'] = 5;
-		$this->pagination->initialize($config);
+			$this->load->library('pagination');
+			$config['base_url'] = site_url($base_url);
+			$config['total_rows'] = $total_rows;
+			$config['per_page'] = $pagination_per_page;
+			$config['uri_segment'] = $this->uri->total_segments();
+			$this->pagination->initialize($config);			
+		}
 		
 		//set user score			
 		foreach ($data['results'] as $key => $row) {
 			if ($this->userauth->isUser()) {
+				$this->vote->type='video';
 				$score = $this->vote->votedScore($row['video_id'],$this->session->userdata('user_id'));
 				if ($score > 0) $data['results'][$key]['voted'] = 'up';
 				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
+				else $data['results'][$key]['voted'] = false;
 			} else $data['results'][$key]['voted'] = false;
 		}
 		//exit(var_dump($data['results']));
