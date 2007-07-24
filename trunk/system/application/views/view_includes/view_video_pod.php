@@ -8,18 +8,18 @@
 			<? if ($voted == 'up') { ?>
 				<a class="voteup">voted</a>			
 			<? } else { ?>
-				<a href="index.php/question/voteup/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="up">up</a>
+				<a href="index.php/video/voteup/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="up">up</a>
 			<? } ?>	
 		</span>
-		<span id="xreport-<?= $question_id; ?>">
+		<span id="xreport-<?= $video_id; ?>">
 			<? if ($voted == 'down') { ?>
 				<a class="votedown">voted</a>			
 			<? } else { ?>
-				<a href="index.php/question/votedown/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="down">down</a>
+				<a href="index.php/video/votedown/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="down">down</a>
 			<? } ?>
 		</span>
-		<!--  <a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a> -->
-		<a id="xvotes-<?= $question_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a>
+		<!--  <a id="xvotes-<?= $video_id; ?>" href="index.php/votes/who/<?= $video_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a> -->
+		<a id="xvotes-<?= $video_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a>
 	</div>
 																					
 	<div class="describtion">
@@ -27,26 +27,22 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<h3><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$user_name;?> Video Entry</a></h3>
-							<div class="autor">
-									<?
-									$array = explode('v=',trim($question_name));
-									$video_id = $array[1];
-																		
-									$this->load->library('YouTubeApi');
-									$youtube_api = new YouTubeApi();
-									$thumb_url = $youtube_api->videoThumb($video_id);
-									?>									
-									<!--  <object width="325" height="250">
-									<param name="movie" value="http://www.youtube.com/v/<?=$video_id;?>"></param>
-									<param name="wmode" value="transparent"></param>
-									<embed src="http://www.youtube.com/v/<?=$video_id;?>" type="application/x-shockwave-flash" wmode="transparent" width="325" height="250"></embed>
-									</object> -->
-									<img src='<?=$thumb_url;?>'>
+							<h3><a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>"><?=$user_name;?> Video Entry</a></h3>
+							<div class="author">
+								<div id='ytvid_<?=$video_youtude_id;?>' class="video">						
+										<!--  <object width="325" height="250">
+										<param name="movie" value="http://www.youtube.com/v/<?=$video_id;?>"></param>
+										<param name="wmode" value="transparent"></param>
+										<embed src="http://www.youtube.com/v/<?=$video_id;?>" type="application/x-shockwave-flash" wmode="transparent" width="325" height="250"></embed>
+										</object> -->
+										<span class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')"><img src='<?=$video_thumb;?>'></span>
+								</div>
+								<p class='video_desc'><?=substr($video_desc,0,150);?>... <a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="more"> read more &raquo;</a></p>
 							</div>
-						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
+						
 						<ul class="options">
-							<li class="discuss"><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>">Discuss</a></li> 	
+							<li class="play_video"><a class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')">Play Video</a></li>
+							<li class="discuss"><a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>">Discuss</a></li> 	
 							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
 						</ul>
 						<span id="emailto-5" style="display:none"></span>
@@ -55,5 +51,5 @@
 			</div>
 		</div>
 	</div>
-	<? if ($this->userauth->isAdmin()) echo "<div style='float:right;'>".anchor('question/edit/'.$question_id, 'edit')."</div>"; ?>
+	<? if ($this->userauth->isAdmin()) echo "<div style='float:right;'>".anchor('video/edit/'.$video_id, 'edit')."</div>"; ?>
 </div>
