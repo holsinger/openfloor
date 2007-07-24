@@ -79,6 +79,14 @@ ajaxVideo.youTubeVideoDetails = function(id) {
 	return;
 };
 
+ajaxVideo.playYouTubeVideo = function(id) {
+	if(!ajaxVideo.supported) return;
+		
+		var vid_element = $('ytvid_'+id);
+		console.log(id);
+		vid_element.innerHTML = '<embed src="http://www.youtube.com/v/'+id+'&autoplay=1" type="application/x-shockwave-flash" wmode="transparent" width="325" height="250"></embed>';
+}
+
 /**
 * this fucntion get the video id from some youtube code
 *
