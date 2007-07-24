@@ -889,3 +889,14 @@ textarea.txt {
 	width:850px;
 	padding:10px;
 }
+/****************Video*************************/
+.video {
+	padding:5px;
+	float:left;
+}
+.video_desc {
+	padding-top:5px;
+	min-height:100px;
+	vertical-align: middle;
+}
+.describtion ul.options li.play_video a{background:url(../images/ico-play.png) no-repeat left;}
