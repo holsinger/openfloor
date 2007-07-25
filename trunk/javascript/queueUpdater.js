@@ -15,20 +15,11 @@ queueUpdater.updateQueueOnce = function() {
 	new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater' + window.location.pathname);
 }
 
-queueUpdater.voteUp = function(url) {
+queueUpdater.vote = function(url) {
 	new Ajax.Request(url, {
 	  onSuccess: function(transport) {
 		  queueUpdater.updateQueueOnce();
-	      console.log('successfully voted up!');
-	  }
-	});
-}
-
-queueUpdater.voteDown = function(url) {
-	new Ajax.Request(url, {
-	  onSuccess: function(transport) {
-		queueUpdater.updateQueueOnce();
-	      console.log('successfully voted down!');
+	      console.log('successfully voted!');
 	  }
 	});
 }
