@@ -128,45 +128,49 @@ class User extends Controller {
 		// ==================
 		// = uploading code =
 		// ==================
-		$config['upload_path'] = './avatars/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '1024';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
-		$config['overwrite']  = FALSE;
-		$config['encrypt_name']  = TRUE;
+		if(isset($_POST['userfile']))
+		{
+			$config['upload_path'] = './avatars/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '1024';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+			$config['overwrite']  = FALSE;
+			$config['encrypt_name']  = TRUE;
 
-		$this->load->library('upload', $config);
+			$this->load->library('upload', $config);
 		
-		if ( ! $this->upload->do_upload())
-		{
-			$this->error = $this->upload->display_errors();
-		}	
-		else
-		{
-			$data['upload_data'] = $this->upload->data();
-			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
+			if ( ! $this->upload->do_upload())
+			{
+				$this->error = $this->upload->display_errors();
+			}	
+			else
+			{
+				$data['upload_data'] = $this->upload->data();
+				//echo '<pre>'; print_r($data); echo'</pre>'; exit();
 			
-			//resize image
-			$config = array();
-			$config['image_library'] = 'GD2';
-			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
-			#$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-			$config['width'] = 75;
-			$config['height'] = 50;			
-			$this->load->library('image_lib', $config);			
-			$this->image_lib->resize();
-			if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
-			else $this->error = 'Update complete!';			
-		}
+				//resize image
+				$config = array();
+				$config['image_library'] = 'GD2';
+				$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+				#$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 75;
+				$config['height'] = 50;			
+				$this->load->library('image_lib', $config);			
+				$this->image_lib->resize();
+				if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
+				else $this->error = 'Update complete!';			
+			}
+	
 		
-		#remove old image
-		if (isset($_POST['old_avatar']) ) 
-		{
-			$filename = $_POST['old_avatar'];
-			if ( file_exists($filename) && !is_string($this->error)) unlink ($filename);
-			unset($_POST['old_avatar']);
+			#remove old image
+			if (isset($_POST['old_avatar']) ) 
+			{
+				$filename = $_POST['old_avatar'];
+				if ( file_exists($filename) && !is_string($this->error)) unlink ($filename);
+				unset($_POST['old_avatar']);
+			}
 		}
 		
 		foreach($_POST as $k=>$v) $userdata[$k] = $v;

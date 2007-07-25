@@ -81,7 +81,7 @@ class Conventionnext extends Controller
 		//set default sort link
 		$type = ucfirst($data['event_type']);
 		$sort_active = 'upcoming';
-		$queue_title = 'Upcoming '.$type.'s';
+		$queue_title = 'Upcoming '. $type . 's';
 		
 		//create sorting options
 		if (isset($uri_array['sort']) )

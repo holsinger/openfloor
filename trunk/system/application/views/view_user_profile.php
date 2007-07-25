@@ -1,11 +1,15 @@
-<?$data['red_head'] = 'Welcome';?>
+<?
+$data['red_head'] = 'Welcome';
+
+$img_src = (!isset($avatar_image_name)) ? './images/image01.jpg' : "./avatars/$avatar_image_name" ;
+?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
   <h2>User Profile</h2>	
   	<div class='errorArea'><?=$error?></div>
 	<?
-	echo "<br /><p style='float:right;margin-right:25px;'><img src='./avatars/{$avatar_image_name}'></p>";
+	echo "<br /><p style='float:right;margin-right:25px;'><img src='$img_src'></p>";
 	echo "<br /><strong> Username: </strong> ".$user_name;
 	echo "<br /><strong> Email: </strong> ".$user_email;
 	echo "<br /><strong> Display Name: </strong> ".$user_display_name;
