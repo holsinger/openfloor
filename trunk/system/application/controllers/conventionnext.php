@@ -25,7 +25,7 @@ class Conventionnext extends Controller
 	public function ajQueueUpdater()
 	{
 		$func_get_args = func_get_args();
-		$args = array_splice($func_get_args, array_search('index.php', $func_get_args) + 1);
+		$args = array_splice($func_get_args, array_search('conventionnext', $func_get_args));
 		redirect(implode('/', $args) . '/ajax/true');
 	}
 	
