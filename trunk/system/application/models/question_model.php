@@ -71,7 +71,7 @@ class Question_model extends Model
 			"SELECT 
 				question_id, 
 				(SELECT 
-					format(sum(vote_value)/10,0) AS number 
+					cast(format(sum(vote_value)/10,0) as signed) AS number 
 				FROM 
 					cn_votes 
 				WHERE 

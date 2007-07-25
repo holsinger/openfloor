@@ -1,6 +1,8 @@
 <?php
 class Conventionnext extends Controller 
 {
+	private $ajax = false;
+	
 	function __construct()
 	{
 		parent::Controller();
@@ -20,11 +22,17 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	function queue()
+	public function ajQueueUpdater()
+	{
+		$args = array_splice(func_get_args(), 3);
+		redirect(implode('/', $args) . '/ajax/true');
+	}
+	
+	function queue() // passing $this->ajax through still needs to be implemented
 	{		
-		
 		//get data from url
 		$uri_array = $this->uri->uri_to_assoc(3);
+		if (isset($uri_array['ajax'])) $this->ajax = true;
 		if (!isset($uri_array['event'])) $this->index();
 
 		//find event type 
@@ -44,6 +52,7 @@ class Conventionnext extends Controller
 		
 	function questionQueue ($uri_array,$event_id) 
 	{
+		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'question';
 		$this->load->model('Question_model','question2');
 		//event

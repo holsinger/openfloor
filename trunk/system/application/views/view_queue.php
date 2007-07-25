@@ -5,14 +5,18 @@ $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
 
 
-// echo '<pre>'; print_r($data); echo '</pre>';
+//echo '<pre>'; print_r($data); echo '</pre>';
 
 
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
 	<h3><?=$queue_title;?></h3>
+	<? if(isset($ajax)) ob_clean(); //echo '<pre>'; print_r($data); echo '</pre>';?>
 	<div id='queue'>
+	<? if(!isset($ajax)): ?>
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="queueUpdater.updateQueue();">
+	<? endif; ?>
 	<?
 	if ($event_type == 'video')
 	{
@@ -25,7 +29,7 @@ $data['event_url'] = $event_url;
 		$this->load->view('view_includes/view_question_pod.php',$row);
 	}
 	
-	if (isset($question_view)) {
+	if (isset($question_view) && !$ajax) {
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library($vars);
 		$comments_library->createComments($vars);
@@ -51,6 +55,7 @@ $data['event_url'] = $event_url;
 	<p><?=empty($results)?'There are no questions to display':''?>
 	<p><?=(!isset($question_view) && !empty($results))?$this->pagination->create_links():''?></p>
 	<p><?=(isset($cloud) && !isset($question_view))?$cloud:''?></p>
-	</div>	
+	</div>
+	<? if(isset($ajax))	ob_end_flush(); ?>
 </div>
 <?$this->load->view('view_includes/footer.php');?>

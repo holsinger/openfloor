@@ -374,17 +374,17 @@ class Question extends Controller
 		#check that has not voted
 		if($this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
 			redirect('question/queue/'.$event_url);
-			ob_clean();
-			exit();
+		 	ob_clean();
+		 	exit();
 		}
 		
 		#TODO validation and trending need to be considered		
 		$this->vote->voteup($this->session->userdata('user_id'), $id);
 		//$this->queue();
 		
-		redirect('question/queue/'.$event_url);
-		ob_clean();
-		exit();
+		// redirect('question/queue/'.$event_url);
+		// 		ob_clean();
+		// 		exit();
 	}
 	
 	function votedown($question_id = 0)
@@ -392,8 +392,10 @@ class Question extends Controller
 		$this->userauth->check();
 		//get question id
 		$uri_array = $this->uri->uri_to_assoc(3);
+		echo '<pre>'; print_r($uri_array); echo '</pre>';
 		if (isset($uri_array['question']) && is_numeric($uri_array['question'])) $id = $uri_array['question'];
-		if (isset($uri_array['question']) && is_string($uri_array['question'])) $id = $this->question->get_id_from_url($uri_array['question']);	
+		if (isset($uri_array['question']) && is_string($uri_array['question'])) $id = $this->question->get_id_from_url($uri_array['question']);
+			
 		$id = ($question_id > 0) ? $question_id:$id;
 		
 		$event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
@@ -409,9 +411,9 @@ class Question extends Controller
 		#TODO validation and trending need to be considered
 		$this->vote->votedown($this->session->userdata('user_id'), $id);
 		//$this->queue();
-		redirect('question/queue/'.$event_url);
-		ob_clean();
-		exit();
+		// redirect('question/queue/'.$event_url);
+		// 		ob_clean();
+		// 		exit();
 	}
 }
 ?>
