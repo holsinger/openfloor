@@ -3,12 +3,15 @@
 $data['browser'] = $this->agent->browser();
 $data['browserVer'] = $this->agent->version();
 
+//setup onLoad array
+if (isset($data['js_onload']) && is_array($data['js_onload'])) $onload = implode('();',$data['js_onload']).'();';
+else $onload = 'init();';
 $this->load->view('view_includes/view_head_setup.php',$data);
 ?>
 <? if ($data['browser'] == 'Internet Explorer' && $data['browserVer'] < 7) { ?>
-<body onLoad='fixPNG();'>
+<body onLoad='fixPNG();<?=$onload;?>'>
 <?}else{?>
-<body>
+<body onLoad='<?=$onload;?>'>
 <?}?>
 <!--  load AJAX views -->
 <div id="overlay" onclick="hideBox()" style="display:none"></div>

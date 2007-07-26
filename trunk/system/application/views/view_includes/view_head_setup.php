@@ -10,13 +10,15 @@
 	      @import url('css/wordcloud.css');
 	    //-->
 	</style>
+	<script type="text/javascript" src="javascript/init.js"></script>
+	<script type="text/javascript">
+		site_url = '<?= $this->config->site_url();?>';
+		username = '<?=$this->session->userdata('user_name');?>';
+	</script>
 	<? if ($browser == 'Internet Explorer' && $browserVer < 7) { ?>
 		<style media="all" type="text/css">@import "css/lt7.css";</style>	
 		<script type="text/javascript" src="javascript/IEFixes.js"></script>
 	<? } ?>
-	<script type="text/javascript">
-		var site_url = '<?= $this->config->site_url();?>';
-	</script>
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 	<script src="javascript/src/effects.js" type="text/javascript"></script>
