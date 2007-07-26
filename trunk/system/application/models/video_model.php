@@ -113,7 +113,7 @@ class Video_model extends Model
 	{
 		 $result_array = array(); 
 		 if ($id) $this->db->where('video_id',$id);
-		 if ($url) $this->db->where('video_url_name',$url);
+		 if ($url) $this->db->where('video_url_title',$url);
 		 if ($youtubeID) $this->db->where('video_youtube_id',$youtubeID);
 		 $query = $this->db->get('cn_videos');
 		 log_message('debug', "VIDEOS:getVideos:".trim($this->db->last_query()));
