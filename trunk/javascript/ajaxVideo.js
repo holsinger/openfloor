@@ -44,6 +44,7 @@ ajaxVideo.ajaxCall = function(id) {
  */
 ajaxVideo.youTubeVideoDetails = function(id) {
 	if(!ajaxVideo.supported || ajaxVideo.inprogress) {
+		alert('busy');
 		return;
 	}
 
@@ -51,6 +52,10 @@ ajaxVideo.youTubeVideoDetails = function(id) {
 	//see if we have a video id
 	ajaxVideo.videoID = ajaxVideo.getVideoID(id);
 
+	//do some sexy time
+	$('videoNext').innerHTML= '<br />Loading..<br />';
+	$('errorArea').innerHTML = ' ';
+	
 	//make the AJAX Calls
 	new Ajax.Request(site_url+'/video/youTubeAjax/', {
 	  method:'post',	  
@@ -61,11 +66,24 @@ ajaxVideo.youTubeVideoDetails = function(id) {
 	     if (jsonObj.code) {
 	     	 $('errorArea').innerHTML = jsonObj.description;
 	     	 new Effect.Shake ('errorArea');
-	     	 $('videoDetailsButton').onclick = ajaxVideo.youTubeVideoDetails($F('youtube'));
+	     	 var my_input = document.createElement('input');
+
+				 Element.extend(my_input);
+				 my_input.id='videoDetailsButton';
+				 my_input.type='button';
+				 my_input.value='Next >';
+				 my_input.addClassName('button');
+	     	 my_input.show();
+				
+				 $('videoNext').innerHTML = '';
+				 // insert it in the document
+				 $('videoNext').appendChild(my_input);
+				 Event.observe($('videoDetailsButton'),'click',function(){ajaxVideo.youTubeVideoDetails($F('youtube'))});
+	     	 ajaxVideo.inprogress = false;
 	     	 return;
 	     }
 	     $('youtube').value = ajaxVideo.videoID;
-	     $('videoDetailsButton').hide();
+	     Element.extend($('videoNext')).hide();
 	     new Effect.BlindDown ('videoDetails'); 
 			 
 	     $('video').value = jsonObj.title;
