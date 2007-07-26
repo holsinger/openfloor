@@ -40,7 +40,7 @@ $data['event_url'] = $event_url;
 		?>
 		<br />
 		<br />
-		<input value='Next >' type="button" id="videoDetailsButton" class="button" onClick="ajaxVideo.youTubeVideoDetails(document.getElementById('youtube').value);">
+		<div id='videoNext'><input value='Next >' type="button" id="videoDetailsButton" class="button" onClick="ajaxVideo.youTubeVideoDetails(document.getElementById('youtube').value);"></div>
 		<br />
 		<div id='videoDetails' style="display:none;">
 		
