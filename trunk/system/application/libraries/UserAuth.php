@@ -16,7 +16,6 @@ class UserAuth {
 		define('SL_USER',4);
 		define('SL_BLOCKED',100);
 			
-        log_message('debug', "FreakAuth Class Initialized");
 		$this->CI->load->model('User_model','user');
 		$this->CI->load->helper('url');
 		
@@ -31,7 +30,11 @@ class UserAuth {
 		{
 			$this->user_id = $this->CI->session->userdata('user_id');
 			//get karma score
-			$this->user_karma = $this->CI->user->get_karma($this->CI->session->userdata('user_id'));
+			$user_array = $this->CI->user->get_user($this->CI->session->userdata('user_id'));
+			$this->user_karma = $user_array['user_karma'];
+			$this->user_name = $user_array['user_name'];
+			$this->user_avatar = $user_array['user_avatar'];
+			#TODO check user security level get all user info
 		}
 	}
 	/**
