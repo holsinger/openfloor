@@ -22,11 +22,12 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	public function ajQueueUpdater()
+	public function ajQueueUpdater($e_key, $e_val)
 	{
-		$func_get_args = func_get_args();
-		$args = array_splice($func_get_args, array_search('conventionnext', $func_get_args));
-		redirect(implode('/', $args) . '/ajax/true');
+		// $func_get_args = func_get_args();
+		// $args = array_splice($func_get_args, array_search('conventionnext', $func_get_args));
+		// redirect(implode('/', $args) . '/ajax/true');
+		redirect("/conventionnext/queue/$e_key/$e_val/ajax/true");
 	}
 	
 	function queue() // passing $this->ajax through still needs to be implemented
@@ -64,8 +65,8 @@ class Conventionnext extends Controller
 				$this->question2->question_id = $uri_array['question'];
 			elseif (is_string($uri_array['question']))
 				$this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);
-				
-			$data['question_view'] = true;
+			
+			$data['question_view'] = true;			
 		}
 		
 		//user
@@ -119,7 +120,7 @@ class Conventionnext extends Controller
 		
 		$data['sort_array'] = $sort_array;
 		//var_dump($sort_array);
-
+		
 		if ( isset($uri_array['sort']) ) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		$data['queue_title'] = $queue_title;
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
@@ -166,12 +167,15 @@ class Conventionnext extends Controller
 				else $data['results'][$key]['voted'] = false;
 			} else $data['results'][$key]['voted'] = false;
 		}
+		
 		//exit(var_dump($data['results']));
+		//echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	
 	}		
 	
 	function videoQueue ($uri_array,$event_id) 
 	{
+		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'video';
 		
 		$this->load->model('Video_model','video2');

@@ -1,4 +1,5 @@
 <?
+//echo '<pre>'; print_r($data); echo '</pre>';
 $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
@@ -6,7 +7,7 @@ $data['event_url'] = $event_url;
 
 
 //echo '<pre>'; print_r($data); echo '</pre>';
-
+$event = explode('/', $event_url);
 
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
@@ -15,7 +16,7 @@ $data['event_url'] = $event_url;
 	<? if(isset($ajax)) ob_clean(); //echo '<pre>'; print_r($data); echo '</pre>';?>
 	<div id='queue'>
 	<? if(!isset($ajax)): ?>
-	<img src="<?=base_url();?>/images/nothing.gif" onLoad="queueUpdater.updateQueue();">
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="queueUpdater.updateQueue('<?=$event[0]?>', '<?=$event[1]?>');">
 	<? endif; ?>
 	<?
 	if ($event_type == 'video')

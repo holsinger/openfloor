@@ -5,8 +5,8 @@ if(typeof queueUpdater === "undefined" || !queueUpdater) {
 	};
 }
 
-queueUpdater.updateQueue = function() {
-	new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater' + window.location.pathname, {
+queueUpdater.updateQueue = function(e_key, e_val) {
+	new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + e_key + '/' + e_val, {
 	  frequency: 10
 	});
 }
