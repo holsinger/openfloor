@@ -22,12 +22,12 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	public function ajQueueUpdater($e_key, $e_val)
+	public function ajQueueUpdater($event_name, $sort)
 	{
 		// $func_get_args = func_get_args();
 		// $args = array_splice($func_get_args, array_search('conventionnext', $func_get_args));
 		// redirect(implode('/', $args) . '/ajax/true');
-		redirect("/conventionnext/queue/$e_key/$e_val/ajax/true");
+		redirect("/conventionnext/queue/event/$event_name/sort/$sort/ajax/true");
 	}
 	
 	function queue() // passing $this->ajax through still needs to be implemented
@@ -59,6 +59,7 @@ class Conventionnext extends Controller
 		$this->load->model('Question_model','question2');
 		//event
 		$this->question2->event_id = $event_id; 
+		$data['event_name'] = $uri_array['event'];
 		//question
 		if (isset($uri_array['question'])) {
 			if (is_numeric($uri_array['question'])) // change all is_numeric, is_string groups to if, elseif logic
@@ -82,6 +83,7 @@ class Conventionnext extends Controller
 		//set default sort link
 		$type = ucfirst($data['event_type']);
 		$sort_active = 'upcoming';
+		$data['sort'] = $sort_active;
 		$queue_title = 'Upcoming '. $type . 's';
 		
 		//create sorting options

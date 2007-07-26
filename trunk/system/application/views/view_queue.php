@@ -1,22 +1,18 @@
 <?
-//echo '<pre>'; print_r($data); echo '</pre>';
+
 $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
-
-
-//echo '<pre>'; print_r($data); echo '</pre>';
-$event = explode('/', $event_url);
-
+$question_view = (isset($vars['question_view'])) ? true : false ;
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
 	<h3><?=$queue_title;?></h3>
-	<? if(isset($ajax)) ob_clean(); //echo '<pre>'; print_r($data); echo '</pre>';?>
+	<? if(isset($ajax) && !$question_view) ob_clean(); //echo '<pre>'; print_r($data); echo '</pre>';?>
 	<div id='queue'>
-	<? if(!isset($ajax)): ?>
-	<img src="<?=base_url();?>/images/nothing.gif" onLoad="queueUpdater.updateQueue('<?=$event[0]?>', '<?=$event[1]?>');">
+	<? if(!isset($ajax) && !$question_view): ?>
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';queueUpdater.updateQueue();">
 	<? endif; ?>
 	<?
 	if ($event_type == 'video')
@@ -57,6 +53,6 @@ $event = explode('/', $event_url);
 	<p><?=(!isset($question_view) && !empty($results))?$this->pagination->create_links():''?></p>
 	<p><?=(isset($cloud) && !isset($question_view))?$cloud:''?></p>
 	</div>
-	<? if(isset($ajax))	ob_end_flush(); ?>
+	<? if(isset($ajax) && !$question_view)	ob_end_flush(); ?>
 </div>
 <?$this->load->view('view_includes/footer.php');?>
