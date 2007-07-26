@@ -24,8 +24,10 @@ class Conventionnext extends Controller
 	
 	public function ajQueueUpdater($event_name, $sort)
 	{
+		//exit(var_dump($_SERVER));
 		// $func_get_args = func_get_args();
 		// $args = array_splice($func_get_args, array_search('conventionnext', $func_get_args));
+		
 		// redirect(implode('/', $args) . '/ajax/true');
 		redirect("/conventionnext/queue/event/$event_name/sort/$sort/ajax/true");
 	}
@@ -83,7 +85,6 @@ class Conventionnext extends Controller
 		//set default sort link
 		$type = ucfirst($data['event_type']);
 		$sort_active = 'upcoming';
-		$data['sort'] = $sort_active;
 		$queue_title = 'Upcoming '. $type . 's';
 		
 		//create sorting options
@@ -111,6 +112,7 @@ class Conventionnext extends Controller
 				$queue_title = 'Current '.$type;
 			}
 		}
+		$data['sort'] = $sort_active;
 		
 		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
 		//set a sorting array
@@ -168,6 +170,10 @@ class Conventionnext extends Controller
 				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
 				else $data['results'][$key]['voted'] = false;
 			} else $data['results'][$key]['voted'] = false;
+			//set user avatar
+			$image_array = unserialize($data['results'][$key]['user_avatar']);
+			if (count($image_array)>0) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
+			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";
 		}
 		
 		//exit(var_dump($data['results']));
@@ -182,7 +188,8 @@ class Conventionnext extends Controller
 		
 		$this->load->model('Video_model','video2');
 		//event
-		$this->video2->event_id = $event_id; 
+		$this->video2->event_id = $event_id;		
+		$data['event_name'] = $uri_array['event'];
 		//video
 		if (isset($uri_array['video'])) {
 			if (is_numeric($uri_array['video'])) // change all is_numeric, is_string groups to if, elseif logic
@@ -233,6 +240,7 @@ class Conventionnext extends Controller
 				$queue_title = 'Current '.$type;
 			}
 		}
+		$data['sort'] = $sort_active;
 		
 		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
 		//set a sorting array
@@ -286,6 +294,5 @@ class Conventionnext extends Controller
 		//exit(var_dump($data['results']));
 		$this->load->view('view_queue',$data);	
 	}
-
 }
 ?>
