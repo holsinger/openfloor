@@ -63,7 +63,7 @@ class Question extends Controller
 			if( is_numeric($questionID) ) {
 				$this->voteup($questionID);
 				//redirect to question view page
-				redirect('question/queue/'.$_POST['event_url']);
+				redirect('conventionnext/queue/'.$_POST['event_url']);
 				ob_clean();
 				exit();
 				
@@ -373,7 +373,7 @@ class Question extends Controller
 		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		#check that has not voted
 		if($this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
-			redirect('question/queue/'.$event_url);
+			redirect('conventionnext/queue/'.$event_url);
 		 	ob_clean();
 		 	exit();
 		}
@@ -403,7 +403,7 @@ class Question extends Controller
 		
 		#check that user has not voted
 		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
-			redirect('question/queue/'.$event_url);
+			redirect('conventionnext/queue/'.$event_url);
 			ob_clean();
 			exit();
 		}
