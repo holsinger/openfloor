@@ -46,6 +46,11 @@ class Tag_model extends Model
 		return $words;	
 	}
 	
+	public function getTagsByQuestion($question_id)
+	{
+		return $this->db->query("SELECT value FROM cn_tags, cn_idx_tags_questions WHERE tag_id = fk_tag_id AND fk_question_id=$question_id")->result_array();
+	}
+	
 	public function get_id_from_tag($value)
 	{
 		$result = $this->db->getwhere('cn_tags', array('value' => $value))->result_array();

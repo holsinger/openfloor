@@ -81,6 +81,7 @@ class Question_model extends Model
 				question_desc,
 				cn_questions.timestamp as date, 
 				user_name, 
+				user_avatar,
 				event_name 
 			FROM 
 				cn_questions, 

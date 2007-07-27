@@ -243,40 +243,43 @@ class Event extends Controller
 					
 		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
 		
-		// ==================
-		// = uploading code =
-		// ==================
-		$config['upload_path'] = './avatars/';
-		$config['allowed_types'] = 'gif|jpg|png';
-		$config['max_size']	= '1024';
-		$config['max_width']  = '1024';
-		$config['max_height']  = '768';
-		$config['overwrite']  = FALSE;
-		$config['encrypt_name']  = TRUE;
+		if(!empty($_FILES['userfile']['name']))
+		{
+			// ==================
+			// = uploading code =
+			// ==================
+			$config['upload_path'] = './avatars/';
+			$config['allowed_types'] = 'gif|jpg|png';
+			$config['max_size']	= '1024';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+			$config['overwrite']  = FALSE;
+			$config['encrypt_name']  = TRUE;
 
-		$this->load->library('upload', $config);
+			$this->load->library('upload', $config);
 		
-		if ( ! $this->upload->do_upload())
-		{
-			$error = $this->upload->display_errors();
-		}	
-		else
-		{
-			$data['upload_data'] = $this->upload->data();
-			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
+			if ( ! $this->upload->do_upload())
+			{
+				$error = $this->upload->display_errors();
+			}	
+			else
+			{
+				$data['upload_data'] = $this->upload->data();
+				//echo '<pre>'; print_r($data); echo'</pre>'; exit();
 			
-			//resize image
-			$config = array();
-			$config['image_library'] = 'GD2';
-			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
-			#$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-			$config['width'] = 75;
-			$config['height'] = 50;			
-			$this->load->library('image_lib', $config);			
-			$this->image_lib->resize();
-			if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
-			$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;		
+				//resize image
+				$config = array();
+				$config['image_library'] = 'GD2';
+				$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+				#$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 75;
+				$config['height'] = 50;			
+				$this->load->library('image_lib', $config);			
+				$this->image_lib->resize();
+				if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
+				$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;		
+			}
 		}
 		
 		if ( !$error ) {

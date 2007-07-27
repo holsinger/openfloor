@@ -565,6 +565,13 @@ a.vote_digit:hover {
 .describtion ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}
 .describtion ul.options li.trackback a{background:url(../images/ico-trackback.gif) no-repeat left;}
 .describtion ul.options li.discuss a{background:url(../images/ico-discuss.gif) no-repeat left;}
+/*	question pod comments 
+	author: Rob Stefanussen */
+.describtion .comments_header
+{
+	background:#c6e5f6;
+}
+
 ul.sort-questions{
 	margin:0;
 	padding:0 36px 0 0;

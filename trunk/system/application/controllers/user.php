@@ -23,6 +23,8 @@ class User extends Controller {
 	
 	}
 	function loginToDo () {
+		$func_args = func_get_args();
+		$data['location'] = implode('/', $func_args);
 		$data['error'] = 'Please login to do that.';
 		$this->load->view('view_login',$data);
 	}
@@ -128,7 +130,7 @@ class User extends Controller {
 		// ==================
 		// = uploading code =
 		// ==================
-		if(isset($_POST['userfile']))
+		if(!empty($_FILES['userfile']['name']))
 		{
 			$config['upload_path'] = './avatars/';
 			$config['allowed_types'] = 'gif|jpg|png';
@@ -147,7 +149,6 @@ class User extends Controller {
 			else
 			{
 				$data['upload_data'] = $this->upload->data();
-				//echo '<pre>'; print_r($data); echo'</pre>'; exit();
 			
 				//resize image
 				$config = array();
@@ -176,6 +177,7 @@ class User extends Controller {
 		foreach($_POST as $k=>$v) $userdata[$k] = $v;
 		if(isset($data['upload_data'])) $userdata['user_avatar'] = serialize($data['upload_data']);
 		
+		unset($userdata['user_karma'], $userdata['old_avatar']);
 		//add to db
 		#TODO move to model
 		$this->db->where('user_id', $userdata['user_id']);

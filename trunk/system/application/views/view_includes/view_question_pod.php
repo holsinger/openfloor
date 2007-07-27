@@ -1,5 +1,5 @@
 <?
-
+$days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 ?>
 <div class="news-summary" id="xnews-5">
 	<!-- raiting topics start here -->
@@ -30,13 +30,18 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<h3><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$question_name;?></a></h3>
+							<h3><!-- <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$question_name;?></a> -->
+								<a href="index.php/conventionnext/question/<?= url_title($event_name) . '/' . url_title($question_name); ?>"><?=$question_name;?></a>
+							</h3>
 							<div class="autor">
-								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name);?> <!-- 72 days ago -->
+								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ' . $days_old;?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
 									Event: <?=anchor("conventionnext/queue/event/".url_title($question_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
+								</p>
+								<p>
+									Tags: <? foreach($tags as $tag) echo "<a href=\"#\">$tag</a>, "?>
 								</p>
 							</div>
 						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
@@ -44,6 +49,9 @@
 							<li class="discuss"><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>">Discuss</a></li> 	
 							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
 						</ul>
+						<div class="comments_header">
+							<?=isset($comments_body)?$comments_body.'<br/>':''?>
+						</div>						
 						<span id="emailto-5" style="display:none"></span>
 					</div>
 				</div>

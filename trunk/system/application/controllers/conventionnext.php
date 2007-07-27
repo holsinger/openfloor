@@ -12,6 +12,7 @@ class Conventionnext extends Controller
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
+		$this->load->model('tag_model');
 
 		$this->load->scaffolding('cn_questions');
 	}
@@ -52,12 +53,22 @@ class Conventionnext extends Controller
 			if ( $this->event->get_event_type($event_id) == 'question') $this->questionQueue($uri_array,$event_id);
 			if ( $this->event->get_event_type($event_id) == 'video') $this->videoQueue($uri_array,$event_id); 
 		}
+	}
+	
+	public function question($event, $question)
+	{
+		$question_id = $this->question->get_id_from_url($question);
+		$this->question->question_id = $question_id;
+		$data['results'] = $this->question->questionQueue();
+		
+		$this->load->view('question/question_view.php', $data);
 	}	
 		
 	function questionQueue ($uri_array,$event_id) 
 	{
 		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'question';
+		
 		$this->load->model('Question_model','question2');
 		//event
 		$this->question2->event_id = $event_id; 
@@ -146,6 +157,14 @@ class Conventionnext extends Controller
 			
 
 			$data['results'] = $this->question2->questionQueue();
+			// get our tags real quick & determine how old the question is
+			
+			foreach($data['results'] as $k=>$v) {
+				foreach($this->tag_model->getTagsByQuestion($v['question_id']) as $v2)
+					$data['results'][$k]['tags'][] = $v2['value'];
+				$data['results'][$k]['days_old'] = floor((time() - strtotime($v['date']))/86400);	
+			}
+					
 			$total_rows = count($data['results']);
 			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
 			
@@ -176,8 +195,6 @@ class Conventionnext extends Controller
 			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";
 		}
 		
-		//exit(var_dump($data['results']));
-		//echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	
 	}		
 	
@@ -247,6 +264,7 @@ class Conventionnext extends Controller
 		$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');		
 		($sort_active == 'upcoming') ? array_push($sort_array,'Score'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}",'Score') );
 		($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}/sort/newest",'Newest') ); 
+		
 		$data['sort_array'] = $sort_array;
 		//var_dump($sort_array);
 
@@ -291,7 +309,7 @@ class Conventionnext extends Controller
 				else $data['results'][$key]['voted'] = false;
 			} else $data['results'][$key]['voted'] = false;
 		}
-		//exit(var_dump($data['results']));
+		
 		$this->load->view('view_queue',$data);	
 	}
 }
