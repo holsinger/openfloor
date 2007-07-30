@@ -145,7 +145,8 @@ class Event extends Controller
 		if (isset($_POST['old_avatar']) ) 
 		{
 			$filename = $_POST['old_avatar'];
-			if ( file_exists($filename) && !is_string($this->error)) unlink ($filename);
+			// we still probably want to catch errors, but the !is_string($this->error) was causing the file not to get deleted
+			if ( file_exists($filename) /*&& !is_string($this->error)*/) unlink ($filename);
 			unset($_POST['old_avatar']);
 		}
 		
