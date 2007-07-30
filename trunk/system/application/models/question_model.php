@@ -19,12 +19,20 @@ class Question_model extends Model
     {
         // Call the Model constructor
         parent::Model();
+		$this->load->model('tag_model');
+		
     }
     
-	public function insertQuestion($questionName='', $questionDesc='', $userID='', $eventID='', $questionURLName='')
+	public function insertQuestion($questionName='', $questionDesc='', $userID=0, $eventID=0, $questionURLName='')
 	{
+		$questionName = $this->db->escape($questionName);
+		$questionDesc = $this->db->escape($questionDesc);
+		$userID = $this->db->escape($userID);
+		$eventID = $this->db->escape($eventID);
+		$questionURLName = $this->db->escape($questionURLName);
+		
 		$query = "INSERT INTO cn_questions (question_name, question_url_name, question_desc, fk_user_id, fk_event_id) ";
-		$query .="VALUES ('$questionName', '$questionURLName', '$questionDesc', $userID, $eventID)";		
+		$query .="VALUES ($questionName, $questionURLName, $questionDesc, $userID, $eventID)";		
 		$this->db->query($query);
 		
 		return $this->db->insert_id();
@@ -98,7 +106,16 @@ class Question_model extends Model
 			DESC 
 				$limit");
 		log_message('debug', "questionQueue:".trim($this->db->last_query()));
-		return $query->result_array();
+		$results = $query->result_array();
+		
+		// get our tags real quick & determine how old the question is
+		foreach($results as $k=>$v) {
+			foreach($this->tag_model->getTagsByQuestion($v['question_id']) as $v2)
+				$results[$k]['tags'][] = $v2['value'];
+			$results[$k]['days_old'] = floor((time() - strtotime($v['date']))/86400);	
+		}
+		
+		return $results;
 	}
 	
 	/**
