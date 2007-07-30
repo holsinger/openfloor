@@ -7,6 +7,7 @@ class Conventionnext extends Controller
 	{
 		parent::Controller();
 		$this->load->model('Question_model','question');
+		$this->load->model('Video_model', 'video');
 		$this->load->model('Vote_model','vote');
 		$this->load->model('Event_model','event');
 		$this->load->library('validation');
@@ -60,9 +61,18 @@ class Conventionnext extends Controller
 		$question_id = $this->question->get_id_from_url($question);
 		$this->question->question_id = $question_id;
 		$data['results'] = $this->question->questionQueue();
-		
-		$this->load->view('question/question_view.php', $data);
-	}	
+
+		$this->load->view('question/question_view.php', $data);					
+	}
+	
+	public function video($event, $video)
+	{
+		$video_id = $this->video->get_id_from_url($video);
+		$this->video->video_id = $video_id;
+		$data['results'] = $this->video->videoQueue();
+
+		$this->load->view('video/video_view.php', $data);
+	}
 		
 	function questionQueue ($uri_array,$event_id) 
 	{

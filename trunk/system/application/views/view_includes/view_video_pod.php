@@ -29,7 +29,7 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<h3><a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>"><?=$user_name;?> Video Entry</a></h3>
+							<h3><a href="index.php/conventionnext/video/<?= url_title($event_name); ?>/<?= url_title($video_title); ?>"><?=$user_name;?> Video Entry</a></h3>
 							<div class="author">
 								<div id='ytvid_<?=$video_youtude_id;?>' class="video">						
 										<!--  <object width="325" height="250">
