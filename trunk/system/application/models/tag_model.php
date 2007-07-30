@@ -9,7 +9,7 @@ class Tag_model extends Model
     
 	public function insertTag($value)
 	{
-		$query = $this->db->query("INSERT INTO cn_tags (value) VALUES ('$value')");
+		$query = $this->db->query("INSERT INTO cn_tags (value) VALUES (\"$value\")");
 		if($this->db->insert_id() > 0)
 			return $this->db->insert_id();
 		else
@@ -30,7 +30,7 @@ class Tag_model extends Model
 	
 	public function getTagsInSet($set)
 	{
-		foreach($set as $k=>$v) $set[$k] = '\'' . $v . '\'';		
+		foreach($set as $k=>$v) $set[$k] = '"' . $v . '"';		
 		return $this->db->query('SELECT tag_id, value FROM cn_tags WHERE value IN (' . implode(',',$set) . ')');
 	}
 	
