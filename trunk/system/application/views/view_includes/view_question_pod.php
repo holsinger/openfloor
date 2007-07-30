@@ -1,7 +1,7 @@
 <?
 $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 ?>
-<div class="news-summary" id="xnews-5">
+<div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<!-- raiting topics start here -->
 	<div class="raiting" >
 		<span id="xvote-5" class="next_invisible">
@@ -10,7 +10,7 @@ $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 			<? } else { ?>
 				<!-- <a href="index.php/question/voteup/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="up">up</a> -->
 				<!-- span, class link -->
-				<a href="javascript:queueUpdater.vote(site_url + '/question/voteup/<?= $event_url; ?>/question/<?= url_title($question_name); ?>');" class="up">up</a>
+				<a href="javascript:queueUpdater.vote(site_url + '/question/voteup/<?= $event_url; ?>/question/<?= url_title($question_name); ?>','xnews-<?= $question_id; ?>');" class="up">up</a>
 			<? } ?>	
 		</span>
 		<span id="xreport-<?= $question_id; ?>">
@@ -18,7 +18,7 @@ $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 				<a class="votedown">voted</a>			
 			<? } else { ?>
 				<!-- <a href="index.php/question/votedown/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="down">down</a> -->
-				<a href="javascript:queueUpdater.vote(site_url + '/question/votedown/<?= $event_url; ?>/question/<?= url_title($question_name); ?>');" class="down">down</a>
+				<a href="javascript:queueUpdater.vote(site_url + '/question/votedown/<?= $event_url; ?>/question/<?= url_title($question_name); ?>','xnews-<?= $question_id; ?>');" class="down">down</a>
 			<? } ?>
 		</span>
 		<a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit" title='Who Voted?'><?=(is_numeric($votes))?$votes:0;?></a>
@@ -34,6 +34,7 @@ $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 								<a href="index.php/conventionnext/question/<?= url_title($event_name) . '/' . url_title($question_name); ?>"><?=$question_name;?></a>
 							</h3>
 							<div class="autor">
+
 								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ' . $days_old;?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>

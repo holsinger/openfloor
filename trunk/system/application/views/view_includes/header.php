@@ -41,7 +41,14 @@ $this->load->view('view_includes/view_center_head.php',$data);
 
 <? 
 //set vars for right column
-if (!$data['admin']) $this->load->view('view_includes/view_right_column.php'); 
+//$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
+$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('dynamic'=>array());
+if (isset($cloud)) {
+	$data['rightpods']['dynamic']['tag_cloud']= $cloud;
+} else $data['cloud'] = FALSE;
+
+
+if (!$data['admin']) $this->load->view('view_includes/view_right_column.php',$data); 
 ?>
 
 <? if (!$data['admin'])  $this->load->view('view_includes/view_left_column.php'); ?>
