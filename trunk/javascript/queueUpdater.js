@@ -12,18 +12,19 @@ queueUpdater.updateQueue = function() {
 }
 
 queueUpdater.updateQueueOnce = function() {
-	new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater' + window.location.pathname);
+	//new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater' + window.location.pathname);
+	new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort);
 	//new Effect.SlideDown ('queue');
 }
 
 
-queueUpdater.vote = function(url,id) {	
+queueUpdater.vote = function(url) {	
 	//new Effect.DropOut ('queue');
 	if (username.length <= 0) {
 		showBox('login');
 		return;
 	}
-	new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
+	//new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
 	  onSuccess: function(transport) {
 		  queueUpdater.updateQueueOnce();
