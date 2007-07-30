@@ -200,13 +200,14 @@ class Video extends Controller
 			exit();
 		}
 		
-		#TODO validation and trending need to be considered		
+		#TODO validation and trending need to be considered	
+		$this->vote->type = 'video';
 		$this->vote->voteup($this->session->userdata('user_id'), $id);
 		//$this->queue();
 		
-		redirect('conventionnext/queue/'.$event_url);
-		ob_clean();
-		exit();
+		// redirect('conventionnext/queue/'.$event_url);
+		// 		ob_clean();
+		// 		exit();
 	}
 	
 	function votedown($video_id = 0)
@@ -229,11 +230,12 @@ class Video extends Controller
 		}
 		
 		#TODO validation and trending need to be considered
+		$this->vote->type = 'video';
 		$this->vote->votedown($this->session->userdata('user_id'), $id);
 		//$this->queue();
-		redirect('conventionnext/queue/'.$event_url);
-		ob_clean();
-		exit();
+		// redirect('conventionnext/queue/'.$event_url);
+		// 		ob_clean();
+		// 		exit();
 	}
 	
 	/**

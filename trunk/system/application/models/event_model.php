@@ -14,10 +14,10 @@ class Event_model extends Model
 			$this->db->set('event_name',$_POST['event_name']);
 			$this->db->set('event_url_name',url_title($_POST['event_name']));
 		}
-    if ( isset($_POST['event_desc']) ) $this->db->set('event_desc',$_POST['event_desc']);
-    if ( isset($_POST['event_desc_brief']) ) $this->db->set('event_desc_brief',$_POST['event_desc_brief']);
-    if ( isset($_POST['event_type']) ) $this->db->set('event_type',$_POST['event_type']);
-		//if ( isset($_POST['event_avatar']) ) $this->db->set('event_avatar',$_POST['event_avatar']);
+    	if ( isset($_POST['event_desc']) ) $this->db->set('event_desc',$_POST['event_desc']);
+	    if ( isset($_POST['event_desc_brief']) ) $this->db->set('event_desc_brief',$_POST['event_desc_brief']);
+	    if ( isset($_POST['event_type']) ) $this->db->set('event_type',$_POST['event_type']);
+		if ( isset($_POST['event_avatar']) ) $this->db->set('event_avatar',$_POST['event_avatar']);
 		if ( isset($_POST['sunlight_id']) ) $this->db->set('sunlight_id',$_POST['sunlight_id']);
 		if ( isset($_POST['event_date']) ) $this->db->set('event_date',$_POST['event_date']);
 		if ( isset($_POST['location']) ) $this->db->set('location',$_POST['location']);
@@ -50,7 +50,7 @@ class Event_model extends Model
 	 */
 	public function get_id_from_url ($url)
 	{
-		 $result_array = array(); 
+		$result_array = array(); 
 		 $query = $this->db->getwhere('cn_events', array('event_url_name' => $url));
 		//echo $this->db->last_query();
 		 log_message('debug', "EVENT:getIDfromURL:".trim($this->db->last_query()));

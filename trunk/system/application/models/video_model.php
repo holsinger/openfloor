@@ -21,10 +21,18 @@ class Video_model extends Model
         parent::Model();
     }
     
-	public function insertVideo($videoName='', $videoDesc='', $userID='', $eventID='', $youtubeID = '', $thumb = '',$videoURLName='')
+	public function insertVideo($videoName='', $videoDesc='', $userID=0, $eventID=0, $youtubeID = 0, $thumb = '',$videoURLName='')
 	{
+		$videoName = $this->db->escape($videoName);
+		$videoDesc = $this->db->escape($videoDesc);
+		$userID = $this->db->escape($userID);
+		$eventID = $this->db->escape($eventID);
+		$youtubeID = $this->db->escape($youtubeID);
+		$thumb = $this->db->escape($thumb);
+		$videoURLName = $this->db->escape($videoURLName);
+		
 		$query = "INSERT INTO cn_videos (video_title, video_url_title, video_desc, fk_user_id, fk_event_id, video_youtude_id, video_thumb) ";
-		$query .="VALUES ('$videoName', '$videoURLName', \"$videoDesc\", $userID, $eventID, '$youtubeID', '$thumb')";		
+		$query .="VALUES ($videoName, $videoURLName, $videoDesc, $userID, $eventID, $youtubeID, $thumb)";		
 		$this->db->query($query);
 		
 		return $this->db->insert_id();

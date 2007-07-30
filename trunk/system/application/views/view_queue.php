@@ -10,6 +10,9 @@ $data['event_url'] = $event_url;
 	<? if(isset($ajax)) ob_clean();?>
 	<div id='queue'>
 	<? if(!isset($ajax)): ?>
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';">
+	<? endif; ?>
+	<? if(!isset($ajax) && $event_type == 'question'): ?>
 	<img src="<?=base_url();?>/images/nothing.gif" onLoad="event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';queueUpdater.updateQueue();">
 	<? endif; ?>
 	<?
@@ -24,7 +27,7 @@ $data['event_url'] = $event_url;
 		$this->load->view('view_includes/view_question_pod.php',$row);
 	}	
 	?>
-	<p><?=empty($results)?'There are no questions to display':''?>
+	<p><?=empty($results)?'There are no '.$event_type.' to display':''?>
 	<p><?=(!empty($results))?$this->pagination->create_links():''?></p>
 	</div>
 	<? if(isset($ajax))	ob_end_flush(); ?>

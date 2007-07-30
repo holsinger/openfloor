@@ -20,7 +20,7 @@ class Question extends Controller
 	}
 	
 	function add()
-	{				
+	{
 		#check that user is allowed
 		$this->userauth->check();
 		

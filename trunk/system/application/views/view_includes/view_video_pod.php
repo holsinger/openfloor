@@ -1,5 +1,5 @@
 <?
-
+//echo '<pre>'; print_r($data); echo '</pre>';
 ?>
 <div class="news-summary" id="xnews-5">
 	<!-- raiting topics start here -->
@@ -8,14 +8,16 @@
 			<? if ($voted == 'up') { ?>
 				<a class="voteup">voted</a>			
 			<? } else { ?>
-				<a href="index.php/video/voteup/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="up">up</a>
+				<!-- <a href="index.php/video/voteup/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="up">up</a> -->
+				<a href="javascript:queueUpdater.vote(site_url + '/video/voteup/event/<?= url_title($event_name); ?>/video/<?= url_title($video_title); ?>','xnews-<?= $video_id; ?>');" class="up">up</a>
 			<? } ?>	
 		</span>
 		<span id="xreport-<?= $video_id; ?>">
 			<? if ($voted == 'down') { ?>
 				<a class="votedown">voted</a>			
 			<? } else { ?>
-				<a href="index.php/video/votedown/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="down">down</a>
+				<!-- <a href="index.php/video/votedown/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="down">down</a> -->
+				<a href="javascript:queueUpdater.vote(site_url + '/video/votedown/event/<?= url_title($event_name); ?>/video/<?= url_title($video_title); ?>','xnews-<?= $video_id; ?>');" class="down">down</a>
 			<? } ?>
 		</span>
 		<!--  <a id="xvotes-<?= $video_id; ?>" href="index.php/votes/who/<?= $video_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a> -->

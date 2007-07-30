@@ -270,8 +270,7 @@ class Event extends Controller
 			else
 			{
 				$data['upload_data'] = $this->upload->data();
-				//echo '<pre>'; print_r($data); echo'</pre>'; exit();
-			
+				
 				//resize image
 				$config = array();
 				$config['image_library'] = 'GD2';
@@ -283,7 +282,8 @@ class Event extends Controller
 				$this->load->library('image_lib', $config);			
 				$this->image_lib->resize();
 				if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
-				$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;		
+				$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
+				//echo '<pre>'; print_r($_POST); echo '</pre>';	exit();	
 			}
 		}
 		
