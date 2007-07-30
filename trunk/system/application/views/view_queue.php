@@ -26,7 +26,6 @@ $data['event_url'] = $event_url;
 	?>
 	<p><?=empty($results)?'There are no questions to display':''?>
 	<p><?=(!empty($results))?$this->pagination->create_links():''?></p>
-	<p><?=(isset($cloud))?$cloud:''?></p>
 	</div>
 	<? if(isset($ajax))	ob_end_flush(); ?>
 </div>
