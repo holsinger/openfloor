@@ -85,6 +85,7 @@ class Event extends Controller
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
 		$fields['event_type']	= ( isset($_POST['event_type']) ) ? $_POST['event_type']:"";
 		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
+		$fields['event_desc_brief']	= ( isset($_POST['event_desc_brief']) ) ? $_POST['event_desc_brief']:"";
 		//$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
 		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
@@ -165,6 +166,7 @@ class Event extends Controller
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
 		$rules['event_desc'] = "trim|required|max_length[255]|xss_clean";
+		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
 		$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
@@ -215,6 +217,7 @@ class Event extends Controller
 		$fields['event_name']	= ( isset($_POST['event_name']) ) ? $_POST['event_name']:"";
 		$fields['event_type']	= ( isset($_POST['event_type']) ) ? $_POST['event_type']:"";
 		$fields['event_desc']	= ( isset($_POST['event_desc']) ) ? $_POST['event_desc']:"";
+		$fields['event_desc_brief']	= ( isset($_POST['event_desc_brief']) ) ? $_POST['event_desc_brief']:"";
 		$fields['event_avatar']	= ( isset($_POST['event_avatar']) ) ? $_POST['event_avatar']:"";		
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
 		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
@@ -233,6 +236,7 @@ class Event extends Controller
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
 		$rules['event_desc'] = "trim|required|max_length[255]|xss_clean";
+		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
 		//$rules['event_avatar'] = "trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
