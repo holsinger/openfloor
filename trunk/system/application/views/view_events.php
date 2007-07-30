@@ -23,7 +23,7 @@ $data['red_head'] = 'Events';
 		<span style"float:right;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></span>
 		<br /><b>When:</b> <?=$array['event_date'];?>
 		<br /><b>Where:</b> <?=$array['location'];?>
-		<br /><b>Description:</b> <?=$array['event_desc'];?>
+		<br /><b>Description:</b> <?=$array['event_desc_brief'];?>
 		<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
 		</div>
 

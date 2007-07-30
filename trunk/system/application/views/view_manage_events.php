@@ -11,6 +11,18 @@
 	
 	<?
 		$format = array(
+              'name'        => 'event_desc_brief',
+              'id'          => 'event_desc_brief',
+              'value'       => $this->validation->event_desc_brief,
+              'rows'        => '2',
+              'cols'        => '48',
+              'class'       => 'txt'
+            );
+		echo form_format("Event Description Brief: *",form_textarea($format),'Write a brief description of the event. (will be displayed on the events page)' ); 
+		?>
+	
+	<?
+		$format = array(
               'name'        => 'event_desc',
               'id'          => 'event_desc',
               'value'       => $this->validation->event_desc,
