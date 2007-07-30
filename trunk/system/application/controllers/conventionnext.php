@@ -157,20 +157,10 @@ class Conventionnext extends Controller
 			
 
 			$data['results'] = $this->question2->questionQueue();
-			// get our tags real quick & determine how old the question is
-			
-			foreach($data['results'] as $k=>$v) {
-				foreach($this->tag_model->getTagsByQuestion($v['question_id']) as $v2)
-					$data['results'][$k]['tags'][] = $v2['value'];
-				$data['results'][$k]['days_old'] = floor((time() - strtotime($v['date']))/86400);	
-			}
-					
+								
 			$total_rows = count($data['results']);
 			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
-			
-			
-
-		
+				
 			$this->load->library('pagination');
 			$config['base_url'] = site_url($base_url);
 			$config['total_rows'] = $total_rows;//$this->question2->numQuestions($event_id);
@@ -194,7 +184,7 @@ class Conventionnext extends Controller
 			if (count($image_array)>0) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
 			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";
 		}
-		
+		//echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	
 	}		
 	
