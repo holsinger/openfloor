@@ -321,6 +321,11 @@ class User extends Controller {
 			$data['avatar_image_name'] = $image_array['file_name'];
 			$data['avatar_image_height'] = $image_array['image_height'];
 			$data['avatar_image_width'] = $image_array['image_width'];
+			$data['avatar_image_path'] = "./avatars/".$image_array['file_name'];
+		}
+		else 
+		{				
+			$data['avatar_image_path'] = './images/image01.jpg';
 		}
 		//exit(var_dump($data));
 		//admin is also an owner
@@ -377,12 +382,14 @@ class User extends Controller {
 				$users[$k]['avatar_image_name'] = $image_array['file_name'];
 				$users[$k]['avatar_image_height'] = $image_array['image_height'];
 				$users[$k]['avatar_image_width'] = $image_array['image_width'];
+				$users[$k]['avatar_image_path'] = "./avatars/".$image_array['file_name'];
 			} 
 			else
 			{
 				$users[$k]['avatar_image_name'] = '';
 				$users[$k]['avatar_image_height'] = '';
 				$users[$k]['avatar_image_width'] = '';
+				$users[$k]['avatar_image_path'] = "./images/image01.jpg";
 			}
 		}
 		$data['users'] = $users;	
