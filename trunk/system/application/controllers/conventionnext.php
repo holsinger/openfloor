@@ -53,16 +53,7 @@ class Conventionnext extends Controller
 			$event_id = $this->event->get_id_from_url($uri_array['event']);
 			if ( $this->event->get_event_type($event_id) == 'question') $this->questionQueue($uri_array,$event_id);
 			if ( $this->event->get_event_type($event_id) == 'video') $this->videoQueue($uri_array,$event_id); 
-		}
-	}
-	
-	public function question($event, $question)
-	{
-		$question_id = $this->question->get_id_from_url($question);
-		$this->question->question_id = $question_id;
-		$data['results'] = $this->question->questionQueue();
-
-		$this->load->view('question/question_view.php', $data);					
+		}			
 	}
 	
 	public function video($event, $video)
@@ -165,18 +156,31 @@ class Conventionnext extends Controller
 			// 					$this->question2->offset = $this->uri->segment($this->uri->total_segments());
 			$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
 			
-
 			$data['results'] = $this->question2->questionQueue();
 								
 			$total_rows = count($data['results']);
 			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
-				
+
 			$this->load->library('pagination');
 			$config['base_url'] = site_url($base_url);
 			$config['total_rows'] = $total_rows;//$this->question2->numQuestions($event_id);
 			$config['per_page'] = $pagination_per_page;
 			$config['uri_segment'] = $this->uri->total_segments();
+			//add some style
+			$config['first_link'] = '';
+			$config['last_link'] = '';
+			$config['next_link'] = '&gt';
+			$config['next_tag_open'] = '<li class="next"><span>';
+			$config['next_tag_close'] = '</span></li>';			
+			$config['prev_link'] = '&lt';
+			$config['prev_tag_open'] = '<li class="prev"><span>';
+			$config['prev_tag_close'] = '</span></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li class="current">';
+			$config['cur_tag_close'] = '</li>';
 			$this->pagination->initialize($config);
+			$data['pagination'] = $this->pagination->create_links();
 			
 		}
 		
@@ -191,10 +195,41 @@ class Conventionnext extends Controller
 			} else $data['results'][$key]['voted'] = false;
 			//set user avatar
 			$image_array = unserialize($data['results'][$key]['user_avatar']);
-			if (count($image_array)>0) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
-			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";
+			if ($image_array) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
+			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";	
+			//get time diff
+			$data['results'][$key]['time_diff'] = timespan(strtotime($data['results'][$key]['date']));
 		}
 		//echo '<pre>'; print_r($data); echo '</pre>';
+		//get event details
+		if (!isset($uri_array['tag'])) {
+			$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
+		}
+		
+		// tag cloud - this section might need a little tweaking
+		if (isset($event_id) && !empty($data['results'])) {
+			$this->load->model('tag_model');
+			$this->load->library('wordcloud');
+			$words = $this->tag_model->getAllReferencedTags($event_id);
+
+			$cloud = new wordCloud($words);
+			$cloud_array = $cloud->showCloud('array');
+			
+			$segment_array = $this->uri->segment_array();
+			if(is_numeric($segment_array[count($segment_array)]))
+				array_pop($segment_array);
+			$class = array_shift($segment_array);
+			$function = array_shift($segment_array);
+			if ($segment_array[0] == 'tag')
+				array_splice($segment_array, 0, 2);
+			$args = '/'.implode('/', $segment_array);
+			
+			$cloud_string = '';
+			foreach ($cloud_array as $value)
+		    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
+			$data['cloud'] = $cloud_string;
+		}	
+
 		$this->load->view('view_queue',$data);	
 	}		
 	
@@ -280,7 +315,7 @@ class Conventionnext extends Controller
 				array_pop($segment_array);				
 			$base_url = implode('/', $segment_array);				
 
-			$pagination_per_page = '10';			
+			$pagination_per_page = '5';			
 			// $this->video2->limit = $pagination_per_page;
 			// 			
 			// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
@@ -295,8 +330,21 @@ class Conventionnext extends Controller
 			$config['base_url'] = site_url($base_url);
 			$config['total_rows'] = $total_rows;
 			$config['per_page'] = $pagination_per_page;
-			$config['uri_segment'] = $this->uri->total_segments();
-			$this->pagination->initialize($config);			
+			$config['uri_segment'] = $this->uri->total_segments();//add some style
+			$config['first_link'] = '';
+			$config['last_link'] = '';
+			$config['next_link'] = '&gt';
+			$config['next_tag_open'] = '<li class="next"><span>';
+			$config['next_tag_close'] = '</span></li>';			
+			$config['prev_link'] = '&lt';
+			$config['prev_tag_open'] = '<li class="prev"><span>';
+			$config['prev_tag_close'] = '</span></li>';
+			$config['num_tag_open'] = '<li>';
+			$config['num_tag_close'] = '</li>';
+			$config['cur_tag_open'] = '<li class="current">';
+			$config['cur_tag_close'] = '</li>';
+			$this->pagination->initialize($config);
+			$data['pagination'] = $this->pagination->create_links();
 		}
 		
 		//set user score			
@@ -310,6 +358,31 @@ class Conventionnext extends Controller
 			} else $data['results'][$key]['voted'] = false;
 		}
 		
+		// tag cloud - this section might need a little tweaking
+		if (isset($event_id) && !empty($data['results'])) {
+			$this->load->model('tag_model');
+			$this->load->library('wordcloud');
+			$words = $this->tag_model->getAllReferencedTags($event_id);
+
+			$cloud = new wordCloud($words);
+			$cloud_array = $cloud->showCloud('array');
+			
+			$segment_array = $this->uri->segment_array();
+			if(is_numeric($segment_array[count($segment_array)]))
+				array_pop($segment_array);
+			$class = array_shift($segment_array);
+			$function = array_shift($segment_array);
+			if ($segment_array[0] == 'tag')
+				array_splice($segment_array, 0, 2);
+			$args = '/'.implode('/', $segment_array);
+			
+			$cloud_string = '';
+			foreach ($cloud_array as $value)
+		    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
+			$data['cloud'] = $cloud_string;
+		}	
+		//exit(var_dump($data['results']));
+
 		$this->load->view('view_queue',$data);	
 	}
 }
