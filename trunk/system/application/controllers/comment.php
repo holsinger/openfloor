@@ -20,7 +20,7 @@ class Comment extends Controller
 		$this->load->model('comments_model');
 		$_POST['fk_user_id'] = $this->session->userdata('user_id');
 		if($this->comments_model->insertComment())
-			redirect('/conventionnext/question/' . url_title($event_name) . '/' . url_title($question_name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($question_name));
 	}
 	
 	public function voteUp($comment_id, $question_name, $event_name)
@@ -37,7 +37,7 @@ class Comment extends Controller
 		if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
 			$this->vote_model->voteUp($user_id, $comment_id);
 			
-		redirect('/conventionnext/question/' . url_title($event_name) . '/' . url_title($question_name));	
+		redirect('/question/view/' . url_title($event_name) . '/' . url_title($question_name));	
 	}
 	
 	public function voteDown($comment_id, $question_name, $event_name)
@@ -54,7 +54,7 @@ class Comment extends Controller
 		if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
 			$this->vote_model->voteDown($user_id, $comment_id);
 			
-		redirect('/conventionnext/question/' . url_title($event_name) . '/' . url_title($question_name));
+		redirect('/question/view/' . url_title($event_name) . '/' . url_title($question_name));
 	}
 }
 
