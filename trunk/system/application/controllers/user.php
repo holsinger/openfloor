@@ -95,6 +95,25 @@ class User extends Controller {
 			if ( is_numeric($last_id) ) {
 				//set sessions
 				$this->user->login_user($this->user->user_name,$this->user->user_id);
+				//send mail
+				$this->load->library('email');
+				$config['protocol'] = 'sendmail';
+				$config['mailpath'] = '/usr/sbin/sendmail';
+				$config['charset'] = 'iso-8859-1';
+				$config['wordwrap'] = TRUE;				
+				$this->email->initialize($config);
+				$this->email->from('contact@politic20.com', 'Registration');
+				$this->email->to($this->user->user_name);
+				
+				$this->email->subject('Thanks for Registering');
+				
+				$this->load->model('Cms_model','cms');
+				$cms_id = $this->cms->get_id_from_url('email_registration');
+				$cms = $this->cms->get_cms($cms_id);	
+				$this->email->message($cms['cms_text']);
+				
+				$this->email->send();
+				
 				//forward to a user page
 				redirect('user/profile/'.$_POST['user_name']);
 				ob_clean();
