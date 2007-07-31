@@ -100,6 +100,7 @@ class User extends Controller {
 				$config['protocol'] = 'sendmail';
 				$config['mailpath'] = '/usr/sbin/sendmail';
 				$config['charset'] = 'iso-8859-1';
+				$config['mailtype'] = 'html';
 				$config['wordwrap'] = TRUE;				
 				$this->email->initialize($config);
 				$this->email->from('contact@politic20.com', 'Registration');
@@ -111,6 +112,7 @@ class User extends Controller {
 				$cms_id = $this->cms->get_id_from_url('email_registration');
 				$cms = $this->cms->get_cms($cms_id);	
 				$this->email->message($cms['cms_text']);
+				$this->email->set_alt_message(strip_tags($cms['cms_text']));
 				
 				$this->email->send();
 				log_message('debug', "emailReg:".trim($this->email->print_debugger()));
