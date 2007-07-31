@@ -92,7 +92,10 @@ class Video_model extends Model
 				video_youtude_id,
 				cn_videos.timestamp as date, 
 				user_name, 
-				event_name 
+				user_avatar,
+				event_name,
+				event_desc,
+				location 
 			FROM 
 				cn_videos, 
 				cn_events, 

@@ -6,14 +6,14 @@ if(typeof queueUpdater === "undefined" || !queueUpdater) {
 }
 
 queueUpdater.updateQueue = function() {
-	new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort, {
+	new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag, {
 	  frequency: 10
 	});
 }
 
 queueUpdater.updateQueueOnce = function() {
-	//new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater' + window.location.pathname);
-	new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort);
+	
+	new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag);
 	//new Effect.SlideDown ('queue');
 }
 

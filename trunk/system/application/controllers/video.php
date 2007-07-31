@@ -100,11 +100,11 @@ class Video extends Controller
 		$thumbnail = $_POST['thumbnail'];
 		
 		/* deal with tags first */
-		$tags = str_replace(array(' ', "\t"), '', $tags);
+		$tags = str_replace(array(/*' ', */"\t"), '', $tags);
 		//make sure we have some tags
 		if (!empty($tags)) {
 			$tagsExist = true;
-			$a = explode(',',$tags);
+			$a = explode(' ',$tags);
 			$tags = array();
 			foreach($a as $v) if(!empty($v)) $tags[] = $v;
 
@@ -163,22 +163,33 @@ class Video extends Controller
 		$this->load->view('view_edit_video',$data);		
 	}
 	
-	function view () {
-		if (!$this->uri->segment(3))
-		{
-			redirect('event/');
-			ob_clean();
-			exit();
-		} 
-		else 
-		{
-			$this->load->model('Video_model','video2');
-			//set restrictions
-			if (is_numeric($this->uri->segment(3))) $this->video2->video_id = $this->uri->segment(3); 
-			if (is_string($this->uri->segment(3))) $this->video2->video_id = $this->video->get_id_from_url($this->uri->segment(3));
-			$data['results'] = $this->video2->videoQueue();
-			$this->load->view('view_queue',$data);	
-		}
+	function view ($event, $video) {
+		$video_id = $this->video->get_id_from_url($video);
+		$this->video->video_id = $video_id;
+		$result = $this->video->videoQueue();
+		$data = $result[0];
+		$data['event_type'] = 'video';
+		$image_array = unserialize($data['user_avatar']);
+		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
+		else $data['avatar_path'] = "./images/image01.jpg";
+		//exit(var_dump($data));	
+		//get time diff
+		$data['time_diff'] = timespan(strtotime($data['date']));
+		//get voted
+		if ($this->userauth->isUser()) {
+			$this->vote->type='video';
+			$score = $this->vote->votedScore($data['video_id'],$this->session->userdata('user_id'));
+			if ($score > 0) $data['voted'] = 'up';
+			else if ($score < 0) $data['voted'] = 'down';
+			else $data['voted'] = false;
+		} else $data['voted'] = false;
+		$this->load->library('comments_library');
+		$comments_library = new Comments_library();
+		$comments_library->type = $data['event_type'];
+		$data['comments_body'] = $comments_library->createComments($result[0]);
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
+		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
+		$this->load->view('video/video_view.php', $data);
 	}
 	
 	function voteup($video_id = 0)
@@ -194,6 +205,7 @@ class Video extends Controller
 		$event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
 		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		#check that has not voted
+		$this->vote->type = 'video';
 		if($this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
 			redirect('conventionnext/queue/'.$event_url);
 			ob_clean();
@@ -201,7 +213,6 @@ class Video extends Controller
 		}
 		
 		#TODO validation and trending need to be considered	
-		$this->vote->type = 'video';
 		$this->vote->voteup($this->session->userdata('user_id'), $id);
 		//$this->queue();
 		
@@ -223,6 +234,7 @@ class Video extends Controller
 		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		
 		#check that user has not voted
+		$this->vote->type = 'video';
 		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
 			redirect('conventionnext/queue/'.$event_url);
 			ob_clean();
@@ -230,7 +242,6 @@ class Video extends Controller
 		}
 		
 		#TODO validation and trending need to be considered
-		$this->vote->type = 'video';
 		$this->vote->votedown($this->session->userdata('user_id'), $id);
 		//$this->queue();
 		// redirect('conventionnext/queue/'.$event_url);

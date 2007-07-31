@@ -1,27 +1,79 @@
 <?
-$this->load->view('view_includes/header.php');
+$data['red_head'] = $event_type;
+$data['tabs'] = $event_type;
+$data['tab_view_question'] = 'active';
+$data['event_url'] = "event/".url_title($event_name);
 
-$this->load->library('comments_library');
-$comments_library = new Comments_library();
-//$results[0]['comments_body'] = $comments_library->createComments($results);
+$this->load->view('view_includes/header.php',$data);
+?>
+<div class="news-summary" id="xnews-5">
+	<!-- raiting topics start here -->
+	<div class="raiting" >
+		<span id="xvote-5" class="next_invisible">
+			<? if ($voted == 'up'): ?>
+				<a class="voteup">voted</a>			
+			<? else: ?>
+				<a href="javascript:queueUpdater.vote(site_url + '/video/voteup/event/<?= url_title($event_name); ?>/video/<?= url_title($video_title); ?>','xnews-<?= $video_id; ?>');" class="up">up</a>
+			<? endif; ?>	
+		</span>
+		<span id="xvote-5" class="next_invisible">
+			<? if ($voted == 'down'): ?>
+				<a class="voteup">voted</a>			
+			<? else: ?>
+				<a href="javascript:queueUpdater.vote(site_url + '/video/votedown/event/<?= url_title($event_name); ?>/video/<?= url_title($video_title); ?>','xnews-<?= $video_id; ?>');" class="down">down</a>
+			<? endif; ?>	
+		</span>
+		<a id="xvotes-<?= $video_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a>
+	</div>
+																					
+	<div class="describtion">
+		<div class="describtion-frame">
+			<div class="descr-tr">
+				<div class="descr-bl">
+					<div class="descr-br">
+							<h3><a href="index.php/conventionnext/video/<?= url_title($event_name); ?>/<?= url_title($video_title); ?>"><?=$video_title;?></a></h3>
+							<div class="author">
+								<div id='ytvid_<?=$video_youtude_id;?>' class="video">						
+										<span class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')"><img src='<?=$video_thumb;?>'></span>
+								</div>
+								<p class='video_desc'><?=substr($video_desc,0,150);?>... <a href="index.php/video/queue/event/<?= $event_name; ?>/video/<?= url_title($video_title); ?>" class="more"> read more &raquo;</a></p>
+							</div>
+						
+						<ul class="options">
+							<li class="play_video"><a class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')">Play Video</a></li>
+							<li class="discuss"><a href="index.php/video/queue/event/<?= $event_name; ?>/video/<?= url_title($video_title); ?>">Discuss</a></li> 	
+							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
+						</ul>
+						<div id="comments">
+							<?=isset($comments_body)?$comments_body.'<br/>':''?>
+						</div>
+						<?
+						$attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 48);
+						$submit = ($this->userauth->isUser()) ? 
+						'<input type="submit" value="Submit Comment" class="button"/>' : 
+						'<input type="button" onclick="showBox(\'login\') value="Login to comment" class="button"/>';
 
-//$attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 40);
-/*$submit = ($this->userauth->isUser()) ? 
-	'<input type="submit" value="Submit Comment"/>' : 
-	'<br/><div id="userLogin"><span onclick="showBox(\'login\');">Login to comment</span></div>' ;*/
-/*$results[0]['comments_body'] .=  '
-<div id="content_div">
-	<h3>Add a comment</h3>'
-	. form_open('comment/addCommentAction')
-		. form_format("Your comment: ",form_textarea($attributes) )
-		. form_hidden('fk_question_id', $results[0]['question_id'])
-		. form_hidden('event_name', url_title($results[0]['event_name']))
-		. form_hidden('question_name', $results[0]['question_name'])
-		. $submit
-	. form_close()
-. '</div>';*/
-
-$this->load->view('view_includes/view_video_pod.php',$results[0]);
-
+						$comments=  '
+						<div id="comment_add">
+							<div class="comment_head"><strong> '.anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name')).' why not add to the discussion?</strong></div><br />'
+							. form_open('comment/addCommentAction')
+								. form_textarea($attributes)
+								. form_hidden('fk_video_id', $video_id)
+								. form_hidden('event_name', url_title($event_name))
+								. form_hidden('name', $video_title)
+								. form_hidden('event_type', 'video')
+								. "<br /><br />{$submit}"
+							. form_close()
+						. '<br /><br /></div>';			
+						echo $comments;
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<? if ($this->userauth->isAdmin()) echo "<div style='float:right;'>".anchor('video/edit/'.$video_id, 'edit')."</div>"; ?>
+</div>
+<?
 $this->load->view('view_includes/footer.php');
 ?>

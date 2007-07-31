@@ -1,28 +1,20 @@
-<?
-//echo '<pre>'; print_r($data); echo '</pre>';
-?>
 <div class="news-summary" id="xnews-5">
 	<!-- raiting topics start here -->
 	<div class="raiting" >
 		<span id="xvote-5" class="next_invisible">
-			<? if ($voted == 'up') { ?>
+			<? if ($voted == 'up'): ?>
 				<a class="voteup">voted</a>			
-			<? } else { ?>
-				<!-- <a href="index.php/video/voteup/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="up">up</a> -->
+			<? else: ?>
 				<a href="javascript:queueUpdater.vote(site_url + '/video/voteup/event/<?= url_title($event_name); ?>/video/<?= url_title($video_title); ?>','xnews-<?= $video_id; ?>');" class="up">up</a>
-			<? } ?>	
+			<? endif; ?>	
 		</span>
-		<?/*
-		<span id="xreport-<?= $video_id; ?>">
-			<? if ($voted == 'down') { ?>
+		<span id="xvote-5" class="next_invisible">
+			<? if ($voted == 'down'): ?>
 				<a class="votedown">voted</a>			
-			<? } else { ?>
-				<!-- <a href="index.php/video/votedown/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="down">down</a> -->
+			<? else: ?>
 				<a href="javascript:queueUpdater.vote(site_url + '/video/votedown/event/<?= url_title($event_name); ?>/video/<?= url_title($video_title); ?>','xnews-<?= $video_id; ?>');" class="down">down</a>
-			<? } ?>
+			<? endif; ?>	
 		</span>
-		*/?>
-		<!--  <a id="xvotes-<?= $video_id; ?>" href="index.php/votes/who/<?= $video_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a> -->
 		<a id="xvotes-<?= $video_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a>
 	</div>
 																					
@@ -31,14 +23,11 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<h3><a href="index.php/conventionnext/video/<?= url_title($event_name); ?>/<?= url_title($video_title); ?>"><?=$video_title;?></a></h3>
+							<h3>
+								<?=anchor("video/view/".url_title($event_name) . '/' . url_title($video_title),$video_title);?>
+							</h3>
 							<div class="author">
 								<div id='ytvid_<?=$video_youtude_id;?>' class="video">						
-										<!--  <object width="325" height="250">
-										<param name="movie" value="http://www.youtube.com/v/<?=$video_id;?>"></param>
-										<param name="wmode" value="transparent"></param>
-										<embed src="http://www.youtube.com/v/<?=$video_id;?>" type="application/x-shockwave-flash" wmode="transparent" width="325" height="250"></embed>
-										</object> -->
 										<span class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')"><img src='<?=$video_thumb;?>'></span>
 								</div>
 								<p class='video_desc'><?=substr($video_desc,0,150);?>... <a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="more"> read more &raquo;</a></p>

@@ -3,6 +3,8 @@ $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
+$tag_execute = '';
+if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
@@ -10,10 +12,10 @@ $data['event_url'] = $event_url;
 	<? if(isset($ajax)) ob_clean();?>
 	<div id='queue'>
 	<? if(!isset($ajax)): ?>
-	<img src="<?=base_url();?>/images/nothing.gif" onLoad="event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';">
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">
 	<? endif; ?>
 	<? if(!isset($ajax) && $event_type == 'question'): ?>
-	<img src="<?=base_url();?>/images/nothing.gif" onLoad="event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';queueUpdater.updateQueue();">
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="queueUpdater.updateQueue();">
 	<? endif; ?>
 	<?
 	if ($event_type == 'video')

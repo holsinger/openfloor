@@ -116,7 +116,6 @@ class Question_model extends Model
 				$results[$k]['tags'][] = $v2['value'];
 			$results[$k]['days_old'] = floor((time() - strtotime($v['date']))/86400);	
 		}
-		
 		return $results;
 	}
 	

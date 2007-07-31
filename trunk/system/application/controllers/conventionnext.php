@@ -13,7 +13,7 @@ class Conventionnext extends Controller
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
-		$this->load->model('tag_model');
+		$this->load->model('tag_model', 'tag');
 
 		$this->load->scaffolding('cn_questions');
 	}
@@ -24,14 +24,10 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	public function ajQueueUpdater($event_name, $sort)
+	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
 	{
-		//exit(var_dump($_SERVER));
-		// $func_get_args = func_get_args();
-		// $args = array_splice($func_get_args, array_search('conventionnext', $func_get_args));
-		
-		// redirect(implode('/', $args) . '/ajax/true');
-		redirect("/conventionnext/queue/event/$event_name/sort/$sort/ajax/true");
+		if(!empty($tag)) $tag = "tag/$tag/";
+		redirect("/conventionnext/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
 	}
 	
 	function queue() // passing $this->ajax through still needs to be implemented
@@ -92,8 +88,10 @@ class Conventionnext extends Controller
 			
 		//tag
 		if (isset($uri_array['tag']) && is_numeric($uri_array['tag'])) $this->question2->tag_id = $uri_array['tag'];
-		if (isset($uri_array['tag']) && is_string($uri_array['tag'])) $this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
-		
+		if (isset($uri_array['tag']) && is_string($uri_array['tag'])) {
+			$this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
+			$data['tag'] = $uri_array['tag'];
+		}
 		//set default sort link
 		$type = ucfirst($data['event_type']);
 		$sort_active = 'upcoming';
@@ -181,7 +179,8 @@ class Conventionnext extends Controller
 			$config['cur_tag_close'] = '</li>';
 			$this->pagination->initialize($config);
 			$data['pagination'] = $this->pagination->create_links();
-			
+			$data['offset'] = $this->uri->segment($this->uri->total_segments());
+			if(!is_numeric($data['offset'])) $data['offset'] = 0;
 		}
 		
 		//set user score			
@@ -359,28 +358,29 @@ class Conventionnext extends Controller
 		}
 		
 		// tag cloud - this section might need a little tweaking
-		if (isset($event_id) && !empty($data['results'])) {
-			$this->load->model('tag_model');
-			$this->load->library('wordcloud');
-			$words = $this->tag_model->getAllReferencedTags($event_id);
+		/*if (isset($event_id) && !empty($data['results'])) {
+					$this->load->model('tag_model');
+					$this->load->library('wordcloud');
+					$words = $this->tag_model->getAllReferencedTags($event_id);
 
-			$cloud = new wordCloud($words);
-			$cloud_array = $cloud->showCloud('array');
-			
-			$segment_array = $this->uri->segment_array();
-			if(is_numeric($segment_array[count($segment_array)]))
-				array_pop($segment_array);
-			$class = array_shift($segment_array);
-			$function = array_shift($segment_array);
-			if ($segment_array[0] == 'tag')
-				array_splice($segment_array, 0, 2);
-			$args = '/'.implode('/', $segment_array);
-			
-			$cloud_string = '';
-			foreach ($cloud_array as $value)
-		    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
-			$data['cloud'] = $cloud_string;
-		}	
+					$cloud = new wordCloud($words);
+					$cloud_array = $cloud->showCloud('array');
+					
+					$segment_array = $this->uri->segment_array();
+					if(is_numeric($segment_array[count($segment_array)]))
+						array_pop($segment_array);
+					$class = array_shift($segment_array);
+					$function = array_shift($segment_array);
+					if ($segment_array[0] == 'tag')
+						array_splice($segment_array, 0, 2);
+					$args = '/'.implode('/', $segment_array);
+					
+					$cloud_string = '';
+					foreach ($cloud_array as $value)
+				    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
+					$data['cloud'] = $cloud_string;
+				}	*/
+				$data['cloud'] = '';
 		//exit(var_dump($data['results']));
 
 		$this->load->view('view_queue',$data);	

@@ -96,11 +96,11 @@ class Question extends Controller
 		$tags = $_POST['tags'];		
 		
 		/* deal with tags first */
-		$tags = str_replace(array(' ', "\t"), '', $tags);
+		$tags = str_replace(array(/*' ', */"\t"), '', $tags);
 		//make sure we have some tags
 		if (!empty($tags)) {
 			$tagsExist = true;
-			$a = explode(',',$tags);
+			$a = explode(' ',$tags);
 			$tags = array();
 			foreach($a as $v) if(!empty($v)) $tags[] = $v;
 
@@ -191,7 +191,8 @@ class Question extends Controller
 		} else $data['voted'] = false;
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library();
-		$data['comments_body'] = $comments_library->createComments($result);
+		$comments_library->type = $data['event_type'];
+		$data['comments_body'] = $comments_library->createComments($result[0]);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		$this->load->view('question/question_view.php', $data);

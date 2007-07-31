@@ -2,7 +2,8 @@
 
 class Comments_library
 {
-	private $question_name;
+	public $type;
+	private $name;
 	private $event_name;
 	
 	public function __construct()
@@ -10,27 +11,36 @@ class Comments_library
 		$this->CI =& get_instance();
 		$this->CI->load->model('comments_model');
 		$this->CI->load->model('event_model');
-		$this->CI->load->model('vote_model','vote');
+		$this->CI->load->model('vote_model','vote');		
 	}
 	
-	public function createComments($results)
+	public function createComments($result)
 	{
-		$commentHtml = '';
-		$question_id = $results[0]['question_id'];
-		$this->question_name = url_title($results[0]['question_name']);
-		$this->event_name = url_title($results[0]['event_name']);
+		$_id_ = ($this->type == 'question') ? 'question_id' : 'video_id' ;
+		$_name_ = ($this->type == 'question') ? 'question_name' : 'video_title' ;
 		
-		if (!$comments = $this->CI->comments_model->getCommentsByQuestion($question_id)) {
-			$commentHtml .= '<strong>There are no comments yet.</strong>';
+		$commentHtml = '';
+		$id = $result[$_id_];
+		$this->name = url_title($result[$_name_]);
+		$this->event_name = url_title($result['event_name']);
+		
+		if($this->type == 'question') {
+			if (!$comments = $this->CI->comments_model->getCommentsByQuestion($id)) 
+				$commentHtml .= '<strong>There are no comments yet.</strong>';
 		} else {
-			foreach ($comments as $v)
-				$commentHtml .= $this->createCommentsPod($v, $question_id);
-				#TODO CHECK children
+			if (!$comments = $this->CI->comments_model->getCommentsByVideo($id)) 
+				$commentHtml .= '<strong>There are no comments yet.</strong>';
 		}
+		
+		if(is_array($comments))
+			foreach ($comments as $v)
+				$commentHtml .= $this->createCommentsPod($v, $id);
+				#TODO CHECK children
+		
 		return $commentHtml;
 	}
 	
-	public function createCommentsPod($info, $question_id)
+	public function createCommentsPod($info, $id)
 	{
 		$votes = ($info['votes'] == null) ? 0 : $info['votes'] ;
 		#see if user voted
@@ -58,8 +68,8 @@ class Comments_library
 			$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 			$pod .= " <img src='./images/thumbsDown.png' border='0'>";
 		} else {
-			$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->question_name}/{$this->event_name}", "<img src='./images/thumbsUp.png' border='0'>");
-			$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->question_name}/{$this->event_name}", "<img src='./images/thumbsDown.png' border='0'>");
+			$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
+			$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
 		}
 		$pod .= "</span>";
 		$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
