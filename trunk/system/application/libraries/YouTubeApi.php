@@ -57,11 +57,11 @@ class YouTubeApi {
 	{
 		$videoObj = $this->getVideoDetails ($video_id);
 		if ($videoObj->error) {
-			$videoObj = $videoObj->error;
-			return (array) $videoObj;
+			$toArray = $videoObj->error;
+			return (array) $toArray;
 		} else {				
-			$videoObj = $videoObj->video_details;
-			return (array) $videoObj;
+			$toArray = $videoObj->video_details;
+			return (array) $toArray;
 		}
 	}
 		
