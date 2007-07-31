@@ -66,7 +66,7 @@ class Video_model extends Model
 		
 		if(isset($this->tag_id)) {
 			$tag_append = ', cn_idx_tags_questions';
-			$where .= " AND	fk_tag_id=$this->tag_id	AND cn_idx_tags_questionss.fk_video_id = video_id";
+			$where .= " AND	fk_tag_id=$this->tag_id	AND cn_idx_tags_questions.fk_video_id = video_id";
 		}
 		
 		$limit = '';
