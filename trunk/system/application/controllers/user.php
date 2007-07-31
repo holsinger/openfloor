@@ -103,7 +103,7 @@ class User extends Controller {
 				$config['wordwrap'] = TRUE;				
 				$this->email->initialize($config);
 				$this->email->from('contact@politic20.com', 'Registration');
-				$this->email->to($this->user->user_name);
+				$this->email->to($this->user->user_email);
 				
 				$this->email->subject('Thanks for Registering');
 				
@@ -113,7 +113,7 @@ class User extends Controller {
 				$this->email->message($cms['cms_text']);
 				
 				$this->email->send();
-				
+				log_message('debug', "emailReg:".trim($this->email->print_debugger()));
 				//forward to a user page
 				redirect('user/profile/'.$_POST['user_name']);
 				ob_clean();
