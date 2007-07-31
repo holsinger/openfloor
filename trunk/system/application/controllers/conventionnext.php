@@ -385,8 +385,7 @@ class Conventionnext extends Controller
 		    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
 			$data['cloud'] = $cloud_string;
 		}
-		//exit(var_dump($data['results']));
-
+		
 		$this->load->view('view_queue',$data);	
 	}
 }

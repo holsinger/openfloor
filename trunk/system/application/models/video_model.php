@@ -111,7 +111,15 @@ class Video_model extends Model
 			DESC 
 				$limit");
 		log_message('debug', "videoQueue:".trim($this->db->last_query()));
-		return $query->result_array();
+		$results = $query->result_array();
+		
+		// get our tags real quick & determine how old the question is
+		foreach($results as $k=>$v) {
+			foreach($this->tag_model->getTagsByVideo($v['video_id']) as $v2)
+				$results[$k]['tags'][] = $v2['value'];
+			$results[$k]['days_old'] = floor((time() - strtotime($v['date']))/86400);	
+		}
+		return $results;
 	}
 	
 	/**
