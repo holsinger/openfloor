@@ -97,7 +97,7 @@ class Vote_model extends Model
 	
 	public function getVotesByQuestion($question_id)
 	{
-		return $this->db->query("SELECT user_name, vote_value, timestamp FROM cn_votes, cn_users WHERE fk_question_id = $question_id AND fk_user_id=user_id")->result_array();
+		return $this->db->query("SELECT user_name, user_avatar, vote_value, timestamp FROM cn_votes, cn_users WHERE fk_question_id = $question_id AND fk_user_id=user_id")->result_array();
 		// return $this->db->getwhere('cn_votes', array('fk_question_id' => $question_id))->result_array();
 	}
 		
