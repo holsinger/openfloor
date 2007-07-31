@@ -12,6 +12,8 @@ class Comments_model extends Model
 		//$query = $this->db->getwhere('cn_comments', array('fk_question_id' => $id));
 		// $query = $this->db->query('select comment_id, user_name, comment, fk_user_id, fk_question_id from cn_comments 
 		// 		left join cn_users on user_id = fk_user_id;');
+		#TODO allow for order by date of parent
+		#TODO where parent_id is null
 		$query = $this->db->query(
 			"SELECT 
 				comment_id, 
@@ -25,7 +27,9 @@ class Comments_model extends Model
 				comment, 
 				fk_user_id,
 				fk_question_id, 
-				user_name
+				cn_comments.timestamp as date,
+				user_name,
+				user_avatar
 			FROM 
 				cn_comments,
 				cn_users 
@@ -41,6 +45,11 @@ class Comments_model extends Model
 			return false;
 			
 		return $query->result_array();	
+	}
+	
+	#TODO get child comments
+	public function getChildrenByComment($id)
+	{
 	}
 	
 	public function insertComment()
