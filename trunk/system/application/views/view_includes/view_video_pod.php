@@ -38,7 +38,7 @@
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<? if(isset($tags)): ?>
-								<p>Tags: <? foreach($tags as $tag) echo "<a href=\"#\">$tag</a>, "?></p>
+								<p>Tags: <? foreach($tags as $tag) echo "<a class=\"link\">$tag</a>, "?></p>
 								<? endif; ?>
 								<!-- -->
 								<p class='video_desc'><?=substr($video_desc,0,150);?>... <a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>" class="more"> read more &raquo;</a></p>

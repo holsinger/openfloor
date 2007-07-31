@@ -19,6 +19,7 @@ class Video_model extends Model
     {
         // Call the Model constructor
         parent::Model();
+		$this->load->model('tag_model');
     }
     
 	public function insertVideo($videoName='', $videoDesc='', $userID=0, $eventID=0, $youtubeID = 0, $thumb = '',$videoURLName='')

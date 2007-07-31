@@ -4,7 +4,7 @@ class Video extends Controller
 	function __construct()
 	{
 		parent::Controller();
-		$this->load->model('Tag_model','tag');
+		$this->load->model('tag_model','tag');
 		$this->load->model('Video_model','video');
 		$this->load->model('Event_model','event');
 		$this->load->model('Vote_model','vote');
