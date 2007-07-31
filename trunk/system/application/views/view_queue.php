@@ -27,9 +27,11 @@ $data['event_url'] = $event_url;
 		$this->load->view('view_includes/view_question_pod.php',$row);
 	}	
 	?>
-	<p><?=empty($results)?'There are no '.$event_type.' to display':''?>
-	<p><?=(!empty($results))?$this->pagination->create_links():''?></p>
+	<p><?=empty($results)?'<strong>There are no '.$event_type.' to display</strong>':''?>
 	</div>
 	<? if(isset($ajax))	ob_end_flush(); ?>
 </div>
-<?$this->load->view('view_includes/footer.php');?>
+<?
+$data['pagination'] = $pagination;
+$this->load->view('view_includes/footer.php',$data);
+?>
