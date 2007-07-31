@@ -3,6 +3,7 @@ class User_model extends Model {
 
 	var $user_id   = 0;	
     var $user_name   = '';
+    var $user_email   = '';
     var $user_password = '';
     var $user_avatar = '';
     var $user_display_name = '';
@@ -39,7 +40,8 @@ class User_model extends Model {
 				//set the class vars
 			    $this->user_id = $user_id;	
 			    $this->user_name = $_POST['user_name'];
-			    $this->user_avatar  = $_POST['user_email'];
+			    $this->user_email  = $_POST['user_email'];
+			    //$this->user_avatar  = $_POST['user_avatar'];
 			    
 				return $user_id;
 		    }
