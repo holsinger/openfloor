@@ -6,7 +6,7 @@
 		<div id="header">
 			<h1><a href="http://www.politic20.com">Politic20</a></h1>
 			<? if ($this->session->userdata('user_name')) { ?>
-			<div id="userLogin">Welcome, <?=anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name'));?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span><img src="images/karma_star_default.png" style='top:4px;'>)&nbsp;|&nbsp;<?=anchor('user/profile/'.$this->session->userdata('user_name'),'Manage Account');?>&nbsp;|&nbsp;<?=anchor('user/logout/',"Logout");?></div>
+			<div id="userLogin">Welcome, <?=anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name'));?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span><img src="./images/karma_star_default.png" style='top:4px;'>)&nbsp;|&nbsp;<?=anchor('user/profile/'.$this->session->userdata('user_name'),'Manage Account');?>&nbsp;|&nbsp;<?=anchor('user/logout/',"Logout");?></div>
 			<? } else { ?>
 			<div id="userLogin"><img src="images/openid-icon-small.gif" style='top:4px;'>&nbsp;<span onClick="showBox('login');">Login</span>&nbsp;|&nbsp;<a href="index.php/user/createAccount/">Create Account</a></div>
 			<? } ?>
