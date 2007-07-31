@@ -201,9 +201,9 @@ class Conventionnext extends Controller
 		}
 		//echo '<pre>'; print_r($data); echo '</pre>';
 		//get event details
-		if (!isset($uri_array['tag'])) {
+		//if (!isset($uri_array['tag'])) {
 			$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
-		}
+		//}
 		
 		// tag cloud - this section might need a little tweaking
 		if (isset($event_id) && !empty($data['results'])) {
