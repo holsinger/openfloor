@@ -427,7 +427,7 @@ ul.tabs li.active span,ul.tabs li.active span{
 	height:24px;
 	line-height:24px;
 	font-weight:bold;
-	color:#019CD3;
+	color:#F04A54;
 	font-size:12px;
 	text-decoration:none;
 }
@@ -439,6 +439,15 @@ ul.tabs li.active span,ul.tabs li.active span{
 	background:url(../images/divide.gif) no-repeat right;
 	padding:0 11px 0 0;
 	margin:0 10px 0 0;
+}
+.pagers .pbg .list ul li.current {
+	color:#019CD3;
+	float:left;
+	height:24px;
+	line-height:24px;
+	font-weight:bold;
+	font-size:12px;
+	text-decoration:none;
 }
 .pagers .pbg .list ul li.next a,
 .pagers .pbg .list ul li.prev a{
@@ -566,12 +575,7 @@ a.vote_digit:hover {
 .describtion ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}
 .describtion ul.options li.trackback a{background:url(../images/ico-trackback.gif) no-repeat left;}
 .describtion ul.options li.discuss a{background:url(../images/ico-discuss.gif) no-repeat left;}
-/*	question pod comments 
-	author: Rob Stefanussen */
-.describtion .comments_header
-{
-	background:#c6e5f6;
-}
+
 
 ul.sort-questions{
 	margin:0;
@@ -732,7 +736,6 @@ div.slogan{position:relative;}
 }
 
 #comments {
-	padding:0 20px;
 }
 
 li.next span {
@@ -847,7 +850,7 @@ textarea.txt {
 }
 
 .button {
-  	top: 5px;
+  top: 5px;
 	background: #F04A54;
 	color: #FFFFFF;
 	border-right: solid 2px #651F23;
@@ -908,3 +911,37 @@ textarea.txt {
 	vertical-align: middle;
 }
 .describtion ul.options li.play_video a{background:url(../images/ico-play.png) no-repeat left;}
+.describtion ul.options li.votes a{background:url(../images/votedCheckBox.png) no-repeat left;}
+/*************************Comments************/
+.votes_head,
+.comment_head {
+	background:#C6E5F6;
+	padding:5px 0px 5px 5px;
+	height: 19px;
+}
+.comment_vote{
+	background:#FFFFFF;
+	color:#F04A54;
+	text-decoration:underline;
+	padding:3px;	
+	float:right;
+	position: relative;
+	right: 1px;
+	top: -15px;
+	height: 17px;	
+}
+.comment_voting{
+	background:#0173BA;
+	padding:5px;
+	float:right;
+	position: relative;
+	right: 1px;
+	top: -18px;	
+}
+#comments p {
+	padding:5px;
+	color:#444444;
+}
+#comment_add {
+	padding:15px;
+}
