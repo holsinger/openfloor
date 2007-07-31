@@ -45,7 +45,7 @@ class Comments_library
 		$votes = ($info['votes'] == null) ? 0 : $info['votes'] ;
 		#see if user voted
 		$this->CI->vote->type = 'comment';
-		$voted = $this->CI->vote->alreadyVoted($info['comment_id'],$this->CI->session->userdata('user_id'));
+		$voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->alreadyVoted($info['comment_id'],$this->CI->session->userdata('user_id')):0;
 		
 		#resize image
 		$image_array = unserialize($info['user_avatar']);
