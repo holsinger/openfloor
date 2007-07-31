@@ -182,7 +182,7 @@ class Question extends Controller
 		//get time diff
 		$data['time_diff'] = timespan(strtotime($data['date']));
 		//get voted
-		if ($this->userauth->isUser()) {
+		if ($this->session->userdata('user_id')>0) {
 			$this->vote->type='question';
 			$score = $this->vote->votedScore($data['question_id'],$this->session->userdata('user_id'));
 			if ($score > 0) $data['voted'] = 'up';
