@@ -63,11 +63,11 @@ $this->load->view('view_includes/header.php',$data);
 						$attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 48);
 						$submit = ($this->userauth->isUser()) ? 
 						'<input type="submit" value="Submit Comment" class="button"/>' : 
-						'<input type="button" onclick="showBox(\'login\') value="Login to comment" class="button"/>';
+						'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
 
-						$comments=  '
-						<div id="comment_add">
-							<div class="comment_head"><strong> '.anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name')).' why not add to the discussion?</strong></div><br />'
+						$comments = '<div id="comment_add"><div class="comment_head"><strong>';
+							if ($this->session->userdata('user_name')>0) $comments .= anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name'));
+							$comments .= ' why not add to the discussion?</strong></div><br />'
 							. form_open('comment/addCommentAction')
 								. form_textarea($attributes)
 								. form_hidden('fk_question_id', $question_id)
