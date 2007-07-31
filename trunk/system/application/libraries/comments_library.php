@@ -49,7 +49,7 @@ class Comments_library
 		$pod = '<div class="comment_head">';
 		//$pod .= '<img src="./images/shrink.php?imgpath='.$avatar_path.'&qt=70&width=16&height=16">';
 		$pod .= 'by '.anchor('user/profile/'.$info['user_name'],$info['user_name']);
-		$pod .= " ({$time_diff})";
+		$pod .= " ({$time_diff} ago)";
 		$pod .= "<span class='comment_voting'>";
 		if ($voted < 0) {
 			$pod .= "<img src='./images/thumbsUp.png' border='0'>";
