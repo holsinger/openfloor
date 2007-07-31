@@ -1,10 +1,7 @@
-<?
-$days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
-?>
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<!-- raiting topics start here -->
 	<div class="raiting" >
-		<span id="xvote-5" class="next_invisible">
+		<span id="xvote-<?= $question_id; ?>" class="next_invisible">
 			<? if ($voted == 'up') { ?>
 				<a class="voteup">voted</a>			
 			<? } else { ?>
@@ -31,11 +28,11 @@ $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 				<div class="descr-bl">
 					<div class="descr-br">
 							<h3><!-- <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>"><?=$question_name;?></a> -->
-								<a href="index.php/conventionnext/question/<?= url_title($event_name) . '/' . url_title($question_name); ?>"><?=$question_name;?></a>
+								<?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name);?>
 							</h3>
 							<div class="autor">
-
-								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ' . $days_old;?>
+								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
+								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ('.$time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
@@ -45,14 +42,12 @@ $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 									Tags: <? foreach($tags as $tag) echo "<a href=\"#\">$tag</a>, "?>
 								</p>
 							</div>
-						<p><?=substr($question_desc,0,150);?>... <a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>" class="more"> read more &raquo;</a></p>
+						<p><?=substr($question_desc,0,150);?>... <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more &raquo;","class='more'");?></p>
 						<ul class="options">
-							<li class="discuss"><a href="index.php/question/queue/<?= $event_url; ?>/question/<?= url_title($question_name); ?>">Discuss</a></li> 	
-							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
-						</ul>
-						<div class="comments_header">
-							<?=isset($comments_body)?$comments_body.'<br/>':''?>
-						</div>						
+							<li class="discuss"><?=anchor("question/queue/{$event_url}/question/".url_title($question_name),"Discuss");?></li>
+							<li class="votes"><?=anchor("votes/who/{$question_id}"," Votes");?></li> 	
+							<!--  <li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li> -->
+						</ul>					
 						<span id="emailto-5" style="display:none"></span>
 					</div>
 				</div>
