@@ -168,22 +168,33 @@ class Question extends Controller
 		return $output;
 	}
 	
-	function view () {
-		if (!$this->uri->segment(3))
-		{
-			redirect('event/');
-			ob_clean();
-			exit();
-		} 
-		else 
-		{
-			$this->load->model('Question_model','question2');
-			//set restrictions
-			if (is_numeric($this->uri->segment(3))) $this->question2->question_id = $this->uri->segment(3); 
-			if (is_string($this->uri->segment(3))) $this->question2->question_id = $this->question->get_id_from_url($this->uri->segment(3));
-			$data['results'] = $this->question2->questionQueue();
-			$this->load->view('view_queue',$data);	
-		}
+	function view ($event, $question) {
+		
+		$question_id = $this->question->get_id_from_url($question);
+		$this->question->question_id = $question_id;
+		$result = $this->question->questionQueue();
+		$data = $result[0];
+		$data['event_type'] = 'question';
+		$image_array = unserialize($data['user_avatar']);
+		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
+		else $data['avatar_path'] = "./images/image01.jpg";
+		//exit(var_dump($data));	
+		//get time diff
+		$data['time_diff'] = timespan(strtotime($data['date']));
+		//get voted
+		if ($this->userauth->isUser()) {
+			$this->vote->type='question';
+			$score = $this->vote->votedScore($data['question_id'],$this->session->userdata('user_id'));
+			if ($score > 0) $data['voted'] = 'up';
+			else if ($score < 0) $data['voted'] = 'down';
+			else $data['voted'] = false;
+		} else $data['voted'] = false;
+		$this->load->library('comments_library');
+		$comments_library = new Comments_library();
+		$data['comments_body'] = $comments_library->createComments($result);
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
+		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
+		$this->load->view('question/question_view.php', $data);
 	}
 	
 	function queue()
