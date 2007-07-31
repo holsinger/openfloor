@@ -11,13 +11,9 @@
 																<div class="pbg">
 																<div class="list">
 																		<!-- pagers list start here -->
-																		<? /*
 																		<ul>
-																			<li class="prev"><span>&nbsp;</span></li>
-																			<li><a href="?page=1">1</a></li>
-																			<li class="next"><span>&nbsp;</span></li>
+																		<?=(isset($pagination)) ? $pagination:'';?>
 																		</ul>
-																*/ ?>
 																	</div>
 																</div>													
 														</div>

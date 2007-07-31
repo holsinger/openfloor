@@ -1,4 +1,4 @@
-<?if (isset($admin) && !$admin)  $this->load->view('view_includes/view_center_foot.php'); ?>
+<?if (isset($admin) && !$admin)  $this->load->view('view_includes/view_center_foot.php',$data); ?>
         </div><!-- end class frame -->
   		</div>
   		
