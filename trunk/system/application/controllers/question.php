@@ -180,7 +180,8 @@ class Question extends Controller
 		else $data['avatar_path'] = "./images/image01.jpg";
 		//exit(var_dump($data));	
 		//get time diff
-		$data['time_diff'] = timespan(strtotime($data['date']));
+		$time_array = explode(', ', timespan(strtotime($data['date'])));
+		$data['time_diff'] = $time_array[0];
 		//get voted
 		if ($this->session->userdata('user_id')>0) {
 			$this->vote->type='question';

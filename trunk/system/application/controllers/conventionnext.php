@@ -197,7 +197,8 @@ class Conventionnext extends Controller
 			if ($image_array) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
 			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";	
 			//get time diff
-			$data['results'][$key]['time_diff'] = timespan(strtotime($data['results'][$key]['date']));
+			$time_array = explode(', ', timespan(strtotime($data['results'][$key]['date'])));
+			$data['results'][$key]['time_diff'] = $time_array[0];
 		}
 		//echo '<pre>'; print_r($data); echo '</pre>';
 		//get event details

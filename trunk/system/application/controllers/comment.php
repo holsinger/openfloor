@@ -39,13 +39,13 @@ class Comment extends Controller
 		if($type  == 'question') {
 			$this->load->model('question_model', 'model');
 		
-			$question_info = $this->question_model->get_question('', $question_name);		
+			$question_info = $this->model->get_question('', $question_name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
 			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
 				$this->vote_model->voteUp($user_id, $comment_id);
 			
-			redirect('/question/view/' . url_title($event_name) . '/' . url_title($question_name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
 		} else {
 			$this->load->model('video_model', 'model');
 		
@@ -68,13 +68,13 @@ class Comment extends Controller
 		if($type == 'question') {
 			$this->load->model('question_model', 'model');
 		
-			$question_info = $this->question_model->get_question('', $question_name);		
+			$question_info = $this->model->get_question('', $question_name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
 			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
 				$this->vote_model->voteDown($user_id, $comment_id);
 			
-			redirect('/question/view/' . url_title($event_name) . '/' . url_title($question_name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
 		} else {
 			$this->load->model('video_model', 'model');
 		

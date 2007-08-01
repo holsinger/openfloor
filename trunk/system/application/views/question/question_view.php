@@ -72,7 +72,7 @@ $this->load->view('view_includes/header.php',$data);
 								. form_textarea($attributes)
 								. form_hidden('fk_question_id', $question_id)
 								. form_hidden('event_name', url_title($event_name))
-								. form_hidden('question_name', $question_name)
+								. form_hidden('name', $question_name)
 								. form_hidden('event_type', 'question')
 								. "<br /><br />{$submit}"
 							. form_close()
