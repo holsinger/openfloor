@@ -44,6 +44,7 @@ $this->load->view('view_includes/header.php',$data);
 							<li class="discuss"><a href="index.php/video/queue/event/<?= $event_name; ?>/video/<?= url_title($video_title); ?>">Discuss</a></li> 	
 							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
 						</ul>
+						<br /><br /><br /><br />
 						<div id="comments">
 							<?=isset($comments_body)?$comments_body.'<br/>':''?>
 						</div>
@@ -53,7 +54,7 @@ $this->load->view('view_includes/header.php',$data);
 						'<input type="submit" value="Submit Comment" class="button"/>' : 
 						'<input type="button" onclick="showBox(\'login\') value="Login to comment" class="button"/>';
 
-						$comments=  '
+						$comments =  '
 						<div id="comment_add">
 							<div class="comment_head"><strong> '.anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name')).' why not add to the discussion?</strong></div><br />'
 							. form_open('comment/addCommentAction')

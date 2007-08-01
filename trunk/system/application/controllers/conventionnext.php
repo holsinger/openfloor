@@ -51,15 +51,6 @@ class Conventionnext extends Controller
 			if ( $this->event->get_event_type($event_id) == 'video') $this->videoQueue($uri_array,$event_id); 
 		}			
 	}
-	
-	public function video($event, $video)
-	{
-		$video_id = $this->video->get_id_from_url($video);
-		$this->video->video_id = $video_id;
-		$data['results'] = $this->video->videoQueue();
-
-		$this->load->view('video/video_view.php', $data);
-	}
 		
 	function questionQueue ($uri_array,$event_id) 
 	{
@@ -200,7 +191,7 @@ class Conventionnext extends Controller
 			$time_array = explode(', ', timespan(strtotime($data['results'][$key]['date'])));
 			$data['results'][$key]['time_diff'] = $time_array[0];
 		}
-		//echo '<pre>'; print_r($data); echo '</pre>';
+		
 		//get event details
 		//if (!isset($uri_array['tag'])) {
 			if(!empty($data['results']))
@@ -215,20 +206,11 @@ class Conventionnext extends Controller
 			if(!empty($words)) {
 				$cloud = new wordCloud($words);
 				$cloud_array = $cloud->showCloud('array');
-			
-				$segment_array = $this->uri->segment_array();
-				if(is_numeric($segment_array[count($segment_array)]))
-					array_pop($segment_array);
-				$class = array_shift($segment_array);
-				$function = array_shift($segment_array);
-				if ($segment_array[0] == 'tag')
-					array_splice($segment_array, 0, 2);
-				$args = '/'.implode('/', $segment_array);
-			
-				$cloud_string = '';
-				foreach ($cloud_array as $value)
-			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
-				$data['cloud'] = $cloud_string;
+				$this->load->library('tag_lib');
+				$data['cloud'] = $this->tag_lib->createTagLink($cloud_array);
+				foreach($data['results'] as $k1=>$question) 
+					foreach($question['tags'] as $k2=>$tag) 
+						$data['results'][$k1]['tags'][$k2]=$this->tag_lib->createTagLink($tag);
 			}
 		}	
 
@@ -373,20 +355,24 @@ class Conventionnext extends Controller
 			if(!empty($words)) {
 				$cloud = new wordCloud($words);
 				$cloud_array = $cloud->showCloud('array');
-			
-				$segment_array = $this->uri->segment_array();
-				if(is_numeric($segment_array[count($segment_array)]))
-					array_pop($segment_array);
-				$class = array_shift($segment_array);
-				$function = array_shift($segment_array);
-				if ($segment_array[0] == 'tag')
-					array_splice($segment_array, 0, 2);
-				$args = '/'.implode('/', $segment_array);
-			
-				$cloud_string = '';
-				foreach ($cloud_array as $value)
-			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
-				$data['cloud'] = $cloud_string;
+				$this->load->library('tag_lib');
+				// $segment_array = $this->uri->segment_array();
+				// 				if(is_numeric($segment_array[count($segment_array)]))
+				// 					array_pop($segment_array);
+				// 				$class = array_shift($segment_array);
+				// 				$function = array_shift($segment_array);
+				// 				if ($segment_array[0] == 'tag')
+				// 					array_splice($segment_array, 0, 2);
+				// 				$args = '/'.implode('/', $segment_array);
+				// 			
+				// 				$cloud_string = '';
+				// 				foreach ($cloud_array as $value)
+				// 			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
+				$data['cloud'] = $this->tag_lib->createTagLink($cloud_array);
+				// create tag links for all tags in queue
+				foreach($data['results'] as $k1=>$question) 
+					foreach($question['tags'] as $k2=>$tag) 
+						$data['results'][$k1]['tags'][$k2]=$this->tag_lib->createTagLink($tag);		
 			}
 		}
 		
