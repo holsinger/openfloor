@@ -47,7 +47,7 @@ $this->load->view('view_includes/header.php',$data);
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<p>
-									Tags: <? foreach($tags as $tag) echo anchor("conventionnext/queue/event/".url_title($event_name)."/tag/".$tag,$tag);?>
+									Tags: <? foreach($tags as $tag) echo anchor("conventionnext/queue/event/".url_title($event_name)."/tag/".$tag,$tag) . ', ';?>
 								</p>
 							</div>
 						<p><?=$question_desc;?></p>
