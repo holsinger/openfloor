@@ -36,7 +36,7 @@
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
-									Event: <?=anchor("conventionnext/queue/event/".url_title($question_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
+									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<p>
 									Tags: <? foreach($tags as $tag) echo "<a href=\"#\">$tag</a>, "?>
