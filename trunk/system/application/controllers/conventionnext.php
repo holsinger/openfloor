@@ -212,22 +212,24 @@ class Conventionnext extends Controller
 			$this->load->model('tag_model');
 			$this->load->library('wordcloud');
 			$words = $this->tag_model->getAllReferencedTags($event_id);
-			$cloud = new wordCloud($words);
-			$cloud_array = $cloud->showCloud('array');
+			if(!empty($words)) {
+				$cloud = new wordCloud($words);
+				$cloud_array = $cloud->showCloud('array');
 			
-			$segment_array = $this->uri->segment_array();
-			if(is_numeric($segment_array[count($segment_array)]))
-				array_pop($segment_array);
-			$class = array_shift($segment_array);
-			$function = array_shift($segment_array);
-			if ($segment_array[0] == 'tag')
-				array_splice($segment_array, 0, 2);
-			$args = '/'.implode('/', $segment_array);
+				$segment_array = $this->uri->segment_array();
+				if(is_numeric($segment_array[count($segment_array)]))
+					array_pop($segment_array);
+				$class = array_shift($segment_array);
+				$function = array_shift($segment_array);
+				if ($segment_array[0] == 'tag')
+					array_splice($segment_array, 0, 2);
+				$args = '/'.implode('/', $segment_array);
 			
-			$cloud_string = '';
-			foreach ($cloud_array as $value)
-		    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
-			$data['cloud'] = $cloud_string;
+				$cloud_string = '';
+				foreach ($cloud_array as $value)
+			    	$cloud_string .= " <a href=\"index.php/$class/$function/tag/{$value['word']}$args\" class=\"size{$value['sizeRange']}\">{$value['word']}</a> &nbsp;";
+				$data['cloud'] = $cloud_string;
+			}
 		}	
 
 		$this->load->view('view_queue',$data);	
