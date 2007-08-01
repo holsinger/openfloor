@@ -17,13 +17,13 @@ class Comments_model extends Model
 		$query = $this->db->query(
 			"SELECT 
 				comment_id, 
-				(SELECT 
+				IFNULL((SELECT 
 					cast(format(sum(vote_value)/10,0) as signed) AS number 
 				FROM 
 					cn_votes 
 				WHERE 
 					fk_comment_id=comment_id 
-				GROUP BY fk_comment_id) as votes, 
+				GROUP BY fk_comment_id), 0) as votes, 
 				comment, 
 				fk_user_id,
 				fk_question_id, 
@@ -39,7 +39,7 @@ class Comments_model extends Model
 				fk_question_id = $id
 			ORDER BY 
 				votes
-			DESC");
+			DESC"); echo $this->db->last_query();
 		
 		if($query->num_rows() == 0)
 			return false;

@@ -147,7 +147,7 @@ class Conventionnext extends Controller
 				array_pop($segment_array);				
 			$base_url = implode('/', $segment_array);				
 
-			$pagination_per_page = '10';			
+			$pagination_per_page = '5';			
 			// $this->question2->limit = $pagination_per_page;
 			// 			
 			// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))

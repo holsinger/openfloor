@@ -57,7 +57,7 @@ $data['event_url'] = $event_url;
               'class'       => 'txt',
 			  'style'	    => 'text-transform:lowercase'
             );
-		echo form_format("Tags: ",form_input($format),'Short, generic words separated by \',\' (commas) example: abortion, lgbt, war' ); 
+		echo form_format("Tags: ",form_input($format),'Short, generic words separated by spaces example: abortion war politics' ); 
 		?>
 		<br />
 		<br />
