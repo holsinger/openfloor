@@ -21,7 +21,7 @@ $data['red_head'] = 'Events';
 		<div id='event<?=$array['event_id'];?>' class='event-summary'>
 		<br /><?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>
 		<span style"float:right;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></span>
-		<br /><b>When:</b> <?=$array['event_date'];?>
+		<br /><b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?>
 		<br /><b>Where:</b> <?=$array['location'];?>
 		<br /><b>Description:</b> <?=$array['event_desc_brief'];?>
 		<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
@@ -33,3 +33,5 @@ $data['red_head'] = 'Events';
 </div>
 
 <? $this->load->view('view_includes/footer.php'); ?>
+
+//date("F j, Y, g:i a");
