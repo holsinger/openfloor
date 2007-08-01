@@ -61,7 +61,9 @@ class Vote_model extends Model
 				return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_video_id=$fk")->num_rows() > 0) ? true : false;
 				break;
 			case 'comment':
-				return ($this->db->query("SELECT vote_id FROM cn_votes WHERE fk_user_id=$user_id AND fk_comment_id=$fk")->num_rows() > 0) ? true : false;
+				$query = $this->db->query("SELECT vote_value FROM cn_votes WHERE fk_user_id=$user_id AND fk_comment_id=$fk");
+				$result = $query->result_array();
+				return ($query->num_rows() > 0) ? $result[0]['vote_value'] : 0;
 				break;
 			default:
 				exit(); // error

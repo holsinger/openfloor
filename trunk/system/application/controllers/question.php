@@ -51,7 +51,7 @@ class Question extends Controller
 
 		$rules['event'] = "required";
 		$rules['question'] = "trim|required|min_length[10]|max_length[150]|xss_clean";
-		$rules['desc'] = "trim|max_length[250]|xss_clean";
+		$rules['desc'] = "trim|max_length[255]|xss_clean";
 		$rules['tags'] = "trim|strtolower|xss_clean";
 		
 		$this->validation->set_rules($rules);

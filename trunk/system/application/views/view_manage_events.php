@@ -7,7 +7,8 @@
 	<?= form_open_multipart('event/create_event_action/', array('name'=>'my_form')); ?>
 	<label>Event Type:</label>
 	<?= form_dropdown('event_type', array('question' => 'Questions','video'=>'Videos'), null, 'class="txt"');?>
-	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
+	<? $format = array('name' => 'event_name', 'value' => $this->validation->event_name, 'class' => 'txt', 'maxlength' => 100) ?>
+	<?= form_format("Event Name: *",form_input($format) ); ?>
 	
 	<?
 		$format = array(
