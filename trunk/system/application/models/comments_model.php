@@ -39,7 +39,7 @@ class Comments_model extends Model
 				fk_question_id = $id
 			ORDER BY 
 				votes
-			DESC"); echo $this->db->last_query();
+			DESC");
 		
 		if($query->num_rows() == 0)
 			return false;

@@ -78,13 +78,13 @@ class Question_model extends Model
 		$query = $this->db->query(
 			"SELECT 
 				question_id, 
-				(SELECT 
+				IFNULL((SELECT 
 					cast(format(sum(vote_value)/10,0) as signed) AS number 
 				FROM 
 					cn_votes 
 				WHERE 
 					fk_question_id=question_id 
-				GROUP BY fk_question_id) as votes, 
+				GROUP BY fk_question_id), 0) as votes, 
 				question_name, 
 				question_desc,
 				cn_questions.timestamp as date, 
