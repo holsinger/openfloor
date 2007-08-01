@@ -185,7 +185,7 @@ class Video extends Controller
 		} else $data['voted'] = false;
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library();
-		$comments_library->type = $data['event_type'];
+		$comments_library->type = 'video';
 		$data['comments_body'] = $comments_library->createComments($result[0]);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
