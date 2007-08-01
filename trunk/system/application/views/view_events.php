@@ -33,5 +33,3 @@ $data['red_head'] = 'Events';
 </div>
 
 <? $this->load->view('view_includes/footer.php'); ?>
-
-//date("F j, Y, g:i a");
