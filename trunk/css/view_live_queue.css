@@ -1,0 +1,23 @@
+body {
+	background-color:#cae7f7;
+	color:#0173ba;
+	font-family: sans-serif;
+	margin: 50px 0 0 50px;
+}
+
+p {
+	margin-left:50px;
+}
+
+h3 {
+	color:#f04a54;
+	text-decoration:underline;
+}
+
+.votes {
+	font-weight:bold;	
+}
+
+.question {
+	margin:20px;
+}

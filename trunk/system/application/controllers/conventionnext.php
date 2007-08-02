@@ -24,6 +24,18 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
+	public function liveQueue()
+	{
+		// get the list of upcoming (pending) questions
+		$data['questions'] = $this->question->questionQueue();
+		
+		// get the current question, if any
+		$this->question->question_status = 'current';
+		$data['current_question'] = $this->question->questionQueue();
+		
+		$this->load->view('view_live_queue', $data);
+	}
+	
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
 	{
 		if(!empty($tag)) $tag = "tag/$tag/";
