@@ -39,10 +39,10 @@
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<p>
-									Tags: <? foreach($tags as $tag) echo "<a href=\"#\">$tag</a>, "?>
+									Tags: <?= implode(', ',$tags);?>
 								</p>
 							</div>
-						<p><?=substr($question_desc,0,150);?>... <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more &raquo;","class='more'");?></p>
+						<p><?=substr($question_desc,0,150);?> <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more&raquo;","class='more'");?></p>
 						<ul class="options">
 							<li class="discuss"><?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),'Discuss');?></li>
 							<li class="votes"><?=anchor("votes/who/{$question_id}"," Votes");?></li> 	
