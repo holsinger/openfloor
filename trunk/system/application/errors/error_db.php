@@ -9,6 +9,7 @@ margin:				40px;
 font-family:		Lucida Grande, Verdana, Sans-serif;
 font-size:			12px;
 color:				#000;
+text-align: center;
 }
 
 #content  {
@@ -34,7 +35,7 @@ margin: 			0 0 4px 0;
 	<div id="content">
 		<!--<h1><?php echo $heading; ?></h1>-->
 		<?php 
-		echo $message; 
+		//echo $message; 
 		mail('kleinschnitz@wikireview.com',$heading,$message);
 		?>
 	</div>
