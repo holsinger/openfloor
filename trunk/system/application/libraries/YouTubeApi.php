@@ -56,7 +56,7 @@ class YouTubeApi {
 	function getVideoDetailsArray ($video_id = '') 
 	{
 		$videoObj = $this->getVideoDetails ($video_id);
-		if ($videoObj->error) {
+		if (isset($videoObj->error)) {
 			$toArray = $videoObj->error;
 			return (array) $toArray;
 		} else {				
