@@ -44,7 +44,7 @@ class Event extends Controller
 		$data['cms_id'] = $this->cms->get_id_from_url('ConventionNext');
 		$data = $this->cms->get_cms($data['cms_id']);	
 			
-		$events = $this->db->get('cn_events')->result_array();
+		$events = $this->event->getEvents();
 		//echo '<pre>'; print_r($events); echo '</pre>'; exit();
 		
 		
@@ -146,7 +146,7 @@ class Event extends Controller
 		{
 			$filename = $_POST['old_avatar'];
 			// we still probably want to catch errors, but the !is_string($this->error) was causing the file not to get deleted
-			if ( file_exists($filename) /*&& !is_string($this->error)*/) unlink ($filename);
+			if ( file_exists($filename) && $filename != './avatars/') unlink ($filename);
 			unset($_POST['old_avatar']);
 		}
 		
@@ -166,12 +166,12 @@ class Event extends Controller
 		
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
-		$rules['event_desc'] = "trim|required|max_length[65535]|xss_clean";
+		$rules['event_desc'] = "trim|required|max_length[65535]";
 		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
 		$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
-		$rules['location'] = "trim|max_length[100]|xss_clean";
+		$rules['location'] = "trim|max_length[65535]";
 		
 		$this->validation->set_rules($rules);
 					
