@@ -91,7 +91,8 @@ ajaxVideo.youTubeVideoDetails = function(id) {
 	     $('desc').value = desc.substring(0,250);
 	     $('thumbnail').value = jsonObj.thumbnail_url;
 	     var tags = jsonObj.tags;
-	     //$('tags').value = tags.replace(/ /g,', ');	     
+	     //$('tags').value = tags.replace(/ /g,', ');
+	     $('tags').value = tags;	     
 	   }
 	});
 	return;
