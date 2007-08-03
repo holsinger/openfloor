@@ -36,7 +36,18 @@ $this->load->view('view_includes/header.php',$data);
 								<div id='ytvid_<?=$video_youtude_id;?>' class="video">						
 										<span class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')"><img src='<?=$video_thumb;?>'></span>
 								</div>
-								<p class='video_desc'><?=substr($video_desc,0,150);?>... <a href="index.php/video/queue/event/<?= $event_name; ?>/video/<?= url_title($video_title); ?>" class="more"> read more &raquo;</a></p>
+								<!-- -->
+								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ('.'5'.' ago)';?>
+									<span id="ls_story_link-<?= $video_id; ?>"></span>
+								</p>
+								<p>
+									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
+								</p>
+								<? if(isset($tags)): ?>
+								<p>Tags: <? foreach($tags as $tag) echo "<a class=\"link\">$tag</a>, "?></p>
+								<? endif; ?>
+								<!-- -->
+								<p class='video_desc'><?=$video_desc;?></p>
 							</div>
 						
 						<ul class="options">
@@ -52,11 +63,11 @@ $this->load->view('view_includes/header.php',$data);
 						$attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 48);
 						$submit = ($this->userauth->isUser()) ? 
 						'<input type="submit" value="Submit Comment" class="button"/>' : 
-						'<input type="button" onclick="showBox(\'login\') value="Login to comment" class="button"/>';
+						'<input type="button" onclick="showBox(\'login\');" value="Login to comment" class="button"/>';
 
-						$comments =  '
-						<div id="comment_add">
-							<div class="comment_head"><strong> '.anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name')).' why not add to the discussion?</strong></div><br />'
+						$comments = '<div id="comment_add"><div class="comment_head"><strong>';
+							if ($this->session->userdata('user_name')>0) $comments .= anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name'));
+							$comments .= ' why not add to the discussion?</strong></div><br />'
 							. form_open('comment/addCommentAction')
 								. form_textarea($attributes)
 								. form_hidden('fk_video_id', $video_id)
