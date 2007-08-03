@@ -61,7 +61,7 @@
 
 	<br /><br />
 	<br /><br />
-	<?= isset($avatar_image_name)?form_hidden('old_avatar','./avatars/'.$avatar_image_name):'';?>
+	<?= (isset($avatar_image_name) && !empty($avatar_image_name))?form_hidden('old_avatar','./avatars/'.$avatar_image_name):'';?>
 	<?= form_submit('','Edit Event','class="button"'); ?>
 	<br /><br />
 	<small>* required fields</small>
