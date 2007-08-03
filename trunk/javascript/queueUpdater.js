@@ -18,7 +18,7 @@ queueUpdater.updateQueueOnce = function() {
 }
 
 
-queueUpdater.vote = function(url) {	
+queueUpdater.vote = function(url,id) {	
 	//new Effect.DropOut ('queue');
 	if (username.length <= 0) {
 		showBox('login');
