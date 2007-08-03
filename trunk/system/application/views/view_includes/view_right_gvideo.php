@@ -47,7 +47,7 @@
       //var options = { largeResultSet : true };
       var videoSearch = new GSvideoSearchControl(
                               document.getElementById("videoControl"),
-                              [{ query : "politics"}, { query : "campaign 2008"}, { query : "u.s. senate"}, { query : "congress"}, { query : "liberal"}, { query : "democrat"}, { query : "republican"}], null, null, options);
+                              [{ query : "Republican"}, { query : "Democrat"}, { query : "Conservative"}, { query : "Liberal"}, { query : "Presidential Campaign"}, { query : "Breaking Political News"}, { query : "U.S. Senate"}, { query : "U.S. House"}, { query : "Bush Administration"}, { query : "Supreme Court"}, { query : "Local & State Government"}], null, null, options);
     }
     // arrange for this function to be called during body.onload
     // event processing

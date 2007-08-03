@@ -37,7 +37,7 @@
   <script src="http://www.google.com/uds/solutions/blogbar/gsblogbar.js?mode=new"
     type="text/javascript"></script>
   <style type="text/css">
-    @import url("http://www.google.com/uds/solutions/blogbar/gsblogbar.css");
+    @import "css/googleBar.css";
   </style>
 
   <script type="text/javascript">
@@ -49,7 +49,7 @@
         horizontal : false,
         orderBy : GSearch.ORDER_BY_DATE,
         autoExecuteList : {
-          executeList : ["politics", "us senate", "congress", "democrat", "republican", "campaign 2008", "liberal"]
+          executeList : [ "Republican", "Democrat", "Conservative", "Liberal", "Presidential Campaign", "Breaking Political News", "U.S. Senate", "U.S. House", "Bush Administration", "Supreme Court", "Local & State Government"]
         }
       }
 
