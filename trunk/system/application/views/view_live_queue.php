@@ -10,7 +10,7 @@
 	<meta name="author" content="Rob Stefanussen">
 	<link rel="stylesheet" type="text/css" href="css/view_live_queue.css" />
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
-	<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';</script>
+	<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';var event_name = '<?=$event?>';</script>
 	<script type="text/javascript" src="javascript/liveQueueUpdater.js"></script>
 	<script type="text/javascript">liveQueueUpdater.liveQueueUpdate();</script>
 	<!-- Date: 2007-08-02 -->

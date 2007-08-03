@@ -24,8 +24,14 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	public function liveQueue($ajax=null)
+	public function liveQueue($event, $ajax=null)
 	{
+		$data['event'] = $event;
+		
+		$event_id = $this->event->get_id_from_url($event);
+		if(!$event_id) exit();
+		$this->question->event_id = $event_id;
+		
 		// get the list of upcoming (pending) questions
 		$data['questions'] = $this->question->questionQueue();
 		

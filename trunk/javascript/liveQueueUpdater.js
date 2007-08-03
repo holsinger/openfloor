@@ -6,10 +6,10 @@ if(typeof liveQueueUpdater === "undefined" || !liveQueueUpdater) {
 }
 
 liveQueueUpdater.liveQueueUpdate = function() {
-	new Ajax.PeriodicalUpdater('current_question', site_url + '/conventionnext/liveQueue/current_question', {
+	new Ajax.PeriodicalUpdater('current_question', site_url + '/conventionnext/liveQueue/' + event_name + '/current_question', {
 	  frequency: 10
 	});
-	new Ajax.PeriodicalUpdater('upcoming_questions', site_url + '/conventionnext/liveQueue/upcoming_questions', {
+	new Ajax.PeriodicalUpdater('upcoming_questions', site_url + '/conventionnext/liveQueue/' + event_name + '/upcoming_questions', {
 	  frequency: 10
 	});
 }
