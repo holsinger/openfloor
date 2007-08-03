@@ -33,6 +33,7 @@ class Conventionnext extends Controller
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
 		
+		// if an AJAX request is being made
 		if(isset($ajax))
 		{
 			switch($ajax)
@@ -53,7 +54,7 @@ class Conventionnext extends Controller
 			default:
 				break;
 			}
-		} else {
+		} else { // if no AJAX request is being made, load the view
 			$this->load->view('view_live_queue', $data);
 		}
 	}

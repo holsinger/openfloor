@@ -37,6 +37,8 @@ class Comments_model extends Model
 				fk_user_id=user_id
 			AND
 				fk_question_id = $id
+			AND 
+				parent_id = 0
 			ORDER BY 
 				votes
 			DESC");
@@ -77,6 +79,8 @@ class Comments_model extends Model
 				fk_user_id=user_id
 			AND
 				fk_video_id = $id
+			AND
+				parent_id =0
 			ORDER BY 
 				votes
 			DESC");
@@ -90,6 +94,37 @@ class Comments_model extends Model
 	#TODO get child comments
 	public function getChildrenByComment($id)
 	{
+		$query = $this->db->query(
+			"SELECT 
+				comment_id, 
+				IFNULL((SELECT 
+					cast(format(sum(vote_value)/10,0) as signed) AS number 
+				FROM 
+					cn_votes 
+				WHERE 
+					fk_comment_id=comment_id 
+				GROUP BY fk_comment_id), 0) as votes, 
+				comment, 
+				fk_user_id,
+				fk_video_id, 
+				cn_comments.timestamp as date,
+				user_name,
+				user_avatar
+			FROM 
+				cn_comments,
+				cn_users 
+			WHERE 
+				fk_user_id=user_id
+			AND
+				parent_id = $id
+			ORDER BY 
+				votes
+			DESC");
+		
+		if($query->num_rows() == 0)
+			return false;
+			
+		return $query->result_array();
 	}
 	
 	public function insertComment()

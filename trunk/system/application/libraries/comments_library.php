@@ -33,14 +33,15 @@ class Comments_library
 		}
 		
 		if(is_array($comments))
-			foreach ($comments as $v)
-				$commentHtml .= $this->createCommentsPod($v, $id);
-				#TODO CHECK children
+			foreach ($comments as $v) {
+				$subcomments = $this->CI->comments_model->getChildrenByComment($v['comment_id']);
+				$commentHtml .= $this->createCommentsPod($v, $id, $subcomments);
+			}	
 		
 		return $commentHtml;
 	}
 	
-	public function createCommentsPod($info, $id)
+	public function createCommentsPod($info, $id, $subcomments = false)
 	{
 		$votes = ($info['votes'] == null) ? 0 : $info['votes'] ;
 		#see if user voted
@@ -75,11 +76,11 @@ class Comments_library
 		$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
 		$pod .= '</div>';
 		$pod .= "<p>{$info['comment']}</p>";
+		// add subcomments
+		if ($subcomments) {
+			foreach($subcomments as $subcomment)
+				$pod .= "<p>--> {$subcomment['comment']}</p>";
+		}
 		return $pod;
-		/*return '<p>' . 
-		"$votes votes " . 
-		anchor("/comment/voteUp/{$info['comment_id']}/$this->question_name/$this->event_name", '[+] ') . 
-		anchor("/comment/voteDown/{$info['comment_id']}/$this->question_name/$this->event_name", '[-] ') . 
-		"<strong>Posted by:</strong> {$info['user_name']} <strong>Comment:</strong> {$info['comment']}</p>";*/
 	}
 }
