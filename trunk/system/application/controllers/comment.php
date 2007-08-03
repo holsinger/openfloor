@@ -19,7 +19,6 @@ class Comment extends Controller
 		
 		$name = $_POST['name'];
 		unset($_POST['name']);
-		
 		$this->load->model('comments_model');
 		$_POST['fk_user_id'] = $this->session->userdata('user_id');
 		if($this->comments_model->insertComment()) {

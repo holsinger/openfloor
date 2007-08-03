@@ -25,6 +25,7 @@
 	<script type="text/javascript" src="javascript/userWindow.js"></script>
 	<script type="text/javascript" src="javascript/ajaxVideo.js"></script>
 	<script type="text/javascript" src="javascript/queueUpdater.js"></script>
+	<script type="text/javascript" src="javascript/subcomment.js"></script>
 	<?php if(isset($this->validation->event_date)) echo @js_calendar_script('my_form');  ?>
 	<title>Politic 2.0</title>
 	<link rel="icon" href="/p20/favicon.ico" type="image/x-icon"/>

@@ -76,11 +76,25 @@ class Comments_library
 		$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
 		$pod .= '</div>';
 		$pod .= "<p>{$info['comment']}</p>";
+				
 		// add subcomments
 		if ($subcomments) {
 			foreach($subcomments as $subcomment)
 				$pod .= "<p>--> {$subcomment['comment']}</p>";
 		}
+		
+		// subcommenting form
+		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> ";
+		$pod .= '<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">';
+		$pod .= form_open('comment/addCommentAction');
+		$pod .= form_input(array('class' => 'txt', 'size' => 36, 'name' => 'comment'));
+		$pod .= form_hidden('parent_id', $info['comment_id']);
+		$pod .= form_hidden('event_name', $this->event_name);
+		$pod .= form_hidden('name', $this->name);
+		$pod .= form_hidden('event_type', $this->type);
+		$pod .= "<input type=\"submit\" value=\"Comment\">";
+		$pod .= form_close();
+		$pod .= "</div>";
 		return $pod;
 	}
 }
