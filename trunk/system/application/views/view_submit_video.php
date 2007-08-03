@@ -23,8 +23,6 @@ $data['event_url'] = $event_url;
 			</select>
 		<? } ?>
 		<br />
-		W80fsB7kzz8
-		<br />
 		<?
 		$format = array(
 	              'name'        => 'youtube',
