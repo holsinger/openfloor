@@ -133,7 +133,7 @@ class Question extends Controller
 	}
 	
 	function edit () 
-	{		
+	{
 		$data['error'] = "";
 		if (isset($_POST['question_id'])) 
 		{
@@ -168,7 +168,8 @@ class Question extends Controller
 		return $output;
 	}
 	
-	function view ($event, $question) {
+	function view ($event, $question) 
+	{
 		
 		$question_id = $this->question->get_id_from_url($question);
 		$this->question->question_id = $question_id;
@@ -200,7 +201,7 @@ class Question extends Controller
 	}
 	
 	function queue()
-	{		
+	{
 		
 		//get data from url
 		$uri_array = $this->uri->uri_to_assoc(3);

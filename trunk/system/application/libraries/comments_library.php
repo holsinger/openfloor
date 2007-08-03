@@ -79,8 +79,41 @@ class Comments_library
 				
 		// add subcomments
 		if ($subcomments) {
-			foreach($subcomments as $subcomment)
-				$pod .= "<p>--> {$subcomment['comment']}</p>";
+			foreach($subcomments as $subcomment) { 
+				$votes = ($subcomment['votes'] == null) ? 0 : $subcomment['votes'] ;
+				#see if user voted
+				$this->CI->vote->type = 'comment';
+				$voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->alreadyVoted($subcomment['comment_id'],$this->CI->session->userdata('user_id')):0;
+
+				#resize image
+				$image_array = unserialize($subcomment['user_avatar']);
+				if ($image_array) $avatar_path = "./avatars/".$image_array['file_name'];
+				else $avatar_path = "./images/image01.jpg";
+
+				//get time diff
+				$time_diff = timespan(strtotime($subcomment['date']));
+				
+				//$pod .= "<p>--> {$subcomment['comment']}</p>";
+				$pod .= '<div class="comment_head">';
+				//$pod .= '<img src="./images/shrink.php?imgpath='.$avatar_path.'&qt=70&width=16&height=16">';
+				$pod .= 'by '.anchor('user/profile/'.$subcomment['user_name'],$subcomment['user_name']);
+				$pod .= " ({$time_diff} ago)";
+				$pod .= "<span class='comment_voting'>";
+				if ($voted < 0) {
+					$pod .= "<img src='./images/thumbsUp.png' border='0'>";
+					$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+				} else if ($voted > 0) {
+					$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+					$pod .= " <img src='./images/thumbsDown.png' border='0'>";
+				} else {
+					$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
+					$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+				}
+				$pod .= "</span>";
+				$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
+				$pod .= '</div>';
+				$pod .= "<p>{$subcomment['comment']}</p>";
+			}
 		}
 		
 		// subcommenting form
@@ -92,7 +125,7 @@ class Comments_library
 		$pod .= form_hidden('event_name', $this->event_name);
 		$pod .= form_hidden('name', $this->name);
 		$pod .= form_hidden('event_type', $this->type);
-		$pod .= "<input type=\"submit\" value=\"Comment\">";
+		$pod .= "<input type=\"submit\" value=\"Comment\" class=\"button\" />";
 		$pod .= form_close();
 		$pod .= "</div>";
 		return $pod;

@@ -18,7 +18,8 @@ class Conventionnext extends Controller
 		$this->load->scaffolding('cn_questions');
 	}
 	
-	function index () {
+	function index () 
+	{
 		redirect('event/');
 		ob_clean();
 		exit();
@@ -72,7 +73,7 @@ class Conventionnext extends Controller
 	}
 	
 	function queue() // passing $this->ajax through still needs to be implemented
-	{		
+	{
 		//get data from url
 		$uri_array = $this->uri->uri_to_assoc(3);
 		if (isset($uri_array['ajax'])) $this->ajax = true;
