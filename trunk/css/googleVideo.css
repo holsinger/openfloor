@@ -69,7 +69,7 @@ td.tag-control_gsvsc  {
 }
 
 td.tag-control_gsvsc div.tag-control_gsvsc {
-  font-size : 13px;
+  font-size : 10px;
   cursor : pointer;
   margin-right : 8px;
   font-weight : 400;
@@ -220,7 +220,7 @@ td.tag-control_gsvsc div.tag-control_gsvsc {
   padding-bottom : 2px;
   text-align : right;
   color : #676767;
-  font-size : 11px;
+  font-size : 10px;
   margin-right : 2px;
 }
 
@@ -259,7 +259,7 @@ td.tag-control_gsvsc div.tag-control_gsvsc {
 }
 
 div.search-form-save_gsvsc {
-  font-size : 11px;
+  font-size : 10px;
   text-align : left;
   cursor : pointer;
 }
@@ -291,7 +291,7 @@ tr.edit-form-delete_gsvsc {
 }
 
 td.edit-form-input_gsvsc input {
-  font-size : 11px;
+  font-size : 10px;
   padding-left : 2px;
   margin-right : 4px;
   width : 50%;
@@ -309,7 +309,7 @@ div.edit-form-submit-box_gsvsc {
 }
 
 div.edit-form-submit-box_gsvsc input {
-  font-size : 11px;
+  font-size : 10px;
   margin-right : 6px;
 }
 
@@ -334,7 +334,7 @@ div.edit-form-submit-box_gsvsc input {
 }
 
 .footerBox_gsvsc a {
-  font-size : 11px;
+  font-size : 10px;
   cursor : pointer;
   text-decoration : underline;
 }
@@ -482,15 +482,15 @@ div.tag-selected_gsvsc:hover {
 }
 
 div.tag_gsvsc-0 {
-  font-size : 13px;
+  font-size : 10px;
 }
 
 div.tag_gsvsc-1 {
-  font-size : 13px;
+  font-size : 10px;
 }
 
 div.tag_gsvsc-2 {
-  font-size : 13px;
+  font-size : 10px;
 }
 
 
