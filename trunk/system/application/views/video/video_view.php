@@ -31,7 +31,7 @@ $this->load->view('view_includes/header.php',$data);
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<h3><a href="index.php/conventionnext/video/<?= url_title($event_name); ?>/<?= url_title($video_title); ?>"><?=$video_title;?></a></h3>
+							<h3><a href="#"><?=$video_title;?></a></h3>
 							<div class="author">
 								<div id='ytvid_<?=$video_youtude_id;?>' class="video">						
 										<span class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')"><img src='<?=$video_thumb;?>'></span>
@@ -49,7 +49,7 @@ $this->load->view('view_includes/header.php',$data);
 								<!-- -->
 								<p class='video_desc'><?=$video_desc;?></p>
 							</div>
-						
+							<br>
 						<ul class="options">
 							<li class="play_video"><a class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')">Play Video</a></li>
 							<li class="discuss"><a href="index.php/video/queue/event/<?= $event_name; ?>/video/<?= url_title($video_title); ?>">Discuss</a></li> 	
