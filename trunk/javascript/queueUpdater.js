@@ -24,7 +24,7 @@ queueUpdater.vote = function(url) {
 		showBox('login');
 		return;
 	}
-	//new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
+	new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
 	  onSuccess: function(transport) {
 		  queueUpdater.updateQueueOnce();
