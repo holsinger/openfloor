@@ -24,7 +24,7 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	public function liveQueue()
+	public function liveQueue($ajax=null)
 	{
 		// get the list of upcoming (pending) questions
 		$data['questions'] = $this->question->questionQueue();
@@ -33,7 +33,29 @@ class Conventionnext extends Controller
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
 		
-		$this->load->view('view_live_queue', $data);
+		if(isset($ajax))
+		{
+			switch($ajax)
+			{
+			case 'current_question':
+				if(!empty($data['current_question']))
+					echo '<p>' . $data['current_question'][0]['question_name'] . '</p>';
+				else
+					echo '<p>There is no current question</p>';
+				break;
+			case 'upcoming_questions':
+				foreach($data['questions'] as $question) {
+						$votes = ($question['votes'] == 1) ? 'vote' : 'votes' ;
+						echo "<p><span class=\"votes\">{$question['votes']} $votes</span>";
+						echo "<span class=\"question\">{$question['question_name']}</span></p>";
+				}
+				break;
+			default:
+				break;
+			}
+		} else {
+			$this->load->view('view_live_queue', $data);
+		}
 	}
 	
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
