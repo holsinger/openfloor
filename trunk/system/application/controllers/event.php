@@ -166,7 +166,7 @@ class Event extends Controller
 		
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
-		$rules['event_desc'] = "trim|required|max_length[255]|xss_clean";
+		$rules['event_desc'] = "trim|required|max_length[65535]|xss_clean";
 		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
 		$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
