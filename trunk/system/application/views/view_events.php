@@ -5,7 +5,7 @@ $data['red_head'] = 'Events';
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <h3>Convention Next</h3>
+  <!-- <h3>Convention Next</h3> -->
   <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
   <? if ($this->userauth->isAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
   
@@ -19,13 +19,15 @@ $data['red_head'] = 'Events';
 	<? //echo $this->table->generate($events)?>
 	<? foreach ($events as $key => $array) {?>
 		<div id='event<?=$array['event_id'];?>' class='event-summary'>
-		<br /><?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>
-		<span style"float:right;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></span>
-		<br /><b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?>
-		<br /><b>Where:</b> <?=$array['location'];?>
-		<br /><b>Description:</b> <?=$array['event_desc_brief'];?>
-		<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
+		<div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
+			<p><?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />		
+			<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
+			<b>Where:</b> <?=$array['location'];?><br />
+			<b>Description:</b> <?=$array['event_desc_brief'];?>
+			</p>
 		</div>
+		<br />
+		<? if ($this->userauth->isAdmin()) $array['edit'];?>
 
 	<? }?>
 	</div>
