@@ -117,7 +117,7 @@ class Comments_library
 		}
 		
 		// subcommenting form
-		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> ";
+		//$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> ";
 		$pod .= '<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">';
 		$pod .= form_open('comment/addCommentAction');
 		$pod .= form_input(array('class' => 'txt', 'size' => 36, 'name' => 'comment'));
