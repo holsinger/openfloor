@@ -978,3 +978,13 @@ herald_hr,
 #herald_right {
 	text-align: left;
 }
+.foot_list {
+	left:13px;
+	position:relative;
+	top:-10px;
+}
+.foot_list_right{
+	left:35px;
+	position:relative;
+	top:4px;
+}
