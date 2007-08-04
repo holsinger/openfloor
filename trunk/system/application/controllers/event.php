@@ -133,8 +133,8 @@ class Event extends Controller
 			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
 			#$config['create_thumb'] = TRUE;
 			$config['maintain_ratio'] = TRUE;
-			$config['width'] = 75;
-			$config['height'] = 50;			
+			$config['width'] = 100;
+			$config['height'] = 75;			
 			$this->load->library('image_lib', $config);			
 			$this->image_lib->resize();
 			if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
@@ -236,13 +236,13 @@ class Event extends Controller
 		$error = false;
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
-		$rules['event_desc'] = "trim|required|max_length[255]|xss_clean";
+		$rules['event_desc'] = "trim|required|max_length[65535]";
 		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
 		//$rules['event_avatar'] = "trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
 		$rules['event_type'] = "required";
-		$rules['location'] = "trim|max_length[100]|xss_clean";
+		$rules['location'] = "trim|max_length[65535]";
 		
 		$this->validation->set_rules($rules);
 					
@@ -277,8 +277,8 @@ class Event extends Controller
 				$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
 				#$config['create_thumb'] = TRUE;
 				$config['maintain_ratio'] = TRUE;
-				$config['width'] = 75;
-				$config['height'] = 50;			
+				$config['width'] = 100;
+				$config['height'] = 75;			
 				$this->load->library('image_lib', $config);			
 				$this->image_lib->resize();
 				if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
