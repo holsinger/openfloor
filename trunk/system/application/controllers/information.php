@@ -16,13 +16,14 @@ class Information extends Controller {
 	
 	function index()
 	{		
-		$data['cms_id'] = 0;
+		/*$data['cms_id'] = 0;
 		
 		$data['cms_id'] = $this->cms->get_id_from_url('home');
 		$data = $this->cms->get_cms($data['cms_id']);	
 		
 		if (count($data)>1) $this->load->view('view_message',$data);
-		else $this->failSafe();
+		else $this->failSafe();*/
+		$this->failSafe();
 	}
 	
 	function failSafe()
