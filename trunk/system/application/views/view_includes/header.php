@@ -22,7 +22,6 @@ $this->load->view('view_includes/view_head_setup.php',$data);
 <? $this->load->view('view_includes/view_head_body.php'); ?>	
 <!--  Ad space -->
 
-<center>ad space</center>
 <br /><br /><br />
 
 <?
