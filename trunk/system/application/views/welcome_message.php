@@ -39,7 +39,7 @@
 	            </table>
             </div>
 	            <p>Read our first press release:<br>
-              <center><a href='http://blog.politic20.com/2007/07/30/politic20-to-hold-live-web-based-forum-for-salt-lake-city-mayoral-candidates/'>Politic2.0 to Hold Live Web-Based Forum for Salt Lake City Mayoral Candidates</a><center>
+              <center><a href='http://blog.politic20.com/2007/07/30/politic20-to-hold-live-web-based-forum-for-salt-lake-city-mayoral-candidates/'>Politic2.0 to Hold Live Web-Based Forum for Salt Lake City Mayoral Candidates</a></center>
                </p>
             
             <? /*
