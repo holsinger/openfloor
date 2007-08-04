@@ -893,6 +893,11 @@ textarea.txt {
 	margin-left:20px;
 	width: 450px;
 }
+
+.event-summary p {
+	padding-left:105px;
+	line-height: 12px;
+}
 /******************Content*******************/
 #admin_content {
 	margin:0 11px 0 9px;
@@ -946,4 +951,30 @@ textarea.txt {
 }
 .inner-box {
 	padding: 7px;
+}
+#herald {
+	text-align: center;
+	font:11px Verdana, Geneva, Arial, Helvetica, sans-serif;
+}
+herald_hr,
+#herald hr {
+	width:472px;
+	background: #0058AC;
+	border: 0;
+	color: #0058AC;
+  height: 2px;
+}
+.herald_header,
+#herald h2 {
+	font:27px Verdana, Geneva, Arial, Helvetica, sans-serif;
+	margin-left:-15px;
+	font-weight: bold;
+	color:#053C7C;
+	display: inline;
+} 
+#herald_left {
+	text-align: justify;
+}
+#herald_right {
+	text-align: left;
 }
