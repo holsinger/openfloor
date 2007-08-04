@@ -4,7 +4,7 @@
 <div id="content_div">
             
             <div id='herald'>
-            	<img src="./images/thep20herald.png">
+            	<img src="./images/thep20herald.png" alt='The P20 Herald'>
             	<br />
             	<hr class='herald_hr'>
             	<strong><?=date('l, F j, Y');?></strong>
@@ -27,7 +27,7 @@
 	            	<td width="200" valign='top'>
 	            	<span id='herald_right'>
 	            		<br /><br />
-	            		<span style='margin-left:-2px;'><img src="./images/megaphone.png"></span>
+	            		<span style='margin-left:-2px;'><img src="./images/megaphone.png" alt='Speak Your Mind'></span>
 	            		<br /><br />
 	            		
 	            		<p style='width:255px;'>&nbsp;&nbsp;You are given a face, a voice, and a megaphone.</p>
@@ -56,4 +56,7 @@
             </div><!-- end zip -->
 						*/?>
 </div>
-<? $this->load->view('view_includes/footer.php'); ?>  				
+<? 
+$data['foot'] = '<span class="foot_list">To find out more information about what we\'re up to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.politic20.com" target="top"></span><span class="foot_list_right"><img src="./images/readourblog.png" border="0"></a></span>';
+$this->load->view('view_includes/footer.php',$data); 
+?>  				
