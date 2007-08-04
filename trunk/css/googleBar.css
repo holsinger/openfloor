@@ -2,7 +2,7 @@
  * color settings
  */
 .titleBox_gsblb                              { }
-a.statusItemSelected_gsblb                   { color : #000000; }
+a.statusItemSelected_gsblb                   { color : #053C7C; }
 span.statusItemSep_gsblb                     { color : #6f6f6f; }
 .horizontal_gsblb .blogBarInnerBox_gsblb      { border-color : #aaaaaa; }
 .horizontal_gsblb div.statusBox_gsblb         { border-right-color : #c0c0c0; }
@@ -62,12 +62,22 @@ div.statusBox_gsblb {
 a.statusItem_gsblb {
   cursor : pointer;
   white-space: nowrap;
+  text-decoration : none;
+  font-size: 10px;
 }
+
+a.statusItem_gsblb:hover {
+  cursor : pointer;
+  white-space: nowrap;
+  text-decoration : underline;
+}
+
 
 a.statusItemSelected_gsblb {
   font-weight : bold;
   text-decoration : none;
   border: none;
+  font-size: 10px;
 }
 
 /**
