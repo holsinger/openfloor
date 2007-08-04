@@ -240,7 +240,7 @@ class Conventionnext extends Controller
 
 
 			if(empty($data['results'])) {
-				$event['results'] = $this->event->$event_id($event_id);
+				$event['results'] = $this->event->get_event($event_id);
 				$data['rightpods'] = array('dynamic'=>array('event_description'=>$event['results'][0]['event_desc'],'event_location'=>$event['results'][0]['location']));
 			} else {
 				$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
