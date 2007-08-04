@@ -27,7 +27,7 @@ $data['red_head'] = 'Events';
 			</p>
 		</div>
 		<br />
-		<? if ($this->userauth->isAdmin()) $array['edit'];?>
+		<? if ($this->userauth->isAdmin()) echo $array['edit'];?>
 
 	<? }?>
 	</div>
