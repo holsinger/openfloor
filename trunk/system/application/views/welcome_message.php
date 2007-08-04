@@ -2,12 +2,47 @@
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-            <h3>Welcome</h3>
-            <p style="margin-left:10px;margin-right:30px;">
-            <span class='red'>Politic2.0</span> Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Morbi consequat pulvinar erat. Curabitur scelerisque, massa nec aliquam cursus, lacus metus accumsan risus, quis viverra tellus ligula non neque. Aliquam vel felis. Fusce mattis, quam eu rutrum malesuada, tortor tortor nonummy augue, nec malesuada velit neque id eros. Ut tortor. Ut at tortor a augue semper volutpat. Aenean nonummy egestas lacus. Donec sagittis, risus vel rutrum sollicitudin, velit ligula sollicitudin turpis, a fermentum libero est a ante. Pellentesque feugiat. Quisque ut est.</p>
-            <p style="margin-left:10px;margin-right:30px;">
-            Donec quis libero. Duis mattis pulvinar nisl. Mauris et sem. Sed aliquet. Donec sit amet tellus. Praesent et lacus ac justo pellentesque viverra. Vivamus neque ante, fermentum eu, tempus sed, tincidunt a, pede. Quisque eu dolor. Donec elementum dapibus arcu. Phasellus porttitor consequat nisi. Etiam non tellus sed ligula dapibus mollis. Etiam eget dolor at massa commodo adipiscing. Morbi pretium pellentesque magna. Sed at elit. Ut gravida rhoncus augue. Integer imperdiet, ipsum nec imperdiet varius, odio leo porta ante, nec imperdiet pede nisl et dolor. Phasellus euismod placerat enim. Integer placerat faucibus urna. </p>
             
+            <div id='herald'>
+            	<img src="./images/thep20herald.png">
+            	<br />
+            	<hr class='herald_hr'>
+            	<strong><?=date('l, F j, Y');?></strong>
+            	<hr class='herald_hr'>
+            	<h2 class='herald_header'>WHY DON'T AMERICANS VOTE?</h2>
+            	<table cellspacing="7" cellpadding="0">
+	            	<tr><td width="165" valign='top'>
+	            	<span id='herald_left'>
+	            		<p style="font-size:14px;">What has happened to democracy in America?</p>
+	            		<p>EVERYWHERE, U.S.A. - Who truly holds the power - the government or the people? What can be done about the disillusionment and frustration YOU feel when faced with U.S. politics?</p>
+
+  								<p>&nbsp;&nbsp;These are some of the questions and issues Politic 2.0 was created to address.</p>
+
+  								<p>&nbsp;&nbsp;At Politic 2.0, you don't have to spend $1000 a plate to sit at the table with your elected official.</p>
+
+  								<p>&nbsp;&nbsp;You don't have to spend hours upon hours sifting through mounds of biased data to find the facts.</p>
+	            	</span>
+	            	</td>
+	            	<td bgcolor='#0058AC' width='2'></td>
+	            	<td width="200" valign='top'>
+	            	<span id='herald_right'>
+	            		<br /><br />
+	            		<span style='margin-left:-2px;'><img src="./images/megaphone.png"></span>
+	            		<br /><br />
+	            		
+	            		<p style='width:255px;'>&nbsp;&nbsp;You are given a face, a voice, and a megaphone.</p>
+
+  								<p style='width:295px;'>&nbsp;&nbsp;We're more than a library, more than a search engine, more than a social gathering place. Politic 2.0 is not just a website; it's a place where you finally are as powerful as the people who represent you - the way it <u>should</u> be.</p>
+	            	
+	            	</span>
+	            	</td></tr>
+	            </table>
+            </div>
+	            <p>Read our first press release:<br>
+              <center><a href='http://blog.politic20.com/2007/07/30/politic20-to-hold-live-web-based-forum-for-salt-lake-city-mayoral-candidates/'>Politic2.0 to Hold Live Web-Based Forum for Salt Lake City Mayoral Candidates</a><center>
+               </p>
+            
+            <? /*
             <br><br>
             <div id="zip_form">
               <h2>Start by entering your zip code below.</h3>
@@ -19,5 +54,6 @@
         				</div>
         			</form>            
             </div><!-- end zip -->
+						*/?>
 </div>
 <? $this->load->view('view_includes/footer.php'); ?>  				
