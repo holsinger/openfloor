@@ -63,6 +63,8 @@ $data['event_url'] = $event_url;
 		<br />
 		<?= form_hidden('submitted','true'); ?>
 		<?= form_hidden('event_url',$event_url); ?>
+		<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
+		<br />
 		<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
 		<br />
 		<br />
