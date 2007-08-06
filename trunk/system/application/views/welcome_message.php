@@ -57,6 +57,6 @@
 						*/?>
 </div>
 <? 
-$data['foot'] = '<span class="foot_list">To find out more information about what we\'re up to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://blog.politic20.com" target="top"></span><span class="foot_list_right"><img src="./images/readourblog.png" border="0"></a></span>';
+$data['foot'] = '<span class="foot_list">To find out more information about what we\'re up to:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="foot_list_right"><a href="http://blog.politic20.com" target="top"><img src="./images/readourblog.png" border="0"></a></span>';
 $this->load->view('view_includes/footer.php',$data); 
 ?>  				
