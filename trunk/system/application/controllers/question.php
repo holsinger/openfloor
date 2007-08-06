@@ -96,7 +96,7 @@ class Question extends Controller
 		$tags = $_POST['tags'];		
 		
 		/* deal with tags first */
-		$tags = str_replace(array(/*' ', */"\t"), '', $tags);
+		$tags = str_replace(array(/*' ', */"\t", '.', ','), '', $tags);
 		//make sure we have some tags
 		if (!empty($tags)) {
 			$tagsExist = true;
