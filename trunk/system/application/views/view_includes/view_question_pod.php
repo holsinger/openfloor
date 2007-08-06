@@ -39,7 +39,7 @@
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<p>
-									Tags: <?= implode(', ',$tags);?>
+									Tags: <? if(!empty($tags)) echo implode(', ',$tags);?>
 								</p>
 							</div>
 						<p><?=substr($question_desc,0,150);?> <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more&raquo;","class='more'");?></p>

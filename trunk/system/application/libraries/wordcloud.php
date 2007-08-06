@@ -146,12 +146,20 @@
   	{
   		$this->shuffleCloud();
   		$this->max = max($this->wordsArray);
+	//	echo $this->max;
   		if (is_array($this->wordsArray))
   		{
   			$return = ($returnType == "html" ? "" : ($returnType == "array" ? array() : ""));
   			foreach ($this->wordsArray as $word => $popularity)
   			{
-  				$sizeRange = $this->getClassFromPercent(($popularity / $this->max) * 100);
+				$sizeRange = $this->getClassFromPercent(($popularity / $this->max) * 100);
+				
+				/* By Rob Stefanussen */
+				$cloudSize = $this->getCloudSize();
+				if($cloudSize <= 10)
+					$sizeRange += round((9 * (11-$cloudSize)/10));
+				/* End by Rob Stefanussen */
+				
   				if ($returnType == "array")
   				{
   					$return[$word]['word'] = $word;
