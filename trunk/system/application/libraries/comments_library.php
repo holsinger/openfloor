@@ -55,7 +55,8 @@ class Comments_library
 		
 		
 		//get time diff
-		$time_diff = timespan(strtotime($info['date']));
+		$time_array = explode(', ', timespan(strtotime($subcomment['date'])));
+		$time_diff = $time_array[0];
 		
 		$pod = '<div class="comment_head">';
 		//$pod .= '<img src="./images/shrink.php?imgpath='.$avatar_path.'&qt=70&width=16&height=16">';
@@ -76,6 +77,19 @@ class Comments_library
 		$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
 		$pod .= '</div>';
 		$pod .= "<p>{$info['comment']}</p>";
+		
+		// subcommenting form
+		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> ";
+		$pod .= '<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">';
+		$pod .= form_open('comment/addCommentAction');
+		$pod .= form_input(array('class' => 'txt', 'size' => 36, 'name' => 'comment'));
+		$pod .= form_hidden('parent_id', $info['comment_id']);
+		$pod .= form_hidden('event_name', $this->event_name);
+		$pod .= form_hidden('name', $this->name);
+		$pod .= form_hidden('event_type', $this->type);
+		$pod .= "<input type=\"submit\" value=\"Comment\" class=\"button\" />";
+		$pod .= form_close();
+		$pod .= "</div>";
 				
 		// add subcomments
 		if ($subcomments) {
@@ -91,10 +105,13 @@ class Comments_library
 				else $avatar_path = "./images/image01.jpg";
 
 				//get time diff
-				$time_diff = timespan(strtotime($subcomment['date']));
+				$time_array = explode(', ', timespan(strtotime($subcomment['date'])));
+				$time_diff = $time_array[0];
 				
 				//$pod .= "<p>--> {$subcomment['comment']}</p>";
+				//$pod .= '<img src="./images/P20_Comment_SubcommentArrow.png"/>';
 				$pod .= '<div class="comment_head">';
+				$pod  .= '<span class="subcomment_arrow"><img src="./images/P20_Comment_SubcommentArrow.png"/></span>';
 				//$pod .= '<img src="./images/shrink.php?imgpath='.$avatar_path.'&qt=70&width=16&height=16">';
 				$pod .= 'by '.anchor('user/profile/'.$subcomment['user_name'],$subcomment['user_name']);
 				$pod .= " ({$time_diff} ago)";
@@ -116,18 +133,6 @@ class Comments_library
 			}
 		}
 		
-		// subcommenting form
-		//$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> ";
-		$pod .= '<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">';
-		$pod .= form_open('comment/addCommentAction');
-		$pod .= form_input(array('class' => 'txt', 'size' => 36, 'name' => 'comment'));
-		$pod .= form_hidden('parent_id', $info['comment_id']);
-		$pod .= form_hidden('event_name', $this->event_name);
-		$pod .= form_hidden('name', $this->name);
-		$pod .= form_hidden('event_type', $this->type);
-		$pod .= "<input type=\"submit\" value=\"Comment\" class=\"button\" />";
-		$pod .= form_close();
-		$pod .= "</div>";
 		return $pod;
 	}
 }

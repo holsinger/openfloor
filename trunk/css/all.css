@@ -952,6 +952,17 @@ textarea.txt {
 .inner-box {
 	padding: 7px;
 }
+
+.subcomment_arrow {
+	float: left;
+	position: relative;
+	top: -5px;
+	left: -5px;
+	background: #f0faff;
+}
+/* ========== */
+/* = Herald = */
+/* ========== */
 #herald {
 	text-align: center;
 	font:11px Verdana, Geneva, Arial, Helvetica, sans-serif;
