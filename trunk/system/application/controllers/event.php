@@ -118,36 +118,40 @@ class Event extends Controller
 
 		$this->load->library('upload', $config);
 		
-		if ( ! $this->upload->do_upload())
+		if(!empty($_FILES['userfile']['name']))
 		{
-			$this->error = $this->upload->display_errors();
-		}	
-		else
-		{
-			$data['upload_data'] = $this->upload->data();
-			//echo '<pre>'; print_r($data); echo'</pre>'; exit();
+			echo 'AVATAR IS SET';
+			if ( ! $this->upload->do_upload())
+			{
+				$this->error = $this->upload->display_errors();
+			}	
+			else
+			{
+				$data['upload_data'] = $this->upload->data();
+				//echo '<pre>'; print_r($data); echo'</pre>'; exit();
 			
-			//resize image
-			$config = array();
-			$config['image_library'] = 'GD2';
-			$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
-			#$config['create_thumb'] = TRUE;
-			$config['maintain_ratio'] = TRUE;
-			$config['width'] = 100;
-			$config['height'] = 75;			
-			$this->load->library('image_lib', $config);			
-			$this->image_lib->resize();
-			if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
-			else $this->error = 'Update complete!';			
-		}
+				//resize image
+				$config = array();
+				$config['image_library'] = 'GD2';
+				$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+				#$config['create_thumb'] = TRUE;
+				$config['maintain_ratio'] = TRUE;
+				$config['width'] = 100;
+				$config['height'] = 75;			
+				$this->load->library('image_lib', $config);			
+				$this->image_lib->resize();
+				if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
+				else $this->error = 'Update complete!';			
+			}
 		
-		#remove old image
-		if (isset($_POST['old_avatar']) ) 
-		{
-			$filename = $_POST['old_avatar'];
-			// we still probably want to catch errors, but the !is_string($this->error) was causing the file not to get deleted
-			if ( file_exists($filename) && $filename != './avatars/') unlink ($filename);
-			unset($_POST['old_avatar']);
+			#remove old image
+			if (isset($_POST['old_avatar']) ) 
+			{
+				$filename = $_POST['old_avatar'];
+				// we still probably want to catch errors, but the !is_string($this->error) was causing the file not to get deleted
+				if ( file_exists($filename) && $filename != './avatars/') unlink ($filename);
+				unset($_POST['old_avatar']);
+			}
 		}
 		
 		// foreach($_POST as $k=>$v) $userdata[$k] = $v;
@@ -162,13 +166,16 @@ class Event extends Controller
 		// $this->profile();  // Actually, send back to event_view
 		
 		// echo '<pre>'; print_r($data); echo '</pre>'; exit();
-		$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
+		if (isset($data['upload_data'])) {
+			$_POST['event_avatar'] = serialize($data['upload_data']);
+		}
+		//$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : null ;
 		
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
 		$rules['event_desc'] = "trim|required|max_length[65535]";
 		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
-		$rules['event_avatar'] = ''; //"trim|max_length[255]";
+		//$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
 		$rules['location'] = "trim|max_length[65535]";
@@ -181,13 +188,15 @@ class Event extends Controller
 			//add event url name to array
 			$array = $_POST;
 			$array['event_url_name'] = url_title($_POST['event_name']);
+			unset($array['old_avatar']);
 			$affected_rows = $this->event->update_event_form($event_id,$array);
+			
 			//make sure a row was affected
 			if ( $affected_rows > 0 ) {
 				$error = 'Event Updated!';
 				$this->view_events($error);
 			} else {
-				$error = 'Error Editing Event';
+				$error = 'Error editing event or no changes were made';
 				$this->edit_event($event_id, $error);
 			}
 		} //if no error
