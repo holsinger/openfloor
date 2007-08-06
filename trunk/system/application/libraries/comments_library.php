@@ -55,7 +55,7 @@ class Comments_library
 		
 		
 		//get time diff
-		$time_array = explode(', ', timespan(strtotime($subcomment['date'])));
+		$time_array = explode(', ', timespan(strtotime($info['date'])));
 		$time_diff = $time_array[0];
 		
 		$pod = '<div class="comment_head">';
