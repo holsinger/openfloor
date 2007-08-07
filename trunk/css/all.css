@@ -931,7 +931,7 @@ textarea.txt {
 	float:right;
 	position: relative;
 	right: 1px;
-	top: -15px;
+	top: -20px;
 	height: 17px;	
 }
 .comment_voting{
@@ -940,7 +940,7 @@ textarea.txt {
 	float:right;
 	position: relative;
 	right: 1px;
-	top: -18px;	
+	top: -23px;	
 }
 #comments p {
 	padding:5px;
