@@ -9,6 +9,7 @@ class Video extends Controller
 		$this->load->model('Event_model','event');
 		$this->load->model('Vote_model','vote');
 		$this->load->library('validation');
+		$this->load->library('time_lib');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
 
@@ -174,7 +175,7 @@ class Video extends Controller
 		else $data['avatar_path'] = "./images/image01.jpg";
 		//exit(var_dump($data));	
 		//get time diff
-		$data['time_diff'] = timespan(strtotime($data['date']));
+		$data['time_diff'] = $this->time_lib->getDecay($data['date']);
 		//get voted
 		if ($this->userauth->isUser()) {
 			$this->vote->type='video';

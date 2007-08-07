@@ -931,7 +931,7 @@ textarea.txt {
 	float:right;
 	position: relative;
 	right: 1px;
-	top: -20px;
+	top: -15px;
 	height: 17px;	
 }
 .comment_voting{
@@ -940,7 +940,7 @@ textarea.txt {
 	float:right;
 	position: relative;
 	right: 1px;
-	top: -23px;	
+	top: -18px;	
 }
 #comments p {
 	padding:5px;
@@ -959,6 +959,12 @@ textarea.txt {
 	top: -5px;
 	left: -5px;
 	background: #f0faff;
+}
+.subcomment_container {
+	margin:0 auto;
+}
+.subcomment_left, .subcomment_right {
+	float:left;
 }
 /* ========== */
 /* = Herald = */

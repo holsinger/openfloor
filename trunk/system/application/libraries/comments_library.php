@@ -11,7 +11,8 @@ class Comments_library
 		$this->CI =& get_instance();
 		$this->CI->load->model('comments_model');
 		$this->CI->load->model('event_model');
-		$this->CI->load->model('vote_model','vote');		
+		$this->CI->load->model('vote_model','vote');
+		$this->CI->load->library('time_lib');
 	}
 	
 	public function createComments($result)
@@ -56,7 +57,7 @@ class Comments_library
 		
 		//get time diff
 		$time_array = explode(', ', timespan(strtotime($info['date'])));
-		$time_diff = $time_array[0];
+		$time_diff = $this->CI->time_lib->getDecay($info['date']);
 		
 		$pod = '<div class="comment_head">';
 		$pod .= '<img src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;';
@@ -107,7 +108,7 @@ class Comments_library
 
 				//get time diff
 				$time_array = explode(', ', timespan(strtotime($subcomment['date'])));
-				$time_diff = $time_array[0];
+				$time_diff = $this->CI->time_lib->getDecay($subcomment['date']);
 				
 				//$pod .= "<p>--> {$subcomment['comment']}</p>";
 				//$pod .= '<img src="./images/P20_Comment_SubcommentArrow.png"/>';

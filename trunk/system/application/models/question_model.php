@@ -113,8 +113,7 @@ class Question_model extends Model
 		// get our tags real quick & determine how old the question is
 		foreach($results as $k=>$v) {
 			foreach($this->tag_model->getTagsByQuestion($v['question_id']) as $v2)
-				$results[$k]['tags'][] = $v2['value'];
-			$results[$k]['days_old'] = floor((time() - strtotime($v['date']))/86400);	
+				$results[$k]['tags'][] = $v2['value'];	
 		}
 		return $results;
 	}

@@ -7,6 +7,7 @@ class Votes extends Controller
 		parent::Controller();
 		$this->load->model('question_model');
 		$this->load->model('vote_model');
+		$this->load->library('time_lib');
 	}
 	
 	public function who($question_id)
@@ -20,7 +21,7 @@ class Votes extends Controller
 		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
 		else $data['avatar_path'] = "./images/image01.jpg";
 		//get time diff
-		$time_diff = timespan(strtotime($data['date']));
+		$time_diff = $this->time_lib->getDecay($data['date']);
 		//set event type
 		$data['event_type'] = 'question';
 		//get voted

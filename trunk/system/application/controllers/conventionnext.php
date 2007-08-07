@@ -11,6 +11,7 @@ class Conventionnext extends Controller
 		$this->load->model('Vote_model','vote');
 		$this->load->model('Event_model','event');
 		$this->load->library('validation');
+		$this->load->library('time_lib');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
 		$this->load->model('tag_model', 'tag');
@@ -230,8 +231,7 @@ class Conventionnext extends Controller
 			if ($image_array) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
 			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";	
 			//get time diff
-			$time_array = explode(', ', timespan(strtotime($data['results'][$key]['date'])));
-			$data['results'][$key]['time_diff'] = $time_array[0];
+			$data['results'][$key]['time_diff'] = $this->time_lib->getDecay($data['results'][$key]['date']);
 		}
 		
 		//get event details
