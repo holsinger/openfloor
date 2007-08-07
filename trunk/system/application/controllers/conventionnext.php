@@ -257,12 +257,13 @@ class Conventionnext extends Controller
 				$cloud_array = $cloud->showCloud('array');
 				$this->load->library('tag_lib');
 				$data['cloud'] = $this->tag_lib->createTagLink($cloud_array);
-				foreach($data['results'] as $k1=>$question) 
-					foreach($question['tags'] as $k2=>$tag) 
-						$data['results'][$k1]['tags'][$k2]=$this->tag_lib->createTagLink($tag);
+				foreach($data['results'] as $k1=>$question)
+				 	if(!empty($question['tags']))
+						foreach($question['tags'] as $k2=>$tag) 
+							$data['results'][$k1]['tags'][$k2]=$this->tag_lib->createTagLink($tag);
 			}
 		}	
-
+		
 		$this->load->view('view_queue',$data);	
 	}		
 	
