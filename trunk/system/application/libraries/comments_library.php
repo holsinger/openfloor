@@ -89,6 +89,7 @@ class Comments_library
 		$pod .= form_hidden('event_type', $this->type);
 		$pod .= "<input type=\"submit\" value=\"Comment\" class=\"button\" />";
 		$pod .= form_close();
+		$pod .= "<br />";
 		$pod .= "</div>";
 				
 		// add subcomments
