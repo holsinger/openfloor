@@ -215,7 +215,7 @@ class User extends Controller {
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "login"){ // Get identity from user and redirect browser to OpenID Server
 			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_POST['openid_url']);
-			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_NAME'].'/p20/' );
+			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_NAME']);
 			$this->simpleopenid->SetRequiredFields(array('email'));
 			$this->simpleopenid->SetOptionalFields(array('fullname','dob','gender','postcode','country','language','timezone'));
 			if ($this->simpleopenid->GetOpenIDServer()){
@@ -250,6 +250,8 @@ class User extends Controller {
 					exit();						
 				} else {
 					$data['error'] = 'No user record found for: '.$_GET['openid_identity'];
+					$data['error'] .= '<br />Have you registered your OpenID with Politic2.0  by '.anchor('user/createAccount','Creating an Account?');
+					
 					//$this->load->view('view_login',$data);
 				}
 				
@@ -279,7 +281,7 @@ class User extends Controller {
 		if (isset($_POST['openid_action']) && $_POST['openid_action'] == "create"){ // Get identity from user and redirect browser to OpenID Server
 			$this->load->library('SimpleOpenID');
 			$this->simpleopenid->SetIdentity($_POST['openid_url']);
-			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_NAME'].'/p20/' );
+			$this->simpleopenid->SetTrustRoot('http://'.$_SERVER['SERVER_NAME']);
 			$this->simpleopenid->SetRequiredFields(array('email'));
 			$this->simpleopenid->SetOptionalFields(array('fullname','dob','gender','postcode','country','language','timezone'));
 			if ($this->simpleopenid->GetOpenIDServer()){
