@@ -4,6 +4,9 @@ class UserAuth {
 	
 	var $user_id = 0;
 	var $user_karma = 0;
+	var $user_name = '';
+	var $user_avatar = '';
+	var $user_avatar_path = '';
 	
 	function __construct() {
 		
@@ -33,7 +36,15 @@ class UserAuth {
 			$user_array = $this->CI->user->get_user($this->CI->session->userdata('user_id'));
 			$this->user_karma = $user_array['user_karma'];
 			$this->user_name = $user_array['user_name'];
-			$this->user_avatar = $user_array['user_avatar'];
+			
+			$image_array = unserialize($user_array['user_avatar']);
+			if ($image_array) {
+				$this->user_avatar_path = "./avatars/".$image_array['file_name'];
+				$this->user_avatar = $image_array['file_name'];
+			}	else 	{
+				$this->user_avatar_path = "./images/image01.jpg";
+				$this->user_avatar = 'image01.jpg';
+			} 
 			#TODO check user security level get all user info
 		}
 	}
