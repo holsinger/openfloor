@@ -1005,3 +1005,65 @@ herald_hr,
 	position:relative;
 	top:4px;
 }
+
+/* ============ */
+/* = Comments = */
+/* ============ */
+.c_content
+{
+background-color:#f0faff;
+}
+/* =============== */
+/* = Subcomments = */
+/* =============== */
+.sc_container
+{
+background-color: #f0faff;
+}
+
+.sc_leftnav
+{
+float: left;
+width: 57px;
+}
+
+.sc_content
+{
+margin-left: 57px;
+background-color:#f0faff;
+}
+
+.sc_header {
+	height:29px;
+	background-color:#c6e5f6;
+}
+.thumb_block, .num_votes {
+	float: right;
+}
+.thumb_block {
+	background-color:#0173ba;
+	padding:5px;
+}
+.num_votes {
+	margin-top:3px;
+	padding:4px;
+	height:15px;
+	background-color:#ffffff;
+}
+.info {
+	float:left;
+	position:relative;
+	left:4px;
+	top:2px;
+}
+
+.sc_votes {
+	color:#F04A54;
+	text-decoration: underline;
+}
+
+.sc_image {
+	position:relative;
+	left:2px;
+	top:4px;
+}

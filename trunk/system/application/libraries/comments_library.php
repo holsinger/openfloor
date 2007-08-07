@@ -54,44 +54,52 @@ class Comments_library
 		if ($image_array) $avatar_path = $image_array['file_name'];
 		else $avatar_path = "image01.jpg";
 		
-		
 		//get time diff
 		$time_array = explode(', ', timespan(strtotime($info['date'])));
 		$time_diff = $this->CI->time_lib->getDecay($info['date']);
-		
-		$pod = '<div class="comment_head">';
-		$pod .= '<img src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;';
-		$pod .= 'by '.anchor('user/profile/'.$info['user_name'],$info['user_name']);
-		$pod .= " ({$time_diff} ago)";
-		$pod .= "<span class='comment_voting'>";
-		if ($voted < 0) {
-			$pod .= "<img src='./images/thumbsUp.png' border='0'>";
-			$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-		} else if ($voted > 0) {
-			$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-			$pod .= " <img src='./images/thumbsDown.png' border='0'>";
-		} else {
-			$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
-			$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
-		}
-		$pod .= "</span>";
-		$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
-		$pod .= '</div>';
-		$pod .= "<p>{$info['comment']}</p>";
+		$pod = 
+		'<div class="sc_container">
+			<div class="c_content">
+				<div class="sc_header">
+					<div class="info">
+						<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
+						.anchor('user/profile/'.$info['user_name'],$info['user_name']).
+						' ('.$time_diff.' ago)'.'
+					</div>	
+					<div class="thumb_block">';
+					if ($voted < 0) {
+						$pod .= "<img src='./images/thumbsUp.png' border='0'>";
+						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+					} else if ($voted > 0) {
+						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+						$pod .= " <img src='./images/thumbsDown.png' border='0'>";
+					} else {
+						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
+						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+					}				
+		$pod .=			
+					'</div>
+					<div class="num_votes">
+						<span class="sc_votes">'.$votes.' VOTES</span>
+					</div>		
+				</div>
+				<p>'.$info['comment'].'</p>
+			</div>
+		</div>';
 		
 		// subcommenting form
-		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> ";
-		$pod .= '<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">';
-		$pod .= form_open('comment/addCommentAction');
-		$pod .= form_input(array('class' => 'txt', 'size' => 36, 'name' => 'comment'));
-		$pod .= form_hidden('parent_id', $info['comment_id']);
-		$pod .= form_hidden('event_name', $this->event_name);
-		$pod .= form_hidden('name', $this->name);
-		$pod .= form_hidden('event_type', $this->type);
-		$pod .= "<input type=\"submit\" value=\"Comment\" class=\"button\" />";
-		$pod .= form_close();
-		$pod .= "<br />";
-		$pod .= "</div>";
+		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> "
+		.'<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">'
+		.form_open('comment/addCommentAction')
+		.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment'))
+		.form_hidden('parent_id', $info['comment_id'])
+		.form_hidden('event_name', $this->event_name)
+		.form_hidden('name', $this->name)
+		.form_hidden('event_type', $this->type)
+		."<input type=\"submit\" value=\"Comment\" class=\"button\" />"
+		.form_close()
+		."<br />"
+		."</div>";
 				
 		// add subcomments
 		if ($subcomments) {
@@ -110,28 +118,38 @@ class Comments_library
 				$time_array = explode(', ', timespan(strtotime($subcomment['date'])));
 				$time_diff = $this->CI->time_lib->getDecay($subcomment['date']);
 				
-				//$pod .= "<p>--> {$subcomment['comment']}</p>";
-				//$pod .= '<img src="./images/P20_Comment_SubcommentArrow.png"/>';
-				$pod .= '<div class="comment_head">';
-				$pod  .= '<span class="subcomment_arrow"><img src="./images/P20_Comment_SubcommentArrow.png"/></span>';
-				$pod .= '<img src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;';
-				$pod .= 'by '.anchor('user/profile/'.$subcomment['user_name'],$subcomment['user_name']);
-				$pod .= " ({$time_diff} ago)";
-				$pod .= "<span class='comment_voting'>";
-				if ($voted < 0) {
-					$pod .= "<img src='./images/thumbsUp.png' border='0'>";
-					$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-				} else if ($voted > 0) {
-					$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-					$pod .= " <img src='./images/thumbsDown.png' border='0'>";
-				} else {
-					$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
-					$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
-				}
-				$pod .= "</span>";
-				$pod .= "<span class='comment_vote'>{$votes} VOTES</span>"; 
-				$pod .= '</div>';
-				$pod .= "<p>{$subcomment['comment']}</p>";
+				$pod .= 
+				'<div class="sc_container">
+					<div class="sc_leftnav">
+						<img src="./images/P20_Comment_SubcommentArrow.png"/>
+					</div>
+					<div class="sc_content">
+						<div class="sc_header">
+							<div class="info">
+								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
+								.anchor('user/profile/'.$subcomment['user_name'],$subcomment['user_name']).
+								' ('.$time_diff.' ago)'.'
+							</div>	
+							<div class="thumb_block">';
+							if ($voted < 0) {
+								$pod .= "<img src='./images/thumbsUp.png' border='0'>";
+								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+							} else if ($voted > 0) {
+								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+								$pod .= " <img src='./images/thumbsDown.png' border='0'>";
+							} else {
+								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
+								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+							}				
+				$pod .=			
+							'</div>
+							<div class="num_votes">
+								<span class="sc_votes">'.$votes.' VOTES</span>
+							</div>		
+						</div>
+						<p>'.$subcomment['comment'].'</p>
+					</div>
+				</div>';
 			}
 		}
 		
