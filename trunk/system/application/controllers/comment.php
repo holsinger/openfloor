@@ -38,7 +38,7 @@ class Comment extends Controller
 		if($type  == 'question') {
 			$this->load->model('question_model', 'model');
 		
-			$question_info = $this->model->get_question('', $question_name);		
+			$question_info = $this->model->get_question('', $name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
 			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
@@ -67,7 +67,7 @@ class Comment extends Controller
 		if($type == 'question') {
 			$this->load->model('question_model', 'model');
 		
-			$question_info = $this->model->get_question('', $question_name);		
+			$question_info = $this->model->get_question('', $name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
 			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
