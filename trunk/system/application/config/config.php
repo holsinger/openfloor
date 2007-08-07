@@ -11,7 +11,7 @@
 |	http://www.your-site.com/
 |
 */
-$config['base_url']	= "http://localhost/~Rob/Politic20/";
+$config['base_url']	= "http://www.politic20.com";
 
 /*
 |--------------------------------------------------------------------------
@@ -163,7 +163,7 @@ $config['function_trigger'] = 'm';
 | your log files will fill up very fast.
 |
 */
-$config['log_threshold'] = 4;
+$config['log_threshold'] = 0;
 
 /*
 |--------------------------------------------------------------------------
