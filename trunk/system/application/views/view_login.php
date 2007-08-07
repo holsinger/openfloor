@@ -19,7 +19,7 @@
 	<?= form_hidden('openid_action','login'); ?>
 	<br />
 	<div>
-		<a href="http://www.myopenid.com/" class="link" target='_top'>Get an OpenID</a>
+		<small>To login with your OpenID please make sure you register your<br /> OpenID with us first by <?=anchor('user/createAccount','Creating an Account');?>.</small>
 	</div>
 	<br /><?= form_submit('','Login','class="button"'); ?>
 	<?= form_close(); ?>
