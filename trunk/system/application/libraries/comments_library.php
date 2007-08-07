@@ -50,8 +50,8 @@ class Comments_library
 		
 		#resize image
 		$image_array = unserialize($info['user_avatar']);
-		if ($image_array) $avatar_path = "./avatars/".$image_array['file_name'];
-		else $avatar_path = "./images/image01.jpg";
+		if ($image_array) $avatar_path = $image_array['file_name'];
+		else $avatar_path = "image01.jpg";
 		
 		
 		//get time diff
@@ -59,7 +59,7 @@ class Comments_library
 		$time_diff = $time_array[0];
 		
 		$pod = '<div class="comment_head">';
-		//$pod .= '<img src="./images/shrink.php?imgpath='.$avatar_path.'&qt=70&width=16&height=16">';
+		$pod .= '<img src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;';
 		$pod .= 'by '.anchor('user/profile/'.$info['user_name'],$info['user_name']);
 		$pod .= " ({$time_diff} ago)";
 		$pod .= "<span class='comment_voting'>";
@@ -102,8 +102,8 @@ class Comments_library
 
 				#resize image
 				$image_array = unserialize($subcomment['user_avatar']);
-				if ($image_array) $avatar_path = "./avatars/".$image_array['file_name'];
-				else $avatar_path = "./images/image01.jpg";
+				if ($image_array) $avatar_path = $image_array['file_name'];
+				else $avatar_path = "image01.jpg";
 
 				//get time diff
 				$time_array = explode(', ', timespan(strtotime($subcomment['date'])));
@@ -113,7 +113,7 @@ class Comments_library
 				//$pod .= '<img src="./images/P20_Comment_SubcommentArrow.png"/>';
 				$pod .= '<div class="comment_head">';
 				$pod  .= '<span class="subcomment_arrow"><img src="./images/P20_Comment_SubcommentArrow.png"/></span>';
-				//$pod .= '<img src="./images/shrink.php?imgpath='.$avatar_path.'&qt=70&width=16&height=16">';
+				$pod .= '<img src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;';
 				$pod .= 'by '.anchor('user/profile/'.$subcomment['user_name'],$subcomment['user_name']);
 				$pod .= " ({$time_diff} ago)";
 				$pod .= "<span class='comment_voting'>";
