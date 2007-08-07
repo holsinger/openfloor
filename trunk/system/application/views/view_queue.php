@@ -1,5 +1,4 @@
 <?
-
 $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
@@ -16,7 +15,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">
 	<? endif; ?>
 	<? if(!isset($ajax) && $event_type == 'question'): ?>
-	<img src="<?=base_url();?>/images/nothing.gif" onLoad="queueUpdater.updateQueue();">
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';queueUpdater.updateQueue();">
 	<? endif; ?>
 	<?
 	if ($event_type == 'video')
