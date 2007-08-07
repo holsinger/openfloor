@@ -184,7 +184,7 @@ class Question extends Controller
 		$time_array = explode(', ', timespan(strtotime($data['date'])));
 		$data['time_diff'] = $time_array[0];
 		//get voted
-		if ($this->session->userdata('user_id')>0) {
+		if ($this->userauth->isUser()) {
 			$this->vote->type='question';
 			$score = $this->vote->votedScore($data['question_id'],$this->session->userdata('user_id'));
 			if ($score > 0) $data['voted'] = 'up';
