@@ -50,13 +50,13 @@ class Conventionnext extends Controller
 				if(!empty($data['current_question']))
 					echo '<p>' . $data['current_question'][0]['question_name'] . '</p>';
 				else
-					echo '<p>There is no current question</p>';
+					echo 'There is no current question';
 				break;
 			case 'upcoming_questions':
 				foreach($data['questions'] as $question) {
-						$votes = ($question['votes'] == 1) ? 'vote' : 'votes' ;
-						echo "<p><span class=\"votes\">{$question['votes']} $votes</span>";
-						echo "<span class=\"question\">{$question['question_name']}</span></p>";
+						$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ;
+						echo "<div class='queue-question'><span class=\"votes\"><p>{$question['votes']} $votes<p></span>";
+						echo "<span class=\"question\">{$question['question_name']}</span></div><br />";
 				}
 				break;
 			default:
