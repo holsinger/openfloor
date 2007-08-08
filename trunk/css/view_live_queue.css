@@ -8,14 +8,14 @@ body {
 	background-color:#FFFFFF;
 	color:#0173ba;
 	height:100%;	
-	font-size:14px;
+	font-size:16px;
 	min-width:575px;
 }
 .current_question {
 	margin-left:50px;
 	color:#EC2834;
 	font-weight:bold;
-	font-size: 15px;
+	font-size: 18px;
 }
 .queue-question {
 	margin-left:15px;
