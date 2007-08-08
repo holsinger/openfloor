@@ -145,7 +145,8 @@ class User_model extends Model {
 	 * @autho James Kleinschnitz
 	 * */
 	function login_user ($user_name,$user_id) {
-		$data['user_name'] = $user_name;
+		#TODO remove user_name from the sessions use userauth obj
+		$data['user_name'] = $user_name; 
 		$data['user_id'] = $user_id;
 		$data['logged_in'] = "asdjfhlak#adsfLKJHJ";
 		
