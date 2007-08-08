@@ -16,7 +16,8 @@
 </head>
 <body>
 <script language="JavaScript">
-TargetDate = "08/08/2007 7:45 PM";
+//TargetDate = "08/08/2007 7:45 PM";
+TargetDate = "<?=$date?>";
 BackColor = "white";
 ForeColor = "navy";
 CountActive = true;

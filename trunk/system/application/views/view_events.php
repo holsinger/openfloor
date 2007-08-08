@@ -25,6 +25,7 @@ $data['red_head'] = 'Events';
 			<b>Where:</b> <?=$array['location'];?><br />
 			<b>Description:</b> <?=$array['event_desc_brief'];?>
 			</p>
+			<p><strong><?=anchor_popup('information/videoFeed/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', array())?></strong></p>
 		</div>
 		<br />
 		<? if ($this->userauth->isAdmin()) echo $array['edit'];?>

@@ -76,6 +76,8 @@ class Information extends Controller {
 		$this->load->model('Event_model','event');
 		$event_id = $this->event->get_id_from_url($event);
 		$array = $this->event->get_event($event_id);
+		$array['date'] = date('m/d/Y g:i A', strtotime($array['event_date']));	
+		
 		//check ip
 		$array['ip'] = $this->_getIP();
 		if ($array['ip'] == '166.70.140.70') $array['blocked'] = true;
