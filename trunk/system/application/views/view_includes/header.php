@@ -41,7 +41,7 @@ $this->load->view('view_includes/view_center_head.php',$data);
 <? 
 //set vars for right column
 //$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
-$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
+$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('events'=>array(),'gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
 if (isset($cloud)) {
 	$data['rightpods']['dynamic']['tag_cloud']= $cloud;
 } else $data['cloud'] = FALSE;
