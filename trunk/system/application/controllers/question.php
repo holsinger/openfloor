@@ -136,15 +136,30 @@ class Question extends Controller
 	function edit () 
 	{
 		$data['error'] = "";
+		$oldCurrent = 0;
 		if (isset($_POST['question_id'])) 
 		{
+			//change status
 			$changed = $this->question->updateQuestion($_POST['question_id'],$_POST);
+			//check that this event has no other current questions
+			if ($_POST['question_status'] == 'current') {
+				$question_id =$_POST['question_id'];
+				$event_id = $this->event->get_id_from_url($_POST['event_url_name']);
+				$oldCurrent = $this->question->singleCurrent($event_id,$question_id);
+			}
 			if ($changed > 0)
 			{
-				$data['error'] = "{$changed} record(s) updated.";
+				$array = $this->question->get_question($changed);
+				$data['error'] = "{$array['question_name']} changed to 'Current'";
 			}
 		}
-		$question_id = $this->uri->segment(3);
+		if ( $oldCurrent>0 && $oldCurrent != $_POST['question_id']) {
+			$question_id = $oldCurrent;
+			$array = $this->question->get_question($question_id);
+			$data['error'] .= "<br />{$array['question_name']} changed to 'Asked'";
+		} else {
+			$question_id = $this->uri->segment(3);
+		}
 		$question_data = $this->question->get_question ($question_id);
 		$event_data = $this->event->get_event ($question_data['fk_event_id']);
 		$data['event'] = $event_data;
