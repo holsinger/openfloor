@@ -156,5 +156,25 @@ class Question_model extends Model
 		$result = $this->db->query("SELECT count(*) as count FROM cn_questions WHERE fk_event_id=$event_id")->result_array();
 		return $result[0]['count'];
 	}
+	
+	/**
+	 * make sure the given event has only the given question marked current
+	 **/
+	public function singleCurrent ($event_id,$question_id) {
+		$this->db->where('fk_event_id',$event_id);
+		$this->db->where('question_id !=',$question_id);
+		$this->db->where('question_status','current');
+		$query = $this->db->get('cn_questions');
+		log_message('debug', "QUESTIONS:singleCurrent:".trim($this->db->last_query()));
+		$result_array = $query->result_array();
+		foreach ($result_array as $row) {
+			$this->db->where('question_id',$row['question_id']);
+			$this->db->set ('question_status','asked');
+			$this->db->update('cn_questions');
+			$question_id = $row['question_id'];
+		}
+		return $question_id;
+	}
+	 
 }
 ?>
