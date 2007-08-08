@@ -8,14 +8,14 @@ body {
 	background-color:#FFFFFF;
 	color:#0173ba;
 	height:100%;	
-	font-size:11px;
+	font-size:14px;
 	min-width:575px;
 }
 .current_question {
 	margin-left:50px;
 	color:#EC2834;
 	font-weight:bold;
-	font-size: 12px;
+	font-size: 15px;
 }
 .queue-question {
 	margin-left:15px;
@@ -25,11 +25,13 @@ body {
 	height:23px;
 	vertical-align: middle;
 	border:1px solid #053C7C;
+	font-weight: bold;
 }
 .question {
 	widht:100%;
 	background:#F0FAFF;
 	vertical-align: middle;
+	font-weight: bold;
 }
 span.votes {
 	border: 5px solid #053C7C;	
