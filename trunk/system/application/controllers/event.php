@@ -59,7 +59,8 @@ class Event extends Controller
 		$data['error'] = $error;		
 		
 		//$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
-    $data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');	
+		$data['rightpods'] = array('gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');	
 		$this->load->view('view_events',$data);
 	}
 	
