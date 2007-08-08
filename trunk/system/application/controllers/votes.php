@@ -38,9 +38,17 @@ class Votes extends Controller
 		
 		$voteHtml = '';
 		foreach ($votes as $vote) {
+			//echo '<pre>'; print_r($vote); echo '</pre>';
+			
+			#resize image
+			$vote_image_array = unserialize($vote['user_avatar']);
+			if ($vote_image_array) $vote_avatar_path = $vote_image_array['file_name'];
+			else $vote_avatar_path = "image01.jpg";
+			
 			$vote_time = $this->time_lib->getDecay($vote['timestamp']);
 			$vote_value = ($vote['vote_value'] > 0) ? 'voted <img src="./images/thumbsUp.png"> in favor' : 'voted <img src="./images/thumbsDown.png"> against' ;
-			$voteHtml .= '<div class="votes_head">'.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
+			$voteHtml .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
+			.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
 		}
 		$data['votedHtml'] = $voteHtml;
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
