@@ -7,7 +7,7 @@ $data['event_url'] = "event/".url_title($event_name);
 $this->load->view('view_includes/header.php',$data);
 ?>
 <?
-$days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
+//$days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 ?>
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<!-- raiting topics start here -->
@@ -43,14 +43,14 @@ $days_old = ($days_old > 0) ? $days_old . ' days ago' : 'today' ;
 							</h3>
 							<div class="autor">
 								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
-								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ' . $days_old;?>
+								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' (' . $time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<p>
-									Tags: <? foreach($tags as $tag) echo anchor("conventionnext/queue/event/".url_title($event_name)."/tag/".$tag,$tag);?>
+									Tags: <? foreach($tags as $tag) echo anchor("conventionnext/queue/event/".url_title($event_name)."/tag/".$tag,$tag) . ', ';?>
 								</p>
 							</div>
 						<p><?=$question_desc;?></p>

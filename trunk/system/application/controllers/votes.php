@@ -21,7 +21,7 @@ class Votes extends Controller
 		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
 		else $data['avatar_path'] = "./images/image01.jpg";
 		//get time diff
-		$time_diff = $this->time_lib->getDecay($data['date']);
+		$data['time_diff'] = $this->time_lib->getDecay($data['date']);
 		//set event type
 		$data['event_type'] = 'question';
 		//get voted
@@ -38,8 +38,9 @@ class Votes extends Controller
 		
 		$voteHtml = '';
 		foreach ($votes as $vote) {
+			$vote_time = $this->time_lib->getDecay($vote['timestamp']);
 			$vote_value = ($vote['vote_value'] > 0) ? 'voted <img src="./images/thumbsUp.png"> in favor' : 'voted <img src="./images/thumbsDown.png"> against' ;
-			$voteHtml .= '<div class="votes_head">'.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$time_diff.' ago </div><br />';
+			$voteHtml .= '<div class="votes_head">'.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
 		}
 		$data['votedHtml'] = $voteHtml;
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
