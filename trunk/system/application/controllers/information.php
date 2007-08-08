@@ -71,5 +71,27 @@ class Information extends Controller {
 		
 		exit();
 	}
+	
+	function videoFeed ($event) {
+		$this->load->model('Event_model','event');
+		$event_id = $this->event->get_id_from_url($event);
+		$array = $this->event->get_event($event_id);
+		//check ip
+		$array['ip'] = $this->_getIP();
+		if ($array['ip'] == '166.70.140.70') $array['blocked'] = true;
+		else $array['blocked'] = false;
+		$this->load->view('view_cn_feed',$array);
+	}
+	
+	private function _getIP() { 
+		$ip; 
+	
+		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP"); 
+		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR"); 
+		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR"); 
+		else $ip = "UNKNOWN"; 
+	
+		return $ip; 
+	} 
 }
 ?>
