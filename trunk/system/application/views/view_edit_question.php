@@ -1,6 +1,6 @@
 <?
 $data['red_head'] = 'Questions';
-$data['tabs'] = TRUE;
+$data['tabs'] = 'question';
 $data['tab_view_question'] = 'active';
 $data['event_url'] = "event/{$event['event_url_name']}";
 ?>
@@ -28,6 +28,7 @@ $data['event_url'] = "event/{$event['event_url_name']}";
 		}
 		?>
 		<? echo form_hidden("question_id",$question['question_id']); ?>  
+		<? echo form_hidden("event_url_name",$event['event_url_name']); ?>
 		<br /><br />
 		<?= form_submit('','Edit Question','class="button"'); ?>		
 		<?= form_close(); ?>
