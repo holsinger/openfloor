@@ -82,6 +82,7 @@ class Information extends Controller {
 		$array['ip'] = $this->_getIP();
 		if ($array['ip'] == '166.70.140.70') $array['blocked'] = true;
 		else $array['blocked'] = false;
+		
 		$this->load->view('view_cn_feed',$array);
 	}
 	
