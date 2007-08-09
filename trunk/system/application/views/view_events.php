@@ -9,7 +9,7 @@ $data['red_head'] = 'Events';
   <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
   <? if ($this->userauth->isAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
   
-  <h3>Upcoming Events</h3>	
+  <h3>Events</h3>	
   
   	<div id="event_view">
 
