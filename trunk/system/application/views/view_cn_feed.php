@@ -29,7 +29,7 @@ FinishMessage = "It is finally here!";
 </script>
 <div style="background:#FFFFFF;height:100%;">
 
-/*
+<?/*
 <br />
 Live feed of <?=$event_name;?> will be available: 
 <br />
