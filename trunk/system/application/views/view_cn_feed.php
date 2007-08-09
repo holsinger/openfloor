@@ -54,5 +54,7 @@ Live feed of <?=$event_name;?> will be available:
 <? } else { ?>
 <p>Users at the live event will <br />be blocked from the live feed.</p>
 <? } ?>
+<?=anchor('information/videoFeedLow/' . url_title($event_name), 'Low bandwidth feed')?>
+</div>
 </body>
 </html>
