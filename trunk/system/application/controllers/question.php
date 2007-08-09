@@ -188,6 +188,7 @@ class Question extends Controller
 	{
 		
 		$question_id = $this->question->get_id_from_url($question);
+		$this->question->question_status = null;
 		$this->question->question_id = $question_id;
 		$result = $this->question->questionQueue();
 		$data = $result[0];
