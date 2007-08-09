@@ -15,7 +15,7 @@
 	<!-- Date: 2007-08-02 -->
 </head>
 <body>
-<?/*
+
 <script language="JavaScript">
 //TargetDate = "08/08/2007 7:45 PM";
 TargetDate = "<?=$date?>";
@@ -29,7 +29,7 @@ FinishMessage = "It is finally here!";
 </script>
 <div style="background:#FFFFFF;height:100%;">
 
-
+/*
 <br />
 Live feed of <?=$event_name;?> will be available: 
 <br />
@@ -37,7 +37,8 @@ Live feed of <?=$event_name;?> will be available:
 </div>
 */?>
 <br />
-<?if (!$blocked) { ?>
+The Event is Over.<br /> Look for a copy of the feed on our Blog.
+<?/*if (!$blocked) { ?>
 <!-- Begin Flash Video for VitalStream FVSS -->
 <!-- Note: Extra space was added to "width=" & "height=" for the size of the skin -->
 <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" width="320" height="240" id="FLVPlayer">
@@ -53,8 +54,8 @@ Live feed of <?=$event_name;?> will be available:
 <!-- End Flash Video for VitalStream FVSS -->
 <? } else { ?>
 <p>Users at the live event will <br />be blocked from the live feed.</p>
-<? } ?>
-<?=anchor('information/videoFeedLow/' . url_title($event_name), 'Low bandwidth feed')?>
+<? } */?>
+<?//=anchor('information/videoFeedLow/' . url_title($event_name), 'Low bandwidth feed')?>
 </div>
 </body>
 </html>
