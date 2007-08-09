@@ -25,7 +25,18 @@ $data['red_head'] = 'Events';
 			<b>Where:</b> <?=$array['location'];?><br />
 			<b>Description:</b> <?=$array['event_desc_brief'];?>
 			</p>
-			<p><strong><?=anchor_popup('information/videoFeed/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', array())?></strong></p>
+			<?
+			$atts = array(
+              'width'      => '372',
+              'height'     => '280',
+              'scrollbars' => 'no',
+              'status'     => 'no',
+              'resizable'  => 'no',
+              'screenx'    => '0',
+              'screeny'    => '0'
+            );
+       ?>
+			<p><strong><?=anchor_popup('information/videoFeed/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
 		</div>
 		<br />
 		<? if ($this->userauth->isAdmin()) echo $array['edit'];?>
