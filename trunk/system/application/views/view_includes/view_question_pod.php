@@ -1,4 +1,4 @@
-<div class="news-summary" id="xnews-<?= $question_id; ?>">
+<?//echo '<pre>'; print_r($data); echo '</pre>';?><div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<!-- raiting topics start here -->
 	<div class="raiting" >
 		<span id="xvote-<?= $question_id; ?>" class="next_invisible">
@@ -44,8 +44,8 @@
 							</div>
 						<p><?=substr($question_desc,0,150);?> <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more&raquo;","class='more'");?></p>
 						<ul class="options">
-							<li class="discuss"><?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),'Discuss');?></li>
-							<li class="votes"><?=anchor("votes/who/{$question_id}"," Votes");?></li> 	
+							<li class="discuss"><?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name), $comment_count . ' Comments');?></li>
+							<li class="votes"><?=anchor("votes/who/{$question_id}", $vote_count . " Votes");?></li> 	
 							<!--  <li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li> -->
 						</ul>					
 						<span id="emailto-5" style="display:none"></span>
