@@ -519,5 +519,58 @@ class User extends Controller {
 		echo 'User successfully edited!';
 		$this->view_users();
 	}
+
+	public function password_reset($error = '')
+	{
+		if($error == 'na') $error = 'There is no account associated with that e-mail address';
+		$data['error'] = str_replace('_',' ',$error);
+		$this->load->view('user/password_reset_view', $data);
+	}
+	
+	public function password_reset_form()
+	{
+		$error = '';
+		$rules['user_email'] = 'trim|required';
+		
+		$this->validation->set_rules($rules);
+		if ($this->validation->run() == FALSE) 
+			$error = $this->validation->error_string;
+		
+		if(!$error) $this->user->password_reset($_POST['user_email']);		
+		
+		$this->password_reset($error);
+	}
+	
+	public function reset_password($user_id, $auth, $error='')
+	{
+		$data['error'] = str_replace('_',' ',$error);
+		$data['user_id'] = $user_id;
+		$data['auth'] = $auth;
+		
+		$this->load->view('user/reset_password_view', $data);
+	}
+	
+	public function reset_password_form()
+	{
+		$error = '';
+		$rules['user_password'] = 'trim|required|matches[user_password_confirm]|md5|xss_clean';
+		$rules['user_password_confirm'] = 'trim|required|xss_clean';
+		
+		$this->validation->set_rules($rules);
+		if ($this->validation->run() == FALSE) 
+			$error = $this->validation->error_string;
+		
+		if(!$error) if(!$this->user->reset_password_validate($_POST['user_id'], $_POST['auth']))
+			$error = 'Unauthorized';
+		if(!$error) if($this->user->reset_password($_POST['user_id'], $_POST['user_password']))
+			$this->load->view('user/successful_password_reset');
+		
+		$this->reset_password($_POST['user_id'], $_POST['auth'], $error);
+	}
+	
+	public function successful_password_reset()
+	{
+		$this->load->view('user/successful_password_reset');
+	}
 }
 ?>

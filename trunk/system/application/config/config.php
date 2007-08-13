@@ -11,7 +11,8 @@
 |	http://www.your-site.com/
 |
 */
-$config['base_url']	= "http://www.politic20.com";
+// $config['base_url']	= "http://www.politic20.com";
+$config['base_url']	= "http://localhost/~Rob/Politic20";
 
 /*
 |--------------------------------------------------------------------------
