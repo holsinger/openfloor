@@ -31,14 +31,14 @@ margin: 			0 0 4px 0;
 	<img src='http://www.politic20.com/images/logo.png'>
 	<br /><br />
 	<br /><br />
-	<h1>Opps! We should fix this!</h1>
-	<div id="content">
+	<h1>Oops! We should fix this!</h1>
+	<!-- <div id="content"> -->
 		<!--<h1><?php echo $heading; ?></h1>-->
 		<?php 
 		//echo $message; 
 		mail('kleinschnitz@wikireview.com',$heading,$message);
 		?>
-	</div>
+	<!-- </div> -->
 	</div>
 </body>
 </html>

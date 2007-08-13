@@ -77,6 +77,7 @@ class User extends Controller {
 	
 	function create () {
 		$error = false;
+		$custom_error = '';
 		
 		$rules['user_name'] = "trim|required|min_length[5]|max_length[45]|xss_clean";
 		//open require if no open id
@@ -88,6 +89,15 @@ class User extends Controller {
 		$this->validation->set_rules($rules);
 					
 		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
+		
+		if ($this->user->userExists(array('user_name' => $_POST['user_name'])))
+			$custom_error .= '<p>User name already taken<p>';
+		if ($this->user->userExists(array('user_email' => $_POST['user_email'])))
+			$custom_error .= '<p>Email address already taken</p>';
+		if($custom_error && $error)
+			$error .= $custom_error;
+		elseif($custom_error)
+			$error = $custom_error;
 		
 		if ( !$error ) {
 			$last_id = $this->user->insert_user_form();

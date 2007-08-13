@@ -293,19 +293,28 @@ class User_model extends Model {
      * @param int $user_id 
      * @param int $user_karma new karma score for a user
      */
-		public function set_karma ($user_id,$user_karma) 
-		{
-			$this->db->where("user_id",$user_id);
-			$this->db->set("user_karma",$user_karma);
-			$this->db->update("cn_users");
-		}
-		
-		public function get_karma ($user_id) 
-		{
+	public function set_karma ($user_id,$user_karma) 
+	{
+		$this->db->where("user_id",$user_id);
+		$this->db->set("user_karma",$user_karma);
+		$this->db->update("cn_users");
+	}
+	
+	public function get_karma ($user_id) 
+	{
 			$this->db->where("user_id",$user_id);
 			$query = $this->db->get("cn_users");
 			$array = $query->result_array();
 			return $array[0]['user_karma'];			
 		}
+
+	public function userExists($user)
+	{
+		$array_keys = array_keys($user);
+		if(!in_array($array_keys[0], array('user_name', 'user_email')) || count($user) != 1)
+			show_error('User_model::userExists: malformed argument');
+		$result = $this->db->getwhere('cn_users', $user)->row_array();
+		return empty($result) ? false : true ;
+	}
 }
 ?>
