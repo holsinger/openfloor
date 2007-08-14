@@ -33,7 +33,7 @@ class YouTubeApi {
 	 	if (file_exists($cachedFileName)) {
 			$resultObj = simplexml_load_file($cachedFileName); 
 	 	} else {
-	 		$contents = file_get_contents($url);
+	 		$contents = curl_get_contents($url);
 	 		$resultObj = simplexml_load_string($contents);
 	 		//if we want to cache the data write the data to a file
 	 		if ($this->cacheData) {

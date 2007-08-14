@@ -1,5 +1,3 @@
-<?'<pre>'; print_r($data); echo '</pre>';?>
-
 <? $this->load->view('view_includes/header.php');?>
 
 <div id="content_div">
