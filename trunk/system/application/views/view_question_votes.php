@@ -16,8 +16,6 @@ $this->load->view('view_includes/header.php',$data);
 			<? if ($voted == 'up') { ?>
 				<a class="voteup">voted</a>			
 			<? } else { ?>
-				<!-- <a href="index.php/question/voteup/<?= url_title($event_name); ?>/question/<?= url_title($question_name); ?>" class="up">up</a> -->
-				<!-- span, class link -->
 				<a href="javascript:queueUpdater.vote(site_url + '/question/voteup/<?= url_title($event_name); ?>/question/<?= url_title($question_name); ?>','xnews-<?= $question_id; ?>');" class="up">up</a>
 			<? } ?>	
 		</span>
@@ -25,12 +23,10 @@ $this->load->view('view_includes/header.php',$data);
 			<? if ($voted == 'down') { ?>
 				<a class="votedown">voted</a>			
 			<? } else { ?>
-				<!-- <a href="index.php/question/votedown/<?= url_title($event_name); ?>/question/<?= url_title($question_name); ?>" class="down">down</a> -->
 				<a href="javascript:queueUpdater.vote(site_url + '/question/votedown/<?= url_title($event_name); ?>/question/<?= url_title($question_name); ?>','xnews-<?= $question_id; ?>');" class="down">down</a>
 			<? } ?>
 		</span>
 		<a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit" title='Who Voted?'><?=(is_numeric($votes))?$votes:0;?></a>
-		<!-- <a id="xvotes-<?= $question_id; ?>" class="vote_digit"><?=(is_numeric($votes))?$votes:0;?></a> -->
 	</div>
 																					
 	<div class="describtion">

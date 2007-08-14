@@ -25,10 +25,10 @@ class Tag_lib {
 		if ($type) {		// generate cloud
 			$cloud = '';
 			foreach ($arg as $v)
-		    	$cloud .= " <a href=\"index.php/$class/$function/tag/{$v['word']}$args\" class=\"size{$v['sizeRange']}\">{$v['word']}</a> &nbsp;";
+				$cloud .= ' ' . anchor("$class/$function/tag/{$v['word']}$args", $v['word'], array('class' => "size{$v['sizeRange']}")) . ' &nbsp;';
 			return $cloud;
 		} else {			// generate single link
-			return "<a href=\"index.php/$class/$function/tag/$arg$args\"\">$arg</a>";
+			return anchor("$class/$function/tag/$arg$args", $arg);
 		}		
 	}
 }

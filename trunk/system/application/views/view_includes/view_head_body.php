@@ -4,7 +4,7 @@
 	<div id="page">
 		<!-- header start here -->
 		<div id="header">
-			<h1><a href="http://www.politic20.com">Politic20</a></h1>
+			<h1><?=anchor('', 'Politic20')?></h1>
 			<? if ($this->userauth->isUser()) { ?>
 			<div id="userLogin">Welcome, <?=anchor("user/profile/{$this->userauth->user_name}",$this->userauth->user_name);?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span><img src="./images/karma_star_default.png" style='top:4px;'>)&nbsp;|&nbsp;<?=anchor('user/profile/'.$this->session->userdata('user_name'),'Manage Account');?>&nbsp;|&nbsp;<?=anchor('user/logout/',"Logout");?></div>
 			<? } else { ?>
@@ -27,7 +27,7 @@
 		<!-- top navigation start here -->
 		<div class="body">
       <ul class="top-nav">
-  			<li><span><a href="<?= $this->config->site_url();?>">Home</a></span></li>
+  			<li><?=anchor('', 'Home')?></li>
   			<li><?=anchor("event/","Events");?></li>
   			<li><?=anchor("information/view/about_us","About Us");?></li>  			
   			<li><a href="http://blog.politic20.com">Blog</a></li>  

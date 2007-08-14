@@ -46,7 +46,7 @@
 						
 						<ul class="options">
 							<li class="play_video"><a class='link' onClick="ajaxVideo.playYouTubeVideo('<?=$video_youtude_id;?>')">Play Video</a></li>
-							<li class="discuss"><a href="index.php/video/queue/<?= $event_url; ?>/video/<?= url_title($video_title); ?>">Discuss</a></li> 	
+							<li class="discuss"><?=anchor("index.php/video/queue/$event_url/video/" . url_title($video_title), 'Discuss')?></li> 	
 							<li class="tell-friend" id="ls_recommend-5"><a href="javascript://" onclick="show_recommend(5, 58, '<?= $this->config->site_url();?>');">Tell a friend</a></li>
 						</ul>
 						<span id="emailto-5" style="display:none"></span>

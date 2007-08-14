@@ -330,10 +330,11 @@ class User_model extends Model {
 		$this->db->insert('cn_password_reset', array('fk_user_id' => $fk_user_id, 'auth' => $auth));
 		if($this->db->affected_rows() == 1) {
 			$url = site_url("user/reset_password/$fk_user_id/$auth");
-			$message = "Reset your password by following this link: <a href=\"$url\">$url</a>";
-			$subject = "Politic20.com Password Reset";
+			$message = 'Reset your password by following this link: ' . anchor($url, $url);
+			$heading = "Politic20.com Password Reset";
 			// mail($result->user_email, $subject, $message);
-			// redirect();
+			//mail('kleinschnitz@wikireview.com',$heading,$message);
+			//redirect();
 			
 			// temporary
 			echo $message;
