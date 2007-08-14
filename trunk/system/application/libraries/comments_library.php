@@ -88,6 +88,9 @@ class Comments_library
 		</div>';
 		
 		// subcommenting form
+		$submit = ($this->CI->userauth->isUser()) ? 
+		'<input type="submit" value="Comment" class="button"/>' : 
+		'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
 		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> "
 		.'<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">'
 		.form_open('comment/addCommentAction')
@@ -95,8 +98,8 @@ class Comments_library
 		.form_hidden('parent_id', $info['comment_id'])
 		.form_hidden('event_name', $this->event_name)
 		.form_hidden('name', $this->name)
-		.form_hidden('event_type', $this->type)
-		."<input type=\"submit\" value=\"Comment\" class=\"button\" />"
+		.form_hidden('event_type', $this->type)		
+		.$submit
 		.form_close()
 		."<br />"
 		."</div>";
