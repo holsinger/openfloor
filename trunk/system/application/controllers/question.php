@@ -239,9 +239,8 @@ class Question extends Controller
 		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		
 		#check that user has not voted
-		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
-			exit();
-		}
+		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->session->userdata('user_id')))
+			$this->vote->deleteVote($id, $this->session->userdata('user_id'));
 		
 		#TODO validation and trending need to be considered
 		if($upOrDown) $this->vote->voteup($this->session->userdata('user_id'), $id);

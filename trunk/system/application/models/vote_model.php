@@ -114,6 +114,20 @@ class Vote_model extends Model
 		return $this->db->query("SELECT user_name, vote_value, timestamp FROM cn_votes, cn_users WHERE fk_comment_id = $comment_id AND fk_user_id=user_id")->result_array();
 		// return $this->db->getwhere('cn_votes', array('fk_question_id' => $question_id))->result_array();
 	}
+	
+	public function deleteVote($fk_id, $user_id)
+	{
+		switch ($this->type) 
+		{
+		case 'question':			
+			$this->db->where('fk_question_id', $fk_id);
+			$this->db->where('fk_user_id', $user_id);
+			$this->db->delete('cn_votes');
+			break;
+		default:
+			break;
+		}
+	}
 }
 
 ?>
