@@ -37,7 +37,7 @@ span.votes {
 	border: 5px solid #053C7C;	
 	color:#F04A54;
 	position:relative;
-	top:5px;
+	top:3px;
 }
 span.votes p {
 		padding: 1px;
@@ -60,6 +60,11 @@ h3 {
 
 .votes {
 	font-weight:bold;	
+}
+
+.votebox {
+	position:relative;
+	top:2px;
 }
 
 .question {
