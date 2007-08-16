@@ -536,9 +536,12 @@ class User extends Controller {
 		if ($this->validation->run() == FALSE) 
 			$error = $this->validation->error_string;
 		
-		if(!$error) $this->user->password_reset($_POST['user_email']);		
-		
-		$this->password_reset($error);
+		if(!$error) { 
+			if($this->user->password_reset($_POST['user_email']))
+				$this->load->view('user/sent_password_email.php', $_POST);
+		} else {
+			$this->password_reset($error);
+		}
 	}
 	
 	public function reset_password($user_id, $auth, $error='')
@@ -566,11 +569,6 @@ class User extends Controller {
 			$this->load->view('user/successful_password_reset');
 		
 		$this->reset_password($_POST['user_id'], $_POST['auth'], $error);
-	}
-	
-	public function successful_password_reset()
-	{
-		$this->load->view('user/successful_password_reset');
 	}
 }
 ?>
