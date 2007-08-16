@@ -10,8 +10,10 @@ class Conventionnext extends Controller
 		$this->load->model('Video_model', 'video');
 		$this->load->model('Vote_model','vote');
 		$this->load->model('Event_model','event');
+		$this->load->model('Flag_model','flag');
 		$this->load->library('validation');
 		$this->load->library('time_lib');
+		$this->load->library('flag_lib');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
 		$this->load->model('tag_model', 'tag');
@@ -65,6 +67,53 @@ class Conventionnext extends Controller
 		} else { // if no AJAX request is being made, load the view
 			$this->load->view('view_live_queue', $data);
 		}
+	}
+	
+	public function cp($event = 'salt_lake_city_mayoral_forum', $ajax = null)
+	{
+		// ========
+		// = init =
+		// ========
+		$data['event'] = $event;
+		
+		$event_id = $this->event->get_id_from_url($event);
+		if(!$event_id) exit();
+		$this->question->event_id = $event_id;
+		
+		// get the list of upcoming (pending) questions
+		$data['questions'] = $this->question->questionQueue();
+		foreach ($data['questions'] as $key => $row) {
+			if ($this->userauth->isUser()) {
+				$this->vote->type='question';
+				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
+			} else { 
+				$data['questions'][$key]['voted'] = 0; 
+			}
+		}
+		
+		// get the current question, if any
+		$this->question->question_status = 'current';
+		$data['current_question'] = $this->question->questionQueue();
+		
+		// ==========
+		// = output =
+		// ==========
+		if(isset($ajax)) // AJAX
+		{
+			switch($ajax)
+			{
+			case 'current_question':
+				$this->load->view('user/cp_current_question.php', $data);
+				break;
+			case 'upcoming_questions':
+				$this->load->view('user/cp_upcoming_questions.php', $data);
+				break;
+			default:
+				break;
+			}
+		} else { // NO AJAX
+			$this->load->view('user/cp', $data);
+		}		
 	}
 	
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')

@@ -1,0 +1,1 @@
+<? echo (!empty($current_question)) ? $current_question[0]['question_name']:'There is no current question'; ?>

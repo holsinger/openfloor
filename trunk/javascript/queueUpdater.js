@@ -31,3 +31,16 @@ queueUpdater.vote = function(url,id) {
 	  }
 	});
 }
+
+queueUpdater.flagQuestion = function(question_id, type_id, reporter_id) {
+	url = site_url + '/flag/flagQuestion/' + question_id + '/' + type_id + '/' + reporter_id;
+	if (username.length <= 0) {
+		showBox('login');
+		return;
+	}
+	new Ajax.Request(url, {
+	  onSuccess: function(transport) {
+		  queueUpdater.updateQueueOnce();
+	  }
+	});
+}
