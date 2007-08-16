@@ -18,7 +18,7 @@
 								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' ('.$time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
-								<a id="flaglet" style="float:right;" onclick="javascript:new Effect.toggle('flag<?=$question_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a><!-- Yes, this is temporary -->
+								<!-- <a id="flaglet" style="float:right;" onclick="javascript:new Effect.toggle('flag<?=$question_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a> --><!-- Yes, this is temporary -->
 								<p>
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
