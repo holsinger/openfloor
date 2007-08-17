@@ -11,7 +11,8 @@ class Flag_model extends Model
     
 	public function getFlagTypes()
 	{
-		return $this->db->get('cn_flag_types')->result();
+		if(!in_array($this->type, array('question', 'user'))) show_error('Flag_model::type: invalid type');		
+		return $this->db->get("cn_flag_types_{$this->type}")->result();
 	}
 	
 	public function alreadyFlagged($fk_id, $reporter_id)
@@ -24,10 +25,10 @@ class Flag_model extends Model
 		return !empty($result);
 	}
 	
-	public function flagQuestion($question_id, $type_id, $reporter_id)
+	public function flag($fk_id, $type_id, $reporter_id)
 	{
 		#TODO insert IP
-		$this->db->set(array('fk_question_id' => $question_id, 'fk_type_id' => $type_id, 'fk_reporter_id' => $reporter_id));
+		$this->db->set(array("fk_{$this->type}_id" => $fk_id, 'fk_type_id' => $type_id, 'fk_reporter_id' => $reporter_id));
 		$this->db->insert('cn_flags');
 	}
 }

@@ -13,10 +13,12 @@
 							</h3>
 							<div class="autor">
 								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
-								<p>Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' (' . $time_diff.' ago)';?>
+								<p>
+									<a id="flaglet" style="float:right;" onclick="javascript:new Effect.toggle('flag_user<?=$user_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a><!-- Yes, this is temporary -->
+									Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' (' . $time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
-								<!-- <a id="flaglet" style="float:right;" onclick="javascript:new Effect.toggle('flag<?=$question_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a> --><!-- Yes, this is temporary -->
+								<a id="flaglet" style="float:right;" onclick="javascript:new Effect.toggle('flag_question<?=$question_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a><!-- Yes, this is temporary -->
 								<p>
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
@@ -34,9 +36,12 @@
 							<li class="votes"><?=anchor("votes/who/{$question_id}", $vote_count . " Votes");?></li>
 						</ul>
 						<? if($view_name == 'question_view') echo $this->load->view('question/_comments.php') ?>
-						<? //if($this->userauth->isUser()): ?>
-						<?//= $this->flag_lib->createQuestionFlagHTML($question_id); ?>
-						<? //endif; ?>		
+						<? if($this->userauth->isUser()): ?>
+						<? $this->flag_lib->type = 'question'; echo $this->flag_lib->createFlagHTML($question_id); ?>
+						<? endif; ?>
+						<? if($this->userauth->isUser()): ?>
+						<? $this->flag_lib->type = 'user'; echo $this->flag_lib->createFlagHTML($user_id); ?>
+						<? endif; ?>		
 						<span id="emailto-5" style="display:none"></span>
 					</div>
 				</div>
