@@ -35,7 +35,8 @@
 							<li class="discuss"><?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name), $comment_count . ' Comments');?></li>
 							<li class="votes"><?=anchor("votes/who/{$question_id}", $vote_count . " Votes");?></li>
 						</ul>
-						<? if($view_name == 'question_view') echo $this->load->view('question/_comments.php') ?>
+						<? if($view_name == 'question_view') $this->load->view('question/_comments.php') ?>
+						<? if($view_name == 'votes_view') echo $voteHTML ?>
 						<? if($this->userauth->isUser()): ?>
 						<? $this->flag_lib->type = 'question'; echo $this->flag_lib->createFlagHTML($question_id); ?>
 						<? endif; ?>

@@ -8,6 +8,8 @@ class Votes extends Controller
 		$this->load->model('question_model');
 		$this->load->model('vote_model');
 		$this->load->library('time_lib');
+		$this->load->library('flag_lib');
+		$this->load->model('flag_model', 'flag');
 	}
 	
 	public function who($question_id)
@@ -22,6 +24,10 @@ class Votes extends Controller
 		else $data['avatar_path'] = "./images/image01.jpg";
 		//get time diff
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);
+		
+		// tags		
+		if(!empty($data['tags'])) foreach($data['tags'] as $k1=>$tag) $data['tags'][$k1] = anchor("conventionnext/queue/event/".url_title($data['event_name'])."/tag/".$tag,$tag);
+		
 		//set event type
 		$data['event_type'] = 'question';
 		//get voted
@@ -36,10 +42,8 @@ class Votes extends Controller
 		// retrieve votes information
 		$votes = $this->vote_model->getVotesByQuestion($question_id);
 		
-		$voteHtml = '';
-		foreach ($votes as $vote) {
-			//echo '<pre>'; print_r($vote); echo '</pre>';
-			
+		$voteHTML = '';
+		foreach ($votes as $vote) {			
 			#resize image
 			$vote_image_array = unserialize($vote['user_avatar']);
 			if ($vote_image_array) $vote_avatar_path = $vote_image_array['file_name'];
@@ -47,12 +51,14 @@ class Votes extends Controller
 			
 			$vote_time = $this->time_lib->getDecay($vote['timestamp']);
 			$vote_value = ($vote['vote_value'] > 0) ? 'voted <img src="./images/thumbsUp.png"> in favor' : 'voted <img src="./images/thumbsDown.png"> against' ;
-			$voteHtml .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
+			$voteHTML .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
 			.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
 		}
-		$data['votedHtml'] = $voteHtml;
+		$data['voteHTML'] = $voteHTML;
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
+		
+		$data['view_name'] = 'votes_view';
 		$this->load->view('view_question_votes', $data);
 	}
 }
