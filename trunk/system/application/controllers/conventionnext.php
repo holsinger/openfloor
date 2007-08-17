@@ -283,21 +283,15 @@ class Conventionnext extends Controller
 			$data['results'][$key]['time_diff'] = $this->time_lib->getDecay($data['results'][$key]['date']);
 		}
 		
-		//get event details
-		//if (!isset($uri_array['tag'])) {
-			//
-
-
-			if(empty($data['results'])) {
-				$event['results'] = $this->event->get_event($event_id);
-				$data['rightpods'] = array('dynamic'=>array('event_description'=>$event['results']['event_desc'],'event_location'=>$event['results']['location']));
-			} else {
-				$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
-			}
-		//}
+		if(empty($data['results'])) {
+			$event['results'] = $this->event->get_event($event_id);
+			$data['rightpods'] = array('dynamic'=>array('event_description'=>$event['results']['event_desc'],'event_location'=>$event['results']['location']));
+		} else {
+			$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
+		}
 		
-		// tag cloud - this section might need a little tweaking
 		if (isset($event_id) && !empty($data['results'])) {
+			// tag cloud - this section might need a little tweaking
 			$this->load->model('tag_model');
 			$this->load->library('wordcloud');
 			$words = $this->tag_model->getAllReferencedTags($event_id);
@@ -306,13 +300,12 @@ class Conventionnext extends Controller
 				$cloud_array = $cloud->showCloud('array');
 				$this->load->library('tag_lib');
 				$data['cloud'] = $this->tag_lib->createTagLink($cloud_array);
-				foreach($data['results'] as $k1=>$question)
-				 	if(!empty($question['tags']))
-						foreach($question['tags'] as $k2=>$tag) 
-							$data['results'][$k1]['tags'][$k2]=$this->tag_lib->createTagLink($tag);
 			}
+			// question tags
+			$this->tag_lib->createTagLinks($data['results']);
 		}	
 		
+		$data['view_name'] = 'view_queue';
 		$this->load->view('view_queue',$data);	
 	}		
 	

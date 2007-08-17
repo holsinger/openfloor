@@ -31,4 +31,12 @@ class Tag_lib {
 			return anchor("$class/$function/tag/$arg$args", $arg);
 		}		
 	}
+	
+	public function createTagLinks(&$result)
+	{
+		foreach($result as $k1=>$question)
+		 	if(!empty($question['tags']))
+				foreach($question['tags'] as $k2=>$tag) 
+					$result[$k1]['tags'][$k2]=$this->createTagLink($tag);
+	}
 }

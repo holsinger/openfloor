@@ -10,6 +10,7 @@ class Question extends Controller
 		$this->load->model('Vote_model','vote');
 		$this->load->library('validation');
 		$this->load->library('time_lib');
+		$this->load->library('tag_lib');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
 
@@ -193,12 +194,17 @@ class Question extends Controller
 		$result = $this->question->questionQueue();
 		$data = $result[0];
 		$data['event_type'] = 'question';
+		
 		$image_array = unserialize($data['user_avatar']);
 		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
 		else $data['avatar_path'] = "./images/image01.jpg";
-		//exit(var_dump($data));	
+		
 		//get time diff
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);		
+		
+		//tags
+		if(!empty($data['tags'])) foreach($data['tags'] as $k1=>$tag) $data['tags'][$k1] = anchor("conventionnext/queue/event/".url_title($data['event_name'])."/tag/".$tag,$tag);
+					
 		//get voted
 		if ($this->userauth->isUser()) {
 			$this->vote->type='question';
@@ -207,12 +213,16 @@ class Question extends Controller
 			else if ($score < 0) $data['voted'] = 'down';
 			else $data['voted'] = false;
 		} else $data['voted'] = false;
+		
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library();
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
+		
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
+		
+		$data['view_name'] = 'question_view';		
 		$this->load->view('question/question_view.php', $data);
 	}
 	
