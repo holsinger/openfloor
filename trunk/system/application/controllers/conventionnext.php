@@ -458,5 +458,28 @@ class Conventionnext extends Controller
 		
 		$this->load->view('view_queue',$data);	
 	}
+	
+	public function create($what)
+	{
+		#TODO redirect to some kind of 'unauthorized' page
+		if(!$this->userauth->isAdmin()) redirect();
+		
+		switch($what)
+		{
+		case 'candidate':
+			$this->newCandidate();
+			break;
+		default:
+			exit();
+			break;
+		}
+	}
+	
+	private function newCandidate()
+	{
+		$data = array('error' => '');
+		
+		$this->load->view('candidate/new.php', $data);
+	}
 }
 ?>
