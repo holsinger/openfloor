@@ -165,6 +165,7 @@ strong.convention-next{
 	height:19px;
 	border:none;
 	background:#BED3EA url(../images/bg-input.gif);
+	overflow: auto;
 }
 .search ul li input{
 	float:left;
@@ -828,6 +829,7 @@ input.txt {
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	/*background:#BED3EA url(../images/bg-header-input.gif);*/
 	background:#BED3EA;
+	overflow:auto;
 }
 
 select.txt {
@@ -843,6 +845,7 @@ textarea.txt {
 	padding:5px 0 0 4px;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;
+	overflow:auto;
 }
 .errorArea {
 	color: #FF0000;	
@@ -1056,7 +1059,7 @@ background-color:#f0faff;
 	left:4px;
 	top:2px;
 }
-
+#feed{width:495px;}
 .sc_votes {
 	color:#F04A54;
 	text-decoration: underline;
