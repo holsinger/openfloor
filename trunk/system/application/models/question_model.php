@@ -95,6 +95,7 @@ class Question_model extends Model
 				user_avatar,
 				event_name,
 				event_desc,
+				event_url_name,
 				location
 			FROM 
 				cn_questions, 
