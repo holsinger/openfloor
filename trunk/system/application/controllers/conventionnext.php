@@ -468,7 +468,7 @@ class Conventionnext extends Controller
 		switch($what)
 		{
 		case 'candidate':
-			$this->newCandidate();
+			$this->adminCandidate('create');
 			break;
 		default:
 			exit();
@@ -476,19 +476,49 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	private function newCandidate()
+	public function view($what, $name)
+	{
+		switch($what)
+		{
+		case 'candidate':
+			$this->viewCandidate($name);
+			break;
+		default:
+			exit();
+			break;
+		}
+	}
+	
+	public function edit($what, $name)
+	{
+		#TODO redirect to some kind of 'unauthorized' page
+		if(!$this->userauth->isAdmin()) redirect();
+		
+		switch($what)
+		{
+		case 'candidate':
+			$this->adminCandidate('edit', $name);
+			break;
+		default:
+			exit();
+			break;
+		}
+	}
+	
+	public function viewCandidate($can_name)
+	{
+		$can_id = $this->candidate->getIdByName($can_name);
+		if(!$can_id) redirect();
+		$candidate = $this->candidate->getCandidate($can_id);		
+		$data['candidate'] = $candidate;
+		
+		$this->load->view('candidate/view.php', $data);
+	}
+	
+	private function adminCandidate($action, $name = null)
 	{
 		$data['error'] = '';
-		$field_names = array(	'can_name', 
-								'can_display_name', 
-								'can_password', 
-								'can_password_confirm', 
-								'can_bio', 
-								'can_email');
-		
-		foreach($field_names as $v)
-			$fields[$v] = isset($_POST[$v]) ? $_POST[$v] : '';
-		$this->validation->set_fields($fields);
+		$data['action'] = $action;
 		
 		if(isset($_POST['submitted']))
 		{
@@ -503,11 +533,45 @@ class Conventionnext extends Controller
 			
 			if(!$error)
 			{
-				if($can_id = $this->candidate->addCandidate()) 
-					$data['error'] = 'Candidate successfully created!';
+				switch($action)
+				{
+				case 'create':
+					if($can_id = $this->candidate->addCandidate())
+						redirect("conventionnext/view/candidate/{$_POST['can_name']}");
+					break;
+				case 'edit':
+					if($this->candidate->editCandidate())
+						redirect("conventionnext/view/candidate/{$_POST['can_name']}");
+					break;
+				default:
+					exit();
+					break;
+				}
 			}
-		}		
-		$this->load->view('candidate/create.php', $data);
+		}
+		
+		$field_names = array(	'can_name', 
+								'can_display_name', 
+								'can_password', 
+								'can_password_confirm', 
+								'can_bio', 
+								'can_email');
+		
+		if($action == 'edit')
+		{
+			$can_id = $this->candidate->getIdByName($name);
+			if(!$can_id) redirect();
+			$candidate = $this->candidate->getCandidate($can_id);
+			$_POST['can_id'] = $can_id;
+			foreach($candidate as $k => $v)
+				if(!empty($v)) $_POST[$k] = $v;
+		}
+		
+		foreach($field_names as $v)
+			$fields[$v] = isset($_POST[$v]) ? $_POST[$v] : '';
+		$this->validation->set_fields($fields);
+		
+		$this->load->view('candidate/admin.php', $data);
 	}
 }
 ?>
