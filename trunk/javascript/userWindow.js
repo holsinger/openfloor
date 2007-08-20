@@ -37,7 +37,7 @@ function center(string){
 		} else {
 	    //set element styles
 	    element.style.position = 'absolute';
-	    element.style.zIndex   = 1000;
+	    element.style.zIndex   = 3000;
 	    cleanUp (element);
 	    new Effect.Appear(string);
 	  }
@@ -48,7 +48,7 @@ function getDynamicElement(string) {
 	Element.extend(my_div);
 	//set element styles
   my_div.style.position = 'absolute';
-  my_div.style.zIndex   = 1000;
+  my_div.style.zIndex   = 3000;
 	my_div.innerHTML = 'Loading...';
 	my_div.show();
 	new Ajax.Request(site_url+'/information/viewAjax/'+string,
