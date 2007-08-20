@@ -37,7 +37,7 @@ class Question extends Controller
 		//event
 		if (isset($uri_array['event'])) 
 		{
-			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"question/queue/{$data['event_url']}");
+			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
 			$uri_array = $this->event->get_event(0,$uri_array['event']);
 			$data['event_id'] = $uri_array['event_id'];
 			$data['event_name'] = $uri_array['event_name'];
