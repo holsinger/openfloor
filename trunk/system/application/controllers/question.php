@@ -8,9 +8,11 @@ class Question extends Controller
 		$this->load->model('Question_model','question');
 		$this->load->model('Event_model','event');
 		$this->load->model('Vote_model','vote');
+		$this->load->model('flag_model','flag');
 		$this->load->library('validation');
 		$this->load->library('time_lib');
 		$this->load->library('tag_lib');
+		$this->load->library('flag_lib');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
 
