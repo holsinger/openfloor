@@ -1060,6 +1060,7 @@ background-color:#f0faff;
 	top:2px;
 }
 #feed{width:495px;}
+.feed_title{font-weight:bold;font-size:12px;};
 .sc_votes {
 	color:#F04A54;
 	text-decoration: underline;

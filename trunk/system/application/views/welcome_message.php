@@ -1,6 +1,37 @@
 <? $data['red_head'] = 'Welcome'; ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
+      <script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAkKcqFPODFw9EgKwKbb0vmxQMMgp4bRk8oDwCMuUVC3eAkH6yhxRey5JriXQU4hISBErCZHOSAAHL4w"></script>
+			<script type="text/javascript">
 
+	    google.load("feeds", "1");
+	
+	    function initialize() {
+	      var feed = new google.feeds.Feed("http://blog.politic20.com/category/home/feed");
+	      feed.load(function(result) {
+	        if (!result.error) {
+	          var container = document.getElementById("feed");
+	          for (var i = 0; i < result.feed.entries.length; i++) {
+	            var entry = result.feed.entries[i];
+              var div = document.createElement("div");
+              //create link
+              var link = document.createElement("a");
+              link.setAttribute("href", entry.link);
+              link.className = 'feed_title';
+              link.appendChild(document.createTextNode(entry.title));
+              div.appendChild(link);
+              var text = document.createElement("p");
+              //text.setAttribute("href", entry['link']);
+              //text.appendChild(document.createTextNode(entry['contentSnippet']));
+              text.innerHTML = entry.content;
+              div.appendChild(text);
+              container.appendChild(div);
+            }
+	        }
+	      });
+	    }
+	    google.setOnLoadCallback(initialize);
+	
+	    </script>
 <div id="content_div">
             
             <div id='herald'>
@@ -37,11 +68,15 @@
 	            	</span>
 	            	</td></tr>
 	            </table>
-            </div>
+	          </div>
+	            <!-- 
 	            <p>Read our first press release:<br>
               <center><a href='http://blog.politic20.com/2007/07/30/politic20-to-hold-live-web-based-forum-for-salt-lake-city-mayoral-candidates/'>Politic2.0 to Hold Live Web-Based Forum for Salt Lake City Mayoral Candidates</a></center>
-               </p>
-            
+              </p>
+              -->
+              
+            <p<strong>Breaking News</strong></p>  
+				    <div id="feed"></div>
             <? /*
             <br><br>
             <div id="zip_form">
