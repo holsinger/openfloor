@@ -11,6 +11,7 @@ class Conventionnext extends Controller
 		$this->load->model('Vote_model','vote');
 		$this->load->model('Event_model','event');
 		$this->load->model('Flag_model','flag');
+		$this->load->model('Candidate_model', 'candidate');
 		$this->load->library('validation');
 		$this->load->library('time_lib');
 		$this->load->library('flag_lib');
@@ -477,9 +478,36 @@ class Conventionnext extends Controller
 	
 	private function newCandidate()
 	{
-		$data = array('error' => '');
+		$data['error'] = '';
+		$field_names = array(	'can_name', 
+								'can_display_name', 
+								'can_password', 
+								'can_password_confirm', 
+								'can_bio', 
+								'can_email');
 		
-		$this->load->view('candidate/new.php', $data);
+		foreach($field_names as $v)
+			$fields[$v] = isset($_POST[$v]) ? $_POST[$v] : '';
+		$this->validation->set_fields($fields);
+		
+		if(isset($_POST['submitted']))
+		{
+			$rules['can_name'] = "trim|required|max_length[45]|xss_clean";
+			$rules['can_display_name'] = "trim|max_length[100]";
+			$rules['can_password'] = "trim|required|matches[password_confirm]|md5|xss_clean";
+			$rules['can_password_confirm'] = "trim|required|xss_clean";
+			$rules['can_bio'] = "trim|required|max_length[65535]|xss_clean";
+			$rules['can_email'] = "trim|max_length[75]";
+			
+			if (!$this->validation->run()) $error = $this->validation->error_string;
+			
+			if(!$error)
+			{
+				if($can_id = $this->candidate->addCandidate()) 
+					$data['error'] = 'Candidate successfully created!';
+			}
+		}		
+		$this->load->view('candidate/create.php', $data);
 	}
 }
 ?>
