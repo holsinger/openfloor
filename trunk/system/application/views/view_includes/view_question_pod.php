@@ -1,6 +1,6 @@
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<div class="raiting" >
-		<? $this->load->view('view_includes/voteBox.php')?>
+		<? $this->load->view('view_includes/votebox.php')?>
 		<a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit" title='Who Voted?'><?=(is_numeric($votes))?$votes:0;?></a>
 	</div>																					
 	<div class="describtion">
