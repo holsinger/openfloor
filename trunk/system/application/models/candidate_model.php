@@ -41,6 +41,16 @@ class Candidate_model extends Model
 		return !empty($result);
 	}
 	
+	public function getCandidates()
+	{
+		$this->db->select('can_id, can_name');
+		$result = $this->db->get('cn_candidates')->result_array();
+		$array = array();
+		foreach($result as $v)
+			$array[$v['can_id']] = $v['can_name'];
+		return $array;	
+	}
+	
 	private function adminCandidate()
 	{
 		if(isset($_POST))

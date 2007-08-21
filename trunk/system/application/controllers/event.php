@@ -16,6 +16,7 @@ class Event extends Controller
 		
 		$this->load->model('Event_model','event');
 		$this->load->model('Cms_model','cms');
+		$this->load->model('Candidate_model', 'candidate');
 		
 		$this->load->library('validation');
 		$this->load->library('ApiData');
@@ -220,7 +221,8 @@ class Event extends Controller
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);
 		
-		$data['politicians'] = $this->apidata->getAllNames();		
+		// $data['politicians'] = $this->apidata->getAllNames();		
+		$data['politicians'] = $this->candidate->getCandidates();		
 		$data['error'] = str_replace('_',' ',$error);
 		
 		$_POST['event_date'] = '0000-00-00 00:00:00';		
@@ -235,6 +237,7 @@ class Event extends Controller
 		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";	
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
+		
 		$this->load->view('view_manage_events',$data);
 	}
 	
