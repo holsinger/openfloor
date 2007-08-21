@@ -490,14 +490,16 @@ class Conventionnext extends Controller
 	}
 	
 	public function edit($what, $name)
-	{
-		#TODO redirect to some kind of 'unauthorized' page
-		if(!$this->userauth->isAdmin()) redirect();
-		
+	{		
 		switch($what)
 		{
 		case 'candidate':
+			#TODO redirect to some kind of 'unauthorized' page
+			if(!$this->userauth->isAdmin()) redirect();
 			$this->adminCandidate('edit', $name);
+			break;
+		case 'bio':
+			$this->editCandidateBio($name);
 			break;
 		default:
 			exit();
@@ -524,8 +526,11 @@ class Conventionnext extends Controller
 		{
 			$rules['can_name'] = "trim|required|max_length[45]|xss_clean";
 			$rules['can_display_name'] = "trim|max_length[100]";
-			$rules['can_password'] = "trim|required|matches[can_password_confirm]|md5|xss_clean";
-			$rules['can_password_confirm'] = "trim|required|xss_clean";
+			if(!($action == 'edit' && empty($_POST['can_password']))) {
+				echo 'spam!!';
+				$rules['can_password'] = "trim|required|matches[can_password_confirm]|md5|xss_clean";
+				$rules['can_password_confirm'] = "trim|required|xss_clean";
+			}
 			$rules['can_bio'] = "trim|max_length[65535]|xss_clean";
 			$rules['can_email'] = "trim|max_length[75]";
 			$this->validation->set_rules($rules);
@@ -573,6 +578,24 @@ class Conventionnext extends Controller
 		$this->validation->set_fields($fields);
 		
 		$this->load->view('candidate/admin.php', $data);
+	}
+
+	private function editCandidateBio($can_name)
+	{
+		$data['error'] = '';
+		if(isset($_POST['submitted'])) {
+			if($this->candidate->authenticate($_POST['can_id'], $_POST['can_password'])) {
+				unset($_POST['can_password']);
+				$this->candidate->editCandidate();
+				redirect("conventionnext/view/candidate/$can_name");
+			} else $data['error'] = 'Invalid Password';
+		}
+		$data['can_name'] = $can_name;
+		$can_id = $this->candidate->getIdByName($can_name);
+		if(!$can_id) redirect();
+		$data['can_id'] = $can_id;
+		
+		$this->load->view('candidate/edit_bio.php', $data);
 	}
 }
 ?>

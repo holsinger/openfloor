@@ -35,11 +35,18 @@ class Candidate_model extends Model
 		return $result['can_id'];
 	}
 	
+	public function authenticate($can_id, $can_password)
+	{
+		$result = $this->db->getwhere('cn_candidates', array('can_id' => $can_id, 'can_password' => md5($can_password)))->row_array();
+		return !empty($result);
+	}
+	
 	private function adminCandidate()
 	{
 		if(isset($_POST))
 		{
-			unset($_POST['submitted'], $_POST['can_password_confirm']);
+			unset($_POST['submitted']);
+			if(isset($_POST['can_password_confirm'])) unset($_POST['can_password_confirm']);
 			
 			foreach($_POST as $k => $v)
 				if(empty($v)) unset($_POST[$k]);
