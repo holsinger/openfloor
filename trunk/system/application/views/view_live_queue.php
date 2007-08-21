@@ -13,6 +13,7 @@
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 	<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';var event_name = '<?=$event?>';</script>
+	<script type="text/javascript" src="javascript/textsizer.js"></script>
 
 <script type="text/javascript" src="javascript/liveQueueUpdater.js"></script>
 	<script type="text/javascript">liveQueueUpdater.liveQueueUpdate();</script>
@@ -22,6 +23,7 @@
 		<br />
 		<span class='queue-logo'>
 			<img src="./images/bg-convention-next.gif" alt="convention-next"/>
+			<a href="javascript:ts('body',1)" class="invisi">[+]</a><a href="javascript:ts('body',-1)" class="invisi">[-]</a>
 		</span>
 		<br />
 		<ul class="top-nav"></ul>
