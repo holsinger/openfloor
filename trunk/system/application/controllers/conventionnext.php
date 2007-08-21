@@ -524,14 +524,15 @@ class Conventionnext extends Controller
 		{
 			$rules['can_name'] = "trim|required|max_length[45]|xss_clean";
 			$rules['can_display_name'] = "trim|max_length[100]";
-			$rules['can_password'] = "trim|required|matches[password_confirm]|md5|xss_clean";
+			$rules['can_password'] = "trim|required|matches[can_password_confirm]|md5|xss_clean";
 			$rules['can_password_confirm'] = "trim|required|xss_clean";
-			$rules['can_bio'] = "trim|required|max_length[65535]|xss_clean";
+			$rules['can_bio'] = "trim|max_length[65535]|xss_clean";
 			$rules['can_email'] = "trim|max_length[75]";
+			$this->validation->set_rules($rules);
 			
-			if (!$this->validation->run()) $error = $this->validation->error_string;
+			if (!$this->validation->run()) $data['error'] = $this->validation->error_string;
 			
-			if(!$error)
+			if(!$data['error'])
 			{
 				switch($action)
 				{
