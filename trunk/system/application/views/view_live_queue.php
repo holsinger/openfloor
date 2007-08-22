@@ -8,8 +8,7 @@
 	<title>view_live_queue</title>
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Rob Stefanussen">
-	<link rel="stylesheet" type="text/css" href="css/all.css" />
-	<link rel="stylesheet" type="text/css" href="css/view_live_queue.css" />
+	<link rel="stylesheet" type="text/css" href="css/all.css" /><link rel="stylesheet" type="text/css" href="css/view_live_queue.css" />
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 	<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';var event_name = '<?=$event?>';</script>
@@ -36,7 +35,7 @@
 		<div id="upcoming_questions" class="upcoming_questions">
 		<?	foreach($questions as $question): 
 				$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ;
-				echo "<div class='queue-question'><span class=\"votes\"><p>{$question['votes']} $votes<p></span>";
+				echo "<div class='queue-question'><span class=\"votes\">{$question['votes']} $votes</span>";
 				echo "<span class=\"question\">{$question['question_name']}</span></div><br />";
 			endforeach;	?>
 		</div>

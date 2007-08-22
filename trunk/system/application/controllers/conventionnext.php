@@ -123,7 +123,7 @@ class Conventionnext extends Controller
 		redirect("/conventionnext/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
 	}
 	
-	function queue() // passing $this->ajax through still needs to be implemented
+	function queue()
 	{
 		//get data from url
 		$uri_array = $this->uri->uri_to_assoc(3);
@@ -239,6 +239,9 @@ class Conventionnext extends Controller
 			$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
 			
 			$data['results'] = $this->question2->questionQueue();
+			
+			//time
+			$data['last_response'] = date('m/d/Y g:i:s A', strtotime($data['results'][0]['last_response']));
 								
 			$total_rows = count($data['results']);
 			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
@@ -596,6 +599,29 @@ class Conventionnext extends Controller
 		$data['can_id'] = $can_id;
 		
 		$this->load->view('candidate/edit_bio.php', $data);
+	}
+
+	public function candidate_dashboard($event_name, $ajax = null)
+	{
+		$event_id = $this->event->get_id_from_url($event_name);
+		if(!$event_id) redirect();
+		$this->question->event_id = $event_id;
+		$this->question->question_status = 'current';
+		$data['questions'] = $this->question->questionQueue();
+		$data['last_response'] = date('m/d/Y g:i:s A', strtotime($data['questions'][0]['last_response']));
+		$data['event_name'] = $event_name;
+		
+		if(isset($ajax)) $this->load->view('candidate/dashboard_content.php', $data);
+		else $this->load->view('candidate/dashboard.php', $data);
+	}
+	
+	public function restart_question_timer($event_name)
+	{
+		if(!$this->userauth->isAdmin()) redirect();
+		$event_id = $this->event->get_id_from_url($event_name);
+		if(!$event_id) redirect();		
+		$this->event->restart_question_timer($event_id);
+		redirect("conventionnext/candidate_dashboard/$event_name");
 	}
 }
 ?>

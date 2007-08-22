@@ -96,6 +96,7 @@ class Question_model extends Model
 				event_name,
 				event_desc,
 				event_url_name,
+				last_response,
 				location
 			FROM 
 				cn_questions, 

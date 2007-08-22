@@ -8,7 +8,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 ?>
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
-	<h3><?=$queue_title;?></h3>
+	<h3><?=$queue_title;?></h3>Question Timer: <? $this->load->view('view_includes/timer_include.php') ?>
 	<? if(isset($ajax)) ob_clean();?>
 	<div id='queue'>
 	<? if(!isset($ajax)): ?>

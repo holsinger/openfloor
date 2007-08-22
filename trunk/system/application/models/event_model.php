@@ -50,13 +50,10 @@ class Event_model extends Model
 	 */
 	public function get_id_from_url ($url)
 	{
-		$result_array = array(); 
-		 $query = $this->db->getwhere('cn_events', array('event_url_name' => $url));
-		//echo $this->db->last_query();
-		 log_message('debug', "EVENT:getIDfromURL:".trim($this->db->last_query()));
-		 $result_array = $query->result_array(); //echo '<pre>'; print_r($result_array); echo '</pre>';
-		 
-		 return $result_array[0]['event_id'];
+		$result = $this->db->getwhere('cn_events', array('event_url_name' => $url))->row_array();
+		log_message('debug', "EVENT:getIDfromURL:".trim($this->db->last_query()));
+		if(empty($result)) return false;
+		return $result['event_id'];
 	}
 	
 /**
@@ -83,5 +80,11 @@ class Event_model extends Model
  		$array = $this->get_event($id);
  		return $array['event_type'];
  	}
+
+	public function restart_question_timer($event_id)
+	{
+		$event_id = $this->db->escape($event_id);
+		$this->db->query("UPDATE cn_events SET last_response=now() WHERE event_id=$event_id");
+	}
 }
 ?>
