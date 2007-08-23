@@ -92,6 +92,10 @@ class Event extends Controller
 		$fields['sunlight_id']	= ( isset($_POST['sunlight_id']) ) ? $_POST['sunlight_id']:"";
 		$fields['event_date']	= ( isset($_POST['event_date']) ) ? $_POST['event_date']:"";
 		$fields['location']	= ( isset($_POST['location']) ) ? $_POST['location']:"";
+		$fields['moderator_info']	= ( isset($_POST['moderator_info']) ) ? $_POST['moderator_info']:"";
+		$fields['agenda']	= ( isset($_POST['agenda']) ) ? $_POST['agenda']:"";
+		$fields['rules']	= ( isset($_POST['rules']) ) ? $_POST['rules']:"";
+		$fields['other_instructions']	= ( isset($_POST['other_instructions']) ) ? $_POST['other_instructions']:"";
 		
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
@@ -181,10 +185,10 @@ class Event extends Controller
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
 		$rules['location'] = "trim|max_length[65535]";
-		
-		$this->validation->set_rules($rules);
-					
-		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
+		$rules['moderator_info'] = "trim|max_length[65535]";
+		$rules['agenda'] = "trim|max_length[65535]";
+		$rules['rules'] = "trim|max_length[65535]";
+		$rules['other_instructions'] = "trim|max_length[65535]";
 		
 		if ( !$error ) {
 			//add event url name to array
@@ -314,5 +318,13 @@ class Event extends Controller
 				
 		//send back the error
 		$this->create_event($error);
+	}
+
+	public function view($event_name)
+	{
+		$data['event'] = $this->event->get_event(null, $event_name);
+		
+		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
+		$this->load->view('event/view',$data);
 	}
 }

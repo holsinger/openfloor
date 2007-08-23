@@ -23,7 +23,8 @@ $data['red_head'] = 'Events';
 			<p><?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />		
 			<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 			<b>Where:</b> <?=$array['location'];?><br />
-			<b>Description:</b> <?=$array['event_desc_brief'];?>
+			<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
+			<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
 			</p>
 			<?
 			$atts = array(

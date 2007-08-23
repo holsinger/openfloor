@@ -493,7 +493,7 @@ class Conventionnext extends Controller
 	}
 	
 	public function edit($what, $name)
-	{		
+	{
 		switch($what)
 		{
 		case 'candidate':

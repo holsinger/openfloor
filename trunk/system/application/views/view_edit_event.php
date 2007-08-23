@@ -13,7 +13,7 @@
               'name'        => 'event_desc_brief',
               'id'          => 'event_desc_brief',
               'value'       => $this->validation->event_desc_brief,
-              'rows'        => '2',
+              'rows'        => '3',
               'cols'        => '48',
               'class'       => 'txt'
             );
@@ -24,8 +24,8 @@
               'name'        => 'event_desc',
               'id'          => 'event_desc',
               'value'       => $this->validation->event_desc,
-              'rows'        => '3',
-              'cols'        => '75',
+              'rows'        => '5',
+              'cols'        => '48',
               'class'       => 'txt'
             );
 		echo form_format("Event Description: *",form_textarea($format),'Write a description of the event.' ); 
@@ -52,13 +52,57 @@
               'name'        => 'location',
               'id'          => 'location',
               'value'       => $this->validation->location,
-              'rows'        => '3',
-              'cols'        => '75',
+              'rows'        => '5',
+              'cols'        => '48',
               'class'       => 'txt'
             );
 		echo form_format("Event Location: *",form_textarea($format),'Write a description of the event location, directions etc.' ); 
 		?>
-
+	
+	<?php
+	$format = array(
+			'name'	=>	'moderator_info',
+			'value'	=>	$this->validation->moderator_info,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("Moderator Info: ", form_textarea($format));
+	?>
+	
+	<?php
+	$format = array(
+			'name'	=>	'agenda',
+			'value'	=>	$this->validation->agenda,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("Agenda: ", form_textarea($format));
+	?>
+		
+	<?php
+	$format = array(
+			'name'	=>	'rules',
+			'value'	=>	$this->validation->rules,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("Rules: ", form_textarea($format));
+	?>
+		
+	<?php
+	$format = array(
+			'name'	=>	'other_instructions',
+			'value'	=>	$this->validation->other_instructions,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("Other Instructions: ", form_textarea($format));
+	?>
+	
 	<br /><br />
 	<br /><br />
 	<?= (isset($avatar_image_name) && !empty($avatar_image_name))?form_hidden('old_avatar','./avatars/'.$avatar_image_name):'';?>
