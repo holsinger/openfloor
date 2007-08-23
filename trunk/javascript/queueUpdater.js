@@ -6,7 +6,7 @@ if(typeof queueUpdater === "undefined" || !queueUpdater) {
 }
 
 queueUpdater.updateQueue = function() {
-	new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag, {
+	queueUpdater.updaterObject = new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag, {
 	  frequency: 10
 	});
 }
@@ -56,4 +56,9 @@ queueUpdater.flaguser = function(user_id, type_id, reporter_id) {
 		  queueUpdater.updateQueueOnce();
 	  }
 	});
+}
+
+queueUpdater.toggleQueue = function () {
+	if(ajaxOn) { ajaxOn=false; queueUpdater.updaterObject.stop(); }
+	else { ajaxOn=true; queueUpdater.updaterObject.start(); }
 }

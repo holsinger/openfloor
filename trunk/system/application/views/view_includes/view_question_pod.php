@@ -8,6 +8,7 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
+							<? $this->load->view('view_includes/flag.php') ?>
 							<h3>
 								<?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name);?>
 							</h3>

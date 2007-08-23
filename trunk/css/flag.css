@@ -1,0 +1,22 @@
+/* @override http://localhost/~Rob/Politic20/css/flag.css */
+
+div.flag {
+	position: absolute;
+	right: 8px;
+	top: 27px;
+	background-color: #c6e5f6;
+	border-style: solid;
+	border-width: 1px;
+	padding: 3px;
+}
+
+span.flag-option {
+	display: block;
+}
+
+img.img-flag {
+	position: absolute;
+	right: 8px;
+	top: 14px;
+}
+
