@@ -637,13 +637,13 @@ class Conventionnext extends Controller
 	{
 		$event = $this->event->get_event(null, $event);
 		$event['date'] = date('m/d/Y g:i A', strtotime($event['event_date']));	
-		$event['stream_html']['high'] = "High Stream";
-		$event['stream_html']['low'] = "Low Stream";
+		$event['stream_html']['high'] = $event['stream_high'];
+		$event['stream_html']['low'] = $event['stream_low'];
 		$event['stream'] = $stream;
 		
-		//check ip
 		$event['ip'] = $this->_getIP();
-		if ($event['ip'] == '166.70.140.70') $event['blocked'] = true;
+		$event['blocked_ips'] = explode(',', str_replace(' ', '', $event['blocked_ips']));
+		if(in_array($event['ip'], $event['blocked_ips'])) $event['blocked'] = true;
 		else $event['blocked'] = false;
 		
 		$this->load->view('view_feed',$event);

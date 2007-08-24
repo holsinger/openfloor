@@ -101,6 +101,30 @@
 			'class'	=>	'txt',
 		);
 	echo form_format("Other Instructions: ", form_textarea($format));
+	$format = array(
+			'name'	=>	'stream_high',
+			'value'	=>	$this->validation->stream_high,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("High Stream Code: ", form_textarea($format));
+	$format = array(
+			'name'	=>	'stream_low',
+			'value'	=>	$this->validation->stream_low,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("Low Stream Code: ", form_textarea($format));
+	$format = array(
+			'name'	=>	'blocked_ips',
+			'value'	=>	$this->validation->blocked_ips,
+			'rows'	=>	'5',
+			'cols'	=>	'48',
+			'class'	=>	'txt',
+		);
+	echo form_format("Blocked IPs: ", form_textarea($format));
 	?>
 	
 	<br /><br />

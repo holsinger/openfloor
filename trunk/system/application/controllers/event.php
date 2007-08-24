@@ -96,6 +96,9 @@ class Event extends Controller
 		$fields['agenda']	= ( isset($_POST['agenda']) ) ? $_POST['agenda']:"";
 		$fields['rules']	= ( isset($_POST['rules']) ) ? $_POST['rules']:"";
 		$fields['other_instructions']	= ( isset($_POST['other_instructions']) ) ? $_POST['other_instructions']:"";
+		$fields['stream_high']	= ( isset($_POST['stream_high']) ) ? $_POST['stream_high']:"";
+		$fields['stream_low']	= ( isset($_POST['stream_low']) ) ? $_POST['stream_low']:"";
+		$fields['blocked_ips']	= ( isset($_POST['blocked_ips']) ) ? $_POST['blocked_ips']:"";
 		
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
@@ -189,6 +192,9 @@ class Event extends Controller
 		$rules['agenda'] = "trim|max_length[65535]";
 		$rules['rules'] = "trim|max_length[65535]";
 		$rules['other_instructions'] = "trim|max_length[65535]";
+		$rules['stream_high'] = "trim|max_length[65535]";
+		$rules['stream_low'] = "trim|max_length[65535]";
+		$rules['blocked_ips'] = "trim|max_length[65535]";
 		
 		if ( !$error ) {
 			//add event url name to array
