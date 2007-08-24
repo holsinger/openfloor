@@ -623,5 +623,41 @@ class Conventionnext extends Controller
 		$this->event->restart_question_timer($event_id);
 		redirect("conventionnext/candidate_dashboard/$event_name");
 	}
+	
+	function stream_high($event) {
+		$this->videoFeed($event, 'high');
+	}
+	
+	public function stream_low($event)
+	{
+		$this->videoFeed($event, 'low');
+	}
+	
+	private function videoFeed($event, $stream)
+	{
+		$event = $this->event->get_event(null, $event);
+		$event['date'] = date('m/d/Y g:i A', strtotime($event['event_date']));	
+		$event['stream_html']['high'] = "High Stream";
+		$event['stream_html']['low'] = "Low Stream";
+		$event['stream'] = $stream;
+		
+		//check ip
+		$event['ip'] = $this->_getIP();
+		if ($event['ip'] == '166.70.140.70') $event['blocked'] = true;
+		else $event['blocked'] = false;
+		
+		$this->load->view('view_feed',$event);
+	}
+	
+	private function _getIP() { 
+		$ip; 
+	
+		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP"); 
+		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR"); 
+		else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR"); 
+		else $ip = "UNKNOWN"; 
+	
+		return $ip; 
+	}
 }
 ?>
