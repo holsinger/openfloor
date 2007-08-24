@@ -8,18 +8,17 @@
 			<div class="descr-tr">
 				<div class="descr-bl">
 					<div class="descr-br">
-							<? $this->load->view('view_includes/flag.php') ?>
+							<? $this->flag_lib->type = 'question'; 	$this->load->view('view_includes/flag.php'); ?>
+							<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>
 							<h3>
 								<?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name);?>
 							</h3>
 							<div class="autor">
 								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
 								<p>
-									<!-- <a id="user_flag" style="float:right;" onclick="javascript:new Effect.toggle('flag_user<?=$user_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a><!-- Yes, this is temporary --> -->
 									Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' (' . $time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
-								<!-- <a id="question_flag" style="float:right;" onclick="javascript:new Effect.toggle('flag_question<?=$question_id?>','blind', {queue: 'end'});"><img src="./images/flag.png"/></a><!-- Yes, this is temporary --> -->
 								<p>
 									Event: <?=anchor("conventionnext/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>

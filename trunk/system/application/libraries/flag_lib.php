@@ -14,10 +14,10 @@ class Flag_lib {
 		
 		$this->CI->flag->type = $this->type;
 		if($this->CI->flag->alreadyFlagged($fk_id, $this->CI->session->userdata('user_id')))
-			return "<div id=\"flag_{$this->type}$fk_id\" style=\"display:none;\">This {$this->type} has been flagged</div>";
+			return '';
 		$link = '';
 		foreach ($this->CI->flag->getFlagTypes() as $type)			
-			$link .= "<p><a href=\"javascript:queueUpdater.flag{$this->type}($fk_id, {$type->type_id}, {$this->CI->session->userdata('user_id')});\">{$type->type}</a></p>";
-		return "<div id=\"flag_{$this->type}$fk_id\" style=\"display:none;\">$link</div>";
+			$link .= "<a class=\"flag-option\" href=\"javascript:queueUpdater.flag{$this->type}($fk_id, {$type->type_id}, {$this->CI->session->userdata('user_id')});\">{$type->type}</a>";
+		return "<div id=\"flag_{$this->type}$fk_id\" class=\"flag-$this->type\" style=\"display:none;\">$link</div>";
 	}
 }

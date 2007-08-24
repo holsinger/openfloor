@@ -1,5 +1,17 @@
-<img class="img-flag" src="./images/flag.png" onclick="javascript:queueUpdater.toggleQueue();new Effect.toggle('flag_question<?=$question_id?>','blind', {queue: 'end'});"/>
-<div id="flag_question<?=$question_id?>" class="flag" style="display:none;">
-	<span class="flag-option"><a>Inappropriate</a></span>	
-	<span class="flag-option"><a>Duplicate</a></span>	
-</div>
+<?
+switch ($this->flag_lib->type) {
+	case 'question':
+		$fk_id = $question_id;
+		break;
+	case 'user':
+		$fk_id = $user_id;
+		break;
+	default:
+		show_error('flag.php::type: invalid type');
+		break;
+} 
+$html = $this->flag_lib->createFlagHTML($fk_id);
+?>
+
+<img class="img-flag-<?=$this->flag_lib->type?>" src="./images/flag.png" <? if(!empty($html)) echo "onclick=\"javascript:queueUpdater.toggleQueue();new Effect.toggle('flag_{$this->flag_lib->type}$fk_id','blind', {queue: 'end'});\"" ?>/>
+<?=$html?>

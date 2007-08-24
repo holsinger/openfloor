@@ -1,6 +1,4 @@
-/* @override http://localhost/~Rob/Politic20/css/flag.css */
-
-div.flag {
+div.flag-question {
 	position: absolute;
 	right: 8px;
 	top: 27px;
@@ -10,13 +8,29 @@ div.flag {
 	padding: 3px;
 }
 
-span.flag-option {
+a.flag-option {
 	display: block;
 }
 
-img.img-flag {
+img.img-flag-question {
 	position: absolute;
 	right: 8px;
 	top: 14px;
 }
 
+div.flag-user {
+	position: absolute;
+	background-color: #c6e5f6;
+	border-style: solid;
+	border-width: 1px;
+	padding: 3px;
+	top: 62px;
+	left: 88px;
+}
+
+img.img-flag-user {
+	position: absolute;
+	top: 51px;
+	z-index: 101;
+	left: 88px;
+}
