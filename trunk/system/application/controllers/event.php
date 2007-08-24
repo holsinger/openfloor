@@ -99,6 +99,7 @@ class Event extends Controller
 		$fields['stream_high']	= ( isset($_POST['stream_high']) ) ? $_POST['stream_high']:"";
 		$fields['stream_low']	= ( isset($_POST['stream_low']) ) ? $_POST['stream_low']:"";
 		$fields['blocked_ips']	= ( isset($_POST['blocked_ips']) ) ? $_POST['blocked_ips']:"";
+		$fields['streaming']	= ( isset($_POST['streaming']) ) ? $_POST['streaming']:"";
 		
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
@@ -195,6 +196,7 @@ class Event extends Controller
 		$rules['stream_high'] = "trim|max_length[65535]";
 		$rules['stream_low'] = "trim|max_length[65535]";
 		$rules['blocked_ips'] = "trim|max_length[65535]";
+		$rules['streaming'] = '';
 		
 		if ( !$error ) {
 			//add event url name to array

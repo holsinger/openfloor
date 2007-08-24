@@ -637,8 +637,11 @@ class Conventionnext extends Controller
 	{
 		$event = $this->event->get_event(null, $event);
 		$event['date'] = date('m/d/Y g:i A', strtotime($event['event_date']));	
-		$event['stream_html']['high'] = $event['stream_high'];
-		$event['stream_html']['low'] = $event['stream_low'];
+		if($event['streaming']) {
+			$event['stream_html']['high'] = $event['stream_high'];
+			$event['stream_html']['low'] = $event['stream_low'];
+		} else 
+			$event['stream_html']['high'] = $event['stream_html']['low'] = "There is no live stream for this event at the moment";
 		$event['stream'] = $stream;
 		
 		$event['ip'] = $this->_getIP();

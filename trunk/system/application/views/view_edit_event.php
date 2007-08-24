@@ -125,6 +125,12 @@
 			'class'	=>	'txt',
 		);
 	echo form_format("Blocked IPs: ", form_textarea($format));
+	$format = array(
+	                  '0'  => 'no',
+	                  '1' => 'yes',
+	                );
+
+	echo form_format("Streaming:", form_dropdown('streaming', $format, $this->validation->streaming));
 	?>
 	
 	<br /><br />
