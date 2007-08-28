@@ -28,11 +28,16 @@ class Candidate_model extends Model
 		return $result;
 	}
 	
-	public function getIdByName($can_name)
+	public function getIdByName($can_display_name)
 	{
-		$result = $this->db->getwhere('cn_candidates', array('can_name' => $can_name))->row_array();
+		//$result = $this->db->getwhere('cn_candidates', array('can_name' => $can_name))->row_array();
+		$result = array();
+		$query_result = $this->db->get('cn_candidates')->result_array();
+		foreach($query_result as $k => $v)
+			if(url_title($v['can_display_name']) == $can_display_name)
+				$result[] = $v;
 		if(empty($result)) return false;
-		return $result['can_id'];
+		return $result[0]['can_id'];
 	}
 	
 	public function authenticate($can_id, $can_password)
@@ -43,11 +48,11 @@ class Candidate_model extends Model
 	
 	public function getCandidates()
 	{
-		$this->db->select('can_id, can_name');
+		$this->db->select('can_id, can_display_name');
 		$result = $this->db->get('cn_candidates')->result_array();
 		$array = array();
 		foreach($result as $v)
-			$array[$v['can_id']] = $v['can_name'];
+			$array[$v['can_id']] = $v['can_display_name'];
 		return $array;	
 	}
 	

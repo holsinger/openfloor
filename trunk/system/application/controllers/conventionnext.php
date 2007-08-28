@@ -510,9 +510,9 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	public function viewCandidate($can_name)
+	public function viewCandidate($can_display_name)
 	{
-		$can_id = $this->candidate->getIdByName($can_name);
+		$can_id = $this->candidate->getIdByName($can_display_name);
 		if(!$can_id) redirect();
 		$candidate = $this->candidate->getCandidate($can_id);		
 		$data['candidate'] = $candidate;
@@ -527,10 +527,9 @@ class Conventionnext extends Controller
 		
 		if(isset($_POST['submitted']))
 		{
-			$rules['can_name'] = "trim|required|max_length[45]|xss_clean";
-			$rules['can_display_name'] = "trim|max_length[100]";
+			//$rules['can_name'] = "trim|required|max_length[45]|xss_clean|valid_email";
+			$rules['can_display_name'] = "trim|max_length[100]|required";
 			if(!($action == 'edit' && empty($_POST['can_password']))) {
-				echo 'spam!!';
 				$rules['can_password'] = "trim|required|matches[can_password_confirm]|md5|xss_clean";
 				$rules['can_password_confirm'] = "trim|required|xss_clean";
 			}
@@ -546,11 +545,11 @@ class Conventionnext extends Controller
 				{
 				case 'create':
 					if($can_id = $this->candidate->addCandidate())
-						redirect("conventionnext/view/candidate/{$_POST['can_name']}");
+						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));
 					break;
 				case 'edit':
 					if($this->candidate->editCandidate())
-						redirect("conventionnext/view/candidate/{$_POST['can_name']}");
+						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));
 					break;
 				default:
 					exit();
@@ -559,7 +558,7 @@ class Conventionnext extends Controller
 			}
 		}
 		
-		$field_names = array(	'can_name', 
+		$field_names = array(	//'can_name', 
 								'can_display_name', 
 								'can_password', 
 								'can_password_confirm', 
@@ -583,20 +582,36 @@ class Conventionnext extends Controller
 		$this->load->view('candidate/admin.php', $data);
 	}
 
-	private function editCandidateBio($can_name)
+	private function editCandidateBio($can_display_name)
 	{
 		$data['error'] = '';
 		if(isset($_POST['submitted'])) {
-			if($this->candidate->authenticate($_POST['can_id'], $_POST['can_password'])) {
+			$rules['can_bio'] = "required|trim|max_length[65535]|xss_clean";
+			$this->validation->set_rules($rules);			
+			if (!$this->validation->run())
+				$data['error'] .= $this->validation->error_string;
+			
+			if(!$this->candidate->authenticate($_POST['can_id'], $_POST['can_password']))
+				$data['error'] .= '<p>Invalid Password</p>';
+				
+			if(!$data['error'])	{
 				unset($_POST['can_password']);
 				$this->candidate->editCandidate();
-				redirect("conventionnext/view/candidate/$can_name");
-			} else $data['error'] = 'Invalid Password';
+				redirect('conventionnext/view/candidate/' . url_title($can_display_name));
+			}
 		}
-		$data['can_name'] = $can_name;
-		$can_id = $this->candidate->getIdByName($can_name);
+		$can_id = $this->candidate->getIdByName($can_display_name);
 		if(!$can_id) redirect();
+		
 		$data['can_id'] = $can_id;
+		$data['can_display_name'] = $can_display_name;
+		
+		$candidate = $this->candidate->getCandidate($can_id);
+		
+		#TODO there's some weird sh** going on here with the validation class, fix it!
+		// $fields['can_bio'] = isset($_POST['can_bio']) ? $_POST['can_bio'] : $candidate['can_bio'] ;
+		// $this->validation->set_fields($fields);
+		$data['can_bio'] = isset($_POST['can_bio']) ? $_POST['can_bio'] : $candidate['can_bio'] ;
 		
 		$this->load->view('candidate/edit_bio.php', $data);
 	}

@@ -1,8 +1,8 @@
 <?php
-$can_name_attrs = array(				'name' => 'can_name', 
-										'value' => $this->validation->can_name, 
-										'class' => 'txt', 
-										'maxlength' => 45);
+// $can_name_attrs = array(				'name' => 'can_name', 
+// 										'value' => $this->validation->can_name, 
+// 										'class' => 'txt', 
+// 										'maxlength' => 45);
 						            
 $can_display_name_attrs = array(		'name' => 'can_display_name',
 										'value' => $this->validation->can_display_name,
@@ -40,7 +40,7 @@ else 					$submit_text = "Edit Candidate";
 	<? if($action == 'create'): ?>
   <h2>Create a New Candidate</h2>
 	<? else: ?>
-	<h2>Edit Candidate: <?=$_POST['can_name']?></h2>
+	<h2>Edit Candidate: <?=$_POST['can_display_name']?></h2>
 	<? endif; ?>
 	
   	<div class='errorArea'><?=$error;?></div>
@@ -48,11 +48,11 @@ else 					$submit_text = "Edit Candidate";
 	<? if($action == 'create'): ?>
   	<?= form_open('conventionnext/create/candidate') ?>
 	<? else: ?>
-		<?= form_open("conventionnext/edit/candidate/{$_POST['can_name']}", null, array('can_id' => $_POST['can_id'])) ?>
+		<?= form_open('conventionnext/edit/candidate/' . url_title($_POST['can_display_name']), null, array('can_id' => $_POST['can_id'])) ?>
 	<? endif; ?>
 	
 	
-	<?= form_format('Candidate Name: ', form_input($can_name_attrs)) ?>
+	<?//= form_format('Candidate Name: ', form_input($can_name_attrs)) ?>
 	<?= form_format('Candidate Display Name: ', form_input($can_display_name_attrs)) ?>
 	<?= form_format('Password: ', form_password($can_password_attrs)) ?>
 	<?= form_format('Confirm Password: ', form_password($can_password_confirm_attrs)) ?>
