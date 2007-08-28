@@ -60,5 +60,10 @@ queueUpdater.flaguser = function(user_id, type_id, reporter_id) {
 
 queueUpdater.toggleQueue = function () {
 	if(ajaxOn) { ajaxOn=false; queueUpdater.updaterObject.stop(); }
-	else { ajaxOn=true; queueUpdater.updaterObject.start(); }
+	else if ($$('div[class=flag-question]', 'div[class=flag-user]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { ajaxOn=true; queueUpdater.updaterObject.start(); }
+}
+
+queueUpdater.toggleVisibility = function(element) {
+	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
+	$(element).setStyle(style);
 }
