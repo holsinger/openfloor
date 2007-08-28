@@ -64,6 +64,7 @@ queueUpdater.toggleQueue = function () {
 }
 
 queueUpdater.toggleVisibility = function(element) {
+	$$('div[class=flag-question]', 'div[class=flag-user]').without($(element)).invoke('setStyle', {display:'none'});
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
 	$(element).setStyle(style);
 }
