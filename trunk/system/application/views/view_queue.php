@@ -29,7 +29,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 		$this->load->view('view_includes/view_question_pod.php',$row);
 	}	
 	?>
-	<p><?=empty($results)?'<strong>There are no '.$event_type.' to display '.anchor('question/add/'.$event_url,'Submit A '.ucwords($event_type)).'</strong>':''?>
+	<p><?=empty($results)?'<strong>There are no '.$event_type.'s to display '.anchor("$event_type/add/$event_url",'Submit A '.ucwords($event_type)).'</strong>':''?>
 	<? if(isset($ajax))	ob_end_flush(); ?>
 	</div>
 </div>
