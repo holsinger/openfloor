@@ -9,8 +9,8 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 <?$this->load->view('view_includes/header.php',$data);?>
 <div id="content_div">
 	<h3><?=$queue_title;?></h3>Question Timer: <? $this->load->view('view_includes/timer_include.php') ?>
-	<? if(isset($ajax)) ob_clean();?>
 	<div id='queue'>
+	<?php if(isset($ajax)) ob_clean();?>
 	<? if(!isset($ajax)): ?>
 	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">
 	<? endif; ?>
@@ -30,8 +30,8 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	}	
 	?>
 	<p><?=empty($results)?'<strong>There are no '.$event_type.' to display '.anchor('question/add/'.$event_url,'Submit A '.ucwords($event_type)).'</strong>':''?>
-	</div>
 	<? if(isset($ajax))	ob_end_flush(); ?>
+	</div>
 </div>
 <?
 $data['pagination'] = $pagination;
