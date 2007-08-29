@@ -4,6 +4,7 @@ class Tag_lib {
 
 	public function __construct()
 	{	
+		#TODO Do we want to combine tag_lib.php with wordcloud.php?
 		$this->CI=& get_instance();
 	}
 	
@@ -22,12 +23,12 @@ class Tag_lib {
 		if (($k = array_search('ajax', $segment_array)) !== false) array_splice($segment_array, $k, $k+2);
 		$args = '/'.implode('/', $segment_array);
 		
-		if ($type) {		// generate cloud
+		if ($type) {							// generate cloud
 			$cloud = '';
 			foreach ($arg as $v)
 				$cloud .= ' ' . anchor("$class/$function/tag/{$v['word']}$args", $v['word'], array('class' => "size{$v['sizeRange']}")) . ' &nbsp;';
 			return $cloud;
-		} else {			// generate single link
+		} else {								// generate single link
 			return anchor("$class/$function/tag/$arg$args", $arg);
 		}		
 	}
@@ -38,5 +39,15 @@ class Tag_lib {
 		 	if(!empty($question['tags']))
 				foreach($question['tags'] as $k2=>$tag) 
 					$result[$k1]['tags'][$k2]=$this->createTagLink($tag);
+	}
+	
+	public function createTagCloud($event_id)
+	{
+		$words = $this->CI->tag->getAllReferencedTags($event_id);
+		if(!empty($words)) {
+			$cloud = new wordCloud($words);
+			$cloud_array = $cloud->showCloud('array');
+			return $this->createTagLink($cloud_array);
+		}
 	}
 }

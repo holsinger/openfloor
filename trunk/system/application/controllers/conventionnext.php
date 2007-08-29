@@ -6,19 +6,27 @@ class Conventionnext extends Controller
 	function __construct()
 	{
 		parent::Controller();
-		$this->load->model('Question_model','question');
-		$this->load->model('Video_model', 'video');
-		$this->load->model('Vote_model','vote');
-		$this->load->model('Event_model','event');
-		$this->load->model('Flag_model','flag');
-		$this->load->model('Candidate_model', 'candidate');
-		$this->load->library('validation');
-		$this->load->library('time_lib');
-		$this->load->library('flag_lib');
-		$this->load->helper('url');//for redirect
-		$this->load->helper('form');
+		// models
+		$this->load->model('candidate_model', 'candidate');
+		$this->load->model('event_model','event');
+		$this->load->model('flag_model','flag');
+		$this->load->model('question_model','question');
 		$this->load->model('tag_model', 'tag');
-
+		$this->load->model('video_model', 'video');
+		$this->load->model('vote_model','vote');
+		
+		// libraries
+		$this->load->library('flag_lib');
+		$this->load->library('pagination');
+		$this->load->library('tag_lib');
+		$this->load->library('time_lib');
+		$this->load->library('validation');
+		$this->load->library('wordcloud');
+		
+		// helpers
+		$this->load->helper('form');
+		$this->load->helper('url');
+		
 		$this->load->scaffolding('cn_questions');
 	}
 	
@@ -130,186 +138,82 @@ class Conventionnext extends Controller
 		if (isset($uri_array['ajax'])) $this->ajax = true;
 		if (!isset($uri_array['event'])) $this->index();
 
-		//find event type 
-		if (isset($uri_array['event']) && is_numeric($uri_array['event'])) // if an event id was passed
-		{
-			if ( $this->event->get_event_type($uri_array['event']) == 'question') $this->questionQueue($uri_array,$uri_array['event']);
-			if ( $this->event->get_event_type($uri_array['event']) == 'video') $this->videoQueue($uri_array,$uri_array['event']);			
+		$event_id = $this->event->get_id_from_url($uri_array['event']);
+		if ( $this->event->get_event_type($event_id) == 'question') $this->questionQueue($uri_array,$event_id);
+		if ( $this->event->get_event_type($event_id) == 'video') $this->videoQueue($uri_array,$event_id); 
 			
-		}
-		if (isset($uri_array['event']) && is_string($uri_array['event'])) // if an event name was passed 
-		{
-			$event_id = $this->event->get_id_from_url($uri_array['event']);
-			if ( $this->event->get_event_type($event_id) == 'question') $this->questionQueue($uri_array,$event_id);
-			if ( $this->event->get_event_type($event_id) == 'video') $this->videoQueue($uri_array,$event_id); 
-		}			
 	}
 		
 	function questionQueue ($uri_array,$event_id) 
 	{
+		if(!isset($event_id)) redirect();
 		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'question';
 		
-		$this->load->model('Question_model','question2');
-		//event
+		$this->load->model('Question_model','question2'); // why are we loading it like this?
+		
+		// event information
 		$this->question2->event_id = $event_id; 
 		$data['event_name'] = $uri_array['event'];
-		//question
+		
+		// question information
 		if (isset($uri_array['question'])) {
-			if (is_numeric($uri_array['question'])) // change all is_numeric, is_string groups to if, elseif logic
-				$this->question2->question_id = $uri_array['question'];
-			elseif (is_string($uri_array['question']))
-				$this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);
-			
+			$this->question2->question_id = $this->question->get_id_from_url($uri_array['question']);			
+			// flag this request as question specific
 			$data['question_view'] = true;			
 		}
 		
-		//user
-		if (isset($uri_array['user']) && is_numeric($uri_array['user'])) 
-			$this->question2->user_id = $uri_array['user'];
-		if (isset($uri_array['user']) && is_string($uri_array['user'])) $
+		// user information
+		if (isset($uri_array['user']))
 			$this->question2->user_id = $this->user->get_id_from_name($uri_array['user']); 
 			
-		//tag
-		if (isset($uri_array['tag']) && is_numeric($uri_array['tag'])) $this->question2->tag_id = $uri_array['tag'];
-		if (isset($uri_array['tag']) && is_string($uri_array['tag'])) {
+		// tag information
+		if (isset($uri_array['tag'])) {
 			$this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
 			$data['tag'] = $uri_array['tag'];
 		}
-		//set default sort link
-		$type = ucfirst($data['event_type']);
-		$sort_active = 'upcoming';
-		$queue_title = 'Upcoming '. $type . 's';
 		
-		//create sorting options
-		if (isset($uri_array['sort']) )
-		{
-			//order by date
-			if ( $uri_array['sort'] == 'newest')
-			{
-				$this->question2->order_by = 'date';
-				$sort_active = 'newest';
-				$queue_title = 'Newest '.$type.'s';
-			}
-			//limit to asked questions
-			if ( $uri_array['sort'] == 'asked')
-			{
-				$this->question2->question_status = 'asked';
-				$sort_active = 'asked';
-				$queue_title = 'Asked '.$type.'s';
-			}
-			//limit to current question
-			if ( $uri_array['sort'] == 'current')
-			{
-				$this->question2->question_status = 'current';
-				$sort_active = 'current';
-				$queue_title = 'Current '.$type;
-			}
-		}
-		$data['sort'] = $sort_active;
+		// prepare sorting information
+		$this->prepareSort($data);		
 		
-		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
-		//set a sorting array
-		$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');
-		($sort_active == 'upcoming') ? array_push($sort_array,'Upcoming'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}",'Upcoming') );
-		($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}/sort/newest",'Newest') );
-		($sort_active == 'asked') ? array_push($sort_array,'Asked'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}/sort/asked",'Asked') );
-		($sort_active == 'current') ? array_push($sort_array,'Current'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}/sort/current",'Current') );
-		
-		$data['sort_array'] = $sort_array;
-		//var_dump($sort_array);
-		
-		if ( isset($uri_array['sort']) ) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
-		$data['queue_title'] = $queue_title;
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
-		
-		// pagination
-		if(isset($event_id))
-		{		
-			$segment_array = $this->uri->segment_array();
-			if(is_numeric($segment_array[$this->uri->total_segments()]))
-				array_pop($segment_array);				
-			$base_url = implode('/', $segment_array);				
-
-			$pagination_per_page = '5';			
-			// $this->question2->limit = $pagination_per_page;
-			// 			
-			// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
-			// 					$this->question2->offset = $this->uri->segment($this->uri->total_segments());
-			$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
-			
-			$data['results'] = $this->question2->questionQueue();
-			
-			//time
-			$data['last_response'] = date('m/d/Y g:i:s A', strtotime($data['results'][0]['last_response']));
-								
-			$total_rows = count($data['results']);
-			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
-
-			$this->load->library('pagination');
-			$config['base_url'] = site_url($base_url);
-			$config['total_rows'] = $total_rows;//$this->question2->numQuestions($event_id);
-			$config['per_page'] = $pagination_per_page;
-			$config['uri_segment'] = $this->uri->total_segments();
-			//add some style
-			$config['first_link'] = '';
-			$config['last_link'] = '';
-			$config['next_link'] = '&gt';
-			$config['next_tag_open'] = '<li class="next"><span>';
-			$config['next_tag_close'] = '</span></li>';			
-			$config['prev_link'] = '&lt';
-			$config['prev_tag_open'] = '<li class="prev"><span>';
-			$config['prev_tag_close'] = '</span></li>';
-			$config['num_tag_open'] = '<li>';
-			$config['num_tag_close'] = '</li>';
-			$config['cur_tag_open'] = '<li class="current">';
-			$config['cur_tag_close'] = '</li>';
-			$this->pagination->initialize($config);
-			$data['pagination'] = $this->pagination->create_links();
-			$data['offset'] = $this->uri->segment($this->uri->total_segments());
-			if(!is_numeric($data['offset'])) $data['offset'] = 0;
-		}
-		
-		//set user score			
-		foreach ($data['results'] as $key => $row) {
-			if ($this->userauth->isUser()) {
-				$this->vote->type='question';
-				$score = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
-				if ($score > 0) $data['results'][$key]['voted'] = 'up';
-				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
-				else $data['results'][$key]['voted'] = false;
-			} else $data['results'][$key]['voted'] = false;
-			//set user avatar
-			$image_array = unserialize($data['results'][$key]['user_avatar']);
-			if ($image_array) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
-			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg";	
-			//get time diff
-			$data['results'][$key]['time_diff'] = $this->time_lib->getDecay($data['results'][$key]['date']);
-		}
+		// ==========================================
+		// = Load the question queue from the model =
+		// ==========================================
+		$data['results'] = $this->question2->questionQueue();
 		
 		if(empty($data['results'])) {
-			$event['results'] = $this->event->get_event($event_id);
-			$data['rightpods'] = array('dynamic'=>array('event_description'=>$event['results']['event_desc'],'event_location'=>$event['results']['location']));
-		} else {
-			$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
-		}
+			$event = $this->event->get_event($event_id);
+			$data['rightpods'] = array(	'dynamic'	=>	array(	'event_description'	=>	$event['event_desc'],
+																'event_location'	=>	$event['location']));
+			// set vars
+			$data['view_name'] = 'view_queue';
+			$data['offset'] = 0;
+			$data['pagination'] = '';
+			// load view and exit
+			$this->load->view('view_queue',$data);
+			return;													
+		}		
 		
-		if (isset($event_id) && !empty($data['results'])) {
-			// tag cloud - this section might need a little tweaking
-			$this->load->model('tag_model');
-			$this->load->library('wordcloud');
-			$words = $this->tag_model->getAllReferencedTags($event_id);
-			if(!empty($words)) {
-				$cloud = new wordCloud($words);
-				$cloud_array = $cloud->showCloud('array');
-				$this->load->library('tag_lib');
-				$data['cloud'] = $this->tag_lib->createTagLink($cloud_array);
-			}
-			// question tags
-			$this->tag_lib->createTagLinks($data['results']);
-		}	
+		// time
+		#TODO this implementation is horrible at best - fix it!
+		$data['last_response'] = date('m/d/Y g:i:s A', strtotime($data['results'][0]['last_response']));
 		
+		// prepare pagination data
+		$this->preparePagination($data);
+		
+		// prepare queue data for display
+		$this->prepareQueue($data);		
+				
+		// tag cloud
+		$data['cloud'] = $this->tag_lib->createTagCloud($event_id);
+		
+		// question tags
+		$this->tag_lib->createTagLinks($data['results']);	
+		
+		// load the view
 		$data['view_name'] = 'view_queue';
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
+		
 		$this->load->view('view_queue',$data);	
 	}		
 	
@@ -676,6 +580,124 @@ class Conventionnext extends Controller
 		else $ip = "UNKNOWN"; 
 	
 		return $ip; 
+	}
+
+	// conventionnext::questionQueue() helper functions	
+	private function prepareQueue(&$data)
+	{
+		foreach ($data['results'] as $key => $row) {
+			// if user is registered, find out if and how they voted
+			if ($this->userauth->isUser()) {
+				$this->vote->type='question';
+				$score = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
+				if ($score > 0) $data['results'][$key]['voted'] = 'up';
+				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
+				else $data['results'][$key]['voted'] = false;
+			} else 
+				$data['results'][$key]['voted'] = false;
+			
+			// set user avatar
+			$image_array = unserialize($data['results'][$key]['user_avatar']);
+			if ($image_array) $data['results'][$key]['avatar_path'] = "./avatars/".$image_array['file_name'];
+			else $data['results'][$key]['avatar_path'] = "./images/image01.jpg"; // default avatar	
+			
+			// get time decay
+			$data['results'][$key]['time_diff'] = $this->time_lib->getDecay($data['results'][$key]['date']);
+		}
+				
+		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
+	}
+
+	private function preparePagination(&$data)
+	{
+		$segment_array = $this->uri->segment_array();
+		if(is_numeric($segment_array[$this->uri->total_segments()]))
+			array_pop($segment_array);				
+		$base_url = implode('/', $segment_array);				
+
+		$pagination_per_page = '5';			
+		$offset = (is_numeric($this->uri->segment($this->uri->total_segments()))) ? $this->uri->segment($this->uri->total_segments()) : 0 ;		
+							
+		$total_rows = count($data['results']);
+		$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);		
+		
+		// pagination config
+		$config['base_url'] = site_url($base_url);
+		$config['total_rows'] = $total_rows;
+		$config['per_page'] = $pagination_per_page;
+		$config['uri_segment'] = $this->uri->total_segments();
+		
+		// pagination style
+		$config['first_link'] = '';
+		$config['last_link'] = '';
+		$config['next_link'] = '&gt';
+		$config['next_tag_open'] = '<li class="next"><span>';
+		$config['next_tag_close'] = '</span></li>';			
+		$config['prev_link'] = '&lt';
+		$config['prev_tag_open'] = '<li class="prev"><span>';
+		$config['prev_tag_close'] = '</span></li>';
+		$config['num_tag_open'] = '<li>';
+		$config['num_tag_close'] = '</li>';
+		$config['cur_tag_open'] = '<li class="current">';
+		$config['cur_tag_close'] = '</li>';
+		$this->pagination->initialize($config);
+		$data['pagination'] = $this->pagination->create_links();
+		$data['offset'] = $this->uri->segment($this->uri->total_segments());
+		if(!is_numeric($data['offset'])) $data['offset'] = 0;
+	}
+
+	private function prepareSort(&$data)
+	{
+		$uri_array = $this->uri->uri_to_assoc(3);
+		$type = ucfirst($data['event_type']);
+		// default sort
+		$sort_active = 'upcoming';
+		$queue_title = 'Upcoming '. $type . 's'; // this does not appear to be implemented
+		
+		// override default sort if sort is specified
+		if (isset($uri_array['sort']) )
+		{
+			// order by date
+			if ( $uri_array['sort'] == 'newest')
+			{
+				$this->question2->order_by = 'date';
+				$sort_active = 'newest';
+				$queue_title = 'Newest '.$type.'s';
+			}
+			// limit to asked questions
+			if ( $uri_array['sort'] == 'asked')
+			{
+				$this->question2->question_status = 'asked';
+				$sort_active = 'asked';
+				$queue_title = 'Asked '.$type.'s';
+			}
+			// limit to current question
+			if ( $uri_array['sort'] == 'current')
+			{
+				$this->question2->question_status = 'current';
+				$sort_active = 'current';
+				$queue_title = 'Current '.$type;
+			}
+		}
+		
+		// set the sort
+		$data['sort'] = $sort_active;
+		
+		// build the event_url
+		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
+		
+		// initialize sort array (used to build sorting HTML)
+		$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');
+		
+		$sort_array_template = array('upcoming' => 'Upcoming', 'newest' => 'Newest', 'asked' => 'Asked', 'current' => 'Current');
+		foreach($sort_array_template as $k => $v)
+			$sort_active == $k ? array_push($sort_array, $v) : array_push($sort_array, anchor("conventionnext/queue/{$data['event_url']}/sort/$k", $v)) ;
+		
+		$data['sort_array'] = $sort_array;
+		
+		// rebuild the event_url if needed
+		if(isset($uri_array['sort'])) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
+		$data['queue_title'] = $queue_title;
 	}
 }
 ?>
