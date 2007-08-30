@@ -47,9 +47,9 @@
 	            		<p style="font-size:14px;">What has happened to democracy in America?</p>
 	            		<p>EVERYWHERE, U.S.A. - Who truly holds the power - the government or the people? What can be done about the disillusionment and frustration YOU feel when faced with U.S. politics?</p>
 
-  								<p>&nbsp;&nbsp;These are some of the questions and issues Politic 2.0 was created to address.</p>
+  								<p>&nbsp;&nbsp;These are some of the questions and issues Run Politics was created to address.</p>
 
-  								<p>&nbsp;&nbsp;At Politic 2.0, you don't have to spend $1000 a plate to sit at the table with your elected official.</p>
+  								<p>&nbsp;&nbsp;At Run Politics, you don't have to spend $1000 a plate to sit at the table with your elected official.</p>
 
   								<p>&nbsp;&nbsp;You don't have to spend hours upon hours sifting through mounds of biased data to find the facts.</p>
 	            	</span>
@@ -63,7 +63,7 @@
 	            		
 	            		<p style='width:255px;'>&nbsp;&nbsp;You are given a face, a voice, and a megaphone.</p>
 
-  								<p style='width:295px;'>&nbsp;&nbsp;We're more than a library, more than a search engine, more than a social gathering place. Politic 2.0 is not just a website; it's a place where you finally are as powerful as the people who represent you - the way it <u>should</u> be.</p>
+  								<p style='width:295px;'>&nbsp;&nbsp;We're more than a library, more than a search engine, more than a social gathering place. Run Politics is not just a website; it's a place where you finally are as powerful as the people who represent you - the way it <u>should</u> be.</p>
 	            	
 	            	</span>
 	            	</td></tr>
