@@ -24,43 +24,44 @@ class User_model extends Model {
     /**
      * this function will insert data from a posted form
      */	
-    function insert_user_form()
+    function insert_user_form($can_id = null)
     {
-        if ( isset($_POST['user_name']) ) $this->db->set('user_name',$_POST['user_name']);
-        if ( isset($_POST['user_email']) ) $this->db->set('user_email',$_POST['user_email']);
-				if ( isset($_POST['user_password']) ) $this->db->set('user_password',$_POST['user_password']);
-				if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
-				if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
-				if ( isset($_POST['user_openid']) ) $this->db->set('user_openid',$_POST['user_openid']);
-				$this->db->set('user_security_level',$this->default_security_level);
-				$this->db->insert('cn_users');
-				
-				$user_id = $this->db->insert_id();
-				
-				//set the class vars
-			    $this->user_id = $user_id;	
-			    $this->user_name = $_POST['user_name'];
-			    $this->user_email  = $_POST['user_email'];
-			    //$this->user_avatar  = $_POST['user_avatar'];
-			    
-				return $user_id;
-		    }
+    	if ( isset($_POST['user_name']) ) $this->db->set('user_name',$_POST['user_name']);
+    	if ( isset($_POST['user_email']) ) $this->db->set('user_email',$_POST['user_email']);
+		if ( isset($_POST['user_password']) ) $this->db->set('user_password',$_POST['user_password']);
+		if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
+		if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
+		if ( isset($_POST['user_openid']) ) $this->db->set('user_openid',$_POST['user_openid']);
+		if ( isset($can_id) ) $this->db->set('fk_can_id',$can_id);
+		$this->db->set('user_security_level',$this->default_security_level);
+		$this->db->insert('cn_users');
 		
-		    /**
-		     * this function will update data from a posted form
-		     */	
-		    function update_user_form()
-		    {
-		    	//make sure we have a user id for the where clause
-		    	if ( !is_numeric($_POST['user_id']) ) return false;
-		    		
-		    	$this->db->where('user_id',$_POST['user_id']);	
-		        if ( isset($_POST['user_name']) ) $this->db->set('user_name',$_POST['user_name']);
-				if ( isset($_POST['user_password']) ) $this->db->set('user_password',MD5($_POST['user_password']));
-				if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
-				if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
-				$this->db->update('cn_users');
-				return $this->db->affected_rows();
+		$user_id = $this->db->insert_id();
+		
+		//set the class vars
+	    $this->user_id = $user_id;	
+	    $this->user_name = $_POST['user_name'];
+	    $this->user_email  = $_POST['user_email'];
+	    //$this->user_avatar  = $_POST['user_avatar'];
+	    
+		return $user_id;
+    }
+		
+    /**
+     * this function will update data from a posted form
+     */	
+    function update_user_form()
+    {
+    	//make sure we have a user id for the where clause
+    	if ( !is_numeric($_POST['user_id']) ) return false;
+    		
+    	$this->db->where('user_id',$_POST['user_id']);	
+        if ( isset($_POST['user_name']) ) $this->db->set('user_name',$_POST['user_name']);
+		if ( isset($_POST['user_password']) ) $this->db->set('user_password',MD5($_POST['user_password']));
+		if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
+		if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
+		$this->db->update('cn_users');
+		return $this->db->affected_rows();
     }
     
     /**
@@ -306,7 +307,7 @@ class User_model extends Model {
 			$query = $this->db->get("cn_users");
 			$array = $query->result_array();
 			return $array[0]['user_karma'];			
-		}
+	}
 
 	public function userExists($user)
 	{

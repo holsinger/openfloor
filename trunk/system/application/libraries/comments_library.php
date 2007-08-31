@@ -12,6 +12,7 @@ class Comments_library
 		$this->CI->load->model('comments_model');
 		$this->CI->load->model('event_model');
 		$this->CI->load->model('vote_model','vote');
+		$this->CI->load->model('candidate_model','candidate');
 		$this->CI->load->library('time_lib');
 	}
 	
@@ -44,6 +45,8 @@ class Comments_library
 	
 	public function createCommentsPod($info, $id, $subcomments = false)
 	{
+		$user_name = isset($info['fk_can_id']) ? $this->CI->candidate->nameByUser($info['fk_can_id']) : $info['user_name'];
+		$comment_class = isset($info['fk_can_id']) ? 'sc_header_can' : 'sc_header' ;
 		$votes = ($info['votes'] == null) ? 0 : $info['votes'] ;
 		#see if user voted
 		$this->CI->vote->type = 'comment';
@@ -60,10 +63,10 @@ class Comments_library
 		$pod = 
 		'<div class="sc_container">
 			<div class="c_content">
-				<div class="sc_header">
+				<div class="'.$comment_class.'">
 					<div class="info">
 						<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
-						.anchor('user/profile/'.$info['user_name'],$info['user_name']).
+						.anchor('user/profile/'.$info['user_name'],$user_name).
 						' ('.$time_diff.' ago)'.'
 					</div>	
 					<div class="thumb_block">';
@@ -91,7 +94,7 @@ class Comments_library
 		$submit = ($this->CI->userauth->isUser()) ? 
 		'<input type="submit" value="Comment" class="button"/>' : 
 		'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
-		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$info['user_name']}'s comment:</a></p> "
+		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$user_name}'s comment:</a></p> "
 		.'<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">'
 		.form_open('comment/addCommentAction')
 		.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment'))
@@ -107,6 +110,7 @@ class Comments_library
 		// add subcomments
 		if ($subcomments) {
 			foreach($subcomments as $subcomment) { 
+				$user_name = isset($subcomment['fk_can_id']) ? $this->CI->candidate->nameByUser($subcomment['fk_can_id']) : $subcomment['user_name'];
 				$votes = ($subcomment['votes'] == null) ? 0 : $subcomment['votes'] ;
 				#see if user voted
 				$this->CI->vote->type = 'comment';
@@ -130,7 +134,7 @@ class Comments_library
 						<div class="sc_header">
 							<div class="info">
 								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
-								.anchor('user/profile/'.$subcomment['user_name'],$subcomment['user_name']).
+								.anchor('user/profile/'.$subcomment['user_name'],$user_name).
 								' ('.$time_diff.' ago)'.'
 							</div>	
 							<div class="thumb_block">';

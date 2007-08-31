@@ -31,7 +31,7 @@ class User extends Controller {
 		$this->load->view('view_login',$data);
 	}
 	function login () {
-		$rules['user_name'] = "trim|required|min_length[3]|max_length[20]|xss_clean";
+		$rules['user_name'] = "trim|required|min_length[3]|max_length[75]|xss_clean";
 		$rules['user_password'] = "trim|required|md5|xss_clean";
 		$this->validation->set_rules($rules);
 							

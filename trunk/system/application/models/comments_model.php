@@ -29,7 +29,8 @@ class Comments_model extends Model
 				fk_question_id, 
 				cn_comments.timestamp as date,
 				user_name,
-				user_avatar
+				user_avatar,
+				fk_can_id
 			FROM 
 				cn_comments,
 				cn_users 

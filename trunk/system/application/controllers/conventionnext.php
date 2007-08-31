@@ -444,8 +444,11 @@ class Conventionnext extends Controller
 				switch($action)
 				{
 				case 'create':
-					if($can_id = $this->candidate->addCandidate())
+					if($can_id = $this->candidate->addCandidate()) {
+						$this->createCandidateUser($can_id);
 						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));
+						
+					}
 					break;
 				case 'edit':
 					if($this->candidate->editCandidate())
@@ -482,6 +485,15 @@ class Conventionnext extends Controller
 		$this->load->view('candidate/admin.php', $data);
 	}
 
+	private function createCandidateUser($can_id)
+	{
+		$_POST['user_password'] = $_POST['can_password'];
+		$_POST['user_name'] = $_POST['user_email'] = '_'.url_title($_POST['can_email']);
+		$user_id = $this->user->insert_user_form($can_id);
+		unset($_POST['user_password'], $_POST['user_name'], $_POST['user_email']);
+		return $user_id;
+	}
+	
 	private function editCandidateBio($can_display_name)
 	{
 		$data['error'] = '';

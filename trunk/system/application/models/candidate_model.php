@@ -30,7 +30,6 @@ class Candidate_model extends Model
 	
 	public function getIdByName($can_display_name)
 	{
-		//$result = $this->db->getwhere('cn_candidates', array('can_name' => $can_name))->row_array();
 		$result = array();
 		$query_result = $this->db->get('cn_candidates')->result_array();
 		foreach($query_result as $k => $v)
@@ -38,6 +37,11 @@ class Candidate_model extends Model
 				$result[] = $v;
 		if(empty($result)) return false;
 		return $result[0]['can_id'];
+	}
+	
+	public function nameByUser($fk_can_id)
+	{
+		return $this->db->select('can_display_name')->from('cn_candidates')->where('can_id', $fk_can_id)->get()->row()->can_display_name;
 	}
 	
 	public function authenticate($can_id, $can_password)
