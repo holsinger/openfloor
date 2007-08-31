@@ -9,11 +9,11 @@
 				<div class="descr-bl">
 					<div class="descr-br">
 							<? $this->flag_lib->type = 'question'; 	$this->load->view('view_includes/flag.php'); ?>
-							<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>
 							<h3>
 								<?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name);?>
 							</h3>
 							<div class="autor">
+								<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>
 								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
 								<p>
 									Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' (' . $time_diff.' ago)';?>
