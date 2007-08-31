@@ -1064,6 +1064,10 @@ background-color:#f0faff;
 	height:29px;
 	background-color:#c6e5f6;
 }
+.sc_header_can {
+	height:29px;
+	background-color: #fbff57;
+}
 .thumb_block, .num_votes {
 	float: right;
 }
