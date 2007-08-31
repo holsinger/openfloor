@@ -1,5 +1,11 @@
 /* @override http://localhost/~Rob/Politic20/css/all.css */
 
+#queue div.admin-queue-edit-question a {
+	position: relative;
+	left: 438px;
+	top: 1px;
+}
+
 html{
 	background:#0157AC url(../images/bg-html.gif) repeat-y 0 0;
 	height:100%;
@@ -488,7 +494,7 @@ ul.tabs li.active span,ul.tabs li.active span{
 .news-summary{
 	margin:0 45px 0 36px;
 	padding:7px 0 0 85px;
-	overflow:hidden;
+	overflow: visible;
 	position:relative;
 }
 .raiting{
@@ -591,6 +597,7 @@ a.vote_digit:hover {
 .describtion ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}
 .describtion ul.options li.trackback a{background:url(../images/ico-trackback.gif) no-repeat left;}
 .describtion ul.options li.discuss a{background:url(../images/ico-discuss.gif) no-repeat left;}
+.describtion ul.options li.flag a{background:url(../images/RP_Questions_flag.png) no-repeat left;}
 
 
 ul.sort-questions{

@@ -2,12 +2,13 @@
 
 div.flag-question {
 	position: absolute;
-	right: 8px;
-	top: 27px;
 	background-color: #c6e5f6;
-	border-style: solid;
-	border-width: 1px;
 	padding: 3px;
+	bottom: -25px;
+	z-index: 101;
+	left: 269px;
+	border: 1px solid #93a2b4;
+	font-size: 10px;
 }
 
 a.flag-option {
@@ -22,6 +23,7 @@ img.img-flag-question {
 
 div.flag-user {
 	position: absolute;
+	color: #1f538c;
 	background-color: #c6e5f6;
 	border-style: solid;
 	border-width: 1px;
@@ -29,13 +31,13 @@ div.flag-user {
 	left: 88px;*/
 	z-index: 101;
 	padding: 3px;
-	margin-top: 11px;
-	left: 89px;
+	margin-top: 10px;
+	left: 91px;
 }
 
 div.autor img.img-flag-user {
 	position: absolute;
 	z-index: 101;
-	left: 89px;
+	left: 91px;
 	border-style: none;
 }
