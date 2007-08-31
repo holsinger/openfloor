@@ -1,6 +1,6 @@
 <h2>Candidate Dashboard</h2>
 <div>Current Question: <?=$questions[0]['question_name']?></div>
-<div>Question Timer: <? $this->load->view('view_includes/timer_include.php') ?></div>
+<div>Question Timer: <?=$timerHTML?></div>
 <div>Local Time: <span id="clock">&nbsp;</span></div>
 <script language="JavaScript">updateClock(); setInterval('updateClock()', 1000 );</script>
 <? if($this->userauth->isAdmin()): ?>

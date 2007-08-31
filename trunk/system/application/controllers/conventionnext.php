@@ -194,10 +194,6 @@ class Conventionnext extends Controller
 			return;													
 		}		
 		
-		// time
-		#TODO this implementation is horrible at best - fix it!
-		$data['last_response'] = date('m/d/Y g:i:s A', strtotime($data['results'][0]['last_response']));
-		
 		// prepare pagination data
 		$this->preparePagination($data);
 		
@@ -527,8 +523,7 @@ class Conventionnext extends Controller
 		$this->question->event_id = $event_id;
 		$this->question->question_status = 'current';
 		$data['questions'] = $this->question->questionQueue();
-		$data['last_response'] = date('m/d/Y g:i:s A', strtotime($data['questions'][0]['last_response']));
-		$data['event_name'] = $event_name;
+		$data['timerHTML'] = $this->createTimerHTML($data['event_name'] = $event_name);
 		
 		if(isset($ajax)) $this->load->view('candidate/dashboard_content.php', $data);
 		else $this->load->view('candidate/dashboard.php', $data);
@@ -604,8 +599,16 @@ class Conventionnext extends Controller
 			// get time decay
 			$data['results'][$key]['time_diff'] = $this->time_lib->getDecay($data['results'][$key]['date']);
 		}
-				
-		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['results'][0]['event_desc'],'event_location'=>$data['results'][0]['location']));
+		
+		// question timer
+		$timerHTML = '<div id="timer">'.$this->createTimerHTML($data['event_name']).'</div>';
+		
+		// participants
+		$participants = '<p>Participants: ' . $this->db->count_all('ci_sessions') . '</p>';
+		
+		// right pods
+		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$data['results'][0]['event_desc'] . $timerHTML . $participants, 
+									'event_location'=>$data['results'][0]['location']));
 	}
 
 	private function preparePagination(&$data)
@@ -698,6 +701,27 @@ class Conventionnext extends Controller
 		// rebuild the event_url if needed
 		if(isset($uri_array['sort'])) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		$data['queue_title'] = $queue_title;
+	}
+
+	public function createTimerHTML($event_name)
+	{
+		$event_id = $this->event->get_id_from_url($event_name);
+		$lastResponse = $this->event->last_response($event_id);
+		return <<<EOT
+		<p>
+		<script language="JavaScript">
+		//TargetDate = "08/22/2007 5:00 AM";
+		TargetDate = "$lastResponse";
+		//BackColor = "palegreen";
+		//ForeColor = "navy";
+		CountActive = true;
+		CountStepper = 1;
+		LeadingZero = true;
+		DisplayFormat = "%%M%%:%%S%%";
+		</script>
+		<script language="JavaScript" src="javascript/timer.js"></script>
+		</p>
+EOT;
 	}
 }
 ?>

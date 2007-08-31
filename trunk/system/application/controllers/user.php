@@ -9,6 +9,8 @@ class User extends Controller {
 		$this->load->helper('url');
 		
 		$this->load->model('User_model','user');
+		$this->load->model('vote_model','vote');
+		$this->load->model('question_model', 'question');
 		
 		$this->load->library('validation');
 		
@@ -343,6 +345,23 @@ class User extends Controller {
 		if ( is_numeric($this->uri->segment(3)) ) $user_id = $this->uri->segment(3);
 		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
 		$data = $this->user->get_user($user_id,$user_name);
+		
+		#TODO - Abstract event, question anchor code
+		
+		// users last 10 votes
+		$data['votes'] = $this->vote->getVotesByUser($data['user_id']);
+		foreach($data['votes'] as $k => $v) {
+			$data['votes'][$k]['event_name'] = anchor('conventionnext/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['votes'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
+		}
+		
+		// users last 10 questions
+		$data['questions'] =  $this->question->getQuestionsByUser($data['user_id']);
+		foreach($data['questions'] as $k => $v) {
+			$data['questions'][$k]['event_name'] = anchor('conventionnext/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['questions'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
+		}
+		
 		//set error if there is one
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);

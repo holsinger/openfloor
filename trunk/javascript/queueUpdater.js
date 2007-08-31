@@ -9,6 +9,8 @@ queueUpdater.updateQueue = function() {
 	queueUpdater.updaterObject = new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag, {
 	  frequency: 10
 	});
+	
+	//new Ajax.PeriodicalUpdater('timer', site_url + '/conventionnext/createTimerHTML/' + event_name, {frequency:10});
 }
 
 queueUpdater.updateQueueOnce = function() {

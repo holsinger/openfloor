@@ -86,5 +86,11 @@ class Event_model extends Model
 		$event_id = $this->db->escape($event_id);
 		$this->db->query("UPDATE cn_events SET last_response=now() WHERE event_id=$event_id");
 	}
+
+	public function last_response($event_id)
+	{
+		$last_response = $this->db->getwhere('cn_events', array('event_id' => $event_id))->row()->last_response;
+		return date('m/d/Y g:i:s A', strtotime($last_response));
+	}
 }
 ?>

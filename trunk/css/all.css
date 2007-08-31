@@ -1,6 +1,21 @@
+/* @override http://localhost/~Rob/Politic20/css/all.css */
+
 html{
 	background:#0157AC url(../images/bg-html.gif) repeat-y 0 0;
 	height:100%;
+}
+
+#content_div table {
+	background-color: #d1edfe;
+}
+
+#content_div table tbody tr th {
+	background-color: #0173ba;
+	color: #cae7f7;
+}
+
+#content_div table tbody tr.alternate {
+	background-color: #c1dded;
 }
 img{
 	z-index:100;

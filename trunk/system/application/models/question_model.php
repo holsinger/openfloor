@@ -96,7 +96,6 @@ class Question_model extends Model
 				event_name,
 				event_desc,
 				event_url_name,
-				last_response,
 				location
 			FROM 
 				cn_questions, 
@@ -181,5 +180,9 @@ class Question_model extends Model
 		return $question_id;
 	}
 	 
+	public function getQuestionsByUser($user_id)
+	{
+		return $this->db->query("SELECT event_name, question_name FROM cn_questions, cn_events WHERE fk_event_id = event_id AND fk_user_id = $user_id LIMIT 10")->result_array();
+	}	
 }
 ?>
