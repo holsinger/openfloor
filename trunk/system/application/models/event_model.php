@@ -18,7 +18,6 @@ class Event_model extends Model
 	    if ( isset($_POST['event_desc_brief']) ) $this->db->set('event_desc_brief',$_POST['event_desc_brief']);
 	    if ( isset($_POST['event_type']) ) $this->db->set('event_type',$_POST['event_type']);
 		if ( isset($_POST['event_avatar']) ) $this->db->set('event_avatar',$_POST['event_avatar']);
-		if ( isset($_POST['sunlight_id']) ) $this->db->set('sunlight_id',$_POST['sunlight_id']);
 		if ( isset($_POST['event_date']) ) $this->db->set('event_date',$_POST['event_date']);
 		if ( isset($_POST['location']) ) $this->db->set('location',$_POST['location']);
 		$this->db->insert('cn_events');

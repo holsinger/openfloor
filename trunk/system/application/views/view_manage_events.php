@@ -36,10 +36,6 @@
 	
 	<?= form_format("Event Avatar: ",form_upload('userfile','$this->validation->event_avatar','class="txt"'),'must be less then 1024 kb & 1024px768px (image will be resized)' ); ?>
 	
-	<label>Politician:</label>
-	<?= form_dropdown('sunlight_id', $politicians, null, 'class="txt"')?>
-	<?//echo form_format("Sunlight ID:",form_input('sunlight_id',$this->validation->sunlight_id,'class="txt"') ); ?>
-	
 	<label>Event Date:</label>
 	<?php echo js_calendar_write('event_date', time(), true); ?>
 	<input type="text" name="event_date" value="<?=/*substr(*/$this->validation->event_date/*, 0, 10)*/?>" onblur="update_calendar(this.name, this.value);" class="txt"/>
