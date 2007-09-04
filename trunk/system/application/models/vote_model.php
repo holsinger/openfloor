@@ -103,9 +103,10 @@ class Vote_model extends Model
 		// return $this->db->getwhere('cn_votes', array('fk_question_id' => $question_id))->result_array();
 	}
 		
-	public function getVotesByUser($user_id)
+	public function getVotesByUser($user_id, $all = false)
 	{
-		return $this->db->query("SELECT vote_value, user_name, event_name, question_name FROM cn_questions, cn_votes as v, cn_users, cn_events WHERE  v.fk_user_id = user_id AND v.fk_question_id = question_id AND fk_event_id = event_id AND user_id=$user_id LIMIT 10")->result_array();
+		$limit = ($all) ? '' : 'LIMIT 10' ;
+		return $this->db->query("SELECT vote_value, user_name, event_name, question_name FROM cn_questions, cn_votes as v, cn_users, cn_events WHERE  v.fk_user_id = user_id AND v.fk_question_id = question_id AND fk_event_id = event_id AND user_id=$user_id $limit")->result_array();
 	}
 	
 	public function getVotesByVideo($video_id)

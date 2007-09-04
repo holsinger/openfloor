@@ -180,9 +180,10 @@ class Question_model extends Model
 		return $question_id;
 	}
 	 
-	public function getQuestionsByUser($user_id)
+	public function getQuestionsByUser($user_id, $all = false)
 	{
-		return $this->db->query("SELECT event_name, question_name FROM cn_questions, cn_events WHERE fk_event_id = event_id AND fk_user_id = $user_id LIMIT 10")->result_array();
+		$limit = ($all) ? '' : 'LIMIT 10' ;
+		return $this->db->query("SELECT event_name, question_name FROM cn_questions, cn_events WHERE fk_event_id = event_id AND fk_user_id = $user_id $limit")->result_array();
 	}	
 }
 ?>

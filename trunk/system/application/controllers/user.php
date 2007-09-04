@@ -589,5 +589,32 @@ class User extends Controller {
 		
 		$this->reset_password($_POST['user_id'], $_POST['auth'], $error);
 	}
+
+	public function all($what, $user_name)
+	{
+		$data = $this->user->get_user(null ,$user_name);
+		
+		switch ($what) {
+			case 'votes':
+				$data['header'] = "Votes by {$data['user_display_name']}";
+				$data['type'] = 'vote';
+				$data['result'] = $this->vote->getVotesByUser($data['user_id']);
+				break;
+			case 'questions':
+				$data['header'] = "Questions asked by {$data['user_display_name']}";
+				$data['type'] = 'question';
+				$data['result'] = $this->question->getQuestionsByUser($data['user_id']);
+				break;
+			default:
+				break;
+		}
+		
+		foreach($data['result'] as $k => $v) {
+			$data['result'][$k]['event_name'] = anchor('conventionnext/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['result'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
+		}
+		
+		$this->load->view('user/all_questions_votes.php', $data);
+	}
 }
 ?>

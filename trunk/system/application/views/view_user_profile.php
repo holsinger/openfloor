@@ -16,7 +16,7 @@ $data['red_head'] = 'Welcome';
 	//echo isset($avatar_image_name)?"<br /><strong> Avatar: </strong> <img src='./avatars/{$avatar_image_name}'>":'';
 	?>
 	<? if(!empty($votes)): ?>
-	<h3>Last 10 votes</h3>
+	<h3>Last 10 votes</h3><?= anchor("user/all/votes/$user_name", 'See all') ?>
 	<table>
 	<tr><th>Voted</th><th>Event</th><th>Question</th></tr>
 	<? $rowClass = 'normal'; foreach($votes as $k => $v): $vote_value = ($v['vote_value'] > 0) ? '<img src="./images/thumbsUp.png">' : '<img src="./images/thumbsDown.png">'; ?>
@@ -25,7 +25,7 @@ $data['red_head'] = 'Welcome';
 	</table>
 	<? endif; ?>
 	<? if(!empty($questions)): ?>
-	<h3>Last 10 questions</h3>
+	<h3>Last 10 questions</h3><?= anchor("user/all/questions/$user_name", 'See all') ?>
 	<table>
 	<tr><th>Event</th><th>Question</th></tr>
 	<? $rowClass = 'normal'; foreach($questions as $k => $v): ?>
