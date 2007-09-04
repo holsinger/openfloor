@@ -487,8 +487,9 @@ class Conventionnext extends Controller
 
 	private function createCandidateUser($can_id)
 	{
+		$_POST['user_email'] = $_POST['can_email'];
 		$_POST['user_password'] = $_POST['can_password'];
-		$_POST['user_name'] = $_POST['user_email'] = '_'.url_title($_POST['can_email']);
+		$_POST['user_name'] = '_'.url_title($_POST['can_email']);
 		$user_id = $this->user->insert_user_form($can_id);
 		unset($_POST['user_password'], $_POST['user_name'], $_POST['user_email']);
 		return $user_id;
