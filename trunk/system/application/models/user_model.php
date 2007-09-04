@@ -68,6 +68,10 @@ class User_model extends Model {
      * this function will validate a user login
      */
 	function check_user_login () {
+		// candidate check
+		if(strpos($_POST['user_name'], '@') !== false)
+			$_POST['user_name'] = '_' . url_title($_POST['user_name']);
+			
 		$this->db->where('user_name',$_POST['user_name']);
 		$this->db->where('user_password',$_POST['user_password']);		
 		$query = $this->db->get('cn_users');
