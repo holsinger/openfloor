@@ -54,10 +54,10 @@ else 					$submit_text = "Edit Candidate";
 	
 	<?//= form_format('Candidate Name: ', form_input($can_name_attrs)) ?>
 	<?= form_format('Candidate Display Name: ', form_input($can_display_name_attrs)) ?>
-	<?= form_format('Password: ', form_password($can_password_attrs)) ?>
-	<?= form_format('Confirm Password: ', form_password($can_password_confirm_attrs)) ?>
+	<?= $action == 'create' ? form_format('Password: ', form_password($can_password_attrs)) : '' ?>
+	<?= $action == 'create' ? form_format('Confirm Password: ', form_password($can_password_confirm_attrs)) : '' ?>
 	<?= form_format('Biography: ', form_textarea($can_bio_attrs)) ?>
-	<?= form_format('Email: ', form_input($can_email_attrs)) ?>
+	<?= $action == 'create' ? form_format('Email: ', form_input($can_email_attrs)) : '' ?>
 	<?= form_hidden('submitted', 'true') ?>
 	<p><?= form_submit(null, $submit_text, 'class="button"') ?></p>
 	<?= form_close() ?>

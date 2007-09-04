@@ -1,8 +1,8 @@
 <?php
 $display_titles = array(//'can_name' => 'Profile Name',
 						'can_display_name' => 'Display Name',
-						'can_bio' => 'Biography',
-						'can_email' => 'Email Address');
+						'can_bio' => 'Biography'/*,
+						'can_email' => 'Email Address'*/);
 ?>
 
 <? $this->load->view('view_includes/header.php');?>

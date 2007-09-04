@@ -446,8 +446,7 @@ class Conventionnext extends Controller
 				case 'create':
 					if($can_id = $this->candidate->addCandidate()) {
 						$this->createCandidateUser($can_id);
-						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));
-						
+						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));						
 					}
 					break;
 				case 'edit':
@@ -486,12 +485,17 @@ class Conventionnext extends Controller
 	}
 
 	private function createCandidateUser($can_id)
-	{
+	{	
+		#TODO decide for good what to do with email & password
 		$_POST['user_email'] = $_POST['can_email'];
 		$_POST['user_password'] = $_POST['can_password'];
-		$_POST['user_name'] = '_'.url_title($_POST['can_email']);
+		$_POST['user_name'] = '_'.url_title($_POST['user_email']);
+		
+		$display_name = $_POST['can_display_name'];
+		unset($_POST['can_email'], $_POST['can_password'], $_POST['can_display_name'], $_POST['can_bio']);
+		$_POST['can_display_name'] = $display_name;
+		
 		$user_id = $this->user->insert_user_form($can_id);
-		unset($_POST['user_password'], $_POST['user_name'], $_POST['user_email']);
 		return $user_id;
 	}
 	
@@ -521,7 +525,7 @@ class Conventionnext extends Controller
 		
 		$candidate = $this->candidate->getCandidate($can_id);
 		
-		#TODO there's some weird sh** going on here with the validation class, fix it!
+		#TODO there's some weird stuff going on here with the validation class, fix it!
 		// $fields['can_bio'] = isset($_POST['can_bio']) ? $_POST['can_bio'] : $candidate['can_bio'] ;
 		// $this->validation->set_fields($fields);
 		$data['can_bio'] = isset($_POST['can_bio']) ? $_POST['can_bio'] : $candidate['can_bio'] ;
