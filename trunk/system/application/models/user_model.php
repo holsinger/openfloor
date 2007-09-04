@@ -6,7 +6,6 @@ class User_model extends Model {
     var $user_email   = '';
     var $user_password = '';
     var $user_avatar = '';
-    var $user_display_name = '';
     var $default_security_level = SL_USER;
 
     function __construct()
@@ -30,7 +29,6 @@ class User_model extends Model {
     	if ( isset($_POST['user_email']) ) $this->db->set('user_email',$_POST['user_email']);
 		if ( isset($_POST['user_password']) ) $this->db->set('user_password',$_POST['user_password']);
 		if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
-		if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
 		if ( isset($_POST['user_openid']) ) $this->db->set('user_openid',$_POST['user_openid']);
 		if ( isset($can_id) ) $this->db->set('fk_can_id',$can_id);
 		$this->db->set('user_security_level',$this->default_security_level);
@@ -59,7 +57,6 @@ class User_model extends Model {
         if ( isset($_POST['user_name']) ) $this->db->set('user_name',$_POST['user_name']);
 		if ( isset($_POST['user_password']) ) $this->db->set('user_password',MD5($_POST['user_password']));
 		if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
-		if ( isset($_POST['user_display_name']) ) $this->db->set('user_display_name',$_POST['user_display_name']);
 		$this->db->update('cn_users');
 		return $this->db->affected_rows();
     }
@@ -89,7 +86,6 @@ class User_model extends Model {
 		   $this->user_name = $row->user_name;
 		   $this->user_avatar  = $row->user_avatar;
 		   $this->user_avatar  = $row->user_email;
-		   $this->user_display_name = $row->user_display_name;
 		   return true;
 		} else {
 			return false;

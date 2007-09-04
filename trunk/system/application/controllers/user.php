@@ -471,7 +471,6 @@ class User extends Controller {
 		$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";
 		$fields['user_password']	= ( isset($_POST['user_password']) ) ? $_POST['user_password']:"";
 		$fields['user_avatar']	= ( isset($_POST['user_avatar']) ) ? $_POST['user_avatar']:"";
-		$fields['user_display_name']	= ( isset($_POST['user_display_name']) ) ? $_POST['user_display_name']:"";
 		
 		$this->validation->set_fields($fields);
 		$this->load->view('view_edit_user',$data);
@@ -487,7 +486,6 @@ class User extends Controller {
 		$rules['user_name'] = "trim|required|xss_clean";
 		$rules['user_password'] = "trim|required|xss_clean";
 		$rules['user_avatar'] = "trim";
-		$rules['user_display_name'] = "trim|xss_clean";
 		
 		$this->validation->set_rules($rules);
 					
@@ -596,12 +594,12 @@ class User extends Controller {
 		
 		switch ($what) {
 			case 'votes':
-				$data['header'] = "Votes by {$data['user_display_name']}";
+				$data['header'] = "Votes by {$data['user_name']}";
 				$data['type'] = 'vote';
 				$data['result'] = $this->vote->getVotesByUser($data['user_id']);
 				break;
 			case 'questions':
-				$data['header'] = "Questions asked by {$data['user_display_name']}";
+				$data['header'] = "Questions asked by {$data['user_name']}";
 				$data['type'] = 'question';
 				$data['result'] = $this->question->getQuestionsByUser($data['user_id']);
 				break;

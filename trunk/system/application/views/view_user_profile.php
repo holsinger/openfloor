@@ -11,7 +11,6 @@ $data['red_head'] = 'Welcome';
 	echo "<br /><p style='float:right;margin-right:25px;'><img src='{$avatar_image_path}'></p>";
 	echo "<br /><strong> Username: </strong> ".$user_name;
 	echo "<br /><strong> Email: </strong> ".$user_email;
-	echo "<br /><strong> Display Name: </strong> ".$user_display_name;
 	//echo "<br /><strong> OpenID: </strong> ".$user_openid;
 	//echo isset($avatar_image_name)?"<br /><strong> Avatar: </strong> <img src='./avatars/{$avatar_image_name}'>":'';
 	?>
@@ -40,7 +39,6 @@ $data['red_head'] = 'Welcome';
 	
 	<?= form_format("Username: ",$user_name); ?>
 	<?= form_format("Email: ",form_input('user_email',$user_email,'class="txt"') ); ?>
-	<?= form_format("Display Name: ",form_input('user_display_name',$user_display_name,'class="txt"') ); ?>
 	<?= form_format("OpenID: ",form_input('user_openid',$user_openid,'class="txt"') ); ?>
 	<?= isset($avatar_image_name)?"<br /><img src=\"./avatars/<?=$avatar_image_name;/>\"":'' ?>
 	<?= form_format("Avatar: ",form_upload('userfile',$user_avatar,'class="txt"'),'must be less then 1024 kb & 1024px768px (image will be resized)' ); ?>
