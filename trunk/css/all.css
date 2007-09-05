@@ -21,7 +21,7 @@ html{
 
 #content_div table tbody tr th {
 	background-color: #0173ba;
-	color: #cae7f7;
+	color: #FFFFFF;
 }
 
 #content_div table tbody tr.alternate {
@@ -1070,7 +1070,7 @@ background-color:#f0faff;
 }
 .sc_header_can {
 	height:29px;
-	background-color: #fbff57;
+	background-color: #D2D2D2;
 }
 .thumb_block, .num_votes {
 	float: right;
