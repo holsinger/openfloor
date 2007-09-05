@@ -1,3 +1,21 @@
+<?php
+// fckeditor
+include("./fckeditor/fckeditor.php");
+
+function richField($name, $value)
+{
+	$oFCKeditor 			= new FCKeditor($name) ;
+	$sBasePath 				= 'fckeditor/';
+	$oFCKeditor->BasePath 	= $sBasePath ;
+	$oFCKeditor->ToolbarSet = 'Basic';
+	$oFCKeditor->Height 	= '100';
+	$oFCKeditor->Width 		= '367';
+	$oFCKeditor->Value 		= $value;
+	return $oFCKeditor->CreateHtml();
+}
+
+?>
+	
 <? $this->load->view('view_includes/header.php'); ?>
 
 <div id="content_div">
@@ -9,27 +27,9 @@
 	<?= $this->validation->event_type;?>
 	<?= form_format("Event Name: *",form_input('event_name',$this->validation->event_name,'class="txt"') ); ?>
 	<?
-		$format = array(
-              'name'        => 'event_desc_brief',
-              'id'          => 'event_desc_brief',
-              'value'       => $this->validation->event_desc_brief,
-              'rows'        => '3',
-              'cols'        => '48',
-              'class'       => 'txt'
-            );
-		echo form_format("Event Description Brief: *",form_textarea($format),'Write a brief description of the event. (will be displayed on the events page)' ); 
-		?>
-	<?
-		$format = array(
-              'name'        => 'event_desc',
-              'id'          => 'event_desc',
-              'value'       => $this->validation->event_desc,
-              'rows'        => '5',
-              'cols'        => '48',
-              'class'       => 'txt'
-            );
-		echo form_format("Event Description: *",form_textarea($format),'Write a description of the event.' ); 
-		?>
+	echo form_format("Event Description Brief: *", richField('event_desc_brief', $this->validation->event_desc_brief), 'Write a brief description of the event. (will be displayed on the events page)');
+	echo form_format("Event Description: *", richField('event_desc', $this->validation->event_desc), 'Write a description of the event.');
+	?>
 	<?= isset($avatar_image_name)?"<br /><img src=\"./avatars/<?=$avatar_image_name;/>\"":'' ?>
 	<? // echo form_format("Event Avatar:",form_input('event_avatar',$this->validation->event_avatar,'class="txt"') ); ?>
 	<?= form_format("Event Avatar: ",form_upload('userfile','$this->validation->event_avatar','class="txt"'),'must be less then 1024 kb & 1024px768px (image will be resized)' ); ?>
@@ -43,59 +43,16 @@
 	<?//echo form_format("Event Date: *",form_input('event_date','','class="txt"') ); ?>
 	
 	<?
-		$format = array(
-              'name'        => 'location',
-              'id'          => 'location',
-              'value'       => $this->validation->location,
-              'rows'        => '5',
-              'cols'        => '48',
-              'class'       => 'txt'
-            );
-		echo form_format("Event Location: *",form_textarea($format),'Write a description of the event location, directions etc.' ); 
-		?>
+	echo form_format("Event Location: *", richField('location', $this->validation->location), 'Write a description of the event location, directions etc.');
 	
-	<?php
-	$format = array(
-			'name'	=>	'moderator_info',
-			'value'	=>	$this->validation->moderator_info,
-			'rows'	=>	'5',
-			'cols'	=>	'48',
-			'class'	=>	'txt',
-		);
-	echo form_format("Moderator Info: ", form_textarea($format));
-	?>
+	echo form_format("Moderator Info: ", richField('moderator_info', $this->validation->moderator_info));
+	 
+	echo form_format("Agenda: ", richField('agenda', $this->validation->agenda));
 	
-	<?php
-	$format = array(
-			'name'	=>	'agenda',
-			'value'	=>	$this->validation->agenda,
-			'rows'	=>	'5',
-			'cols'	=>	'48',
-			'class'	=>	'txt',
-		);
-	echo form_format("Agenda: ", form_textarea($format));
-	?>
-		
-	<?php
-	$format = array(
-			'name'	=>	'rules',
-			'value'	=>	$this->validation->rules,
-			'rows'	=>	'5',
-			'cols'	=>	'48',
-			'class'	=>	'txt',
-		);
-	echo form_format("Rules: ", form_textarea($format));
-	?>
-		
-	<?php
-	$format = array(
-			'name'	=>	'other_instructions',
-			'value'	=>	$this->validation->other_instructions,
-			'rows'	=>	'5',
-			'cols'	=>	'48',
-			'class'	=>	'txt',
-		);
-	echo form_format("Other Instructions: ", form_textarea($format));
+	echo form_format("Rules: ", richField('rules', $this->validation->rules));
+	
+	echo form_format("Other Instructions: ", richField('other_instructions', $this->validation->other_instructions));
+	
 	$format = array(
 			'name'	=>	'stream_high',
 			'value'	=>	$this->validation->stream_high,
