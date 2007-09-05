@@ -576,7 +576,10 @@ a.vote_digit:hover {
 	margin:0 6px 0 0;
 	border:1px solid #6F808A;
 }
-.describtion p{margin:0;}
+.describtion p{
+	margin:0;	
+	width:335px !important;	
+}
 .describtion p a.more{
 	margin:0;
 	font-size:10px;
