@@ -11,7 +11,7 @@ array('Event' => 'event_name', 'Question' => 'question_name') ;
 <div id="content_div">
 	<h3><?=$header?></h3>
 	<p>
-	<table>
+	<table class="user-profile">
 	<tr><? foreach($table_template as $k => $v) echo "<th>$k</th>" ?></tr>
 	<? 
 	$rowClass = 'normal'; 

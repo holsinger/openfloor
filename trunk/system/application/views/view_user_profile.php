@@ -16,7 +16,7 @@ $data['red_head'] = 'Welcome';
 	?>
 	<? if(!empty($votes)): ?>
 	<h3>Last 10 votes</h3><?= anchor("user/all/votes/$user_name", 'See all') ?>
-	<table>
+	<table class="user-profile">
 	<tr><th>Voted</th><th>Event</th><th>Question</th></tr>
 	<? $rowClass = 'normal'; foreach($votes as $k => $v): $vote_value = ($v['vote_value'] > 0) ? '<img src="./images/thumbsUp.png">' : '<img src="./images/thumbsDown.png">'; ?>
 	<tr class="<?=$rowClass?>"><td><?=$vote_value?></td><td><?=$v['event_name']?></td><td><?=$v['question_name']?></td></tr>
@@ -25,7 +25,7 @@ $data['red_head'] = 'Welcome';
 	<? endif; ?>
 	<? if(!empty($questions)): ?>
 	<h3>Last 10 questions</h3><?= anchor("user/all/questions/$user_name", 'See all') ?>
-	<table>
+	<table class="user-profile">
 	<tr><th>Event</th><th>Question</th></tr>
 	<? $rowClass = 'normal'; foreach($questions as $k => $v): ?>
 	<tr class="<?=$rowClass?>"><td><?=$v['event_name']?></td><td><?=$v['question_name']?></td></tr>

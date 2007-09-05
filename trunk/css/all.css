@@ -11,7 +11,7 @@ html{
 	height:100%;
 }
 
-#content_div table {
+#content_div table.user-profile {
 	background-color: #d1edfe;
 }
 
