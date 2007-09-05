@@ -15,6 +15,10 @@ html{
 	background-color: #d1edfe;
 }
 
+#content_div p {
+	width: 490px;
+}
+
 #content_div table tbody tr th {
 	background-color: #0173ba;
 	color: #cae7f7;
