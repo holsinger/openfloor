@@ -66,7 +66,7 @@ $this->load->view('view_includes/header.php',$data);
 						'<input type="button" onclick="showBox(\'login\');" value="Login to comment" class="button"/>';
 
 						$comments = '<div id="comment_add"><div class="comment_head"><strong>';
-							if ($this->session->userdata('user_name')>0) $comments .= anchor("user/profile/{$this->session->userdata('user_name')}",$this->session->userdata('user_name'));
+							if ($this->userauth->user_name>0) $comments .= anchor("user/profile/{$this->userauth->user_name}",$this->userauth->user_name);
 							$comments .= ' why not add to the discussion?</strong></div><br />'
 							. form_open('comment/addCommentAction')
 								. form_textarea($attributes)

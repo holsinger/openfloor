@@ -20,7 +20,7 @@ class Comment extends Controller
 		$name = $_POST['name'];
 		unset($_POST['name']);
 		$this->load->model('comments_model');
-		$_POST['fk_user_id'] = $this->session->userdata('user_id');
+		$_POST['fk_user_id'] = $this->userauth->user_id;
 		if($this->comments_model->insertComment()) {
 			if($event_type == 'question')
 				redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
@@ -32,7 +32,7 @@ class Comment extends Controller
 	public function voteUp($comment_id, $name, $event_name, $type)
 	{
 		$this->userauth->check();
-		$user_id = $this->session->userdata('user_id');
+		$user_id = $this->userauth->user_id;
 				
 		$this->load->model('vote_model');
 		if($type  == 'question') {
@@ -61,7 +61,7 @@ class Comment extends Controller
 	public function voteDown($comment_id, $name, $event_name, $type)
 	{
 		$this->userauth->check();
-		$user_id = $this->session->userdata('user_id');
+		$user_id = $this->userauth->user_id;
 				
 		$this->load->model('vote_model');
 		if($type == 'question') {

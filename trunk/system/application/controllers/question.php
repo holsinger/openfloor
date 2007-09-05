@@ -94,7 +94,7 @@ class Question extends Controller
 		$this->userauth->check();
 		
 		$eventID = $_POST['event'];
-		$userID = $this->session->userdata('user_id');
+		$userID = $this->userauth->user_id;
 		$questionName = $_POST['question'];
 		$questionDesc = $_POST['desc'];
 		$tags = $_POST['tags'];		
@@ -201,6 +201,9 @@ class Question extends Controller
 		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
 		else $data['avatar_path'] = "./images/image01.jpg";
 		
+		// set display name
+		$data['display_name'] = $this->user->displayName($data['user_name']);
+		
 		//get time diff
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);		
 		
@@ -210,7 +213,7 @@ class Question extends Controller
 		//get voted
 		if ($this->userauth->isUser()) {
 			$this->vote->type='question';
-			$score = $this->vote->votedScore($data['question_id'],$this->session->userdata('user_id'));
+			$score = $this->vote->votedScore($data['question_id'],$this->userauth->user_id);
 			if ($score > 0) $data['voted'] = 'up';
 			else if ($score < 0) $data['voted'] = 'down';
 			else $data['voted'] = false;
@@ -251,12 +254,12 @@ class Question extends Controller
 		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		
 		#check that user has not voted
-		// if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->session->userdata('user_id')))
-		// 	$this->vote->deleteVote($id, $this->session->userdata('user_id'));
+		// if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->userauth->user_id))
+		// 	$this->vote->deleteVote($id, $this->userauth->user_id);
 		
 		#TODO validation and trending need to be considered
-		if($upOrDown) $this->vote->voteup($this->session->userdata('user_id'), $id);
-		else $this->vote->votedown($this->session->userdata('user_id'), $id);
+		if($upOrDown) $this->vote->voteup($this->userauth->user_id, $id);
+		else $this->vote->votedown($this->userauth->user_id, $id);
 	}
 }
 ?>

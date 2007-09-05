@@ -94,7 +94,7 @@ class Conventionnext extends Controller
 		foreach ($data['questions'] as $key => $row) {
 			if ($this->userauth->isUser()) {
 				$this->vote->type='question';
-				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
+				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
 			} else { 
 				$data['questions'][$key]['voted'] = 0; 
 			}
@@ -209,7 +209,7 @@ class Conventionnext extends Controller
 		// load the view
 		$data['view_name'] = 'view_queue';
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
-		
+		// echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	
 	}		
 	
@@ -335,7 +335,7 @@ class Conventionnext extends Controller
 		foreach ($data['results'] as $key => $row) {
 			if ($this->userauth->isUser()) {
 				$this->vote->type='video';
-				$score = $this->vote->votedScore($row['video_id'],$this->session->userdata('user_id'));
+				$score = $this->vote->votedScore($row['video_id'],$this->userauth->user_id);
 				if ($score > 0) $data['results'][$key]['voted'] = 'up';
 				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
 				else $data['results'][$key]['voted'] = false;
@@ -601,7 +601,7 @@ class Conventionnext extends Controller
 			// if user is registered, find out if and how they voted
 			if ($this->userauth->isUser()) {
 				$this->vote->type='question';
-				$score = $this->vote->votedScore($row['question_id'],$this->session->userdata('user_id'));
+				$score = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
 				if ($score > 0) $data['results'][$key]['voted'] = 'up';
 				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
 				else $data['results'][$key]['voted'] = false;
@@ -615,6 +615,9 @@ class Conventionnext extends Controller
 			
 			// get time decay
 			$data['results'][$key]['time_diff'] = $this->time_lib->getDecay($data['results'][$key]['date']);
+			
+			// set display name
+			$data['results'][$key]['display_name'] = $this->user->displayName($data['results'][$key]['user_name']);
 		}
 		
 		// question timer

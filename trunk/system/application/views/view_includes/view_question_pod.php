@@ -16,7 +16,7 @@
 								<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>
 								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
 								<p>
-									Posted by: <?=anchor("user/profile/{$user_name}",$user_name) . ' (' . $time_diff.' ago)';?>
+									Posted by: <?=anchor("user/profile/{$user_name}",$display_name) . ' (' . $time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>

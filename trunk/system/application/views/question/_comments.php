@@ -8,7 +8,7 @@ $submit = ($this->userauth->isUser()) ?
 '<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
 
 $comments = '<div id="comment_add"><div class="comment_head"><strong>';
-	if ($this->userauth->isUser()) $comments .= '<img src="./avatars/shrink.php?img='.$this->userauth->user_avatar.'&w=16&h=16">&nbsp;&nbsp;'.anchor("user/profile/{$this->userauth->user_name}",$this->userauth->user_name);
+	if ($this->userauth->isUser()) $comments .= '<img src="./avatars/shrink.php?img='.$this->userauth->user_avatar.'&w=16&h=16">&nbsp;&nbsp;'.anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name);
 	$comments .= ' why not add to the discussion?</strong></div><br />'
 	. form_open('comment/addCommentAction')
 		. form_textarea($attributes)

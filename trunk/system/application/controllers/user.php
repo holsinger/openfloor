@@ -46,7 +46,7 @@ class User extends Controller {
 			
 			//redirect somewhere
 			if (isset($_POST['redirect'])) redirect($_POST['redirect']); 
-			else redirect('user/profile/'.$this->session->userdata('user_name'));
+			else redirect('user/profile/'.$this->session->userdata['user_name']);
 			ob_clean();
 			exit();
 		} else {
@@ -257,7 +257,7 @@ class User extends Controller {
 				//set error if there is one
 				if (count($data) > 0) {
 					$this->user->login_user($data['user_name'],$data['user_id']);
-					redirect('user/profile/'.$this->session->userdata('user_name'));
+					redirect('user/profile/'.$this->session->userdata['user_name']);
 					ob_clean();
 					exit();						
 				} else {

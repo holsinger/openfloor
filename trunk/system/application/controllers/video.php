@@ -93,7 +93,7 @@ class Video extends Controller
 		$this->userauth->check();
 		
 		$eventID = $_POST['event'];
-		$userID = $this->session->userdata('user_id');
+		$userID = $this->userauth->user_id;
 		$videoName = $_POST['video'];
 		$videoDesc = $_POST['desc'];
 		$tags = $_POST['tags'];		
@@ -179,7 +179,7 @@ class Video extends Controller
 		//get voted
 		if ($this->userauth->isUser()) {
 			$this->vote->type='video';
-			$score = $this->vote->votedScore($data['video_id'],$this->session->userdata('user_id'));
+			$score = $this->vote->votedScore($data['video_id'],$this->userauth->user_id);
 			if ($score > 0) $data['voted'] = 'up';
 			else if ($score < 0) $data['voted'] = 'down';
 			else $data['voted'] = false;
@@ -207,14 +207,14 @@ class Video extends Controller
 		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		#check that has not voted
 		$this->vote->type = 'video';
-		if($this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
+		if($this->vote->alreadyVoted($id, $this->userauth->user_id)) {
 			redirect('conventionnext/queue/'.$event_url);
 			ob_clean();
 			exit();
 		}
 		
 		#TODO validation and trending need to be considered	
-		$this->vote->voteup($this->session->userdata('user_id'), $id);
+		$this->vote->voteup($this->userauth->user_id, $id);
 		//$this->queue();
 		
 		// redirect('conventionnext/queue/'.$event_url);
@@ -236,14 +236,14 @@ class Video extends Controller
 		
 		#check that user has not voted
 		$this->vote->type = 'video';
-		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->session->userdata('user_id'))) {
+		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->userauth->user_id)) {
 			redirect('conventionnext/queue/'.$event_url);
 			ob_clean();
 			exit();
 		}
 		
 		#TODO validation and trending need to be considered
-		$this->vote->votedown($this->session->userdata('user_id'), $id);
+		$this->vote->votedown($this->userauth->user_id, $id);
 		//$this->queue();
 		// redirect('conventionnext/queue/'.$event_url);
 		// 		ob_clean();

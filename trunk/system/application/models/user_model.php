@@ -174,7 +174,7 @@ class User_model extends Model {
     {
     	$user_array = array();
     	#make sure we have a user id to use
-    	if ($this->session->userdata('user_id')) $this->db->where('user_id', (int) $this->session->userdata('user_id'));
+    	if ($this->userauth->user_id) $this->db->where('user_id', (int) $this->userauth->user_id);
     	else if ($user_id) $this->db->where('user_id', (int) $user_id);
     	else 
     	{
@@ -356,6 +356,13 @@ class User_model extends Model {
 	{
 		$result = $this->db->getwhere('cn_password_reset', array('fk_user_id' => $user_id, 'auth' => $auth))->row();
 		return !empty($result);
+	}
+	
+	public function displayName($user)
+	{
+		$a = is_numeric($user) ? $this->get_user($user) : $this->get_user(null, $user);
+		if(!isset($a['fk_can_id'])) return $a['user_name'];
+		return $this->db->select('can_display_name')->from('cn_candidates')->where('can_id',$a['fk_can_id'])->get()->row()->can_display_name;
 	}
 }
 ?>

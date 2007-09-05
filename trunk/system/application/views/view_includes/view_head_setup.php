@@ -14,7 +14,7 @@
 	<script type="text/javascript" src="javascript/init.js"></script>
 	<script type="text/javascript">
 		site_url = '<?= $this->config->site_url();?>';
-		username = '<?=$this->session->userdata('user_name');?>';
+		username = '<?=$this->userauth->user_name;?>';
 	</script>
 	<? if ($browser == 'Internet Explorer' && $browserVer < 7) { ?>
 		<style media="all" type="text/css">@import "css/lt7.css";</style>	

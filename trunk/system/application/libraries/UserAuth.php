@@ -7,6 +7,8 @@ class UserAuth {
 	var $user_name = '';
 	var $user_avatar = '';
 	var $user_avatar_path = '';
+	var $candidate = false;
+	var $display_name = '';
 	
 	function __construct() {
 		
@@ -35,7 +37,8 @@ class UserAuth {
 			//get karma score
 			$user_array = $this->CI->user->get_user($this->CI->session->userdata('user_id'));
 			$this->user_karma = $user_array['user_karma'];
-			$this->user_name = $user_array['user_name'];
+			$this->user_name = $this->display_name = $user_array['user_name'];
+			$this->candidate = isset($user_array['fk_can_id']);
 			
 			$image_array = unserialize($user_array['user_avatar']);
 			if ($image_array) {
@@ -44,7 +47,11 @@ class UserAuth {
 			}	else 	{
 				$this->user_avatar_path = "./images/image01.jpg";
 				$this->user_avatar = 'image01.jpg';
-			} 
+			}
+			
+			// set display name (if candidate)
+			if($this->candidate) $this->display_name = $this->CI->user->displayName($user_array['user_id']);
+			
 			#TODO check user security level get all user info
 		}
 	}

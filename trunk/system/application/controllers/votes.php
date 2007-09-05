@@ -33,7 +33,7 @@ class Votes extends Controller
 		//get voted
 		if ($this->userauth->isUser()) {
 			$this->vote->type='question';
-			$score = $this->vote_model->votedScore($data['question_id'],$this->session->userdata('user_id'));
+			$score = $this->vote_model->votedScore($data['question_id'],$this->userauth->user_id);
 			if ($score > 0) $data['voted'] = 'up';
 			else if ($score < 0) $data['voted'] = 'down';
 			else $data['voted'] = false;
