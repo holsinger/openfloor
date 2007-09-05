@@ -1004,6 +1004,9 @@ textarea.txt {
 	text-align: center;
 	font:11px Verdana, Geneva, Arial, Helvetica, sans-serif;
 }
+#herald p {
+	width:100%;
+}
 herald_hr,
 #herald hr {
 	width:472px;
