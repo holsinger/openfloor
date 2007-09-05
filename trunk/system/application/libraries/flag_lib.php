@@ -22,6 +22,6 @@ class Flag_lib {
 			foreach ($this->CI->flag->getFlagTypes() as $type)			
 				$link .= "<a class=\"flag-option\" href=\"javascript:queueUpdater.flag{$this->type}($fk_id, {$type->type_id}, {$this->CI->session->userdata('user_id')});\">{$type->type}</a>";
 		}
-		return "<div id=\"flag_{$this->type}$fk_id\" class=\"flag-$this->type\" style=\"display:none;\">$link</div>";
+		return "<div id=\"flag_{$this->type}$fk_id\" class=\"flag-$this->type\" style=\"display:none;\"><div class=\"close_flag_window\" onClick=\"javascript:$('flag_{$this->type}$fk_id').setStyle({display:'none'});\"></div>$link</div>";
 	}
 }

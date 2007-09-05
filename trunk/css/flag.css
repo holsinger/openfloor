@@ -11,6 +11,16 @@ div.flag-question {
 	font-size: 10px;
 }
 
+div.close_flag_window {
+	background: url(../images/micro_close.png) no-repeat;
+	width: 7px;
+	height: 7px;
+	position: absolute;
+	top: -1px;
+	right: -1px;
+	cursor: pointer;
+}
+
 a.flag-option {
 	display: block;
 }
