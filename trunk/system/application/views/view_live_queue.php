@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="javascript/textsizer.js"></script>
 
 <script type="text/javascript" src="javascript/liveQueueUpdater.js"></script>
-	<script type="text/javascript">liveQueueUpdater.liveQueueUpdate();</script>
+	<script type="text/javascript">//liveQueueUpdater.liveQueueUpdate();</script>
 	<!-- Date: 2007-08-02 -->
 </head>
 <body>
@@ -24,10 +24,11 @@
 			<img src="./images/bg-convention-next.gif" alt="convention-next"/>
 			<a href="javascript:ts('body',1)" class="invisi">[+]</a><a href="javascript:ts('body',-1)" class="invisi">[-]</a>
 		</span>
+		<span class="participants"><?=$this->db->count_all('ci_sessions')?> Participants</span>
 		<br />
 		<ul class="top-nav"></ul>
 		
-		<h3> &nbsp;&nbsp;Current Question</h3>	
+		<h3> &nbsp;&nbsp;Current Question: <?=$timerHTML?></h3>	
 		<div id="current_question" class="current_question">
 		<? echo (!empty($current_question)) ? $current_question[0]['question_name']:'There is no current question'; ?>
 		</div>

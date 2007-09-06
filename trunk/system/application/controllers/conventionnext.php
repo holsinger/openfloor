@@ -52,6 +52,9 @@ class Conventionnext extends Controller
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
 		
+		// generate current question timer JavaScript
+		$data['timerHTML'] = $this->createTimerHTML($event);
+		
 		// if an AJAX request is being made
 		if(isset($ajax))
 		{
@@ -620,14 +623,8 @@ class Conventionnext extends Controller
 			$data['results'][$key]['display_name'] = $this->user->displayName($data['results'][$key]['user_name']);
 		}
 		
-		// question timer
-		$timerHTML = '<div id="timer">'.$this->createTimerHTML($data['event_name']).'</div>';
-		
-		// participants
-		$participants = '<p>Participants: ' . $this->db->count_all('ci_sessions') . '</p>';
-		
 		// right pods
-		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$data['results'][0]['event_desc'] . $timerHTML . $participants, 
+		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$data['results'][0]['event_desc'], 
 									'event_location'=>$data['results'][0]['location']));
 	}
 
@@ -728,19 +725,17 @@ class Conventionnext extends Controller
 		$event_id = $this->event->get_id_from_url($event_name);
 		$lastResponse = $this->event->last_response($event_id);
 		return <<<EOT
-		<p>
 		<script language="JavaScript">
 		//TargetDate = "08/22/2007 5:00 AM";
 		TargetDate = "$lastResponse";
-		//BackColor = "palegreen";
-		//ForeColor = "navy";
+		BackColor = "#f0faff";
+		ForeColor = "#EC2834";
 		CountActive = true;
 		CountStepper = 1;
 		LeadingZero = true;
 		DisplayFormat = "%%M%%:%%S%%";
 		</script>
 		<script language="JavaScript" src="javascript/timer.js"></script>
-		</p>
 EOT;
 	}
 }

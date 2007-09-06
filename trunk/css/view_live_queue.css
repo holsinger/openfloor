@@ -1,5 +1,14 @@
+/* @override http://localhost/~Rob/Politic20/css/view_live_queue.css */
+
 html {
 	background-color:#0173BA;
+}
+
+span.participants {
+	position: absolute;
+	right: 57px;
+	font-size: 1.4em;
+	font-weight: bold;
 }
 .queue-logo {
 	padding:15px;
