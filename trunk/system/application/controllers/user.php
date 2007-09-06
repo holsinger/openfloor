@@ -591,15 +591,16 @@ class User extends Controller {
 	public function all($what, $user_name)
 	{
 		$data = $this->user->get_user(null ,$user_name);
+		$display_name = $this->user->displayName($data['user_name']);
 		
 		switch ($what) {
 			case 'votes':
-				$data['header'] = "Votes by {$data['user_name']}";
+				$data['header'] = "Votes by $display_name";
 				$data['type'] = 'vote';
 				$data['result'] = $this->vote->getVotesByUser($data['user_id']);
 				break;
 			case 'questions':
-				$data['header'] = "Questions asked by {$data['user_name']}";
+				$data['header'] = "Questions asked by $display_name";
 				$data['type'] = 'question';
 				$data['result'] = $this->question->getQuestionsByUser($data['user_id']);
 				break;
