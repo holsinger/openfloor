@@ -41,7 +41,7 @@ class User_model extends Model {
 	    $this->user_name = $_POST['user_name'];
 	    $this->user_email  = $_POST['user_email'];
 	    //$this->user_avatar  = $_POST['user_avatar'];
-	    
+	    		
 		return $user_id;
     }
 		
@@ -363,6 +363,25 @@ class User_model extends Model {
 		$a = is_numeric($user) ? $this->get_user($user) : $this->get_user(null, $user);
 		if(!isset($a['fk_can_id'])) return $a['user_name'];
 		return $this->db->select('can_display_name')->from('cn_candidates')->where('can_id',$a['fk_can_id'])->get()->row()->can_display_name;
+	}
+	
+	public function bio($user)
+	{
+		$a = is_numeric($user) ? $this->get_user($user) : $this->get_user(null, $user);
+		if(!isset($a['fk_can_id'])) return '';
+		return $this->db->select('can_bio')->from('cn_candidates')->where('can_id',$a['fk_can_id'])->get()->row()->can_bio;
+	}
+	
+	public function can_id($user)
+	{
+		$a = is_numeric($user) ? $this->get_user($user) : $this->get_user(null, $user);
+		if(!isset($a['fk_can_id'])) return false;
+		return $a['fk_can_id'];
+	}
+
+	public function user_name($user_id)
+	{
+		return $this->db->select('user_name')->from('cn_users')->where('user_id',$user_id)->get()->row()->user_name;
 	}
 }
 ?>

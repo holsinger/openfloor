@@ -401,8 +401,9 @@ class Conventionnext extends Controller
 		{
 		case 'candidate':
 			#TODO redirect to some kind of 'unauthorized' page
-			if(!$this->userauth->isAdmin()) redirect();
 			$this->adminCandidate('edit', $name);
+			//if($this->userauth->isAdmin() || ($this->userauth->user_name == $name)) $this->adminCandidate('edit', $name);
+			//else redirect();
 			break;
 		case 'bio':
 			$this->editCandidateBio($name);
@@ -413,8 +414,10 @@ class Conventionnext extends Controller
 		}
 	}
 	
+	// deprecated
 	public function viewCandidate($can_display_name)
 	{
+		exit();
 		$can_id = $this->candidate->getIdByName($can_display_name);
 		if(!$can_id) redirect();
 		$candidate = $this->candidate->getCandidate($can_id);		
@@ -448,13 +451,14 @@ class Conventionnext extends Controller
 				{
 				case 'create':
 					if($can_id = $this->candidate->addCandidate()) {
-						$this->createCandidateUser($can_id);
-						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));						
+						$name = $this->user->user_name($this->createCandidateUser($can_id));
+						
+						redirect("user/profile/$name");						
 					}
 					break;
 				case 'edit':
 					if($this->candidate->editCandidate())
-						redirect('conventionnext/view/candidate/' . url_title($_POST['can_display_name']));
+						redirect("user/profile/$name");
 					break;
 				default:
 					exit();
@@ -472,7 +476,9 @@ class Conventionnext extends Controller
 		
 		if($action == 'edit')
 		{
-			$can_id = $this->candidate->getIdByName($name);
+			$data['name'] = $name;
+			$can_id = $this->user->can_id($name);
+			
 			if(!$can_id) redirect();
 			$candidate = $this->candidate->getCandidate($can_id);
 			$_POST['can_id'] = $can_id;
@@ -499,11 +505,14 @@ class Conventionnext extends Controller
 		$_POST['can_display_name'] = $display_name;
 		
 		$user_id = $this->user->insert_user_form($can_id);
+		
 		return $user_id;
 	}
 	
+	// deprecated
 	private function editCandidateBio($can_display_name)
 	{
+		exit();
 		$data['error'] = '';
 		if(isset($_POST['submitted'])) {
 			$rules['can_bio'] = "required|trim|max_length[65535]|xss_clean";

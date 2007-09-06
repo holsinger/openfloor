@@ -48,7 +48,7 @@ else 					$submit_text = "Edit Candidate";
 	<? if($action == 'create'): ?>
   	<?= form_open('conventionnext/create/candidate') ?>
 	<? else: ?>
-		<?= form_open('conventionnext/edit/candidate/' . url_title($_POST['can_display_name']), null, array('can_id' => $_POST['can_id'])) ?>
+		<?= form_open('conventionnext/edit/candidate/' . $name, null, array('can_id' => $_POST['can_id'])) ?>
 	<? endif; ?>
 	
 	
