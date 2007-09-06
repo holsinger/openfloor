@@ -3,10 +3,10 @@
 div.flag-question {
 	position: absolute;
 	background-color: #c6e5f6;
-	padding: 3px;
-	bottom: -25px;
+	padding: 6px;
+	bottom: -28px;
 	z-index: 101;
-	left: 269px;
+	left: 287px;
 	border: 1px solid #93a2b4;
 	font-size: 10px;
 }
@@ -40,7 +40,7 @@ div.flag-user {
 	/*top: 62px;
 	left: 88px;*/
 	z-index: 101;
-	padding: 3px;
+	padding: 6px;
 	margin-top: 10px;
 	left: 91px;
 }
