@@ -27,7 +27,7 @@ margin: 			0 0 4px 0;
 </style>
 </head>
 <body>
-	<img src='http://www.politic20.com/images/logo.png'>
+	<img src='http://www.runpolitics.com/images/logo.png'>
 	<br /><br />
 	<br /><br />
 	<h1>Opps! We should fix this!</h1>
