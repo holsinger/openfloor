@@ -30,7 +30,7 @@
   			<li><?=anchor('', 'Home')?></li>
   			<li><?=anchor("event/","Events");?></li>
   			<li><?=anchor("information/view/about_us","About Us");?></li>  			
-  			<li><a href="http://blog.politic20.com">Blog</a></li>  
+  			<li><a href="http://blog.runpolitics.com">Blog</a></li>  
   		</ul>
   		<div class="slogan"><strong class="slogan">populace politic change</strong></div>
   		
