@@ -238,7 +238,7 @@ class Conventionnext extends Controller
 		//user
 		if (isset($uri_array['user']) && is_numeric($uri_array['user'])) 
 			$this->video2->user_id = $uri_array['user'];
-		if (isset($uri_array['user']) && is_string($uri_array['user'])) $
+		if (isset($uri_array['user']) && is_string($uri_array['user'])) 
 			$this->video2->user_id = $this->user->get_id_from_name($uri_array['user']); 
 			
 		//tag
