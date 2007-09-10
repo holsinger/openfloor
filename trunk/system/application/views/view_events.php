@@ -37,7 +37,9 @@ $data['red_head'] = 'Events';
               'screeny'    => '0'
             );
        ?>
+			<?if($array['streaming']):?>
 			<p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+			<?endif;?>
 		</div>
 		<br />
 		<? if ($this->userauth->isAdmin()) echo $array['edit'];?>
