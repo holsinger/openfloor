@@ -1,3 +1,4 @@
+<? $profileLink = "user/profile/$user_name" ?>
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<div class="raiting" >
 		<? $this->load->view('view_includes/votebox.php')?>
@@ -14,9 +15,9 @@
 							</h3>
 							<div class="autor">
 								<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>
-								<span style:"float:left;"><img src="<?=$avatar_path;?>"></span>
+								<span style:"float:left;"><a href="<?=site_url($profileLink)?>"><img src="<?=$avatar_path;?>"></a></span>
 								<p>
-									Posted by: <?=anchor("user/profile/{$user_name}",$display_name) . ' (' . $time_diff.' ago)';?>
+									Posted by: <?=anchor($profileLink, $display_name) . ' (' . $time_diff.' ago)';?>
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
