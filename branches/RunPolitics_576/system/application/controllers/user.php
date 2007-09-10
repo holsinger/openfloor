@@ -594,6 +594,11 @@ class User extends Controller {
 		$this->reset_password($_POST['user_id'], $_POST['auth'], $error);
 	}
 
+	public function successful_password_reset() 
+	{
+		$this->load->view('user/successful_password_reset');
+	}
+	
 	public function all($what, $user_name)
 	{
 		$data = $this->user->get_user(null ,$user_name);

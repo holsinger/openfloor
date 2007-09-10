@@ -332,7 +332,7 @@ class User_model extends Model {
 		if($this->db->affected_rows() == 1) {
 			$url = site_url("user/reset_password/$fk_user_id/$auth");
 			$message = 'Reset your password by following this link: ' . $url;
-			$subject = "Politic20.com Password Reset";
+			$subject = "RunPolitics.com Password Reset";
 			mail($result->user_email, $subject, $message);
 			$data['email'] = $result->user_email;
 			return true;
