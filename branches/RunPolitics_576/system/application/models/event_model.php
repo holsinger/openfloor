@@ -91,5 +91,15 @@ class Event_model extends Model
 		$last_response = $this->db->getwhere('cn_events', array('event_id' => $event_id))->row()->last_response;
 		return date('m/d/Y g:i:s A', strtotime($last_response));
 	}
+	
+	public function addCanToEvent($can_id, $event_id)
+	{
+		$this->db->insert('cn_idx_candidates_events', array('fk_can_id' => $can_id, 'fk_event_id' => $event_id));
+	}
+	
+	public function removeCanFromEvent($can_id, $event_id)
+	{
+		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $can_id, 'fk_event_id' => $event_id));
+	}
 }
 ?>

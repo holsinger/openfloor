@@ -60,6 +60,11 @@ class Candidate_model extends Model
 		return $array;	
 	}
 	
+	public function cansInEvent($event_id)
+	{
+		return $this->db->select('fk_can_id')->from('cn_idx_candidates_events')->where('fk_event_id', $event_id)->get()->result_array();
+	}
+	
 	private function adminCandidate()
 	{
 		if(isset($_POST))

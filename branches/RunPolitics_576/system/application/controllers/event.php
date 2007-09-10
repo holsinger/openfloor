@@ -20,6 +20,7 @@ class Event extends Controller
 		
 		$this->load->library('validation');
 		$this->load->library('ApiData');
+		$this->load->library('Utilities');
 		$this->load->plugin('js_calendar');
 				
 		$this->load->scaffolding('cn_events');
@@ -75,10 +76,10 @@ class Event extends Controller
 		
 		$data['event_id'] = $event_id;
 		$data['error'] = str_replace('_',' ',$error);
-		$data['politicians'] = $this->apidata->getAllNames();		
+		//$data['politicians'] = $this->apidata->getAllNames();		
 		
 		$event = $this->db->getwhere('cn_events', array('event_id'=>$event_id))->row();
-		//print_r($event); exit();
+		
 		$data['avatar_image_name'] = (is_array($temp_array = unserialize($event->event_avatar))) ? $temp_array['file_name'] : '' ;
 		
 		foreach($event as $k=>$v)
@@ -101,6 +102,12 @@ class Event extends Controller
 		$fields['blocked_ips']	= ( isset($_POST['blocked_ips']) ) ? $_POST['blocked_ips']:"";
 		$fields['streaming']	= ( isset($_POST['streaming']) ) ? $_POST['streaming']:"";
 		
+		// participating candidates
+		$data['candidates'] = $this->candidate->getCandidates();
+		$cansInEvent = $this->candidate->cansInEvent($event_id);
+		$data['cansInEvent'] = array();
+		foreach($cansInEvent as $v) $data['cansInEvent'][] = $v['fk_can_id'];
+		
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
 		$this->load->view('view_edit_event',$data);
@@ -114,6 +121,27 @@ class Event extends Controller
 		$this->userauth->check(SL_ADMIN);
 		$error = false;
 		
+		// ==============
+		// = Candidates =
+		// ==============
+		
+		// in case no candidates were selected
+		if(!isset($_POST['candidates'])) $_POST['candidates'] = array(); 
+		$cansInEvent = unserialize(urldecode($_POST['cansInEvent']));
+		
+		if($_POST['candidates'] != $cansInEvent) { // a change was made
+			// Determine the new and old candidates.
+			$add = array_diff($_POST['candidates'], $cansInEvent);
+			$delete = array_diff($cansInEvent, $_POST['candidates']);
+			
+			// Add new candidates, if needed.
+			if (!empty($add)) foreach($add as $v) $this->event->addCanToEvent($v, $event_id);
+			
+			// Delete old candidates, if necessary.
+			if (!empty($delete)) foreach($delete as $v) $this->event->removeCanFromEvent($v, $event_id);
+		}
+		unset($_POST['candidates']);
+		unset($_POST['cansInEvent']);
 		
 		// ==================
 		// = uploading code =
@@ -138,8 +166,7 @@ class Event extends Controller
 			else
 			{
 				$data['upload_data'] = $this->upload->data();
-				//echo '<pre>'; print_r($data); echo'</pre>'; exit();
-			
+				
 				//resize image
 				$config = array();
 				$config['image_library'] = 'GD2';
@@ -164,28 +191,13 @@ class Event extends Controller
 			}
 		}
 		
-		// foreach($_POST as $k=>$v) $userdata[$k] = $v;
-		// if(isset($data['upload_data'])) $userdata['user_avatar'] = serialize($data['upload_data']);
-		
-		//add to db
-		#TODO move to model
-		// $this->db->where('user_id', $userdata['user_id']);
-		// $this->db->update('cn_users', $userdata);
-				
-		//send back to the profile
-		// $this->profile();  // Actually, send back to event_view
-		
-		// echo '<pre>'; print_r($data); echo '</pre>'; exit();
 		if (isset($data['upload_data'])) {
 			$_POST['event_avatar'] = serialize($data['upload_data']);
 		}
-		//$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : null ;
-		
 		
 		$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
 		$rules['event_desc'] = "trim|required|max_length[65535]";
 		$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
-		//$rules['event_avatar'] = ''; //"trim|max_length[255]";
 		$rules['sunlight_id'] = "";
 		$rules['event_date'] = "trim|required|xss_clean";
 		$rules['location'] = "trim|max_length[65535]";
@@ -197,6 +209,7 @@ class Event extends Controller
 		$rules['stream_low'] = "trim|max_length[65535]";
 		$rules['blocked_ips'] = "trim|max_length[65535]";
 		$rules['streaming'] = '';
+		#TODO is validation even being performed??
 		
 		if ( !$error ) {
 			//add event url name to array
@@ -336,3 +349,32 @@ class Event extends Controller
 		$this->load->view('event/view',$data);
 	}
 }
+
+
+// if ($_POST['types'] != $exist_types) { // A category change was made.
+// 
+// 	// Determine the new and old categories.
+// 	$add = array_diff($_POST['types'], $exist_types);
+// 	$delete = array_diff($exist_types, $_POST['types']);
+// 	
+// 	// Add new types, if needed.
+// 	if (!empty($add)) {
+// 		$query2 = 'INSERT INTO url_associations (url_id, url_category_id, approved) VALUES ';
+// 		foreach ($add as $v) {
+// 			$query2 .= "($uid, $v, 'Y'), ";
+// 		}
+// 		$query2 = substr ($query2, 0, -2); // Chop off the last comma and space.
+// 		$result2 = mysql_query ($query2); // Run the query.
+// 	} else { // No new types.
+// 		$result2 = TRUE;
+// 	}
+// 	
+// 	// Delete old types, if necessary.
+// 	if (!empty($delete)) {
+// 		$query3 = "DELETE FROM url_associations WHERE (url_id=$uid) AND (url_category_id IN (". implode (',', $delete) . "))";
+// 		$result3 = mysql_query($query3);
+// 	} else { // No old types.
+// 		$result3 = TRUE;
+// 	}
+// 	
+// }
