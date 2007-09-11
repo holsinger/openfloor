@@ -250,9 +250,9 @@ strong.convention-next{
 }
 #right .box{
 	width:285px;
-	padding:7px 0 0 0;
 	overflow:hidden;
 	background:url(../images/bg-box.gif);
+	padding-top: 5px;
 }
 #right h3{
 	width:285px;
