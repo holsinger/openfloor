@@ -9,6 +9,10 @@
 	top: 1px;
 }
 
+a img {
+	border-style: none;
+}
+
 div.rightpod-item div.header {
 	background-color: #cae7f9;
 	font-weight: bold;

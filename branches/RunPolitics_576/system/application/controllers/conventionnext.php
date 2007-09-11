@@ -653,7 +653,7 @@ class Conventionnext extends Controller
 		}
 		
 		// right pods
-		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$data['results'][0]['event_desc'] . $this->createParticipantsHTML($event_id), 
+		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
 									'event_location'=>$data['results'][0]['location']));
 	}
 
@@ -749,12 +749,17 @@ class Conventionnext extends Controller
 		$data['queue_title'] = $queue_title;
 	}
 
+	public function createDescriptionHTML(&$data)
+	{
+		return '<div class="rightpod-item"><div class="header">Description</div><div class="content">' . $data['results'][0]['event_desc'] . '</div></div>';
+	}
+	
 	public function createParticipantsHTML($event_id)
 	{
 		$return = '<div class="rightpod-item"><div class="header">Participants</div>';
 		$candidates = $this->event->getCansInEvent($event_id);
 		$return .= '<div class="content">';
-		foreach($candidates as $v) $return .= '<img src="./avatars/'.$this->candidate->canAvatar($v).'"/>';
+		foreach($candidates as $v) $return .= '<a href="' . $this->candidate->linkToProfile($v, true) . '"><img src="./avatars/'.$this->candidate->canAvatar($v).'"/></a>';
 		for($i = 0; $i < count($candidates); $i++) 
 			if($i == count($candidates) - 1) $return .= ' and ' . $this->candidate->linkToProfile($candidates[$i]);
 			else $return .= $this->candidate->linkToProfile($candidates[$i]) . ', ';
