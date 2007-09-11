@@ -27,8 +27,25 @@
 		
 		<h3> &nbsp;&nbsp;Current Question</h3>	
 		<div id="current_question" class="current_question">		
-			<?$this->load->view('user/cp_current_question.php')?>
+			<?$this->load->view('user/cp_current_question.php')?>		
 		</div>
+		
+		<h3> &nbsp;&nbsp;Participant Reaction</h3>
+		<div id="user-reaction">
+			<table>
+				<tr><th>Candidate</th><th>Your Reaction</th><th>Overall Reaction</th></tr>
+				<? $class = '' ?>
+				<? foreach($candidates as $v): ?>
+				<tr<?=$class?>>
+					<td><?=$v['can_display_name']?></td>
+					<td><?$this->load->view('user/_userReactSlider', $v)?></td>
+					<td><?$this->load->view('user/_overallReaction', $v)?></td>
+				</tr>
+				<? $class = $class ? '' : ' class="alternate"' ?>
+				<? endforeach; ?>
+			</table>	
+		</div>
+		
 		<h3> &nbsp;&nbsp;Upcoming Questions:</h3>
 		<div id="upcoming_questions" class="upcoming_questions">		
 			<?$this->load->view('user/cp_upcoming_questions.php')?>

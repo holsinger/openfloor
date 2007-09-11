@@ -100,10 +100,11 @@ class Candidate_model extends Model
 		return $return['file_name'];
 	}
 	
-	public function linkToProfile($can_id)
+	public function linkToProfile($can_id, $image = false)
 	{
-		$display_name = $this->nameByUser($can_id);
 		$user_name = $this->user_name($can_id);
+		if($image) return site_url("/user/profile/$user_name");		
+		$display_name = $this->nameByUser($can_id);
 		return anchor("/user/profile/$user_name", $display_name);
 	}
 }

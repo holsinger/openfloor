@@ -102,12 +102,13 @@ class Event_model extends Model
 		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $can_id, 'fk_event_id' => $event_id));
 	}
 
-	public function getCansInEvent($event_id)
+	public function getCansInEvent($event_id, $full = false)
 	{
 		$candidates = $this->db->getwhere('cn_idx_candidates_events', array('fk_event_id', $event_id))->result_array();
 		$return = array();
 		foreach($candidates as $v) $return[] = $v['fk_can_id'];
-		return $return;
+		if(!$full) return $return;
+		return $this->db->query('SELECT can_id, can_display_name FROM cn_candidates WHERE can_id IN(' . implode(',', $return) . ')')->result_array();
 	}
 }
 ?>

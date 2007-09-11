@@ -1,7 +1,14 @@
-/* @override http://localhost/~Rob/Politic20/css/view_live_queue.css */
+/* @override 
+	http://localhost/~Rob/Politic20/css/view_live_queue.css
+	http://localhost/~Rob/RunPolitics/css/view_live_queue.css
+*/
 
 html {
 	background-color:#0173BA;
+}
+
+#user-reaction img {
+	border-style: none;
 }
 
 span.participants {
@@ -9,6 +16,29 @@ span.participants {
 	right: 57px;
 	font-size: 1.4em;
 	font-weight: bold;
+}
+
+#user-reaction table {
+	position: relative;
+	left: 40px;
+	background-color: #f0faff;
+}
+
+#user-reaction th {
+	background-color: #053c7c;
+	color: #f0faff;
+	padding: 3px 8px;
+	text-align: left;
+	font-size: smaller;
+}
+
+#user-reaction tr.alternate {
+	/*background-color: #e1eaef;*/
+}
+
+#user-reaction td {
+	padding: 2px;
+	color: #053c7c;
 }
 .queue-logo {
 	padding:15px;
@@ -87,4 +117,14 @@ ul.top-nav {
 }
 .invisi {
 	color: white;
+}
+
+div.overall-reaction-meter {
+	background-color: #f04a54;
+}
+
+div.overall-reaction-meter-total {
+	background-color: #caedff;
+	border: 1px solid #f04a54;
+	margin: 2px;
 }

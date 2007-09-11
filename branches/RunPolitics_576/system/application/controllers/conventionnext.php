@@ -14,6 +14,7 @@ class Conventionnext extends Controller
 		$this->load->model('tag_model', 'tag');
 		$this->load->model('video_model', 'video');
 		$this->load->model('vote_model','vote');
+		$this->load->model('reaction_model','reaction');
 		
 		// libraries
 		$this->load->library('flag_lib');
@@ -107,6 +108,17 @@ class Conventionnext extends Controller
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
 		
+		// user reaction
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;
+		
+		$data['candidates'] = $this->event->getCansInEvent($event_id, true);
+		foreach($data['candidates'] as $k => $v) {
+			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/5)*100, 0) . '%';
+		}
+		
+		
 		// ==========
 		// = output =
 		// ==========
@@ -126,6 +138,12 @@ class Conventionnext extends Controller
 		} else { // NO AJAX
 			$this->load->view('user/cp', $data);
 		}		
+	}
+	
+	public function react($value, $can_id, $question_id)
+	{
+		$this->reaction->react($value, $can_id, $question_id, $this->userauth->user_id);
+		redirect('conventionnext/cp');
 	}
 	
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
