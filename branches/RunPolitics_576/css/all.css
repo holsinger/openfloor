@@ -1,9 +1,22 @@
-/* @override http://localhost/~Rob/Politic20/css/all.css */
+/* @override 
+	http://localhost/~Rob/Politic20/css/all.css
+	http://localhost/~Rob/RunPolitics/css/all.css
+*/
 
 #queue div.admin-queue-edit-question a {
 	position: relative;
 	left: 438px;
 	top: 1px;
+}
+
+div.rightpod-item div.header {
+	background-color: #cae7f9;
+	font-weight: bold;
+	padding: 3px 3px 3px 8px;
+}
+
+div.rightpod-item div.content img {
+	padding: 4px 8px;
 }
 
 html{

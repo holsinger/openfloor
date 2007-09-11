@@ -9,6 +9,11 @@ class Candidate_model extends Model
         parent::Model();
     }
 
+	public function user_name($can_id)
+	{
+		return $this->db->select('user_name')->from('cn_users')->where('fk_can_id', $can_id)->get()->row()->user_name;
+	}
+	
 	public function addCandidate()
 	{
 		$this->action = 'create';
@@ -86,6 +91,20 @@ class Candidate_model extends Model
 			} else return false;
 		}
 		return false;
+	}
+
+	public function canAvatar($can_id)
+	{
+		$return = $this->db->select('user_avatar')->from('cn_users')->where('fk_can_id', $can_id)->get()->row()->user_avatar;
+		$return = unserialize($return);
+		return $return['file_name'];
+	}
+	
+	public function linkToProfile($can_id)
+	{
+		$display_name = $this->nameByUser($can_id);
+		$user_name = $this->user_name($can_id);
+		return anchor("/user/profile/$user_name", $display_name);
 	}
 }
 ?>

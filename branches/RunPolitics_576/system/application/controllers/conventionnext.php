@@ -609,6 +609,8 @@ class Conventionnext extends Controller
 	// conventionnext::questionQueue() helper functions	
 	private function prepareQueue(&$data)
 	{
+		$event_id = $this->event->get_id_from_url(url_title($data['event_name']));
+		
 		foreach ($data['results'] as $key => $row) {
 			// if user is registered, find out if and how they voted
 			if ($this->userauth->isUser()) {
@@ -633,7 +635,7 @@ class Conventionnext extends Controller
 		}
 		
 		// right pods
-		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$data['results'][0]['event_desc'], 
+		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$data['results'][0]['event_desc'] . $this->createParticipantsHTML($event_id), 
 									'event_location'=>$data['results'][0]['location']));
 	}
 
@@ -729,6 +731,19 @@ class Conventionnext extends Controller
 		$data['queue_title'] = $queue_title;
 	}
 
+	public function createParticipantsHTML($event_id)
+	{
+		$return = '<div class="rightpod-item"><div class="header">Participants</div>';
+		$candidates = $this->event->getCansInEvent($event_id);
+		$return .= '<div class="content">';
+		foreach($candidates as $v) $return .= '<img src="./avatars/'.$this->candidate->canAvatar($v).'"/>';
+		for($i = 0; $i < count($candidates); $i++) 
+			if($i == count($candidates) - 1) $return .= ' and ' . $this->candidate->linkToProfile($candidates[$i]);
+			else $return .= $this->candidate->linkToProfile($candidates[$i]) . ', ';
+		
+		return $return . ' (l to r).</div></div>';
+	}
+	
 	public function createTimerHTML($event_name)
 	{
 		$event_id = $this->event->get_id_from_url($event_name);
