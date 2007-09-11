@@ -653,7 +653,7 @@ class Conventionnext extends Controller
 		}
 		
 		// right pods
-		$data['rightpods'] = array(	'dynamic'=>array('event_description'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
+		$data['rightpods'] = array(	'dynamic'=>array('forum_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
 									'event_location'=>$data['results'][0]['location']));
 	}
 
