@@ -349,32 +349,3 @@ class Event extends Controller
 		$this->load->view('event/view',$data);
 	}
 }
-
-
-// if ($_POST['types'] != $exist_types) { // A category change was made.
-// 
-// 	// Determine the new and old categories.
-// 	$add = array_diff($_POST['types'], $exist_types);
-// 	$delete = array_diff($exist_types, $_POST['types']);
-// 	
-// 	// Add new types, if needed.
-// 	if (!empty($add)) {
-// 		$query2 = 'INSERT INTO url_associations (url_id, url_category_id, approved) VALUES ';
-// 		foreach ($add as $v) {
-// 			$query2 .= "($uid, $v, 'Y'), ";
-// 		}
-// 		$query2 = substr ($query2, 0, -2); // Chop off the last comma and space.
-// 		$result2 = mysql_query ($query2); // Run the query.
-// 	} else { // No new types.
-// 		$result2 = TRUE;
-// 	}
-// 	
-// 	// Delete old types, if necessary.
-// 	if (!empty($delete)) {
-// 		$query3 = "DELETE FROM url_associations WHERE (url_id=$uid) AND (url_category_id IN (". implode (',', $delete) . "))";
-// 		$result3 = mysql_query($query3);
-// 	} else { // No old types.
-// 		$result3 = TRUE;
-// 	}
-// 	
-// }
