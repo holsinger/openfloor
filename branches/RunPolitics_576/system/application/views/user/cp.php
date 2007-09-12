@@ -12,7 +12,11 @@
 	<link rel="stylesheet" type="text/css" href="css/view_live_queue.css" />
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
-	<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';var event_name = '<?=$event?>';</script>
+	<script type="text/javascript">
+	site_url = '<?= $this->config->site_url();?>';
+	var event_name = '<?=$event?>';
+	var cans = [<? $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; echo substr($cans, 0, -2); ?>];	
+	</script>
 
 	<script type="text/javascript" src="javascript/cpUpdater.js"></script>
 	<script type="text/javascript">cpUpdater.cpUpdate();</script>
@@ -39,7 +43,7 @@
 				<tr<?=$class?>>
 					<td><?=$v['can_display_name']?></td>
 					<td><?$this->load->view('user/_userReactSlider', $v)?></td>
-					<td><?$this->load->view('user/_overallReaction', $v)?></td>
+					<td><div id="overall-<?=$v['can_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
 				</tr>
 				<? $class = $class ? '' : ' class="alternate"' ?>
 				<? endforeach; ?>

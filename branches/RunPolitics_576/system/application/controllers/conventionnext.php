@@ -82,42 +82,17 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	public function cp($event = 'salt_lake_city_mayoral_forum', $ajax = null)
+	public function cp($event = 'salt_lake_city_mayoral_forum', $ajax = null, $can_id = null)
 	{
 		// ========
 		// = init =
 		// ========
+		$this->userauth->check();
 		$data['event'] = $event;
 		
-		$event_id = $this->event->get_id_from_url($event);
-		if(!$event_id) exit();
-		$this->question->event_id = $event_id;
-		
-		// get the list of upcoming (pending) questions
-		$data['questions'] = $this->question->questionQueue();
-		foreach ($data['questions'] as $key => $row) {
-			if ($this->userauth->isUser()) {
-				$this->vote->type='question';
-				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
-			} else { 
-				$data['questions'][$key]['voted'] = 0; 
-			}
-		}
-		
-		// get the current question, if any
-		$this->question->question_status = 'current';
-		$data['current_question'] = $this->question->questionQueue();
-		
-		// user reaction
-		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
-		$this->reaction->user_id		= $this->userauth->user_id;
-		
-		$data['candidates'] = $this->event->getCansInEvent($event_id, true);
-		foreach($data['candidates'] as $k => $v) {
-			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
-			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/5)*100, 0) . '%';
-		}
-		
+		$data['event_id'] = $this->event->get_id_from_url($event);
+		if(!$data['event_id']) exit();
+		$this->question->event_id = $data['event_id'];		
 		
 		// ==========
 		// = output =
@@ -127,17 +102,67 @@ class Conventionnext extends Controller
 			switch($ajax)
 			{
 			case 'current_question':
+				$this->_currentQuestion($data);
 				$this->load->view('user/cp_current_question.php', $data);
 				break;
 			case 'upcoming_questions':
+				$this->_upcomingQuestions($data);
 				$this->load->view('user/cp_upcoming_questions.php', $data);
+				break;
+			case 'overall_reaction':
+				$this->_currentQuestion($data);
+				$data['can_id'] = $can_id;
+				$this->_reaction($data);
+				$this->load->view('user/_overallReaction.php', $data);
 				break;
 			default:
 				break;
 			}
 		} else { // NO AJAX
+			$this->_upcomingQuestions($data);		
+			$this->_currentQuestion($data);
+			$this->_allReactions($data);
 			$this->load->view('user/cp', $data);
 		}		
+	}
+	
+	// cp helper functions
+	private function _currentQuestion(&$data)
+	{
+		$this->question->question_status = 'current';
+		$data['current_question'] = $this->question->questionQueue();
+	}
+	
+	private function _upcomingQuestions(&$data)
+	{
+		$data['questions'] = $this->question->questionQueue();
+		foreach ($data['questions'] as $key => $row) {
+			if ($this->userauth->isUser()) {
+				$this->vote->type='question';
+				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
+			} else { 
+				$data['questions'][$key]['voted'] = 0; 
+			}
+		}
+	}
+	
+	private function _allReactions(&$data)
+	{
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;
+		
+		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
+		foreach($data['candidates'] as $k => $v) {
+			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/5)*100, 0) . '%';
+		}
+	}
+	
+	private function _reaction(&$data)
+	{
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;		
+		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/5)*100, 0) . '%';
 	}
 	
 	public function react($value, $can_id, $question_id)
