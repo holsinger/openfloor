@@ -6,17 +6,21 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 }
 
 cpUpdater.cpUpdate = function() {
-	new Ajax.PeriodicalUpdater('current_question', site_url + '/conventionnext/cp/' + event_name + '/current_question', {
+	new Ajax.PeriodicalUpdater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question', {
 	  frequency: 10
 	});
 	
-	new Ajax.PeriodicalUpdater('upcoming_questions', site_url + '/conventionnext/cp/' + event_name + '/upcoming_questions', {
+	new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions', {
 	  frequency: 10
 	});
 	
 	cans.each(function(s) {
-		new Ajax.PeriodicalUpdater('overall-' + s, site_url + '/conventionnext/cp/' + event_name + '/overall_reaction/' + s, {
+		new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s, {
 		  frequency: 10
 		});
 	});
+}
+
+cpUpdater.react = function() {
+	
 }

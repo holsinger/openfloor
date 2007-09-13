@@ -46,7 +46,7 @@ span.participants {
 body {
 	background-color:#FFFFFF;
 	color:#0173ba;
-	height:100%;	
+	/*height:100%;*/	
 	font-size:16px;
 	min-width:575px;
 }
@@ -127,4 +127,19 @@ div.overall-reaction-meter-total {
 	background-color: #caedff;
 	border: 1px solid #f04a54;
 	margin: 2px;
+}
+
+.cp-comments-tab, .cp-votes-tab {
+	position: absolute;
+	right: 50px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	margin: 0;
+	width: 100px;
+	text-align: center;
+}
+
+.cp-votes-tab {
+	right: 160px;
 }

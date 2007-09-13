@@ -12,5 +12,13 @@
 					</span>
 					<span class=\"question\">{$question['question_name']}</span>
 				</div>
+				<div id=\"cp-comments-{$question['question_id']}\" class=\"cp-comments\" style=\"display:none\">
+					comments
+				</div>
+				<div id=\"cp-votes-{$question['question_id']}\" class=\"cp-votes\" style=\"display:none\">
+					votes
+				</div>
+				<span class=\"cp-comments-tab\" onClick=\"javascript:new Effect.toggle('cp-comments-{$question['question_id']}','blind', {queue: 'end'});\">comments</span>
+				<span class=\"cp-votes-tab\" onClick=\"javascript:new Effect.toggle('cp-votes-{$question['question_id']}','blind', {queue: 'end'});\">votes</span>
 				<br />";
 	endforeach;	?>

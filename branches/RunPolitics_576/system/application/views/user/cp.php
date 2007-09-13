@@ -42,8 +42,8 @@
 				<? foreach($candidates as $v): ?>
 				<tr<?=$class?>>
 					<td><?=$v['can_display_name']?></td>
-					<td><?$this->load->view('user/_userReactSlider', $v)?></td>
-					<td><div id="overall-<?=$v['can_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
+					<td><div id="your-reaction-<?=$v['can_id']?>"><?$this->load->view('user/_userReactSlider', $v)?></div></td>
+					<td><div id="overall-reaction-<?=$v['can_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
 				</tr>
 				<? $class = $class ? '' : ' class="alternate"' ?>
 				<? endforeach; ?>
@@ -51,6 +51,8 @@
 		</div>
 		
 		<h3> &nbsp;&nbsp;Upcoming Questions:</h3>
+		<div style="text-align:right"><a onClick="javascript:new Effect.toggle('cp-ask-question','blind', {queue: 'end'});">Ask a Question</a></div>
+		<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 		<div id="upcoming_questions" class="upcoming_questions">		
 			<?$this->load->view('user/cp_upcoming_questions.php')?>
 		</div>

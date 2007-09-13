@@ -85,7 +85,7 @@ class Question extends Controller
 		
 		#$data['events'] = $this->populateEventsSelect();
 		
-		$this->load->view('view_submit_question', $data);
+		$this->load->view('question/submit_question', $data);
 	}
 
 	function addQuestion()

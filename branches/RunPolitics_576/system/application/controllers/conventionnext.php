@@ -109,10 +109,16 @@ class Conventionnext extends Controller
 				$this->_upcomingQuestions($data);
 				$this->load->view('user/cp_upcoming_questions.php', $data);
 				break;
+			case 'your_reaction':
+				$this->_currentQuestion($data);
+				$data['can_id'] = $can_id;
+				$this->_yourReaction($data);
+				$this->load->view('user/_userReactSlider.php', $data);
+				break;
 			case 'overall_reaction':
 				$this->_currentQuestion($data);
 				$data['can_id'] = $can_id;
-				$this->_reaction($data);
+				$this->_overallReaction($data);
 				$this->load->view('user/_overallReaction.php', $data);
 				break;
 			default:
@@ -122,6 +128,7 @@ class Conventionnext extends Controller
 			$this->_upcomingQuestions($data);		
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
+			$this->_submitQuestion($data);
 			$this->load->view('user/cp', $data);
 		}		
 	}
@@ -158,11 +165,31 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	private function _reaction(&$data)
+	private function _yourReaction(&$data)
+	{
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;
+		$data['user_reaction'] = $this->reaction->canUserReaction($data['can_id']);
+	}
+	
+	private function _overallReaction(&$data)
 	{
 		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 		$this->reaction->user_id		= $this->userauth->user_id;		
 		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/5)*100, 0) . '%';
+	}
+	
+	private function _submitQuestion(&$data)
+	{
+		#TODO fix disclaimer box
+		$data['event_type'] = 'question';
+		$data['event_url'] = "event/{$data['event']}";
+		
+		$fields['event']	= ( isset($_POST['event']) ) ? $_POST['event']:"";
+		$fields['question']	= ( isset($_POST['question']) ) ? $_POST['question']:"";
+		$fields['desc']	= ( isset($_POST['desc']) ) ? $_POST['desc']:"";
+		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
+		$this->validation->set_fields($fields);
 	}
 	
 	public function react($value, $can_id, $question_id)
