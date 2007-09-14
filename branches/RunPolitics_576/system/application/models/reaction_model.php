@@ -19,7 +19,7 @@ class Reaction_model extends Model
 		$this->where['fk_user_id'] 		= $this->user_id;
 		$this->where['fk_can_id'] 		= $can_id;
 		$reaction = $this->db->select('reaction')->from('cn_reactions')->where($this->where)->get()->row();
-		return empty($reaction) ? 3 : $reaction->reaction ;																			
+		return empty($reaction) ? 5 : $reaction->reaction ;																			
 	}
 	
 	public function overallReaction($can_id)
@@ -28,7 +28,7 @@ class Reaction_model extends Model
 										FROM cn_reactions 
 										WHERE fk_can_id = $can_id AND fk_question_id = {$this->question_id} 
 										GROUP BY fk_can_id")->row();
-		return empty($reaction) ? 3 : $reaction->overall_reaction ;										
+		return empty($reaction) ? 5 : $reaction->overall_reaction ;										
 	}
 	
 	public function react($value, $can_id, $question_id, $user_id)
@@ -37,10 +37,10 @@ class Reaction_model extends Model
 		$this->where['fk_user_id'] 		= $this->user_id		= $user_id;
 		$this->where['fk_can_id'] 		= $can_id;
 		
-		$reaction = $this->canUserReaction($can_id);		
+		//$reaction = $this->canUserReaction($can_id);		
 		$this->db->delete('cn_reactions', $this->where);
 		
-		$this->where['reaction'] 		= $reaction + $value;
+		$this->where['reaction'] 		= $value;
 		$this->db->insert('cn_reactions', $this->where);
 	}
 }

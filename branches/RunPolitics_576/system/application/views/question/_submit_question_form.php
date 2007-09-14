@@ -1,4 +1,4 @@
-<?= form_open('question/add/'.$event_url); ?>
+<?= form_open('question/add/'.$event_url, array('id' => 'add_question_form')); ?>
 	<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
 		
 	<? if ($event_id>0) { ?>
@@ -54,7 +54,11 @@
 	<?= form_hidden('event_url',$event_url); ?>
 	<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
 	<br />
+	<? if($ajax): ?>
+	<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>
+	<? else: ?>
 	<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
+	<? endif; ?>
 	<br />
 	<br />
 	<small>* required fields</small>

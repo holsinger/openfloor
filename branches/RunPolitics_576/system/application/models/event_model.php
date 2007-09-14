@@ -104,7 +104,7 @@ class Event_model extends Model
 
 	public function getCansInEvent($event_id, $full = false)
 	{
-		$candidates = $this->db->getwhere('cn_idx_candidates_events', array('fk_event_id', $event_id))->result_array();
+		$candidates = $this->db->getwhere('cn_idx_candidates_events', array('fk_event_id' => $event_id))->result_array();
 		$return = array();
 		foreach($candidates as $v) $return[] = $v['fk_can_id'];
 		if(!$full) return $return;

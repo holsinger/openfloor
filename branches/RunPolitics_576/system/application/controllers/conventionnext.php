@@ -84,6 +84,9 @@ class Conventionnext extends Controller
 	
 	public function cp($event = 'salt_lake_city_mayoral_forum', $ajax = null, $can_id = null)
 	{
+		#TODO Handle no current question
+		#TODO Handle no candidates assigned?
+		
 		// ========
 		// = init =
 		// ========
@@ -161,7 +164,7 @@ class Conventionnext extends Controller
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
 		foreach($data['candidates'] as $k => $v) {
 			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
-			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/5)*100, 0) . '%';
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
 		}
 	}
 	
@@ -176,12 +179,13 @@ class Conventionnext extends Controller
 	{
 		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 		$this->reaction->user_id		= $this->userauth->user_id;		
-		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/5)*100, 0) . '%';
+		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/10)*100, 0) . '%';
 	}
 	
 	private function _submitQuestion(&$data)
 	{
 		#TODO fix disclaimer box
+		$data['ajax'] = true;
 		$data['event_type'] = 'question';
 		$data['event_url'] = "event/{$data['event']}";
 		
@@ -195,7 +199,7 @@ class Conventionnext extends Controller
 	public function react($value, $can_id, $question_id)
 	{
 		$this->reaction->react($value, $can_id, $question_id, $this->userauth->user_id);
-		redirect('conventionnext/cp');
+		//redirect('conventionnext/cp');
 	}
 	
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
