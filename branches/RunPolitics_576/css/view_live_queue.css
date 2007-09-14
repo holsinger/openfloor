@@ -67,12 +67,12 @@ body {
 .queue-question {
 	margin-left:15px;
 	margin-right:15px;
-	widht:100%;
 	background:#F0FAFF;
 	height:27px;
 	vertical-align: middle;
 	border:1px solid #053C7C;
 	font-weight: bold;
+	margin-top: 8px;
 }
 .question {
 	widht:100%;

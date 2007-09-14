@@ -12,10 +12,10 @@
 					</span>
 					<span class=\"question\">{$question['question_name']}</span>
 				</div>
-				<div id=\"cp-comments-{$question['question_id']}\" class=\"cp-comments\" style=\"display:none\">
+				<div id=\"cp-comments-{$question['question_id']}\" class=\"cp-comments\" style=\"display:none; height: 300px; overflow: scroll;\">
 					[comments view]
 				</div>
-				<div id=\"cp-votes-{$question['question_id']}\" class=\"cp-votes\" style=\"display:none\">
+				<div id=\"cp-votes-{$question['question_id']}\" class=\"cp-votes\" style=\"display:none; height: 300px; overflow: scroll;\">
 					[votes view]
 				</div>
 				<span class=\"cp-comments-tab\" onClick=\"cpUpdater.viewComments({$question['question_id']}, event_name, '" . url_title($question['question_name']) . "')\">comments</span>
