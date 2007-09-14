@@ -82,7 +82,7 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	public function cp($event = 'salt_lake_city_mayoral_forum', $ajax = null, $can_id = null)
+	public function cp($event = 'test_event', $ajax = null, $can_id = null)
 	{
 		#TODO Handle no current question
 		#TODO Handle no candidates assigned?

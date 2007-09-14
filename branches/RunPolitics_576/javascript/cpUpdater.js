@@ -45,11 +45,14 @@ cpUpdater.askQuestion = function() {
 			'ajax'		: 'true'
 		},
 		onSuccess: function(transport) {
-			console.log('success!');
-			form['question'].clear();
-			form['desc'].clear();
-			form['tags'].clear();
-			new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
+			if(transport.responseText=='success') {
+				form['question'].clear();
+				form['desc'].clear();
+				form['tags'].clear();
+				new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
+			} else {
+				$('cp-ask-question').innerHTML = transport.responseText;
+			}
 		}
 	});
 }

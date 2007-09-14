@@ -66,7 +66,7 @@ class Question extends Controller
 			if( is_numeric($questionID) ) {
 				$this->voteup($questionID);
 				if(isset($_POST['ajax'])) {
-					$data['error'] = 'Your question was successfully added';
+					echo 'success'; exit();
 				} else {
 					//redirect to question view page
 					redirect('conventionnext/queue/'.$_POST['event_url']);
