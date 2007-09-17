@@ -1,0 +1,20 @@
+/* @override http://localhost/~Rob/RunPolitics/css/candidate_dashboard.css */
+
+html {
+	background-color: #0173ba;
+}
+
+body {
+	background-color: #fff;
+	margin: 0 30px;
+	padding: 10px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	height: 100%;
+}
+
+h3 {
+	color: #f04a54;
+	background-color: #cae7f7;
+	margin: 10px -10px;
+	padding: 5px 20px;
+}

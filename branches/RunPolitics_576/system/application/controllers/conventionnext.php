@@ -619,7 +619,7 @@ class Conventionnext extends Controller
 		$this->load->view('candidate/edit_bio.php', $data);
 	}
 
-	public function candidate_dashboard($event_name, $ajax = null)
+	public function candidate_dashboard($event_name =  'salt_lake_city_mayoral_forum', $ajax = null)
 	{
 		$event_id = $this->event->get_id_from_url($event_name);
 		if(!$event_id) redirect();
