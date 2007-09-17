@@ -229,7 +229,10 @@ class Question extends Controller
 		$comments_library = new Comments_library();
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
-		if(isset($_POST['ajax'])) { echo $data['comments_body']; exit(); }
+		if(isset($_POST['ajax'])) { 
+			$data['ajax'] = true;
+			$this->load->view('question/_comments', $data); 
+		}
 		
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));

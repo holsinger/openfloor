@@ -11,6 +11,9 @@ class Comment extends Controller
 	
 	public function addCommentAction()
 	{
+		$ajax = isset($_POST['ajax']);
+		unset($_POST['ajax']);
+		
 		$event_type = $_POST['event_type'];
 		unset($_POST['event_type']);
 		
@@ -22,7 +25,9 @@ class Comment extends Controller
 		$this->load->model('comments_model');
 		$_POST['fk_user_id'] = $this->userauth->user_id;
 		if($this->comments_model->insertComment()) {
-			if($event_type == 'question')
+			if($ajax)
+				echo 'success';
+			elseif($event_type == 'question')
 				redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
 			else
 				redirect('/video/view/' . url_title($event_name) . '/' . url_title($name));
