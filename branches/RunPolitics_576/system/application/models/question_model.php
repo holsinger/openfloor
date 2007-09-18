@@ -86,7 +86,6 @@ class Question_model extends Model
 					fk_question_id=question_id 
 				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
 				GROUP BY fk_question_id), 0) as votes,
-				(SELECT count(*) FROM cn_votes WHERE fk_question_id=question_id) AS vote_count,
 				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
 				question_name, 
 				question_desc,
@@ -117,6 +116,9 @@ class Question_model extends Model
 		
 		// get our tags real quick & determine how old the question is
 		foreach($results as $k=>$v) {
+			# TODO this method for getting the vote count is not as speed friendly as the monolithic single-query above
+			// I was unsuccessful getting this into the query above because of the double-nested sub-query
+			$results[$k]['vote_count'] = $this->db->query("SELECT count(*) AS vote_count FROM (SELECT * FROM cn_votes WHERE fk_question_id = {$v['question_id']} GROUP BY fk_user_id) AS sq")->row()->vote_count;
 			$tags = $this->tag_model->getTagsByQuestion($v['question_id']);
 			if(empty($tags))
 				$results[$k]['tags'] = array();

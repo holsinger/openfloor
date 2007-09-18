@@ -10,8 +10,9 @@
 				<div class="descr-bl">
 					<div class="descr-br">
 							<? $this->flag_lib->type = 'question'; 	$this->load->view('view_includes/flag.php'); ?>
-							<h3>
-								<?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name);?>
+							<h3 style="color:#f0616a;">
+								<? if($view_name == 'question_view') { echo $question_name;
+								} else { echo anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name); } ?>
 							</h3>
 							<div class="autor">
 								<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>

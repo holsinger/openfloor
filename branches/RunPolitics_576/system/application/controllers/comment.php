@@ -46,8 +46,7 @@ class Comment extends Controller
 			$question_info = $this->model->get_question('', $name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
-			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
-				$this->vote_model->voteUp($user_id, $comment_id);
+			$this->vote_model->voteUp($user_id, $comment_id);
 			
 			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
 		} else {
@@ -75,8 +74,7 @@ class Comment extends Controller
 			$question_info = $this->model->get_question('', $name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
-			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
-				$this->vote_model->voteDown($user_id, $comment_id);
+			$this->vote_model->voteDown($user_id, $comment_id);
 			
 			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
 		} else {

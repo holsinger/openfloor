@@ -50,7 +50,8 @@ class Comments_library
 		$votes = ($info['votes'] == null) ? 0 : $info['votes'] ;
 		#see if user voted
 		$this->CI->vote->type = 'comment';
-		$voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->alreadyVoted($info['comment_id'],$this->CI->session->userdata('user_id')):0;
+		// $voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->alreadyVoted($info['comment_id'],$this->CI->session->userdata('user_id')):0;
+		$voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->votedScore($info['comment_id'],$this->CI->session->userdata('user_id')):0;
 		
 		#resize image
 		$image_array = unserialize($info['user_avatar']);
@@ -71,11 +72,11 @@ class Comments_library
 					</div>	
 					<div class="thumb_block">';
 					if ($voted < 0) {
-						$pod .= "<img src='./images/thumbsUp.png' border='0'>";
+						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
 						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 					} else if ($voted > 0) {
 						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-						$pod .= " <img src='./images/thumbsDown.png' border='0'>";
+						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
 					} else {
 						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
 						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
@@ -114,8 +115,9 @@ class Comments_library
 				$votes = ($subcomment['votes'] == null) ? 0 : $subcomment['votes'] ;
 				#see if user voted
 				$this->CI->vote->type = 'comment';
-				$voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->alreadyVoted($subcomment['comment_id'],$this->CI->session->userdata('user_id')):0;
-
+				// $voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->alreadyVoted($subcomment['comment_id'],$this->CI->session->userdata('user_id')):0;
+				$voted = ($this->CI->session->userdata('user_id')>0) ? $this->CI->vote->votedScore($subcomment['comment_id'],$this->CI->session->userdata('user_id')):0;
+				
 				#resize image
 				$image_array = unserialize($subcomment['user_avatar']);
 				if ($image_array) $avatar_path = $image_array['file_name'];
@@ -139,11 +141,11 @@ class Comments_library
 							</div>	
 							<div class="thumb_block">';
 							if ($voted < 0) {
-								$pod .= "<img src='./images/thumbsUp.png' border='0'>";
+								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
 								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 							} else if ($voted > 0) {
 								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-								$pod .= " <img src='./images/thumbsDown.png' border='0'>";
+								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
 							} else {
 								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
 								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
