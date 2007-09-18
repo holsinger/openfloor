@@ -84,6 +84,7 @@ class Question_model extends Model
 					cn_votes 
 				WHERE 
 					fk_question_id=question_id 
+				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
 				GROUP BY fk_question_id), 0) as votes,
 				(SELECT count(*) FROM cn_votes WHERE fk_question_id=question_id) AS vote_count,
 				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
