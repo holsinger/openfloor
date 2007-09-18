@@ -18,3 +18,22 @@ h3 {
 	margin: 10px -10px;
 	padding: 5px 20px;
 }
+
+table.can-dashboard-current-question {
+	background-color: #cae7f7;
+	padding: 2px;
+	border-style: dotted;
+	border-color: #0173ba;
+}
+
+table.can-dashboard-current-question span.total-votes {
+	color: #0173ba;
+}
+
+table.can-dashboard-current-question span.total-positive-votes {
+	color: #3bba01;
+}
+
+table.can-dashboard-current-question span.total-negative-votes {
+	color: #ba0104;
+}

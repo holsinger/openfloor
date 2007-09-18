@@ -628,6 +628,11 @@ class Conventionnext extends Controller
 		$data['questions'] = $this->question->questionQueue();
 		$data['timerHTML'] = $this->createTimerHTML($data['event_name'] = $event_name);
 		
+		$currentQuestionId = $data['questions'][0]['question_id'];
+		$data['totalVotes'] 		= $this->vote->countVotes($currentQuestionId);
+		$data['totalPositiveVotes']	= $this->vote->countPositiveVotes($currentQuestionId);
+		$data['totalNegativeVotes'] = $this->vote->countNegativeVotes($currentQuestionId);
+		
 		if(isset($ajax)) $this->load->view('candidate/dashboard_content.php', $data);
 		else $this->load->view('candidate/dashboard.php', $data);
 	}
