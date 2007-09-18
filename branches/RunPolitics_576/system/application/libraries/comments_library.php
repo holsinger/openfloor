@@ -97,7 +97,7 @@ class Comments_library
 		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$user_name}'s comment:</a></p> "
 		.'<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">'
 		.form_open('comment/addCommentAction')
-		.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment'))
+		.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment', 'style' => 'width:98%'))
 		.form_hidden('parent_id', $info['comment_id'])
 		.form_hidden('event_name', $this->event_name)
 		.form_hidden('name', $this->name)

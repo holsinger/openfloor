@@ -2,7 +2,7 @@
 	<?=isset($comments_body)?$comments_body.'<br/>':''?>
 </div>
 <?
-$attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 48);
+$attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 48, 'style' => 'width:97%');
 
 if(isset($ajax)) $submit = '<a onClick="javascript:cpUpdater.submitComment(' . $question_id . ', \'' . url_title($event_name) . '\', \'' . url_title($question_name) . '\')">Submit Comment</a>';
 else {
