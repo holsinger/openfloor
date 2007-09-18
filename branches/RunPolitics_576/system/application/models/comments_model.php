@@ -2,6 +2,8 @@
 
 class Comments_model extends Model
 {
+	var $order_by = 'date';
+	
 	public function __construct()
     {
         parent::Model();
@@ -9,9 +11,6 @@ class Comments_model extends Model
 
 	public function getCommentsByQuestion($id)
 	{
-		//$query = $this->db->getwhere('cn_comments', array('fk_question_id' => $id));
-		// $query = $this->db->query('select comment_id, user_name, comment, fk_user_id, fk_question_id from cn_comments 
-		// 		left join cn_users on user_id = fk_user_id;');
 		#TODO allow for order by date of parent
 		#TODO where parent_id is null
 		$query = $this->db->query(
@@ -42,7 +41,7 @@ class Comments_model extends Model
 			AND 
 				parent_id = 0
 			ORDER BY 
-				votes
+				$this->order_by
 			DESC");
 		
 		if($query->num_rows() == 0)

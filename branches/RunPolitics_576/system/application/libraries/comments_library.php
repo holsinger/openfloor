@@ -5,6 +5,7 @@ class Comments_library
 	public $type;
 	private $name;
 	private $event_name;
+	public $sort = 'date';
 	
 	public function __construct()
 	{
@@ -21,11 +22,12 @@ class Comments_library
 		$_id_ = ($this->type == 'question') ? 'question_id' : 'video_id' ;
 		$_name_ = ($this->type == 'question') ? 'question_name' : 'video_title' ;
 		
-		$commentHtml = '';
+		$commentHtml = "<span class=\"comments-sort\">Sort comments by: Date | Votes</span>";
 		$id = $result[$_id_];
 		$this->name = url_title($result[$_name_]);
 		$this->event_name = url_title($result['event_name']);
 		
+		$this->CI->comments_model->sort = $this->sort;
 		if($this->type == 'question') {
 			if (!$comments = $this->CI->comments_model->getCommentsByQuestion($id)) 
 				$commentHtml .= '<strong>There are no comments yet.</strong>';

@@ -193,13 +193,23 @@ class Question extends Controller
 		return $output;
 	}
 	
-	function view ($event, $question) 
+	function view ($event, $question, $sort = 'date') 
 	{
+		// how to sort comments
+		switch ($sort) {
+			case 'votes':
+				$sort = 'votes';
+				break;
+			default:
+				$sort = 'date';
+				break;
+		}
 		
 		$question_id = $this->question->get_id_from_url($question);
 		$this->question->question_status = null;
 		$this->question->question_id = $question_id;
 		$result = $this->question->questionQueue();
+		
 		$data = $result[0];
 		$data['event_type'] = 'question';
 		
@@ -227,6 +237,7 @@ class Question extends Controller
 		
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library();
+		$comments_library->sort = $sort;
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
 		if(isset($_POST['ajax'])) { 

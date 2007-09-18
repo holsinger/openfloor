@@ -9,6 +9,10 @@
 	top: 1px;
 }
 
+span.comments-sort {
+	width: 100%;
+}
+
 a img {
 	border-style: none;
 }
