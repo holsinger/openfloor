@@ -22,12 +22,16 @@ class Comments_library
 		$_id_ = ($this->type == 'question') ? 'question_id' : 'video_id' ;
 		$_name_ = ($this->type == 'question') ? 'question_name' : 'video_title' ;
 		
-		$commentHtml = "<span class=\"comments-sort\">Sort comments by: Date | Votes</span>";
+		// deal with sorting
+		$dateSort = ($this->sort == 'date') ? 'Date' : anchor("question/view/{$result['event_url_name']}/" . url_title($result['question_name']), 'Date');
+		$votesSort = ($this->sort == 'votes') ? 'Votes' : anchor("question/view/{$result['event_url_name']}/" . url_title($result['question_name']) . '/votes', 'Votes');
+		$commentHtml = "<div class=\"comments-sort\">Sort comments by: $dateSort | $votesSort</div>";
+		
 		$id = $result[$_id_];
 		$this->name = url_title($result[$_name_]);
 		$this->event_name = url_title($result['event_name']);
 		
-		$this->CI->comments_model->sort = $this->sort;
+		$this->CI->comments_model->order_by = $this->sort;
 		if($this->type == 'question') {
 			if (!$comments = $this->CI->comments_model->getCommentsByQuestion($id)) 
 				$commentHtml .= '<strong>There are no comments yet.</strong>';
@@ -74,14 +78,14 @@ class Comments_library
 					</div>	
 					<div class="thumb_block">';
 					if ($voted < 0) {
-						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
+						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
 						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 					} else if ($voted > 0) {
 						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
 					} else {
-						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
-						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
+						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
 					}				
 		$pod .=			
 					'</div>
@@ -143,14 +147,14 @@ class Comments_library
 							</div>	
 							<div class="thumb_block">';
 							if ($voted < 0) {
-								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
+								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
 								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 							} else if ($voted > 0) {
 								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
 							} else {
-								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsUp.png' border='0'>");
-								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}", "<img src='./images/thumbsDown.png' border='0'>");
+								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
+								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
 							}				
 				$pod .=			
 							'</div>

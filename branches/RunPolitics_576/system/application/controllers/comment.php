@@ -34,7 +34,7 @@ class Comment extends Controller
 		}
 	}
 	
-	public function voteUp($comment_id, $name, $event_name, $type)
+	public function voteUp($comment_id, $name, $event_name, $type, $sort = '')
 	{
 		$this->userauth->check();
 		$user_id = $this->userauth->user_id;
@@ -48,7 +48,7 @@ class Comment extends Controller
 			$this->vote_model->type = 'comment';
 			$this->vote_model->voteUp($user_id, $comment_id);
 			
-			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name) . '/' . $sort);
 		} else {
 			$this->load->model('video_model', 'model');
 		
@@ -62,7 +62,7 @@ class Comment extends Controller
 		}
 	}
 	
-	public function voteDown($comment_id, $name, $event_name, $type)
+	public function voteDown($comment_id, $name, $event_name, $type, $sort = '')
 	{
 		$this->userauth->check();
 		$user_id = $this->userauth->user_id;
@@ -76,7 +76,7 @@ class Comment extends Controller
 			$this->vote_model->type = 'comment';
 			$this->vote_model->voteDown($user_id, $comment_id);
 			
-			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name) . '/' . $sort);
 		} else {
 			$this->load->model('video_model', 'model');
 		

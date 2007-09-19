@@ -9,8 +9,9 @@
 	top: 1px;
 }
 
-span.comments-sort {
-	width: 100%;
+div.comments-sort {
+	margin: 5px;
+	text-align: right;
 }
 
 a img {
