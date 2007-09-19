@@ -2,7 +2,7 @@
 
 class Comment extends Controller
 {
-	public function __constructor()
+	public function __construct()
 	{
 		parent::Controller();
 		// $this->load->model('vote_model', 'vote');

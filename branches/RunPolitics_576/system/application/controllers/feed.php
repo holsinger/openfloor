@@ -2,51 +2,81 @@
 
 class Feed extends Controller
 {
-	function __constructor()
+	var $title;
+	var $description;
+	var $link;	
+	var $data;
+	
+	function __construct()
 	{
 		parent::Controller();
-	}
-
-	public function event($event = null)
-	{
+		
+		// models
+		$this->load->model('event_model', 'event');
+		$this->load->model('question_model', 'question');
+		
+		// libraries
 		$this->load->library('RssGenerator_rss');
 		$this->load->library('RssGenerator_channel');
 		$this->load->library('RssGenerator_image');
 		$this->load->library('RssGenerator_textInput');
 		$this->load->library('RssGenerator_item');		
-		
-		$rss_channel = new RssGenerator_channel();
-		$rss_channel->title = 'My News';
-		$rss_channel->link = 'http://mysite.com/news.php';
-		$rss_channel->description = 'The latest news about web-development.';
-		$rss_channel->language = 'en-us';
-		$rss_channel->generator = 'PHP RSS Feed Generator';
-		$rss_channel->managingEditor = 'editor@mysite.com';
-		$rss_channel->webMaster = 'webmaster@mysite.com';
-
-		$item = new RssGenerator_item();
-		$item->title = 'New website launched';
-		$item->description = 'Today I finaly launch a new website.';
-		$item->link = 'http://newsite.com';
-		$item->pubDate = 'Tue, 07 Mar 2006 00:00:01 GMT';
-		$rss_channel->items[] = $item;
-
-		$item = new RssGenerator_item();
-		$item->title = 'Another website launched';
-		$item->description = 'Just another website launched.';
-		$item->link = 'http://anothersite.com';
-		$item->pubDate = 'Wen, 08 Mar 2006 00:00:01 GMT';
-		$rss_channel->items[] = $item;
-
-		$rss_feed = new RssGenerator_rss();
-		$rss_feed->encoding = 'UTF-8';
-		$rss_feed->version = '2.0';
-		header('Content-Type: text/xml');
-		echo $rss_feed->createFeed($rss_channel);
+	}
+	
+	public function index()
+	{
+		redirect();
+		exit();
 	}
 
-	public function tag($tag)
+	public function event($event = 'salt_lake_city_mayoral_forum')
 	{
-		return true;
+		$event_id				= $this->event->get_id_from_url($event);
+		if(!$event_id) 			exit();
+		
+		// set class vars
+		$this->title 			= ucwords(str_replace('_',' ', $event));
+		$this->description		= 'RunPolitics Event Feed';
+		$this->link 			= 'http://www.runpolitics.com/';
+		$this->data				= $this->event->rss_upcoming_questions($event_id);
+		
+		$this->feed_questions();				
+	}
+
+	public function tag($tag = 'government')
+	{
+		// set class vars
+		$this->title 			= 'Questions tagged with ' . ucfirst($tag);
+		$this->description		= 'RunPolitics Question Feed';
+		$this->link 			= 'http://www.runpolitics.com/';
+		$this->data				= $this->question->rss_questions_by_tag($tag);
+		
+		$this->feed_questions();
+	}
+	
+	private function feed_questions()
+	{
+		$rss_channel 					= new RssGenerator_channel();
+		$rss_channel->title 			= $this->title;
+		$rss_channel->link 				= $this->link;
+		$rss_channel->description 		= $this->description;
+		$rss_channel->language 			= 'en-us';
+		$rss_channel->managingEditor 	= 'contact@politic20.com';
+		$rss_channel->webMaster 		= 'contact@politic20.com';
+
+		foreach($this->data as $question) {
+			$item 						= new RssGenerator_item();
+			$item->title 				= $question->question_name;
+			$item->description 			= $question->question_desc;
+			$item->link 				= 'http://newsite.com';
+			$item->pubDate 				= 'Tue, 07 Mar 2006 00:00:01 GMT';
+			$rss_channel->items[] 		= $item;
+		}
+
+		$rss_feed 						= new RssGenerator_rss();
+		$rss_feed->encoding 			= 'UTF-8';
+		$rss_feed->version 				= '2.0';
+		header('Content-Type: text/xml');
+		echo $rss_feed->createFeed($rss_channel);
 	}
 }
