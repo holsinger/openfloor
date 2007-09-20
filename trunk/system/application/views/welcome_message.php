@@ -6,7 +6,7 @@
 	    google.load("feeds", "1");
 	
 	    function initialize() {
-	      var feed = new google.feeds.Feed("http://blog.politic20.com/category/home/feed");
+	      var feed = new google.feeds.Feed("http://blog.runpolitics.com/category/home/feed");
 	      feed.load(function(result) {
 	        if (!result.error) {
 	          var container = document.getElementById("feed");
