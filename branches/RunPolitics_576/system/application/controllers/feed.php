@@ -43,11 +43,11 @@ class Feed extends Controller
 		$this->feed_questions();				
 	}
 
-	public function tag($tag = 'government')
+	public function tag($tag = 'politics')
 	{
 		// set class vars
-		$this->title 			= 'Questions tagged with ' . ucfirst($tag);
-		$this->description		= 'RunPolitics Question Feed';
+		$this->title 			= 'Questions tagged with \'' . ucfirst($tag) . '\'';
+		$this->description		= 'RunPolitics Tag Feed';
 		$this->link 			= 'http://www.runpolitics.com/';
 		$this->data				= $this->question->rss_questions_by_tag($tag);
 		
