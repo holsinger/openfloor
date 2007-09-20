@@ -285,6 +285,7 @@ class Conventionnext extends Controller
 		
 		// load the view
 		$data['view_name'] = 'view_queue';
+		$data['rss'] = array();
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
 		// echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	
