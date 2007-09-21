@@ -228,6 +228,7 @@ class Conventionnext extends Controller
 		$data['event_type'] = 'question';
 		
 		$this->load->model('Question_model','question2'); // why are we loading it like this?
+		$data['rss'] = array();
 		
 		// event information
 		$this->question2->event_id = $event_id; 
@@ -248,6 +249,8 @@ class Conventionnext extends Controller
 		if (isset($uri_array['tag'])) {
 			$this->question2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
 			$data['tag'] = $uri_array['tag'];
+			$data['rss'][] = array(	'title' => 'Questions Tagged With \'' . ucfirst($data['tag']) . '\'', 
+									'href' => site_url("feed/tag/{$data['tag']}"));
 		}
 		
 		// prepare sorting information
@@ -285,7 +288,6 @@ class Conventionnext extends Controller
 		
 		// load the view
 		$data['view_name'] = 'view_queue';
-		$data['rss'] = array();
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
 		// echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	

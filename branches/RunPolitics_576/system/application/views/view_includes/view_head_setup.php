@@ -34,7 +34,7 @@
 	<?
 	if(isset($rss)): 
 		foreach($rss as $feed):
-			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />";
+			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
 		endforeach;
 	endif;
 	?>
