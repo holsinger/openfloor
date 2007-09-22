@@ -55,8 +55,12 @@ div.horizontal_gsblb {
  * - vertical mode
  */
 div.statusBox_gsblb {
-  padding-top : 4px;
-  padding-bottom : 4px;
+ border:1px solid #CEDFEF;
+float:left;
+margin:6px 0pt 0pt -9px;
+padding:10px 0pt;
+text-align:center;
+width:309px;
 }
 
 a.statusItem_gsblb {
@@ -64,6 +68,7 @@ a.statusItem_gsblb {
   white-space: nowrap;
   text-decoration : none;
   font-size: 10px;
+  color: #F04A54;
 }
 
 a.statusItem_gsblb:hover {
@@ -78,8 +83,12 @@ a.statusItemSelected_gsblb {
   text-decoration : none;
   border: none;
   font-size: 10px;
+  color:#053C7C;
 }
 
+a.statusItemSelected_gsblb:hover {
+  text-decoration : none;
+}
 /**
  * Auto Execute List Status Box
  * - horizontal mode
@@ -139,7 +148,11 @@ span.statusItemSep_gsblb {
  * always suppress bolding (inserted by search)
  */
 .resultsBox_gsblb .resultDiv_gsblb b {
-  font-weight : normal;
+  color:#053C7C;
+font-size:11px;
+font-weight:bold;
+margin:0pt;
+padding:0pt;
 }
 
 /**
@@ -148,9 +161,11 @@ span.statusItemSep_gsblb {
  */
 .horizontal_gsblb .resultDiv_gsblb,
 .resultsBox_gsblb .resultDiv_gsblb .gs-title {
-  line-height: 1.4em;
-  height: 1.4em;
-  overflow: hidden;
+  color:#053C7C;
+font-size:11px;
+font-weight:bold;
+margin:0pt;
+padding:0pt;
 }
 
 .horizontal_gsblb .resultDivBold_gsblb * {
@@ -165,6 +180,11 @@ span.statusItemSep_gsblb {
 }
 .expanded_gsblb .resultDiv_gsblb .gs-relativePublishedDate {
   display : block;
+  color:#6CA8DC;
+font-size:11px;
+font-weight:normal;
+margin:0pt;
+padding:0pt;
 }
 .expanded_gsblb .resultDiv_gsblb {
   margin-top : .8em;
@@ -210,4 +230,8 @@ span.statusItemSep_gsblb {
 .horizontal_gsblb div.gsc-branding-vertical {
   position: relative;
   width: 75px;
+}
+.gs-result a.gs-visibleUrl, .gs-result .gs-visibleUrl {
+color:#F04A54;
+text-decoration:none;
 }
