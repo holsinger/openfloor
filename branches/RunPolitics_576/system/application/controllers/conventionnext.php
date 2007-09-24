@@ -136,66 +136,6 @@ class Conventionnext extends Controller
 		}		
 	}
 	
-	// cp helper functions
-	private function _currentQuestion(&$data)
-	{
-		$this->question->question_status = 'current';
-		$data['current_question'] = $this->question->questionQueue();
-	}
-	
-	private function _upcomingQuestions(&$data)
-	{
-		$data['questions'] = $this->question->questionQueue();
-		foreach ($data['questions'] as $key => $row) {
-			if ($this->userauth->isUser()) {
-				$this->vote->type='question';
-				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
-			} else { 
-				$data['questions'][$key]['voted'] = 0; 
-			}
-		}
-	}
-	
-	private function _allReactions(&$data)
-	{
-		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
-		$this->reaction->user_id		= $this->userauth->user_id;
-		
-		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
-		foreach($data['candidates'] as $k => $v) {
-			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
-			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
-		}
-	}
-	
-	private function _yourReaction(&$data)
-	{
-		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
-		$this->reaction->user_id		= $this->userauth->user_id;
-		$data['user_reaction'] = $this->reaction->canUserReaction($data['can_id']);
-	}
-	
-	private function _overallReaction(&$data)
-	{
-		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
-		$this->reaction->user_id		= $this->userauth->user_id;		
-		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/10)*100, 0) . '%';
-	}
-	
-	private function _submitQuestion(&$data)
-	{
-		#TODO fix disclaimer box
-		$data['ajax'] = true;
-		$data['event_type'] = 'question';
-		$data['event_url'] = "event/{$data['event']}";
-		
-		$fields['event']	= ( isset($_POST['event']) ) ? $_POST['event']:"";
-		$fields['question']	= ( isset($_POST['question']) ) ? $_POST['question']:"";
-		$fields['desc']	= ( isset($_POST['desc']) ) ? $_POST['desc']:"";
-		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
-		$this->validation->set_fields($fields);
-	}
-	
 	public function react($value, $can_id, $question_id)
 	{
 		$this->reaction->react($value, $can_id, $question_id, $this->userauth->user_id);
@@ -208,7 +148,7 @@ class Conventionnext extends Controller
 		redirect("/conventionnext/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
 	}
 	
-	function queue()
+	public function queue()
 	{
 		//get data from url
 		$uri_array = $this->uri->uri_to_assoc(3);
@@ -221,7 +161,7 @@ class Conventionnext extends Controller
 			
 	}
 		
-	function questionQueue ($uri_array,$event_id) 
+	public function questionQueue ($uri_array,$event_id) 
 	{
 		if(!isset($event_id)) redirect();
 		if($this->ajax) $data['ajax'] = true;
@@ -293,7 +233,7 @@ class Conventionnext extends Controller
 		$this->load->view('view_queue',$data);	
 	}		
 	
-	function videoQueue ($uri_array,$event_id) 
+	public function videoQueue ($uri_array,$event_id) 
 	{
 		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'video';
@@ -491,18 +431,6 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	// deprecated
-	public function viewCandidate($can_display_name)
-	{
-		exit();
-		$can_id = $this->candidate->getIdByName($can_display_name);
-		if(!$can_id) redirect();
-		$candidate = $this->candidate->getCandidate($can_id);		
-		$data['candidate'] = $candidate;
-		
-		$this->load->view('candidate/view.php', $data);
-	}
-	
 	private function adminCandidate($action, $name = null)
 	{
 		$data['error'] = '';
@@ -571,7 +499,7 @@ class Conventionnext extends Controller
 	}
 
 	private function createCandidateUser($can_id)
-	{	
+	{
 		#TODO decide for good what to do with email & password
 		$_POST['user_email'] = $_POST['can_email'];
 		$_POST['user_password'] = $_POST['can_password'];
@@ -586,42 +514,6 @@ class Conventionnext extends Controller
 		return $user_id;
 	}
 	
-	// deprecated
-	private function editCandidateBio($can_display_name)
-	{
-		exit();
-		$data['error'] = '';
-		if(isset($_POST['submitted'])) {
-			$rules['can_bio'] = "required|trim|max_length[65535]|xss_clean";
-			$this->validation->set_rules($rules);			
-			if (!$this->validation->run())
-				$data['error'] .= $this->validation->error_string;
-			
-			if(!$this->candidate->authenticate($_POST['can_id'], $_POST['can_password']))
-				$data['error'] .= '<p>Invalid Password</p>';
-				
-			if(!$data['error'])	{
-				unset($_POST['can_password']);
-				$this->candidate->editCandidate();
-				redirect('conventionnext/view/candidate/' . url_title($can_display_name));
-			}
-		}
-		$can_id = $this->candidate->getIdByName($can_display_name);
-		if(!$can_id) redirect();
-		
-		$data['can_id'] = $can_id;
-		$data['can_display_name'] = $can_display_name;
-		
-		$candidate = $this->candidate->getCandidate($can_id);
-		
-		#TODO there's some weird stuff going on here with the validation class, fix it!
-		// $fields['can_bio'] = isset($_POST['can_bio']) ? $_POST['can_bio'] : $candidate['can_bio'] ;
-		// $this->validation->set_fields($fields);
-		$data['can_bio'] = isset($_POST['can_bio']) ? $_POST['can_bio'] : $candidate['can_bio'] ;
-		
-		$this->load->view('candidate/edit_bio.php', $data);
-	}
-
 	public function candidate_dashboard($event_name =  'salt_lake_city_mayoral_forum', $ajax = null)
 	{
 		$event_id = $this->event->get_id_from_url($event_name);
@@ -649,7 +541,8 @@ class Conventionnext extends Controller
 		redirect("conventionnext/candidate_dashboard/$event_name");
 	}
 	
-	function stream_high($event) {
+	public function stream_high($event) 
+	{
 		$this->videoFeed($event, 'high');
 	}
 	
@@ -677,7 +570,8 @@ class Conventionnext extends Controller
 		$this->load->view('view_feed',$event);
 	}
 	
-	private function _getIP() { 
+	private function _getIP() 
+	{
 		$ip; 
 	
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP"); 
@@ -688,7 +582,6 @@ class Conventionnext extends Controller
 		return $ip; 
 	}
 
-	// conventionnext::questionQueue() helper functions	
 	private function prepareQueue(&$data)
 	{
 		$event_id = $this->event->get_id_from_url(url_title($data['event_name']));
@@ -848,6 +741,66 @@ class Conventionnext extends Controller
 		</script>
 		<script language="JavaScript" src="javascript/timer.js"></script>
 EOT;
+	}
+
+	// cp helper functions
+	private function _currentQuestion(&$data)
+	{
+		$this->question->question_status = 'current';
+		$data['current_question'] = $this->question->questionQueue();
+	}
+	
+	private function _upcomingQuestions(&$data)
+	{
+		$data['questions'] = $this->question->questionQueue();
+		foreach ($data['questions'] as $key => $row) {
+			if ($this->userauth->isUser()) {
+				$this->vote->type='question';
+				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
+			} else { 
+				$data['questions'][$key]['voted'] = 0; 
+			}
+		}
+	}
+	
+	private function _allReactions(&$data)
+	{
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;
+		
+		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
+		foreach($data['candidates'] as $k => $v) {
+			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
+		}
+	}
+	
+	private function _yourReaction(&$data)
+	{
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;
+		$data['user_reaction'] = $this->reaction->canUserReaction($data['can_id']);
+	}
+	
+	private function _overallReaction(&$data)
+	{
+		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+		$this->reaction->user_id		= $this->userauth->user_id;		
+		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/10)*100, 0) . '%';
+	}
+	
+	private function _submitQuestion(&$data)
+	{
+		#TODO fix disclaimer box
+		$data['ajax'] = true;
+		$data['event_type'] = 'question';
+		$data['event_url'] = "event/{$data['event']}";
+		
+		$fields['event']	= ( isset($_POST['event']) ) ? $_POST['event']:"";
+		$fields['question']	= ( isset($_POST['question']) ) ? $_POST['question']:"";
+		$fields['desc']	= ( isset($_POST['desc']) ) ? $_POST['desc']:"";
+		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
+		$this->validation->set_fields($fields);
 	}
 }
 ?>

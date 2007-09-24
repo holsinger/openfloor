@@ -9,6 +9,19 @@
 	top: 1px;
 }
 
+div.event-view-content {
+	margin-left: 110px;
+}
+
+div.event-view-content p {
+	padding: 0;
+	margin: 0;
+}
+
+div.event-view-avatar {
+	float: left;
+}
+
 div.comments-sort {
 	margin: 5px;
 	text-align: right;

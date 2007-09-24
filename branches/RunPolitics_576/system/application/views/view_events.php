@@ -19,27 +19,32 @@ $data['red_head'] = 'Events';
 	<? //echo $this->table->generate($events)?>
 	<? foreach ($events as $key => $array) {?>
 		<div id='event<?=$array['event_id'];?>' class='event-summary'>
-		<div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
-			<p><?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />		
-			<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
-			<b>Where:</b> <?=$array['location'];?><br />
-			<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
-			<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
-			</p>
-			<?
-			$atts = array(
-              'width'      => '372',
-              'height'     => '280',
-              'scrollbars' => 'no',
-              'status'     => 'no',
-              'resizable'  => 'no',
-              'screenx'    => '0',
-              'screeny'    => '0'
-            );
-       ?>
-			<p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+		<div class="event-view-avatar"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
+			<div class="event-view-content">
+				<?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />		
+				<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
+				<b>Where:</b> <?=$array['location'];?><br />
+				<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
+				<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
+				<?
+				$atts = array(
+	              'width'      => '372',
+	              'height'     => '280',
+	              'scrollbars' => 'no',
+	              'status'     => 'no',
+	              'resizable'  => 'no',
+	              'screenx'    => '0',
+	              'screeny'    => '0'
+	            );
+	       ?>
+				<!-- <p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p> -->
+			</div>
 		</div>
 		<br />
+		<? if ($this->userauth->isUser()) 
+		// $url = site_url() . "chat/chat.php?user_name={$this->userauth->user_name}&event_name=" . url_title($array['event_name']);
+		// echo "<a href='javascript:void(0);' onclick=\"window.open('$url', '_blank', 'width=800,height=600,scrollbars=no,status=no,resizable=no,screenx=0,screeny=0');\">Chat</a>"
+		?>
 		<? if ($this->userauth->isAdmin()) echo $array['edit'];?>
 
 	<? }?>
