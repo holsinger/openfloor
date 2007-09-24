@@ -130,7 +130,8 @@ google.setOnLoadCallback(initialize);
                 </div>
                 
                 <div class="col-center">
-                    <div class="blog">
+                    <!--
+					<div class="blog">
                         <h1>THE RUNPOLITICS BLOG</h1>
                         <h2>WHY DON'T AMERICANS VOTE?</h2>
                         <img src="images/vote.jpg" alt="" />
@@ -148,7 +149,7 @@ google.setOnLoadCallback(initialize);
                             <p>Welcome to RunPolitics.com &mdash; Join the party.</p>
                         </div>
                     </div>
-                    
+                    -->
                     <div class="news">
                         <h1>BREAKING NEWS</h1>
                         <div id="feed"></div>
