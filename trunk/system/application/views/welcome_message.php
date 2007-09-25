@@ -34,10 +34,12 @@ function initialize() {
       link.className = 'feed_title';
       link.appendChild(document.createTextNode(entry.title));
       div.appendChild(link);
-      var text = document.createElement("p");
+      var text = document.createElement("div");
       //text.setAttribute("href", entry['link']);
       //text.appendChild(document.createTextNode(entry['contentSnippet']));
-      text.innerHTML = entry.content;
+      //alert(entry.content);
+	  text.innerHTML = entry.content;
+	  //text.appendChild(document.createTextNode(entry.content));
       div.appendChild(text);
 	  var br = document.createElement("br");
 	  div.appendChild(br);
