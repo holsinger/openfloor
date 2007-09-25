@@ -7,7 +7,7 @@ $data['red_head'] = 'Events';
 <div id="content_div">
   <!-- <h3>Convention Next</h3> -->
   <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
-  <? if ($this->userauth->isAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
+  <? if ($this->userauth->isSuperAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
   
   <h3>Events</h3>	
   

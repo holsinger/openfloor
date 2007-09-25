@@ -6,6 +6,6 @@
             <div style="margin-left:10px;margin-right:30px;">
             <?=$cms_text;?>
             </div>
-            <? if ($this->userauth->isAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
+            <? if ($this->userauth->isSuperAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
 </div>
 <? $this->load->view('view_includes/footer.php'); ?>  				
