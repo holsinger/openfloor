@@ -25,6 +25,7 @@ $data['red_head'] = 'Events';
 				<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 				<b>Where:</b> <?=$array['location'];?><br />
 				<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
+				<? if($array['streaming']) echo '<b>' . anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts) . '</b>'; ?><br/>
 				<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
 				<?
 				$atts = array(
