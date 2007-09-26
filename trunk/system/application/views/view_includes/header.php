@@ -7,11 +7,13 @@ $data['browserVer'] = $this->agent->version();
 if (isset($data['js_onload']) && is_array($data['js_onload'])) $onload = implode('();',$data['js_onload']).'();';
 else $onload = 'init();';
 $this->load->view('view_includes/view_head_setup.php',$data);
+#NEver do this bad ok a hack again
+$js_onload_special = (isset($js_onload_special)) ? $js_onload_special:'';
 ?>
 <? if ($data['browser'] == 'Internet Explorer' && $data['browserVer'] < 7) { ?>
-<body onLoad='fixPNG();<?=$onload;?>'>
+<body onLoad='fixPNG();<?=$onload.$js_onload_special;?>'>
 <?}else{?>
-<body onLoad='<?=$onload;?>'>
+<body onLoad='<?=$onload.$js_onload_special;?>'>
 <?}?>
 <!--  load AJAX views -->
 <div id="overlay" onclick="hideBox()" style="display:none"></div>
