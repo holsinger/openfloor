@@ -130,6 +130,8 @@ class Event extends Controller
 		$cansInEvent = unserialize(urldecode($_POST['cansInEvent']));
 		
 		if($_POST['candidates'] != $cansInEvent) { // a change was made
+			$candidateChange = true;
+			
 			// Determine the new and old candidates.
 			$add = array_diff($_POST['candidates'], $cansInEvent);
 			$delete = array_diff($cansInEvent, $_POST['candidates']);
@@ -222,6 +224,9 @@ class Event extends Controller
 			if ( $affected_rows > 0 ) {
 				$error = 'Event Updated!';
 				$this->view_events($error);
+			} elseif ($candidateChange) {
+				$error = 'Event Updated!';
+				$this->view_events($error);			
 			} else {
 				$error = 'Error editing event or no changes were made';
 				$this->edit_event($event_id, $error);
