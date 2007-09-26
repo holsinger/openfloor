@@ -330,7 +330,9 @@ class Event extends Controller
 			//make sure a new id was inserted
 			if ( is_numeric($last_id) ) {
 				$error = 'Event creation complete!';
-				$this->view_events($error);
+				// $this->view_events($error);
+				$this->edit_event($last_id);
+				return;
 			} else {
 				$error = 'Error Creating Event';
 				$this->view_events($error);
