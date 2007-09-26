@@ -11,6 +11,10 @@
 </style>
 <style media="all" type="text/css">@import "css/userWindow.css";</style>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
+<script type="text/javascript">
+	site_url = '<?= $this->config->site_url();?>';
+	username = '<?=$this->userauth->user_name;?>';
+</script>
 <script type="text/javascript" src="javascript/lib/prototype.js"></script>
 <script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 <script src="javascript/src/effects.js" type="text/javascript"></script>
@@ -132,26 +136,11 @@ google.setOnLoadCallback(initialize);
                 </div>
                 
                 <div class="col-center">
-                    <!--
-					<div class="blog">
-                        <h1>THE RUNPOLITICS BLOG</h1>
-                        <h2>WHY DON'T AMERICANS VOTE?</h2>
-                        <img src="images/vote.jpg" alt="" />
-                        
-                        <div class="blog-left"> 
-                            <h3>What has happened to democracy in America?</h3>
-                            <p>EVERYWHERE, U.S.A. - Who truly holds the power - the government or the people? What can be done about the disillusionment and frustration YOU feel when faced with U.S. politics?</p>
-                            <p>These are some of the questions RunPolitics.com was created to address.</p>
-                        </div>
-                        
-                        <div class="blog-right">
-                            <p class="first">At RunPolitics.com, you don?t have to spend $1000 a plate to sit at the table with your elected official.</p>
-                            <p>You don't have to spend hours upon hours sifting through mounds of biased data to find the facts. You are given a face, a voice, and a megaphone.</p>
-                            <p>We're more than a library, more than a search engine, more than a social gathering place. Politic 2.0 is not just a website; it's a place where you finally are as powerful as the people who represent you... the way it should be.</p>
-                            <p>Welcome to RunPolitics.com &mdash; Join the party.</p>
-                        </div>
-                    </div>
-                    -->
+                    		
+                    <div>
+					<h2 style="color:#F04A54;text-align:center;cursor:pointer;" onClick="showBox('main_pop');">Click to see what's coming soon to this page!</h2>
+                    </div>   
+					
                     <div class="news">
                         <h1>BREAKING NEWS</h1>
                         <div id="feed"></div>
