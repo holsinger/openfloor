@@ -1,5 +1,7 @@
 <?
+$data['js_onload_special'] = "showBox(\"events_pop\");";
 $data['red_head'] = 'Events';
+//exit(var_dump($data));
 ?>
 
 <? $this->load->view('view_includes/header.php',$data); ?>
