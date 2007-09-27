@@ -10,9 +10,9 @@ cpUpdater.cpUpdateOnce = function() {
 	
 	new Ajax.Updater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions');
 	
-	cans.each(function(s) {
-		new Ajax.Updater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s);
-	});
+	// cans.each(function(s) {
+	// 	new Ajax.Updater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s);
+	// });
 }
 
 cpUpdater.cpUpdate = function() {
@@ -26,11 +26,11 @@ cpUpdater.cpUpdate = function() {
 	  frequency: 10
 	}));
 	
-	cans.each(function(s) {
-		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s, {
-		  frequency: 10
-		}));
-	});
+	// cans.each(function(s) {
+	// 	updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s, {
+	// 	  frequency: 10
+	// 	}));
+	// });
 }
 
 cpUpdater.askQuestion = function() {

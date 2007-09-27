@@ -33,8 +33,13 @@
 		<img src="./images/ucp/vote-down.jpg"/>
 	</div>
 	<div class="question"><?= $question['question_name'] ?></div>
-	<div class="votes">votes</div>
-	<div class="comments">comments</div>
 </div>
+<div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments" style="display:none; height: 300px; overflow: scroll;">
+</div>
+<div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none; height: 300px; overflow: scroll;">
+</div>
+<div class="votes" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)">votes</div>
+<div class="comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')">comments</div>
+
 
 <? 	endforeach; ?>	

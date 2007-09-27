@@ -33,7 +33,7 @@
 }
 
 #ucp .question-pod {
-	margin-bottom: 20px;
+	margin-bottom: -25px;
 }
 
 #ucp .feed-reaction-panel td {
@@ -74,19 +74,18 @@
 	background: url(../images/ucp/th-reaction.jpg) no-repeat right;
 }
 
+#ucp .vote {
+	position: relative;
+	top: -20px;
+	left: 89px;
+}
+
 #ucp .votes {
 	width: 48px;
 	height: 15px;
 	background: url(../images/ucp/votes-tab.jpg) no-repeat;
 	position: relative;
-	top: -45px;
 	left: 644px;
-}
-
-#ucp .vote {
-	position: relative;
-	top: -20px;
-	left: 89px;
 }
 
 #ucp .comments {
@@ -94,8 +93,23 @@
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
 	position: relative;
-	top: -62px;
 	left: 698px;
+}
+
+#ucp #upcoming_questions .votes {	
+	top: 24px;
+}
+
+#ucp #upcoming_questions .comments {	
+	top: 7px;
+}
+
+#ucp .current-question-pod .votes {	
+	top: -45px;
+}
+
+#ucp .current-question-pod .comments {	
+	top: -62px;
 }
 
 #ucp .votes, #ucp .comments {
@@ -104,6 +118,7 @@
 	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 	text-align: center;
 	padding: 1px;
+	cursor: pointer;
 }
 
 #ucp .score {
@@ -172,4 +187,13 @@
 
 #ucp .content-toggle {
 	float: right;
+}
+
+#ucp img {
+	cursor: pointer;
+}
+
+#ucp .cp-comments, #ucp .cp-votes {
+	position: relative;
+	top: 24px;
 }

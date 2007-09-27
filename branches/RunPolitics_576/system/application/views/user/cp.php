@@ -19,7 +19,7 @@
 	</script>
 
 	<script type="text/javascript" src="javascript/cpUpdater.js"></script>
-	<script type="text/javascript">//cpUpdater.cpUpdate();</script>
+	<script type="text/javascript">cpUpdater.cpUpdate();</script>
 	<style type="text/css" media="screen" >
 		/* put the left rounded edge on the track */
 		.track-left {
@@ -41,32 +41,35 @@
 		<div class="hr-1"></div>
 		<div class="section">
 			<span class="section-title">Current Question</span>
-			<img class="content-toggle" src="./images/ucp/toggle.jpg"/>
+			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question_container','blind', {queue: 'end'});"/>
 		</div>
-		<div id="current_question" class="current-question-pod">
-			<div class="score">14</div>
-			<div class="vote">
-				<img src="./images/ucp/vote-up.jpg"/>
-				<img src="./images/ucp/vote-down.jpg"/>
+		<div id="current_question_container">
+			<div class="current-question-pod">
+				<div class="score">14</div>
+				<div class="vote">
+					<img src="./images/ucp/vote-up.jpg"/>
+					<img src="./images/ucp/vote-down.jpg"/>
+				</div>
+				<div id="current_question" class="question"><? $this->load->view('user/cp_current_question') ?></div>
+				<div class="votes">votes</div>
+				<div class="comments">comments</div>
 			</div>
-			<div class="question"><? $this->load->view('user/cp_current_question') ?></div>
-			<div class="votes">votes</div>
-			<div class="comments">comments</div>
 		</div>
-
 		<table class="feed-reaction-panel">
 			<tr>
 				<td>
 					<div class="section">
 						<span class="section-title">Live Video Feed:</span>
-						<img class="content-toggle" src="./images/ucp/toggle.jpg"/>
+						<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('video_container','blind', {queue: 'end'});"/>
 					</div>
-					<img src="./images/ucp/video-placeholder.jpg"/>
+					<div id="video_container">
+						<img src="./images/ucp/video-placeholder.jpg"/>
+					</div>
 				</td>
 				<td>
 					<div class="section">
 						<span class="section-title">Participant Reaction:</span>
-						<img class="content-toggle" src="./images/ucp/toggle.jpg"/>
+						<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('user-reaction','blind', {queue: 'end'});"/>
 					</div>
 					<div id="user-reaction">
 						<table>
@@ -82,13 +85,14 @@
 						</table>							
 					</div>
 					<br/><br/>
-					<img src="./images/ucp/ask-a-question.jpg"/>
+					<img src="./images/ucp/ask-a-question.jpg" onClick="javascript:new Effect.toggle('cp-ask-question','blind', {queue: 'end'});"/>
 				</td>
 			</tr>
 		</table>
+		<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 		<div class="section">
 			<span class="section-title">Upcoming Questions</span>
-			<img class="content-toggle" src="./images/ucp/toggle.jpg"/>
+			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('upcoming_questions','blind', {queue: 'end'});"/>
 		</div>
 		<div id="upcoming_questions">		
 			<? $this->load->view('user/cp_upcoming_questions') ?>
