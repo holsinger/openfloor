@@ -11,6 +11,7 @@
 </style>
 <style media="all" type="text/css">@import "css/userWindow.css";</style>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
+<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="public/css/ie7.css" /><![endif]-->
 <script type="text/javascript">
 	site_url = '<?= $this->config->site_url();?>';
 	username = '<?=$this->userauth->user_name;?>';
@@ -75,13 +76,6 @@ google.setOnLoadCallback(initialize);
 					<li><a href="http://blog.runpolitics.com">Blog</a></li>
                 </ul>
                 <ul class="right" id="userLogin">
-                    <? /*
-					<li class="login">Welcome, <a href="#">maryjo8</a> (100 <img class="star" src="images/star.gif" alt="" />)</li>
-                    <li class="separator">|</li>
-                    <li><a href="#">Manage Account</a></li>
-                    <li class="separator">|</li>
-                    <li><a href="#">Log Out</a></li>
-					*/?>
 					<? if ($this->userauth->isUser()) { ?>
 						<li class="login">Welcome, <?=anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name,'user');?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span></li>
 						<li><img src="images/karma_star_default.png" style='top:4px;'></li>
@@ -102,22 +96,24 @@ google.setOnLoadCallback(initialize);
             <div class="header">
                 <div class="flag">  
                     <a href="#" class="left-banner"><img src="images/blank.gif" alt="" /></a>
-                    <img src="images/logo.gif" alt="" class="logo" />
+                    <a href="#" class="logo"><img src="images/logo.gif" alt="" /></a>
                     <a href="#" class="right-banner"><img src="images/blank.gif" alt="" /></a>
                 </div>
-                <div class="menu">
-                    <div class="date"><?=date('l, F j, Y');?></div>
-                    
-                    <div class="links">
-                        <a href="#"><img src="images/people.gif" alt="" /></a>
-                        <div class="sep"></div>
-                        <a href="#"><img src="images/politics.gif" alt="" /></a>
-                        <div class="sep"></div>
-                        <a href="#"><img src="images/change.gif" alt="" /></a>
-                    </div>
-                    
-                    <!-- <div class="update">Last Update: <span>9:32 AM MST</span></div> -->
-                </div>
+				<div class="menu-container">
+	                <div class="menu">
+	                    <div class="date"><?=date('l, F j, Y');?></div>
+	                    
+	                    <div class="links">
+	                        <a href="#"><img src="images/people.gif" alt="" /></a>
+	                        <div class="sep"></div>
+	                        <a href="#"><img src="images/politics.gif" alt="" /></a>
+	                        <div class="sep"></div>
+	                        <a href="#"><img src="images/change.gif" alt="" /></a>
+	                    </div>
+	                    
+	                    <!-- <div class="update">Last Update: <span>9:32 AM MST</span></div> -->
+	                </div>
+				</div>
             </div>
         
             <div class="content">
@@ -134,19 +130,19 @@ google.setOnLoadCallback(initialize);
                     <a href="#">Vice President</a>
 					-->
                 </div>
-                
-                <div class="col-center">
-                    		
-                    <div>
-					<h2 style="color:#F04A54;text-align:center;cursor:pointer;" onClick="showBox('main_pop');">Click to see what's coming soon to this page!</h2>
-                    </div>   
-					
-                    <div class="news">
-                        <h1>BREAKING NEWS</h1>
-                        <div id="feed"></div>
-                    </div>
+                <div class="col-center-container">
+	                <div class="col-center">
+	                    <div class="col-border"></div>		
+	                    <div>
+						<h2 style="color:#F04A54;text-align:center;cursor:pointer;" onClick="showBox('main_pop');">Click to see what's coming soon to this page!</h2>
+	                    </div>   
+						
+	                    <div class="news">
+	                        <h1>BREAKING NEWS</h1>
+	                        <div id="feed"></div>
+	                    </div>
+	                </div>
                 </div>
-                
                 <div class="col-right">
                     <h1>VIDEOS</h1>
                     
