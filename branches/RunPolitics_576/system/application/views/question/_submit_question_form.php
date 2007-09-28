@@ -54,7 +54,7 @@
 	<?= form_hidden('event_url',$event_url); ?>
 	<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
 	<br />
-	<? if($ajax): ?>
+	<? if(isset($ajax)): ?>
 	<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>
 	<? else: ?>
 	<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		

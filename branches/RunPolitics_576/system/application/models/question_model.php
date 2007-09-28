@@ -134,6 +134,7 @@ class Question_model extends Model
 		 $result_array = array(); 
 		 if ($id) $this->db->where('question_id',$id);
 		 if ($url) $this->db->where('question_url_name',$url);
+		if($this->event_id) $this->db->where('fk_event_id', $this->event_id);
 		 $query = $this->db->get('cn_questions');
 		 log_message('debug', "QUESTIONS:getQuestions:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
@@ -142,8 +143,8 @@ class Question_model extends Model
 	
 	public function get_id_from_url ($url)
 	{
-		 $result_array = $this->get_question(0,$url);
-		 return $result_array['question_id'];
+		$result_array = $this->get_question(0,$url);
+		return $result_array['question_id'];
 	}
 	
 	public function numQuestions($event_id)

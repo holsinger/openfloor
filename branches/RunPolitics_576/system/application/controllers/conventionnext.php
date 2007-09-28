@@ -82,7 +82,7 @@ class Conventionnext extends Controller
 		}
 	}
 	
-	public function cp($event = 'salt_lake_city_mayoral_forum', $ajax = null, $can_id = null)
+	public function cp($event = 'presidential_debate', $ajax = null, $can_id = null)
 	{
 		#TODO Handle no current question
 		#TODO Handle no candidates assigned?
@@ -717,11 +717,12 @@ class Conventionnext extends Controller
 		$candidates = $this->event->getCansInEvent($event_id);
 		$return .= '<div class="content">';
 		foreach($candidates as $v) $return .= '<a href="' . $this->candidate->linkToProfile($v, true) . '"><img src="./avatars/'.$this->candidate->canAvatar($v).'"/></a>';
+		$return .= '<p>';
 		for($i = 0; $i < count($candidates); $i++) 
 			if($i == count($candidates) - 1) $return .= ' and ' . $this->candidate->linkToProfile($candidates[$i]);
 			else $return .= $this->candidate->linkToProfile($candidates[$i]) . ', ';
 		
-		return $return . ' (l to r).</div></div>';
+		return "$return (l to r).</p></div></div>";
 	}
 	
 	public function createTimerHTML($event_name)

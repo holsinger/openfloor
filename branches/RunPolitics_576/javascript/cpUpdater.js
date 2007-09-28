@@ -15,6 +15,15 @@ cpUpdater.cpUpdateOnce = function() {
 	// });
 }
 
+cpUpdater.vote = function(url,id) {	
+	new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
+	new Ajax.Request(url, {
+	  onSuccess: function(transport) {
+		  cpUpdater.cpUpdateOnce();
+	  }
+	});
+}
+
 cpUpdater.cpUpdate = function() {
 	updaters = new Array();
 	

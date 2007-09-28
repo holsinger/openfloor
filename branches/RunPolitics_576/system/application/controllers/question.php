@@ -204,6 +204,9 @@ class Question extends Controller
 				$sort = 'date';
 				break;
 		}
+		$event_id = $this->event->get_id_from_url($event);
+		if(!$event_id) redirect();
+		$this->question->event_id = $event_id;
 		
 		$question_id = $this->question->get_id_from_url($question);
 		$this->question->question_status = null;
@@ -248,7 +251,7 @@ class Question extends Controller
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		
-		$data['view_name'] = 'question_view';		
+		$data['view_name'] = 'question_view';
 		$this->load->view('question/question_view.php', $data);
 	}
 	
