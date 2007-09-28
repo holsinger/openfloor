@@ -41,6 +41,12 @@ class Event_model extends Model
 		return $query->result_array();
 	}
 	
+	public function getEventsByDate()
+	{
+		$query = $this->db->query('SELECT * FROM cn_events ORDER BY event_date DESC');
+		return $query->result_array();
+	}
+	
 	/**
 	 * return the id from the event url name
 	 * 
