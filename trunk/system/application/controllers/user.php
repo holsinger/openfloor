@@ -383,6 +383,12 @@ class User extends Controller {
 		//exit(var_dump($data));
 		//admin is also an owner
 		if ( $this->userauth->isAdmin() ) $data['owner'] = TRUE;
+		
+		// if user is a candidate, set appropriate variables
+		$data['candidate'] = isset($data['fk_can_id']);
+		$data['display_name'] = $this->user->displayName($data['user_name']);
+		$data['bio'] = $this->user->bio($data['user_name']);
+				
 		$this->load->view('view_user_profile',$data);
 	}
 	

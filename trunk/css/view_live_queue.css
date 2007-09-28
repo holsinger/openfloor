@@ -1,7 +1,22 @@
-/* @override http://localhost/~Rob/Politic20/css/view_live_queue.css */
+/* @override 
+	http://localhost/~Rob/Politic20/css/view_live_queue.css
+	http://localhost/~Rob/RunPolitics/css/view_live_queue.css
+*/
 
 html {
 	background-color:#0173BA;
+}
+
+.cp-votes, .cp-comments {
+	border-style: solid;
+	border-width: 1px;
+	margin-right: 15px;
+	margin-left: 15px;
+	padding: 3px 10px;
+}
+
+#user-reaction img {
+	border-style: none;
 }
 
 span.participants {
@@ -10,13 +25,36 @@ span.participants {
 	font-size: 1.4em;
 	font-weight: bold;
 }
+
+#user-reaction table {
+	position: relative;
+	left: 40px;
+	background-color: #f0faff;
+}
+
+#user-reaction th {
+	background-color: #053c7c;
+	color: #f0faff;
+	padding: 3px 8px;
+	text-align: left;
+	font-size: smaller;
+}
+
+#user-reaction tr.alternate {
+	/*background-color: #e1eaef;*/
+}
+
+#user-reaction td {
+	padding: 2px;
+	color: #053c7c;
+}
 .queue-logo {
 	padding:15px;
 }
 body {
 	background-color:#FFFFFF;
 	color:#0173ba;
-	height:100%;	
+	/*height:100%;*/	
 	font-size:16px;
 	min-width:575px;
 }
@@ -29,12 +67,12 @@ body {
 .queue-question {
 	margin-left:15px;
 	margin-right:15px;
-	widht:100%;
 	background:#F0FAFF;
 	height:27px;
 	vertical-align: middle;
 	border:1px solid #053C7C;
 	font-weight: bold;
+	margin-top: 8px;
 }
 .question {
 	widht:100%;
@@ -87,4 +125,29 @@ ul.top-nav {
 }
 .invisi {
 	color: white;
+}
+
+div.overall-reaction-meter {
+	background-color: #f04a54;
+}
+
+div.overall-reaction-meter-total {
+	background-color: #caedff;
+	border: 1px solid #f04a54;
+	margin: 2px;
+}
+
+.cp-comments-tab, .cp-votes-tab {
+	position: absolute;
+	right: 50px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	margin: 0;
+	width: 100px;
+	text-align: center;
+}
+
+.cp-votes-tab {
+	right: 160px;
 }

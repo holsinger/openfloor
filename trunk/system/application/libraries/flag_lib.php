@@ -8,13 +8,14 @@ class Flag_lib {
 		$this->CI=& get_instance();
 	}
 	
-	public function createFlagHTML($fk_id)
+	public function createFlagHTML($fk_id, $event_name = '')
 	{
+		$event_name = url_title($event_name);
 		if(!in_array($this->type, array('question', 'user'))) show_error('Flag_lib::type: invalid type');
 		
 		$this->CI->flag->type = $this->type;
 		if(!$this->CI->userauth->isUser()) {
-			$link = 'Log in to flag items.';
+			$link = anchor("/user/loginToDo/conventionnext/queue/event/$event_name", 'Log in to flag items.');
 		} elseif($this->CI->flag->alreadyFlagged($fk_id, $this->CI->session->userdata('user_id')))
 			$link = 'You have already flagged this.';
 		else {	

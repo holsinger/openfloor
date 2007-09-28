@@ -10,7 +10,7 @@ switch ($this->flag_lib->type) {
 		show_error('flag.php::type: invalid type');
 		break;
 } 
-$html = $this->flag_lib->createFlagHTML($fk_id);
+$html = $this->flag_lib->createFlagHTML($fk_id, $event_name);
 ?>
 
 <? if($this->flag_lib->type == 'user'): ?>

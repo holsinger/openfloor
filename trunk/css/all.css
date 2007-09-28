@@ -1,9 +1,44 @@
-/* @override http://localhost/~Rob/Politic20/css/all.css */
+/* @override 
+	http://localhost/~Rob/Politic20/css/all.css
+	http://localhost/~Rob/RunPolitics/css/all.css
+*/
 
 #queue div.admin-queue-edit-question a {
 	position: relative;
 	left: 438px;
 	top: 1px;
+}
+
+div.event-view-content {
+	margin-left: 110px;
+}
+
+div.event-view-content p {
+	padding: 0;
+	margin: 0;
+}
+
+div.event-view-avatar {
+	float: left;
+}
+
+div.comments-sort {
+	margin: 5px;
+	text-align: right;
+}
+
+a img {
+	border-style: none;
+}
+
+div.rightpod-item div.header {
+	background-color: #cae7f9;
+	font-weight: bold;
+	padding: 3px 3px 3px 8px;
+}
+
+div.rightpod-item div.content img {
+	padding: 4px 8px;
 }
 
 html{
@@ -233,9 +268,9 @@ strong.convention-next{
 }
 #right .box{
 	width:285px;
-	padding:7px 0 0 0;
 	overflow:hidden;
 	background:url(../images/bg-box.gif);
+	padding-top: 5px;
 }
 #right h3{
 	width:285px;

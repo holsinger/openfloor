@@ -1,0 +1,199 @@
+/* @override 
+	http://localhost/~Rob/test/style.css
+	http://knopf.local/~Rob/test/style.css
+	http://localhost/~Rob/RunPolitics/css/ucp.css
+*/
+
+#ucp {
+	width: 804px;
+	margin: 0 auto;
+}
+
+#ucp .hr-1 {
+	width: 100%;
+	height: 2px;
+	border-top: 2px solid #98bcdc;
+	border-bottom: 3px solid #98bcde;
+	margin-bottom: 5px;
+}
+
+#ucp #user-reaction .alternate {
+	background-color: #eef8ff;
+}
+
+#ucp .current-question-pod, #ucp .question-pod {
+	width: 804px;
+	height: 28px;
+	margin-top: 10px;
+	background: url(../images/ucp/question-pod-bg.jpg) no-repeat;
+}
+
+#ucp .current-question-pod {
+	margin-bottom: 10px;
+}
+
+#ucp .question-pod {
+	margin-bottom: -25px;
+}
+
+#ucp .feed-reaction-panel td {
+	width: 50%;
+	vertical-align: top;
+	text-align: center;
+}
+
+#user-reaction {
+	width: 287px;
+	margin: 0 auto;
+}
+
+#ucp #user-reaction table {
+	margin-top: 10px;
+}
+
+#ucp #user-reaction th {
+	color: #fdfeff;
+	text-transform: uppercase;
+	font: bold small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	height: 20px;
+	padding-top: 0;
+	padding-right: 15px;
+}
+
+#ucp #user-reaction td {
+	text-align: left;
+	font: small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding-left: 5px;
+}
+
+#ucp #user-reaction .candidate {
+	background: url(../images/ucp/th-candidate.jpg) no-repeat left;
+}
+
+#ucp #user-reaction .reaction {
+	background: url(../images/ucp/th-reaction.jpg) no-repeat right;
+}
+
+#ucp .vote {
+	position: relative;
+	top: -20px;
+	left: 89px;
+}
+
+#ucp .votes {
+	width: 48px;
+	height: 15px;
+	background: url(../images/ucp/votes-tab.jpg) no-repeat;
+	position: relative;
+	left: 644px;
+}
+
+#ucp .comments {
+	width: 68px;
+	height: 15px;
+	background: url(../images/ucp/comments-tab.jpg) no-repeat;
+	position: relative;
+	left: 698px;
+}
+
+#ucp #upcoming_questions .votes {	
+	top: 24px;
+}
+
+#ucp #upcoming_questions .comments {	
+	top: 7px;
+}
+
+#ucp .current-question-pod .votes {	
+	top: -45px;
+}
+
+#ucp .current-question-pod .comments {	
+	top: -62px;
+}
+
+#ucp .votes, #ucp .comments {
+	color: #fffeff;
+	text-transform: uppercase;
+	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+	padding: 1px;
+	cursor: pointer;
+}
+
+#ucp .score {
+	width: 74px;
+	height: 23px;
+	background: url(../images/ucp/score-bg.jpg) no-repeat;
+	color: #053c7c;
+	font-size: 17px;
+	font-weight: bold;
+	font-family: Verdana,Geneva,Arial;
+	position: relative;
+	top: 2px;
+	left: 11px;
+	padding-left: 4px;
+	padding-top: 1px;
+}
+
+#ucp table {
+	width: 100%;
+}
+
+#ucp .current-question-pod .question {
+	background-color: #fcc6ca;
+}
+
+#ucp .question-pod .question {
+	background-color: #eef8ff;
+}
+
+#ucp .question {
+	position: relative;
+	top: -46px;
+	left: 140px;
+	width: 621px;
+	height: 21px;
+	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
+	padding-top: 5px;
+	padding-left: 5px;
+}
+
+#ucp h1 {
+	text-transform: uppercase;
+	color: #043b7c;
+	margin: 0;
+}
+
+#ucp .section {
+	background-color: #e4f2fd;
+	border-top: 2px solid #c1d8ea;
+	height: 21px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#ucp .ask-a-question-container {
+	width: 125px;
+	margin: 12px auto 4px;
+}
+
+#ucp .section-title {
+	float: left;
+	margin-left: 5px;
+	color: #053c7c;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#ucp .content-toggle {
+	float: right;
+}
+
+#ucp img {
+	cursor: pointer;
+}
+
+#ucp .cp-comments, #ucp .cp-votes {
+	position: relative;
+	top: 24px;
+}

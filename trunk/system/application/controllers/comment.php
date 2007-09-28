@@ -2,7 +2,7 @@
 
 class Comment extends Controller
 {
-	public function __constructor()
+	public function __construct()
 	{
 		parent::Controller();
 		// $this->load->model('vote_model', 'vote');
@@ -11,6 +11,9 @@ class Comment extends Controller
 	
 	public function addCommentAction()
 	{
+		$ajax = isset($_POST['ajax']);
+		unset($_POST['ajax']);
+		
 		$event_type = $_POST['event_type'];
 		unset($_POST['event_type']);
 		
@@ -22,14 +25,16 @@ class Comment extends Controller
 		$this->load->model('comments_model');
 		$_POST['fk_user_id'] = $this->userauth->user_id;
 		if($this->comments_model->insertComment()) {
-			if($event_type == 'question')
+			if($ajax)
+				echo 'success';
+			elseif($event_type == 'question')
 				redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
 			else
 				redirect('/video/view/' . url_title($event_name) . '/' . url_title($name));
 		}
 	}
 	
-	public function voteUp($comment_id, $name, $event_name, $type)
+	public function voteUp($comment_id, $name, $event_name, $type, $sort = '')
 	{
 		$this->userauth->check();
 		$user_id = $this->userauth->user_id;
@@ -41,10 +46,9 @@ class Comment extends Controller
 			$question_info = $this->model->get_question('', $name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
-			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
-				$this->vote_model->voteUp($user_id, $comment_id);
+			$this->vote_model->voteUp($user_id, $comment_id);
 			
-			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name) . '/' . $sort);
 		} else {
 			$this->load->model('video_model', 'model');
 		
@@ -58,7 +62,7 @@ class Comment extends Controller
 		}
 	}
 	
-	public function voteDown($comment_id, $name, $event_name, $type)
+	public function voteDown($comment_id, $name, $event_name, $type, $sort = '')
 	{
 		$this->userauth->check();
 		$user_id = $this->userauth->user_id;
@@ -70,10 +74,9 @@ class Comment extends Controller
 			$question_info = $this->model->get_question('', $name);		
 			$question_id = $question_info['question_id']; 
 			$this->vote_model->type = 'comment';
-			if(!$this->vote_model->alreadyVoted($comment_id, $user_id))
-				$this->vote_model->voteDown($user_id, $comment_id);
+			$this->vote_model->voteDown($user_id, $comment_id);
 			
-			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name));
+			redirect('/question/view/' . url_title($event_name) . '/' . url_title($name) . '/' . $sort);
 		} else {
 			$this->load->model('video_model', 'model');
 		

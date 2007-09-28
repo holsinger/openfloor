@@ -84,8 +84,8 @@ class Question_model extends Model
 					cn_votes 
 				WHERE 
 					fk_question_id=question_id 
+				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
 				GROUP BY fk_question_id), 0) as votes,
-				(SELECT count(*) FROM cn_votes WHERE fk_question_id=question_id) AS vote_count,
 				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
 				question_name, 
 				question_desc,
@@ -116,6 +116,9 @@ class Question_model extends Model
 		
 		// get our tags real quick & determine how old the question is
 		foreach($results as $k=>$v) {
+			# TODO this method for getting the vote count is not as speed friendly as the monolithic single-query above
+			// I was unsuccessful getting this into the query above because of the double-nested sub-query
+			$results[$k]['vote_count'] = $this->db->query("SELECT count(*) AS vote_count FROM (SELECT * FROM cn_votes WHERE fk_question_id = {$v['question_id']} GROUP BY fk_user_id) AS sq")->row()->vote_count;
 			$tags = $this->tag_model->getTagsByQuestion($v['question_id']);
 			if(empty($tags))
 				$results[$k]['tags'] = array();
@@ -126,33 +129,22 @@ class Question_model extends Model
 		return $results;
 	}
 	
-	/**
-	 * return the id from the question url name
-	 * 
-	 * @param string $url event url name
-	 * @author James Kleinschnitz
-	 */
 	public function get_question ($id, $url='')
 	{
 		 $result_array = array(); 
 		 if ($id) $this->db->where('question_id',$id);
 		 if ($url) $this->db->where('question_url_name',$url);
+		if($this->event_id) $this->db->where('fk_event_id', $this->event_id);
 		 $query = $this->db->get('cn_questions');
 		 log_message('debug', "QUESTIONS:getQuestions:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
 		 return $result_array[0];
 	}
 	
-	/**
-	 * return the id from the question url name
-	 * 
-	 * @param string $url event url name
-	 * @author James Kleinschnitz
-	 */
 	public function get_id_from_url ($url)
 	{
-		 $result_array = $this->get_question(0,$url);
-		 return $result_array['question_id'];
+		$result_array = $this->get_question(0,$url);
+		return $result_array['question_id'];
 	}
 	
 	public function numQuestions($event_id)
@@ -163,7 +155,7 @@ class Question_model extends Model
 	
 	/**
 	 * make sure the given event has only the given question marked current
-	 **/
+	 */
 	public function singleCurrent ($event_id,$question_id) {
 		$this->db->where('fk_event_id',$event_id);
 		$this->db->where('question_id !=',$question_id);
@@ -185,5 +177,15 @@ class Question_model extends Model
 		$limit = ($all) ? '' : 'LIMIT 10' ;
 		return $this->db->query("SELECT event_name, question_name FROM cn_questions, cn_events WHERE fk_event_id = event_id AND fk_user_id = $user_id $limit")->result_array();
 	}	
+
+	public function rss_questions_by_tag($tag)
+	{
+		$tag = $this->db->escape($tag);
+		return $this->db->query("	SELECT question_id, question_name, question_desc 
+									FROM cn_questions, cn_idx_tags_questions, cn_tags 
+									WHERE fk_question_id = question_id 
+									AND fk_tag_id = tag_id 
+									AND value = $tag")->result();
+	}
 }
 ?>

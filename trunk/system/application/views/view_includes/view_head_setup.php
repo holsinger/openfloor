@@ -31,4 +31,11 @@
 	<?php if(isset($this->validation->event_date)) echo @js_calendar_script('my_form');  ?>
 	<title>RunPolitics</title>
 	<link rel="icon" href="/p20/favicon.ico" type="image/x-icon"/>
+	<?
+	if(isset($rss)): 
+		foreach($rss as $feed):
+			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
+		endforeach;
+	endif;
+	?>
 </head>

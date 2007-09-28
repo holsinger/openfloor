@@ -18,6 +18,7 @@ class Votes extends Controller
 		$this->question_model->question_id = $question_id;
 		$results = $this->question_model->questionQueue();
 		$data = $results[0];
+		$data['display_name'] = $this->user->displayName($data['user_name']);
 		//set user avatar
 		$image_array = unserialize($data['user_avatar']);
 		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
@@ -55,6 +56,7 @@ class Votes extends Controller
 			.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
 		}
 		$data['voteHTML'] = $voteHTML;
+		if(isset($_POST['ajax'])) { echo $data['voteHTML']; exit(); }
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		

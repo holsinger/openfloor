@@ -2,7 +2,7 @@
 
 class Event_model extends Model
 {
-	function __constructor()
+	function __construct()
 	{
 		parent::Model();
 	}
@@ -47,12 +47,6 @@ class Event_model extends Model
 		return $query->result_array();
 	}
 	
-	/**
-	 * return the id from the event url name
-	 * 
-	 * @param string $url event url name
-	 * @author James Kleinschnitz
-	 */
 	public function get_id_from_url ($url)
 	{
 		$result = $this->db->getwhere('cn_events', array('event_url_name' => $url))->row_array();
@@ -61,12 +55,6 @@ class Event_model extends Model
 		return $result['event_id'];
 	}
 	
-/**
-	 * return the id for the event url name
-	 * 
-	 * @param string $url event url name
-	 * @author James Kleinschnitz
-	 */
 	public function get_event ($id,$url='',$date_start='',$date_end='')
 	{
 		 $result_array = array(); 
@@ -96,6 +84,31 @@ class Event_model extends Model
 	{
 		$last_response = $this->db->getwhere('cn_events', array('event_id' => $event_id))->row()->last_response;
 		return date('m/d/Y g:i:s A', strtotime($last_response));
+	}
+	
+	public function addCanToEvent($can_id, $event_id)
+	{
+		$this->db->insert('cn_idx_candidates_events', array('fk_can_id' => $can_id, 'fk_event_id' => $event_id));
+	}
+	
+	public function removeCanFromEvent($can_id, $event_id)
+	{
+		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $can_id, 'fk_event_id' => $event_id));
+	}
+
+	public function getCansInEvent($event_id, $full = false)
+	{
+		$candidates = $this->db->getwhere('cn_idx_candidates_events', array('fk_event_id' => $event_id))->result_array();
+		$return = array();
+		foreach($candidates as $v) $return[] = $v['fk_can_id'];
+		if(!$full) return $return;
+		return $this->db->query('SELECT can_id, can_display_name FROM cn_candidates WHERE can_id IN(' . implode(',', $return) . ')')->result_array();
+	}
+
+	public function rss_upcoming_questions($event_id)
+	{
+		// how dow we want to order these?
+		return $this->db->select('question_name, question_desc')->where(array('fk_event_id' => $event_id, 'question_status' => 'pending'))->get('cn_questions')->result();
 	}
 }
 ?>

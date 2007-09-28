@@ -9,7 +9,7 @@ $data['red_head'] = 'Events';
 <div id="content_div">
   <!-- <h3>Convention Next</h3> -->
   <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
-  <? if ($this->userauth->isAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
+  <? if ($this->userauth->isSuperAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
   
   <h3>Events</h3>	
   
@@ -57,29 +57,33 @@ $data['red_head'] = 'Events';
 	<? foreach ($events as $key => $array) {?>
 		<? if (strtotime($array['event_date']) < strtotime(date('Y-m-d'))) { ?>
 		<div id='event<?=$array['event_id'];?>' class='event-summary'>
-		<div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
-			<?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />		
-			<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
-			<b>Where:</b> <?=$array['location'];?><br />
-			<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
-			<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
-			
-			<?
-			$atts = array(
-              'width'      => '372',
-              'height'     => '280',
-              'scrollbars' => 'no',
-              'status'     => 'no',
-              'resizable'  => 'no',
-              'screenx'    => '0',
-              'screeny'    => '0'
-            );
-       ?>
-			<?if($array['streaming']):?>
-			<p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+
+		<div class="event-view-avatar"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
+			<div class="event-view-content">
+				<?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />		
+				<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
+				<b>Where:</b> <?=$array['location'];?><br />
+				<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
+				<? if($array['streaming']) echo '<b>' . anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts) . '</b>'; ?><br/>
+				<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
+				<?
+				$atts = array(
+	              'width'      => '372',
+	              'height'     => '280',
+	              'scrollbars' => 'no',
+	              'status'     => 'no',
+	              'resizable'  => 'no',
+	              'screenx'    => '0',
+	              'screeny'    => '0'
+	            );
+	       ?>
+				<!-- <p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p> -->
+			</div>
 			<?endif;?>
 		</div>
 		<br />
+		<? if ($this->userauth->isUser()) 
+		?>
 		<? if ($this->userauth->isAdmin()) echo $array['edit'];?>
 	   <? }?>
 	<? }?>

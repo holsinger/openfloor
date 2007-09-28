@@ -45,6 +45,9 @@ function richField($name, $value)
 	<?
 	echo form_format("Event Location: *", richField('location', $this->validation->location), 'Write a description of the event location, directions etc.');
 	
+	echo form_format("Participating Candidates: ", $this->utilities->multi_select('candidates', $candidates, $cansInEvent));
+	echo form_hidden('cansInEvent', urlencode(serialize($cansInEvent)));
+	
 	echo form_format("Moderator Info: ", richField('moderator_info', $this->validation->moderator_info));
 	 
 	echo form_format("Agenda: ", richField('agenda', $this->validation->agenda));

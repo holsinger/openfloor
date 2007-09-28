@@ -28,7 +28,6 @@ class Question extends Controller
 		#check that user is allowed
 		$this->userauth->check();
 		
-		
 		//make sure there is an event id
 		//get the event id
 		$uri_array = $this->uri->uri_to_assoc(3);		
@@ -66,11 +65,14 @@ class Question extends Controller
 			$questionID = $this->addQuestion();
 			if( is_numeric($questionID) ) {
 				$this->voteup($questionID);
-				//redirect to question view page
-				redirect('conventionnext/queue/'.$_POST['event_url']);
-				ob_clean();
-				exit();
-				
+				if(isset($_POST['ajax'])) {
+					echo 'success'; exit();
+				} else {
+					//redirect to question view page
+					redirect('conventionnext/queue/'.$_POST['event_url']);
+					ob_clean();
+					exit();					
+				}				
 			} else {
 				$data['error'] = 'Error Adding Question';
 			}
@@ -81,13 +83,17 @@ class Question extends Controller
 		$fields['question']	= ( isset($_POST['question']) ) ? $_POST['question']:"";
 		$fields['desc']	= ( isset($_POST['desc']) ) ? $_POST['desc']:"";
 		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
+		if(isset($_POST['ajax'])) foreach($fields as $k => $v) $fields[$k] = '';
 		$this->validation->set_fields($fields);
 		
 		#$data['events'] = $this->populateEventsSelect();
-		
-		$this->load->view('view_submit_question', $data);
+		if(isset($_POST['ajax'])) {
+			$data['ajax'] = true;
+			$this->load->view('question/_submit_question_form', $data);
+		}
+		else $this->load->view('question/submit_question', $data);
 	}
-
+	
 	function addQuestion()
 	{
 		#check that user is allowed
@@ -187,13 +193,26 @@ class Question extends Controller
 		return $output;
 	}
 	
-	function view ($event, $question) 
+	function view ($event, $question, $sort = 'date') 
 	{
+		// how to sort comments
+		switch ($sort) {
+			case 'votes':
+				$sort = 'votes';
+				break;
+			default:
+				$sort = 'date';
+				break;
+		}
+		$event_id = $this->event->get_id_from_url($event);
+		if(!$event_id) redirect();
+		$this->question->event_id = $event_id;
 		
 		$question_id = $this->question->get_id_from_url($question);
 		$this->question->question_status = null;
 		$this->question->question_id = $question_id;
 		$result = $this->question->questionQueue();
+		
 		$data = $result[0];
 		$data['event_type'] = 'question';
 		
@@ -221,13 +240,18 @@ class Question extends Controller
 		
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library();
+		$comments_library->sort = $sort;
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
+		if(isset($_POST['ajax'])) { 
+			$data['ajax'] = true;
+			$this->load->view('question/_comments', $data); 
+		}
 		
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		
-		$data['view_name'] = 'question_view';		
+		$data['view_name'] = 'question_view';
 		$this->load->view('question/question_view.php', $data);
 	}
 	

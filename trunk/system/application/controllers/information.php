@@ -56,7 +56,7 @@ class Information extends Controller {
 		if (count($data)>1) $output = $data['cms_text'];
 		else $output = 'no page found!';
 		
-		if ($this->userauth->isAdmin()) $output .= "<div>".anchor('admin/cms/'.$data['cms_url'], 'edit')."</div>";
+		if ($this->userauth->isSuperAdmin()) $output .= "<div>".anchor('admin/cms/'.$data['cms_url'], 'edit')."</div>";
 		
 		echo $output;
 		

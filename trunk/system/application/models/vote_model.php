@@ -99,26 +99,35 @@ class Vote_model extends Model
 	
 	public function getVotesByQuestion($question_id)
 	{
-		return $this->db->query("SELECT user_name, user_avatar, vote_value, timestamp FROM cn_votes, cn_users WHERE fk_question_id = $question_id AND fk_user_id=user_id")->result_array();
-		// return $this->db->getwhere('cn_votes', array('fk_question_id' => $question_id))->result_array();
+		return $this->db->query("	SELECT user_name, user_avatar, vote_value, timestamp 
+									FROM cn_votes, cn_users 
+									WHERE fk_user_id = user_id 
+										AND vote_id IN 
+										(SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = $question_id GROUP BY fk_user_id) 
+									ORDER BY timestamp;")->result_array();
 	}
 		
 	public function getVotesByUser($user_id, $all = false)
 	{
 		$limit = ($all) ? '' : 'LIMIT 10' ;
-		return $this->db->query("SELECT vote_value, user_name, event_name, question_name FROM cn_questions, cn_votes as v, cn_users, cn_events WHERE  v.fk_user_id = user_id AND v.fk_question_id = question_id AND fk_event_id = event_id AND user_id=$user_id $limit")->result_array();
+		return $this->db->query("	SELECT vote_value, user_name, event_name, question_name 
+									FROM cn_questions, cn_votes AS v, cn_users, cn_events 
+									WHERE v.fk_user_id = user_id 
+										AND v.fk_question_id = question_id 
+										AND fk_event_id = event_id 
+										AND vote_id 
+										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_user_id = $user_id GROUP BY fk_question_id) 
+									$limit")->result_array();
 	}
 	
 	public function getVotesByVideo($video_id)
 	{
 		return $this->db->query("SELECT user_name, vote_value, timestamp FROM cn_votes, cn_users WHERE fk_video_id = $video_id AND fk_user_id=user_id")->result_array();
-		// return $this->db->getwhere('cn_votes', array('fk_question_id' => $question_id))->result_array();
 	}
 	
 	public function getVotesByComment($comment_id)
 	{
 		return $this->db->query("SELECT user_name, vote_value, timestamp FROM cn_votes, cn_users WHERE fk_comment_id = $comment_id AND fk_user_id=user_id")->result_array();
-		// return $this->db->getwhere('cn_votes', array('fk_question_id' => $question_id))->result_array();
 	}
 	
 	public function deleteVote($fk_id, $user_id)
@@ -133,6 +142,32 @@ class Vote_model extends Model
 		default:
 			break;
 		}
+	}
+
+	public function countVotes($question_id)
+	{
+		return $this->_countVotes($question_id);
+	}
+	
+	public function countPositiveVotes($question_id)
+	{
+		return $this->_countVotes($question_id, true);
+	}
+	
+	public function countNegativeVotes($question_id)
+	{
+		return $this->_countVotes($question_id, false);
+	}
+	
+	private function _countVotes($question_id, $positiveOrNegative = null)
+	{
+		if(isset($positiveOrNegative))
+			if($positiveOrNegative) $where = ' AND vote_value > 0';
+			else 					$where = ' AND vote_value < 0';
+		else $where = '';
+		
+		$question_id 	= $this->db->escape($question_id);
+		return $this->db->query("SELECT count(*) AS count FROM cn_votes WHERE vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = $question_id GROUP BY fk_user_id) $where")->row()->count;
 	}
 }
 
