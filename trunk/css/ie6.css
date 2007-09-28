@@ -1,20 +1,38 @@
-.footer {
-    margin-left: 1px;
+#root {
+    width: expression((documentElement.clientWidth||document.body.clientWidth)<970?'970px':'95%');
 }
 
-.content {
+.footer {
     margin-left: 1px;
-    width: 932px;
 }
 
 .top-menu UL.left {
     margin-left: 4px;
 }
 
-.content .col-right {
-    margin-right: 5px;
+.header .menu-container {
+    text-align: center;
 }
 
-.header .menu .date {
-    margin-left: 100px;
+.content .col-left {
+    width: 10%;
+    margin-right: -10%;
+}
+
+.content .col-center {
+    margin-right: 17%;
+	margin-left: 5%;
+    width: 54%;
+}
+
+.content .col-right {
+    width: 34%;
+    margin-left: -35%;
+}
+
+.header .logo {
+    left: -92px;
+}
+
+.header {
 }

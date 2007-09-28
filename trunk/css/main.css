@@ -1,5 +1,4 @@
 BODY {
- 
     text-align: center;
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size: 11px;
@@ -8,9 +7,10 @@ BODY {
 }
 
 #root {
-    width: 932px;
     margin: auto;
     text-align: left;
+	width: 95%;
+	min-width: 970px;
 }
 
 .frame {
@@ -47,7 +47,7 @@ BODY {
 }
 
 .frame .cbl {
-    width: 934px;
+	width: 100%;
     float: left;
     position: relative;
     left: -4px;
@@ -70,7 +70,6 @@ BODY {
 .top-menu UL.left {
     float: left;
     margin: 0 0 0 8px;
-	text-transform:uppercase;
 }
 
 .top-menu UL.right {
@@ -116,11 +115,13 @@ BODY {
     float: left;
     width: 100%;
     border-top: 2px solid #97BCDC;
+	position: relative;
+	left: 2px;
 }
 
 .footer {
     float: left;
-    width: 932px;
+    width: 100%;
     margin: 0 0 0 2px;
     background: url("../images/double-line.gif") repeat-x left top;
     padding: 13px 0 10px 0;
@@ -129,30 +130,42 @@ BODY {
 
 .content {
     float: left;
-    width: 934px;
+	width: 100%;
     border-top: 2px solid #97BCDC;
-    background: url("../images/content-bg.gif") repeat-y left top;
     margin-left: 2px;
 }
 
 .content .col-left {
     float: left;
-    width: 100px;
-    margin: 0 11px 0 0;
+    width: 11%;
+    margin: 0 -11% 0 0;
+}
+
+.content .col-center-container {
+    width: 100%;
+	float: left;
 }
 
 .content .col-center {
-    float: left;
-    width: 475px;
-    margin: 10px 11px 0 0;
-    background: url("../images/double-line.gif") repeat-x left top;
+    margin: 0 34% 0 11%;
+	padding: 0 1% 50px 1%;
+	width: 52%;
+	border-left: 2px solid #C6DDEF;
+	border-right: 2px solid #C6DDEF;
+	float: left;
 }
 
 .content .col-right {
     float: right;
-    width: 310px;
-    margin: 10px 11px 0 0;
+    width: 33%;
+    margin: 0 0 0 -35%;
+	padding: 0 1% 0 0;
+}
+
+.content .col-border {
     background: url("../images/double-line.gif") repeat-x left top;
+	height: 6px;
+	margin: 10px 0 0 0;
 }
 
 .content .col-left H1 {
@@ -260,7 +273,7 @@ BODY {
 
 .content .col-center .blog .blog-left {
     float: left;
-    width: 185px;
+    width: 49%;
     border-right: 1px solid #DAE7F3;
     margin: 14px 0 0 0;
     padding: 0 3px 20px 0;
@@ -268,7 +281,7 @@ BODY {
 
 .content .col-center .blog .blog-right {
     float: right;
-    width: 278px;
+    width: 49%;
     margin: 10px 0 0 0;
 }
 
@@ -402,27 +415,38 @@ BODY {
     background: url("../images/flag.jpg") no-repeat center top;
     float: left;
     width: 100%;
+	text-align: center;
 }
 
 .header .logo {
-    float: left;
     position: relative;
-    left: 108px;
     top: 12px;
+	margin: auto;
+	display: block;
+	width: 328px;
 }
 
-.header .menu {
+.header .logo IMG {
+    border: none;
+}
+
+.header .menu-container {
     float: left;
     width: 100%;
     border-top: 2px solid #97BCDC;
     padding-bottom: 3px;
 }
 
+.header .menu {
+    margin: auto;
+	width: 620px;
+}
+
 .header .menu .date {
     float: left;
     font-size: 11px;
     color: #053C7C;
-    margin: 7px 0 0 200px;
+    margin: 7px 0 0 0;
 }
 
 .header .menu .update {
@@ -464,11 +488,12 @@ BODY {
 
 .header .left-banner IMG {
     border: none;
-    margin: 10px 0 10px 12px;
+    margin: 10px 0 10px 10px;
 }
 
 .header .right-banner {
     float: right;
+	margin-top: -105px;
 }
 
 .header .right-banner IMG {
@@ -476,6 +501,9 @@ BODY {
     margin: 10px 10px 10px 0;
 }
 
+
+
+/*custom*/
 #feed a:hover {
 	text-decoration:underline;
 }
