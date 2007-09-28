@@ -16,6 +16,7 @@
 		<?= form_hidden('user_openid',$openID); ?>
 	<? } else { ?>
 		<?= form_open('user/createOpenID'); ?>
+		<strong style="color:#000000;">Use your OpenID to Create an Account (<a href="http://www.myopenid.com/" class="link" target='_top'>Get an OpenID</a>)</strong>
 		<?= form_format("<img src='images/openid-icon-small.gif'> OpenID: ",form_input('openid_url','','class="txt"') ); ?>
 		<?= form_hidden('openid_action','create'); ?>
 		<br />
@@ -25,7 +26,7 @@
 		<br /><?= form_submit('','Validate','class="button"'); ?>
 		<?= form_close(); ?>
 		<br /><br />
-		<strong>- or -</strong>
+		<strong style="color:#000000;">- OR Create an Account below -</strong>
 		<br /><br />
 		<?= form_open('user/create'); ?>
 	<? } ?>
