@@ -45,7 +45,7 @@ class Event extends Controller
 		$data['cms_id'] = $this->cms->get_id_from_url('ConventionNext');
 		$data = $this->cms->get_cms($data['cms_id']);	
 			
-		$events = $this->event->getEvents();
+		$events = $this->event->getEventsByDate();
 		//echo '<pre>'; print_r($events); echo '</pre>'; exit();
 		
 		
