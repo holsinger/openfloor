@@ -2,11 +2,17 @@
 	http://localhost/~Rob/test/style.css
 	http://knopf.local/~Rob/test/style.css
 	http://localhost/~Rob/RunPolitics/css/ucp.css
+	http://knopf.gateway.2wire.net/~Rob/test/css/ucp.css
+	http://localhost/~Rob/test/css/ucp.css
 */
 
 #ucp {
 	width: 804px;
 	margin: 0 auto;
+}
+
+.question-pod-container {
+	margin-bottom: -10px;
 }
 
 #ucp .hr-1 {
@@ -21,12 +27,56 @@
 	background-color: #eef8ff;
 }
 
-#ucp .current-question-pod, #ucp .question-pod {
+/*#ucp .current-question-pod, #ucp .question-pod {
 	width: 804px;
 	height: 28px;
 	margin-top: 10px;
 	background: url(../images/ucp/question-pod-bg.jpg) no-repeat;
 }
+*/
+
+/* BEGIN TEST */
+
+.question-pod{display:block}
+.question-pod0 *{
+  display:block;
+  height:1px;
+  overflow:hidden;
+  font-size:.01em;
+  background:#9bb9d5}
+.question-pod1{
+  margin-left:3px;
+  margin-right:3px;
+  padding-left:1px;
+  padding-right:1px;
+  border-left:1px solid #d4e0ec;
+  border-right:1px solid #d4e0ec;
+  background:#b4cadf}
+.question-pod2{
+  margin-left:1px;
+  margin-right:1px;
+  padding-right:1px;
+  padding-left:1px;
+  border-left:1px solid #f5f8fa;
+  border-right:1px solid #f5f8fa;
+  background:#aec6dc}
+.question-pod3{
+  margin-left:1px;
+  margin-right:1px;
+  border-left:1px solid #aec6dc;
+  border-right:1px solid #aec6dc;}
+.question-pod4{
+  border-left:1px solid #d4e0ec;
+  border-right:1px solid #d4e0ec}
+.question-pod5{
+  border-left:1px solid #b4cadf;
+  border-right:1px solid #b4cadf}
+.question-podfg{
+  background:#9bb9d5;
+  height: 100%;
+}
+
+/* END TEST */
 
 #ucp .current-question-pod {
 	margin-bottom: 10px;
@@ -75,9 +125,10 @@
 }
 
 #ucp .vote {
-	position: relative;
-	top: -20px;
-	left: 89px;
+	float: left;
+	vertical-align: middle;
+	padding-top: 2px;
+	margin-bottom: -2px;
 }
 
 #ucp .votes {
@@ -97,19 +148,19 @@
 }
 
 #ucp #upcoming_questions .votes {	
-	top: 24px;
+	top: 0;
 }
 
 #ucp #upcoming_questions .comments {	
-	top: 7px;
+	top: -17px;
 }
 
 #ucp .current-question-pod .votes {	
-	top: -45px;
+	top: 0;
 }
 
 #ucp .current-question-pod .comments {	
-	top: -62px;
+	top: -17px;
 }
 
 #ucp .votes, #ucp .comments {
@@ -129,11 +180,8 @@
 	font-size: 17px;
 	font-weight: bold;
 	font-family: Verdana,Geneva,Arial;
-	position: relative;
-	top: 2px;
-	left: 11px;
-	padding-left: 4px;
-	padding-top: 1px;
+	float: left;
+	margin-left: 5px;
 }
 
 #ucp table {
@@ -149,14 +197,12 @@
 }
 
 #ucp .question {
-	position: relative;
-	top: -46px;
-	left: 140px;
-	width: 621px;
-	height: 21px;
 	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
-	padding-top: 5px;
-	padding-left: 5px;
+	background-color: #f1faff;
+	float: left;
+	width: 634px;
+	margin-left: 5px;
+	padding: 3px;
 }
 
 #ucp h1 {
