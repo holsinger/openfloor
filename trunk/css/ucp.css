@@ -270,4 +270,8 @@ body {
 	position: relative;
 	top: 24px;
 }
-
+#ucp #folder {
+	height:300px;
+	overflow-x:auto;
+	overflow-y:auto;
+}
