@@ -170,7 +170,7 @@ body {
 	left: 698px;
 }
 
-/*#ucp #upcoming_questions .votes {	
+#ucp #upcoming_questions .votes {	
 	top: 0;
 }
 
@@ -184,7 +184,7 @@ body {
 
 #ucp .current-question-pod .comments {	
 	top: -17px;
-}*/
+}
 
 #ucp .votes, #ucp .comments {
 	color: #fffeff;
@@ -193,7 +193,6 @@ body {
 	text-align: center;
 	padding: 1px;
 	cursor: pointer;
-	float:right;
 }
 
 #ucp .score {
@@ -275,10 +274,4 @@ body {
 	overflow-y:auto;
 	display:none
 }
-/*#ucp #folder {
-	height:300px;
-	overflow-x:auto;
-	overflow-y:auto;
-	display:none;
-	background:#9BB9D5;
-}*/
+
