@@ -56,7 +56,7 @@
 	<br />
 	<? if(isset($ajax)): ?>
 	<?/*<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>*/?>
-	<input type="button" value='Submit Question' class="button">
+	<input type="button" value='Submit Question' class="button" onClick="javascript:cpUpdater.askQuestion();">
 	<? else: ?>
 	<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
 	<? endif; ?>
