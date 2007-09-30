@@ -6,6 +6,29 @@
 	http://localhost/~Rob/test/css/ucp.css
 */
 
+/***these will override all css stuff*/
+
+html {
+	background:#FFFFFF url(../images/bg-html.gif) repeat-y scroll 0pt;
+	height:100%;
+}
+body {
+	background:#FFFFFF none repeat scroll 0% 50%;
+	color:#053C7C;
+	font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+	margin:0pt 27px 0pt 30px;
+	min-height:100%;
+	min-width:968px;
+}
+
+
 #ucp {
 	width: 804px;
 	margin: 0 auto;
@@ -182,6 +205,7 @@
 	font-family: Verdana,Geneva,Arial;
 	float: left;
 	margin-left: 5px;
+	text-indent: 4px;
 }
 
 #ucp table {
@@ -209,6 +233,9 @@
 	text-transform: uppercase;
 	color: #043b7c;
 	margin: 0;
+	position:relative;
+	left:0px;
+	top:0px;
 }
 
 #ucp .section {
@@ -243,3 +270,4 @@
 	position: relative;
 	top: 24px;
 }
+
