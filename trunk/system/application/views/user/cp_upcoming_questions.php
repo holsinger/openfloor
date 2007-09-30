@@ -68,10 +68,12 @@
   <div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments" style="display:none; height: 300px; overflow: auto;"></div>
   <div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none; height: 300px; overflow: auto;"></div>
 </div>
+<div style="clear:both;"></div>
 <div id='tabs'>
   <div class="votes" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)">votes</div>
   <div class="comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')">comments</div>
 </div>
+<div style="clear:both;"></div>
 
 
 
