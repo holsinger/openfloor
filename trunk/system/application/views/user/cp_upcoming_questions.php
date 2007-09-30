@@ -65,9 +65,9 @@
   <b class="question-pod3"></b>
   <b class="question-pod2"><b></b></b>
   <b class="question-pod1"><b></b></b></b>
-<div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments" style="display:none; height: 300px; overflow: scroll;">
+<div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments" style="display:none; height: 300px; overflow-x: hidden;overflow-y: auto;">
 </div>
-<div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none; height: 300px; overflow: scroll;">
+<div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none; height: 300px; overflow-x: hidden;overflow-y: auto;">
 </div>
 <div class="votes" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)">votes</div>
 <div class="comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')">comments</div>

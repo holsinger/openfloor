@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<?= $this->config->site_url();?>" />
 	<title>myControlPanel</title>
-	<!-- <link rel="stylesheet" type="text/css" href="css/all.css" /> -->
+	<link rel="stylesheet" type="text/css" href="css/all.css" />
 	<link rel="stylesheet" type="text/css" href="css/ucp.css" />
 	<!-- <link rel="stylesheet" type="text/css" href="css/view_live_queue.css" /> -->
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
