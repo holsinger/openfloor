@@ -55,7 +55,8 @@
 	<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
 	<br />
 	<? if(isset($ajax)): ?>
-	<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>
+	<?/*<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>*/?>
+	<input type="button" value='Submit Question' class="button">
 	<? else: ?>
 	<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
 	<? endif; ?>
