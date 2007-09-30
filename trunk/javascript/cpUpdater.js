@@ -103,6 +103,7 @@ cpUpdater.populateVotes = function (question_id) {
 			'ajax' : 'true'
 		},
 		onSuccess: function(transport) {
+			javascript:new Effect.toggle('folder');
 			javascript:new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
 		}
 	});

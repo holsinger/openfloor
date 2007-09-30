@@ -274,4 +274,6 @@ body {
 	height:300px;
 	overflow-x:auto;
 	overflow-y:auto;
+	display:none;
+	background:#9BB9D5;
 }

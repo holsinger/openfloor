@@ -66,8 +66,8 @@
   <b class="question-pod2"><b></b></b>
   <b class="question-pod1"><b></b></b></b>
   <div id='folder'>
-    <div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments"></div>
-    <div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes"></div>
+    <div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments" style="display:none"></div>
+    <div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none"></div>
   </div>
   <div style="clear:both;"></div>
   <div id='tabs'>
