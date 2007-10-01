@@ -111,13 +111,19 @@ cpUpdater.populateComments = function (question_id, event_name, question_name) {
 	});
 }
 
-cpUpdater.submitComment = function(question_id, event_name, question_name) {
-	form = $('commenting_form_' + question_id);
+cpUpdater.submitComment = function(question_id, event_name, question_name, parent_id) {
+	// form = $('commenting_form_' + question_id);
+	if(parent_id > 0) {
+		form = $('subcommenting_form_' + parent_id);
+	} else {
+		form = $('commenting_form_' + question_id);
+	}
 	
 	new Ajax.Request(site_url + 'comment/addCommentAction/', {
 		parameters: {
+			'parent_id'			: parent_id,
 			'comment'			: $F(form['comment']),
-			'fk_question_id'	: $F(form['fk_question_id']),
+			'fk_question_id'	: question_id,
 			'event_name'		: $F(form['event_name']),
 			'name'				: $F(form['name']),
 			'event_type'		: $F(form['event_type']),

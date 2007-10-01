@@ -3,6 +3,7 @@
 class Comments_library
 {
 	public $type;
+	public $ajax;
 	private $name;
 	private $event_name;
 	public $sort = 'date';
@@ -97,13 +98,21 @@ class Comments_library
 			</div>
 		</div>';
 		
+		// $pod .= '<pre>' . print_r($info, true) . '</pre>';
+		
 		// subcommenting form
-		$submit = ($this->CI->userauth->isUser()) ? 
-		'<input type="submit" value="Comment" class="button"/>' : 
-		'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
+		if($this->ajax) {
+			$question =  $this->CI->question->get_question($info['fk_question_id']);
+			$submit = $submit = '<a onClick="javascript:cpUpdater.submitComment(' . $info['fk_question_id'] . ', \'' . url_title($this->event_name) . '\', \'' . url_title($question['question_name']) . '\', ' . $info['comment_id'] . ')">Comment</a>';
+		}
+		else
+			$submit = ($this->CI->userauth->isUser()) ? 
+			'<input type="submit" value="Comment" class="button"/>' : 
+			'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
+		
 		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$user_name}'s comment:</a></p> "
 		.'<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">'
-		.form_open('comment/addCommentAction')
+		.form_open('comment/addCommentAction', array('id' => 'subcommenting_form_' . $info['comment_id']))
 		.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment', 'style' => 'width:98%'))
 		.form_hidden('parent_id', $info['comment_id'])
 		.form_hidden('event_name', $this->event_name)

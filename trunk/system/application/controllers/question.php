@@ -240,6 +240,7 @@ class Question extends Controller
 		
 		$this->load->library('comments_library');
 		$comments_library = new Comments_library();
+		$comments_library->ajax = isset($_POST['ajax']);
 		$comments_library->sort = $sort;
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
