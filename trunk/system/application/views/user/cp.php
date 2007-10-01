@@ -43,50 +43,13 @@
 			<span class="section-title">Current Question</span>
 			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question_container','blind', {queue: 'end'});"/>
 		</div>
-		<!-- <div id="current_question_container">
-			<div class="current-question-pod">
-				<div class="score">14</div>
-				<div class="vote">
-					<img src="./images/ucp/vote-up.jpg"/>
-					<img src="./images/ucp/vote-down.jpg"/>
-				</div>
-				<div id="current_question" class="question"><? $this->load->view('user/cp_current_question') ?></div>
-				<div class="votes">votes</div>
-				<div class="comments">comments</div>
-			</div>
-		</div> -->
+	
+		<div class="current-question-pod" id="current_question">
 
-
-		<div class="current-question-pod">
-		  <b class="question-pod0">
-		  <b class="question-pod1"><b></b></b>
-		  <b class="question-pod2"><b></b></b>
-		  <b class="question-pod3"></b>
-		  <b class="question-pod4"></b>
-		  <b class="question-pod5"></b></b>
-		  <div class="question-podfg">
-			<div class="score"><?= $current_question[0]['votes'] ?></div>
-			<div class="vote">
-				<? $this->load->view('user/_cp_vote_box', $current_question[0]) ?>
-			</div>
-			<div id="current_question" class="question"><? $this->load->view('user/cp_current_question') ?></div>
-			<div style="clear:both;"></div>
-
-			<div id="cp-comments-<?= $current_question[0]['question_id'] ?>" class="cp-comments" style="height:300;display:none;overflow:auto;">COMMENTS</div>
-		    <div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES</div>
-		  </div>
-
-		  <b class="question-pod0">
-		  <b class="question-pod5"></b>
-		  <b class="question-pod4"></b>
-		  <b class="question-pod3"></b>
-		  <b class="question-pod2"><b></b></b>
-		  <b class="question-pod1"><b></b></b></b>
-		
-		</div>
-		<div class="votes" onClick="cpUpdater.viewVotes(<?= $current_question[0]['question_id'] ?>)">votes</div>
-		<div class="comments" onClick="cpUpdater.viewComments(<?= $current_question[0]['question_id'] ?>, event_name, '<?= url_title($current_question[0]['question_name']) ?>')">comments</div>
-		<div style="clear:both;"></div>
+<?
+		$this->load->view('user/cp_current_question');
+?>
+</div>		  
 
 		<table class="feed-reaction-panel">
 			<tr>

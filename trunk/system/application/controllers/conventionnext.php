@@ -775,9 +775,11 @@ EOT;
 	
 	private function _allReactions(&$data)
 	{
+		if(empty($data['current_question'])) $data['candidates'] = array();
+		else{
 		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 		$this->reaction->user_id		= $this->userauth->user_id;
-		
+		}
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
 		foreach($data['candidates'] as $k => $v) {
 			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
