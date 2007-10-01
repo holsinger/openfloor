@@ -142,7 +142,7 @@ class Question extends Controller
 		return $questionID;
 	}
 	
-	function edit () 
+	function edit() 
 	{
 		$data['error'] = "";
 		$oldCurrent = 0;
@@ -158,7 +158,7 @@ class Question extends Controller
 			}
 			if ($changed > 0)
 			{
-				$array = $this->question->get_question($changed);
+				$array = $this->question->get_question($_POST['question_id']);
 				$data['error'] = "{$array['question_name']} changed to 'Current'";
 			}
 		}
@@ -169,7 +169,7 @@ class Question extends Controller
 		} else {
 			$question_id = $this->uri->segment(3);
 		}
-		$question_data = $this->question->get_question ($question_id);
+		$question_data = $this->question->get_question($question_id);
 		$event_data = $this->event->get_event ($question_data['fk_event_id']);
 		$data['event'] = $event_data;
 		
