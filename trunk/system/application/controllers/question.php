@@ -268,8 +268,15 @@ class Question extends Controller
 	private function vote($question_id, $upOrDown)
 	{
 		$this->userauth->check();
+		
 		//get question id
 		$uri_array = $this->uri->uri_to_assoc(3);
+		
+		// get event id
+		$event_id = $this->event->get_id_from_url($uri_array['event']);
+		if(!$event_id) return;
+		$this->question->event_id = $event_id;
+		
 		if (isset($uri_array['question']) && is_numeric($uri_array['question'])) $id = $uri_array['question'];
 		if (isset($uri_array['question']) && is_string($uri_array['question'])) $id = $this->question->get_id_from_url($uri_array['question']);
 		$id = ($question_id > 0) ? $question_id:$id;

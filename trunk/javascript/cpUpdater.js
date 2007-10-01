@@ -9,14 +9,10 @@ cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question');
 	
 	new Ajax.Updater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions');
-	
-	// cans.each(function(s) {
-	// 	new Ajax.Updater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s);
-	// });
 }
 
-cpUpdater.vote = function(url,id) {	
-	new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
+cpUpdater.vote = function(url) {	
+	// new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
 	  onSuccess: function(transport) {
 		  cpUpdater.cpUpdateOnce();
@@ -34,12 +30,6 @@ cpUpdater.cpUpdate = function() {
 	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions', {
 	  frequency: 10
 	}));
-	
-	// cans.each(function(s) {
-	// 	updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/overall_reaction/' + s, {
-	// 	  frequency: 10
-	// 	}));
-	// });
 }
 
 cpUpdater.askQuestion = function() {
@@ -98,23 +88,25 @@ cpUpdater.viewComments = function(question_id, event_name, question_name) {
 }
 
 cpUpdater.populateVotes = function (question_id) {
+	// new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
 	new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
 		parameters: {
 			'ajax' : 'true'
 		},
 		onSuccess: function(transport) {
-			javascript:new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
+			new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
 		}
 	});
 }
 
 cpUpdater.populateComments = function (question_id, event_name, question_name) {
+	// new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
 	new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
 		parameters: {
 			'ajax' : 'true'
 		},
 		onSuccess: function(transport) {
-			javascript:new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
+			new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
 		}
 	});
 }

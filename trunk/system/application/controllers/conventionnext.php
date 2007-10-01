@@ -132,6 +132,7 @@ class Conventionnext extends Controller
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
+			// echo '<pre>'; print_r($data); echo '</pre>';
 			$this->load->view('user/cp', $data);
 		}		
 	}
@@ -749,6 +750,14 @@ EOT;
 	{
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
+		foreach ($data['current_question'] as $key => $row) {
+			if ($this->userauth->isUser()) {
+				$this->vote->type='question';
+				$data['current_question'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
+			} else { 
+				$data['current_question'][$key]['voted'] = 0; 
+			}
+		}
 	}
 	
 	private function _upcomingQuestions(&$data)

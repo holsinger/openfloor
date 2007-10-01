@@ -4,6 +4,7 @@
 	http://localhost/~Rob/RunPolitics/css/ucp.css
 	http://knopf.gateway.2wire.net/~Rob/test/css/ucp.css
 	http://localhost/~Rob/test/css/ucp.css
+	http://localhost/~Rob/RunPoliticsTrunk/css/ucp.css
 */
 
 /***these will override all css stuff*/
@@ -35,7 +36,7 @@ body {
 }
 
 .question-pod-container {
-	margin-bottom: -10px;
+	margin-top: 20px;
 }
 
 #ucp .hr-1 {
@@ -102,7 +103,6 @@ body {
 /* END TEST */
 
 #ucp .current-question-pod {
-	margin-bottom: 10px;
 }
 
 #ucp .question-pod {
@@ -158,32 +158,30 @@ body {
 	width: 48px;
 	height: 15px;
 	background: url(../images/ucp/votes-tab.jpg) no-repeat;
-	position: relative;
-	left: 644px;
+	margin-right: 33px;	
 }
 
 #ucp .comments {
 	width: 68px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
-	position: relative;
-	left: 698px;
+	margin-right: 5px;	
 }
 
-#ucp #upcoming_questions .votes {	
-	top: 0;
+#ucp #upcoming_questions .votes {
+	margin-top: 0;
 }
 
-#ucp #upcoming_questions .comments {	
-	top: -17px;
+#ucp #upcoming_questions .comments {
+	margin-top: 0;
 }
 
-#ucp .current-question-pod .votes {	
-	top: 0;
+#ucp .current-question-pod .votes {
+	margin-top: 0;
 }
 
-#ucp .current-question-pod .comments {	
-	top: -17px;
+#ucp .current-question-pod .comments {
+	margin-top: 0;
 }
 
 #ucp .votes, #ucp .comments {
@@ -193,6 +191,7 @@ body {
 	text-align: center;
 	padding: 1px;
 	cursor: pointer;
+	float: right;
 }
 
 #ucp .score {
@@ -267,7 +266,5 @@ body {
 }
 
 #ucp .cp-comments, #ucp .cp-votes {
-	position: relative;
-	top: 24px;
 }
 
