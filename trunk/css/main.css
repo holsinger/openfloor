@@ -503,28 +503,31 @@ BODY {
 
 
 
-/*custom*/
-#feed a:hover {
+/*main pods*/
+.mainpod ul {
+	list-style: none;
+	font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;
+	font-size:11px;
+}
+.mainpod li a:hover {
 	text-decoration:underline;
 }
-#feed a {
+.mainpod li a {
 	color:#F04A54;
 	text-decoration:none;
 }
-#feed div {
-	display:block;
-}
-#feed a.feed_title {
+.mainpod li a.feed-title {
     margin: 10px 0 0 0;
     padding: 0;
-    font-size: 17px;
+    font-size: 15px;
     font-weight: normal;
-    color: #053C7C;
+    color: #053C7C !important;
 	display:block;
 }
-#feed IMG{
+.mainpod li IMG{
 	border: none;
 }
+/*form*/
 form label{
 	display: block;
 	font-weight: bold;
