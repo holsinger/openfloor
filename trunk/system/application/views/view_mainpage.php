@@ -99,8 +99,7 @@
 						<a href="http://media.runpolitics.com/">All</a>	
 						
 	                </div>
-	                <div class="col-center">
-	                    <div class="col-border"></div>		
+	                <div class="col-center">	
 	                    <?=$center;?>
 	                </div>
                 </div>
@@ -113,5 +112,14 @@
             <div class="footer">Copyright &copy; 2007 RunPolitics.com. All Rights Reserved. Reproduction in whole<br />or part in any form or medium without express written permission is strictly prohibited.</div>
         </div></div></div></div></div>
     </div>
+<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+    
+    </script>
+    
+    <script type="text/javascript">
+    
+    _uacct = "UA-1010094-3";
+    urchinTracker();
+    </script>
 </body>
 </html>
