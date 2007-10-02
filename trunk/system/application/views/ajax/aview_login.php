@@ -8,7 +8,7 @@
          
 	<h2>Log in</h2>
 	<p id="userloginlink">Don't have a login? <?=anchor('/user/createAccount', 'Create an account')?>.</p>
-	<div id="userloginprompt"><p>You must have cookies enabled to log in to Politic 2.0.</p></div>
+	<div id="userloginprompt"><p>You must have cookies enabled to log in to RunPolitics</p></div>
 	
 	<?= form_open('user/login'); ?>
 	<?= form_format("Username: ",form_input('user_name','','class="txt" id="username"') ); ?>
