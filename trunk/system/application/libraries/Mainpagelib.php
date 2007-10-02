@@ -82,7 +82,7 @@ class Mainpagelib {
 								$feed = $this->CI->simplepie;		        		
 								$html .= "<ul>";
 								foreach($feed->get_items(0,$data['items']) as $item) {
-									if ($data['title']) $html .= "<li><a href='" .$item->get_link() . "' class='feed-title'>" . htmlspecialchars_decode($item->get_title()) . "</a></li>";
+									if ($data['title']) $html .= "<li><a href='" .$item->get_link() . "' class='feed-title'>" . $item->get_title() . "</a></li>";
 									if (isset($data['desc_limit']) && $data['desc_limit']>0) $desc = $this->_truncate_str($item->get_content(), $data['desc_limit']);
 									else $desc = $item->get_content();	
 									if (isset($data['desc'])) $html .= "<li>" . $desc . "</li>";
