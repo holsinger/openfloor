@@ -76,13 +76,15 @@ class Mainpagelib {
 							$this->CI->load->library('Simplepie');
 							$this->CI->simplepie->set_feed_url($data['feed']); 
 			        		if (!@$this->CI->simplepie->error()) {
-								@$this->CI->simplepie->init();			        		
+			        			$this->CI->simplepie->set_output_encoding ('UTF-8');
+								@$this->CI->simplepie->init();	
+								@$this->CI->simplepie->handle_content_type();		        		
 								$feed = $this->CI->simplepie;		        		
 								$html .= "<ul>";
 								foreach($feed->get_items(0,$data['items']) as $item) {
-									if ($data['title']) $html .= "<li><a href='" .$item->get_link() . "' class='feed-title'>" . $item->get_title() . "</a></li>";
-									if (isset($data['desc_limit']) && $data['desc_limit']>0) $desc = $this->_truncate_str($item->get_description(), $data['desc_limit']);
-									else $desc = $item->get_description();	
+									if ($data['title']) $html .= "<li><a href='" .$item->get_link() . "' class='feed-title'>" . htmlspecialchars_decode($item->get_title()) . "</a></li>";
+									if (isset($data['desc_limit']) && $data['desc_limit']>0) $desc = $this->_truncate_str($item->get_content(), $data['desc_limit']);
+									else $desc = $item->get_content();	
 									if (isset($data['desc'])) $html .= "<li>" . $desc . "</li>";
 								}
 								$html .= "</ul>";
