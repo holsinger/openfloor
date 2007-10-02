@@ -8,7 +8,6 @@
 	<title>myControlPanel</title>
 	<link rel="stylesheet" type="text/css" href="css/all.css" />
 	<link rel="stylesheet" type="text/css" href="css/ucp.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="css/view_live_queue.css" /> -->
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 	<script type="text/javascript">
@@ -44,12 +43,9 @@
 			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question_container','blind', {queue: 'end'});"/>
 		</div>
 	
-		<div class="current-question-pod" id="current_question">
-
-<?
-		$this->load->view('user/cp_current_question');
-?>
-</div>		  
+		<div id="current_question">
+		<? $this->load->view('user/cp_current_question'); ?>
+		</div>		  
 
 		<table class="feed-reaction-panel">
 			<tr>
@@ -70,6 +66,7 @@
 					<div id="user-reaction">
 					<? $this->load->view('user/_cp_user_reaction'); ?>
 					</div>
+					<div id="user-reaction-ajax"></div>
 					<br/><br/>
 					<img src="./images/ucp/ask-a-question.jpg" onClick="javascript:new Effect.toggle('cp-ask-question','blind', {queue: 'end'});"/>
 				</td>

@@ -112,6 +112,12 @@ class Conventionnext extends Controller
 				$this->_upcomingQuestions($data);
 				$this->load->view('user/cp_upcoming_questions.php', $data);
 				break;
+			case 'reaction':
+				$data['reactionAjax'] = true;
+				$this->_currentQuestion($data);
+				$this->_allReactions($data);
+				$this->load->view('user/_cp_user_reaction', $data);
+				break;
 			case 'your_reaction':
 				$this->_currentQuestion($data);
 				$data['can_id'] = $can_id;
@@ -132,7 +138,6 @@ class Conventionnext extends Controller
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
-			// echo '<pre>'; print_r($data); echo '</pre>';
 			$this->load->view('user/cp', $data);
 		}		
 	}
@@ -777,13 +782,13 @@ EOT;
 	{
 		if(empty($data['current_question'])) $data['candidates'] = array();
 		else{
-		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
-		$this->reaction->user_id		= $this->userauth->user_id;
+			$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+			$this->reaction->user_id		= $this->userauth->user_id;
 		}
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
 		foreach($data['candidates'] as $k => $v) {
 			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
-			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
+			// $data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
 		}
 	}
 	

@@ -9,6 +9,10 @@ cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question');
 	
 	new Ajax.Updater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions');
+	
+	cans.each(function(s) {
+	     updaters.push(new Ajax.Updater('your-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/your_reaction/' + s));
+	});
 }
 
 cpUpdater.vote = function(url) {	
@@ -30,6 +34,17 @@ cpUpdater.cpUpdate = function() {
 	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions', {
 	  frequency: 10
 	}));
+	
+	updaters.push(new Ajax.Updater('user-reaction-ajax', site_url + 'conventionnext/cp/' + event_name + '/reaction', {
+	  frequency: 10,
+	  evalScripts: true
+	}));
+	
+	// cans.each(function(s) {
+	//      updaters.push(new Ajax.PeriodicalUpdater('your-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/your_reaction/' + s, {
+	//        frequency: 10
+	//      }));
+	// });
 }
 
 cpUpdater.askQuestion = function() {
