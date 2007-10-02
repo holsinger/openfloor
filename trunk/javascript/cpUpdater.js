@@ -15,7 +15,7 @@ cpUpdater.cpUpdateOnce = function() {
 	});
 }
 
-cpUpdater.vote = function(url) {	
+cpUpdater.vote = function(url) {
 	// new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
 	  onSuccess: function(transport) {
@@ -35,7 +35,7 @@ cpUpdater.cpUpdate = function() {
 	  frequency: 10
 	}));
 	
-	updaters.push(new Ajax.Updater('user-reaction-ajax', site_url + 'conventionnext/cp/' + event_name + '/reaction', {
+	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'conventionnext/cp/' + event_name + '/reaction', {
 	  frequency: 10,
 	  evalScripts: true
 	}));
@@ -122,6 +122,18 @@ cpUpdater.populateComments = function (question_id, event_name, question_name) {
 		},
 		onSuccess: function(transport) {
 			new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
+		}
+	});
+}
+
+cpUpdater.voteComment = function (url, question_id, event_name, question_name) {
+	new Ajax.Request(url, {
+		onSuccess: function(transport) {
+			new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
+				parameters: {
+					'ajax' : 'true'
+				}
+			});
 		}
 	});
 }

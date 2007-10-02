@@ -6,6 +6,8 @@ class Comments_library
 	public $ajax;
 	private $name;
 	private $event_name;
+	private $question_name;
+	private $question_id;
 	public $sort = 'date';
 	
 	public function __construct()
@@ -78,16 +80,10 @@ class Comments_library
 						' ('.$time_diff.' ago)'.'
 					</div>	
 					<div class="thumb_block">';
-					if ($voted < 0) {
-						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
-						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-					} else if ($voted > 0) {
-						$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
-					} else {
-						$pod .= anchor("/comment/voteUp/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
-						$pod .= " ".anchor("/comment/voteDown/{$info['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
-					}				
+		$this->question_id = $info['fk_question_id'];
+		$question =  $this->CI->question->get_question($this->question_id);
+		$this->question_name = url_title($question['question_name']);
+		$this->createVoteBox($pod, $voted, $info['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);				
 		$pod .=			
 					'</div>
 					<div class="num_votes">
@@ -98,12 +94,9 @@ class Comments_library
 			</div>
 		</div>';
 		
-		// $pod .= '<pre>' . print_r($info, true) . '</pre>';
-		
 		// subcommenting form
 		if($this->ajax) {
-			$question =  $this->CI->question->get_question($info['fk_question_id']);
-			$submit = $submit = '<a onClick="javascript:cpUpdater.submitComment(' . $info['fk_question_id'] . ', \'' . url_title($this->event_name) . '\', \'' . url_title($question['question_name']) . '\', ' . $info['comment_id'] . ')">Comment</a>';
+			$submit = $submit = '<a onClick="javascript:cpUpdater.submitComment(' . $info['fk_question_id'] . ', \'' . url_title($this->event_name) . '\', \'' . $this->question_name . '\', ' . $info['comment_id'] . ')">Comment</a>';
 		}
 		else
 			$submit = ($this->CI->userauth->isUser()) ? 
@@ -155,16 +148,7 @@ class Comments_library
 								' ('.$time_diff.' ago)'.'
 							</div>	
 							<div class="thumb_block">';
-							if ($voted < 0) {
-								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
-								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-							} else if ($voted > 0) {
-								$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
-							} else {
-								$pod .= anchor("/comment/voteUp/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
-								$pod .= " ".anchor("/comment/voteDown/{$subcomment['comment_id']}/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
-							}				
+				$this->createVoteBox($pod, $voted, $subcomment['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);
 				$pod .=			
 							'</div>
 							<div class="num_votes">
@@ -178,5 +162,34 @@ class Comments_library
 		}
 		
 		return $pod;
+	}
+	
+	private function createVoteBox(&$pod, $voted, $id, $question_id = '', $event_name = '', $question_name = '', $ajax = false)
+	{
+		if($ajax)
+		{
+			$site_url = site_url();
+			if ($voted < 0) {
+				$pod .= "<img src=\"./images/thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
+				$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+			} else if ($voted > 0) {
+				$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+				$pod .= "<img src=\"./images/thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
+			} else {
+				$pod .= "<img src=\"./images/thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
+				$pod .= "<img src=\"./images/thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
+			}
+		} else {
+			if ($voted < 0) {
+				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
+				$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+			} else if ($voted > 0) {
+				$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
+			} else {
+				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
+				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
+			}
+		}		
 	}
 }
