@@ -68,17 +68,7 @@
 						<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('user-reaction','blind', {queue: 'end'});"/>
 					</div>
 					<div id="user-reaction">
-						<table>
-							<tr><th class="candidate">Candidate</th><th class="reaction">Your Reaction</th></tr>
-							<? $class = '' ?>
-							<? foreach($candidates as $v): ?>
-							<tr<?=$class?>>
-								<td><?=$v['can_display_name']?></td>
-								<td><div id="your-reaction-<?=$v['can_id']?>"><?$this->load->view('user/_userReactSlider', $v)?></div></td>
-							</tr>
-							<? $class = $class ? '' : ' class="alternate"' ?>
-							<? endforeach; ?>
-						</table>							
+					<? $this->load->view('user/_cp_user_reaction'); ?>
 					</div>
 					<br/><br/>
 					<img src="./images/ucp/ask-a-question.jpg" onClick="javascript:new Effect.toggle('cp-ask-question','blind', {queue: 'end'});"/>
