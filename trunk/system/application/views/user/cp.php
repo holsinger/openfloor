@@ -40,7 +40,7 @@
 		<div class="hr-1"></div>
 		<div class="section">
 			<span class="section-title">Current Question</span>
-			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question_container','blind', {queue: 'end'});"/>
+			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question','blind', {queue: 'end'});"/>
 		</div>
 	
 		<div id="current_question">

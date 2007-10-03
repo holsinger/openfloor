@@ -1,3 +1,4 @@
+<? if(!empty($current_question)): ?>
 <script type="text/javascript" language="javascript">
 	cpUpdater.current_question_id = <?=$current_question[0]['question_id']?>;
 	<? foreach($candidates as $v): ?>
@@ -19,3 +20,4 @@
 		};		
 	<?php endforeach; ?>
 </script>
+<? endif; ?>
