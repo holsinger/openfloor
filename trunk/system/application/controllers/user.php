@@ -552,7 +552,7 @@ class User extends Controller {
 	
 	public function password_reset_form()
 	{
-		$array = array;
+		//$array = array;
 		$error = '';
 		$rules['user_email'] = 'trim|required';
 		
@@ -561,7 +561,8 @@ class User extends Controller {
 			$error = $this->validation->error_string;
 		
 		if(!$error) { 
-			if($array = $this->user->password_reset($_POST['user_email']))
+			$array = $this->user->password_reset($_POST['user_email']);
+			if(is_array($array))
 				$this->load->library('email');
 				$config['protocol'] = 'sendmail';
 				$config['mailpath'] = '/usr/sbin/sendmail';
@@ -569,8 +570,8 @@ class User extends Controller {
 				$config['mailtype'] = 'html';
 				$config['wordwrap'] = TRUE;				
 				$this->email->initialize($config);
-				$this->email->from('contact@runpolitics.com', 'Password');
-				$this->email->to($email);
+				$this->email->from('contact@runpolitics.com', 'Password Reset');
+				$this->email->to($_POST['user_email']);
 				#vars
 				$url = site_url("user/reset_password/{$array['fk_user_id']}/{$array['auth']}");
 				$message = 'Reset your password by following this link: ' . $url;
