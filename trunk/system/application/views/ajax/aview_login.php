@@ -2,7 +2,7 @@
 
 ?>
 
-<div id="login" class="ajax_box" style="display:none">
+<div id="login" class="ajax_box" style="display:none;text-align:left;">
     <img id="close" src="images/close.gif" onclick="hideBox('login')" alt="Close" 
          title="Close this window" />
          
@@ -15,6 +15,7 @@
 	<?= form_format("Password: ",form_password('user_password','','class="txt"') ); ?>
 	<?= form_hidden('redirect',$this->uri->uri_string()); ?>
 	<br /><br /><?= form_submit('','Login','class="button"'); ?>
+	<br /><br /><?= anchor('/user/password_reset','Forgot your password?','class="link"'); ?>
 	<?= form_close(); ?>
 	
 	<br /><br />
