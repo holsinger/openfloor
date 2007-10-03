@@ -1,8 +1,3 @@
-<? if (isset($reactionAjax)): ?>
-	<? foreach($candidates as $v): ?>
-	<? $this->load->view('user/_userReactSlider', $v) ?>
-	<? endforeach; ?>
-<? else: ?>	
 <? if(!empty($current_question)): ?>
 <table>
 	<tr><th class="candidate">Candidate</th><th class="reaction">Your Reaction</th></tr>
@@ -15,5 +10,4 @@
 	<? $class = $class ? '' : ' class="alternate"' ?>
 	<? endforeach; ?>
 </table>							
-<? endif; ?>
 <? endif; ?>

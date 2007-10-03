@@ -113,10 +113,9 @@ class Conventionnext extends Controller
 				$this->load->view('user/cp_upcoming_questions.php', $data);
 				break;
 			case 'reaction':
-				$data['reactionAjax'] = true;
 				$this->_currentQuestion($data);
 				$this->_allReactions($data);
-				$this->load->view('user/_cp_user_reaction', $data);
+				$this->load->view('user/_cp_js_update', $data);
 				break;
 			case 'your_reaction':
 				$this->_currentQuestion($data);

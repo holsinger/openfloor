@@ -28,7 +28,7 @@ class Comments_library
 		// deal with sorting
 		$dateSort = ($this->sort == 'date') ? 'Date' : anchor("question/view/{$result['event_url_name']}/" . url_title($result['question_name']), 'Date');
 		$votesSort = ($this->sort == 'votes') ? 'Votes' : anchor("question/view/{$result['event_url_name']}/" . url_title($result['question_name']) . '/votes', 'Votes');
-		$commentHtml = "<div class=\"comments-sort\">Sort comments by: $dateSort | $votesSort</div>";
+		$commentHtml = $this->ajax ? '' : "<div class=\"comments-sort\">Sort comments by: $dateSort | $votesSort</div>";
 		
 		$id = $result[$_id_];
 		$this->name = url_title($result[$_name_]);

@@ -5,14 +5,20 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 	};
 }
 
+// vars
+cpUpdater.current_question_id = 0;
+cpUpdater.sliders = new Object;
+
+// functions
+
 cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question');
 	
 	new Ajax.Updater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions');
 	
-	cans.each(function(s) {
-	     updaters.push(new Ajax.Updater('your-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/your_reaction/' + s));
-	});
+	// cans.each(function(s) {
+	//      updaters.push(new Ajax.Updater('your-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/your_reaction/' + s));
+	// });
 }
 
 cpUpdater.vote = function(url) {
@@ -69,6 +75,20 @@ cpUpdater.askQuestion = function() {
 			}
 		}
 	});
+}
+
+cpUpdater.disableAJAX = function() {
+	if(ajaxOn) { ajaxOn=false; updaters.each(function(s) {
+			s.stop();
+		}); 
+	}
+}
+
+cpUpdater.enableAJAX = function() {
+	if(!ajaxOn) { ajaxOn=true; updaters.each(function(s) {
+			s.start();
+		}); 
+	}
 }
 
 cpUpdater.toggleAJAX = function () {
