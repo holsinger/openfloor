@@ -588,8 +588,30 @@ class User extends Controller {
 		
 		if(!$error) if(!$this->user->reset_password_validate($_POST['user_id'], $_POST['auth']))
 			$error = 'Unauthorized';
-		if(!$error) if($this->user->reset_password($_POST['user_id'], $_POST['user_password']))
+		if(!$error) if($email = $this->user->reset_password($_POST['user_id'], $_POST['user_password'])) {
+			$this->load->library('email');
+			$config['protocol'] = 'sendmail';
+			$config['mailpath'] = '/usr/sbin/sendmail';
+			$config['charset'] = 'iso-8859-1';
+			$config['mailtype'] = 'html';
+			$config['wordwrap'] = TRUE;				
+			$this->email->initialize($config);
+			$this->email->from('contact@runpolitics.com', 'Password');
+			$this->email->to($email);
+			#vars
+			$url = site_url("user/reset_password/{$_POST['user_id']}/{$_POST['auth']}");
+			$message = 'Reset your password by following this link: ' . $url;
+			$subject = "RunPolitics.com Password Reset";
+			#set subject
+			$this->email->subject($subject);
+			#set message
+			$this->email->message($message);
+			$this->email->set_alt_message(strip_tags($message));
+			#send
+			$this->email->send();
+			log_message('debug', "emailReg:".trim($this->email->print_debugger()));
 			$this->load->view('user/successful_password_reset');
+		}
 		
 		$this->reset_password($_POST['user_id'], $_POST['auth'], $error);
 	}
