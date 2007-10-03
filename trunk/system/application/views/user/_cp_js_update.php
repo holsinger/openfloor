@@ -18,6 +18,15 @@
 		function(v) {
 			cpUpdater.disableAJAX();
 		};		
-	<?php endforeach; ?>
+	<? endforeach; ?>
 </script>
+<? else: ?>
+<? foreach($candidates as $v): ?>
+<script type="text/javascript" language="javascript">
+	cpUpdater.sliders[<?=$v['can_id']?>].setDisabled();
+	cpUpdater.sliders[<?=$v['can_id']?>].options.onChange = null;
+	cpUpdater.sliders[<?=$v['can_id']?>].options.onSlide = null;
+	cpUpdater.sliders[<?=$v['can_id']?>].setValue(<?=$v['user_reaction']/10?>);
+</script>
+<? endforeach; ?>
 <? endif; ?>

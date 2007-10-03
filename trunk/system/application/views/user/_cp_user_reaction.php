@@ -1,4 +1,3 @@
-<? if(!empty($current_question)): ?>
 <table>
 	<tr><th class="candidate">Candidate</th><th class="reaction">Your Reaction</th></tr>
 	<? $class = '' ?>
@@ -9,5 +8,4 @@
 	</tr>
 	<? $class = $class ? '' : ' class="alternate"' ?>
 	<? endforeach; ?>
-</table>							
-<? endif; ?>
+</table>
