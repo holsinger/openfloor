@@ -144,7 +144,6 @@ class Conventionnext extends Controller
 	public function react($value, $can_id, $question_id)
 	{
 		$this->reaction->react($value, $can_id, $question_id, $this->userauth->user_id);
-		//redirect('conventionnext/cp');
 	}
 	
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')

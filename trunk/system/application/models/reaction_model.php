@@ -37,8 +37,7 @@ class Reaction_model extends Model
 		$this->where['fk_user_id'] 		= $this->user_id		= $user_id;
 		$this->where['fk_can_id'] 		= $can_id;
 		
-		//$reaction = $this->canUserReaction($can_id);		
-		$this->db->delete('cn_reactions', $this->where);
+		// $this->db->delete('cn_reactions', $this->where);
 		
 		$this->where['reaction'] 		= $value;
 		$this->db->insert('cn_reactions', $this->where);

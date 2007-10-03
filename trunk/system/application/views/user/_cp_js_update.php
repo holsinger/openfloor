@@ -18,6 +18,7 @@
 		function(v) {
 			cpUpdater.disableAJAX();
 		};		
+	cpUpdater.sliders[<?=$v['can_id']?>].setEnabled();
 	<? endforeach; ?>
 </script>
 <? else: ?>
