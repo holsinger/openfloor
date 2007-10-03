@@ -123,27 +123,41 @@ cpUpdater.viewComments = function(question_id, event_name, question_name) {
 }
 
 cpUpdater.populateVotes = function (question_id) {
-	// new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
-	new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
-		parameters: {
-			'ajax' : 'true'
-		},
-		onSuccess: function(transport) {
-			new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
-		}
-	});
+	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
+	
+	if(visible) {
+		$('cp-votes-' + question_id).setStyle({ display:'none' });		
+	} else {
+		// new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
+		new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
+			parameters: {
+				'ajax' : 'true'
+			},
+			onSuccess: function(transport) {
+				$('cp-votes-' + question_id).setStyle({ display:'block' });
+				// new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
+			}
+		});
+	}
 }
 
 cpUpdater.populateComments = function (question_id, event_name, question_name) {
-	// new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
-	new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
-		parameters: {
-			'ajax' : 'true'
-		},
-		onSuccess: function(transport) {
-			new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
-		}
-	});
+	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
+	
+	if(visible) {
+		$('cp-comments-' + question_id).setStyle({ display:'none' });		
+	} else {
+		// new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
+		new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
+			parameters: {
+				'ajax' : 'true'
+			},
+			onSuccess: function(transport) {
+				$('cp-comments-' + question_id).setStyle({ display:'block' });
+				// new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
+			}
+		});
+	}
 }
 
 cpUpdater.voteComment = function (url, question_id, event_name, question_name) {

@@ -9,6 +9,17 @@
 
 /***these will override all css stuff*/
 
+.cp-comments {
+	margin-top: 29px;
+	margin-right: 6px;
+	margin-left: 6px;
+	background-color: #fff;
+}
+
+.cp-votes {
+	margin: 29px 6px -10px;
+}
+
 html {
 	background:#FFFFFF url(../images/bg-html.gif) repeat-y scroll 0pt;
 	height:100%;
