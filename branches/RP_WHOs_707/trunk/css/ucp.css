@@ -1,0 +1,281 @@
+/* @override 
+	http://localhost/~Rob/test/style.css
+	http://knopf.local/~Rob/test/style.css
+	http://localhost/~Rob/RunPolitics/css/ucp.css
+	http://knopf.gateway.2wire.net/~Rob/test/css/ucp.css
+	http://localhost/~Rob/test/css/ucp.css
+	http://localhost/~Rob/RunPoliticsTrunk/css/ucp.css
+*/
+
+/***these will override all css stuff*/
+
+.cp-comments {
+	margin-top: 29px;
+	margin-right: 6px;
+	margin-left: 6px;
+	background-color: #fff;
+}
+
+.cp-votes {
+	margin: 29px 6px -10px;
+}
+
+html {
+	background:#FFFFFF url(../images/bg-html.gif) repeat-y scroll 0pt;
+	height:100%;
+}
+body {
+	background:#FFFFFF none repeat scroll 0% 50%;
+	color:#053C7C;
+	font-family:Verdana,Geneva,Arial,Helvetica,sans-serif;
+	font-size:11px;
+	font-size-adjust:none;
+	font-stretch:normal;
+	font-style:normal;
+	font-variant:normal;
+	font-weight:normal;
+	line-height:normal;
+	margin:0pt 27px 0pt 30px;
+	min-height:100%;
+	min-width:968px;
+}
+
+
+#ucp {
+	width: 804px;
+	margin: 0 auto;
+}
+
+.question-pod-container {
+	margin-top: 20px;
+}
+
+#ucp .hr-1 {
+	width: 100%;
+	height: 2px;
+	border-top: 2px solid #98bcdc;
+	border-bottom: 3px solid #98bcde;
+	margin-bottom: 5px;
+}
+
+#ucp #user-reaction .alternate {
+	background-color: #eef8ff;
+}
+
+/*#ucp .current-question-pod, #ucp .question-pod {
+	width: 804px;
+	height: 28px;
+	margin-top: 10px;
+	background: url(../images/ucp/question-pod-bg.jpg) no-repeat;
+}
+*/
+
+/* BEGIN TEST */
+
+.question-pod{display:block}
+.question-pod0 *{
+  display:block;
+  height:1px;
+  overflow:hidden;
+  font-size:.01em;
+  background:#9bb9d5}
+.question-pod1{
+  margin-left:3px;
+  margin-right:3px;
+  padding-left:1px;
+  padding-right:1px;
+  border-left:1px solid #d4e0ec;
+  border-right:1px solid #d4e0ec;
+  background:#b4cadf}
+.question-pod2{
+  margin-left:1px;
+  margin-right:1px;
+  padding-right:1px;
+  padding-left:1px;
+  border-left:1px solid #f5f8fa;
+  border-right:1px solid #f5f8fa;
+  background:#aec6dc}
+.question-pod3{
+  margin-left:1px;
+  margin-right:1px;
+  border-left:1px solid #aec6dc;
+  border-right:1px solid #aec6dc;}
+.question-pod4{
+  border-left:1px solid #d4e0ec;
+  border-right:1px solid #d4e0ec}
+.question-pod5{
+  border-left:1px solid #b4cadf;
+  border-right:1px solid #b4cadf}
+.question-podfg{
+  background:#9bb9d5;
+  height: 100%;
+}
+
+/* END TEST */
+
+#ucp .current-question-pod {
+}
+
+#ucp .question-pod {
+	margin-bottom: -25px;
+}
+
+#ucp .feed-reaction-panel td {
+	width: 50%;
+	vertical-align: top;
+	text-align: center;
+}
+
+#user-reaction {
+	width: 287px;
+	margin: 0 auto;
+}
+
+#ucp #user-reaction table {
+	margin-top: 10px;
+}
+
+#ucp #user-reaction th {
+	color: #fdfeff;
+	text-transform: uppercase;
+	font: bold small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	height: 20px;
+	padding-top: 0;
+	padding-right: 15px;
+}
+
+#ucp #user-reaction td {
+	text-align: left;
+	font: small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	padding-left: 5px;
+}
+
+#ucp #user-reaction .candidate {
+	background: url(../images/ucp/th-candidate.jpg) no-repeat left;
+}
+
+#ucp #user-reaction .reaction {
+	background: url(../images/ucp/th-reaction.jpg) no-repeat right;
+}
+
+#ucp .vote {
+	float: left;
+	vertical-align: middle;
+	padding-top: 2px;
+	margin-bottom: -2px;
+}
+
+#ucp .votes {
+	width: 48px;
+	height: 15px;
+	background: url(../images/ucp/votes-tab.jpg) no-repeat;
+	margin-right: 33px;	
+}
+
+#ucp .comments {
+	width: 68px;
+	height: 15px;
+	background: url(../images/ucp/comments-tab.jpg) no-repeat;
+	margin-right: 5px;	
+}
+
+#ucp #upcoming_questions .votes {
+	margin-top: 0;
+}
+
+#ucp #upcoming_questions .comments {
+	margin-top: 0;
+}
+
+#ucp .current-question-pod .votes {
+	margin-top: 0;
+}
+
+#ucp .current-question-pod .comments {
+	margin-top: 0;
+}
+
+#ucp .votes, #ucp .comments {
+	color: #fffeff;
+	text-transform: uppercase;
+	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	text-align: center;
+	padding: 1px;
+	cursor: pointer;
+	float: right;
+}
+
+#ucp .score {
+	width: 74px;
+	height: 23px;
+	background: url(../images/ucp/score-bg.jpg) no-repeat;
+	color: #053c7c;
+	font-size: 17px;
+	font-weight: bold;
+	font-family: Verdana,Geneva,Arial;
+	float: left;
+	margin-left: 5px;
+	text-indent: 4px;
+}
+
+#ucp table {
+	width: 100%;
+}
+
+#ucp .current-question-pod .question {
+	background-color: #fcc6ca;
+}
+
+#ucp .question-pod .question {
+	background-color: #eef8ff;
+}
+
+#ucp .question {
+	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
+	background-color: #f1faff;
+	float: left;
+	width: 634px;
+	margin-left: 5px;
+	padding: 3px;
+}
+
+#ucp h1 {
+	text-transform: uppercase;
+	color: #043b7c;
+	margin: 0;
+	position:relative;
+	left:0px;
+	top:0px;
+}
+
+#ucp .section {
+	background-color: #e4f2fd;
+	border-top: 2px solid #c1d8ea;
+	height: 21px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+#ucp .ask-a-question-container {
+	width: 125px;
+	margin: 12px auto 4px;
+}
+
+#ucp .section-title {
+	float: left;
+	margin-left: 5px;
+	color: #053c7c;
+	font-family: Georgia, "Times New Roman", Times, serif;
+}
+
+#ucp .content-toggle {
+	float: right;
+}
+
+#ucp img {
+	cursor: pointer;
+}
+
+#ucp .cp-comments, #ucp .cp-votes {
+}
+

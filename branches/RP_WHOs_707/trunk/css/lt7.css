@@ -1,0 +1,35 @@
+.box-bottom{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://127.0.0.1/p20/images/bg-box-bottom.png', sizingMethod='crop');
+}
+#right h3{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://127.0.0.1/p20/images/bg-h3.png', sizingMethod='crop');
+}
+body{
+	width:expression(document.documentElement.clientWidth < 1024 ? "967px" : "auto");
+}
+a.what span{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://127.0.0.1/p20/images/a-what-this.png', sizingMethod='crop');
+}
+
+
+a.up{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://127.0.0.1/p20/images/thumbsUp.png', sizingMethod='scale');
+}
+a.voteup,
+a.votedown
+{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://127.0.0.1/p20/images/votedCheckBox.png', sizingMethod='scale');
+}
+a.down{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://127.0.0.1/p20/images/thumbsDown.png', sizingMethod='scale');
+}
+strong.slogan{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='../images/slogan.png', sizingMethod='crop');
+}
