@@ -7,16 +7,9 @@ $data['browserVer'] = $this->agent->version();
 if (isset($data['js_onload']) && is_array($data['js_onload'])) $onload = implode('();',$data['js_onload']).'();';
 else $onload = 'init();';
 $this->load->view('view_layout/view_head_setup.php',$data);
-#NEver do this bad ok a hack again
-if (isset($js_onload_special) && !isset($_COOKIE[md5(date('Y-m').'p20')]) ) {
-	$js_onload_special = $js_onload_special; 
-	setcookie(md5(date('Y-m').'p20'), md5(date('Y-m-d H:i:s')),time()+3600*24*1000);
-} else {
-	$js_onload_special = '';	
-}
 ?>
 <? if ($data['browser'] == 'Internet Explorer' && $data['browserVer'] < 7) { ?>
-<body onLoad='fixPNG();<?=$onload.$js_onload_special;?>'>
+<body onLoad='fixPNG();<?=$onload;?>'>
 <?}else{?>
 <body onLoad='<?=$onload.$js_onload_special;?>'>
 <?}?>
