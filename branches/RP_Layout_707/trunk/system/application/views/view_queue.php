@@ -6,6 +6,7 @@ $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
+$data['left_nav'] = 'event';
 $tag_execute = '';
 if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 ?>

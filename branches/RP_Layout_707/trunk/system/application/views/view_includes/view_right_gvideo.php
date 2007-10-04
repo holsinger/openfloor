@@ -1,8 +1,9 @@
 <?php
 
 ?>
-
-<h3><a class="close" onclick="new Effect.toggle('videos','blind', {queue: 'end'}); ">close</a><span>Political Videos</span></h3>
+<h1>VIDEOS</h1>
+<div class="video">
+                      
 <div class="box" id="videos">
 
 	<!-- ++Begin Video Search Control Wizard Generated Code++ -->
@@ -58,5 +59,4 @@
                 
 	
 	
-</div>
-<div class="box-bottom"></div>
+</div></div>

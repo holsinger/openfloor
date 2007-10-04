@@ -3,6 +3,7 @@ $data['red_head'] = 'Questions';
 $data['tabs'] = 'question';
 $data['tab_view_question'] = 'active';
 $data['event_url'] = "event/{$event['event_url_name']}";
+$data['left_nav'] = 'event';
 ?>
 
 <? $this->load->view('view_includes/header.php',$data); ?>

@@ -1,4 +1,5 @@
 <?php
+$data['left_nav'] = 'event';
 $display_titles = array(//'can_name' => 'Profile Name',
 						'can_display_name' => 'Display Name',
 						'can_bio' => 'Biography'/*,

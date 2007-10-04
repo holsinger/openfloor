@@ -1,12 +1,13 @@
 <? $data['red_head'] = 'Admin'; ?>
+<? $data['left_nav'] = 'admin'; ?>
 <? $data['admin'] = TRUE; ?>
 
 <? $this->load->view('view_includes/header.php',$data); ?>
 <? include("./fckeditor/fckeditor.php"); ?>
 <div id="admin_content">
     <h3>Manage Content</h3>
-    <?echo anchor('conventionnext/create/candidate','Add Candidate');?><br/>
-    <?echo anchor('admin/view','view all');?>
+    <?/*echo anchor('conventionnext/create/candidate','Add Candidate');?><br/>
+    <?echo anchor('admin/view','view all');*/?>
     <br />
 		<?= form_open('admin/'); ?>
     <?

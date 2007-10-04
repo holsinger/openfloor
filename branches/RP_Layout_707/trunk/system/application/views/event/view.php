@@ -1,4 +1,5 @@
 <?php
+$data['left_nav'] = 'events';
 $display_titles = array('event_desc_brief' => 'Brief Description',
 						'event_desc' => 'Full Description',
 						'event_date' => 'Event Date',

@@ -2,7 +2,8 @@
 
 ?>
 
-<h3><a class="close" onclick="new Effect.toggle('blog','blind', {queue: 'end'}); ">close</a><span>Political Blog Posts</span></h3>
+<div class="post">
+<h1>BLOG POSTS</h1>
 <div class="box" id="blog">
 
 <!-- ++Begin Blog Bar Wizard Generated Code++ -->
@@ -62,5 +63,4 @@
 <!-- ++End Blog Bar Wizard Generated Code++ -->
 	
 	
-</div>
-<div class="box-bottom"></div>
+</div></div>
