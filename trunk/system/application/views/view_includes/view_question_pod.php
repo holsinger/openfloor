@@ -36,7 +36,11 @@
 						<ul class="options">
 							<li class="discuss"><?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name), $comment_count . ' Comments');?></li>
 							<li class="votes"><?=anchor("votes/who/{$question_id}", '&nbsp;' . $vote_count . ' Votes');?></li>
-							<li class="flag"><a href="<?="javascript:queueUpdater.toggleVisibility('flag_question$question_id');queueUpdater.toggleQueue();"?>">Flag</a></li>
+							<? if($this->userauth->isUser()): ?>
+								<li class="flag"><a href="<?="javascript:queueUpdater.toggleVisibility('flag_question$question_id');queueUpdater.toggleQueue();"?>">Flag</a></li>
+							<? else: ?>
+								<li class="flag"><a href="javascript: var none = showBox('login');">Flag</a></li>
+							<? endif; ?>
 						</ul>
 						<? if($view_name == 'question_view') $this->load->view('question/_comments.php') ?>
 						<? if($view_name == 'votes_view') echo $voteHTML ?>
