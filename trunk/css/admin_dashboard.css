@@ -1,0 +1,48 @@
+/* @override http://localhost/~Rob/RunPoliticsTrunk/admin/css/admin_dashboard.css */
+
+html {
+	background-color: #fff;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	margin: 0;
+}
+
+table {
+	background-color: #e4f2fd;
+	margin-left: 35px;
+}
+
+th {
+	background-color: #063c7c;
+	color: #fdfeff;
+	padding: 2px 4px;
+}
+
+td {
+	padding: 2px 4px;
+	border-bottom: 1px solid #9bb9d5;
+}
+
+h3 {
+	color: #063c7c;
+	background-color: #e4f2fd;
+	padding-left: 6px;
+	margin-left: 25px;
+	border-bottom: 1px solid #9bb9d5;
+	font-variant: small-caps;
+}
+
+h2 {
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	background-color: #063c7c;
+	color: #e4f2fd;
+	margin-top: 0;
+	padding-left: 25px;
+	padding-top: 25px;
+	padding-bottom: 5px;
+	border-bottom: 2px solid #9bb9d5;
+}

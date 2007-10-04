@@ -52,7 +52,7 @@ class Question_model extends Model
 	}
 	
 	public function questionQueue ()
-	{	
+	{
 		$where = '';
 		$tag_append = '';
 		
@@ -156,7 +156,8 @@ class Question_model extends Model
 	/**
 	 * make sure the given event has only the given question marked current
 	 */
-	public function singleCurrent ($event_id,$question_id) {
+	public function singleCurrent ($event_id,$question_id) 
+	{
 		$this->db->where('fk_event_id',$event_id);
 		$this->db->where('question_id !=',$question_id);
 		$this->db->where('question_status','current');
@@ -186,6 +187,11 @@ class Question_model extends Model
 									WHERE fk_question_id = question_id 
 									AND fk_tag_id = tag_id 
 									AND value = $tag")->result();
+	}
+
+	public function last_10()
+	{
+		return $this->db->select('question_name')->orderby('question_id', 'desc')->limit(10)->get('cn_questions')->result();
 	}
 }
 ?>

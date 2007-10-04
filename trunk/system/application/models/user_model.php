@@ -383,5 +383,10 @@ class User_model extends Model {
 	{
 		return $this->db->select('user_name')->from('cn_users')->where('user_id',$user_id)->get()->row()->user_name;
 	}
+
+	public function last_10()
+	{
+		return $this->db->select('user_name, user_email, timestamp')->orderby('user_id', 'desc')->limit(10)->get('cn_users')->result();
+	}
 }
 ?>

@@ -84,7 +84,6 @@ class Conventionnext extends Controller
 	
 	public function cp($event = 'presidential_debate', $ajax = null, $can_id = null)
 	{
-		#TODO Handle no current question
 		#TODO Handle no candidates assigned?
 		
 		// ========
@@ -817,5 +816,6 @@ EOT;
 		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
 		$this->validation->set_fields($fields);
 	}
+
 }
 ?>

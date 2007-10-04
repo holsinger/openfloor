@@ -6,6 +6,12 @@ class Admin extends Controller {
 	{
 		parent::Controller();
 		$this->load->model('Cms_model','cms');
+		
+		$this->load->model('event_model', 'event');
+		$this->load->model('user_model', 'user');
+		$this->load->model('flag_model', 'flag');
+		$this->load->model('question_model', 'question');
+		
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
@@ -14,7 +20,6 @@ class Admin extends Controller {
 		$this->userauth->check(SL_ADMIN);
 
 	}
-	
 	
 	function index()
 	{
@@ -67,5 +72,60 @@ class Admin extends Controller {
 		$this->load->view('view_cms',$data);			
 	}
 	
+	public function dashboard($event = 'presidential_debate', $ajax = null)
+	{
+		// ========
+		// = init =
+		// ========
+		$this->userauth->isAdmin();
+		$data['event'] = $event;
+		
+		$data['event_id'] = $this->event->get_id_from_url($event);
+		if(!$data['event_id']) exit();
+		
+		// ==========
+		// = output =
+		// ==========
+		if(isset($ajax)) // AJAX
+		{
+			switch($ajax)
+			{
+			case 'last_10_users':
+				$this->_last_10_users($data);
+				$this->load->view('admin/last_10_users.php', $data);
+				break;
+			case 'last_10_flags':
+				$this->_last_10_flags($data);
+				$this->load->view('admin/last_10_flags.php', $data);
+				break;
+			case 'last_10_questions':
+				$this->_last_10_questions($data);
+				$this->load->view('admin/last_10_questions', $data);
+				break;
+			default:
+				break;
+			}
+		} else { // NO AJAX
+			$this->_last_10_users($data);
+			$this->_last_10_flags($data);
+			$this->_last_10_questions($data);
+			$this->load->view('admin/dashboard', $data);
+		}
+	}
+	
+	private function _last_10_users(&$data)
+	{
+		$data['last_10_users'] = $this->user->last_10();
+	}
+	
+	private function _last_10_flags(&$data)
+	{
+		$data['last_10_flags'] = $this->flag->last_10();
+	}
+	
+	private function _last_10_questions(&$data)
+	{
+		$data['last_10_questions'] = $this->question->last_10();
+	}
 }
 ?>
