@@ -8,7 +8,12 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) $onload = implode
 else $onload = 'init();';
 $this->load->view('view_includes/view_head_setup.php',$data);
 #NEver do this bad ok a hack again
-$js_onload_special = (isset($js_onload_special)) ? $js_onload_special:'';
+if (isset($js_onload_special) && !isset($_COOKIE[md5(date('Y-m').'p20')]) ) {
+	$js_onload_special = $js_onload_special; 
+	setcookie(md5(date('Y-m').'p20'), md5(date('Y-m-d H:i:s')),time()+3600*24*1000);
+} else {
+	$js_onload_special = '';	
+}
 ?>
 <? if ($data['browser'] == 'Internet Explorer' && $data['browserVer'] < 7) { ?>
 <body onLoad='fixPNG();<?=$onload.$js_onload_special;?>'>
