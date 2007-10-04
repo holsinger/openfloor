@@ -1,4 +1,5 @@
 <? $data['red_head'] = 'Results'; ?>
+<? $data['admin'] = TRUE; ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">

@@ -47,11 +47,18 @@ class Your_government extends Controller {
 	}
 	
 	function setData () {
-		$this->output->cache(60);
+		//$this->output->cache(60);
 		//get the data send to view
 		$data['html'] = $this->apidata->getData();		
 		$this->load->view('view_your_government',$data);
 	}
+
+	function politician ($id) {
+		//$this->output->cache(60);
+		//get the data send to view
+		$data['html'] = $this->apidata->whatUp($id);		
+		$this->load->view('view_your_government',$data);
+	}	
 	
 	
 }
