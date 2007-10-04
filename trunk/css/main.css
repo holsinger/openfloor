@@ -483,6 +483,7 @@ BODY {
 }
 
 .header .left-banner {
+    margin-left:10px;
     float: left;
 }
 
@@ -493,6 +494,7 @@ BODY {
 
 .header .right-banner {
     float: right;
+    margin-right:10px;
 	margin-top: -105px;
 }
 
