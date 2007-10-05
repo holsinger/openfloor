@@ -145,7 +145,7 @@ class Conventionnext extends Controller
 		}		
 	}
 	
-	public function overall_reaction($event = 'presidential_debate')
+	public function overall_reaction($event = 'presidential_debate', $ajax = null, $can_id = null)
 	{
 		// ========
 		// = init =
@@ -155,6 +155,10 @@ class Conventionnext extends Controller
 		
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
+		
+		$this->event->id = $data['event_id'];
+		$data['stream_high'] = $this->event->get('stream_high');
+		
 		$this->question->event_id = $data['event_id'];		
 		
 		// ==========
@@ -163,9 +167,9 @@ class Conventionnext extends Controller
 		if(isset($ajax)) // AJAX
 		{
 			$this->_currentQuestion($data);
-			$this->_overallReactions($data);
-			$this->load->view('admin/_overall_reactions', $data);
-				
+			$data['can_id'] = $can_id;
+			$this->_overallReaction($data);
+			$this->load->view('user/_overallReaction.php', $data);				
 		} else { // NO AJAX
 			$this->_currentQuestion($data);
 			$this->_overallReactions($data);

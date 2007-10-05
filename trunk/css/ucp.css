@@ -265,7 +265,7 @@ body {
 	float: left;
 	margin-left: 5px;
 	color: #053c7c;
-	font-family: Georgia, "Times New Roman", Times, serif;
+	font: small-caps medium Georgia, "Times New Roman", Times, serif;
 }
 
 #ucp .content-toggle {

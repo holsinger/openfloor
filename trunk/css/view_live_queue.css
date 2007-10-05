@@ -127,16 +127,6 @@ ul.top-nav {
 	color: white;
 }
 
-div.overall-reaction-meter {
-	background-color: #f04a54;
-}
-
-div.overall-reaction-meter-total {
-	background-color: #caedff;
-	border: 1px solid #f04a54;
-	margin: 2px;
-}
-
 .cp-comments-tab, .cp-votes-tab {
 	position: absolute;
 	right: 50px;
