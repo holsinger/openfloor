@@ -2,6 +2,8 @@
 
 class Event_model extends Model
 {
+	var $id;
+	
 	function __construct()
 	{
 		parent::Model();
@@ -109,6 +111,11 @@ class Event_model extends Model
 	{
 		// how dow we want to order these?
 		return $this->db->select('question_name, question_desc')->where(array('fk_event_id' => $event_id, 'question_status' => 'pending'))->get('cn_questions')->result();
+	}
+
+	public function get($field)
+	{
+		return $this->db->select($field)->where('event_id', $this->id)->get('cn_events')->row()->$field;
 	}
 }
 ?>

@@ -38,7 +38,7 @@ class Conventionnext extends Controller
 		exit();
 	}
 	
-	public function liveQueue($event, $ajax=null)
+	public function liveQueue($event = 'presidential_debate', $ajax=null)
 	{
 		$data['event'] = $event;
 		
@@ -94,7 +94,12 @@ class Conventionnext extends Controller
 		
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
-		$this->question->event_id = $data['event_id'];		
+		
+		$this->event->id = $data['event_id'];
+		$data['stream_high'] = $this->event->get('stream_high');
+		
+		$this->question->event_id = $data['event_id'];
+			
 		
 		// ==========
 		// = output =
@@ -137,6 +142,34 @@ class Conventionnext extends Controller
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
 			$this->load->view('user/cp', $data);
+		}		
+	}
+	
+	public function overall_reaction($event = 'presidential_debate')
+	{
+		// ========
+		// = init =
+		// ========
+		$this->userauth->check();
+		$data['event'] = $event;
+		
+		$data['event_id'] = $this->event->get_id_from_url($event);
+		if(!$data['event_id']) exit();
+		$this->question->event_id = $data['event_id'];		
+		
+		// ==========
+		// = output =
+		// ==========
+		if(isset($ajax)) // AJAX
+		{
+			$this->_currentQuestion($data);
+			$this->_overallReactions($data);
+			$this->load->view('admin/_overall_reactions', $data);
+				
+		} else { // NO AJAX
+			$this->_currentQuestion($data);
+			$this->_overallReactions($data);
+			$this->load->view('admin/overall_reactions', $data);
 		}		
 	}
 	
@@ -794,6 +827,19 @@ EOT;
 		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 		$this->reaction->user_id		= $this->userauth->user_id;
 		$data['user_reaction'] = $this->reaction->canUserReaction($data['can_id']);
+	}
+	
+	private function _overallReactions(&$data)
+	{
+		if(empty($data['current_question'])) $data['candidates'] = array();
+		else{
+			$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
+			$this->reaction->user_id		= $this->userauth->user_id;
+		}
+		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
+		foreach($data['candidates'] as $k => $v) {
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
+		}
 	}
 	
 	private function _overallReaction(&$data)

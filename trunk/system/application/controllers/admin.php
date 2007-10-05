@@ -74,6 +74,8 @@ class Admin extends Controller {
 	
 	public function dashboard($event = 'presidential_debate', $ajax = null)
 	{
+		#TODO Make it so that the flags & questions actually pull by event
+		
 		// ========
 		// = init =
 		// ========

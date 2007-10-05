@@ -45,7 +45,6 @@
 		<h1>Dashboard</h1>
 		<div class="hr-1"></div>
 		<div class="section">
-			<span class="section-title">Current Question</span>
 			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question','blind', {queue: 'end'});"/>
 		</div>
 	
@@ -61,7 +60,8 @@
 						<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('video_container','blind', {queue: 'end'});"/>
 					</div>
 					<div id="video_container">
-						<img src="./images/ucp/video-placeholder.jpg"/>
+						<?= $stream_high ?>
+						<!-- <img src="./images/ucp/video-placeholder.jpg"/> -->
 					</div>
 				</td>
 				<td>
