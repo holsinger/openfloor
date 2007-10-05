@@ -11,9 +11,10 @@ $data['event_url'] = "event/{$event['event_url_name']}";
 	<h3>Edit a Question</h3>	
 	<?= form_open('question/edit/'.$question['question_id']); ?>
 		<div class='errorArea'><?= isset($error)?$error:'' ?></div>
-		<? echo form_format("Question:",anchor("event/{$event['event_url_name']}/question/".url_title($question['question_name']),$question['question_name']),'' ); ?>
+		<? echo form_format("Question:",anchor("question/view/{$event['event_url_name']}/".url_title($question['question_name']),$question['question_name']),'' ); ?>
 		<? echo form_format("Question Status: *",$dropdown,'' ); ?>
 		<?
+		// Show Question Answer text box if the questions is either current or asked
 		if ($question['question_status'] == 'current' || $question['question_status'] == 'asked')
 		{
 			$format = array(
@@ -21,9 +22,9 @@ $data['event_url'] = "event/{$event['event_url_name']}";
 	              'id'          => 'question_answer',
 	              'value'       => $question['question_answer'],
 	              'rows'        => '6',
-	              'cols'        => '75',
+	              'cols'        => '65',
 	              'class'       => 'txt'
-	            );
+	        );
 			echo form_format("Question Answer: *",form_textarea($format),'Write a the answer to the question.' );
 		}
 		?>
