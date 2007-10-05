@@ -29,7 +29,7 @@ class User_model extends Model {
     	if ( isset($_POST['user_email']) ) $this->db->set('user_email',$_POST['user_email']);
 		if ( isset($_POST['user_password']) ) $this->db->set('user_password',$_POST['user_password']);
 		if ( isset($_POST['user_avatar']) ) $this->db->set('user_avatar',$_POST['user_avatar']);
-		if ( isset($_POST['user_openid']) ) $this->db->set('user_openid',$_POST['user_openid']);
+		$this->db->set('ip_address',$ip=$_SERVER['REMOTE_ADDR']);
 		if ( isset($can_id) ) $this->db->set('fk_can_id',$can_id);
 		$this->db->set('user_security_level',$this->default_security_level);
 		$this->db->insert('cn_users');
