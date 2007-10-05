@@ -8,8 +8,10 @@
 	<title>myControlPanel</title>
 	<link rel="stylesheet" type="text/css" href="css/all.css" />
 	<link rel="stylesheet" type="text/css" href="css/ucp.css" />
+	<link rel="stylesheet" type="text/css" href="css/userWindow.css" />
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
+	<script src="javascript/userWindow.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	ajaxOn = true;
 	site_url = '<?= $this->config->site_url();?>';
@@ -35,6 +37,10 @@
 	</style>
 </head>
 <body>		
+	<!-- This reimplements the stuff that is normally loaded for each page on the rest of the site.  Used for the disclaimer dialog -->
+	<div id="overlay" onclick="hideBox()" style="display:none"></div>
+	<div id="hijax" style="display:none" class="ajax_box"></div>
+	
 	<div id="ucp">
 		<h1>Dashboard</h1>
 		<div class="hr-1"></div>
