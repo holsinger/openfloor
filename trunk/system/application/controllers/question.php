@@ -148,21 +148,22 @@ class Question extends Controller
 		$oldCurrent = 0;
 		if (isset($_POST['question_id'])) 
 		{
-			//change status
-			$changed = $this->question->updateQuestion($_POST['question_id'],$_POST);
-			//check that this event has no other current questions
+			// Change status, changed is returned how many rows were affected
+			$changed = $this->question->updateQuestion($_POST['question_id'], $_POST);
+			// If changed to current, we have to be sure that there are no other current questions.
+			// if there is a current, then change to 'asked' since this event now replaces it
 			if ($_POST['question_status'] == 'current') {
 				$question_id =$_POST['question_id'];
 				$event_id = $this->event->get_id_from_url($_POST['event_url_name']);
-				$oldCurrent = $this->question->singleCurrent($event_id,$question_id);
+				$oldCurrent = $this->question->singleCurrent($event_id, $question_id);
 			}
 			if ($changed > 0)
 			{
 				$array = $this->question->get_question($_POST['question_id']);
-				$data['error'] = "{$array['question_name']} changed to 'Current'";
+				$data['error'] = "{$array['question_name']} changed to '{$_POST['question_status']}'";
 			}
 		}
-		if ( $oldCurrent>0 && $oldCurrent != $_POST['question_id']) {
+		if($oldCurrent > 0 && $oldCurrent != $_POST['question_id']) {
 			$question_id = $oldCurrent;
 			$array = $this->question->get_question($question_id);
 			$data['error'] .= "<br />{$array['question_name']} changed to 'Asked'";
