@@ -8,7 +8,7 @@
 <script type="text/javascript" language="javascript">
 // <![CDATA[
 
-	cpUpdater.current_question_id = <?=$current_question[0]['question_id']?>;
+	cpUpdater.current_question_id = <?= empty($current_question) ? 0 : $current_question[0]['question_id'] ?>;
 
 	// horizontal slider control
 	slider = new Control.Slider('handle<?=$can_id?>', 'track<?=$can_id?>', {
