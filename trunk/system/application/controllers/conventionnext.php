@@ -141,6 +141,9 @@ class Conventionnext extends Controller
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
+			
+			#TODO This solution for no candidates assigned to event is not ideal
+			if(empty($data['candidates'])) redirect();
 			$this->load->view('user/cp', $data);
 		}		
 	}
