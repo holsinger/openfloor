@@ -96,6 +96,7 @@ class Candidate_model extends Model
 	public function canAvatar($can_id)
 	{
 		$return = $this->db->select('user_avatar')->from('cn_users')->where('fk_can_id', $can_id)->get()->row()->user_avatar;
+		if(empty($return)) return 'image01.jpg';
 		$return = unserialize($return);
 		return $return['file_name'];
 	}

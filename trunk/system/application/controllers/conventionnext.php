@@ -756,6 +756,7 @@ class Conventionnext extends Controller
 		$return = '<div class="rightpod-item"><div class="header">Participants</div>';
 		$candidates = $this->event->getCansInEvent($event_id);
 		$return .= '<div class="content">';
+		
 		foreach($candidates as $v) $return .= '<a href="' . $this->candidate->linkToProfile($v, true) . '"><img src="./avatars/'.$this->candidate->canAvatar($v).'"/></a>';
 		$return .= '<p>';
 		for($i = 0; $i < count($candidates); $i++) 

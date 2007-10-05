@@ -6,9 +6,14 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<?= $this->config->site_url();?>" />
 	<title>Admin Dashboard</title>
-	<meta name="generator" content="TextMate http://macromates.com/">
 	<link rel="stylesheet" type="text/css" href="css/admin_dashboard.css" />
-</head>
+	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
+	<script type="text/javascript">
+	site_url = '<?= $this->config->site_url();?>';
+	var event_name = '<?=$event?>';
+	</script>
+	<script type="text/javascript" src="javascript/admin_dashboard.js"></script>
+	<script type="text/javascript">admin_dashboard.init();</script></head>
 <body>
 
 <h2>Admin Dashboard</h2>
