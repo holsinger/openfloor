@@ -17,6 +17,7 @@ class Votes extends Controller
 	{
 		// retrieve question information
 		$this->question_model->question_id = $question_id;
+		$this->question_model->question_status = null;
 		$results = $this->question_model->questionQueue();
 		$data = $results[0];
 		$data['display_name'] = $this->user->displayName($data['user_name']);

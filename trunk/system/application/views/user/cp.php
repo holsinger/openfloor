@@ -45,7 +45,8 @@
 		<h1>Dashboard</h1>
 		<div class="hr-1"></div>
 		<div class="section">
-			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question','blind', {queue: 'end'});"/>
+			<span class="section-title">Current Question:</span>
+			<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('current_question','blind', {queue: 'end'});"/> -->
 		</div>
 	
 		<div id="current_question">
@@ -57,7 +58,7 @@
 				<td>
 					<div class="section">
 						<span class="section-title">Live Video Feed:</span>
-						<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('video_container','blind', {queue: 'end'});"/>
+						<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('video_container','blind', {queue: 'end'});"/> -->
 					</div>
 					<div id="video_container">
 						<?= $stream_high ?>
@@ -67,7 +68,7 @@
 				<td>
 					<div class="section">
 						<span class="section-title">Participant Reaction:</span>
-						<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('user-reaction','blind', {queue: 'end'});"/>
+						<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('user-reaction','blind', {queue: 'end'});"/> -->
 					</div>
 					<div id="user-reaction">
 						Rate the credibility of each candidate's response.
@@ -82,7 +83,7 @@
 		<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 		<div class="section">
 			<span class="section-title">Upcoming Questions</span>
-			<img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('upcoming_questions','blind', {queue: 'end'});"/>
+			<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('upcoming_questions','blind', {queue: 'end'});"/> -->
 		</div>
 		<div id="upcoming_questions">		
 			<? $this->load->view('user/cp_upcoming_questions') ?>
