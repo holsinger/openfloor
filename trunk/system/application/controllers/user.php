@@ -633,12 +633,12 @@ class User extends Controller {
 			case 'votes':
 				$data['header'] = "Votes by $display_name";
 				$data['type'] = 'vote';
-				$data['result'] = $this->vote->getVotesByUser($data['user_id']);
+				$data['result'] = $this->vote->getVotesByUser($data['user_id'], true);
 				break;
 			case 'questions':
 				$data['header'] = "Questions asked by $display_name";
 				$data['type'] = 'question';
-				$data['result'] = $this->question->getQuestionsByUser($data['user_id']);
+				$data['result'] = $this->question->getQuestionsByUser($data['user_id'], true);
 				break;
 			default:
 				break;
