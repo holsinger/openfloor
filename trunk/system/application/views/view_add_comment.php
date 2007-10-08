@@ -1,5 +1,6 @@
 <?
 $data['red_head'] = 'Add comment';
+$data['left_nav'] = 'event';
 ?>
 
 <?$this->load->view('view_includes/header.php',$data);?>

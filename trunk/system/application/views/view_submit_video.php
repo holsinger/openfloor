@@ -3,6 +3,7 @@ $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_submit_question'] = 'active';
 $data['event_url'] = $event_url;
+$data['left_nav'] = 'event';
 ?>
 
 <? $this->load->view('view_includes/header.php',$data); ?>

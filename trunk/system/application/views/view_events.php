@@ -1,5 +1,5 @@
 <?
-$data['js_onload_special'] = "showBox(\"events_pop\");";
+$data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
 ?>
 
