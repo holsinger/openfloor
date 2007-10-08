@@ -137,7 +137,7 @@ class Comments_model extends Model
 				return true;
 			}
 		}
-		return false;
+		return true;
 	}
 }
 
