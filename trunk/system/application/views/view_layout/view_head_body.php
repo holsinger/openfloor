@@ -40,45 +40,9 @@
             <div class="header">
                 <div class="flag">  
                     <span class="left-banner">
-					<script type="text/javascript"><!--
-					google_ad_client = "pub-1655877598275494";
-					google_ad_width = 180;
-					google_ad_height = 150;
-					google_ad_format = "180x150_as";
-					google_ad_type = "text_image";
-					google_ad_channel = "";
-					google_color_border = "ffffff";
-					google_color_bg = "FFFFFF";
-					google_color_link = "0000FF";
-					google_color_text = "000000";
-					google_color_url = "008000";
-					google_ui_features = "rc:0";
-					//-->
-					</script>
-					<script type="text/javascript"
-					  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-					</script>
 					</span>
                     <a href="#" class="logo"><img src="images/logo.gif" alt="" /></a>
-                    <span class="right-banner">
-                    <script type="text/javascript"><!--
-					google_ad_client = "pub-1655877598275494";
-					google_ad_width = 180;
-					google_ad_height = 150;
-					google_ad_format = "180x150_as";
-					google_ad_type = "text_image";
-					google_ad_channel = "";
-					google_color_border = "ffffff";
-					google_color_bg = "FFFFFF";
-					google_color_link = "0000FF";
-					google_color_text = "000000";
-					google_color_url = "008000";
-					google_ui_features = "rc:0";
-					//-->
-					</script>	
-					<script type="text/javascript"
-					  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-					</script>					
+                    <span class="right-banner">		
                     </span>
                 </div>
 				<div class="menu-container">
