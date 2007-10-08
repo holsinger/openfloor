@@ -193,5 +193,10 @@ class Question_model extends Model
 	{
 		return $this->db->select('question_name')->orderby('question_id', 'desc')->limit(10)->get('cn_questions')->result();
 	}
+
+	public function set_asked_time($question_id)
+	{
+		$this->db->query("UPDATE cn_questions SET question_asked = now() WHERE question_id = $question_id");
+	}
 }
 ?>

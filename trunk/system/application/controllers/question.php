@@ -151,7 +151,7 @@ class Question extends Controller
 			// Change status, changed is returned how many rows were affected
 			$changed = $this->question->updateQuestion($_POST['question_id'], $_POST);
 			// If changed to current, we have to be sure that there are no other current questions.
-			// if there is a current, then change to 'asked' since this event now replaces it
+			// if there is a current, then change to 'asked' since this question now replaces it
 			if ($_POST['question_status'] == 'current') {
 				$question_id =$_POST['question_id'];
 				$event_id = $this->event->get_id_from_url($_POST['event_url_name']);
@@ -166,6 +166,7 @@ class Question extends Controller
 		if($oldCurrent > 0 && $oldCurrent != $_POST['question_id']) {
 			$question_id = $oldCurrent;
 			$array = $this->question->get_question($question_id);
+			$this->question->set_asked_time($question_id);
 			$data['error'] .= "<br />{$array['question_name']} changed to 'Asked'";
 		} else {
 			$question_id = $this->uri->segment(3);

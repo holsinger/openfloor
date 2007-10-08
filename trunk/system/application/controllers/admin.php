@@ -79,7 +79,7 @@ class Admin extends Controller {
 		// ========
 		// = init =
 		// ========
-		$this->userauth->isAdmin();
+		if(!$this->userauth->isAdmin()) redirect();
 		$data['event'] = $event;
 		
 		$data['event_id'] = $this->event->get_id_from_url($event);
