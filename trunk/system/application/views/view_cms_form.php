@@ -6,10 +6,12 @@
 <? include("./fckeditor/fckeditor.php"); ?>
 <div id="admin_content">
     <h3>Manage Content</h3>
-    <?/*echo anchor('conventionnext/create/candidate','Add Candidate');?><br/>
-    <?echo anchor('admin/view','view all');*/?>
+    <?echo anchor('conventionnext/create/candidate','Add Candidate');?><br/>
+    <?echo anchor('admin/dashboard','Admin Dashboard');?><br/>
+    <?echo anchor('conventionnext/overall_reaction','Overall Reaction');?><br/>
+    <?echo anchor('admin/view','view all');?>
     <br />
-		<?= form_open('admin/'); ?>
+	<?= form_open('admin/'); ?>
     <?
 		$format = array(
               'name'        => 'cms_name',
