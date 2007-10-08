@@ -11,8 +11,11 @@
 					<div class="descr-br">
 							<? $this->flag_lib->type = 'question'; 	$this->load->view('view_includes/flag.php'); ?>
 							<h3 style="color:#f0616a;">
-								<? if($view_name == 'question_view') { echo $question_name;
-								} else { echo anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name); } ?>
+								<? if($view_name == 'question_view') {
+								   		echo $question_name;
+								} else { 
+										echo anchor("question/view/".url_title($event_name) . '/' . url_title($question_name),$question_name); 
+								} ?>
 							</h3>
 							<div class="autor">
 								<? $this->flag_lib->type = 'user'; 		$this->load->view('view_includes/flag.php'); ?>
@@ -29,9 +32,9 @@
 								</p>
 							</div>
 						<? if ($view_name == 'question_view'): ?>
-						<p><?=$question_desc;?></p>
+							<p><?=$question_desc;?></p>
 						<? else: ?>	
-						<p><?=substr($question_desc,0,150);?> <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more&raquo;","class='more'");?></p>
+							<p><?=substr($question_desc,0,150);?> <?=anchor("question/view/".url_title($event_name)."/".url_title($question_name), "read more&raquo;","class='more'");?></p>
 						<? endif; ?>
 						<ul class="options">
 							<li class="discuss"><?=anchor("question/view/".url_title($event_name) . '/' . url_title($question_name), $comment_count . ' Comments');?></li>
