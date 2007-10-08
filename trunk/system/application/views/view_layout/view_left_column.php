@@ -33,7 +33,7 @@
 	                    <?= anchor("conventionnext/queue/{$event_url}/sort/asked","View Asked");?>
 	                    
 	                    <h2>Dashboards</h2>
-	                    <a onclick="showBox('event_dashboard');window.open('index.php/conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);" class='published-questions'>Launch Event Dashboard</a>
+	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);" class='published-questions'>Launch Event Dashboard</a>
 											<br />
 											<br />
 											<br />
