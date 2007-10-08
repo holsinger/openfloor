@@ -31,7 +31,7 @@ margin: 			0 0 4px 0;
 	<img src='http://www.runpolitics.com/images/logo.png'>
 	<br /><br />
 	<br /><br />
-	<h1>Opps! We should fix this!</h1>
+	<h1>Oops! A system error has occured. An error report has been dispatched to our technical team.</h1>
 	<div id="content">
 		<!--<h1><?php echo $heading; ?></h1>-->
 		<?php 
