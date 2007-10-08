@@ -53,7 +53,7 @@ class Votes extends Controller
 			$vote_time = $this->time_lib->getDecay($vote['timestamp']);
 			$vote_value = ($vote['vote_value'] > 0) ? 'voted <img src="./images/thumbsUp.png"> in favor' : 'voted <img src="./images/thumbsDown.png"> against' ;
 			$voteHTML .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
-			.anchor("user/profile/".$vote['user_name'],$vote['user_name']) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
+			.anchor("user/profile/".$vote['user_name'], $this->userauth->display_name) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
 		}
 		$data['voteHTML'] = $voteHTML;
 		if(isset($_POST['ajax'])) { echo $data['voteHTML']; exit(); }
