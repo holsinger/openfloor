@@ -131,7 +131,7 @@ class Comments_model extends Model
 	public function insertComment()
 	{
 		if(isset($_POST['comment']) && isset($_POST['fk_user_id']) && (isset($_POST['fk_question_id']) || isset($_POST['fk_video_id']) || isset($_POST['parent_id']))) {
-			$trimmed = trim($_POST['comment'])
+			$trimmed = trim($_POST['comment']);
 			if(!empty($trimmed)) {
 				$this->db->insert('cn_comments', $_POST);
 				return true;
