@@ -175,6 +175,7 @@ class Conventionnext extends Controller
 			$this->load->view('user/_overallReaction.php', $data);				
 		} else { // NO AJAX
 			$this->_currentQuestion($data);
+			if(empty($data['current_question'])) exit('This event has no current question.');
 			$this->_overallReactions($data);
 			$this->load->view('admin/overall_reactions', $data);
 		}		
