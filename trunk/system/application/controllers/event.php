@@ -51,7 +51,7 @@ class Event extends Controller
 		
 		
 		foreach($events as $k=>$v) {
-			if ($this->userauth->isAdmin()) $events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit');
+			if ($this->userauth->isAdmin()) $events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit')." | ".anchor("admin/dashboard/".url_title($v['event_name']), 'Admin Dashboard')." | ".anchor("conventionnext/overall_reaction/".url_title($v['event_name']), 'Overall Reaction');
 			$file_name = '';
 			if (is_array($temp_array = unserialize($events[$k]['event_avatar']))) $file_name = $temp_array['file_name'];
 			$events[$k]['event_avatar'] = $file_name;

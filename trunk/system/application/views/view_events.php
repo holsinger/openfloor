@@ -2,7 +2,6 @@
 $data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
 ?>
-
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
