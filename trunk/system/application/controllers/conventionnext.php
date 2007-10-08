@@ -96,7 +96,7 @@ class Conventionnext extends Controller
 		if(!$data['event_id']) exit();
 		
 		$this->event->id = $data['event_id'];
-		$data['stream_high'] = $this->event->get('stream_high');
+		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : 'This event is not live yet.';
 		
 		$this->question->event_id = $data['event_id'];
 			
