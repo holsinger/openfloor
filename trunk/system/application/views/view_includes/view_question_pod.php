@@ -48,10 +48,10 @@
 						<? if($view_name == 'question_view') $this->load->view('question/_comments.php') ?>
 						<? if($view_name == 'votes_view') echo $voteHTML ?>
 						<? if($this->userauth->isUser()): ?>
-						<? $this->flag_lib->type = 'question'; echo $this->flag_lib->createFlagHTML($question_id, $event_name); ?>
+						<? $this->flag_lib->type = 'question'; echo $this->flag_lib->createFlagHTML($question_id, $event_name, $question_id); ?>
 						<? endif; ?>
 						<? if($this->userauth->isUser()): ?>
-						<? $this->flag_lib->type = 'user'; echo $this->flag_lib->createFlagHTML($user_id, $event_name); ?>
+						<? $this->flag_lib->type = 'user'; echo $this->flag_lib->createFlagHTML($user_id, $event_name, $question_id); ?>
 						<? endif; ?>		
 						<span id="emailto-5" style="display:none"></span>
 					</div>
