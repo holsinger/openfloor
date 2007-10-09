@@ -28,8 +28,10 @@
 											<h1>EVENTS</h1>
 											
 	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);"><h2>Dashboard</h2></a>
+	                    <div id='event_pop' style="position:absolute;left:90px;top:188px;z-index:3000;"><img src="images/live_pop.gif" onLoad="new Effect.Shake($('event_pop')); window.setTimeout('Effect.Squish(\'event_pop\', {duration:.3})',4000);"></div>
 	                    
-	                    <?=anchor('/event/','<h2>Event</h2>'); ?>
+	                    
+											<?=anchor('/event/','<h2>Event</h2>'); ?>
 											<?=anchor("question/add/{$event_url}","Ask a Question");?>
 	                    <?= anchor("conventionnext/queue/{$event_url}","View Upcoming");?>
 	                    <?= anchor("conventionnext/queue/{$event_url}/sort/newest","View Newest");?>
