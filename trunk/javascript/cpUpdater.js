@@ -161,7 +161,7 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 
 cpUpdater.toggleAJAX = function () {
 	if(ajaxOn) { cpUpdater.disableAJAX(); }
-	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { console.log('enabling AJAX'); }
+	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
 }
 
 cpUpdater.toggleVisibility = function(element) {
