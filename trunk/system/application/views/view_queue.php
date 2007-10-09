@@ -19,7 +19,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">
 	<? endif; ?>
 	<? if(!isset($ajax) && $event_type == 'question'): ?>
-	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';queueUpdater.updateQueue();">
+	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';">
 	<? endif; ?>
 	<?
 	if ($event_type == 'video')
