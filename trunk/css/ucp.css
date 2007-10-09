@@ -40,6 +40,10 @@ body {
 	min-width:804px;
 }
 
+a {
+	cursor: pointer;
+}
+
 
 #ucp {
 	width: 804px;
