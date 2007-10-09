@@ -27,7 +27,7 @@
 											?>
 											<h1>EVENTS</h1>
 											
-	                    <a onclick="showBox('event_dashboard');window.open('index.php/conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);"><h2>Dashboard</h2></a>
+	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);"><h2>Dashboard</h2></a>
 	                    
 	                    <?=anchor('/event/','<h2>Event</h2>'); ?>
 											<?=anchor("question/add/{$event_url}","Ask a Question");?>
