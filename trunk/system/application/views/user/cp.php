@@ -5,7 +5,7 @@
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<?= $this->config->site_url();?>" />
-	<title>myControlPanel</title>
+	<title>RunPolitics Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="css/all.css" />
 	<link rel="stylesheet" type="text/css" href="css/ucp.css" />
 	<link rel="stylesheet" type="text/css" href="css/userWindow.css" />
