@@ -11,7 +11,7 @@
 </style>
 <style media="all" type="text/css">@import "css/userWindow.css";</style>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
-<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="public/css/ie7.css" /><![endif]-->
+<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
 <script type="text/javascript">
 	site_url = '<?= $this->config->site_url();?>';
 	username = '<?=$this->userauth->user_name;?>';
