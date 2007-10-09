@@ -56,10 +56,10 @@
 		elem.src = "./images/about/"+elem.id+"_"+state+".jpg";
 		if(state == 'on'){
 			$('about_bio').style.visibility = 'visible'
-			$('bio_'+elem.id+'_name').innerHTML = '<h1>'+eval('info.'+elem.id+".name")+'</h1>';
-			//$('bio_'+elem.id+'_desc').innerHTML = eval('info.'+elem.id+".bio");
 			$('bio_'+ChangeAboutImage.last_elem_id+'_name').innerHTML = '';
 			//$('bio_'+ChangeAboutImage.last_elem_id+'_desc').innerHTML = '';
+			$('bio_'+elem.id+'_name').innerHTML = '<h1>'+eval('info.'+elem.id+".name")+'</h1>';
+			//$('bio_'+elem.id+'_desc').innerHTML = eval('info.'+elem.id+".bio");
 			$('about_bio').style.left = $(elem.id).offsetLeft+'px';
 		}
 		ChangeAboutImage.last_elem_id = elem.id;
