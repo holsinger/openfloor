@@ -806,6 +806,7 @@ EOT;
 	
 	private function _upcomingQuestions(&$data)
 	{
+		$this->question->limit = 10;
 		$data['questions'] = $this->question->questionQueue();
 		foreach ($data['questions'] as $key => $row) {
 			if ($this->userauth->isUser()) {
