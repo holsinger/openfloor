@@ -35,7 +35,7 @@
                     <li class="separator">|</li>
                     <li><?=anchor("event/","Events");?></li>
                     <li class="separator">|</li>
-					<li><?=anchor("information/view/about_us","About Us");?></li>
+					<li><?=anchor("information/view/aboutUs","About Us");?></li>
                     <li class="separator">|</li>
 					<li><a href="http://blog.runpolitics.com">Blog</a></li>
                 </ul>
