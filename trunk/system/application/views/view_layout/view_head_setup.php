@@ -16,7 +16,7 @@
 <style media="all" type="text/css">@import "css/userWindow.css";</style>
 	<style media="all" type="text/css">@import "css/flag.css";</style>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
-<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="public/css/ie7.css" /><![endif]-->
+<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
 <style type="text/css">
 	    <!--
 	      @import url('css/wordcloud.css');
