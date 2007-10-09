@@ -64,5 +64,18 @@ class Information extends Controller {
 		
 		exit();
 	}
+	
+	// ====================
+	// = About Us Section =
+	// ====================
+	public function aboutUs()
+	{
+		$data['names'] = Array("daniel", "james", "kenshi", "rob", "matt", "brady");
+		foreach($data['names'] as $name){
+			$img_size = getimagesize("./images/about/".$name."_off.jpg");
+			$data['size'][$name] = $img_size[0];
+		}
+		$this->load->view('about/about_us', $data);
+	}
 }
 ?>
