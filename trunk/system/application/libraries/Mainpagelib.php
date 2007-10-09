@@ -77,7 +77,7 @@ class Mainpagelib {
 							$this->CI->simplepie->set_feed_url($data['feed']); 
 			        		if (!@$this->CI->simplepie->error()) {
 			        			$this->CI->simplepie->set_output_encoding ('UTF-8');
-								@$this->CI->simplepie->enable_cache(false);
+								//@$this->CI->simplepie->enable_cache(false);
 			        			@$this->CI->simplepie->init();	
 								@$this->CI->simplepie->handle_content_type();		        		
 								$feed = $this->CI->simplepie;		        		
