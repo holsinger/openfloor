@@ -15,10 +15,6 @@ cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question');
 	
 	new Ajax.Updater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions');
-	
-	// cans.each(function(s) {
-	//      updaters.push(new Ajax.Updater('your-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/your_reaction/' + s));
-	// });
 }
 
 cpUpdater.vote = function(url) {
@@ -45,12 +41,6 @@ cpUpdater.cpUpdate = function() {
 	  frequency: 10,
 	  evalScripts: true
 	}));
-	
-	// cans.each(function(s) {
-	//      updaters.push(new Ajax.PeriodicalUpdater('your-reaction-' + s, site_url + 'conventionnext/cp/' + event_name + '/your_reaction/' + s, {
-	//        frequency: 10
-	//      }));
-	// });
 }
 
 cpUpdater.askQuestion = function() {
@@ -91,70 +81,39 @@ cpUpdater.enableAJAX = function() {
 	}
 }
 
-cpUpdater.toggleAJAX = function () {
-	if(ajaxOn) { ajaxOn=false; updaters.each(function(s) {
-			s.stop();
-		}); 
-	}
-	else { ajaxOn=true; updaters.each(function(s) {
-			s.start();
-		}); 
-	}
-}
-
 cpUpdater.viewVotes = function(question_id) {
-	if(ajaxOn) {
-		cpUpdater.toggleAJAX();
-		cpUpdater.populateVotes(question_id);
-	} else {
-		cpUpdater.populateVotes(question_id);
-		cpUpdater.toggleAJAX();
-	}
-}
-
-cpUpdater.viewComments = function(question_id, event_name, question_name) {
-	if(ajaxOn) {
-		cpUpdater.toggleAJAX();
-		cpUpdater.populateComments(question_id, event_name, question_name);
-	} else {
-		cpUpdater.populateComments(question_id, event_name, question_name);
-		cpUpdater.toggleAJAX();
-	}
-}
-
-cpUpdater.populateVotes = function (question_id) {
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
-		$('cp-votes-' + question_id).setStyle({ display:'none' });		
+		cpUpdater.toggleVisibility('cp-votes-' + question_id);
+		cpUpdater.toggleAJAX();
 	} else {
-		// new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
 		new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
 			parameters: {
 				'ajax' : 'true'
 			},
 			onSuccess: function(transport) {
-				$('cp-votes-' + question_id).setStyle({ display:'block' });
-				// new Effect.toggle('cp-votes-' + question_id,'blind', {queue: 'end'});			
+				cpUpdater.toggleVisibility('cp-votes-' + question_id);
+				cpUpdater.toggleAJAX();
 			}
 		});
-	}
+	}	
 }
 
-cpUpdater.populateComments = function (question_id, event_name, question_name) {
+cpUpdater.viewComments = function(question_id, event_name, question_name) {
 	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
-		$('cp-comments-' + question_id).setStyle({ display:'none' });		
+		cpUpdater.toggleVisibility('cp-comments-' + question_id);
+		cpUpdater.toggleAJAX();		
 	} else {
-		// new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
 		new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
 			parameters: {
 				'ajax' : 'true'
 			},
 			onSuccess: function(transport) {
-				$('cp-comments-' + question_id).setStyle({ display:'block' });
-				// new Effect.toggle('cp-comments-' + question_id,'blind', {queue: 'end'});			
+				cpUpdater.toggleVisibility('cp-comments-' + question_id);
+				cpUpdater.toggleAJAX();
 			}
 		});
 	}
@@ -198,4 +157,15 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 			});
 		}
 	});
+}
+
+cpUpdater.toggleAJAX = function () {
+	if(ajaxOn) { console.log('disabling AJAX'); cpUpdater.disableAJAX(); }
+	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { console.log('enabling AJAX'); cpUpdater.enableAJAX(); }
+}
+
+cpUpdater.toggleVisibility = function(element) {
+	$$('div[class=cp-comments]', 'div[class=cp-votes]').without($(element)).invoke('setStyle', {display:'none'});
+	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
+	$(element).setStyle(style);
 }
