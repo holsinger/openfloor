@@ -71,7 +71,7 @@
 						<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('user-reaction','blind', {queue: 'end'});"/> -->
 					</div>
 					<div id="user-reaction">
-						Rate the credibility of each candidate's response.
+						Rate the credibility of each candidate's response for each question.
 					<? $this->load->view('user/_cp_user_reaction'); ?>
 					</div>
 					<div id="user-reaction-ajax"></div>
