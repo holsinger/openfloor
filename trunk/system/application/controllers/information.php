@@ -65,15 +65,19 @@ class Information extends Controller {
 		exit();
 	}
 	
-	// ====================
-	// = About Us Section =
-	// ====================
+	/**
+	 * Used for the "About Us" Section
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	public function aboutUs()
 	{
+		$data['info'] = $this->cms->GetAboutUsBios();
 		$data['names'] = Array("daniel", "james", "kenshi", "rob", "matt", "brady");
-		foreach($data['names'] as $name){
+		foreach($data['info'] as $name => $value){
 			$img_size = getimagesize("./images/about/".$name."_off.jpg");
-			$data['size'][$name] = $img_size[0];
+			$data['info'][$name]['img_size'] = $img_size[0];
 		}
 		$this->load->view('about/about_us', $data);
 	}

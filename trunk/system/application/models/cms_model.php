@@ -73,6 +73,25 @@ class Cms_model extends Model
 			 if (is_array($result_array))  return $result_array['cms_id'];
 			 else return false;
 		}
-
+		
+		/**
+		 * Returns bio information for the "About Us" section.
+		 *
+		 * @return array
+		 * @author Clark Endrizzi
+		 **/
+		public function GetAboutUsBios()
+		{
+			$query = $this->db->query("SELECT * FROM cms WHERE cms_url LIKE 'about_us_%'");
+			$return_array;
+			foreach ($query->result() as $row)
+			{
+				$name = substr($row->cms_url, 9);
+				$return_array[$name]['name'] = $row->custom_1; 
+				$return_array[$name]['bio'] = $row->cms_text;
+			}
+			
+			return $return_array;
+		}
 }
 ?>
