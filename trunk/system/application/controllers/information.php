@@ -74,7 +74,6 @@ class Information extends Controller {
 	public function aboutUs()
 	{
 		$data['info'] = $this->cms->GetAboutUsBios();
-		$data['names'] = Array("daniel", "james", "kenshi", "rob", "matt", "brady");
 		foreach($data['info'] as $name => $value){
 			$img_size = getimagesize("./images/about/".$name."_off.jpg");
 			$data['info'][$name]['img_size'] = $img_size[0];
