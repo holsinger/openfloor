@@ -25,17 +25,19 @@
 											break;
 											case 'event':
 											?>
+
+											<h1>EVENTS</h1>
+											
+	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);"><h2>Dashboard</h2></a>
+	                    <? /* <div id='event_pop' style="position:absolute;left:90px;top:188px;z-index:3000;"><img src="images/live_pop.gif" onLoad="new Effect.Shake($('event_pop')); window.setTimeout('Effect.Squish(\'event_pop\', {duration:.3})',4000);"></div> */?>
+
 											<h1>EVENT</h1>
 	                    <h2>Questions</h2>
 	                    <?=anchor("question/add/{$event_url}","Ask a Question");?>
 	                    <?= anchor("forums/queue/{$event_url}","View Upcoming");?>
 	                    <?= anchor("forums/queue/{$event_url}/sort/newest","View Newest");?>
 	                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
-	                    
-	                    <h2>Dashboards</h2>
-	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'forums/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);" class='published-questions'>Launch Event Dashboard</a>
-											<br />
-											<br />
+
 											<br />
 											<span onClick="showBox('event_instructions');" class="link">Help</span>
 	                    <?
