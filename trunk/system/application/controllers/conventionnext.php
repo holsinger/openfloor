@@ -1,5 +1,7 @@
+
+	
 <?php
-class Conventionnext extends Controller 
+class Forums extends Controller 
 {
 	private $ajax = false;
 	
@@ -92,15 +94,14 @@ class Conventionnext extends Controller
 		$this->userauth->check();
 		$data['event'] = $event;
 		
+		
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
-		
+
 		$this->event->id = $data['event_id'];
 		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
 		
 		$this->question->event_id = $data['event_id'];
-			
-		
 		// ==========
 		// = output =
 		// ==========
@@ -189,7 +190,7 @@ class Conventionnext extends Controller
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
 	{
 		if(!empty($tag)) $tag = "tag/$tag/";
-		redirect("/conventionnext/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
+		redirect("/forums/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
 	}
 	
 	public function queue()
@@ -272,7 +273,7 @@ class Conventionnext extends Controller
 		
 		// load the view
 		$data['view_name'] = 'view_queue';
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 		// echo '<pre>'; print_r($data); echo '</pre>';
 		$this->load->view('view_queue',$data);	
 	}		
@@ -343,15 +344,15 @@ class Conventionnext extends Controller
 		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
 		//set a sorting array
 		$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');		
-		($sort_active == 'upcoming') ? array_push($sort_array,'Score'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}",'Score') );
-		($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("conventionnext/queue/{$data['event_url']}/sort/newest",'Newest') ); 
+		($sort_active == 'upcoming') ? array_push($sort_array,'Score'):array_push( $sort_array,anchor("forums/queue/{$data['event_url']}",'Score') );
+		($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("forums/queue/{$data['event_url']}/sort/newest",'Newest') ); 
 		
 		$data['sort_array'] = $sort_array;
 		//var_dump($sort_array);
 
 		if ( isset($uri_array['sort']) ) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		$data['queue_title'] = $queue_title;
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 		
 		// pagination
 		if(isset($event_id))
@@ -582,7 +583,7 @@ class Conventionnext extends Controller
 		$event_id = $this->event->get_id_from_url($event_name);
 		if(!$event_id) redirect();		
 		$this->event->restart_question_timer($event_id);
-		redirect("conventionnext/candidate_dashboard/$event_name");
+		redirect("forums/candidate_dashboard/$event_name");
 	}
 	
 	public function stream_high($event) 
@@ -741,7 +742,7 @@ class Conventionnext extends Controller
 		
 		$sort_array_template = array('upcoming' => 'Upcoming', 'newest' => 'Newest', 'asked' => 'Asked', 'current' => 'Current');
 		foreach($sort_array_template as $k => $v)
-			$sort_active == $k ? array_push($sort_array, $v) : array_push($sort_array, anchor("conventionnext/queue/{$data['event_url']}/sort/$k", $v)) ;
+			$sort_active == $k ? array_push($sort_array, $v) : array_push($sort_array, anchor("forums/queue/{$data['event_url']}/sort/$k", $v)) ;
 		
 		$data['sort_array'] = $sort_array;
 		
