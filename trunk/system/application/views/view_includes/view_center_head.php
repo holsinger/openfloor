@@ -17,8 +17,8 @@
 
 														<? if ($tabs) { ?>
 														<ul class="local-nav">
-																<li class=""><a onclick="showBox('event_dashboard');window.open(site_url + 'conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=850,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);" class='published-questions'>Event Dashboard</a></li>
-																<li class="<?=$tab_view_question;?>"><?=anchor("conventionnext/queue/{$event_url}","View {$tabs}s","class='published-questions'");?></li>
+																<li class=""><a onclick="showBox('event_dashboard');window.open(site_url + 'forums/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=850,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);" class='published-questions'>Event Dashboard</a></li>
+																<li class="<?=$tab_view_question;?>"><?=anchor("forums/queue/{$event_url}","View {$tabs}s","class='published-questions'");?></li>
 																<?if (strtolower($tabs) == 'question') { ?>
 																	<li class="<?=$tab_submit_question;?>"><?=anchor("question/add/{$event_url}","Submit a {$tabs}","class='submit-questions'");?></li>
 																<?} else if (strtolower($tabs) == 'video') { ?>

@@ -46,9 +46,9 @@ else 					$submit_text = "Edit Candidate";
   	<div class='errorArea'><?=$error;?></div>
 	
 	<? if($action == 'create'): ?>
-  	<?= form_open('conventionnext/create/candidate') ?>
+  	<?= form_open('forums/create/candidate') ?>
 	<? else: ?>
-		<?= form_open('conventionnext/edit/candidate/' . $name, null, array('can_id' => $_POST['can_id'])) ?>
+		<?= form_open('forums/edit/candidate/' . $name, null, array('can_id' => $_POST['can_id'])) ?>
 	<? endif; ?>
 	
 	

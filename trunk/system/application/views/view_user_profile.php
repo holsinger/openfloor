@@ -35,7 +35,7 @@ $data['red_head'] = 'Welcome';
 	<? endif; ?>
 	<? if ($owner) { ?>
 	<h2>Edit Profile</h2>
-	<? if($candidate) echo anchor("conventionnext/edit/candidate/$user_name", 'Edit Candidate Details') ?>
+	<? if($candidate) echo anchor("forums/edit/candidate/$user_name", 'Edit Candidate Details') ?>
 	<div id="user_form">
 	<?= form_open_multipart("user/updateProfile/$user_name"); ?>
 	

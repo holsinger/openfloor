@@ -6,16 +6,16 @@ if(typeof queueUpdater === "undefined" || !queueUpdater) {
 }
 
 queueUpdater.updateQueue = function() {
-	queueUpdater.updaterObject = new Ajax.PeriodicalUpdater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag, {
+	queueUpdater.updaterObject = new Ajax.PeriodicalUpdater('queue', site_url + '/forums/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag, {
 	  frequency: 10
 	});
 	
-	//new Ajax.PeriodicalUpdater('timer', site_url + '/conventionnext/createTimerHTML/' + event_name, {frequency:10});
+	//new Ajax.PeriodicalUpdater('timer', site_url + '/forums/createTimerHTML/' + event_name, {frequency:10});
 }
 
 queueUpdater.updateQueueOnce = function() {
 	
-	new Ajax.Updater('queue', site_url + '/conventionnext/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag);
+	new Ajax.Updater('queue', site_url + '/forums/ajQueueUpdater/' + event_name + '/' + sort + '/' + offset + '/' + tag);
 	//new Effect.SlideDown ('queue');
 }
 

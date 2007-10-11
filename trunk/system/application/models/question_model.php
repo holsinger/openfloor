@@ -40,7 +40,7 @@ class Question_model extends Model
 	
 	public function updateQuestion ($question_id, $array) 
 	{
-		$this->db->where ('question_id',$question_id);
+		$this->db->where('question_id',$question_id);
 		if (isset($array['question_name'])) $this->db->set ('question_name',$array['question_name']);
 		if (isset($array['question_url_name'])) $this->db->set ('question_url_name',$array['question_url_name']);
 		if (isset($array['question_desc'])) $this->db->set ('question_desc',$array['question_desc']);

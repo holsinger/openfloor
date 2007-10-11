@@ -36,7 +36,7 @@ class Question extends Controller
 		//event
 		if (isset($uri_array['event'])) 
 		{
-			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
+			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 			$uri_array = $this->event->get_event(0,$uri_array['event']);
 			$data['event_id'] = $uri_array['event_id'];
 			$data['event_name'] = $uri_array['event_name'];
@@ -69,7 +69,7 @@ class Question extends Controller
 					echo 'success'; exit();
 				} else {
 					//redirect to question view page
-					redirect('conventionnext/queue/'.$_POST['event_url']);
+					redirect('forums/queue/'.$_POST['event_url']);
 					ob_clean();
 					exit();					
 				}				
@@ -229,7 +229,7 @@ class Question extends Controller
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);		
 		
 		//tags
-		if(!empty($data['tags'])) foreach($data['tags'] as $k1=>$tag) $data['tags'][$k1] = anchor("conventionnext/queue/event/".url_title($data['event_name'])."/tag/".$tag,$tag);
+		if(!empty($data['tags'])) foreach($data['tags'] as $k1=>$tag) $data['tags'][$k1] = anchor("forums/queue/event/".url_title($data['event_name'])."/tag/".$tag,$tag);
 					
 		//get voted
 		if ($this->userauth->isUser()) {
@@ -251,7 +251,7 @@ class Question extends Controller
 			$this->load->view('question/_comments', $data); 
 		}
 		
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"forums/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		
 		$data['view_name'] = 'question_view';

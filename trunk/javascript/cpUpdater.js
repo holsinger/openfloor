@@ -12,9 +12,9 @@ cpUpdater.sliders = new Object;
 // functions
 
 cpUpdater.cpUpdateOnce = function() {
-	new Ajax.Updater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question');
+	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
 	
-	new Ajax.Updater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions');
+	new Ajax.Updater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions');
 }
 
 cpUpdater.vote = function(url) {
@@ -29,15 +29,15 @@ cpUpdater.vote = function(url) {
 cpUpdater.cpUpdate = function() {
 	updaters = new Array();
 	
-	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'conventionnext/cp/' + event_name + '/current_question', {
+	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
 	  frequency: 10
 	}));
 	
-	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'conventionnext/cp/' + event_name + '/upcoming_questions', {
+	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions', {
 	  frequency: 10
 	}));
 	
-	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'conventionnext/cp/' + event_name + '/reaction', {
+	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
 	  frequency: 10,
 	  evalScripts: true
 	}));

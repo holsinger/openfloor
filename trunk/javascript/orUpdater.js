@@ -7,7 +7,7 @@ if(typeof orUpdater === "undefined" || !orUpdater) {
 
 orUpdater.orUpdate = function() {
 	cans.each(function(s) {
-		new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'conventionnext/overall_reaction/' + event_name + '/overall_reaction/' + s, {
+		new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/overall_reaction/' + event_name + '/overall_reaction/' + s, {
 		  frequency: 3
 		});
 	});	

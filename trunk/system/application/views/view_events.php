@@ -24,7 +24,7 @@ $data['red_head'] = 'Events';
                 <? if (strtotime($array['event_date']) > strtotime(date('Y-m-d'))) { ?>
                 <div id='event<?=$array['event_id'];?>' class='event-summary'>
                 <div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
-                        <?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
+                        <?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
                         <b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
                         <b>Where:</b> <?=$array['location'];?><br />
                         <b>Description:</b> <?=$array['event_desc_brief'];?><br/>
@@ -42,7 +42,7 @@ $data['red_head'] = 'Events';
 				            );
 				       ?>
                         <?if($array['streaming']):?>
-                        <p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+                        <p><strong><?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
                         <?endif;?>
                 </div>
                 <br />
@@ -58,7 +58,7 @@ $data['red_head'] = 'Events';
                 <? if (strtotime($array['event_date']) < strtotime(date('Y-m-d'))) { ?>
                 <div id='event<?=$array['event_id'];?>' class='event-summary'>
                 <div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
-                        <?=anchor('conventionnext/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />       -
+                        <?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />       -
                         <b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
                         <b>Where:</b> <?=$array['location'];?><br />
                         <b>Description:</b> <?=$array['event_desc_brief'];?><br/>
@@ -76,7 +76,7 @@ $data['red_head'] = 'Events';
 				            );
 				       ?>
                         <?if($array['streaming']):?>
-                        <p><strong><?=anchor_popup('conventionnext/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+                        <p><strong><?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
                         <?endif;?>
                 </div>
                 <br />

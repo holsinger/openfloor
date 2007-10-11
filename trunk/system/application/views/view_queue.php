@@ -22,15 +22,12 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';">
 	<? endif; ?>
 	<?
-	if ($event_type == 'video')
-	{
+	if ($event_type == 'video')	{
 		foreach ($results as $row)
 			$this->load->view('view_includes/view_video_pod.php',$row);
-	}
-	else 
-	{		
+	}else{		
 		foreach ($results as $row)
-		$this->load->view('view_includes/view_question_pod.php',$row);
+			$this->load->view('view_includes/view_question_pod.php',$row);
 	}	
 	?>
 	<p><?=empty($results)?'<strong>There are no '.$event_type.'s to display '.anchor("$event_type/add/$event_url",'Submit A '.ucwords($event_type)).'</strong>':''?>

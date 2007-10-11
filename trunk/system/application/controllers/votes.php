@@ -29,7 +29,7 @@ class Votes extends Controller
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);
 		
 		// tags		
-		if(!empty($data['tags'])) foreach($data['tags'] as $k1=>$tag) $data['tags'][$k1] = anchor("conventionnext/queue/event/".url_title($data['event_name'])."/tag/".$tag,$tag);
+		if(!empty($data['tags'])) foreach($data['tags'] as $k1=>$tag) $data['tags'][$k1] = anchor("forums/queue/event/".url_title($data['event_name'])."/tag/".$tag,$tag);
 		
 		//set event type
 		$data['event_type'] = 'question';
@@ -59,7 +59,7 @@ class Votes extends Controller
 		}
 		$data['voteHTML'] = $voteHTML;
 		if(isset($_POST['ajax'])) { echo $data['voteHTML']; exit(); }
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"forums/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		
 		$data['view_name'] = 'votes_view';

@@ -14,7 +14,7 @@ $can_bio_attrs = array(					'name' => 'can_bio',
 <div id="content_div">	
   <h2>Edit Candidate Biography</h2>	
   	<div class='errorArea'><?=$error;?></div>
-		<?= form_open('conventionnext/edit/bio/' . url_title($can_display_name), null, array('can_id' => $can_id, 'submitted' => 'true')) ?>
+		<?= form_open('forums/edit/bio/' . url_title($can_display_name), null, array('can_id' => $can_id, 'submitted' => 'true')) ?>
 		<?= form_format('Biography: ', form_textarea($can_bio_attrs)) ?>
 		<?= form_format('Candidate password: ', form_password($can_password_attrs)) ?>
 		<p><?= form_submit(null, 'Edit', 'class="button"') ?></p>

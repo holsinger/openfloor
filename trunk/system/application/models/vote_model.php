@@ -110,13 +110,14 @@ class Vote_model extends Model
 	public function getVotesByUser($user_id, $all = false)
 	{
 		$limit = ($all) ? '' : 'LIMIT 10' ;
-		return $this->db->query("	SELECT vote_value, user_name, event_name, question_name 
+		return $this->db->query("	SELECT vote_value, user_name, event_name, question_name
 									FROM cn_questions, cn_votes AS v, cn_users, cn_events 
 									WHERE v.fk_user_id = user_id 
 										AND v.fk_question_id = question_id 
 										AND fk_event_id = event_id 
 										AND vote_id 
 										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_user_id = $user_id GROUP BY fk_question_id) 
+									ORDER BY v.timestamp DESC
 									$limit")->result_array();
 	}
 	

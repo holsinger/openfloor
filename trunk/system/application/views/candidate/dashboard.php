@@ -11,7 +11,7 @@
 <script language="JavaScript">
 setTimeout("refresh_location()", 1000*5); // 5 seconds
 function refresh_location () {
-	location = "<?=$this->config->site_url()."conventionnext/candidate_dashboard/$event_name"?>";
+	location = "<?=$this->config->site_url()."forums/candidate_dashboard/$event_name"?>";
 }
 </script>
 

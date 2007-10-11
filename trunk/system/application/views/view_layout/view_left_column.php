@@ -25,20 +25,19 @@
 											break;
 											case 'event':
 											?>
-											<h1>EVENTS</h1>
-											
-	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'conventionnext/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);"><h2>Dashboard</h2></a>
-	                    <div id='event_pop' style="position:absolute;left:90px;top:188px;z-index:3000;"><img src="images/live_pop.gif" onLoad="new Effect.Shake($('event_pop')); window.setTimeout('Effect.Squish(\'event_pop\', {duration:.3})',4000);"></div>
+											<h1>EVENT</h1>
+	                    <h2>Questions</h2>
+	                    <?=anchor("question/add/{$event_url}","Ask a Question");?>
+	                    <?= anchor("forums/queue/{$event_url}","View Upcoming");?>
+	                    <?= anchor("forums/queue/{$event_url}/sort/newest","View Newest");?>
+	                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
 	                    
-	                    
-											<?=anchor('/event/','<h2>Event</h2>'); ?>
-											<?=anchor("question/add/{$event_url}","Ask a Question");?>
-	                    <?= anchor("conventionnext/queue/{$event_url}","View Upcoming");?>
-	                    <?= anchor("conventionnext/queue/{$event_url}/sort/newest","View Newest");?>
-	                    <?= anchor("conventionnext/queue/{$event_url}/sort/asked","View Asked");?>
-
-											<a onClick="showBox('event_instructions');" href="javascript:void(0);"><h2>Help</h2></a>
-
+	                    <h2>Dashboards</h2>
+	                    <a onclick="showBox('event_dashboard');window.open(site_url + 'forums/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);" class='published-questions'>Launch Event Dashboard</a>
+											<br />
+											<br />
+											<br />
+											<span onClick="showBox('event_instructions');" class="link">Help</span>
 	                    <?
 											break;
 											case 'events':
@@ -47,14 +46,16 @@
 											<br/>
 	                    Click on an <i>Event Name</i> to get started.
 											<br />
-											<a onClick="showBox('event_instructions');" href="javascript:void(0);"><h2>Help</h2></a>
+											<br />
+											<br />
+											<span onClick="showBox('event_instructions');" class="link">Help</span>
 	                    <?
 											break;
 											case 'admin':
 											?>
 											<h1>Admin</h1>
 	                    <h2>Candidate</h2>
-	                    <?echo anchor('conventionnext/create/candidate','Add Candidate');?><br/>
+	                    <?echo anchor('forums/create/candidate','Add Candidate');?><br/>
     									<h2>CMS</h2>
 	                    <?echo anchor('admin/view','View All');?>
 	                    <?echo anchor('admin/','Add New');?>

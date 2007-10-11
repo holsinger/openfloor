@@ -11,7 +11,7 @@
 <script language="JavaScript">updateClock(); setInterval('updateClock()', 1000 );</script>
 <? if($this->userauth->isAdmin()): ?>
 <div>
-	<p><?= form_open("conventionnext/restart_question_timer/$event_name") ?>
+	<p><?= form_open("forums/restart_question_timer/$event_name") ?>
 	<?= form_submit('', 'Reset Timer') ?>
 	<?= form_close() ?>
 	</p>

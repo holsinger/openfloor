@@ -351,14 +351,14 @@ class User extends Controller {
 		// users last 10 votes
 		$data['votes'] = $this->vote->getVotesByUser($data['user_id']);
 		foreach($data['votes'] as $k => $v) {
-			$data['votes'][$k]['event_name'] = anchor('conventionnext/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['votes'][$k]['event_name'] = anchor('forums/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
 			$data['votes'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
 		}
 		
 		// users last 10 questions
 		$data['questions'] =  $this->question->getQuestionsByUser($data['user_id']);
 		foreach($data['questions'] as $k => $v) {
-			$data['questions'][$k]['event_name'] = anchor('conventionnext/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['questions'][$k]['event_name'] = anchor('forums/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
 			$data['questions'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
 		}
 		
@@ -645,7 +645,7 @@ class User extends Controller {
 		}
 		
 		foreach($data['result'] as $k => $v) {
-			$data['result'][$k]['event_name'] = anchor('conventionnext/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['result'][$k]['event_name'] = anchor('forums/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
 			$data['result'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
 		}
 		

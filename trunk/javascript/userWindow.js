@@ -30,17 +30,17 @@ function center(string){
         my_height = document.body.clientHeight;
     }
 		
-		//see if we have a div
-		element = $(string);
-		if (!element) {
-			element = getDynamicElement(string);	
-		} else {
-	    //set element styles
-	    element.style.position = 'absolute';
-	    element.style.zIndex   = 3000;
-	    cleanUp (element);
-	    new Effect.Appear(string);
-	  }
+	// See if we have a div
+	element = $(string);
+	if (!element) {
+		element = getDynamicElement(string);	
+	} else {
+	   //set element styles
+	   element.style.position = 'absolute';
+	   element.style.zIndex   = 3000;
+	   cleanUp (element);
+	   new Effect.Appear(string);
+	 }
 	    
 }
 function getDynamicElement(string) {

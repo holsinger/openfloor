@@ -14,7 +14,7 @@
 	slider = new Control.Slider('handle<?=$can_id?>', 'track<?=$can_id?>', {
 		sliderValue: <?=$user_reaction/10?>,
 		onChange: function(v) {
-			url = 'conventionnext/react/' + Math.round(v*10) + '/' + <?=$can_id?> + '/' + cpUpdater.current_question_id;
+			url = 'forums/react/' + Math.round(v*10) + '/' + <?=$can_id?> + '/' + cpUpdater.current_question_id;
 			new Ajax.Request(url, {
 		 		onSuccess: function(transport) {
 					cpUpdater.enableAJAX();

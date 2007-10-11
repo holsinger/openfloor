@@ -34,7 +34,7 @@ class Video extends Controller
 		//event
 		if (isset($uri_array['event'])) 
 		{
-			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"conventionnext/queue/{$data['event_url']}");
+			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 			$uri_array = $this->event->get_event(0,$uri_array['event']);
 			$data['event_id'] = $uri_array['event_id'];
 			$data['event_name'] = $uri_array['event_name'];
@@ -66,7 +66,7 @@ class Video extends Controller
 			if( is_numeric($videoID) ) {
 				$this->voteup($videoID);
 				//redirect to video view page
-				redirect('conventionnext/queue/'.$_POST['event_url']);
+				redirect('forums/queue/'.$_POST['event_url']);
 				ob_clean();
 				exit();
 				
@@ -188,7 +188,7 @@ class Video extends Controller
 		$comments_library = new Comments_library();
 		$comments_library->type = 'video';
 		$data['comments_body'] = $comments_library->createComments($result[0]);
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"conventionnext/queue/event/".url_title($data['event_name']));
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"forums/queue/event/".url_title($data['event_name']));
 		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
 		$this->load->view('video/video_view.php', $data);
 	}
@@ -208,7 +208,7 @@ class Video extends Controller
 		#check that has not voted
 		$this->vote->type = 'video';
 		if($this->vote->alreadyVoted($id, $this->userauth->user_id)) {
-			redirect('conventionnext/queue/'.$event_url);
+			redirect('forums/queue/'.$event_url);
 			ob_clean();
 			exit();
 		}
@@ -217,7 +217,7 @@ class Video extends Controller
 		$this->vote->voteup($this->userauth->user_id, $id);
 		//$this->queue();
 		
-		// redirect('conventionnext/queue/'.$event_url);
+		// redirect('forums/queue/'.$event_url);
 		// 		ob_clean();
 		// 		exit();
 	}
@@ -237,7 +237,7 @@ class Video extends Controller
 		#check that user has not voted
 		$this->vote->type = 'video';
 		if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->userauth->user_id)) {
-			redirect('conventionnext/queue/'.$event_url);
+			redirect('forums/queue/'.$event_url);
 			ob_clean();
 			exit();
 		}
@@ -245,7 +245,7 @@ class Video extends Controller
 		#TODO validation and trending need to be considered
 		$this->vote->votedown($this->userauth->user_id, $id);
 		//$this->queue();
-		// redirect('conventionnext/queue/'.$event_url);
+		// redirect('forums/queue/'.$event_url);
 		// 		ob_clean();
 		// 		exit();
 	}

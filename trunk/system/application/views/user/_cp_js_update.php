@@ -7,7 +7,7 @@
 	cpUpdater.sliders[<?=$v['can_id']?>].setValue(<?=$v['user_reaction']/10?>);
 	cpUpdater.sliders[<?=$v['can_id']?>].options.onChange =	
 		function(v) {
-			url = 'conventionnext/react/' + Math.round(v*10) + '/' + <?=$v['can_id']?> + '/' + cpUpdater.current_question_id;
+			url = 'forums/react/' + Math.round(v*10) + '/' + <?=$v['can_id']?> + '/' + cpUpdater.current_question_id;
 			new Ajax.Request(url, {
 		 		onSuccess: function(transport) {
 					cpUpdater.enableAJAX();
