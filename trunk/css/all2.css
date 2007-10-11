@@ -1,3 +1,4 @@
+/* @override http://localhost/~Rob/RunPoliticsTrunk/css/all2.css */
 
 a{color:#F04A54;}
 a:hover{text-decoration:none;}
@@ -187,6 +188,10 @@ a.vote_digit:hover {
 	background:url(../images/divider.gif) no-repeat right;
 	padding:0 8px 0 0;
 	margin:0 7px 0 0;
+}
+
+.describtion ul.options li.watch a {
+	background:url(../images/ico-watch.png) no-repeat left;
 }
 .describtion ul.options li.tell-friend{background:none;}
 .describtion ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}

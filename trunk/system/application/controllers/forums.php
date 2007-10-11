@@ -84,6 +84,12 @@ class Forums extends Controller
 		}
 	}
 	
+	public function watch_answer($id)
+	{
+		$this->question->question_id = $id;
+		echo $this->question->get('question_answer');		
+	}
+	
 	public function cp($event = 'presidential_debate', $ajax = null, $can_id = null)
 	{
 		#TODO Handle no candidates assigned?
@@ -829,7 +835,8 @@ EOT;
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
 		foreach($data['candidates'] as $k => $v) {
 			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
-			// $data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
+			$data['candidates'][$k]['link_to_profile'] = $this->candidate->linkToProfile($v['can_id'], false, true);
+			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['can_id'], true) . '"><img src="./avatars/'.$this->candidate->canAvatar($v['can_id']).'"/></a>';
 		}
 	}
 	

@@ -9,6 +9,20 @@
 
 /***these will override all css stuff*/
 
+#rectangle {
+	background-color: #f1faff;
+	width: 640px;
+	height: 22px;
+	position: absolute;
+	top: 82px;
+	left: 156px;
+	z-index: 0;
+}
+
+.z5 {
+	z-index: 18;
+}
+
 .cp-comments {
 	margin-top: 29px;
 	margin-right: 6px;
