@@ -23,15 +23,34 @@
 		<br />
 		<br />
 		<br />
-    <?
-     $oFCKeditor = new FCKeditor('cms_text') ;
-     $sBasePath = 'fckeditor/';
-     $oFCKeditor->BasePath = $sBasePath ;
-     $oFCKeditor->Height = '400';
+	    <?
+	     $oFCKeditor = new FCKeditor('cms_text') ;
+	     $sBasePath = 'fckeditor/';
+	     $oFCKeditor->BasePath = $sBasePath ;
+	     $oFCKeditor->Height = '400';
 		 $oFCKeditor->Value		= (isset($cms_text))?$cms_text:$this->validation->cms_text;
 		 $oFCKeditor->Create() ;
+		
+		$format1 = array(
+              'name'        => 'custom_1',
+              'id'          => 'custom_1',
+              'value'       => (isset($custom_1))?$custom_1:$this->validation->custom_1,
+              'size'        => '50',
+              'class'       => 'txt',
+        );
+		echo form_format("Custom 1: ",form_input($format1),'Additional field to store information if needed' );
+		
+		$format2 = array(
+              'name'        => 'custom_2',
+              'id'          => 'custom_2',
+              'value'       => (isset($custom_2))?$custom_2:$this->validation->custom_2,
+              'size'        => '50',
+              'class'       => 'txt',
+        );
+		echo form_format("Custom 2: ",form_input($format2),'Additional field to store information if needed' ); 
 		?>
-		<br />
+		
+		<br /><br />
 		<?= form_hidden('cms_id',$cms_id); ?>
 		<?= form_submit('','Submit','class="button"'); ?>
 		<?= form_close(); ?>

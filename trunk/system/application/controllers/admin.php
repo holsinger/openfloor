@@ -34,21 +34,20 @@ class Admin extends Controller {
 			//$data['cms_name'] = $this->uri->segment(3);
 		}
 		$rules['cms_name'] = "trim|xss_clean";
+		$rules['custom_1'] = "trim|xss_clean";
+		$rules['custom_2'] = "trim|xss_clean";
 		$rules['cms_text'] = "trim";		
 		$this->validation->set_rules($rules);
 		
 		if ($this->validation->run() == FALSE) {
 			$data['error'] = $this->validation->error_string;
 		} else {
-			if ($_POST['cms_id']) 
-			{				
+			if ($_POST['cms_id']) {				
 				$this->cms->update_cms($_POST);
 				redirect('admin/view/');
 				ob_clean();
 				exit();
-			} 
-			else 
-			{
+			} else {
 				$this->cms->insert_cms_form();
 				redirect('admin/view/');
 				ob_clean();
