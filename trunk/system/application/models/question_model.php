@@ -40,7 +40,7 @@ class Question_model extends Model
 	
 	public function updateQuestion ($question_id, $array) 
 	{
-		$this->db->where('question_id',$question_id);
+		$this->db->where ('question_id',$question_id);
 		if (isset($array['question_name'])) $this->db->set ('question_name',$array['question_name']);
 		if (isset($array['question_url_name'])) $this->db->set ('question_url_name',$array['question_url_name']);
 		if (isset($array['question_desc'])) $this->db->set ('question_desc',$array['question_desc']);
@@ -89,6 +89,7 @@ class Question_model extends Model
 				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
 				question_name, 
 				question_desc,
+				question_status,
 				cn_questions.timestamp as date, 
 				user_name,
 				user_id, 
@@ -197,6 +198,11 @@ class Question_model extends Model
 	public function set_asked_time($question_id)
 	{
 		$this->db->query("UPDATE cn_questions SET question_asked = now() WHERE question_id = $question_id");
+	}
+
+	public function get($field)
+	{
+		return $this->db->select($field)->where('question_id', $this->question_id)->get('cn_questions')->row()->$field;
 	}
 }
 ?>
