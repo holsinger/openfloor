@@ -14,7 +14,7 @@ cpUpdater.sliders = new Object;
 cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
 	
-	new Ajax.Updater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions');
+	new Ajax.Updater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort);
 }
 
 cpUpdater.vote = function(url) {
@@ -33,7 +33,7 @@ cpUpdater.cpUpdate = function() {
 	  frequency: 10
 	}));
 	
-	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions', {
+	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort, {
 	  frequency: 10
 	}));
 	

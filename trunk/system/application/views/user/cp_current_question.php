@@ -12,7 +12,7 @@
 		<div class="question"><?=$current_question[0]['question_name']?></div>
 		<div style="clear:both;"></div>
 		<div id="cp-comments-<?= $current_question[0]['question_id'] ?>" class="cp-comments" style="height:300;display:none;overflow:auto;">COMMENTS</div>
-		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES</div>
+		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES (<?= $current_question[0]['vote_count'] ?>)</div>
 	</div>
 	<b class="question-pod0">
 	<b class="question-pod5"></b>
@@ -21,8 +21,8 @@
 	<b class="question-pod2"><b></b></b>
 	<b class="question-pod1"><b></b></b></b>
 </div>
-<div class="votes" onClick="cpUpdater.viewVotes(<?= $current_question[0]['question_id'] ?>)">votes</div>
-<div class="comments" onClick="cpUpdater.viewComments(<?= $current_question[0]['question_id'] ?>, event_name, '<?= url_title($current_question[0]['question_name']) ?>')">comments</div>
+<div class="votes" onClick="cpUpdater.viewVotes(<?= $current_question[0]['question_id'] ?>)">votes (<?= $current_question[0]['vote_count'] ?>)</div>
+<div class="comments" onClick="cpUpdater.viewComments(<?= $current_question[0]['question_id'] ?>, event_name, '<?= url_title($current_question[0]['question_name']) ?>')">comments (<?= $current_question[0]['comment_count'] ?>)</div>
 <div style="clear:both;"></div>
 <? else: ?>
 There is no current question

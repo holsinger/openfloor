@@ -17,6 +17,7 @@
 	site_url = '<?= $this->config->site_url();?>';
 	var event_name = '<?=$event?>';
 	var cans = [<? $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; echo substr($cans, 0, -2); ?>];	
+	var sort = 'pending';
 	</script>
 
 	<script type="text/javascript" src="javascript/cpUpdater.js"></script>
@@ -83,6 +84,11 @@
 		<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 		<div class="section">
 			<span class="section-title">Upcoming Questions</span>
+			<span style="float:right;padding-top:3px;cursor:pointer;color:red;">
+				<span onClick="sort='pending';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Upcoming</span> | 
+				<span onClick="sort='newest';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Newest</span> | 
+				<span onClick="sort='asked';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Asked</span>&nbsp;&nbsp;
+			</span>
 			<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('upcoming_questions','blind', {queue: 'end'});"/> -->
 		</div>
 		<div id="upcoming_questions">		

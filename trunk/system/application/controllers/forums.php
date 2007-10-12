@@ -120,6 +120,7 @@ class Forums extends Controller
 				$this->load->view('user/cp_current_question.php', $data);
 				break;
 			case 'upcoming_questions':
+				if(isset($can_id)) $data['sort'] = $can_id;
 				$this->_upcomingQuestions($data);
 				$this->load->view('user/cp_upcoming_questions.php', $data);
 				break;
@@ -813,6 +814,8 @@ EOT;
 	
 	private function _upcomingQuestions(&$data)
 	{
+		if(isset($data['sort']))
+			$this->question->question_status = $data['sort'];
 		$this->question->limit = 10;
 		$data['questions'] = $this->question->questionQueue();
 		foreach ($data['questions'] as $key => $row) {

@@ -26,8 +26,8 @@
   <b class="question-pod2"><b></b></b>
   <b class="question-pod1"><b></b></b></b>
 </div>
-<div class="votes" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)">votes</div>
-<div class="comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')">comments</div>
+<div class="votes" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)">votes (<?= $question['vote_count'] ?>)</div>
+<div class="comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')">comments (<?= $question['comment_count'] ?>)</div>
 <div style="clear:both;"></div>
 
 <? 	endforeach; ?>	
