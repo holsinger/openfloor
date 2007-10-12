@@ -108,26 +108,27 @@ class User extends Controller {
 				//set sessions
 				$this->user->login_user($this->user->user_name,$this->user->user_id);
 				//send mail
-				/*$this->load->library('email');
+				$this->load->library('email');
 				$config['protocol'] = 'sendmail';
 				$config['mailpath'] = '/usr/sbin/sendmail';
 				$config['charset'] = 'iso-8859-1';
 				$config['mailtype'] = 'html';
 				$config['wordwrap'] = TRUE;				
 				$this->email->initialize($config);
-				$this->email->from('contact@politic20.com', 'Registration');
+				$this->email->from('contact@runpolitics.com', 'Registration');
 				$this->email->to($this->user->user_email);
 				
-				$this->email->subject('Thanks for Registering');
+				$this->email->subject('RunPolitics.com Account Activation');
 				
 				$this->load->model('Cms_model','cms');
-				$cms_id = $this->cms->get_id_from_url('email_registration');
-				$cms = $this->cms->get_cms($cms_id);	
-				$this->email->message($cms['cms_text']);
+				// $cms_id = $this->cms->get_id_from_url('email_registration');
+				// $cms = $this->cms->get_cms($cms_id);	
+				// $this->email->message($cms['cms_text']);
+				$this->email->message('message');
 				$this->email->set_alt_message(strip_tags($cms['cms_text']));
 				
 				$this->email->send();
-				log_message('debug', "emailReg:".trim($this->email->print_debugger()));*/
+				log_message('debug', "emailReg:".trim($this->email->print_debugger()));
 				//forward to a user page
 				redirect('user/profile/'.$_POST['user_name']);
 				ob_clean();

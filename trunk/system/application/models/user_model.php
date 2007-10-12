@@ -388,5 +388,10 @@ class User_model extends Model {
 	{
 		return $this->db->select('user_name, user_email, timestamp')->orderby('user_id', 'desc')->limit(10)->get('cn_users')->result();
 	}
+
+	public function get($field)
+	{
+		return $this->db->select($field)->where('user_id', $this->user_id)->get('cn_users')->row()->$field;
+	}
 }
 ?>
