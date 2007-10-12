@@ -127,7 +127,8 @@ class User extends Controller {
 				$this->email->message('message');
 				$this->email->set_alt_message(strip_tags($cms['cms_text']));
 				
-				$this->email->send();
+				// $this->email->send();
+				mail('stefanussen@wikireview.com', )
 				log_message('debug', "emailReg:".trim($this->email->print_debugger()));
 				//forward to a user page
 				redirect('user/profile/'.$_POST['user_name']);
