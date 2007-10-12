@@ -20,7 +20,15 @@ class User_model extends Model {
         return $query->result();
     }
 
-    /**
+    public function activate($password, $timestamp)
+    {
+    	$this->db->set('user_password', $password);
+		$this->db->set('timestamp', base64_decode($timestamp));
+		$this->db->update('cn_users');
+		return $this->db->affected_rows();
+    }	
+
+	/**
      * this function will insert data from a posted form
      */	
     function insert_user_form($can_id = null)

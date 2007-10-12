@@ -107,6 +107,7 @@ class User extends Controller {
 			if ( is_numeric($last_id) ) {
 				//set sessions
 				$this->user->login_user($this->user->user_name,$this->user->user_id);
+				
 				//send mail
 				$this->load->library('email');
 				$config['protocol'] = 'sendmail';
@@ -115,21 +116,23 @@ class User extends Controller {
 				$config['mailtype'] = 'html';
 				$config['wordwrap'] = TRUE;				
 				$this->email->initialize($config);
-				$this->email->from('contact@runpolitics.com', 'Registration');
-				$this->email->to($this->user->user_email);
-				
-				$this->email->subject('RunPolitics.com Account Activation');
-				
-				$this->load->model('Cms_model','cms');
-				// $cms_id = $this->cms->get_id_from_url('email_registration');
-				// $cms = $this->cms->get_cms($cms_id);	
-				// $this->email->message($cms['cms_text']);
-				$this->email->message('message');
-				$this->email->set_alt_message(strip_tags($cms['cms_text']));
-				
-				// $this->email->send();
-				mail('stefanussen@wikireview.com', )
-				log_message('debug', "emailReg:".trim($this->email->print_debugger()));
+				$this->email->from('contact@runpolitics.com', 'Password Reset');
+				$this->email->to($_POST['user_email']);
+				#vars
+				$this->user->user_id = $last_id;
+				$timestamp = $this->user->get('timestamp');
+				$url = site_url('user/activate/' . md5($_POST['user_password']) . '/' . base64_encode($timestamp));
+				$message = 'Activate your account by following this link: ' . $url;
+				$subject = "RunPolitics.com Account Activation";
+				#set subject
+				$this->email->subject($subject);
+				#set message
+				$this->email->message($message);
+				$this->email->set_alt_message(strip_tags($message));
+				#send
+				$this->email->send();
+				log_message('debug', "emailReg:".trim($this->email->print_debugger()));			
+			
 				//forward to a user page
 				redirect('user/profile/'.$_POST['user_name']);
 				ob_clean();
@@ -141,6 +144,14 @@ class User extends Controller {
 				
 		//send back the error
 		$this->createAccount($error);
+	}
+	
+	public function activate($password, $timestamp)
+	{
+		$result = $this->user->activate($password, $timestamp);
+		if($result == 1) 	$data['error'] = 'Your account has been activated.';
+		else 				$data['error'] = 'A system error has occurred, your account could not be activated';
+		$this->load->view('view_login', $data);
 	}
 	
 	public function updateProfile()
