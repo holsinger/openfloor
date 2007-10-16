@@ -169,3 +169,8 @@ cpUpdater.toggleVisibility = function(element) {
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
 	$(element).setStyle(style);
 }
+
+cpUpdater.current_question_fade = function() {
+	$('question-cover').setStyle({display: 'block'});
+	new Effect.Opacity ('question-cover',{duration:1, from:1.0, to:0});
+}

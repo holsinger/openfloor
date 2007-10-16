@@ -246,6 +246,17 @@ a {
 	width: 100%;
 }
 
+#ucp .question-cover {
+	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
+	background-color: #f1faff;
+	position: absolute;
+	width: 634px;
+	margin-left: 128px;
+	padding: 3px;
+	height: 16px;
+	display: none;
+}
+
 #ucp .current-question-pod .question {
 	background-color: #fcc6ca;
 }
