@@ -1,4 +1,6 @@
-<?= form_open('question/add/'.$event_url, array('id' => 'add_question_form')); ?>
+<div class="link" onclick="showBox('question_suggestions');">See our suggestions for asking the best questions!</div>
+	
+<? form_open('question/add/'.$event_url, array('id' => 'add_question_form')); ?>
 	<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
 		
 	<? if ($event_id>0) { ?>

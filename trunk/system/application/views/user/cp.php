@@ -84,10 +84,10 @@
 		<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 		<div class="section">
 			<span class="section-title">Upcoming Questions</span>
-			<span style="float:right;padding-top:3px;cursor:pointer;color:red;">
-				<span onClick="sort='pending';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Upcoming</span> | 
-				<span onClick="sort='newest';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Newest</span> | 
-				<span onClick="sort='asked';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Asked</span>&nbsp;&nbsp;
+			<span style="float:right;padding-top:3px;cursor:pointer;">
+				<span class="link" onClick="sort='pending';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Upcoming</span> | 
+				<span class="link" onClick="sort='newest';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Newest</span> | 
+				<span class="link" onClick="sort='asked';cpUpdater.updaters=null;cpUpdater.cpUpdate();">Asked</span>&nbsp;&nbsp;
 			</span>
 			<!-- <img class="content-toggle" src="./images/ucp/toggle.jpg" onClick="javascript:new Effect.toggle('upcoming_questions','blind', {queue: 'end'});"/> -->
 		</div>

@@ -22,8 +22,9 @@ class User_model extends Model {
 
     public function activate($password, $timestamp)
     {
-    	$this->db->set('user_password', $password);
-		$this->db->set('timestamp', base64_decode($timestamp));
+    	$this->db->set('user_status', true);
+		$this->db->where('user_password', $password);
+		$this->db->where('timestamp', base64_decode($timestamp));
 		$this->db->update('cn_users');
 		return $this->db->affected_rows();
     }	
@@ -78,7 +79,8 @@ class User_model extends Model {
 			$_POST['user_name'] = '_' . url_title($_POST['user_name']);
 			
 		$this->db->where('user_name',$_POST['user_name']);
-		$this->db->where('user_password',$_POST['user_password']);		
+		$this->db->where('user_password',$_POST['user_password']);
+		$this->db->where('user_status', true);
 		$query = $this->db->get('cn_users');
 		log_message('debug',"UserLogin: ".$this->db->last_query());
 		if ($query->num_rows() > 0) {

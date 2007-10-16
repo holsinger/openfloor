@@ -50,7 +50,7 @@ class User extends Controller {
 			ob_clean();
 			exit();
 		} else {
-			$data['error'] = 'Login Failed, Please Try Again';
+			$data['error'] = 'We couldn\'t log you in, the username or password may be incorrect, or you may still need to activate your account.';
 			$this->load->view('view_login',$data);
 		}
 	}
@@ -106,35 +106,30 @@ class User extends Controller {
 			//make sure a new id was inserted
 			if ( is_numeric($last_id) ) {
 				//set sessions
-				$this->user->login_user($this->user->user_name,$this->user->user_id);
+				// $this->user->login_user($this->user->user_name,$this->user->user_id);
 				
 				//send mail
 				$this->load->library('email');
-				$config['protocol'] = 'sendmail';
-				$config['mailpath'] = '/usr/sbin/sendmail';
-				$config['charset'] = 'iso-8859-1';
-				$config['mailtype'] = 'html';
-				$config['wordwrap'] = TRUE;				
-				$this->email->initialize($config);
-				$this->email->from('contact@runpolitics.com', 'Password Reset');
+				$this->email->from('contact@runpolitics.com', 'RunPolitics.com Registration');
 				$this->email->to($_POST['user_email']);
 				#vars
 				$this->user->user_id = $last_id;
 				$timestamp = $this->user->get('timestamp');
-				$url = site_url('user/activate/' . md5($_POST['user_password']) . '/' . base64_encode($timestamp));
+				$url = site_url('user/activate/' . $_POST['user_password'] . '/' . base64_encode($timestamp));
 				$message = 'Activate your account by following this link: ' . $url;
-				$subject = "RunPolitics.com Account Activation";
+				$subject = 'Account Activation';
 				#set subject
 				$this->email->subject($subject);
 				#set message
 				$this->email->message($message);
-				$this->email->set_alt_message(strip_tags($message));
+				// $this->email->set_alt_message(strip_tags($message));
 				#send
 				$this->email->send();
-				log_message('debug', "emailReg:".trim($this->email->print_debugger()));			
+				// log_message('debug', "emailReg:".trim($this->email->print_debugger()));			
 			
 				//forward to a user page
-				redirect('user/profile/'.$_POST['user_name']);
+				redirect('user/complete');
+				// redirect('user/profile/'.$_POST['user_name']);
 				ob_clean();
 				exit();
 			} else {
@@ -144,6 +139,11 @@ class User extends Controller {
 				
 		//send back the error
 		$this->createAccount($error);
+	}
+	
+	public function complete()
+	{
+		$this->load->view('user/activation_email_sent');
 	}
 	
 	public function activate($password, $timestamp)
