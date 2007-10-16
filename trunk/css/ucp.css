@@ -70,8 +70,7 @@ a {
 
 #ucp .close {
 	float: right;
-	position: relative;
-	top: -36px;
+	margin: 3px;
 }
 
 #ucp .hr-1 {
@@ -281,6 +280,7 @@ a {
 	position:relative;
 	left:0px;
 	top:0px;
+	float: left;
 }
 
 #ucp .section {

@@ -44,7 +44,9 @@
 	
 	<div id="ucp">
 		<h1>Dashboard</h1>
-		<div class="hr-1"></div><div class="close"><img src="./images/ucp/close.png" onClick="window.close();"/></div>
+		<img class="close" src="./images/ucp/close.png" onClick="window.close();"/>
+		<div style="clear:both;">
+		<div class="hr-1"></div>
 		<div class="section">
 			<span class="section-title">Current Question:</span>
 		</div>
