@@ -1,5 +1,3 @@
-
-	
 <?php
 class Forums extends Controller 
 {
@@ -884,5 +882,11 @@ EOT;
 		$this->validation->set_fields($fields);
 	}
 
+	public function test()
+	{
+		$this->load->library('Dependencies');
+		$this->dependencies->func('user/cp');
+	}
+	
 }
 ?>
