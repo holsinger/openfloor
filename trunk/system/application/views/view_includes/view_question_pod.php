@@ -44,7 +44,7 @@
 							<? else: ?>
 							<li class="flag"><a href="javascript: var none = showBox('login');">Flag</a></li>
 							<? endif; ?>
-							<? if($question_status == 'asked'): ?>
+							<? if($question_status == 'asked' && !empty($question_answer)): ?>
 							<li class="watch"><?= anchor_popup('forums/watch_answer/' . $question_id, 'Watch', array('width' => 450, 'height' => 360, 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no')) ?></li>
 							<? endif; ?>
 							

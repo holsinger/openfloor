@@ -90,6 +90,7 @@ class Question_model extends Model
 				question_name, 
 				question_desc,
 				question_status,
+				question_answer,
 				cn_questions.timestamp as date, 
 				user_name,
 				user_id, 
