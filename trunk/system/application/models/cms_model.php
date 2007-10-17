@@ -16,9 +16,11 @@ class Cms_model extends Model
     {
     	if ( isset($_POST['cms_name']) ) {
     		$this->db->set('cms_name',$_POST['cms_name']);    		
-				$this->db->set('cms_url',url_title($_POST['cms_name']));
+			$this->db->set('cms_url',url_title($_POST['cms_name']));
     	}
 		if ( isset($_POST['cms_text']) ) $this->db->set('cms_text',$_POST['cms_text']);
+		if ( isset($_POST['custom_1']) ) $this->db->set('custom_1',$_POST['custom_1']);
+		if ( isset($_POST['custom_2']) ) $this->db->set('custom_2',$_POST['custom_2']);
 		
 		$this->db->insert('cms');
 			

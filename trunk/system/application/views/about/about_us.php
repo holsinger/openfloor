@@ -1,4 +1,9 @@
-<? $this->load->view('view_includes/header.php',$data); ?>
+<!--
+	TODO Switch completely to using prototype events so that there is no chance of getting an error of ChangeAboutImage not being set before it's loaded.  (add events on load)
+-->
+	
+	
+<?php $this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div">
             <h3>About Us</h3>
 			<div id="top_about_us">
@@ -6,55 +11,85 @@
 					<tr><td align="center"><a href="javascript: var none = MoveBackwards();">Back</a> | <a href="javascript: var none = MoveForward();">Forward</a></td></tr>
 				</table>
 			</div>
-			<div  id="outer_about_div" style="overflow: hidden; width: 100%; border: 0px solid #000000; z-index: 3;">
-	            <div id="inner_about_div" style="margin-left:10px; margin-right:30px; height: 344px; width: 4000px; z-index: 2;">
+			<div  id="outer_about_div" style="position: relative; overflow: hidden; width: 97%; height: 700px; border: 0px solid #000000; z-index: 3;">
+	            <div id="inner_about_div" style="position: relative; height: 344px; width: 4000px; z-index: 2;">
 					<? foreach($info as $name => $value): ?>
 						<div id="<?=$name?>_div" style="float:left; width: <?=$info[$name]['img_size']?>px; overflow: visible;">
 							<img id="<?=$name?>" src="./images/about/<?=$name?>_off.jpg" border="0" onmouseover="ChangeAboutImage(this, 'on');" onmouseout="ChangeAboutImage(this, 'off');">
-							<div id="<?=$name?>_bio" style="background-color: #FFFFFF; positioning: relative; width: 250px;">
-								<div id="bio_<?=$name?>_name"></div>
-								<div id="bio_<?=$name?>_desc" style="background-color: #FFFFFF; positioning: relative; width: 250px;"></div>								
-							</div>
-				
 						</div>
 					<? endforeach; ?>
 	            </div>
+	
+				<div style="visibility: hidden; width: 250px; top: 350px; position: absolute; margin-top: 10px" id="about_bio"> 
+					<div style="font-weight: bold;" id="bio_name"></div>
+					<div id="bio_content"></div>
+				</div>	
 			</div>
+
 </div>
 <script type="text/javascript" charset="utf-8">
 	var info = <?=json_encode($info);?>
+	
+	var about_bio_offset = 0;
 	// ===================================================================================
 	// = ChangeAboutImage - used for changing the profile images and displaying bio info =
 	// ===================================================================================
-	ChangeAboutImage.last_elem_id;
 	function ChangeAboutImage(elem, state){
+		var div_pos = Position.positionedOffset($(elem));
 		elem.src = "./images/about/"+elem.id+"_"+state+".jpg";
+		
 		if(state == 'on'){
-			//$('about_bio').style.visibility = 'visible'
-			if (ChangeAboutImage.last_elem_id) {
-				$('bio_'+ChangeAboutImage.last_elem_id+'_name').innerHTML = '';
-				$('bio_'+ChangeAboutImage.last_elem_id+'_desc').innerHTML = '';				
-			};
-			$('bio_'+elem.id+'_name').innerHTML = '<h1>'+eval('info.'+elem.id+".name")+'</h1>';
-			$('bio_'+elem.id+'_desc').innerHTML = eval('info.'+elem.id+".bio")+'<? if ($this->userauth->isSuperAdmin()) echo "<br>".anchor("admin/cms/about_us_'+elem.id+'", 'edit'); ?>';
-			//$('about_bio').style.left = $(elem.id).offsetLeft+'px';
+			$('about_bio').style.visibility = 'visible';
+			$('bio_name').innerHTML = eval('info.'+elem.id+'.name');	
+			$('bio_content').innerHTML = eval('info.'+elem.id+'.bio;')+'<? if ($this->userauth->isSuperAdmin()) echo "<br>".anchor("admin/cms/about_us_'+elem.id+'", 'edit'); ?>';
+
+			$('about_bio').setStyle({
+				left: (div_pos[0] + about_bio_offset)+"px"
+			});
+			
 		}
-		ChangeAboutImage.last_elem_id = elem.id;
 		return true;
 	}
 	// =========================================
 	// = Caches the onmouseover profile images =
 	// =========================================
-	
-	
+	<? foreach($info as $name => $value): ?>
+		var img_<?=$name?> = new Image();
+		img_<?=$name?>.src = "./images/about/<?=$name?>_on.jpg";
+	<? endforeach; ?>
+	// ======================
+	// = Initialize Effects =
+	// ======================
+	var effects_active = true;
 	function MoveBackwards()
 	{
-	  new Effect.Move('inner_about_div', { x: 300, y: 0, transition: Effect.Transitions.sinoidal });
+		if(effects_active){
+		  	new Effect.Move('inner_about_div', { 
+				x: 300, 
+				y: 0, 
+				transition: Effect.Transitions.sinoidal, 
+				beforeStart	: function(){ effects_active = false; }, 
+				afterFinish : function(){ effects_active = true; }
+			});
+		  	new Effect.Move('about_bio', { x: 300, y: 0, transition: Effect.Transitions.sinoidal });
+			about_bio_offset += 300;
+		}
 	}
 
 	function MoveForward()
 	{
-	  new Effect.Move('inner_about_div', { x: -300, y: 0, transition: Effect.Transitions.sinoidal });
+		if(effects_active){
+		  	new Effect.Move('inner_about_div', { 
+				x: -300, 
+				y: 0, 
+				transition: Effect.Transitions.sinoidal, 
+				beforeStart	: function(){ effects_active = false; }, 
+				afterFinish : function(){ effects_active = true; } 
+			});
+		  	new Effect.Move('about_bio', { x: -300, y: 0, transition: Effect.Transitions.sinoidal });
+			about_bio_offset -= 300;			
+		}
+
 	}	
 </script>
 <? $this->load->view('view_includes/footer.php'); ?>

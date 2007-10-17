@@ -55,10 +55,12 @@ class Admin extends Controller {
 			}
 		}
 				
-		//this makes the info sticky 
+		// Need to set variables if they aren't set so errors are not thrown
 		$fields['cms_name']	= ( isset($_POST['cms_name']) ) ? $_POST['cms_name']:"";
 		$fields['cms_text']	= ( isset($_POST['cms_text']) ) ? $_POST['cms_text']:"";
-		
+		$fields['custom_1']	= ( isset($_POST['custom_1']) ) ? $_POST['custom_1']:"";
+		$fields['custom_2']	= ( isset($_POST['custom_2']) ) ? $_POST['custom_2']:"";
+				
 		//get update info
 		if ($data['cms_id']>0) $data = $this->cms->get_cms($data['cms_id']);	
 
