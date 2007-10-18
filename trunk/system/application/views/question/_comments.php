@@ -25,5 +25,8 @@ $comments = '<div id="comment_add"><div class="comment_head"><strong>';
 	. form_close()
 . '<br /><br /></div>';
 echo $comments; 
-if(isset($ajax)) exit();
+if(isset($ajax)) {
+	echo "<div class=\"close\"><a class=\"link\" onClick=\"$('cp-comments-$question_id').setStyle({display: 'none'});\">close</a></div>";
+	exit();
+}
 ?>

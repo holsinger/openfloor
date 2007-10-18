@@ -57,6 +57,8 @@ class Votes extends Controller
 			$voteHTML .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
 			.anchor("user/profile/".$vote['user_name'], $this->user_model->displayName($vote['user_name'])) . ' ' . $vote_value . ' ' .$vote_time.' ago </div><br />';
 		}
+		if(isset($_POST['ajax'])) $voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div>";
+				
 		$data['voteHTML'] = $voteHTML;
 		if(isset($_POST['ajax'])) { echo $data['voteHTML']; exit(); }
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"forums/queue/event/".url_title($data['event_name']));

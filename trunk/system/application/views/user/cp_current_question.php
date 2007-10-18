@@ -13,7 +13,7 @@
 		<div id="question-cover" class="question-cover"></div>
 		<div style="clear:both;"></div>
 		<div id="cp-comments-<?= $current_question[0]['question_id'] ?>" class="cp-comments" style="height:300;display:none;overflow:auto;">COMMENTS</div>
-		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES (<?= $current_question[0]['vote_count'] ?>)</div>
+		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES</div>
 	</div>
 	<b class="question-pod0">
 	<b class="question-pod5"></b>
