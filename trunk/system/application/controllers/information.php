@@ -6,6 +6,7 @@ class Information extends Controller {
 	{
 		parent::Controller();
 		$this->load->model('Cms_model','cms');
+		$this->load->model('question_model', 'question');
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
@@ -47,6 +48,19 @@ class Information extends Controller {
 	 */
 	function viewAjax ()
 	{
+		/* 	
+			edit by Rob Stefanussen to allow this function to also serve 
+		 	as a mechanism for viewing question responses	
+		*/
+		$uri_array = $this->uri->uri_to_assoc(3);
+		if(isset($uri_array['watch'])) {
+			$this->question->question_id = $uri_array['watch'];
+			exit('<p>' . $this->question->get('question_answer') . '</p>');
+		}
+		/*
+			end edit
+		*/
+		
 		$data['cms_id'] = 0;
 		if ( is_string($this->uri->segment(3)) ) {
 			$data['cms_id'] = $this->cms->get_id_from_url($this->uri->segment(3));
