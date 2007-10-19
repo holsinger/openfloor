@@ -9,6 +9,18 @@
 
 /***these will override all css stuff*/
 
+.cp-sort_link {
+	color: #f04a54;
+	cursor: pointer;
+	padding: 0px 2px;
+}
+
+.cp-sort_link:hover {
+	background-color: #f04a54;
+	color: white;
+}
+
+
 #rectangle {
 	background-color: #f1faff;
 	width: 640px;
