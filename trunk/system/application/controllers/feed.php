@@ -68,7 +68,7 @@ class Feed extends Controller
 			$item 						= new RssGenerator_item();
 			$item->title 				= $question->question_name;
 			$item->description 			= $question->question_desc;
-			$item->link 				= 'http://newsite.com';
+			$item->link 				= site_url('question/view/' . url_title($question->event_name) . '/' . url_title($question->question_name));
 			$item->pubDate 				= 'Tue, 07 Mar 2006 00:00:01 GMT';
 			$rss_channel->items[] 		= $item;
 		}

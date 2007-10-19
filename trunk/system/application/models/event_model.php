@@ -110,7 +110,8 @@ class Event_model extends Model
 	public function rss_upcoming_questions($event_id)
 	{
 		// how dow we want to order these?
-		return $this->db->select('question_name, question_desc')->where(array('fk_event_id' => $event_id, 'question_status' => 'pending'))->get('cn_questions')->result();
+		return $this->db->query("SELECT event_name, question_name, question_desc FROM cn_questions, cn_events WHERE fk_event_id = event_id AND question_status = 'pending' and fk_event_id = $event_id;")->result();
+		// return $this->db->select('question_name, question_desc')->where(array('fk_event_id' => $event_id, 'question_status' => 'pending'))->get('cn_questions')->result();
 	}
 
 	public function get($field)
