@@ -193,6 +193,12 @@ cpUpdater.current_question_fade = function() {
 	timer = setInterval('ColorChange()', 75);
 }
 
+cpUpdater.change_sort = function(_sort) {
+	sort = _sort;
+	updaters.each(function(s) { s.stop(); });
+	cpUpdater.cpUpdate();
+}
+
 ColorChange = function() {
 	var ratio = i/9;
 	var nowColor = d2h(fadeHex(startHex, endHex, ratio));
