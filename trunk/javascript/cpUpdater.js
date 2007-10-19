@@ -8,8 +8,27 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 // vars
 cpUpdater.current_question_id = 0;
 cpUpdater.sliders = new Object;
+var timer;
+var i = 0;
+var startHex = 0xFCC6CA;
+var endHex = 0xEEF8FF;
+var upOrDown = true;
 
 // functions
+
+function fadeHex (hex, hex2, ratio){
+	var r = hex >> 16;
+	var g = hex >> 8 & 0xFF;
+	var b = hex & 0xFF;
+	r += ((hex2 >> 16)-r)*ratio;
+	g += ((hex2 >> 8 & 0xFF)-g)*ratio;
+	b += ((hex2 & 0xFF)-b)*ratio;
+	return(r<<16 | g<<8 | b);
+}
+
+function d2h(d) {
+	return d.toString(16);
+}
 
 cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
@@ -171,6 +190,27 @@ cpUpdater.toggleVisibility = function(element) {
 }
 
 cpUpdater.current_question_fade = function() {
-	$('question-cover').setStyle({display: 'block'});
-	new Effect.Opacity ('question-cover',{duration:1, from:1.0, to:0});
+	timer = setInterval('ColorChange()', 75);
+}
+
+ColorChange = function() {
+	var ratio = i/9;
+	var nowColor = d2h(fadeHex(startHex, endHex, ratio));
+	$('the-current-question').setStyle({'background-color': '#' + nowColor});
+	
+	if(i == 9) {
+		// startHex = 0xEEF8FF;
+		// endHex = 0xFCC6CA;
+		upOrDown = false;
+	}
+	
+	if(upOrDown) i++;
+	
+	if(i == 0) {
+		upOrDown = true;
+		clearInterval(timer);		
+	}
+	
+	if(!upOrDown) i--;
+	
 }
