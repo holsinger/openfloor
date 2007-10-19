@@ -201,14 +201,14 @@ a {
 }
 
 #ucp .votes {
-	width: 48px;
+	width: 55px;
 	height: 15px;
 	background: url(../images/ucp/votes-tab.jpg) no-repeat;
 	margin-right: 33px;	
 }
 
 #ucp .comments {
-	width: 68px;
+	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
 	margin-right: 5px;	
