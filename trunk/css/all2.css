@@ -85,30 +85,21 @@ a:hover{text-decoration:none;}
 }
 /* news-summary */
 .news-summary{
-	position: relative;
-	margin:0 25px 0 15px;
-	padding:7px 0 0 0px;
-	min-width: 440px;
-	border: 0px solid red;
+	margin:0 45px 0 36px;
+	padding:7px 0 0 85px;
 	overflow: visible;
 	position:relative;
 }
 .raiting{
 	width:85px;
-	height:110px;
+	height:67px;
 	float:left;
-	margin:0 0 0 0px;
-	overflow:visible;
-	background-color: #0173ba;
-	border-width: 3px 0px 3px 3px;
-	border-style: solid;
-	border-color: #cde8f7;
+	position:relative;
+	margin:0 0 0 -85px;
+	display:inline;
+	overflow:hidden;
+	background:url(../images/bg-raiting.png);
 }
-.rating_enclosed_td {
-	width:85px;
-
-}
-
 a.voteup,
 a.votedown,
 a.up,
@@ -454,6 +445,7 @@ background-color:#f0faff;
 	left:2px;
 	top:4px;
 }
+
 /* About Us Page */
 #bio_content p{
 	width: 250px;
