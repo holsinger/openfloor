@@ -337,14 +337,14 @@ class User_model extends Model {
 			
 		$fk_user_id = $result->user_id;
 		$auth = md5(uniqid(rand(), true));
-		$array = array('fk_user_id' => $fk_user_id, 'auth' => $auth);
+		$array = array('fk_user_id' => $fk_user_id, 'user_name' =>$result->user_name, 'auth' => $auth);
 		$this->db->insert('cn_password_reset', $array);
 		if($this->db->affected_rows() == 1) {
-//			$url = site_url("user/reset_password/$fk_user_id/$auth");
-//			$message = 'Reset your password by following this link: ' . $url;
-//			$subject = "RunPolitics.com Password Reset";
-//			mail($result->user_email, $subject, $message);
-//			$data['email'] = $result->user_email;
+			// $url = site_url("user/reset_password/$fk_user_id/$auth");
+			// $message = 'Reset your password by following this link: ' . $url;
+			// $subject = "RunPolitics.com Password Reset";
+			// mail($result->user_email, $subject, $message);
+			// $data['email'] = $result->user_email;
 			return $array;
 		}		
 		return false;

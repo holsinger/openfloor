@@ -587,7 +587,7 @@ class User extends Controller {
 				$this->email->to($_POST['user_email']);
 				#vars
 				$url = site_url("user/reset_password/{$array['fk_user_id']}/{$array['auth']}");
-				$message = 'Reset your password by following this link: ' . $url;
+				$message = "Your username is: {$array['user_name']}\n\nReset your password by following this link: $url";
 				$subject = "RunPolitics.com Password Reset";
 				#set subject
 				$this->email->subject($subject);
