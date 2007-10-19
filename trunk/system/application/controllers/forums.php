@@ -881,12 +881,5 @@ EOT;
 		$fields['tags']	= ( isset($_POST['tags']) ) ? $_POST['tags']:"";
 		$this->validation->set_fields($fields);
 	}
-
-	public function test()
-	{
-		$this->load->library('Dependencies');
-		$this->dependencies->func('user/cp');
-	}
-	
 }
 ?>
