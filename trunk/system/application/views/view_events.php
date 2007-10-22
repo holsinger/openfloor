@@ -9,7 +9,8 @@ $data['red_head'] = 'Events';
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <!-- <h3>Convention Next</h3> -->
+	<br/>
+  <img src="images/RP_OpenFloorEvents.png"/>
   <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
   <? if ($this->userauth->isSuperAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
   

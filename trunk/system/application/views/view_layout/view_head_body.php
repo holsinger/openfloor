@@ -50,11 +50,12 @@
 	                    <div class="date"><?=date('l, F j, Y');?></div>
 	                    
 	                    <div class="links">
-	                        <a href="#"><img src="images/people.gif" alt="" /></a>
+							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;left:91px;"/>
+	                        <!-- <a href="#"><img src="images/people.gif" alt="" /></a>
 	                        <div class="sep"></div>
 	                        <a href="#"><img src="images/politics.gif" alt="" /></a>
 	                        <div class="sep"></div>
-	                        <a href="#"><img src="images/change.gif" alt="" /></a>
+	                        <a href="#"><img src="images/change.gif" alt="" /></a> -->
 	                    </div>
 	                    
 	                    <!-- <div class="update">Last Update: <span>9:32 AM MST</span></div> -->
