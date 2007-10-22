@@ -127,7 +127,7 @@ class Event_model extends Model
 
 	public function rss_events()
 	{
-		return $this->db->select('event_id, event_name, event_desc')->get('cn_events')->result();
+		return $this->db->select('event_id, event_name, event_desc')->orderby('event_date', 'desc')->get('cn_events')->result();
 	}
 }
 ?>
