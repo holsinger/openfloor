@@ -128,7 +128,14 @@ BODY {
     text-align: center;
     font-size:9px;
 }
-
+.contact_us{
+    float: left;
+    width: 100%;
+    margin: 0 0 0 2px;
+    padding: 0px 0 10px 0;
+    text-align: center;
+    font-size:9px;	
+}
 .content {
     float: left;
 	width: 100%;
