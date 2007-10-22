@@ -837,7 +837,7 @@ EOT;
 		foreach($data['candidates'] as $k => $v) {
 			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
 			$data['candidates'][$k]['link_to_profile'] = $this->candidate->linkToProfile($v['can_id'], false, true);
-			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['can_id'], true) . '"><img src="./avatars/'.$this->candidate->canAvatar($v['can_id']).'"/></a>';
+			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['can_id'], true) . '"><img src="./avatars/shrink.php?img='.$this->candidate->canAvatar($v['can_id']).'&w=16&h=16"/></a>';
 		}
 	}
 	
