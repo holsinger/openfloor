@@ -3,7 +3,7 @@
 <div class="pots">
 <div class="box">
 <div class="inner-box" id="events">
- <span style="padding-left:5px;"><img src='./images/forum_logo.jpg'><br />
+ <span style="padding-left:5px;"><img src='./images/RP_OpenFloorEvents.png'><br />
  <h4>&nbsp;&nbsp;&nbsp;Upcoming Events</h4>
  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= anchor('event','<strong>Massachusetts 5th Congressional District Special General Election Debate</strong>');?>
  <h4>&nbsp;&nbsp;&nbsp;Past Events</h4>
