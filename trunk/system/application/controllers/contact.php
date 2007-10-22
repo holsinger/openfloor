@@ -17,11 +17,8 @@ class Contact extends Controller
 	function showForm($contact_type){
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),"Contact Us"=>$this->config->site_url()."contact/showForm/contact_us");
 		$data['contact_type'] = $contact_type;
-		if($contact_type == 'contact_us'){
-			$data['contact_page_name'] = "Contact Us";
-		}elseif($contact_type == 'request_an_event'){
-			$data['contact_page_name'] = "Request An Event";
-		}
+		$data['contact_page_name'] = ucwords(str_replace("_", " ", $contact_type));
+
 		$cms_data = $this->cms_model->get_cms(0, $contact_type);
 		$data['contact_page_desc'] = $cms_data['cms_text'];
 		
@@ -31,12 +28,13 @@ class Contact extends Controller
 	function send(){
 		// Variable Stuff
 		$data['contact_type'] = $_POST['contact_type'];
+		$type_title = ucwords(str_replace("_", " ", $_POST['contact_type']));
 		if($_POST['contact_type'] == 'contact_us'){
 			$data['thank_you_desc'] = 'Your feedback has been received.  Thanks for helping make Run Politics better.';
-			$type_title = "Contact Us";
 		}elseif($_POST['contact_type'] == 'request_an_event'){
 			$data['thank_you_desc'] = 'Thanks for your request.  Our staff will look over your request and contact you if necessary.';
-			$type_title = "Request An Event";
+		}elseif($_POST['contact_type'] == 'feedback'){
+			$data['thank_you_desc'] = 'Thanks for your feedback.  Our staff will look over your request and contact you if necessary.';
 		}
 		if($this->userauth->isUser()){
 			$sender_name = $this->userauth->user_name;
@@ -46,7 +44,7 @@ class Contact extends Controller
 			$sender_email = "";
 		}
 		$cms_data = $this->cms_model->get_cms(0, $_POST['contact_type']);
-		echo("Important Info: ".$sender_name.",".$sender_email.",".$cms_data['custom_1']);
+		//echo("Important Info: ".$sender_name.",".$sender_email.",".$cms_data['custom_1']);
 		// Setup and send email
 		$this->load->library('email');
 		$config['mailtype'] = 'html';

@@ -5,6 +5,7 @@ class UserAuth {
 	var $user_id = 0;
 	var $user_karma = 0;
 	var $user_name = '';
+	var $user_email = '';
 	var $user_avatar = '';
 	var $user_avatar_path = '';
 	var $candidate = false;
@@ -38,6 +39,7 @@ class UserAuth {
 			$user_array = $this->CI->user->get_user($this->CI->session->userdata('user_id'));
 			$this->user_karma = $user_array['user_karma'];
 			$this->user_name = $this->display_name = $user_array['user_name'];
+			$this->user_email = $user_array['user_email'];
 			$this->candidate = isset($user_array['fk_can_id']);
 			
 			$image_array = unserialize($user_array['user_avatar']);
