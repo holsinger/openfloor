@@ -118,6 +118,7 @@
             </div>
             
             <div class="footer">Copyright &copy; 2007 RunPolitics.com. All Rights Reserved. Reproduction in whole<br />or part in any form or medium without express written permission is strictly prohibited.</div>
+			<div class="contact_us"><a href="<?=$this->config->site_url()?>contact/showForm/contact_us">Contact Us</a></div>
         </div></div></div></div></div>
     </div>
 <script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
