@@ -8,6 +8,7 @@
 
 <style type="text/css" media="screen">
     @import url("css/main.css");
+    @import url("css/all2.css");
 </style>
 <style media="all" type="text/css">@import "css/userWindow.css";</style>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
