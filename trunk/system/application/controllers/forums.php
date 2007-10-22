@@ -812,8 +812,10 @@ EOT;
 	
 	private function _upcomingQuestions(&$data)
 	{
-		if(isset($data['sort']))
-			$this->question->question_status = $data['sort'];
+		if(isset($data['sort'])) {
+			if($data['sort'] == 'newest') $this->question->order_by = 'date';
+			else $this->question->question_status = $data['sort'];
+		}	
 		$this->question->limit = 10;
 		$data['questions'] = $this->question->questionQueue();
 		foreach ($data['questions'] as $key => $row) {

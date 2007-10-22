@@ -83,9 +83,9 @@
 		<div class="section">
 			<span class="section-title">Upcoming Questions</span>
 			<span style="float:right;padding-top:3px;cursor:pointer;">
-				<span class="cp-sort_link" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
-				<span class="cp-sort_link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-				<span class="cp-sort_link" onClick="cpUpdater.change_sort('asked')">Asked</span>&nbsp;&nbsp;
+				<span id="sort-link-pending" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
+				<span id="sort-link-newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
+				<span id="sort-link-asked" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Asked</span>&nbsp;&nbsp;
 			</span>
 		</div>
 		<div id="upcoming_questions">		

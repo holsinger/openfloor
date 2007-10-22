@@ -1,3 +1,6 @@
+<? if(isset($ajax))
+	echo "<div class=\"close\"><a class=\"link\" onClick=\"$('cp-ask-question').setStyle({display: 'none'});\">close</a></div>";
+?>
 <div class="link" onclick="showBox('question_suggestions');">See our suggest on how to ask the best questions.</div>
 	
 <?= form_open('question/add/'.$event_url, array('id' => 'add_question_form')); ?>
@@ -56,7 +59,9 @@
 	<?= form_hidden('event_url',$event_url); ?>
 	<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
 	<br />
-	<? if(isset($ajax)): ?>
+	<? if(isset($ajax)): 
+		echo "<div class=\"close\"><a class=\"link\" onClick=\"$('cp-ask-question').setStyle({display: 'none'});\">close</a></div>";
+	?>
 	<?/*<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>*/?>
 	<input type="button" value='Submit Question' class="button" onClick="javascript:cpUpdater.askQuestion();">
 	<? else: ?>

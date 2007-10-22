@@ -195,8 +195,24 @@ cpUpdater.current_question_fade = function() {
 
 cpUpdater.change_sort = function(_sort) {
 	sort = _sort;
+	
+	sort_links = new Array();
+	sort_links = ['pending', 'newest', 'asked'];
+	sort_links.without(_sort).each(function(s) {
+		if($('sort-link-' + s).hasClassName('cp-sort-link-selected')) {
+			$('sort-link-' + s).removeClassName('cp-sort-link-selected');
+			$('sort-link-' + s).addClassName('cp-sort-link');
+		}
+	});
+	
+	if($('sort-link-' + _sort).hasClassName('cp-sort-link')) {
+		$('sort-link-' + _sort).removeClassName('cp-sort-link');
+		$('sort-link-' + _sort).addClassName('cp-sort-link-selected');
+	}
+	
 	updaters.each(function(s) { s.stop(); });
 	cpUpdater.cpUpdate();
+	ajaxOn = true;
 }
 
 ColorChange = function() {

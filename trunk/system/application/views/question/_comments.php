@@ -1,14 +1,21 @@
+<?
+if(isset($ajax)) {
+	echo "<div class=\"close\"><a class=\"link\" onClick=\"$('cp-comments-$question_id').setStyle({display: 'none'});\">close</a></div>";
+}
+?>
+<br/>
+<br/>
 <div id="comments">
 	<?=isset($comments_body)?$comments_body.'<br/>':''?>
 </div>
 <?
 $attributes = array('class' => 'txt', 'name' => 'comment', 'rows' => 3, 'cols' => 48, 'style' => 'width:97%');
 
-if(isset($ajax)) 
-	$submit = '<a onClick="javascript:cpUpdater.submitComment(' . $question_id . ', \'' . url_title($event_name) . '\', \'' . url_title($question_name) . '\', 0)" style="cursor:pointer;">Submit Comment</a>';
-else {
+if(isset($ajax)) {
+	$submit = '<input type="button" class="button" value="Comment" onClick="javascript:cpUpdater.submitComment(' . $question_id . ', \'' . url_title($event_name) . '\', \'' . url_title($question_name) . '\', 0)" style="cursor:pointer;"/>';
+} else {
 	$submit = ($this->userauth->isUser()) ? 
-	'<input type="submit" value="Submit Comment" class="button"/>' : 
+	'<input type="submit" value="Comment" class="button"/>' : 
 	'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
 }
 

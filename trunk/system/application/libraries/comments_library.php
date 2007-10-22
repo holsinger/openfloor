@@ -96,7 +96,7 @@ class Comments_library
 		
 		// subcommenting form
 		if($this->ajax) {
-			$submit = $submit = '<a onClick="javascript:cpUpdater.submitComment(' . $info['fk_question_id'] . ', \'' . url_title($this->event_name) . '\', \'' . $this->question_name . '\', ' . $info['comment_id'] . ')">Comment</a>';
+			$submit = $submit = '<input type="button" class="button" value="Comment" onClick="javascript:cpUpdater.submitComment(' . $info['fk_question_id'] . ', \'' . url_title($this->event_name) . '\', \'' . $this->question_name . '\', ' . $info['comment_id'] . ')"/>';
 		}
 		else
 			$submit = ($this->CI->userauth->isUser()) ? 
