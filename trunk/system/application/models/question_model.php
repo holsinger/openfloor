@@ -184,9 +184,10 @@ class Question_model extends Model
 	public function rss_questions_by_tag($tag)
 	{
 		$tag = $this->db->escape($tag);
-		return $this->db->query("	SELECT question_id, question_name, question_desc 
-									FROM cn_questions, cn_idx_tags_questions, cn_tags 
+		return $this->db->query("	SELECT question_id, question_name, question_desc, event_name 
+									FROM cn_questions, cn_idx_tags_questions, cn_tags, cn_events 
 									WHERE fk_question_id = question_id 
+									AND fk_event_id = event_id
 									AND fk_tag_id = tag_id 
 									AND value = $tag")->result();
 	}

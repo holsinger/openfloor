@@ -124,5 +124,10 @@ class Event_model extends Model
 		if(!isset($this->id)) exit();
 		return $this->db->select('streaming')->where('event_id', $this->id)->get('cn_events')->row()->streaming;
 	}
+
+	public function rss_events()
+	{
+		return $this->db->select('event_id, event_name, event_desc')->get('cn_events')->result();
+	}
 }
 ?>

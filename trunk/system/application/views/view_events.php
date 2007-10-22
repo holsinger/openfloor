@@ -1,4 +1,8 @@
 <?
+
+$data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
+						'href' => site_url("feed/events"));
+
 $data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
 ?>

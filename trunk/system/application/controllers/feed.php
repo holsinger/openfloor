@@ -28,6 +28,17 @@ class Feed extends Controller
 		redirect();
 		exit();
 	}
+	
+	public function events()
+	{
+		// set class vars
+		$this->title 			= 'Events';
+		$this->description		= 'RunPolitics Events Feed';
+		$this->link 			= 'http://www.runpolitics.com';
+		$this->data				= $this->event->rss_events();
+		
+		$this->feed_events();
+	}
 
 	public function event($event = 'salt_lake_city_mayoral_forum')
 	{
@@ -69,6 +80,32 @@ class Feed extends Controller
 			$item->title 				= $question->question_name;
 			$item->description 			= $question->question_desc;
 			$item->link 				= site_url('question/view/' . url_title($question->event_name) . '/' . url_title($question->question_name));
+			$item->pubDate 				= 'Tue, 07 Mar 2006 00:00:01 GMT';
+			$rss_channel->items[] 		= $item;
+		}
+
+		$rss_feed 						= new RssGenerator_rss();
+		$rss_feed->encoding 			= 'UTF-8';
+		$rss_feed->version 				= '2.0';
+		header('Content-Type: text/xml');
+		echo $rss_feed->createFeed($rss_channel);
+	}
+	
+	private function feed_events()
+	{
+		$rss_channel 					= new RssGenerator_channel();
+		$rss_channel->title 			= $this->title;
+		$rss_channel->link 				= $this->link;
+		$rss_channel->description 		= $this->description;
+		$rss_channel->language 			= 'en-us';
+		$rss_channel->managingEditor 	= 'contact@politic20.com';
+		$rss_channel->webMaster 		= 'contact@politic20.com';
+
+		foreach($this->data as $event) {
+			$item 						= new RssGenerator_item();
+			$item->title 				= $event->event_name;
+			$item->description 			= htmlspecialchars($event->event_desc);
+			$item->link 				= site_url('forums/queue/event/' . url_title($event->event_name));
 			$item->pubDate 				= 'Tue, 07 Mar 2006 00:00:01 GMT';
 			$rss_channel->items[] 		= $item;
 		}
