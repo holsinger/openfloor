@@ -32,13 +32,13 @@
         <div class="frame"><div class="ctl"><div class="ctr"><div class="cbr"><div class="cbl">
             <div class="top-menu">
                 <ul class="left">
-                    <li><?=anchor('', 'Home')?></li>
+                    <li><?=anchor('', 'HOME')?></li>
                     <li class="separator">|</li>
-                    <li><?=anchor("event/","Events");?></li>
+                    <li><?=anchor("event/","EVENTS");?></li>
                     <li class="separator">|</li>
-					<li><?=anchor("information/aboutUs","About Us");?></li>
+					<li><?=anchor("information/aboutUs","ABOUT US");?></li>
                     <li class="separator">|</li>
-					<li><a href="http://blog.runpolitics.com">Blog</a></li>
+					<li><a href="http://blog.runpolitics.com">BLOG</a></li>
                 </ul>
                 <ul class="right" id="userLogin">
 					<? if ($this->userauth->isUser()) { ?>
