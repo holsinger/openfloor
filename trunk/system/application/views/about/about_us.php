@@ -8,7 +8,7 @@
             <h3>About Us</h3>
 			<div id="top_about_us">
 				<table border="0" cellspacing="0" cellpadding="0" width="100%">
-					<tr><td align="center"><a href="javascript: var none = MoveBackwards();">Back</a> | <a href="javascript: var none = MoveForward();">Forward</a></td></tr>
+					<tr><td align="center"><img class="link" onclick="MoveBackwards();"  src="./images/about/RP_AboutUs_BackArrow.png" border="0" title="Move Backward"><img class="link" onclick="MoveForward();" src="./images/about/RP_AboutUs_ForwardArrow.png" border="0" title="Move Forward"></td></tr>
 				</table>
 			</div>
 			<div  id="outer_about_div" style="position: relative; overflow: hidden; width: 97%; height: 700px; border: 0px solid #000000; z-index: 3;">

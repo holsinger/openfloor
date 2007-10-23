@@ -87,6 +87,7 @@ class Information extends Controller {
 	 **/
 	public function aboutUs()
 	{
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),"About Us"=>"");
 		$data['info'] = $this->cms->GetAboutUsBios();
 		foreach($data['info'] as $name => $value){
 			$img_size = getimagesize("./images/about/".$name."_off.jpg");
