@@ -15,7 +15,7 @@
 	<?= form_format("Password: ",form_password('user_password','','class="txt"') ); ?>
 	<?= form_hidden('redirect',$this->uri->uri_string()); ?>
 	<br /><br /><?= form_submit('','Login','class="button"'); ?>
-	<br /><br /><?= anchor('/user/password_reset','Forgot your password?','class="link"'); ?>
+	<br /><br /><?= anchor('/user/password_reset','Forgot your username or password?','class="link"'); ?>
 	<?= form_close(); ?>
 	
 	<br /><br />

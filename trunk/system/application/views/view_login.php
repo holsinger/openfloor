@@ -11,7 +11,7 @@
 	<?= form_format("Password: ",form_password('user_password','','class="txt"') ); ?>
 	<?= isset($location) ? form_hidden('redirect', $location) : '' ?>
 	<br /><br /><?= form_submit('','Login','class="button"'); ?>
-	<small><?=anchor('user/password_reset', 'Forgot your password?')?></small>
+	<small><?=anchor('user/password_reset', 'Forgot your username or password?')?></small>
 	<?= form_close(); ?>
 	</div>
 	<br /><br />
