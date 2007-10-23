@@ -38,6 +38,9 @@
 							                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
 												<h2>Feedback</h2>
 												<?= anchor("contact/showForm/request_an_event","Request An Event");?>
+												<h2>RSS Feeds</h2>
+												<?= anchor('feed/events', 'All Events') ?>
+												<?= anchor("feed/$event_url", 'This Event') ?>
 												<br />
 												<span onClick="showBox('event_instructions');" class="link">Help</span>
 	                    					<?
@@ -51,6 +54,8 @@
 												<br />
 												<h2>Feedback</h2>
 												<?= anchor("contact/showForm/request_an_event","Request An Event");?>
+												<h2>RSS Feeds</h2>
+												<?= anchor('feed/events','All Events');?>
  												<br />
 												<br />
 												<span onClick="showBox('event_instructions');" class="link">Help</span>

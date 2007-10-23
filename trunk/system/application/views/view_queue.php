@@ -1,5 +1,7 @@
 <?
 if(isset($rss)) $data['rss'] = $rss;
+$data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
+						'href' => site_url("feed/events"));
 $data['rss'][] = array(	'title' => ucwords(str_replace('_',' ', $event_name)) . ' Event Feed', 
 						'href' => site_url("feed/event/$event_name"));
 $data['red_head'] = $event_type.'s';
