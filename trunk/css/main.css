@@ -56,7 +56,7 @@ BODY {
 }
 
 .top-menu {
-    margin: 4px 0 5px 0;
+    margin: 3px 0 2px 0;
     float: left;
     width: 100%;
 }
@@ -149,12 +149,17 @@ BODY {
     margin: 0 -11% 0 0;
 }
 
+.col_left_item_container {
+	padding-left: 3px;
+}
+
 .content .col-center-container {
     width: 100%;
 	float: left;
 }
 
 .content .col-center {
+	
     margin: 0 34% 0 11%;
 	padding: 0 1% 50px 1%;
 	width: 52%;
@@ -162,12 +167,19 @@ BODY {
 	border-right: 2px solid #C6DDEF;
 	float: left;
 }
+ 
+.double_line_container {
+	background: url("../images/double-line.gif") repeat-x left top;
+	padding-top: 8px;
+	margin-top: 10px;
+}
 
 .content .col-right {
     float: right;
     width: 33%;
     margin: 0 0 0 -35%;
 	padding: 0 1% 0 0;
+	overflow: hidden;
 }
 
 .content .col-border {
@@ -181,7 +193,7 @@ BODY {
     padding: 6px 0 5px 0;
     color: #464646;
     font-weight: bold;
-    font-size: 10px;
+    font-size: 12px;
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     background: #F0FAFF;
@@ -210,7 +222,7 @@ BODY {
 .content .col-right H1,
 .content .col-center H1 {
     margin: 0;
-    padding: 14px 0 0 0;
+    padding: 5px 0 0 0;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
     font-weight: normal;
@@ -419,6 +431,18 @@ BODY {
     text-decoration: none;
 }
 
+/* HEADER STUFF */
+.header .center_text {
+	text-align: center;
+	margin-left: -195px;
+	margin-top: 10px;
+	font-family: Georgia;
+	font-size: 3.5em;
+	position: absolute;
+	width: 100%;
+	color: #073D7D;
+}
+
 .header .flag {
     background: url("../images/flag.jpg") no-repeat center top;
     float: left;
@@ -457,6 +481,11 @@ BODY {
     margin: 7px 0 0 0;
 }
 
+.date {
+	font-family: Georgia;
+	font-size: 12px;
+}
+
 .header .menu .update {
     float: left;
     font-size: 11px;
@@ -491,7 +520,8 @@ BODY {
 }
 
 .header .left-banner {
-    margin-left:10px;
+    margin-left:0px;
+	margin-bottom: 10px;
     float: left;
 }
 
@@ -503,7 +533,8 @@ BODY {
 .header .right-banner {
     float: right;
     margin-right:10px;
-	margin-top: -105px;
+	margin-top: 10px;
+	padding-top: 3px;
 }
 
 .header .right-banner IMG {
