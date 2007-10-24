@@ -77,6 +77,21 @@ class User extends Controller {
 		$this->load->view('view_create_account',$data);
 	}
 	
+	
+	function createAccountOI ($error='') {
+		$data['error'] = str_replace('_',' ',$error);
+	
+		//add image to data
+		$data['capimage'] = $this->createCaptcha();
+		
+		//set field values
+		$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";
+		$fields['user_email']	= ( isset($_POST['user_email']) ) ? $_POST['user_email']:"";	
+		$this->validation->set_fields($fields);
+		
+		$this->load->view('view_create_account_oi',$data);
+	}
+	
 	function create () {
 		$error = false;
 		$custom_error = '';
