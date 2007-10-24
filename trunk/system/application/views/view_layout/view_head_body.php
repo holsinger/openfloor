@@ -29,7 +29,6 @@
 						<li class="separator">|</li>
 						<li><?=anchor('user/logout/',"Logout");?></li>
 					<? else: ?>
-						<li><img src="images/openid-icon-small.gif" style='top:4px;'></li>
 						<li><a onClick="showBox('login');">Login</a></li>
 						<li class="separator">|</li>					
 						<li><?= anchor('user/createAccount','Create Account');?></li>
