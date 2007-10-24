@@ -34,7 +34,8 @@ class User extends Controller {
 		$rules['user_name'] = "trim|required|min_length[3]|max_length[75]|xss_clean";
 		$rules['user_password'] = "trim|required|md5|xss_clean";
 		$this->validation->set_rules($rules);
-							
+		
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Login'=>'');					
 		if ($this->validation->run() == FALSE) {
 			$data['error'] = $this->validation->error_string;
 			$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";	
