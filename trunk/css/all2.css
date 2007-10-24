@@ -5,7 +5,6 @@ a:hover{text-decoration:none;}
 .link{color:#F04A54;cursor:pointer;}
 .link:hover{text-decoration:none;cursor:pointer;}
 
-
 #content_div table.user-profile {
 	background-color: #d1edfe;
 }
@@ -21,6 +20,16 @@ a:hover{text-decoration:none;}
 
 #content_div table tbody tr.alternate {
 	background-color: #c1dded;
+}
+
+
+.help {
+	/* Used for help links */
+	font-family: Georgia;
+	cursor: pointer;
+	color: #033D7C;
+	font-size: 1.0em;
+	font-weight: bold;
 }
 /*pagination*/
 .pagers {
@@ -210,7 +219,7 @@ a.vote_digit:hover {
   	margin: 0 auto;
 }
 #content_div{
-  margin-left:25px;
+  margin-left:0px;
 }
 form label{
 	display: block;
@@ -266,8 +275,8 @@ textarea.txt {
 /*****************login*********************/
 #userLogin {
 	float:right;
-	margin-right:50px;
-	margin-top:5px;
+	margin-right:10px;
+	margin-top:0px;
 	text-align: right;
 }
 #userLogin span{
@@ -291,13 +300,31 @@ textarea.txt {
 /************Event*****************/
 .user-summary,
 .event-summary {
-	margin-left:20px;
-	width: 450px;
+	border-width: 1px 1px 1px 1px;
+	border-color: #C1D8EA;
+	border-style: solid;
+	padding-bottom: 10px;
+	margin-left: 0px;
 }
 
 .event-summary p {
 	/*padding-left:105px;*/
 	line-height: 12px;
+}
+.subheader {
+	font-family: Georgia;
+	font-size: 1.5em;
+	color: #033D7C;
+	padding-top: 10px; 
+	border-width: 2px 0px 0px 0px; 
+	border-color: #C1D8EA; 
+	border-style: solid;
+}
+#working_town_div {
+	/* used on view_events.php page */
+	padding: 20px;
+	border: 1px solid #C1D8EA;
+	text-align: center;
 }
 /******************Content*******************/
 #admin_content {

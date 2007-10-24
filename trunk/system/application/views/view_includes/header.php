@@ -37,8 +37,16 @@ if ($this->userauth->isAdmin()) $data['breadcrumb']['Admin'] = '/admin';
 $this->load->view('view_layout/view_left_column.php',$data); 
 ?>
 <div class="col-center">
-<?
-echo nbs(6);
-foreach ($data['breadcrumb'] as $key => $link) echo anchor($link,$key)."&nbsp;>&nbsp;";
-?>
-<br />
+	<div class="double_line_container">
+		<? 
+		foreach ($breadcrumb as $key => $link){
+			if($link != ""){
+				echo anchor($link,$key)."&nbsp;>&nbsp;";
+			}else{
+				echo $key;
+			}
+			
+		} 
+		?>
+	</div>
+	<br />

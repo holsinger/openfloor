@@ -20,7 +20,7 @@
 					<li><a href="http://blog.runpolitics.com">BLOG</a></li>
                 </ul>
                 <ul class="right" id="userLogin">
-					<? if ($this->userauth->isUser()) { ?>
+					<? if ($this->userauth->isUser()):?>
 						<li class="login">Welcome, <?=anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name,'user');?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span></li>
 						<li><img src="images/karma_star_default.png" style='top:4px;'></li>
 						<li>)</li>
@@ -28,39 +28,30 @@
 						<li><?=anchor('user/profile/'.$this->userauth->user_name,'Manage Account');?></li>
 						<li class="separator">|</li>
 						<li><?=anchor('user/logout/',"Logout");?></li>
-					<? } else { ?>
+					<? else: ?>
 						<li><img src="images/openid-icon-small.gif" style='top:4px;'></li>
 						<li><a onClick="showBox('login');">Login</a></li>
 						<li class="separator">|</li>					
 						<li><?= anchor('user/createAccount','Create Account');?></li>
-					<? } ?>
+					<? endif; ?>
                 </ul>
             </div>
             
-            <div class="header">
-                <div class="flag">  
+            <div class="header"> 
                     <span class="left-banner">
+						<div style="height: 45px;">
+							<img src="./images/sub_site_main/secondary_logo.png" alt="" border="0" />
+						</div>
+						<div style="margin-left: 35px;">
+							<div class="date"><?=date('l, F j, Y');?></div>
+						</div>
 					</span>
-                    <a href="#" class="logo"><img src="images/logo.gif" alt="" /></a>
-                    <span class="right-banner">		
+					
+					<span class="center_text"><?if(isset($top_banner_text)) echo($top_banner_text);?></span>
+					
+                    <span class="right-banner">	
+						<img src="images/RP_YOUaretheparty.gif"/>	
                     </span>
-                </div>
-				<div class="menu-container">
-	                <div class="menu">
-	                    <div class="date"><?=date('l, F j, Y');?></div>
-	                    
-	                    <div class="links">
-							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;left:91px;"/>
-	                        <!-- <a href="#"><img src="images/people.gif" alt="" /></a>
-	                        <div class="sep"></div>
-	                        <a href="#"><img src="images/politics.gif" alt="" /></a>
-	                        <div class="sep"></div>
-	                        <a href="#"><img src="images/change.gif" alt="" /></a> -->
-	                    </div>
-	                    
-	                    <!-- <div class="update">Last Update: <span>9:32 AM MST</span></div> -->
-	                </div>
-				</div>
             </div>
             
             <div class="content">
