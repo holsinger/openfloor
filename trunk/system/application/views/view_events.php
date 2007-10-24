@@ -20,36 +20,36 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 		<p class='errorArea'><?=(isset($error)?$error:'')?></p>
 
 		<? //echo $this->table->generate($events)?>
-		<h3 class="subheader"  >Upcoming Events</h3>
+		<h3 class="subheader">Upcoming Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array) {?>
                 
                 <? if (strtotime($array['event_date']) > strtotime(date('Y-m-d'))) { ?>
                 <div id='event<?=$array['event_id'];?>' class='event-summary'>
-                	<div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
+                	<div style="float:left; margin-right: 5px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
+					
 					<?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
 					<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br/>
-
-
-					<?
-					$atts = array(
-					'width'      => '372',
-					'height'     => '280',
-					'scrollbars' => 'no',
-					'status'     => 'no',
-					'resizable'  => 'no',
-					'screenx'    => '0',
-					'screeny'    => '0'
-					);
-					?>
 					<?if($array['streaming']):?>
-					<p><strong><?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+						<?
+						$atts = array(
+						'width'      => '372',
+						'height'     => '280',
+						'scrollbars' => 'no',
+						'status'     => 'no',
+						'resizable'  => 'no',
+						'screenx'    => '0',
+						'screeny'    => '0'
+						);
+						?>
+						<p><strong><?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
 					<?endif;?>
+					<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
                 </div>
                 <br />
-                <? if ($this->userauth->isAdmin()) echo $array['edit'];?>
+                
            <?$count ++;
            }?>
         <? }?>
@@ -73,30 +73,33 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
         <? foreach ($events as $key => $array) {?>
                 <? if (strtotime($array['event_date']) < strtotime(date('Y-m-d'))) { ?>
                 <div id='event<?=$array['event_id'];?>' class='event-summary'>
-                <div style="float:left;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
-                        <?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />       -
-                        <b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
-                        <b>Where:</b> <?=$array['location'];?><br />
-                        <b>Description:</b> <?=$array['event_desc_brief'];?><br/>
-                        <?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?>
+                	<div style="float:left; margin-right: 5px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
+					
+					<?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
+					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
+					<b>Where:</b> <?=$array['location'];?><br />
+					<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
+					<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br />
 
-                        <?
-                        $atts = array(
-				              'width'      => '372',
-				              'height'     => '280',
-				              'scrollbars' => 'no',
-				              'status'     => 'no',
-				              'resizable'  => 'no',
-				              'screenx'    => '0',
-				              'screeny'    => '0'
-				            );
-				       ?>
-                        <?if($array['streaming']):?>
-                        <p><strong><?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
-                        <?endif;?>
+                        
+					<?if($array['streaming']):?>
+						<?
+						$atts = array(
+						'width'      => '372',
+						'height'     => '280',
+						'scrollbars' => 'no',
+						'status'     => 'no',
+						'resizable'  => 'no',
+						'screenx'    => '0',
+						'screeny'    => '0'
+						);
+						?>
+						<p><strong><?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'CLICK HERE FOR LIVE VIDEO', $atts)?></strong></p>
+					<?endif;?>
+					<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
                 </div>
                 <br />
-                <? if ($this->userauth->isAdmin()) echo $array['edit'];?>
+                
            <? }?>
         <? }?>
         </div>
