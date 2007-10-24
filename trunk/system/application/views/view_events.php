@@ -10,15 +10,20 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-   <br/>
-  <img src="images/RP_OpenFloorEvents.png"/>
-  <div style="margin-left:10px;margin-right:30px;"><?=$cms_text;?></div>
-  <? if ($this->userauth->isSuperAdmin()) echo "<div>".anchor('admin/cms/'.$cms_url, 'edit')."</div>"; ?>
-    
+	<? if($this->userauth->isAdmin()): ?>
+		<?="<p>".anchor('/event/create_event','Create an event').(isset($error)?"<br />".$error:'')."</p>"?>
+	<? endif; ?>
+	<img src="images/RP_OpenFloorEvents.png"/>
+	<div style="margin-left:10px;margin-right:30px;">
+		<div style="float: left; margin: 0px 5px 5px 0px;">
+			<div><img src="./images/events/event_example.jpg" border="0" /></div>
+			<h1>A new kind of meeting place.</h1>
+		</div>
+		<?=$cms_text;?>
+		<? if ($this->userauth->isSuperAdmin()) echo "<br />".anchor('admin/cms/'.$cms_url, 'edit'); ?>
+	</div>
+  
   	<div id="event_view">
-		<p><? if ($this->userauth->isAdmin()) echo anchor('/event/create_event','Create an event');?></p>
-		<p class='errorArea'><?=(isset($error)?$error:'')?></p>
-
 		<? //echo $this->table->generate($events)?>
 		<h3 class="subheader">Upcoming Events</h3>
 		<? $count=0; ?>
