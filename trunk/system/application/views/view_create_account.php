@@ -31,7 +31,7 @@
 		<?= form_open('user/create'); ?>
 	<? }*/ ?>
 	<strong style="color:#000000;">To use your OpenID to Create an Account go <?=anchor('');?></strong>
-	
+	<?= form_open('user/create'); ?>
 	<?= form_format("Username: *",form_input('user_name',(isset($this->validation->user_name))?$this->validation->user_name:'','class="txt"') ); ?>
 	<? if ( !isset($openID) ) echo form_format("Password: *",form_password('user_password','','class="txt"') ); ?>
 	<? if ( !isset($openID) ) echo form_format("Password Confirm: *",form_password('password_confirm','','class="txt"') ); ?>
