@@ -332,6 +332,13 @@ textarea.txt {
 	margin-top: 3px;
 	margin-bottom: 6px;
 }
+
+#participate_live_div {
+	/* used on view_events.php page */
+	padding: 6px;
+	border: 1px solid #C1D8EA;
+	text-align: center;
+}
 /******************Content*******************/
 #admin_content {
 	margin:0 11px 0 9px;

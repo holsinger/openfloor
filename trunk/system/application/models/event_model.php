@@ -60,13 +60,17 @@ class Event_model extends Model
 	public function get_event ($id,$url='',$date_start='',$date_end='')
 	{
 		 $result_array = array(); 
+		
 		 if ($id) $this->db->where('event_id',$id);
 		 if ($url) $this->db->where('event_url_name',$url);
+		
 		 $query = $this->db->get('cn_events');
 		 log_message('debug', "EVENT:getEvent:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
-		 if (count($result_array)> 0) return $result_array[0];
-		 else return false; 
+		 if (count($result_array)> 0) 
+			return $result_array[0];
+		 else 
+			return false; 
 		 
 	}
 	

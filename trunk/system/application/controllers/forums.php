@@ -216,6 +216,7 @@ class Forums extends Controller
 		if(!isset($event_id)) redirect();
 		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'question';
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 		
 		$this->load->model('Question_model','question2'); // why are we loading it like this?
 		$data['rss'] = array();
@@ -223,6 +224,7 @@ class Forums extends Controller
 		// event information
 		$this->question2->event_id = $event_id; 
 		$data['event_name'] = $uri_array['event'];
+		$data['event_info'] = $this->event->get_event("", $data['event_name']);
 		
 		// question information
 		if (isset($uri_array['question'])) {
@@ -246,9 +248,7 @@ class Forums extends Controller
 		// prepare sorting information
 		$this->prepareSort($data);		
 		
-		// ==========================================
-		// = Load the question queue from the model =
-		// ==========================================
+		// Load the question queue from the model
 		$data['results'] = $this->question2->questionQueue();
 		
 		if(empty($data['results'])) {
@@ -278,10 +278,6 @@ class Forums extends Controller
 		
 		// load the view
 		$data['view_name'] = 'view_queue';
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
-		// $this->dependencies->view('view_queue');
-		// $data['javascript'] = $this->dependencies->javascript;
-		// $data['css'] = $this->dependencies->css;
 
 		$this->load->view('view_queue',$data);	
 	}		

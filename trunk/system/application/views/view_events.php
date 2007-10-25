@@ -77,10 +77,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
            		<?$count ++;
            endif; ?>
         <? endforeach; ?>
-        <? 
-		if ($count < 1) {
-			// Ugly table used for vertical text alignment
-			echo '
+        <? if ($count < 1) : ?>
 			<div id="working_town_div">
 				<table cellspacing="0" cellpadding="0" border="0">
 					<tr>
@@ -88,9 +85,8 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 						<td valign="middle" align="left" width="100%">We are working hard to bring our OpenFloor Events to your town!  Stay tuned...</td>
 					</tr>
 				</table>
-			</div>'; 
-		}
-		?>
+			</div>
+		<? endif; ?>
 		<!-- FINALLY, PAST EVENTS -->
         <br />
         <? //echo $this->table->generate($events)?>
