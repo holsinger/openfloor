@@ -23,7 +23,6 @@ class Forums extends Controller
 		$this->load->library('time_lib');
 		$this->load->library('validation');
 		$this->load->library('wordcloud');
-		$this->load->library('dependencies');
 		
 		// helpers
 		$this->load->helper('form');
@@ -280,14 +279,14 @@ class Forums extends Controller
 		// load the view
 		$data['view_name'] = 'view_queue';
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
-		$this->dependencies->view('view_queue');
-		$data['javascript'] = $this->dependencies->javascript;
-		$data['css'] = $this->dependencies->css;
+		// $this->dependencies->view('view_queue');
+		// $data['javascript'] = $this->dependencies->javascript;
+		// $data['css'] = $this->dependencies->css;
 
 		$this->load->view('view_queue',$data);	
 	}		
 	
-	public function videoQueue($uri_array,$event_id) 
+	public function videoQueue ($uri_array,$event_id) 
 	{
 		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'video';
