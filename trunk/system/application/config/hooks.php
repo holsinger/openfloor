@@ -10,5 +10,11 @@
 |
 */
 
-
+$hook['post_controller'][] = array(
+                                'class'    => 'Dependencies',
+                                'function' => 'init',
+                                'filename' => 'Dependencies.php',
+                                'filepath' => 'hooks',
+                                'params'   => array()
+                                );
 ?>
