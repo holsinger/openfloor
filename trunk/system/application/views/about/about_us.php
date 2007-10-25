@@ -12,7 +12,7 @@
 				<tr>
 					<td width="43" valign="top">
 						<div style="margin-top: 130px">
-							<img class="link" onclick="MoveBackwards();"  src="./images/about/RP_AboutUs_BackArrow.png" border="0" title="Move Backward">
+							<img class="link" onclick="MoveBackwards();"  src="<?=base_url()?>images/about/RP_AboutUs_BackArrow.png" border="0" title="Move Backward">
 						</div>
 					</td>
 					<td width="100%" id="main_content_td">
@@ -20,7 +20,7 @@
 		            		<div id="inner_about_div" style="position: relative; height: 344px; width: 4000px; z-index: 2;">
 								<? foreach($info as $name => $value): ?>
 									<div id="<?=$name?>_div" style="float:left; width: <?=$info[$name]['img_size']?>px; overflow: visible;">
-										<img id="<?=$name?>" src="./images/about/<?=$name?>_off.jpg" border="0" onmouseover="ChangeAboutImage(this, 'on');" onmouseout="ChangeAboutImage(this, 'off');">
+										<img id="<?=$name?>" src="<?=base_url()?>images/about/<?=$name?>_off.jpg" border="0" onmouseover="ChangeAboutImage(this, 'on');" onmouseout="ChangeAboutImage(this, 'off');">
 									</div>
 								<? endforeach; ?>
 		            		</div>
