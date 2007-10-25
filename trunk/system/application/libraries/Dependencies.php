@@ -30,14 +30,14 @@ class Dependencies
 		$contents = fread($view_handle, filesize($this->views_base_path . $view));
 		
 		// find out if this views calls any other views
-		preg_match_all('/\$this-\>load-\>view\([\'"](.*)[\'"]\)/', $contents, $views);
-		
+		preg_match_all('/\$this-\>load-\>view\([\'"](.*)[\'"]/', $contents, $views);
+
 		// populate dependencies array with any dependency tags found
 		preg_match_all('/#dependency (.*)/', $contents, $dependencies);
-		foreach($dependencies[1] as $dependency) $this->dependencies[] = $dependency;
+		foreach($dependencies[1] as $dependency) $this->dependencies[] = trim($dependency);
 		
 		// recursion: get dependencies for children views, if any
-		foreach($views[1] as $v) $this->get_dependencies($this->check_extension($v));
+		foreach($views[1] as $v) if(strpos($v, '$') === false) $this->get_dependencies($this->check_extension($v));
 		
 		fclose($view_handle);
 	}
