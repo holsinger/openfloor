@@ -3,7 +3,7 @@
 </div>
 <div>
 
-	<div id="blog">
+	<div style="width: 350px" id="blog">
 		<!-- ++Begin Blog Bar Wizard Generated Code++ -->
 		  <!--
 		  // Created with a Google AJAX Search Wizard
