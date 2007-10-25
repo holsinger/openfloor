@@ -1,7 +1,4 @@
-<? 
-#dependency queueUpdater.js
-$profileLink = "user/profile/$user_name";
-?>
+<? $profileLink = "user/profile/$user_name" ?>
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<div class="raiting" >
 		<? $this->load->view('view_includes/votebox.php')?>

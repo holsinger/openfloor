@@ -1,7 +1,4 @@
 <?
-#dependency ajaxVideo.js
-#dependency queueUpdater.js
-
 $data['red_head'] = $event_type;
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
