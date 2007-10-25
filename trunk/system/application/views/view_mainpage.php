@@ -6,21 +6,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Run Politics</title>
 
-<style type="text/css" media="screen">
-    @import url("css/main.css");
-    @import url("css/all2.css");
-</style>
-<style media="all" type="text/css">@import "css/userWindow.css";</style>
+<!-- 
+
+CSS DEPENDENCIES
+#dependency all2.css
+#dependency main.css
+#dependency userWindow.css
+
+JAVASCRIPT DEPENDENCIES
+#dependency /src/builder.js
+#dependency /src/controls.js
+#dependency /src/dragdrop.js
+#dependency /src/effects.js
+#dependency /src/slider.js
+#dependency /lib/prototype.js
+#dependency userWindow.js
+
+-->
+
+<!-- #dependencies -->
+
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
 <!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
+
 <script type="text/javascript">
 	site_url = '<?= $this->config->site_url();?>';
 	username = '<?=$this->userauth->user_name;?>';
 </script>
-<script type="text/javascript" src="javascript/lib/prototype.js"></script>
-<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
-<script src="javascript/src/effects.js" type="text/javascript"></script>
-<script type="text/javascript" src="javascript/userWindow.js"></script>
 </head>
 <body>
 	<!--  load AJAX views -->

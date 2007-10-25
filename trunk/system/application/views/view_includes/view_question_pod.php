@@ -1,3 +1,6 @@
+<!--
+	#dependency queueUpdater.js
+-->
 <? $profileLink = "user/profile/$user_name" ?>
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
 	<div class="raiting" >

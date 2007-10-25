@@ -18,7 +18,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	<? if(strtotime($event_info['show_live_timestamp']) < strtotime(date('Y-m-d G:i:s')) ): ?>
 		<div id="participate_live_div">
 			<div text-align="center">This event is currently open for live participation.  Click on the button below to join.</div>
-			<div style="background-color: #0173ba; margin: 10px -6px -6px -6px; padding: 4px 3px 0px 10px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
+			<div style="background-color: #0173ba; margin: 10px -6px -6px -6px; padding: 4px 3px 0px 10px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($event_name)?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
 		</div>
 	<? endif; ?>
 	

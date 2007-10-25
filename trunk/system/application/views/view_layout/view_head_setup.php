@@ -5,11 +5,9 @@
 <base href="<?= $this->config->site_url();?>" />
 <link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 <?
-if(isset($rss)): 
-	foreach($rss as $feed):
+if(isset($rss))
+	foreach($rss as $feed)
 		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
-	endforeach;
-endif;
 ?>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Run Politics</title>
@@ -24,13 +22,13 @@ endif;
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js
-	#dependency /lib/prototype.js
-	#dependency /src/scriptaculous.js
+	#dependency /src/builder.js
+	#dependency /src/controls.js
+	#dependency /src/dragdrop.js
 	#dependency /src/effects.js
+	#dependency /src/slider.js
+	#dependency /lib/prototype.js
 	#dependency userWindow.js
-	#dependency ajaxVideo.js
-	#dependency queueUpdater.js
-	#dependency clock.js
 	
 	-->
 	

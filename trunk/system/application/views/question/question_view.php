@@ -1,3 +1,6 @@
+<!--
+	#dependency queueUpdater.js
+-->
 <?
 $data['red_head'] = $event_type;
 $data['tabs'] = $event_type;

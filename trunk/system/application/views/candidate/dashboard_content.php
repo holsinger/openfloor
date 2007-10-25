@@ -1,3 +1,7 @@
+<!--
+	#dependency clock.js
+-->
+
 <h3>Candidate Dashboard</h3>
 <p><table class="can-dashboard-current-question">
 <tr><td>Current Question: </td>		<td><strong><?=$questions[0]['question_name']?></strong></td></tr>
