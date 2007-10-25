@@ -1,6 +1,3 @@
-<?php
-
-?>
 				<div id="content">
 					<div class="c-frame">
 						<div class="c-bl">
@@ -42,8 +39,3 @@
 														?>
 													</div>
 													<div id="twocolumn">
-																			
-																			
-																			
-																			
-																			

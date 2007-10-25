@@ -1,3 +1,6 @@
+<?
+#dependency queueUpdater.js
+?>
 <div class="news-summary" id="xnews-5">
 	<!-- raiting topics start here -->
 	<div class="raiting" >

@@ -1,4 +1,5 @@
 <?
+#dependency ajaxVideo.js
 $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_submit_question'] = 'active';

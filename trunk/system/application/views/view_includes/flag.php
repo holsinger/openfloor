@@ -1,4 +1,6 @@
 <?
+#dependency queueUpdater.js
+
 switch ($this->flag_lib->type) {
 	case 'question':
 		$fk_id = $question_id;
