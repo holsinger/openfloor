@@ -3,7 +3,7 @@
 </div>
 <div>
 
-	<div style="overflow: hidden;" id="blog">
+	<div id="blog">
 		<!-- ++Begin Blog Bar Wizard Generated Code++ -->
 		  <!--
 		  // Created with a Google AJAX Search Wizard

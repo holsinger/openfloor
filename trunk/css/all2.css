@@ -315,7 +315,7 @@ textarea.txt {
 	font-family: Georgia;
 	font-size: 1.5em;
 	color: #033D7C;
-	padding-top: 10px; 
+	padding-top: 7px; 
 	border-width: 2px 0px 0px 0px; 
 	border-color: #C1D8EA; 
 	border-style: solid;
@@ -325,6 +325,12 @@ textarea.txt {
 	padding: 20px;
 	border: 1px solid #C1D8EA;
 	text-align: center;
+}
+
+.event_content_div H3 {
+	/* Used for H3 tags on the event page */
+	margin-top: 3px;
+	margin-bottom: 6px;
 }
 /******************Content*******************/
 #admin_content {
