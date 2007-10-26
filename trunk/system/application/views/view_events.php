@@ -48,7 +48,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 		<? endif; ?>
 	<? endforeach; ?>
 	<? if($count < 1): ?>
-		<img src="images/RP_OpenFloorEvents.png"/>
+		<img src="./images/RP_OpenFloorEvents.png"/>
 		<div style="margin-left:10px;margin-right:30px;">
 			<div style="float: left; margin: 0px 5px 5px 0px;">
 				<div><img src="./images/events/event_example.jpg" border="0" /></div>
