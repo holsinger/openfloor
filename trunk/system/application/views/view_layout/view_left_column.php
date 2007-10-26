@@ -52,10 +52,13 @@
 			                    					Click on an <i>Event Name</i> to get started.
 													<br />
 													<br />
+													<a href="javascript: var none = new Effect.ScrollTo($('upcoming_events_title'));">Upcoming Events</a>
+													<a href="javascript: var none = new Effect.ScrollTo($('past_events_title'));">Past Events</a>
+													<br />
 													<h2>RSS Feeds</h2>
 													<?= anchor('feed/events','All Events');?>
 	 												<br />
-													<br />
+
 													<span onClick="showBox('event_instructions');" class="help">HELP</span>
 												</div>
 	                    					<?

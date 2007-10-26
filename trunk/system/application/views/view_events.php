@@ -60,7 +60,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
     <!-- NEXT, UPCOMING EVENTS -->
   	<div id="event_view">
 		<? //echo $this->table->generate($events)?>
-		<h3 class="subheader">Upcoming Events</h3>
+		<h3 class="subheader" id="upcoming_events_title">Upcoming Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
         	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && strtotime($array['show_live_timestamp']) > strtotime(date('Y-m-d G:i:s')) ): ?>
@@ -90,7 +90,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 		<!-- FINALLY, PAST EVENTS -->
         <br />
         <? //echo $this->table->generate($events)?>
-        <h3 class="subheader">Past Events</h3>
+        <h3 class="subheader" id="past_events_title">Past Events</h3>
         <? foreach ($events as $key => $array): ?>
         	<? if (strtotime($array['event_date']) < strtotime(date('Y-m-d'))): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
@@ -113,5 +113,4 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 		</div>
 
 </div>
-
 <? $this->load->view('view_includes/footer.php'); ?>
