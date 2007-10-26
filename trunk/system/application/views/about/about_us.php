@@ -2,7 +2,7 @@
 	TODO Switch completely to using prototype events so that there is no chance of getting an error of ChangeAboutImage not being set before it's loaded.  (add events on load)
 -->
 	
-	
+<?$data['left_nav'] = 'about_us';	?>
 <?php $this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div">
         <h3>About Us</h3>

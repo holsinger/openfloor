@@ -73,6 +73,14 @@
 							                    <?echo anchor('admin/','Add New');?>
 						                    <?
 											break;
+											case 'about_us':
+											?>
+												<h1>About Us</h1>
+												<div class="col_left_item_container">
+			                    					Hover over an individual to view their bio.
+												</div>
+						                    <?
+											break;
 											default:
 											?>
 											
