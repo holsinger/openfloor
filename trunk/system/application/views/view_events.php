@@ -63,6 +63,8 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
     <!-- NEXT, UPCOMING EVENTS -->
   	<div id="event_view">
 		<? //echo $this->table->generate($events)?>
+		<br/>
+		<br/>
 		<h3 class="subheader" id="upcoming_events_title">Upcoming Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
