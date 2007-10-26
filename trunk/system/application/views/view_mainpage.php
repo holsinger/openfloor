@@ -14,11 +14,8 @@ CSS DEPENDENCIES
 #dependency userWindow.css
 
 JAVASCRIPT DEPENDENCIES
-#dependency /src/builder.js
-#dependency /src/controls.js
-#dependency /src/dragdrop.js
+#dependency /src/scriptaculous.js
 #dependency /src/effects.js
-#dependency /src/slider.js
 #dependency /lib/prototype.js
 #dependency userWindow.js
 
