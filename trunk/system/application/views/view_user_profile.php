@@ -10,7 +10,7 @@ $data['red_head'] = 'Welcome';
 	<?
 	echo "<br /><p style='float:right;margin-right:25px;'><img src='{$avatar_image_path}'></p>";
 	echo '<br /><strong>' . ($candidate ? 'Name:' : 'Username:') . '</strong> '.$display_name;
-	echo "<br /><strong> Email: </strong> ".$user_email;
+	// echo "<br /><strong> Email: </strong> ".$user_email;
 	if($candidate) echo "<p><strong>Bio:</strong> $bio</p>";
 	//echo "<br /><strong> OpenID: </strong> ".$user_openid;
 	//echo isset($avatar_image_name)?"<br /><strong> Avatar: </strong> <img src='./avatars/{$avatar_image_name}'>":'';
