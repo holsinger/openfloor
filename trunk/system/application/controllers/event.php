@@ -114,9 +114,7 @@ class Event extends Controller
 	}
 	
 	public function edit_event_action($event_id)
-	{
-		
-		
+	{		
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);
 		$error = false;
@@ -160,10 +158,10 @@ class Event extends Controller
 		
 		if(!empty($_FILES['userfile']['name']))
 		{
-			echo 'AVATAR IS SET';
 			if ( ! $this->upload->do_upload())
 			{
-				$this->error = $this->upload->display_errors();
+				$error = $this->upload->display_errors();
+				// exit($this->error);
 			}	
 			else
 			{
@@ -212,7 +210,6 @@ class Event extends Controller
 		$rules['blocked_ips'] = "trim|max_length[65535]";
 		$rules['streaming'] = '';
 		#TODO is validation even being performed??
-		
 		if ( !$error ) {
 			//add event url name to array
 			$array = $_POST;
@@ -232,7 +229,7 @@ class Event extends Controller
 				$this->edit_event($event_id, $error);
 			}
 		} //if no error
-		
+		$this->view_events($error);
 		
 		
 	}
