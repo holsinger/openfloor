@@ -165,6 +165,15 @@ class Event extends Controller
 			}	
 			else
 			{
+				#remove old image
+				if (isset($_POST['old_avatar']) ) 
+				{
+					$filename = $_POST['old_avatar'];
+					// we still probably want to catch errors, but the !is_string($this->error) was causing the file not to get deleted
+					if ( file_exists($filename) && $filename != './avatars/') unlink ($filename);
+					unset($_POST['old_avatar']);
+				}
+
 				$data['upload_data'] = $this->upload->data();
 				
 				//resize image
@@ -179,16 +188,7 @@ class Event extends Controller
 				$this->image_lib->resize();
 				if ($this->image_lib->display_errors()) $this->error =  $this->image_lib->display_errors();
 				else $this->error = 'Update complete!';			
-			}
-		
-			#remove old image
-			if (isset($_POST['old_avatar']) ) 
-			{
-				$filename = $_POST['old_avatar'];
-				// we still probably want to catch errors, but the !is_string($this->error) was causing the file not to get deleted
-				if ( file_exists($filename) && $filename != './avatars/') unlink ($filename);
-				unset($_POST['old_avatar']);
-			}
+			}		
 		}
 		
 		if (isset($data['upload_data'])) {
