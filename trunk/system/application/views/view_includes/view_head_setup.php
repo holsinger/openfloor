@@ -20,9 +20,9 @@
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js
+	#dependency /lib/prototype.js
 	#dependency /src/scriptaculous.js
 	#dependency /src/effects.js
-	#dependency /lib/prototype.js
 	#dependency userWindow.js
 	
 	-->
