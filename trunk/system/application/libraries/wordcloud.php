@@ -77,6 +77,24 @@
   	}
   	 
   	/*
+  		Sort alphabetically
+  	*/
+	function sortCloud()
+	{
+		$keys = array_keys($this->wordsArray);
+		
+		asort($keys);
+
+  		if (count($keys) && is_array($keys))
+  		{
+  			$tmpArray = $this->wordsArray;
+  			$this->wordsArray = array();
+  			foreach ($keys as $key => $value)
+  				$this->wordsArray[$value] = $tmpArray[$value];
+  		}		
+	}
+
+	/*
   	* Shuffle associated names in array
   	*/
   	 
@@ -144,7 +162,7 @@
   	 
   	function showCloud($returnType = "html")
   	{
-  		$this->shuffleCloud();
+  		$this->sortCloud();
   		$this->max = max($this->wordsArray);
 	//	echo $this->max;
   		if (is_array($this->wordsArray))
