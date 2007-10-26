@@ -1,12 +1,15 @@
 <!--
 	#dependency queueUpdater.js
+	#dependency question.css
 -->
 <? $profileLink = "user/profile/$user_name" ?>
 <div class="news-summary" id="xnews-<?= $question_id; ?>">
+	<!-- Voting Section -->
 	<div class="raiting" >
 		<? $this->load->view('view_includes/votebox.php')?>
 		<a id="xvotes-<?= $question_id; ?>" href="index.php/votes/who/<?= $question_id; ?>" class="vote_digit" title='Who Voted?'><?=(is_numeric($votes))?$votes:0;?></a>
-	</div>																					
+	</div>	
+	<!-- Right Section -->
 	<div class="describtion">
 		<div class="describtion-frame">
 			<div class="descr-tr">
