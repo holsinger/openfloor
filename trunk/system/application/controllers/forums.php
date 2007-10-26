@@ -247,7 +247,7 @@ class Forums extends Controller
 		// prepare sorting information
 		$this->prepareSort($data);		
 
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>'');
 		
 		// Load the question queue from the model
 		$data['results'] = $this->question2->questionQueue();
