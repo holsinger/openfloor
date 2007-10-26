@@ -1,3 +1,6 @@
+<!--
+	#dependency events.css
+--> 
 <?
 if(isset($rss)) $data['rss'] = $rss;
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 

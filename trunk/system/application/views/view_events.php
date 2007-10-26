@@ -1,3 +1,6 @@
+<!--
+	#dependency events.css
+--> 
 <?
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
 						'href' => site_url("feed/events"));
