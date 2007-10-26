@@ -22,10 +22,13 @@ if(isset($rss))
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js
-	#dependency /lib/prototype.js
-	#dependency /src/scriptaculous.js"
 	#dependency userWindow.js
-	
+	#dependency ajaxVideo.js
+	#dependency queueUpdater.js
+	#dependency clock.js
+	#dependency /lib/prototype.js
+	#dependency /src/scriptaculous.js
+
 	-->
 	
 	<!-- DO NOT REMOVE THIS LINE -->
