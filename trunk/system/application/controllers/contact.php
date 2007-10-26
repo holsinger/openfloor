@@ -15,45 +15,75 @@ class Contact extends Controller
 		$this->showForm();
 	}
 	function showForm($contact_type){
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),"Contact Us"=>$this->config->site_url()."contact/showForm/contact_us");
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),"Contact Us"=> "");
 		$data['contact_type'] = $contact_type;
 		$data['contact_page_name'] = ucwords(str_replace("_", " ", $contact_type));
 
 		$cms_data = $this->cms_model->get_cms(0, $contact_type);
 		$data['contact_page_desc'] = $cms_data['cms_text'];
 		
-		$this->load->view('contact/contact_us', $data);
+		// user info, if posted use it for validation purposes
+		if($_POST){
+			$data['sender_name'] = $_POST['sender_name'];
+			$data['sender_email'] = $_POST['sender_email'];
+			$data['feedback'] = $_POST['feedback'];
+		}else{
+			if($this->userauth->isUser()){
+				$data['sender_name'] = $this->userauth->user_name;
+				$data['sender_email'] = $this->userauth->user_email;
+			}else{
+				$data['sender_name'] = "";
+				$data['sender_email'] = "";
+			}
+		}
+
+		
+		// Validation stuff
+		$this->load->library('validation');
+		$rules['sender_name'] = "required";
+		$rules['feedback'] = "required";
+		$rules['sender_email'] = "required|valid_email";
+		$this->validation->set_rules($rules);
+		$this->validation->set_error_delimiters('<div class="errorArea">', '</div>');
+		
+		if ($this->validation->run() == FALSE){
+			$this->load->view('contact/contact_us', $data);
+		}else{
+			$this->send($data);
+		}
+		
+		
 	}
 	
-	function send(){
+	private function send($data){
 		// Variable Stuff
 		$data['contact_type'] = $_POST['contact_type'];
-		$type_title = ucwords(str_replace("_", " ", $_POST['contact_type']));
-		if($_POST['contact_type'] == 'contact_us'){
+		$type_title = ucwords(str_replace("_", " ", $data['contact_type']));
+		
+		if($data['contact_type'] == 'contact_us'){
 			$data['thank_you_desc'] = 'Your feedback has been received.  Thanks for helping make Run Politics better.';
-		}elseif($_POST['contact_type'] == 'request_an_event'){
+		}elseif($data['contact_type'] == 'request_an_event'){
 			$data['thank_you_desc'] = 'Thanks for your request.  Our staff will look over your request and contact you if necessary.';
-		}elseif($_POST['contact_type'] == 'feedback'){
+		}elseif($data['contact_type'] == 'feedback'){
 			$data['thank_you_desc'] = 'Thanks for your feedback.  Our staff will look over your request and contact you if necessary.';
 		}
-		if($this->userauth->isUser()){
-			$sender_name = $this->userauth->user_name;
-			$sender_email = $this->userauth->user_email;
-		}else{
-			$sender_name = "Anonymous";
-			$sender_email = "";
-		}
-		$cms_data = $this->cms_model->get_cms(0, $_POST['contact_type']);
-		//echo("Important Info: ".$sender_name.",".$sender_email.",".$cms_data['custom_1']);
+
+		$cms_data = $this->cms_model->get_cms(0, $data['contact_type']);
+		//echo("Important Info: ".$data['sender_name'].",".$data['sender_email'].",".$cms_data['custom_1']);
+		
 		// Setup and send email
 		$this->load->library('email');
 		$config['mailtype'] = 'html';
 		$this->email->initialize($config);
-		$this->email->from($sender_name, $sender_email);
+		$this->email->from(str_replace(" ","_",$data['sender_name']), $data['sender_email']);
 		$this->email->to($cms_data['custom_1']);
 
 		$this->email->subject('Run Politics - '.$type_title.' Feedback');
-		$this->email->message('<b>The following feedback was provided through the "'.$type_title.'" feature of runpolitics.com:</b><br /><br />'.$_POST['feedback']);
+		$this->email->message('
+		<b>Sender</b>: '.$data['sender_name'].'<br />
+		<b>Email</b>: '.$data['sender_email'].'<br /><br />
+		<b>The following feedback was provided through the "'.$type_title.'" feature of runpolitics.com:</b><br />
+		'.$data['feedback']);
 
 		$this->email->send();
 		
