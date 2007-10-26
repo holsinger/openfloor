@@ -1,4 +1,7 @@
 <!--
+	// INCLDUE NEED DEPENDANCIES
+	#dependency about_us.css
+
 	TODO Switch completely to using prototype events so that there is no chance of getting an error of ChangeAboutImage not being set before it's loaded.  (add events on load)
 -->
 	
@@ -6,8 +9,8 @@
 <?php $this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div">
         <h3>About Us</h3>
-		<div id="loading_div" style="position: relative; font-size: 2em; text-align: center;">LOADING...</div>
-		<div style="position: relative; overflow: hidden; width: 100%">
+		<div id="loading_div">LOADING...</div>
+		<div id="overall_outer_div">
 			<table cellpadding="0" cellspacing="0" border="0">
 				<tr>
 					<td width="43" valign="top">
@@ -16,8 +19,8 @@
 						</div>
 					</td>
 					<td width="100%" id="main_content_td">
-						<div  id="outer_about_div" style="position: relative; overflow: hidden; width: 0px; height: 700px; border: 0px solid #000000; z-index: 3;">
-		            		<div id="inner_about_div" style="position: relative; height: 344px; width: 4000px; z-index: 2;">
+						<div  id="outer_about_div">
+		            		<div id="inner_about_div">
 								<? foreach($info as $name => $value): ?>
 									<div id="<?=$name?>_div" style="float:left; width: <?=$info[$name]['img_size']?>px; overflow: visible;">
 										<img id="<?=$name?>" src="<?=base_url()?>images/about/<?=$name?>_off.jpg" border="0" onmouseover="ChangeAboutImage(this, 'on');" onmouseout="ChangeAboutImage(this, 'off');">
@@ -35,7 +38,7 @@
 				</tr>
 			</table>
 			<!-- Moving Bio Div -->
-			<div style="visibility: hidden; width: 250px; top: 350px; position: absolute; margin-top: 10px" id="about_bio"> 
+			<div id="about_bio"> 
 				<div style="font-weight: bold;" id="bio_name"></div>
 				<div id="bio_content"></div>
 			</div>
