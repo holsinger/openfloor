@@ -17,7 +17,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 	<!-- FIRST, LIVE EVENTS -->
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
-		<? if(strtotime($array['event_date']) > strtotime(date('Y-m-d')) && strtotime($array['show_live_timestamp']) < strtotime(date('Y-m-d G:i:s')) ): ?>
+		<? if(strtotime($array['event_date']) > strtotime(date('Y-m-d')) && $array['streaming']): ?>
 			<h3 class="subheader">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">
@@ -25,12 +25,10 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 						<td valign="top" style="padding-right: 3px;">
 							<div><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 							<div>
-								<?if($array['streaming']):?>
-									<?
-									$atts = array('width' => '372',	'height' => '280', 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no',	'screenx' => '0', 'screeny' => '0');
-									?>
-									<?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'View Live Feed', $atts)?>
-								<?endif;?>
+								<?
+								$atts = array('width' => '372',	'height' => '280', 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no',	'screenx' => '0', 'screeny' => '0');
+								?>
+								<?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'View Live Feed', $atts)?>
 							</div>
 						</td>
 						<td valign="top">
@@ -59,12 +57,12 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 			<?=$cms_text;?>
 			<? if ($this->userauth->isSuperAdmin()) echo "<br />".anchor('admin/cms/'.$cms_url, 'edit'); ?>
 		</div>
+		<br/>
+		<br/>
 	<? endif; ?>
     <!-- NEXT, UPCOMING EVENTS -->
   	<div id="event_view">
 		<? //echo $this->table->generate($events)?>
-		<br/>
-		<br/>
 		<h3 class="subheader" id="upcoming_events_title">Upcoming Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
