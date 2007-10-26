@@ -31,7 +31,6 @@
 
 												<h1>EVENT</h1>
 												<div class="col_left_item_container">
-													<a onclick="showBox('event_dashboard');window.open(site_url + 'forums/cp/<?=str_replace('event/','',$event_url);?>', '_blank', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" href="javascript:void(0);"><h2>Live Event</h2></a>
 								                    <h2>Questions</h2>
 								                    
 								                    <?=anchor("question/add/{$event_url}","Ask a Question");?>
