@@ -1,7 +1,10 @@
-/* @override http://localhost/~Rob/RunPoliticsTrunk/css/all2.css */
+/* @override 
+	http://localhost/~Rob/RunPoliticsTrunk/css/all2.css
+	http://localhost/~Rob/RunPoliticsTrunk/css/events.css,all2.css,main.css,userWindow.css,flag.css,wordcloud.css
+*/
 
-a{color:#F04A54;}
-a:hover{text-decoration:none;}
+a{color:#F04A54; text-decoration: none;}
+a:hover{text-decoration:underline;}
 .link{color:#F04A54;cursor:pointer;}
 .link:hover{text-decoration:none;cursor:pointer;}
 
