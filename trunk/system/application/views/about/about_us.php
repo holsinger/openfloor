@@ -121,15 +121,13 @@
 		});
 		$('loading_div').innerHTML = '';
 	}
-	
-	var current_win_width = window.innerWidth;
-	console.log("Init window size: "+window.innerWidth);
 	function onResize(){
-		
-		
 		$('outer_about_div').setStyle({
-			width: $('main_content_td').offsetWidth+"px"
-		});	
+			width: "0px"
+		});
+		onLoad();
 	}
+	
+
 </script>
 <? $this->load->view('view_includes/footer.php'); ?>
