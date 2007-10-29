@@ -14,6 +14,8 @@ CSS DEPENDENCIES
 #dependency userWindow.css
 #dependency googleVideo.css
 #dependency googleBar.css
+#dependency ie6.css
+#dependency ie7.css
 
 JAVASCRIPT DEPENDENCIES
 #dependency /lib/prototype.js
@@ -24,9 +26,6 @@ JAVASCRIPT DEPENDENCIES
 -->
 
 <!-- #dependencies -->
-
-<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
-<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
 
 <script type="text/javascript">
 	site_url = '<?= $this->config->site_url();?>';
