@@ -77,7 +77,7 @@
 											?>
 												<h1>About Us</h1>
 												<div class="col_left_item_container">
-			                    					Hover over an individual to view their bio.
+			                    					Hover over an individual to view their bio, below.
 												</div>
 						                    <?
 											break;
