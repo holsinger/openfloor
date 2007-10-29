@@ -46,7 +46,7 @@ class Dependencies
 		if(!empty($this->css))	
 			$ret .= '<link rel="stylesheet" type="text/css" href="css/' . implode(',', $this->css) . '" />' . "\n";			// $ret .= '<style type="text/css" media="screen">@import "css/' . implode(',', $this->css) . '";</style>';
 		if(!empty($this->javascript))
-			$ret .= '<script type="text/javascript" charset="utf-8" src="javascript/' . implode(',', $this->javascript) . '"></script>';
+			$ret .= '<script type="text/javascript" charset="utf-8" src="javascript' . implode(',', $this->javascript) . '"></script>';
 		$this->output = str_replace('<!-- #dependencies -->', $ret, $this->output);
 	}
 	
