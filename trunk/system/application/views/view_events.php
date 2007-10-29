@@ -40,7 +40,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 						</td>
 					</tr>
             	</table>
-				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 6px 3px 0px 10px"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
+				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 6px 3px 0px 10px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
             </div>
             <br />
 		
