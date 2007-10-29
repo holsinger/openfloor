@@ -1,5 +1,5 @@
 <!--
-	#dependency queueUpdater.js
+	#dependency /queueUpdater.js
 -->
 <span id="xvote-<?= $question_id; ?>" class="next_invisible">
 	<? if ($voted == 'up') { ?>

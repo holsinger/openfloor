@@ -1,5 +1,5 @@
 <!--
-	#dependency clock.js
+	#dependency /clock.js
 -->
 
 <h3>Candidate Dashboard</h3>

@@ -1,5 +1,5 @@
 <!--
-	#dependency events.css
+	#dependency /events.css
 --> 
 <?
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 

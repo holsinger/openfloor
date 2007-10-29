@@ -1,6 +1,6 @@
 <!--
-	#dependency queueUpdater.js
-	#dependency ajaxVideo.js
+	#dependency /queueUpdater.js
+	#dependency /ajaxVideo.js
 -->
 <div class="news-summary" id="xnews-5">
 	<!-- raiting topics start here -->
