@@ -1,4 +1,13 @@
-<?php echo($_SERVER['HTTP_USER_AGENT']); exit('<pre>' . print_r($_REQUEST, true) . '</pre>');
+<?php
+if(in_array('ie7.css', explode(',', $_GET['files']))) {
+	header ("Content-Type: text/css");
+	exit(file_get_contents('./css/ie7.css'));
+}
+if(in_array('ie6.css', explode(',', $_GET['files']))) {
+	header ("Content-Type: text/css");
+	exit(file_get_contents('./css/ie6.css'));
+}
+
 
 	/************************************************************************
 	 * CSS and Javascript Combinator 0.5
