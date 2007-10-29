@@ -767,7 +767,7 @@ class Forums extends Controller
 		$candidates = $this->event->getCansInEvent($event_id);
 		$return .= '<div class="content">';
 		
-		foreach($candidates as $v) $return .= '<a href="' . $this->candidate->linkToProfile($v, true) . '"><img src="./avatars/'.$this->candidate->canAvatar($v).'"/></a>';
+		foreach($candidates as $v) $return .= '<a href="' . $this->candidate->linkToProfile($v, true) . '"><img style="border-style:none;" src="./avatars/'.$this->candidate->canAvatar($v).'"/></a>';
 		$return .= '<p>';
 		for($i = 0; $i < count($candidates); $i++) 
 			if($i == count($candidates) - 1) $return .= ' and ' . $this->candidate->linkToProfile($candidates[$i]);
