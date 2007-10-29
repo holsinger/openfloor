@@ -1,4 +1,4 @@
-<?php echo($_SERVER['HTTP_USER_AGENT']); exit('<pre>' . print_r($request, true) . '</pre>');
+<?php echo($_SERVER['HTTP_USER_AGENT']); exit('<pre>' . print_r($_REQUEST, true) . '</pre>');
 
 	/************************************************************************
 	 * CSS and Javascript Combinator 0.5
