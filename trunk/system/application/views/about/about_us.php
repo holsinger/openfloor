@@ -1,10 +1,13 @@
-<!--
-	// INCLDUE NEED DEPENDANCIES
-	#dependency about_us.css
+<? /*
+	PAGE DESCRIPTION:
+	This page displays the about us information, including bios for each person
 
-	TODO Switch completely to using prototype events so that there is no chance of getting an error of ChangeAboutImage not being set before it's loaded.  (add events on load)
--->
-	
+	NOTES:
+	TODO: Switch completely to using prototype events to load the ChangeAboutImage events on page load
+*/ ?>
+<!--
+	#dependency /about_us.css
+--> 
 <?$data['left_nav'] = 'about_us';	?>
 <?php $this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div">
@@ -109,13 +112,24 @@
 		}
 
 	}	
-	// Ugly IE 6 Junk
+	// Ugly IE 6 Junk that keeps growing
 	Event.observe(window, "load", onLoad);
+	Event.observe(window, "resize", onResize);
 	function onLoad(){
 		$('outer_about_div').setStyle({
 			width: $('main_content_td').offsetWidth+"px"
 		});
 		$('loading_div').innerHTML = '';
+	}
+	
+	var current_win_width = window.innerWidth;
+	console.log("Init window size: "+window.innerWidth);
+	function onResize(){
+		
+		
+		$('outer_about_div').setStyle({
+			width: $('main_content_td').offsetWidth+"px"
+		});	
 	}
 </script>
 <? $this->load->view('view_includes/footer.php'); ?>
