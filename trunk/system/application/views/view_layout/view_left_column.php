@@ -39,7 +39,7 @@
 								                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
 													<h2>RSS Feeds</h2>
 													<?= anchor('feed/events', 'Events Feed') ?>
-													<?= anchor("feed/$event_url", 'This Event\'s Question Feed') ?>
+													<?= anchor("feed/$event_url", 'Current Question Feed') ?>
 													<br />
 													<span onClick="showBox('event_instructions');" class="help">HELP</span>
 												</div>
