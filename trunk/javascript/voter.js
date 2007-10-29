@@ -19,7 +19,14 @@ Control.Voter.prototype = {
 		}else{
 			this.num_selected = 0; // The index of meter_elems that is currently selected
 		}
-		
+		if(this.options.voted_meter_class){
+			// If this property is set the we set all the "on" classes to this
+			this.options.voted_meter_classes = new Array();
+			for(var i = 0; i < this.options.meter_values.length; i++){
+				this.options.voted_meter_classes[i] = this.options.voted_meter_class;
+			}
+		}
+		// dragging arrow stuff
 		this.dragging = false;
 		this.offsetX = 0;
 		if(this.options.arrow_elem){
