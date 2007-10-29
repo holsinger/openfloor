@@ -113,8 +113,8 @@ JAVASCRIPT DEPENDENCIES
 											
 											<br /><br />
 											<form id="searchform" action="http://media.runpolitics.com/" method="get">
-											<input id="s" type="text" name="s" size="15" value=""/>
-											<input id="searchsubmit" type="submit" value="Search"/>
+											<input id="s" type="text" name="s" size="10" class='txt' value=""/>
+											<input id="searchsubmit" type="submit" value="Search"/ class='button'>
 											</form>	
 						
 	                </div>
