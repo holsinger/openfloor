@@ -12,13 +12,13 @@ $hidden = array('contact_type' => $contact_type);
 	<?=$this->validation->error_string; ?>
 	<?= form_open('contact/showForm/'.$contact_type, "", $hidden); ?>
 		<br />
-	    Name:&nbsp;<?=form_input(array('name' => 'sender_name', 'value' => $sender_name, 'size' => '20'))?>
+	    Name:&nbsp;<?=form_input(array('name' => 'sender_name', 'value' => $sender_name, 'size' => '20','class'=> 'txt'))?>
 		<br />
 		<br />
-		Email:&nbsp;<?=form_input(array('name' => 'sender_email', 'value' => $sender_email, 'size' => '20'))?>
+		Email:&nbsp;<?=form_input(array('name' => 'sender_email', 'value' => $sender_email, 'size' => '20','class'=> 'txt'))?>
 		<br />
 		<br />
-	    <?=form_textarea(array('name' => 'feedback', 'value' => $feedback, 'id' => 'myform', 'cols' => '50', 'rows' => 15))?>
+	    <?=form_textarea(array('name' => 'feedback', 'value' => $feedback, 'id' => 'myform', 'cols' => '50', 'rows' => 15,'class'=> 'txt'))?>
 		<br /><br />
 		<?= form_submit('','Submit','class="button"'); ?>
 		<?= form_close(); ?>
