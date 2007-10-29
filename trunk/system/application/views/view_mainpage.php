@@ -5,6 +5,8 @@
 <base href="<?= $this->config->site_url();?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>Run Politics</title>
+<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
+<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
 
 <!-- 
 
@@ -24,9 +26,6 @@ JAVASCRIPT DEPENDENCIES
 -->
 
 <!-- #dependencies -->
-
-<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
-<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
 
 <script type="text/javascript">
 	site_url = '<?= $this->config->site_url();?>';
