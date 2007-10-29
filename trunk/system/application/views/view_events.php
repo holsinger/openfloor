@@ -17,7 +17,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 	<!-- FIRST, LIVE EVENTS -->
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
-		<? if(strtotime($array['event_date']) > strtotime(date('Y-m-d')) && $array['streaming']): ?>
+		<? if($array['streaming']): ?>
 			<h3 class="subheader">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">
