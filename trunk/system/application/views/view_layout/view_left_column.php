@@ -14,7 +14,7 @@
 							                    <a href="http://media.runpolitics.com/category/beltway/">Beltway</a>
 							                    <a href="http://media.runpolitics.com/category/commentary/">Commentary</a>
 							                    <a href="http://media.runpolitics.com/category/hot-topics/">Hot Topics</a>															
-																	<a href="http://media.runpolitics.com/">All</a>
+												<a href="http://media.runpolitics.com/">All</a>
 											
 												<br /><br />
 												<form id="searchform" action="http://media.runpolitics.com/" method="get">
@@ -38,8 +38,8 @@
 								                    <?= anchor("forums/queue/{$event_url}/sort/newest","View Newest");?>
 								                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
 													<h2>RSS Feeds</h2>
-													<?= anchor('feed/events', 'All Events') ?>
-													<?= anchor("feed/$event_url", 'This Event') ?>
+													<?= anchor('feed/events', 'Events Feed') ?>
+													<?= anchor("feed/$event_url", 'This Event\'s Question Feed') ?>
 													<br />
 													<span onClick="showBox('event_instructions');" class="help">HELP</span>
 												</div>
