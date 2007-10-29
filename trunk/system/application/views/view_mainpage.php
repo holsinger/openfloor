@@ -4,7 +4,13 @@
 <head>
 <base href="<?= $this->config->site_url();?>" />
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
 <title>Run Politics</title>
+<?
+if(isset($rss))
+	foreach($rss as $feed)
+		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
+?>
 <!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
 <!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
 
