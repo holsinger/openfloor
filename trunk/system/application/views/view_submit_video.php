@@ -1,5 +1,5 @@
 <!--
-	#dependency /ajaxVideo.js
+	#dependency ajaxVideo.js
 -->
 <?
 $data['red_head'] = $event_type.'s';

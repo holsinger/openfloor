@@ -13,17 +13,17 @@
 	<!-- 
 	
 	CSS DEPENDENCIES
-	#dependency /all2.css
-	#dependency /userWindow.css
-	#dependency /flag.css
-	#dependency /wordcloud.css
+	#dependency all2.css
+	#dependency userWindow.css
+	#dependency flag.css
+	#dependency wordcloud.css
 	
 	JAVASCRIPT DEPENDENCIES
-	#dependency /init.js
+	#dependency init.js
 	#dependency /lib/prototype.js
 	#dependency /src/scriptaculous.js
 	#dependency /src/effects.js
-	#dependency /userWindow.js
+	#dependency userWindow.js
 	
 	-->
 

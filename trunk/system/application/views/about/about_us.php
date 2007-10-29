@@ -6,7 +6,7 @@
 	TODO: Switch completely to using prototype events to load the ChangeAboutImage events on page load
 */ ?>
 <!--
-	#dependency /about_us.css
+	#dependency about_us.css
 --> 
 <?$data['left_nav'] = 'about_us';	?>
 <?php $this->load->view('view_includes/header.php',$data); ?>

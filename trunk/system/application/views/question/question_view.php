@@ -1,5 +1,5 @@
 <!--
-	#dependency /queueUpdater.js
+	#dependency queueUpdater.js
 -->
 <?
 $data['red_head'] = $event_type;

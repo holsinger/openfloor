@@ -9,15 +9,15 @@
 <!-- 
 
 CSS DEPENDENCIES
-#dependency /all2.css
-#dependency /main.css
-#dependency /userWindow.css
+#dependency all2.css
+#dependency main.css
+#dependency userWindow.css
 
 JAVASCRIPT DEPENDENCIES
 #dependency /lib/prototype.js
 #dependency /src/scriptaculous.js
 #dependency /src/effects.js
-#dependency /userWindow.js
+#dependency userWindow.js
 
 -->
 

@@ -1,5 +1,5 @@
 <!--
-	#dependency /queueUpdater.js
+	#dependency queueUpdater.js
 -->
 <?
 switch ($this->flag_lib->type) {

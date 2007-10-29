@@ -1,5 +1,5 @@
 <!--
-	#dependency /events.css
+	#dependency events.css
 --> 
 <?
 if(isset($rss)) $data['rss'] = $rss;
