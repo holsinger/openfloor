@@ -33,7 +33,7 @@ JAVASCRIPT DEPENDENCIES
 </head>
 <body>
 	<!--  load AJAX views -->
-	<div id="overlay" onclick="hideBox()" style="display:none"></div>
+	<div id="overlay" onclick="hideBox('overlay')" style="display:none"></div>
 	<div id="hijax" style="display:none"></div>
 	<? //$this->load->view('ajax/aview_zip_nine.php'); ?>
 	<? $this->load->view('ajax/aview_login.php'); ?>
