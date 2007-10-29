@@ -7,6 +7,10 @@ if(in_array('ie6.css', explode(',', $_GET['files']))) {
 	header ("Content-Type: text/css");
 	exit(file_get_contents('./css/ie6.css'));
 }
+if(in_array('lt7.css', explode(',', $_GET['files']))) {
+	header ("Content-Type: text/css");
+	exit(file_get_contents('./css/lt7.css'));
+}
 
 
 	/************************************************************************
