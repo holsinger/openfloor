@@ -11,8 +11,8 @@ if(isset($rss))
 	foreach($rss as $feed)
 		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
 ?>
-<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="css/ie6.css" /><![endif]-->
-<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="css/ie7.css" /><![endif]-->
+<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie6.css" /><![endif]-->
+<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie7.css" /><![endif]-->
 
 <!-- 
 
