@@ -12,12 +12,6 @@
             <div class="top-menu">
                 <ul class="left">
                     <li><?=anchor('', 'HOME')?></li>
-                    <li class="separator">|</li>
-                    <li><?=anchor("event/","EVENTS");?></li>
-                    <li class="separator">|</li>
-					<li><?=anchor("information/aboutUs","ABOUT US");?></li>
-                    <li class="separator">|</li>
-					<li><a href="http://blog.runpolitics.com">BLOG</a></li>
                 </ul>
                 <ul class="right" id="userLogin">
 					<? if ($this->userauth->isUser()):?>

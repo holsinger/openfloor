@@ -128,14 +128,7 @@ BODY {
     text-align: center;
     font-size:9px;
 }
-.contact_us{
-    float: left;
-    width: 100%;
-    margin: 0 0 0 2px;
-    padding: 0px 0 10px 0;
-    text-align: center;
-    font-size:9px;	
-}
+
 .content {
     float: left;
 	width: 100%;
@@ -635,4 +628,26 @@ textarea.txt {
 }
 #userLogin.user a {
 	color:#F04A54;
+}
+
+/* ============== */
+/* = Contact US = */
+/* ============== */
+.contact_us{
+    float: left;
+    width: 100%;
+    margin: 0 0 0 2px;
+    padding: 0px 0 10px 0;
+    text-align: center;
+
+}
+.contact_us A{
+    text-decoration: none;	
+	color: #053C7C;	
+}
+contact_us .separator {
+	padding-left: 6px;
+    padding-right: 6px;
+    color: #41B3DF;
+    font-weight: bold;
 }
