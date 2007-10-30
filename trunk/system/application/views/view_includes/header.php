@@ -19,7 +19,13 @@ else $onload = 'init();';
 <? //$this->load->view('ajax/aview_zip_nine.php'); ?>
 <? $this->load->view('ajax/aview_login.php'); ?>
 
-<? $this->load->view('view_layout/view_head_body.php'); ?>	
+<?  // THIS SECTION USES TEMPORARY CODE FOR AN EVENT AND NEEDS TO BE REPLACED
+if(!isset($use_temp_top)){
+	$this->load->view('view_layout/view_head_body.php');
+}else{
+	$this->load->view('view_layout/temp_view_head_body.php');
+} ?>	
+
 <!--  Ad space -->
 
 <?

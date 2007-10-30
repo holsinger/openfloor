@@ -7,6 +7,9 @@ $data['rss'][] = array(	'title' => 'RunPolitics Events Feed',
 $data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
 $data['top_banner_text'] = "OPENFLOOR EVENTS";
+
+// THIS IS TEMP CODE FOR AN EVENT AND NEEDS TO BE REPLACED
+$data['use_temp_top'] = true;
 ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
@@ -62,7 +65,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
 		<h3 class="subheader" id="upcoming_events_title">Upcoming Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
-        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && strtotime($array['show_live_timestamp']) > strtotime(date('Y-m-d G:i:s')) ): ?>
+        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !($array['streaming']) ): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
@@ -74,7 +77,7 @@ $data['top_banner_text'] = "OPENFLOOR EVENTS";
                 </div>
                 <br />
            		<?$count ++;
-           endif; ?>
+		       endif; ?>
         <? endforeach; ?>
         <? if ($count < 1) : ?>
 			<div id="working_town_div">

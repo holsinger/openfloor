@@ -15,6 +15,12 @@ class Tag_lib {
 		else exit();							// invalid argument
 		
 		$segment_array = $this->CI->uri->segment_array();
+		
+		//TEMP CODE, DELETE AFTER EVENT ON NOV 2nd
+		if(!$segment_array){
+			$segment_array[1] ="event";
+		}
+		
 		if(is_numeric($segment_array[count($segment_array)]))
 			array_pop($segment_array);
 		$class = array_shift($segment_array);

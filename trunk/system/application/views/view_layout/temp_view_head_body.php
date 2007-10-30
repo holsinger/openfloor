@@ -30,21 +30,30 @@
                 </ul>
             </div>
             
-            <div class="header"> 
+            <div class="header">
+                <div class="flag">  
                     <span class="left-banner">
-						<div style="height: 45px;">
-							<img src="./images/sub_site_main/secondary_logo.png" alt="" border="0" style="cursor: pointer;" onclick="window.location = '';"/>
-						</div>
-						<div style="margin-left: 35px;">
-							<div class="date"><?=date('l, F j, Y');?></div>
-						</div>
 					</span>
-					
-					<span class="center_text"><?if(isset($top_banner_text)) echo($top_banner_text);?></span>
-					
-                    <span class="right-banner">	
-						<img src="images/RP_YOUaretheparty.gif"/>	
+                    <a href="#" class="logo"><img src="images/logo.gif" alt="" /></a>
+                    <span class="right-banner">
                     </span>
+                </div>
+				<div class="menu-container">
+	                <div class="menu">
+	                    <div class="date"><?=date('l, F j, Y');?></div>
+	                    
+	                    <div class="links">
+							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;left:91px;"/>
+	                        <!-- <a href="#"><img src="images/people.gif" alt="" /></a>
+	                        <div class="sep"></div>
+	                        <a href="#"><img src="images/politics.gif" alt="" /></a>
+	                        <div class="sep"></div>
+	                        <a href="#"><img src="images/change.gif" alt="" /></a> -->
+	                    </div>
+	                    
+	                    <!-- <div class="update">Last Update: <span>9:32 AM MST</span></div> -->
+	                </div>
+				</div>
             </div>
             
             <div class="content">
