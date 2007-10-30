@@ -43,7 +43,7 @@ $data['use_temp_top'] = true;
 						</td>
 					</tr>
             	</table>
-				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 6px 3px 0px 10px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
+				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 3px 3px 0px 3px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
             </div>
             <br />
 		
@@ -79,7 +79,7 @@ $data['use_temp_top'] = true;
            		<?$count ++;
 		       endif; ?>
         <? endforeach; ?>
-        <? if ($count < 1) : ?>
+        <? if ($count < 10) : ?>
 			<div id="working_town_div">
 				<table cellspacing="0" cellpadding="0" border="0">
 					<tr>
@@ -87,6 +87,7 @@ $data['use_temp_top'] = true;
 						<td valign="middle" align="left" width="100%">We are working hard to bring our OpenFloor Events to your town!  Stay tuned...</td>
 					</tr>
 				</table>
+				<div style="background-color: #0173ba; margin: 5px -10px -10px -10px; padding: 3px 3px 0px 3px; text-align: center"><img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
 			</div>
 		<? endif; ?>
 		<!-- FINALLY, PAST EVENTS -->
@@ -100,9 +101,8 @@ $data['use_temp_top'] = true;
 					
 					<?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
-					<b>Where:</b> <?=$array['location'];?><br />
-					<b>Description:</b> <?=$array['event_desc_brief'];?><br/>
-					<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br />
+					<b>Where:</b> <?=$array['location'];?><br /><br />
+					<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br />
 					<? if ($this->userauth->isAdmin()) echo "<br />".$array['edit'];?>
                 </div>
                 <br />
@@ -110,7 +110,7 @@ $data['use_temp_top'] = true;
            <? endif; ?>
         <? endforeach; ?>
         </div>
-		<div style="text-align: center">
+		<div style="background-color: #0173ba; text-align: center">
 			<img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link" onclick="window.location=site_url+'contact/showForm/request_an_event';">
 		</div>
 

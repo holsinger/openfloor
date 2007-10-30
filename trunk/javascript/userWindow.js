@@ -47,12 +47,12 @@ function getDynamicElement(string) {
 	var my_div = $('hijax');
 	Element.extend(my_div);
 	//set element styles
-  my_div.style.position = 'absolute';
-  my_div.style.zIndex   = 3000;
+    my_div.style.position = 'absolute';
+    my_div.style.zIndex   = 3000;
 	my_div.innerHTML = 'Loading...';
 	my_div.show();
 	new Ajax.Request(site_url+'/information/viewAjax/'+string,
-  {
+    {
     method:'post',
     onSuccess: function(transport){
       var response = transport.responseText;
