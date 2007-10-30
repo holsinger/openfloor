@@ -360,4 +360,49 @@ class Event extends Controller
 		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
 		$this->load->view('event/view',$data);
 	}
+	
+	public function GetEventsForSidebar(){
+		$events = $this->event->getEventsByDate();
+		$massaged_data = Array();  // for the sake of readability.
+		
+		// Massage the information
+		foreach ($events as $key => $array){
+			error_log($array['event_name']);
+			if (strtotime($array['event_date']) >= strtotime(date('Y-m-d')) ){
+				$return_array['upcoming_events'][] = $array;
+			}elseif (strtotime($array['event_date']) < strtotime(date('Y-m-d'))){
+				$return_array['past_events'][] = $array;
+			}
+		}
+		
+		// Since this is used by ajax, we need to return viewable material
+		$st = '<h4>Upcoming Events</h4>';
+		if(count($return_array['upcoming_events']) > 0){
+			$count = 0;
+			foreach ($return_array['upcoming_events'] as $key => $array){
+				//$st .= $array['event_name']."<br />";
+				$st .= anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'<br />';
+				if($count == 1){
+					break;
+				}
+				$count++;
+			}	
+		}else{
+			$st .= 'We are working hard to bring events to your neck of the woods';
+		}
+		
+		$st .= '<h4>Past Events</h4>';
+		$count = 0;
+		foreach ($return_array['past_events'] as $key => $array){
+			$st .= anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'<br />';
+			
+			if($count == 1){
+				break;
+			}
+			$count++;
+		}
+		// Return json data
+		echo($st);
+	}
+	
 }

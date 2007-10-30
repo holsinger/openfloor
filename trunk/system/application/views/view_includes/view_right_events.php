@@ -1,14 +1,15 @@
-<?php
-?>
 <div class="pots">
-<div class="box">
-<div class="inner-box" id="events">
- <span style="padding-left:5px;"><img style="margin-left:-15px" src='./images/RP_OpenFloorEvents.png'><br />
- <h4>&nbsp;&nbsp;&nbsp;Upcoming Events</h4>
- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?= anchor('event','<strong>Massachusetts 5th Congressional District Special General Election Debate</strong>');?>
- <h4>&nbsp;&nbsp;&nbsp;Past Events</h4>
- &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.runpolitics.com/index.php/forums/queue/event/salt_lake_city_mayoral_forum" title="Salt Lake City Mayoral Forum"><strong>Aug 8, Salt Lake City Mayoral Forum</strong></a><br /><br /></span>
+	<div class="box">
+		
+		<div class="inner-box" id="events">
+			<span style="padding-left:5px;"><img style="margin-left:-15px" src='./images/RP_OpenFloorEvents.png'>
+			 <div id="events_sidebar_div">Loading...</div>
+		</div>
+	</div>
 </div>
-</div>
-</div> 
-<?  ?>
+<script type="text/javascript" charset="utf-8">
+	new Ajax.Updater("events_sidebar_div", 
+					'<?=$this->config->site_url()?>event/GetEventsForSidebar/', 
+					{ method: 'get'	}
+	);
+</script>
