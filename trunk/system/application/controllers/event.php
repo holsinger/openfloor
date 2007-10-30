@@ -388,7 +388,7 @@ class Event extends Controller
 				$count++;
 			}	
 		}else{
-			$st .= 'We are working hard to bring events to your neck of the woods';
+			$st .= 'We are working hard to bring our OpenFloor Events to your town!';
 		}
 		
 		$st .= '<h4>Past Events</h4>';
