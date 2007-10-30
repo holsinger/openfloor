@@ -69,7 +69,7 @@ class Event extends Controller
 		// tag cloud
 		$data['cloud'] = $this->tag_lib->createTagCloud(null);
 		
-		$data['rightpods'] = array('dynamic'=>array());
+		$data['rightpods'] = array('accordion' => array(), 'dynamic'=>array());
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'');	
 		$this->load->view('view_events',$data);
 	}
