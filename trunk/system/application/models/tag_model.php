@@ -2,6 +2,7 @@
 class Tag_model extends Model 
 {
 	public $type = 'question';
+	private $global_count = 50;
 	
  	function __construct()
     {
@@ -35,23 +36,26 @@ class Tag_model extends Model
 		foreach($set as $k=>$v) $set[$k] = '"' . $v . '"';		
 		return $this->db->query('SELECT tag_id, value FROM cn_tags WHERE value IN (' . implode(',',$set) . ')');
 	}
-	
+		
 	public function getAllReferencedTags($event_id = null)
 	{
 		$fk = ($this->type == 'question') ? 'fk_question_id' : 'fk_video_id' ;
 		$id = ($this->type == 'question') ? 'question_id' : 'video_id' ;
 		$table = ($this->type == 'question') ? 'cn_questions' : 'cn_videos' ;
 		
-		$result = ($event_id === null) ? 
+		$query = ($event_id === null) ? 
 		$this->db->query('SELECT value FROM cn_idx_tags_questions, cn_tags WHERE fk_tag_id = tag_id')->result_array() : 
 		$this->db->query("SELECT value FROM cn_idx_tags_questions, cn_tags WHERE fk_tag_id = tag_id AND $fk IN (SELECT $id FROM $table WHERE fk_event_id=$event_id)")->result_array() ;
-		
-		$words = array();
-		foreach($result as $v)
-			$words[] = $v['value'];
-		return $words;	
+				
+		$result = $words = array();
+		foreach($query as $v) $result[] = $v['value'];		
+		$count_values = array_count_values($result);		
+		arsort($count_values);
+		array_splice($count_values, $this->global_count);
+		foreach($count_values as $k => $v) for($j = 0; $j < $v; $j++) $words[] = $k;
+		return $words;
 	}
-	
+		
 	public function getTagsByQuestion($question_id)
 	{
 		return $this->db->query("SELECT value FROM cn_tags, cn_idx_tags_questions WHERE tag_id = fk_tag_id AND fk_question_id=$question_id")->result_array();

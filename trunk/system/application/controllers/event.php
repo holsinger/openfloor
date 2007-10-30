@@ -17,10 +17,13 @@ class Event extends Controller
 		$this->load->model('Event_model','event');
 		$this->load->model('Cms_model','cms');
 		$this->load->model('Candidate_model', 'candidate');
+		$this->load->model('tag_model', 'tag');
 		
 		$this->load->library('validation');
 		$this->load->library('ApiData');
 		$this->load->library('Utilities');
+		$this->load->library('tag_lib');
+		$this->load->library('wordcloud');
 		$this->load->plugin('js_calendar');
 				
 		$this->load->scaffolding('cn_events');
@@ -61,7 +64,12 @@ class Event extends Controller
 		$data['error'] = $error;		
 		
 		//$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
-		$data['rightpods'] = array('gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
+		// $data['rightpods'] = array('gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
+
+		// tag cloud
+		$data['cloud'] = $this->tag_lib->createTagCloud(null);
+		
+		$data['rightpods'] = array('dynamic'=>array());
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'');	
 		$this->load->view('view_events',$data);
 	}
