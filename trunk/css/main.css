@@ -134,6 +134,7 @@ BODY {
 	width: 100%;
     border-top: 2px solid #97BCDC;
     margin-left: 2px;
+	overflow: hidden;
 }
 
 .content .col-left {
@@ -172,7 +173,6 @@ BODY {
     width: 33%;
     margin: 0 0 0 -35%;
 	padding: 0 1% 0 0;
-	overflow: hidden;
 }
 
 .content .col-border {
