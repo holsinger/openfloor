@@ -14,6 +14,7 @@ $data['use_temp_top'] = true;
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div" class="event_content_div">
+	<span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span>  <!-- -->
 	<? if($this->userauth->isAdmin()): ?>
 		<?="<p>".anchor('/event/create_event','Create an event').(isset($error)?"<br />".$error:'')."</p>"?>
 	<? endif; ?>
@@ -21,7 +22,7 @@ $data['use_temp_top'] = true;
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
 		<? if($array['streaming']): ?>
-			<span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span>  <!-- -->
+			
 			<h3 class="subheader">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">
@@ -52,7 +53,6 @@ $data['use_temp_top'] = true;
 		<? endif; ?>
 	<? endforeach; ?>
 	<? if($count < 1): ?>
-		<img src="./images/RP_OpenFloorEvents.png"/>
 		<div style="margin-left:10px;margin-right:30px;">
 			<?=$cms_text;?>
 			<? if ($this->userauth->isSuperAdmin()) echo "<br />".anchor('admin/cms/'.$cms_url, 'edit'); ?>
