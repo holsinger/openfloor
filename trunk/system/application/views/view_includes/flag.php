@@ -18,7 +18,7 @@ $html = $this->flag_lib->createFlagHTML($fk_id, $event_name, $question_id);
 
 <? if($this->flag_lib->type == 'user'): ?>
 	<? if($this->userauth->isUser()): ?>
-		<img class="img-flag-<?=$this->flag_lib->type?>" style="cursor:pointer;" src="./images/RP_Questions_flag.png" <? if(!empty($html)) echo "onclick=\"javascript:queueUpdater.toggleVisibility('flag_{$this->flag_lib->type}$question_id');queueUpdater.toggleQueue();\"" ?>/>
+		<img class="img-flag-<?=$this->flag_lib->type?>" style="cursor:pointer;" src="./images/RP_Questions_flag.png" <? if(!empty($html)) echo "onclick=\"javascript:queueUpdater.toggleVisibility('flag_{$this->flag_lib->type}$question_id');\"" ?>/>
 	<? else: ?>
 		<img class="img-flag-<?=$this->flag_lib->type?>" style="cursor:pointer;" src="./images/RP_Questions_flag.png" onclick="showBox('login');" />
 	<? endif; ?>
