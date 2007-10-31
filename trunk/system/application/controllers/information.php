@@ -7,6 +7,10 @@ class Information extends Controller {
 		parent::Controller();
 		$this->load->model('Cms_model','cms');
 		$this->load->model('question_model', 'question');
+		$this->load->library('tag_lib');
+		$this->load->library('wordcloud');
+		$this->load->model('Cms_model','cms');
+		$this->load->model('tag_model', 'tag');
 		$this->load->library('validation');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
@@ -89,6 +93,11 @@ class Information extends Controller {
 	{
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),"About Us"=>"");
 		$data['info'] = $this->cms->GetAboutUsBios();
+		// tag cloud
+		$data['cloud'] = $this->tag_lib->createTagCloud(null);
+		
+		$data['rightpods'] = array('accordion' => array(), 'dynamic'=>array());
+		
 		foreach($data['info'] as $name => $value){
 			$img_size = getimagesize("./images/about/".$name."_off.jpg");
 			$data['info'][$name]['img_size'] = $img_size[0];
