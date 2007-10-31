@@ -21,6 +21,7 @@ $data['use_temp_top'] = true;
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
 		<? if($array['streaming']): ?>
+			<span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span>  <!-- -->
 			<h3 class="subheader">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">

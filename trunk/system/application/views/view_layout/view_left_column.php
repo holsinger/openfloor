@@ -47,7 +47,7 @@
 											break;
 											case 'events':
 											?>
-												<h1>EVENTS</h1>
+												<h1>HOME</h1>
 												<div class="col_left_item_container">
 			                    					Click on an <i>Event Name</i> to get started.
 													<br />

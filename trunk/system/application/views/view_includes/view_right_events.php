@@ -2,7 +2,7 @@
 	<div class="box">
 		
 		<div class="inner-box" id="events">
-			<span style="padding-left:5px;"><img style="margin-left:-15px" src='./images/RP_OpenFloorEvents.png'>
+			<span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span>
 			 <div id="events_sidebar_div">Loading...</div>
 		</div>
 	</div>
