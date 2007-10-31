@@ -112,7 +112,7 @@ $data['use_temp_top'] = true;
         <? endforeach; ?>
         </div>
 		<div style="background-color: #0173ba; text-align: center">
-			<?=anchor('contact/showForm/request_an_event','<img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link">');?>
+			<?=anchor("contact/showForm/request_an_event/","<img src='./images/events/RP_Events_Demand_Event.png' border='0'>");?>
 		</div>
 
 </div>
