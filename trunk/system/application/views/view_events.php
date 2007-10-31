@@ -88,7 +88,7 @@ $data['use_temp_top'] = true;
 						<td valign="middle" align="left" width="100%">We are working hard to bring our OpenFloor Events to your town!  Stay tuned...</td>
 					</tr>
 				</table>
-				<div style="background-color: #0173ba; margin: 5px -10px -10px -10px; padding: 3px 3px 0px 3px; text-align: center"><?=anchor('contact/showForm/request_an_event','<img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link">');?></div>
+				<div style="background-color: #0173ba; margin: 5px -10px -10px -10px; padding: 3px 3px 0px 3px; text-align: center"><?=anchor('contact/showForm/request_an_event','<img src="./images/events/RP_Events_Demand_Event.png" border="0">');?></div>
 			</div>
 		<? endif; ?>
 		<!-- FINALLY, PAST EVENTS -->
