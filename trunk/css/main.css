@@ -170,11 +170,10 @@ BODY {
 
 .content .col-right {
     float: right;
-    width: 33%;
+    width: 32%;
     margin: 0 0 0 -35%;
-	padding: 0 1% 0 5px;
+	padding: 0 1% 0 1%;
 	border-left: 2px solid #C6DDEF;
-	height: 100%;
 }
 
 .content .col-border {

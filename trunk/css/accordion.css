@@ -1,8 +1,12 @@
+#main_accordion {
+	margin-top: 10px;
+}
+
 .accordion_toggle {
 	display: block;
 	height: 28px;
-	width: 327px;
-	background: url(../images/accordion/accordion_toggle.jpg) no-repeat top left #a9d06a;
+	width: 100%;
+	background: url(../images/accordion/accordian_middle_off.png) repeat bottom left;
 	/*padding: 0 10px 0 10px;*/
 	line-height: 30px;
 	color: #6989af;
@@ -16,9 +20,24 @@
 	cursor: pointer;
 	margin: 0 0 0 0;
 }
+.accordion_toggle h2 {
+	margin: 0px;
+	padding: 0px;
+
+}
+.accordion_toggle .right_side{
+	background: url(../images/accordion/accordian_right_on.png) no-repeat top right;
+	width: 10px;
+	float: right;
+}
+.accordion_toggle .left_side{
+	background: url(../images/accordion/accordian_left_on.png) no-repeat top right;
+	width: 10px;
+	float: right;
+}
 
 .accordion_toggle_active {
-	background: url(../images/accordion/accordion_toggle_active.jpg) no-repeat top left #e0542f;
+	background: url(../images/accordion/accordian_middle_on.png) repeat top left;
 	color: #ffffff;
 }
 
@@ -26,14 +45,15 @@
 	background-color: #ffffff;
 	color: #444444;
 	overflow: hidden;
+	display: none;
 }
 	
-	.accordion_content h2 {
-		margin: 15px 0 5px 10px;
-		color: #0099FF;
-	}
+.accordion_content h2 {
+	margin: 15px 0 5px 10px;
+	color: #0099FF;
+}
 
-	.accordion_content p {
-		line-height: 150%;
-		padding: 5px 10px 15px 10px;
-	}
+.accordion_content p {
+	line-height: 150%;
+	padding: 5px 10px 15px 10px;
+}

@@ -20,20 +20,24 @@ $sections = explode(',', $cms['cms_text']);
 
 <script type="text/javascript" charset="utf-8">
 	Event.observe(window, 'load', loadAccordions, false);
-
+	
 	function loadAccordions() {
-		var bottomAccordion = new accordion('main_accordion');
+		var bottomAccordion = new accordion('main_accordion', { onEvent : 'click', oneventcustom : function(id1){ return; } });
 		bottomAccordion.activate($$('#main_accordion .accordion_toggle')[0]);
 	}
 </script>
 
 <div id="main_accordion">
+	<? $count= 0; ?>
 	<? 	foreach($sections as $section):
 			$section = explode(':', $section) ?>
-	<h2 class="accordion_toggle"><?= $section[0] ?></h2>
-	<div class="accordion_content">
-		<? 	$content = $this->cms->get_cms($this->cms->get_id_from_url($section[1])); 
-			echo $content['cms_text']; ?>
-	</div>
+			<h2 class="accordion_toggle">
+				<?= $section[0] ?>
+			</h2>
+			<div class="accordion_content" id="accordian_content_<?=$count?>">
+				<? 	$content = $this->cms->get_cms($this->cms->get_id_from_url($section[1])); 
+				echo $content['cms_text']; ?>
+			</div>
+			<? $count++; ?>
 	<? endforeach; ?>
 </div>

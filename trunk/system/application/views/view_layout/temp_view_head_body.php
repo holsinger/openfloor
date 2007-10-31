@@ -40,10 +40,8 @@
                 </div>
 				<div class="menu-container">
 	                <div class="menu">
-	                    <div class="date"><?=date('l, F j, Y');?></div>
-	                    
 	                    <div class="links">
-							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;left:91px;"/>
+							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;left:150px;"/>
 	                        <!-- <a href="#"><img src="images/people.gif" alt="" /></a>
 	                        <div class="sep"></div>
 	                        <a href="#"><img src="images/politics.gif" alt="" /></a>
