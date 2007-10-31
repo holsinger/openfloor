@@ -137,7 +137,7 @@ JAVASCRIPT DEPENDENCIES
 	                    <?=$center;?>
 	                </div>
                 </div>
-                <div class="col-right">
+                <div class="col-right" >
                     <?=$right;?>
                     
                 </div>

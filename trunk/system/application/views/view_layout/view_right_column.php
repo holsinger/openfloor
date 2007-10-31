@@ -2,7 +2,7 @@
 
 ?>
 <!-- right column start here -->
-<div class="col-right">
+<div class="col-right" id="col_right">
 
 <?
 //build the data array

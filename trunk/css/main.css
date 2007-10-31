@@ -141,6 +141,7 @@ BODY {
     float: left;
     width: 11%;
     margin: 0 -11% 0 0;
+	
 }
 
 .col_left_item_container {
@@ -158,7 +159,6 @@ BODY {
 	padding: 0 1% 50px 1%;
 	width: 52%;
 	border-left: 2px solid #C6DDEF;
-	border-right: 2px solid #C6DDEF;
 	float: left;
 }
  
@@ -172,7 +172,9 @@ BODY {
     float: right;
     width: 33%;
     margin: 0 0 0 -35%;
-	padding: 0 1% 0 0;
+	padding: 0 1% 0 5px;
+	border-left: 2px solid #C6DDEF;
+	height: 100%;
 }
 
 .content .col-border {

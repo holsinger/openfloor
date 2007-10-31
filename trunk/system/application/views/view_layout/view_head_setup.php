@@ -2,17 +2,17 @@
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-<base href="<?= $this->config->site_url();?>" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-<title>Run Politics</title>
-<?
-if(isset($rss))
-	foreach($rss as $feed)
-		echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
-?>
-<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie6.css" /><![endif]-->
-<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie7.css" /><![endif]-->
+	<base href="<?= $this->config->site_url();?>" />
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
+	<title>Run Politics</title>
+	<?
+	if(isset($rss))
+		foreach($rss as $feed)
+			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
+	?>
+	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie6.css" /><![endif]-->
+	<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie7.css" /><![endif]-->
 	
 	<!-- 
 	
@@ -50,6 +50,19 @@ if(isset($rss))
 	<style type="text/css" media="screen">
 		@import url("http://www.google.com/uds/solutions/newsbar/gsnewsbar.css");
 	</style>
-	
+	<script type="text/javascript" charset="utf-8">
+		// This javascript fills in css blanks by sizing the columns as God intended and CSS, alone, cannot.  Added by CTE
+		Event.observe(window, "load", function(){
+			var center_height = $('col_center_container').getHeight();
+			var right_height = $('col_right').getHeight();
+			
+			if(center_height > right_height){
+				$('col_right').setStyle({height: center_height+"px"});
+			}else{
+				$('col_center_container').setStyle({height: right_height+"px"});
+			}
+			
+		});
+	</script>
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>
 </head>
