@@ -104,7 +104,7 @@ class Vote_model extends Model
 									WHERE fk_user_id = user_id 
 										AND vote_id IN 
 										(SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = $question_id GROUP BY fk_user_id) 
-									ORDER BY timestamp;")->result_array();
+									ORDER BY timestamp DESC;")->result_array();
 	}
 		
 	public function getVotesByUser($user_id, $all = false)
