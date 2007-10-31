@@ -12,7 +12,7 @@ $data['red_head'] = $event_type.'s';
 $data['tabs'] = $event_type;
 $data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
-$data['left_nav'] = 'event';
+$data['left_nav'] = $global ? 'events' : 'event';
 $tag_execute = '';
 if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 ?>
@@ -28,11 +28,12 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	
 	<h3><?=$queue_title;?></h3>
 	<div id='queue'>
-		<? if(!$global && !isset($ajax)): ?>
-		<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">
+		<? if(isset($ajax)) ob_clean(); ?>
+		<? if(!isset($ajax)): ?>
+		<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?= $global ? 'none' : $vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">
 		<? endif; ?>
-		<? if(!$global && !isset($ajax) && $event_type == 'question'): ?>
-		<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?=$vars['event_name']?>';sort='<?=$vars['sort']?>';">
+		<? if(!isset($ajax) && $event_type == 'question'): ?>
+		<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?= $global ? 'none' : $vars['event_name']?>';sort='<?=$vars['sort']?>';">
 		<? endif; ?>
 		<?
 		if ($event_type == 'video')	{
@@ -44,6 +45,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 		}	
 		?>
 		<p><?=empty($results)?'<strong>There are no '.$event_type.'s to display '.anchor("$event_type/add/$event_url",'Submit A '.ucwords($event_type)).'</strong>':''?>
+		<? if(isset($ajax)) ob_end_flush(); ?>
 	</div>
 </div>
 <?

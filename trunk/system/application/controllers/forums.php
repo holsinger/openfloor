@@ -196,7 +196,10 @@ class Forums extends Controller
 	public function ajQueueUpdater($event_name, $sort, $offset, $tag='')
 	{
 		if(!empty($tag)) $tag = "tag/$tag/";
-		redirect("/forums/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
+		if($event_name == 'none')
+			redirect("forums/queue/{$tag}ajax/true");
+		else
+			redirect("/forums/queue/{$tag}event/$event_name/sort/$sort/ajax/true/$offset");
 	}
 	
 	public function queue()
