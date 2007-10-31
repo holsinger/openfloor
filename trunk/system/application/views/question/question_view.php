@@ -11,7 +11,7 @@ $data['left_nav'] = 'event';
 $this->load->view('view_includes/header.php', $data);?>
 <script type="text/javascript" charset="utf-8">
 	// Initialize, used in view_question_pod.php
-	queueUpdater.updateQueue();
+	// queueUpdater.updateQueue();
 </script>
 <?
 $this->load->view('view_includes/view_question_pod.php');

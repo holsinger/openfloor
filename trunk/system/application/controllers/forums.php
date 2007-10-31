@@ -2,6 +2,7 @@
 class Forums extends Controller 
 {
 	private $ajax = false;
+	private $global = false;
 	
 	function __construct()
 	{
@@ -203,27 +204,34 @@ class Forums extends Controller
 		//get data from url
 		$uri_array = $this->uri->uri_to_assoc(3);
 		if (isset($uri_array['ajax'])) $this->ajax = true;
-		if (!isset($uri_array['event'])) $this->index();
+		if (!isset($uri_array['event']) && isset($uri_array['tag'])) {
+			$this->global = true;
+			$this->questionQueue($uri_array, null);
+			return;
+		}
+		elseif (!isset($uri_array['event'])) $this->index();
 
 		$event_id = $this->event->get_id_from_url($uri_array['event']);
 		if ( $this->event->get_event_type($event_id) == 'question') $this->questionQueue($uri_array,$event_id);
 		if ( $this->event->get_event_type($event_id) == 'video') $this->videoQueue($uri_array,$event_id); 
-			
 	}
 		
 	public function questionQueue ($uri_array,$event_id) 
 	{
-		if(!isset($event_id)) redirect();
+		if(!isset($event_id) && !$this->global) redirect();
 		if($this->ajax) $data['ajax'] = true;
 		$data['event_type'] = 'question';
+		$data['global'] = $this->global;
 		
 		$this->load->model('Question_model','question2'); // why are we loading it like this?
 		$data['rss'] = array();
 		
 		// event information
-		$this->question2->event_id = $event_id; 
-		$data['event_name'] = $uri_array['event'];
-		$data['event_info'] = $this->event->get_event("", $data['event_name']);
+		if(!$this->global) {
+			$this->question2->event_id = $event_id; 
+			$data['event_name'] = $uri_array['event'];
+			$data['event_info'] = $this->event->get_event("", $data['event_name']);
+		}
 		
 		// question information
 		if (isset($uri_array['question'])) {
@@ -247,7 +255,7 @@ class Forums extends Controller
 		// prepare sorting information
 		$this->prepareSort($data);		
 
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>'');
+		$data['breadcrumb'] = $this->global ? array('Home' => $this->config->site_url()) : array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>'');
 		
 		// Load the question queue from the model
 		$data['results'] = $this->question2->questionQueue();
@@ -634,7 +642,7 @@ class Forums extends Controller
 
 	private function prepareQueue(&$data)
 	{
-		$event_id = $this->event->get_id_from_url(url_title($data['event_name']));
+		$event_id = $this->global ? 0 : $this->event->get_id_from_url(url_title($data['event_name']));
 		
 		foreach ($data['results'] as $key => $row) {
 			// if user is registered, find out if and how they voted
@@ -660,7 +668,7 @@ class Forums extends Controller
 		}
 		
 		// right pods
-		$data['rightpods'] = array(	'dynamic'=>array('forum_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
+		$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('forum_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
 									'event_location'=>$data['results'][0]['location']));
 	}
 
@@ -740,7 +748,7 @@ class Forums extends Controller
 		$data['sort'] = $sort_active;
 		
 		// build the event_url
-		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
+		$data['event_url'] = $this->global ? 'event-url' : $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
 		
 		// initialize sort array (used to build sorting HTML)
 		$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');

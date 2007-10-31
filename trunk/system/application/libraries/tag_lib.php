@@ -10,14 +10,17 @@ class Tag_lib {
 	
 	public function createTagLink($arg)
 	{
+		$global = false;
 		if(is_array($arg)) $type = true;		// array passed, we want to generate html for a tag cloud
 		elseif(is_string($arg)) $type = false;	// string passed, we want to create a single link
 		else exit();							// invalid argument
 		
 		$segment_array = $this->CI->uri->segment_array();
 		
+		if($segment_array[3] != 'event') $global = true;
+		
 		//TEMP CODE, DELETE AFTER EVENT ON NOV 2nd
-		if(!$segment_array){
+		if(!$segment_array) {
 			$segment_array[1] ="event";
 		}
 		
@@ -32,7 +35,10 @@ class Tag_lib {
 		if ($type) {							// generate cloud
 			$cloud = '';
 			foreach ($arg as $v)
-				$cloud .= ' ' . anchor("$class/$function/tag/{$v['word']}$args", $v['word'], array('class' => "size{$v['sizeRange']}")) . ' &nbsp;';
+				if($global)
+					$cloud .= ' ' . anchor("forums/queue/tag/{$v['word']}", $v['word'], array('class' => "size{$v['sizeRange']}")) . ' &nbsp;';
+				else
+					$cloud .= ' ' . anchor("$class/$function/tag/{$v['word']}$args", $v['word'], array('class' => "size{$v['sizeRange']}")) . ' &nbsp;';
 			return $cloud;
 		} else {								// generate single link
 			return anchor("$class/$function/tag/$arg$args", $arg);
