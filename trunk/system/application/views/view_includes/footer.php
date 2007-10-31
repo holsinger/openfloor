@@ -17,7 +17,7 @@
 										//$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
 										$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('events'=>array(),'gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
 										if (isset($cloud)) {
-											$data['rightpods']['dynamic']['tag_cloud']= $cloud;
+											$data['rightpods']['dynamic']['top_tags']= $cloud;
 										} else $data['cloud'] = FALSE;
 										
 										if (!$admin) $this->load->view('view_layout/view_right_column.php',$data); 
