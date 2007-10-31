@@ -88,7 +88,7 @@ $data['use_temp_top'] = true;
 						<td valign="middle" align="left" width="100%">We are working hard to bring our OpenFloor Events to your town!  Stay tuned...</td>
 					</tr>
 				</table>
-				<div style="background-color: #0173ba; margin: 5px -10px -10px -10px; padding: 3px 3px 0px 3px; text-align: center"><img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
+				<div style="background-color: #0173ba; margin: 5px -10px -10px -10px; padding: 3px 3px 0px 3px; text-align: center"><?=anchor('contact/showForm/request_an_event','<img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link">');?></div>
 			</div>
 		<? endif; ?>
 		<!-- FINALLY, PAST EVENTS -->
@@ -112,7 +112,7 @@ $data['use_temp_top'] = true;
         <? endforeach; ?>
         </div>
 		<div style="background-color: #0173ba; text-align: center">
-			<img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link" onclick="window.location=site_url+'contact/showForm/request_an_event';">
+			<?=anchor('contact/showForm/request_an_event','<img src="./images/events/RP_Events_Demand_Event.png" border="0" class="link">');?>
 		</div>
 
 </div>
