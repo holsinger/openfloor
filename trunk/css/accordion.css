@@ -45,7 +45,8 @@
 	background-color: #ffffff;
 	color: #444444;
 	overflow: hidden;
-	display: none;
+	display: none;	
+	padding: 5px 10px 15px 10px;
 }
 	
 .accordion_content h2 {
