@@ -453,3 +453,8 @@ background-color:#f0faff;
 #bio_content p{
 	width: 250px;
 }
+
+/* TD fix for IE */
+TD {
+	font-size: 11px;
+}
