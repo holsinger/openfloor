@@ -6,6 +6,7 @@
 	padding: 6px 6px 10px 6px;
 	margin-left: 0px;
 	background-color: #f1faff;
+	zoom:1;	   /* Fixes top and bottom margin widths for IE */
 }
 
 .event-summary p {
@@ -28,6 +29,7 @@
 	border: 1px solid #C1D8EA;
 	text-align: center;
 	background-color: #f1faff;
+	zoom:1;	   /* Fixes top and bottom margin widths for IE */
 }
 
 .event_content_div H3 {
