@@ -122,7 +122,7 @@ class Event extends Controller
 	}
 	
 	public function edit_event_action($event_id)
-	{		
+	{
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);
 		$error = false;
@@ -364,8 +364,6 @@ class Event extends Controller
 	public function GetEventsForSidebar(){
 		$events = $this->event->getEventsByDate();
 		$massaged_data = Array();  // for the sake of readability.
-		$massaged_data['upcoming_events'] = Array();
-		$massaged_data['past_events'] = Array();
 		// Massage the information
 		foreach ($events as $key => $array){
 			error_log($array['event_name']." - ".strtotime($array['event_date'])." ".strtotime(date('Y-m-d')));
@@ -379,31 +377,32 @@ class Event extends Controller
 		}
 		
 		// Since this is used by ajax, we need to return viewable material
-		$st = '<h4>Upcoming Events</h4>';
+		$st = '<h4>Upcoming Events</h4><ul>';
 		if(isset($return_array['upcoming_events'])){
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
 				//$st .= $array['event_name']."<br />";
-				$st .= anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'<br />';
+				$st .= '<li>'.anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
 				if($count == 1){
 					break;
 				}
 				$count++;
 			}	
 		}else{
-			$st .= 'We are working hard to bring our OpenFloor Events to your town!';
+			$st .= '<li>We are working hard to bring our OpenFloor Events to your town!</li>';
 		}
 		
-		$st .= '<h4>Past Events</h4>';
+		$st .= '</ul><h4>Past Events</h4><ul>';
 		$count = 0;
 		foreach ($return_array['past_events'] as $key => $array){
-			$st .= anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'<br />';
+			$st .= '<li>'.anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
 			
 			if($count == 1){
 				break;
 			}
 			$count++;
 		}
+		$st .= '</ul>';
 		// Return json data
 		echo($st);
 	}
