@@ -1,14 +1,7 @@
 <?php
-/**
- * Event Controller
- */
 
 class Event extends Controller
 {
-	/**
-	 * Constructor
-	 * This function may be able to be cleaned up...
-	 */
 	public function __construct()
 	{
 		parent::Controller();
@@ -29,18 +22,12 @@ class Event extends Controller
 		$this->load->scaffolding('cn_events');
 	}
 	
-	/**
-	 * Index Function
-	 */
 	public function index()
 	{
 		// $this->create_event();
 		$this->view_events();
 	}
 	
-	/**
-	 * View Events
-	 */
 	public function view_events($error='')
 	{
 		$this->load->helper('url');
@@ -74,9 +61,6 @@ class Event extends Controller
 		$this->load->view('view_events',$data);
 	}
 	
-	/**
-	 * Edit Event
-	 */
 	public function edit_event($event_id, $error='')
 	{
 		#check that user is allowed
@@ -248,9 +232,6 @@ class Event extends Controller
 		$this->view_events();
 	}
 	
-	/**
-	 * Create Event
-	 */	
 	public function create_event($error='')
 	{
 		#check that user is allowed
@@ -276,8 +257,8 @@ class Event extends Controller
 		$this->load->view('view_manage_events',$data);
 	}
 	
-	
-	public function create_event_action() {
+	public function create_event_action() 
+	{
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);
 		
@@ -356,12 +337,14 @@ class Event extends Controller
 	public function view($event_name)
 	{
 		$data['event'] = $this->event->get_event(null, $event_name);
+		$data['event_url'] = "event/$event_name";
 		
 		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
 		$this->load->view('event/view',$data);
 	}
 	
-	public function GetEventsForSidebar(){
+	public function GetEventsForSidebar()
+	{
 		$events = $this->event->getEventsByDate();
 		$massaged_data = Array();  // for the sake of readability.
 		// Massage the information

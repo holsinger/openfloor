@@ -1,5 +1,5 @@
 <?php
-$data['left_nav'] = 'events';
+$data['left_nav'] = 'event';
 $display_titles = array('event_desc_brief' => 'Brief Description',
 						'event_desc' => 'Full Description',
 						'event_date' => 'Event Date',
@@ -10,7 +10,7 @@ $display_titles = array('event_desc_brief' => 'Brief Description',
 						'other_instructions' => 'Other Instructions');
 ?>
 
-<? $this->load->view('view_includes/header.php');?>
+<? $this->load->view('view_includes/header.php', $data);?>
 
 <div id="content_div">
   <h2>Event Details</h2>
