@@ -5,6 +5,7 @@ class Contact extends Controller
 	{
 		parent::Controller();
 		$this->load->library('tag_lib');
+		$this->load->library('wordcloud');
 		$this->load->model('tag_model', 'tag');
 		$this->load->model('Cms_model','cms_model');
 		$this->load->library('validation');

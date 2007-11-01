@@ -5,6 +5,7 @@ class Question extends Controller
 	{
 		parent::Controller();
 		$this->load->model('Tag_model','tag');
+		$this->load->library('wordcloud');
 		$this->load->model('Question_model','question');
 		$this->load->model('Event_model','event');
 		$this->load->model('Vote_model','vote');
