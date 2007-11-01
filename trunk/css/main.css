@@ -467,7 +467,7 @@ BODY {
 
 .header .menu {
     margin: auto;
-	width: 620px;
+	width: 100%;
 }
 
 .header .menu .date {
@@ -495,8 +495,8 @@ BODY {
 }
 
 .header .menu .links {
-    float: left;
-    margin: 0 0 0 38px;
+	text-align: center;
+    margin: 0 0 0 -240px;
 }
 
 .header .menu .links A {
