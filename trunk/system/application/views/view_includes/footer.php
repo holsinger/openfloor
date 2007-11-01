@@ -17,7 +17,12 @@
 										$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('events'=>array(),'dynamic'=>array());
 										if (isset($cloud)) {
 											$data['rightpods']['dynamic']['top_tags']= $cloud;
-										} else $data['cloud'] = FALSE;
+										} else {
+											// $data['cloud'] = FALSE;
+											$cloud = $this->tag_lib->createTagCloud(null);
+											$data['rightpods']['dynamic']['top_tags']= $cloud;
+											
+										}
 										
 										if (!$admin) $this->load->view('view_layout/view_right_column.php',$data); 
 										?>

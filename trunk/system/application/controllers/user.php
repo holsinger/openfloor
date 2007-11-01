@@ -7,6 +7,8 @@ class User extends Controller {
 	{
 		parent::Controller();
 		$this->load->helper('url');
+		$this->load->library('tag_lib');
+		$this->load->model('tag_model', 'tag');
 		
 		$this->load->model('User_model','user');
 		$this->load->model('vote_model','vote');

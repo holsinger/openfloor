@@ -5,6 +5,8 @@ class Mainpage extends Controller {
 	function __construct()
 	{
 		parent::Controller();
+		$this->load->library('tag_lib');
+		$this->load->model('tag_model', 'tag');
 		$this->load->model('Mainpage_model','mainpage');
 		$this->load->library('validation');
 		$this->load->library('Mainpagelib');

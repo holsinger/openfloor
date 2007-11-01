@@ -5,6 +5,8 @@ class Information extends Controller {
 	function __construct()
 	{
 		parent::Controller();
+		$this->load->library('tag_lib');
+		$this->load->model('tag_model', 'tag');
 		$this->load->model('Cms_model','cms');
 		$this->load->model('question_model', 'question');
 		$this->load->library('wordcloud');

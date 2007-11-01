@@ -4,6 +4,8 @@ class Contact extends Controller
 	function __construct()
 	{
 		parent::Controller();
+		$this->load->library('tag_lib');
+		$this->load->model('tag_model', 'tag');
 		$this->load->model('Cms_model','cms_model');
 		$this->load->library('validation');
 		$this->load->library('time_lib');

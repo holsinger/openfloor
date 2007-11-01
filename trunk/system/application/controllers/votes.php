@@ -5,6 +5,8 @@ class Votes extends Controller
 	function __construct()
 	{
 		parent::Controller();
+		$this->load->library('tag_lib');
+		$this->load->model('tag_model', 'tag');
 		$this->load->model('question_model');
 		$this->load->model('vote_model');
 		$this->load->model('user_model');
