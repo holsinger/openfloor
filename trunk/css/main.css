@@ -164,12 +164,6 @@ BODY {
 	margin-top: 10px;
 }
 
-.content .col-right {
-    width: 32%;
-	padding: 0 1% 0 1%;
-	border-left: 2px solid #C6DDEF;
-}
-
 .content .col-border {
     background: url("../images/double-line.gif") repeat-x left top;
 	height: 6px;
@@ -318,6 +312,12 @@ BODY {
 
 .content .col-center .blog P.first {
     margin-top: 0;
+}
+
+.content .col-right {
+    width: 32%;
+	padding: 0 1% 0 1%;
+	border-left: 2px solid #C6DDEF;
 }
 
 .content .col-right .video {
@@ -496,7 +496,7 @@ BODY {
 
 .header .menu .links {
 	text-align: center;
-    margin: 0 0 0 -240px;
+    margin: 0 0 0 -240witpx;
 }
 
 .header .menu .links A {
