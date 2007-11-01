@@ -5,11 +5,30 @@ if(!Control) var Control = {};
 Control.Voter = Class.create();
 
 Control.Voter.prototype = {
-	initialize: function (elem_id, options){
+	initialize: function (meter_elem_prefix, options){
 		// Even though initialization is not a requirement, I like to have all the variables defined in one place for cleaner code.
 		this.options = options || {};
+		
+		// METER ELEMS: We start out by figuring out all the meters we are dealing with.  This used to be put in manually but I figured I could simplify it some.
+		var temp_meter_count = 0;
+		this.options.meter_elems = new Array();	// add to options, this is partly because it was this way from the start
+		while($(meter_elem_prefix+"_"+temp_meter_count) != null){
+			this.options.meter_elems[temp_meter_count] = meter_elem_prefix+"_"+temp_meter_count;
+			temp_meter_count++;
+		}
+		this.options.meter_count = (temp_meter_count);
+		
+		// METER VALUES: by default will use 0 and up (to amount of meters) or user can specify their own which will ignore this section
+		if(!this.options.meter_values){
+			this.options.meter_values = new Array();
+			for(var i = 0; i < this.options.meter_count; i++){		// There has got to be a better way to do this...
+				this.options.meter_values[i] = i;
+			}
+		}
+		
+		// If there is a start value then we need to figure out which number is selected
 		if(this.options.start_value){
-			for(var i = 0; i < this.options.meter_values.length; i++){
+			for(var i = 0; i < this.options.meter_count; i++){
 				if(this.options.meter_values[i] == this.options.start_value){
 					this.num_selected = i;
 					break;
@@ -19,7 +38,14 @@ Control.Voter.prototype = {
 		}else{
 			this.num_selected = 0; // The index of meter_elems that is currently selected
 		}
-		
+		// A user can specify all the classed for voted meters (if they are different) or just one and we'll apply it to all
+		if(this.options.voted_meter_class){
+			this.options.voted_meter_classes = new Array();
+			for(var i = 0; i < this.options.meter_count; i++){
+				this.options.voted_meter_classes[i] = this.options.voted_meter_class;
+			}
+		}
+		// dragging arrow stuff
 		this.dragging = false;
 		this.offsetX = 0;
 		if(this.options.arrow_elem){
@@ -49,7 +75,7 @@ Control.Voter.prototype = {
 		this.onArrowMouseDown = this.startDrag.bindAsEventListener(this);
 		this.eventMouseMove = this.update.bindAsEventListener(this);
 				
-		for(i = 0; i < this.options.meter_elems.length; i++){
+		for(i = 0; i < this.options.meter_count; i++){
 			Event.observe(this.options.meter_elems[i], "mousedown", this.onMeterMouseDown);
 		}
 		if(this.options.arrow_elem){
@@ -63,11 +89,18 @@ Control.Voter.prototype = {
 		}
 	}, 
 	clickMeter : function(event){
-		this.changeRating(Event.element(event).id);
+		var continue_after_onstart = true;
+		if(this.options.onstart){
+			continue_after_onstart = this.options.onstart();
+		}
+		if(continue_after_onstart){			
+			this.changeRating(Event.element(event).id);
+		}
 	},
 	changeRating : function(meter_id, ignore_event_calls){
 		ignore_event_calls = typeof(ignore_event_calls) != 'undefined' ? ignore_event_calls : false;  // Want this value to be false by default
-		for (var i = 0; i < this.options.meter_elems.length; i++){
+
+		for (var i = 0; i < this.options.meter_count; i++){
 			$(this.options.meter_elems[i]).className = this.options.voted_meter_classes[i];
 			// If we've found our triggered element, then stop
 			if(this.options.meter_elems[i] == meter_id){
@@ -81,7 +114,7 @@ Control.Voter.prototype = {
 						this.options.onchange(this.options.meter_values[i], meter_id);
 					}
 				}
-					
+				
 				// Move Arrow if it exists
 				if(this.options.arrow_elem){
 					// relative position
@@ -95,17 +128,26 @@ Control.Voter.prototype = {
 						top: this.current_arrow_pos+"px",
 						left: (div_dim[0] - this.options.arrow_offset_x)+"px"
 					});
-					
-				}
 				
+				}
+			
 				return;		
 			}
 		}
 		
+		
 	},
 	startDrag : function(event){
-		this.dragging = true;
-		this.drag_start_num_selected = this.num_selected;	
+		var continue_after_onstart = true;
+		if(this.options.onstart){
+			continue_after_onstart = this.options.onstart();
+		}
+		if(continue_after_onstart){
+			this.dragging = true;
+			this.drag_start_num_selected = this.num_selected;
+		}
+			
+
 	},
 	endDrag : function(){
 		// If it changed then fire the onchange event, this is done hear so it wont' call it for each change while dragging.
