@@ -34,7 +34,7 @@
 								                    <h2>Questions</h2>
 								                    
 								                    <?=anchor("question/add/{$event_url}","Ask a Question");?>
-								                    <?= anchor("forums/queue/{$event_url}","View Upcoming");?>
+								                    <?= anchor("forums/queue/{$event_url}/sort/upcoming","View Upcoming");?>
 								                    <?= anchor("forums/queue/{$event_url}/sort/newest","View Newest");?>
 								                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
 													<h2>RSS Feeds</h2>
