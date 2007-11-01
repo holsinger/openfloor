@@ -7,10 +7,8 @@ class Contact extends Controller
 		$this->load->model('Cms_model','cms_model');
 		$this->load->library('validation');
 		$this->load->library('time_lib');
-		$this->load->library('tag_lib');
 		$this->load->library('wordcloud');
 		$this->load->model('Cms_model','cms');
-		$this->load->model('tag_model', 'tag');
 		$this->load->helper('url');//for redirect
 		$this->load->helper('form');
 	}
@@ -25,12 +23,7 @@ class Contact extends Controller
 
 		$cms_data = $this->cms_model->get_cms(0, $contact_type);
 		$data['contact_page_desc'] = $cms_data['cms_text'];
-		
-		// tag cloud
-		$data['cloud'] = $this->tag_lib->createTagCloud(null);
-		
-		$data['rightpods'] = array('accordion' => array(), 'dynamic'=>array());
-		
+				
 		// user info, if posted use it for validation purposes
 		if($_POST){
 			$data['sender_name'] = $_POST['sender_name'];
