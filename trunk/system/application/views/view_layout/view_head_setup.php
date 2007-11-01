@@ -43,14 +43,14 @@
 		site_url = '<?= $this->config->site_url();?>';
 		username = '<?=$this->userauth->user_name;?>';
 	</script>
-	<?/*
+
 	<style type="text/css" media="screen">
 		 @import url("http://www.google.com/uds/css/gsearch.css");
 	</style>
 	<style type="text/css" media="screen">
 		@import url("http://www.google.com/uds/solutions/newsbar/gsnewsbar.css");
 	</style>
-	*/?>
+
 	<script type="text/javascript" charset="utf-8">
 		// This javascript fills in css blanks by sizing the columns as God intended and CSS, alone, cannot.  Added by CTE
 		Event.observe(window, "load", function(){
