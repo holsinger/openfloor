@@ -63,7 +63,7 @@ $data['use_temp_top'] = true;
     <!-- NEXT, UPCOMING EVENTS -->
   	<div id="event_view">
 		<? //echo $this->table->generate($events)?>
-		<h3 class="subheader" id="upcoming_events_title">Upcoming Events</h3>
+		<h3 class="subheader" id="upcoming_events_title">Future Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
         	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !($array['streaming']) ): ?>

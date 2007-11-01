@@ -360,7 +360,7 @@ class Event extends Controller
 		}
 		
 		// Since this is used by ajax, we need to return viewable material
-		$st = '<h4>Upcoming Events</h4><ul>';
+		$st = '<h3 class="subheader">Upcoming Events</h3><ul>';
 		if(isset($return_array['upcoming_events'])){
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
@@ -375,7 +375,7 @@ class Event extends Controller
 			$st .= '<li>We are working hard to bring our OpenFloor Events to your town!</li>';
 		}
 		
-		$st .= '</ul><h4>Past Events</h4><ul>';
+		$st .= '</ul><h3 class="subheader">Past Events</h3><ul>';
 		$count = 0;
 		foreach ($return_array['past_events'] as $key => $array){
 			$st .= '<li>'.anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
