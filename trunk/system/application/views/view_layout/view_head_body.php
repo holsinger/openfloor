@@ -34,7 +34,7 @@
             <div class="header"> 
                     <span class="left-banner">
 						<div style="height: 45px;">
-							<img src="./images/sub_site_main/secondary_logo.png" alt="" border="0" style="cursor: pointer;" onclick="window.location = '';"/>
+							<?=anchor("","<img src='./images/sub_site_main/secondary_logo.png' alt='HOME' title='HOME' border='0' style='cursor: pointer;'>");?>
 						</div>
 						<div style="margin-left: 35px;">
 							<div class="date"></div>
