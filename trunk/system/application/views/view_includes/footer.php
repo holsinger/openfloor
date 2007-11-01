@@ -27,11 +27,13 @@
             
             <div class="footer">Copyright &copy; 2007 RunPolitics.com. All Rights Reserved. Reproduction in whole<br />or part in any form or medium without express written permission is strictly prohibited.</div>
 			<div class="contact_us">
-					<a href="<?=$this->config->site_url()?>contact/showForm/contact_us">CONTACT US</a>
-					<span class="separator">|</span>
 	                <?=anchor("event/","EVENTS");?>
 	                <span class="separator">|</span>
+					<a href="<?=$this->config->site_url()?>contact/showForm/contact_us">CONTACT US</a>
+					<span class="separator">|</span>
 					<?=anchor("information/aboutUs","ABOUT US");?>
+	                <span class="separator">|</span>
+	                <?=anchor("information/view/faq","FAQ");?>
 	                <span class="separator">|</span>
 					<a href="http://blog.runpolitics.com">BLOG</a>
 			</div>
