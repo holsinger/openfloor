@@ -37,7 +37,7 @@
 							<img src="./images/sub_site_main/secondary_logo.png" alt="" border="0" style="cursor: pointer;" onclick="window.location = '';"/>
 						</div>
 						<div style="margin-left: 35px;">
-							<div class="date"><?=date('l, F j, Y');?></div>
+							<div class="date"><?=/*date('l, F j, Y');*/?></div>
 						</div>
 					</span>
 					
