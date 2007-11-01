@@ -15,10 +15,12 @@
 	<?= form_close(); ?>
 	</div>
 	<br /><br />
-	<a href="javascript: ToggleOpenIDSection();"><strong>Login with Open ID Instead</strong></a>
-	<div id="open_id_login_div" style="visibility: hidden; display: none;">
+	<a class="link" onClick="javascript:new Effect.toggle('open_id_login_div2','blind', {queue: 'end'});"><strong>Click here to login with Open ID.</strong</strong></a>
+	<div id="open_id_login_div2" style="display: none;">
 		<?= form_open('user/loginOpenID'); ?>
 		<?= form_format("<img src='images/openid-icon-small.gif'> OpenID Login: ",form_input('openid_url','','class="txt"') ); ?>
+		<?= form_hidden('openid_action','login'); ?>
+		<?= form_hidden('redirect',$this->uri->uri_string()); ?>
 		<?= form_hidden('openid_action','login'); ?>
 		<br />
 		<div>
@@ -28,19 +30,4 @@
 		<?= form_close(); ?>
 	</div>
 </div>
-<script type="text/javascript" charset="utf-8">
-	function ToggleOpenIDSection() {
-		if($('open_id_login_div').getStyle('visibility') == 'hidden') {
-			$('open_id_login_div').setStyle({
-				visibility: "visible",
-				display: "block"
-			});
-		} else {
-			$('open_id_login_div').setStyle({
-				visibility: "hidden",
-				display: "none"
-			});
-		}
-	}
-</script>
 <? $this->load->view('view_includes/footer.php'); ?>  				

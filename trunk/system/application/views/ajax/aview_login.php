@@ -19,7 +19,7 @@
 	<?= form_close(); ?>
 	
 	<br /><br />
-	<a class="link" onClick="javascript:new Effect.toggle('open_id_login_div','blind', {queue: 'end'});"><strong>Login with Open ID Instead</strong></a>
+	<a class="link" onClick="javascript:new Effect.toggle('open_id_login_div','blind', {queue: 'end'});"><strong>Click here to login with Open ID.</strong</strong></a>
 	<div id="open_id_login_div" style="display: none;">
 		<?= form_open('user/loginOpenID'); ?>
 		<?= form_format("<img src='images/openid-icon-small.gif'> OpenID Login: ",form_input('openid_url','','class="txt"') ); ?>
