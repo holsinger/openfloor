@@ -265,8 +265,12 @@ class Forums extends Controller
 		
 		if(empty($data['results'])) {
 			$event = $this->event->get_event($event_id);
-			$data['rightpods'] = array(	'dynamic'	=>	array(	'event_description'	=>	$event['event_desc'],
-																'event_location'	=>	$event['location']));
+			// $data['rightpods'] = array(	'dynamic'	=>	array(	'event_description'	=>	$event['event_desc'],
+			// 													'event_location'	=>	$event['location']));
+
+			$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('event_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
+										'event_location'=>$data['results'][0]['location']));
+
 			// set vars
 			$data['view_name'] = 'view_queue';
 			$data['offset'] = 0;
