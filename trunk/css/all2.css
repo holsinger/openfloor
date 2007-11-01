@@ -6,7 +6,7 @@
 a{color:#F04A54; text-decoration: none;}
 a:hover{text-decoration:underline;}
 .link{color:#F04A54;cursor:pointer;}
-.link:hover{text-decoration:none;cursor:pointer;}
+.link:hover{text-decoration:underline;cursor:pointer;}
 
 #content_div table.user-profile {
 	background-color: #d1edfe;

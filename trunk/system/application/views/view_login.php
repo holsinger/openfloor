@@ -29,19 +29,18 @@
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">
-	function ToggleOpenIDSection(){
-		if($('open_id_login_div').getStyle('visibility') == 'hidden'){
+	function ToggleOpenIDSection() {
+		if($('open_id_login_div').getStyle('visibility') == 'hidden') {
 			$('open_id_login_div').setStyle({
 				visibility: "visible",
 				display: "block"
 			});
-		}else{
+		} else {
 			$('open_id_login_div').setStyle({
 				visibility: "hidden",
 				display: "none"
 			});
 		}
-
 	}
 </script>
 <? $this->load->view('view_includes/footer.php'); ?>  				
