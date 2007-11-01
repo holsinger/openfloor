@@ -49,4 +49,5 @@
             </div>
             
             <div class="content">
-                <div class="col-center-container"  id="col_center_container">
+                <table cellspacing="0" cellpadding="0" border="0">
+					<tr>

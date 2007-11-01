@@ -48,7 +48,7 @@ class Event_model extends Model
 		$query = $this->db->query('SELECT * FROM cn_events ORDER BY event_date DESC');
 		return $query->result_array();
 	}
-	
+		
 	public function get_id_from_url ($url)
 	{
 		$result = $this->db->getwhere('cn_events', array('event_url_name' => $url))->row_array();

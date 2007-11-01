@@ -1,7 +1,7 @@
 <?php
 
 ?>
-				<div class="col-left">
+				<td class="col-left" valign="top">
 	                    
 						          <?
 											switch ($left_nav) {
@@ -89,4 +89,5 @@
 											}
 											?>
 						
-	                </div>
+	                </td>
+					<td class="col-center" valign="top">

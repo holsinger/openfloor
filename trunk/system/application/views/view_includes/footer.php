@@ -1,17 +1,16 @@
-		                <? if (isset($pagination)) { ?>
+
+						<? if (isset($pagination)) { ?>
 		                <div class="pagers">
-		                <div class="list"	>
+		                	<div class="list"	>
 										<?= (isset($foot)) ? $foot:'';?>
 										<!-- pagers list start here -->
 										<ul>
-										<?=(isset($pagination)) ? $pagination:'';?>
+											<?=(isset($pagination)) ? $pagination:'';?>
 										</ul>
-										</div>
-										</div>
-										<div style="clear:both;"></div>
-										<? } ?>
-	                </div>
-                </div>
+							</div>
+						</div>
+						<div style="clear:both;"></div>
+						<? } ?>
                     <?
                     //set vars for right column
 										//$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
@@ -23,8 +22,10 @@
 										if (!$admin) $this->load->view('view_layout/view_right_column.php',$data); 
 										?>
                     
-            </div>
             
+            	</tr>
+            </table>
+			</div>
             <div class="footer">Copyright &copy; 2007 RunPolitics.com. All Rights Reserved. Reproduction in whole<br />or part in any form or medium without express written permission is strictly prohibited.</div>
 			<div class="contact_us">
 	                <?=anchor("event/","EVENTS");?>

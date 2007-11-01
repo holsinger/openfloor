@@ -27,7 +27,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 	<? endif; ?>
 	
 	<h3><?=$queue_title;?></h3>
-	<div id='queue'>
+	<div id="queue">
 		<? if(isset($ajax)) ob_clean(); ?>
 		<? if(!isset($ajax)): ?>
 		<img src="<?=base_url();?>/images/nothing.gif" onLoad="offset='<?=$vars['offset']?>';event_name='<?= $global ? 'none' : $vars['event_name']?>';sort='<?=$vars['sort']?>';<?=$tag_execute?>">

@@ -51,19 +51,5 @@
 		@import url("http://www.google.com/uds/solutions/newsbar/gsnewsbar.css");
 	</style>
 
-	<script type="text/javascript" charset="utf-8">
-		// This javascript fills in css blanks by sizing the columns as God intended and CSS, alone, cannot.  Added by CTE
-		Event.observe(window, "load", function(){
-			var center_height = $('col_center_container').getHeight();
-			var right_height = $('col_right').getHeight();
-			
-			if(center_height > right_height){
-				$('col_right').setStyle({height: center_height+"px"});
-			}else{
-				$('col_center_container').setStyle({height: right_height+"px"});
-			}
-			
-		});
-	</script>
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>
 </head>

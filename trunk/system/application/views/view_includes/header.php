@@ -42,7 +42,7 @@ $data['breadcrumb'] = (isset($breadcrumb)) ? $breadcrumb:array('Home'=>$this->co
 if ($this->userauth->isAdmin()) $data['breadcrumb']['Admin'] = '/admin';
 $this->load->view('view_layout/view_left_column.php',$data); 
 ?>
-<div class="col-center">
+
 	<div class="double_line_container">
 		<? 
 		if(isset($breadcrumb)){
