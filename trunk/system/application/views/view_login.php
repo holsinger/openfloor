@@ -33,12 +33,12 @@
 		if($('open_id_login_div').getStyle('visibility') == 'hidden'){
 			$('open_id_login_div').setStyle({
 				visibility: "visible",
-				display: "block",  
+				display: "block"
 			});
 		}else{
 			$('open_id_login_div').setStyle({
 				visibility: "hidden",
-				display: "none",  
+				display: "none"
 			});
 		}
 
