@@ -70,7 +70,7 @@ class Event extends Controller
 		$data['cloud'] = $this->tag_lib->createTagCloud(null);
 		
 		$data['rightpods'] = array('accordion' => array(), 'dynamic'=>array());
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'');	
+		$data['breadcrumb'] = array('Home'=>"");	
 		$this->load->view('view_events',$data);
 	}
 	
@@ -364,20 +364,23 @@ class Event extends Controller
 	public function GetEventsForSidebar(){
 		$events = $this->event->getEventsByDate();
 		$massaged_data = Array();  // for the sake of readability.
-		
+		$massaged_data['upcoming_events'] = Array();
+		$massaged_data['past_events'] = Array();
 		// Massage the information
 		foreach ($events as $key => $array){
-			error_log($array['event_name']);
+			error_log($array['event_name']." - ".strtotime($array['event_date'])." ".strtotime(date('Y-m-d')));
 			if (strtotime($array['event_date']) >= strtotime(date('Y-m-d')) ){
+				error_log("Counted upcoming");
 				$return_array['upcoming_events'][] = $array;
 			}elseif (strtotime($array['event_date']) < strtotime(date('Y-m-d'))){
+				error_log('Counted Past');
 				$return_array['past_events'][] = $array;
 			}
 		}
 		
 		// Since this is used by ajax, we need to return viewable material
 		$st = '<h4>Upcoming Events</h4>';
-		if(count($return_array['upcoming_events']) > 0){
+		if(isset($return_array['upcoming_events'])){
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
 				//$st .= $array['event_name']."<br />";
