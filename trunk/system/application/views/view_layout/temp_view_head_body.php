@@ -41,7 +41,7 @@
 				<div class="menu-container">
 	                <div class="menu">
 	                    <div class="links">
-							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;left:150px;"/>
+							<img src="images/RP_YOUaretheparty.gif" style="position:relative;top:5px;"/>
 	                        <!-- <a href="#"><img src="images/people.gif" alt="" /></a>
 	                        <div class="sep"></div>
 	                        <a href="#"><img src="images/politics.gif" alt="" /></a>

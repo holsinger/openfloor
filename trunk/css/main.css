@@ -496,7 +496,7 @@ BODY {
 
 .header .menu .links {
 	text-align: center;
-    margin: 0 0 0 -240witpx;
+    margin: 0 0 0 0;
 }
 
 .header .menu .links A {
