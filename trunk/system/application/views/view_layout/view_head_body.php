@@ -12,7 +12,7 @@
             <div class="top-menu">
                 <ul class="left">
                     <li><?=anchor('', 'HOME')?></li>
-					<? if ($this->userauth->isAdmin()) echo "<li><?=anchor('admin/', 'ADMIN')?></li>";?>
+					<? if ($this->userauth->isAdmin()) echo "<li>".anchor('admin/', 'ADMIN')."</li>";?>
                 </ul>
                 <ul class="right" id="userLogin">
 					<? if ($this->userauth->isUser()):?>
