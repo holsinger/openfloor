@@ -671,7 +671,7 @@ class Forums extends Controller
 		}
 		
 		// right pods
-		$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('forum_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
+		$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('event_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
 									'event_location'=>$data['results'][0]['location']));
 	}
 
