@@ -2,6 +2,8 @@
 
 class Admin extends Controller {
 	
+	private $event_id;
+	
 	function __construct()
 	{
 		parent::Controller();
@@ -86,7 +88,7 @@ class Admin extends Controller {
 		if(!$this->userauth->isAdmin()) redirect();
 		$data['event'] = $event;
 		
-		$data['event_id'] = $this->event->get_id_from_url($event);
+		$data['event_id'] = $this->event_id = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
 		
 		// ==========
@@ -96,6 +98,14 @@ class Admin extends Controller {
 		{
 			switch($ajax)
 			{
+			case 'current_question':
+				$this->_current_question($data);
+				$this->load->view('admin/current_question.php', $data);
+				break;
+			case 'upcoming_question':
+				$this->_upcoming_question($data);
+				$this->load->view('admin/upcoming_question.php', $data);
+				break;
 			case 'last_10_users':
 				$this->_last_10_users($data);
 				$this->load->view('admin/last_10_users.php', $data);
@@ -117,6 +127,16 @@ class Admin extends Controller {
 			$this->_last_10_questions($data);
 			$this->load->view('admin/dashboard', $data);
 		}
+	}
+	
+	private function _current_question(&$data)
+	{
+		$data['current_question'] = $this->question->current_question($this->event_id);
+	}
+
+	private function _upcoming_question(&$data)
+	{
+		$data['upcoming_question'] = $this->question->upcoming_question($this->event_id);
 	}
 	
 	private function _last_10_users(&$data)

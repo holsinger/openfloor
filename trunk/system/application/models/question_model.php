@@ -206,5 +206,38 @@ class Question_model extends Model
 	{
 		return $this->db->select($field)->where('question_id', $this->question_id)->get('cn_questions')->row()->$field;
 	}
+
+	public function current_question($event_id)
+	{
+		return $this->db->select('question_name')->where(array('fk_event_id' => $event_id, 'question_status' => 'current'))->get('cn_questions')->row()->question_name;
+	}
+	
+	public function upcoming_question($event_id)
+	{
+		return $this->db->query(
+			"SELECT 
+				question_id, 
+				IFNULL((SELECT 
+					cast(format(sum(vote_value)/10,0) as signed) AS number 
+				FROM 
+					cn_votes 
+				WHERE 
+					fk_question_id=question_id 
+				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
+				GROUP BY fk_question_id), 0) as votes,
+				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
+				question_name 
+			FROM 
+				cn_questions, 
+				cn_events 
+			WHERE 
+				event_id = 2
+			AND 
+				fk_event_id=event_id AND question_status = 'pending'
+			ORDER BY 
+				votes
+			DESC 
+			LIMIT 1")->row();
+	}
 }
 ?>

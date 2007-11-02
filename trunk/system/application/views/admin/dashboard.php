@@ -18,6 +18,12 @@
 
 <h2>Admin Dashboard</h2>
 
+<h3>Current Question</h3>
+<div id="current_question"><? $this->load->view('admin/current_question'); ?></div>
+
+<h3>Upcoming Question</h3>
+<div id="upcoming_question"><? $this->load->view('admin/upcoming_question'); ?></div>
+
 <h3>Last 10 Users Created</h3>
 <div id="last_10_users"><? $this->load->view('admin/last_10_users'); ?></div>
 
