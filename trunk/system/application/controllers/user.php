@@ -143,9 +143,10 @@ class User extends Controller {
 				$this->email->message($message);
 				// $this->email->set_alt_message(strip_tags($message));
 				#send
-				exit('<pre>' . print_r($this->email, true) . '</pre>');
+				// exit('<pre>' . print_r($this->email, true) . '</pre>');
 				$this->email->send();
 				// log_message('debug', "emailReg:".trim($this->email->print_debugger()));			
+				exit('<pre>' . print_r(trim($this->email->print_debugger()), true) . '</pre>');	
 			
 				//forward to a user page
 				redirect('user/complete');
