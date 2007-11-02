@@ -9,6 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="css/all.css" />
 	<link rel="stylesheet" type="text/css" href="css/ucp.css" />
 	<link rel="stylesheet" type="text/css" href="css/userWindow.css" />
+	<link rel="stylesheet" type="text/css" href="css/overall_reaction.css" />
+	
 	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 	<script src="javascript/userWindow.js" type="text/javascript"></script>

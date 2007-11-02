@@ -34,6 +34,10 @@ cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
 	
 	new Ajax.Updater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort);
+	
+	cans.each(function(s) {
+		new Ajax.Updater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s);
+	});
 }
 
 cpUpdater.vote = function(url) {
@@ -60,6 +64,12 @@ cpUpdater.cpUpdate = function() {
 	  frequency: 10,
 	  evalScripts: true
 	}));
+	
+	cans.each(function(s) {
+		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
+		  frequency: 10
+		}));
+	});
 }
 
 cpUpdater.askQuestion = function() {
