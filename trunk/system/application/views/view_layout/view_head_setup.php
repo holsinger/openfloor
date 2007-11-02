@@ -50,6 +50,6 @@
 	<style type="text/css" media="screen">
 		@import url("http://www.google.com/uds/solutions/newsbar/gsnewsbar.css");
 	</style>
-
+    
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>
 </head>
