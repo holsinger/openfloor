@@ -23,8 +23,7 @@ admin_dashboard.init = function() {
 	});
 }
 
-admin_dashboard.change_to_current = function(id) {
-	new Ajax.Request(site_url + 'question/change_to_current/' + id, {
-		onSuccess: 
-	});
+admin_dashboard.change_to_current = function(event_id, question_id) {
+	url = site_url + 'question/change_to_current/' + event_id + '/' + question_id;
+	new Ajax.Request(url);
 }

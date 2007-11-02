@@ -296,5 +296,10 @@ class Question extends Controller
 		if($upOrDown) $this->vote->voteup($this->userauth->user_id, $id);
 		else $this->vote->votedown($this->userauth->user_id, $id);
 	}
+
+	public function change_to_current($event_id, $question_id)
+	{
+		$this->question->change_to_current($event_id, $question_id);
+	}
 }
 ?>

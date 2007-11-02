@@ -239,5 +239,20 @@ class Question_model extends Model
 			DESC 
 			LIMIT 1")->row();
 	}
+
+	public function change_to_current($event_id, $question_id)
+	{
+		$this->db->update(
+			'cn_questions',
+			array('question_status' => 'asked'),
+			array('question_status' => 'current', 'fk_event_id' => $event_id)
+		);
+		
+		$this->db->update(
+			'cn_questions',
+			array('question_status' => 'current'),
+			array('question_id' => $question_id)
+		);
+	}
 }
 ?>

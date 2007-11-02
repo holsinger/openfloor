@@ -122,6 +122,8 @@ class Admin extends Controller {
 				break;
 			}
 		} else { // NO AJAX
+			$this->_current_question($data);
+			$this->_upcoming_question($data);
 			$this->_last_10_users($data);
 			$this->_last_10_flags($data);
 			$this->_last_10_questions($data);
