@@ -22,3 +22,9 @@ admin_dashboard.init = function() {
 	  frequency: 5
 	});
 }
+
+admin_dashboard.change_to_current = function(id) {
+	new Ajax.Request(site_url + 'question/change_to_current/' + id, {
+		onSuccess: 
+	});
+}
