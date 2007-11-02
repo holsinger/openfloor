@@ -129,6 +129,12 @@ class User extends Controller {
 				
 				//send mail
 				$this->load->library('email');
+				$config['protocol'] = 'sendmail';
+				$config['mailpath'] = '/usr/sbin/sendmail';
+				$config['charset'] = 'iso-8859-1';
+				$config['mailtype'] = 'html';
+				$config['wordwrap'] = TRUE;				
+				$this->email->initialize($config);
 				$this->email->from('contact@runpolitics.com', 'RunPolitics.com Registration');
 				$this->email->to($_POST['user_email']);
 				#vars
@@ -146,7 +152,7 @@ class User extends Controller {
 				// exit('<pre>' . print_r($this->email, true) . '</pre>');
 				$this->email->send();
 				// log_message('debug', "emailReg:".trim($this->email->print_debugger()));			
-				exit('<pre>' . print_r(trim($this->email->print_debugger()), true) . '</pre>');	
+				// exit('<pre>' . print_r(trim($this->email->print_debugger()), true) . '</pre>');	
 			
 				//forward to a user page
 				redirect('user/complete');
