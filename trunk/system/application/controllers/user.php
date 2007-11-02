@@ -124,6 +124,7 @@ class User extends Controller {
 			$last_id = $this->user->insert_user_form();
 			//make sure a new id was inserted
 			if ( is_numeric($last_id) ) {
+				exit('<pre>' . print_r($spam, true) . '</pre>');
 				//set sessions
 				// $this->user->login_user($this->user->user_name,$this->user->user_id);
 				
