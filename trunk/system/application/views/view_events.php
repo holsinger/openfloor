@@ -13,7 +13,6 @@ $data['use_temp_top'] = true;
 ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div" class="event_content_div">
-	<h1> OpenFloor Events</h1>
 	<!-- <span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span> -->
 	<? if($this->userauth->isAdmin()): ?>
 		<?="<p>".anchor('/event/create_event','Create an event').(isset($error)?"<br />".$error:'')."</p>"?>

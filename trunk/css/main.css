@@ -159,9 +159,12 @@ BODY {
 }
  
 .double_line_container {
-	background: url("../images/double-line.gif") repeat-x left top;
-	padding-top: 8px;
-	margin-top: 10px;
+	background: url("../images/double-line.gif") repeat-x left bottom;
+	padding-bottom: 6px;
+	margin-bottom: 5px;
+}
+.double_line_container H1 {
+	margin: 10px 0px 3px 0px;
 }
 
 .content .col-border {
