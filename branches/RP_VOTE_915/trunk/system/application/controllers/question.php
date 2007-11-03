@@ -142,48 +142,38 @@ class Question extends Controller
 		return $questionID;
 	}
 	
-	function edit() 
+	function edit($question_id) 
 	{
 		$data['error'] = "";
 		$oldCurrent = 0;
-		if (isset($_POST['question_id'])) 
-		{
+		
+		if ($_POST){
 			// Change status, changed is returned how many rows were affected
 			$changed = $this->question->updateQuestion($_POST['question_id'], $_POST);
 			// If changed to current, we have to be sure that there are no other current questions.
-			// if there is a current, then change to 'asked' since this question now replaces it
+			// if there is a current questions, then change to 'asked' since this question now replaces it
 			if ($_POST['question_status'] == 'current') {
 				$question_id =$_POST['question_id'];
 				$event_id = $this->event->get_id_from_url($_POST['event_url_name']);
 				$oldCurrent = $this->question->singleCurrent($event_id, $question_id);
 			}
-			if ($changed > 0)
-			{
+			if ($changed > 0){
 				$array = $this->question->get_question($_POST['question_id']);
-				$data['error'] = "{$array['question_name']} changed to '{$_POST['question_status']}'";
+				$data['error'] = "'{$array['question_name']}' changed been updated";
 			}
 		}
+		
 		if($oldCurrent > 0 && $oldCurrent != $_POST['question_id']) {
 			$question_id = $oldCurrent;
 			$array = $this->question->get_question($question_id);
 			$this->question->set_asked_time($question_id);
 			$data['error'] .= "<br />{$array['question_name']} changed to 'Asked'";
-		} else {
-			$question_id = $this->uri->segment(3);
 		}
-		$question_data = $this->question->get_question($question_id);
-		$event_data = $this->event->get_event ($question_data['fk_event_id']);
-		$data['event'] = $event_data;
 		
-		$options = array(
-				'pending' => 'Pending',
-				'current' => 'Current',
-				'asked' => 'Asked',
-				'deleted'  => 'Delete'
-				);
-		$data['dropdown'] = form_dropdown('question_status', $options, $question_data['question_status']);
-		$data['question'] = $question_data;
-		$this->load->view('view_edit_question',$data);		
+		$data['question'] = $this->question->get_question($question_id);
+		$data['event'] = $this->event->get_event($data['question']['fk_event_id']);
+		
+		$this->load->view('view_edit_question', $data);		
 	}
 
 	function populateEventsSelect()
@@ -257,7 +247,7 @@ class Question extends Controller
 		$data['view_name'] = 'question_view';
 		$this->load->view('question/question_view.php', $data);
 	}
-	
+	/*
 	function voteup($question_id = 0)
 	{
 		$this->vote($question_id, true);
@@ -267,33 +257,39 @@ class Question extends Controller
 	{
 		$this->vote($question_id, false);
 	}
-	
-	private function vote($question_id, $upOrDown)
+	*/
+	function vote($event_name, $question_name_or_id, $vote_cast)
 	{
-		$this->userauth->check();
-		
-		//get question id
-		$uri_array = $this->uri->uri_to_assoc(3);
+		$this->userauth->check();	// prevents voting unless authorized
 		
 		// get event id
-		$event_id = $this->event->get_id_from_url($uri_array['event']);
+		$event_id = $this->event->get_id_from_url($event_name);
 		if(!$event_id) return;
-		$this->question->event_id = $event_id;
+		$this->question->event_id = $event_id;		// Assign to the model
 		
-		if (isset($uri_array['question']) && is_numeric($uri_array['question'])) $id = $uri_array['question'];
-		if (isset($uri_array['question']) && is_string($uri_array['question'])) $id = $this->question->get_id_from_url($uri_array['question']);
-		$id = ($question_id > 0) ? $question_id:$id;
-		
-		$event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
-		if (isset($uri_array['sort'])) $event_url = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
+		// Question info can be passed by id or name, each type requires a different approach
+		if (isset($question_name_or_id) && is_numeric($question_name_or_id)) $id = $question_name_or_id;
+		if (isset($question_name_or_id) && is_string($question_name_or_id)) $id = $this->question->get_id_from_url($question_name_or_id);
+		$id = ($question_id > 0) ? $question_name_or_id : $id;
 		
 		#check that user has not voted
 		// if(!$this->userauth->check() || $this->vote->alreadyVoted($id, $this->userauth->user_id))
 		// 	$this->vote->deleteVote($id, $this->userauth->user_id);
 		
 		#TODO validation and trending need to be considered
-		if($upOrDown) $this->vote->voteup($this->userauth->user_id, $id);
-		else $this->vote->votedown($this->userauth->user_id, $id);
+		$this->vote->vote($this->userauth->user_id, $id, $vote_cast);
+	}
+	
+	
+	function getTotalVoteSum($event_name, $question_name, $ajax_on){
+		// Question info can be passed by id or name, each type requires a different approach
+		$id = $this->question->get_id_from_url($question_name);
+		
+		if($ajax_on == 'true'){
+			echo $this->vote->voteSum($id);
+		}else{
+			return $this->vote->voteSum($id);
+		}
 	}
 }
 ?>

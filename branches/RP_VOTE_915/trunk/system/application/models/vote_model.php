@@ -11,7 +11,7 @@ class Vote_model extends Model
         parent::Model();
     }
     
-	
+	/*
 	public function voteup($fk_user_id, $fk)
 	{
 		switch($this->type)
@@ -48,7 +48,26 @@ class Vote_model extends Model
 				exit(); // error
 				break;
 		}
-	}
+	}*/
+	
+	public function vote($fk_user_id, $fk, $vote_cast)
+	{
+		switch($this->type)
+		{
+			case 'question':			
+				$this->db->query("INSERT INTO cn_reactions (reaction, fk_user_id, fk_question_id) VALUES ($vote_cast, $fk_user_id, $fk)");
+				break;
+			case 'video':			
+				$this->db->query("INSERT INTO cn_reactions (reaction, fk_user_id, fk_video_id) VALUES ($vote_cast, $fk_user_id, $fk)");
+				break;
+			case 'comment':
+				$this->db->query("INSERT INTO cn_reactions (reaction, fk_user_id, fk_comment_id) VALUES ($vote_cast, $fk_user_id, $fk)");
+				break;
+			default:
+				exit(); // error
+				break;
+		}
+	}	
 	
 	public function alreadyVoted($fk, $user_id)
 	{
@@ -71,31 +90,35 @@ class Vote_model extends Model
 		}		
 	}
 	
+	// =============================
+	// = GETS A USERS VOTED SCORE =
+	// =============================
 	public function votedScore($fk_id, $user_id)
 	{
 		switch ($this->type) 
 		{
 		case 'question':			
-				$query = $this->db->query("SELECT vote_value FROM cn_votes WHERE fk_user_id=$user_id AND fk_question_id=$fk_id order by timestamp desc");
+				$query = $this->db->query("SELECT reaction FROM cn_reactions WHERE fk_user_id=$user_id AND fk_question_id=$fk_id order by timestamp desc");
 				break;
 			case 'video':			
-				$query = $this->db->query("SELECT vote_value FROM cn_votes WHERE fk_user_id=$user_id AND fk_video_id=$fk_id order by timestamp desc");
+				$query = $this->db->query("SELECT reaction FROM cn_reactions WHERE fk_user_id=$user_id AND fk_video_id=$fk_id order by timestamp desc");
 				break;
 			case 'comment':
-				$query = $this->db->query("SELECT vote_value FROM cn_votes WHERE fk_user_id=$user_id AND fk_comment_id=$fk_id order by timestamp desc");
+				$query = $this->db->query("SELECT reaction FROM cn_reactions WHERE fk_user_id=$user_id AND fk_comment_id=$fk_id order by timestamp desc");
 				break;
 			default:
-				$query = $this->db->query("SELECT vote_value FROM cn_votes WHERE fk_user_id=$user_id AND fk_question_id=$ques$fk_idtion_id order by timestamp desc");
+				$query = $this->db->query("SELECT reaction FROM cn_reactions WHERE fk_user_id=$user_id AND fk_question_id=$fk_id order by timestamp desc");
 				break;
 		}
 		$voted = ($query ->num_rows() > 0) ? true : false ;
 		if ($voted) 
 		{
 			$array = $query->result_array();
-			return $array[0]['vote_value'];
+			return $array[0]['reaction'];
 		}
 		else return 0;		
 	}
+	
 	
 	public function getVotesByQuestion($question_id)
 	{
@@ -144,31 +167,16 @@ class Vote_model extends Model
 			break;
 		}
 	}
-
-	public function countVotes($question_id)
-	{
-		return $this->_countVotes($question_id);
-	}
 	
-	public function countPositiveVotes($question_id)
-	{
-		return $this->_countVotes($question_id, true);
-	}
-	
-	public function countNegativeVotes($question_id)
-	{
-		return $this->_countVotes($question_id, false);
-	}
-	
-	private function _countVotes($question_id, $positiveOrNegative = null)
-	{
-		if(isset($positiveOrNegative))
-			if($positiveOrNegative) $where = ' AND vote_value > 0';
-			else 					$where = ' AND vote_value < 0';
-		else $where = '';
-		
+	function voteSum($question_id)
+	{	
 		$question_id 	= $this->db->escape($question_id);
-		return $this->db->query("SELECT count(*) AS count FROM cn_votes WHERE vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = $question_id GROUP BY fk_user_id) $where")->row()->count;
+		$array = $this->db->query("SELECT sum(reaction) AS total 
+								FROM cn_reactions 
+								WHERE reaction_id IN (SELECT max(reaction_id) FROM cn_reactions WHERE fk_question_id = $question_id GROUP BY fk_user_id)"
+								)->result_array();
+		
+		return $array[0]['total'];
 	}
 }
 

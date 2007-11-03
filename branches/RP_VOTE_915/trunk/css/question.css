@@ -1,18 +1,66 @@
+/* QUESTION VOTER STUFF */
+.overall_rating {
+	float:left; 
+	margin: 42px 0px 0px 3px; 
+	color: white; 
+	font-size: 13px; 
+	text-align: center; 
+	width: 37px;
+	overflow: visible;
+}
+#user_rating {
+	float:left; 
+	margin: 6px 0px 0px 14px; 
+	color: white; font-size: 13px; 
+	text-align: center; 
+	width: 23px; 
+	border: 0px blue solid;
+	overflow: visible;
+}
+.default_meter {
+	height: 5px;
+	width: 23px;
+	margin-bottom: 1px;
+	background:url(../images/voter/meter_off_img.png);
+	cursor: pointer;
+}
+.on_meter{
+	height: 5px;
+	width: 23px;
+	margin-bottom: 1px;
+	background:url(../images/voter/meter_on_img.png);
+	cursor: pointer;	
+}
+.result_div{
+	margin: 10px 0px 0px 0px;
+	font-size: 10px;
+	text-align: center;
+}
+.arrow_div {
+	position: absolute;
+	background:url(../images/voter/slider_arrow.png);
+	width: 21px;
+	height: 25px;
+	left: 43px;
+	top: -1px;
+	cursor: move;
+}
+/* REST */
 .news-summary{
 	margin:0 45px 0 36px;
 	padding:7px 0 0 85px;
 	overflow: visible;
 	position:relative;
 }
-.raiting{
-	width:85px;
-	height:67px;
+.rating{
+	width:88px;
+	height:116px;
 	float:left;
 	position:relative;
 	margin:0 0 0 -85px;
 	display:inline;
-	overflow:hidden;
-	background:url(../images/bg-raiting.png);
+	overflow:visible;
+	background:url(../images/voter/voter_bg.png);
 }
 a.voteup,
 a.votedown,
@@ -58,36 +106,36 @@ a.vote_digit {
 a.vote_digit:hover {
 	text-decoration:none;
 }
-.describtion{background:#F0FAFF url(../images/bg-descr.gif) repeat-y 0 0;}
-.describtion-frame{background:url(../images/bg-descr.gif) repeat-y 100% 0;}
+.description{background:#F0FAFF url(../images/bg-descr.gif) repeat-y 0 0;}
+.description-frame{background:url(../images/bg-descr.gif) repeat-y 100% 0;}
 .descr-tr{background:url(../images/descr-r-corner.gif) no-repeat 100% 0;}
 .descr-bl{background:url(../images/bg-bottom-l-corner.gif) no-repeat 0 100%;}
 .descr-br{background:url(../images/bg-descr-right-r-corner.gif) no-repeat 100% 100%;padding:5px 10px 0 6px;}
-.describtion h3{
+.description h3{
 	margin:0;
 	font-size:16px;
 }
-.describtion .autor{
+.description .author{
 	overflow:hidden;
 	padding:5px 0 14px 0;
 	color:#93A2B4;
 	font-size:10px;
 }
-.describtion .autor p{margin:2px 0 0 0;}
-.describtion .autor img{
+.description .author p{margin:2px 0 0 0;}
+.description .author img{
 	float:left;
 	margin:0 6px 0 0;
 	border:1px solid #6F808A;
 }
-.describtion p{
+.description p{
 	margin:0;	
 	width:335px !important;	
 }
-.describtion p a.more{
+.description p a.more{
 	margin:0;
 	font-size:10px;
 }
-.describtion ul.options{
+.description ul.options{
 	margin:11px 0 0 0;
 	font-size:10px;
 	padding:0 0 8px 0;
@@ -95,20 +143,20 @@ a.vote_digit:hover {
 	width:100%;
 	list-style:none;
 }
-.describtion ul.options a{text-decoration:none; padding:0 0 0 18px;float:left;height:13px;line-height:13px;}
-.describtion ul.options a:hover{text-decoration:underline;}
-.describtion ul.options li{
+.description ul.options a{text-decoration:none; padding:0 0 0 18px;float:left;height:13px;line-height:13px;}
+.description ul.options a:hover{text-decoration:underline;}
+.description ul.options li{
 	float:left;
 	background:url(../images/divider.gif) no-repeat right;
 	padding:0 8px 0 0;
 	margin:0 7px 0 0;
 }
 
-.describtion ul.options li.watch a {
+.description ul.options li.watch a {
 	background:url(../images/ico-watch.png) no-repeat left;
 }
-.describtion ul.options li.tell-friend{background:none;}
-.describtion ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}
-.describtion ul.options li.trackback a{background:url(../images/ico-trackback.gif) no-repeat left;}
-.describtion ul.options li.discuss a{background:url(../images/ico-discuss.gif) no-repeat left;}
-.describtion ul.options li.flag a{background:url(../images/RP_Questions_flag.png) no-repeat left;}
+.description ul.options li.tell-friend{background:none;}
+.description ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}
+.description ul.options li.trackback a{background:url(../images/ico-trackback.gif) no-repeat left;}
+.description ul.options li.discuss a{background:url(../images/ico-discuss.gif) no-repeat left;}
+.description ul.options li.flag a{background:url(../images/RP_Questions_flag.png) no-repeat left;}

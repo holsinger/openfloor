@@ -247,7 +247,7 @@ class Forums extends Controller
 		// prepare sorting information
 		$this->prepareSort($data);		
 
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>'');
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 		
 		// Load the question queue from the model
 		$data['results'] = $this->question2->questionQueue();
@@ -640,10 +640,7 @@ class Forums extends Controller
 			// if user is registered, find out if and how they voted
 			if ($this->userauth->isUser()) {
 				$this->vote->type='question';
-				$score = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
-				if ($score > 0) $data['results'][$key]['voted'] = 'up';
-				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
-				else $data['results'][$key]['voted'] = false;
+				$data['results'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
 			} else 
 				$data['results'][$key]['voted'] = false;
 			

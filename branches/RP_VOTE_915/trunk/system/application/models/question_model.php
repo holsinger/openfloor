@@ -1,5 +1,4 @@
 <?php
-
 class Question_model extends Model 
 {
 	//vars
@@ -79,12 +78,12 @@ class Question_model extends Model
 			"SELECT 
 				question_id, 
 				IFNULL((SELECT 
-					cast(format(sum(vote_value)/10,0) as signed) AS number 
+					sum(reaction) AS number 
 				FROM 
-					cn_votes 
+					cn_reactions 
 				WHERE 
 					fk_question_id=question_id 
-				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
+				AND reaction_id IN (SELECT max(reaction_id) FROM cn_reactions WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
 				GROUP BY fk_question_id), 0) as votes,
 				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
 				question_name, 
