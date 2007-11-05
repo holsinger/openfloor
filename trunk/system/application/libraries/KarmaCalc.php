@@ -2,13 +2,13 @@
 
 class KarmaCalc {
 		
-	var $karma_base=10;
-	var $min_karma=6;
-	var $max_karma=30;
-	var $negative_per_day = 0.3;
+	var $karma_base=20;
+	var $min_karma=10;
+	var $max_karma=100;
+	var $negative_per_day = 0.1;
 	var $history_from = 0;
-	var $points_question_user = 6;
-	var $points_vote_user = 10;
+	var $points_question_user = 25;
+	var $points_vote_user = 15;
 	
 	var $total_question_users;
 	var $total_questions;
