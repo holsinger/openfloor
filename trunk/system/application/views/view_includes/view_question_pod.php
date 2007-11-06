@@ -51,11 +51,19 @@
 							<li class="flag"><a href="javascript: var none = showBox('login');">Flag</a></li>
 							<? endif; ?>
 							<? if($question_status == 'asked' && !empty($question_answer)): ?>
-							<li class="watch"><a class="link" onclick="showBox('watch/<?= $question_id ?>')">Watch</a></li>
+							<li class="watch"><a class="link" onclick="queueUpdater.toggleVisibility('watch_question_<?= $question_id ?>')">Watch</a></li>
 							<!-- <li class="watch"><?= anchor_popup('forums/watch_answer/' . $question_id, 'Watch', array('width' => 450, 'height' => 360, 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no')) ?></li> -->
 							<? endif; ?>
 							
 						</ul>
+
+						<? if($question_status == 'asked' && !empty($question_answer)): ?>
+						<div style="display:none;" class="watch_question" id="watch_question_<?= $question_id ?>">
+							<div class="close_flag_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none'});"></div>
+							<?= $question_answer ?>
+						</div>
+						<? endif; ?>
+
 						<? if($view_name == 'question_view') $this->load->view('question/_comments.php') ?>
 						<? if($view_name == 'votes_view') echo $voteHTML ?>
 						<? if($this->userauth->isUser()): ?>

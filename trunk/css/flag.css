@@ -45,6 +45,18 @@ div.flag-user {
 	left: 91px;
 }
 
+div.watch_question {
+	position: absolute;
+	background-color: #c6e5f6;
+	padding: 6px;
+/*	bottom: -16px;*/
+	bottom: -200px;
+	z-index: 101;
+	left: 341px;
+	border: 1px solid #93a2b4;
+	font-size: 10px;
+}
+
 div.autor img.img-flag-user {
 	position: absolute;
 	z-index: 101;

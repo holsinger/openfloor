@@ -66,7 +66,19 @@ queueUpdater.toggleQueue = function () {
 }
 
 queueUpdater.toggleVisibility = function(element) {
-	$$('div[class=flag-question]', 'div[class=flag-user]').without($(element)).invoke('setStyle', {display:'none'});
+	$$('div[class=flag-question]', 'div[class=flag-user]', 'div[class=watch_question]').without($(element)).invoke('setStyle', {display:'none'});
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
 	$(element).setStyle(style);
+}
+
+queueUpdater.watch = function(id) {
+	exec = '<script type="text/javascript" charset="utf-8">Tips.tips.each(function(s){console.log(s)})</script>';
+	
+	url = site_url + 'forums/watch_answer/' + id;
+	
+	new Ajax.Request(url, {
+		onSuccess: function(transport) {
+			new Tip($('watch_' + id), exec + transport.responseText, {className: 'rp', title: 'Watch', showOn: 'click', hideOn: 'click', closeButton: true});
+		}
+	});
 }
