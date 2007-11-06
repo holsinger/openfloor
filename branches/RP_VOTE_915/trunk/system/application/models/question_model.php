@@ -119,7 +119,7 @@ class Question_model extends Model
 		foreach($results as $k=>$v) {
 			# TODO this method for getting the vote count is not as speed friendly as the monolithic single-query above
 			// I was unsuccessful getting this into the query above because of the double-nested sub-query
-			$results[$k]['vote_count'] = $this->db->query("SELECT count(*) AS vote_count FROM (SELECT * FROM cn_votes WHERE fk_question_id = {$v['question_id']} GROUP BY fk_user_id) AS sq")->row()->vote_count;
+			$results[$k]['vote_count'] = $this->db->query("SELECT count(*) AS vote_count FROM (SELECT * FROM cn_reactions WHERE fk_question_id = {$v['question_id']} GROUP BY fk_user_id) AS sq")->row()->vote_count;
 			$tags = $this->tag_model->getTagsByQuestion($v['question_id']);
 			if(empty($tags))
 				$results[$k]['tags'] = array();
@@ -205,5 +205,6 @@ class Question_model extends Model
 	{
 		return $this->db->select($field)->where('question_id', $this->question_id)->get('cn_questions')->row()->$field;
 	}
+
 }
 ?>

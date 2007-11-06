@@ -22,6 +22,7 @@
 	width: 23px;
 	margin-bottom: 1px;
 	background:url(../images/voter/meter_off_img.png);
+	font-size: 1px;
 	cursor: pointer;
 }
 .on_meter{
@@ -29,6 +30,7 @@
 	width: 23px;
 	margin-bottom: 1px;
 	background:url(../images/voter/meter_on_img.png);
+	font-size: 1px;
 	cursor: pointer;	
 }
 .result_div{
@@ -44,68 +46,25 @@
 	left: 43px;
 	top: -1px;
 	cursor: move;
+	visibility: hidden;
 }
 /* REST */
-.news-summary{
-	margin:0 45px 0 36px;
-	padding:7px 0 0 85px;
+.question-summary{
+	margin:0 45px 20px 36px;
 	overflow: visible;
-	position:relative;
+	position: relative;
+}
+.question-summary .question-table{
+	width: 100%;
 }
 .rating{
 	width:88px;
 	height:116px;
-	float:left;
-	position:relative;
-	margin:0 0 0 -85px;
-	display:inline;
-	overflow:visible;
-	background:url(../images/voter/voter_bg.png);
+	overflow: visible;
+	position: relative;
+	background: url(../images/voter/voter_bg.png) no-repeat 0 0;
 }
-a.voteup,
-a.votedown,
-a.up,
-a.down{
-	width:18px;
-	height:17px;
-	overflow:hidden;
-	display:block;
-	position:absolute;
-	top:7px;
-	left:7px;
-	text-indent:-9999px;
-	background:url(../images/thumbsUp.png);
-}
-a.voteup
-{
-	background:url(../images/votedCheckBox.png);
-}
-a.down{
-	top:42px;
-	background:url(../images/thumbsDown.png);
-}
-a.votedown
-{		
-	top:42px;
-	background:url(../images/votedCheckBox.png);
-}
-a.vote_digit {
-	width:51px;
-	height:51px;
-	text-align:center;
-	line-height:51px;
-	font-size:20px;
-	font-weight:bold;
-	text-decoration:none;
-	color:#053C7C;
-	position:absolute;
-	top:5px;
-	left:29px;
-	display:block;
-}
-a.vote_digit:hover {
-	text-decoration:none;
-}
+
 .description{background:#F0FAFF url(../images/bg-descr.gif) repeat-y 0 0;}
 .description-frame{background:url(../images/bg-descr.gif) repeat-y 100% 0;}
 .descr-tr{background:url(../images/descr-r-corner.gif) no-repeat 100% 0;}

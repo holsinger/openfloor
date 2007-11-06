@@ -280,7 +280,6 @@ class Question extends Controller
 		$this->vote->vote($this->userauth->user_id, $id, $vote_cast);
 	}
 	
-	
 	function getTotalVoteSum($event_name, $question_name, $ajax_on){
 		// Question info can be passed by id or name, each type requires a different approach
 		$id = $this->question->get_id_from_url($question_name);
@@ -290,6 +289,11 @@ class Question extends Controller
 		}else{
 			return $this->vote->voteSum($id);
 		}
+	}
+	
+	// Currently used for ajax only
+	function getVoteCount($question_id){
+		echo($this->vote->voteCount($question_id));
 	}
 }
 ?>

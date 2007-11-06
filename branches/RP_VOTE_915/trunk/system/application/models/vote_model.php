@@ -178,6 +178,10 @@ class Vote_model extends Model
 		
 		return $array[0]['total'];
 	}
+	
+	public function voteCount($question_id){
+		return $this->db->query("SELECT count(*) AS vote_count FROM (SELECT * FROM cn_reactions WHERE fk_question_id = $question_id GROUP BY fk_user_id) AS sq")->row()->vote_count;
+	}
 }
 
 ?>
