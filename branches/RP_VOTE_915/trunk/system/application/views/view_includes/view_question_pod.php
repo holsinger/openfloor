@@ -98,7 +98,7 @@
 					onSuccess: function(transport) {
 						Effect.Fade("overall_<?=$question_id?>_rating", {duration: .8, from: 1, to: .2,  queue: 'end',
 							afterFinish : function(){
-								new Ajax.Updater("overall_<?=$question_id?>_rating", '<?=$this->config->site_url()?>question/getTotalVoteSum/<?=url_title($event_name)?>/<?=url_title($question_name)?>/true', { method: 'get' });
+								new Ajax.Updater("overall_<?=$question_id?>_rating", '<?=$this->config->site_url()?>question/getTotalVoteSum/<?=url_title($event_name)?>/<?=url_title($question_name)?>/true/<?=rand(0, 1000)?>', { method: 'get' });
 								new Ajax.Updater("vote_count_<?=$question_id?>", '<?=$this->config->site_url()?>question/getVoteCount/<?=$question_id?>', { method: 'get' });
 							}
 						});	
