@@ -8,6 +8,9 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 // vars
 cpUpdater.current_question_id = 0;
 cpUpdater.sliders = new Object;
+ajaxOn = true;
+var sort = 'pending';
+
 var timer;
 var i = 0;
 var startHex = 0xFCC6CA;

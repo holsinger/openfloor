@@ -9,6 +9,19 @@
 
 /***these will override all css stuff*/
 
+/* put the left rounded edge on the track */
+.track-left {
+	position: absolute;
+	width: 5px;
+	height: 9px;
+	background: transparent url(../images/slider-images-track-left.png) no-repeat top left;
+}
+
+/* put the track and the right rounded edge on the track */
+.track {
+	background: transparent url(../images/slider-images-track-right.png) no-repeat top right;
+}
+
 .cp-sort-link {
 	color: #f04a54;
 	cursor: pointer;

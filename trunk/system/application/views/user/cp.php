@@ -15,29 +15,13 @@
 	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
 	<script src="javascript/userWindow.js" type="text/javascript"></script>
 	<script type="text/javascript">
-	ajaxOn = true;
-	site_url = '<?= $this->config->site_url();?>';
-	var event_name = '<?=$event?>';
-	var cans = [<? $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; echo substr($cans, 0, -2); ?>];	
-	var sort = 'pending';
+		site_url = '<?= $this->config->site_url();?>';
+		var event_name = '<?=$event?>';
+		var cans = [<? $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; echo substr($cans, 0, -2); ?>];	
 	</script>
 
 	<script type="text/javascript" src="javascript/cpUpdater.js"></script>
 	<script type="text/javascript">cpUpdater.cpUpdate();</script>
-	<style type="text/css" media="screen" >
-		/* put the left rounded edge on the track */
-		.track-left {
-			position: absolute;
-			width: 5px;
-			height: 9px;
-			background: transparent url(./images/slider-images-track-left.png) no-repeat top left;
-		}
-
-		/* put the track and the right rounded edge on the track */
-		.track {
-			background: transparent url(./images/slider-images-track-right.png) no-repeat top right;
-		}
-	</style>
 </head>
 <body>		
 	<!-- This reimplements the stuff that is normally loaded for each page on the rest of the site.  Used for the disclaimer dialog -->
