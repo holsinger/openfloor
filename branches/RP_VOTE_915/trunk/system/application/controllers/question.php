@@ -283,8 +283,9 @@ class Question extends Controller
 	function getTotalVoteSum($event_name, $question_name, $ajax_on){
 		// Question info can be passed by id or name, each type requires a different approach
 		$id = $this->question->get_id_from_url($question_name);
-		
+		error_log($id);
 		if($ajax_on == 'true'){
+			header("Cache-Control: no-cache, must-revalidate");		// Because IE will cache the results otherwise
 			echo $this->vote->voteSum($id);
 		}else{
 			return $this->vote->voteSum($id);
