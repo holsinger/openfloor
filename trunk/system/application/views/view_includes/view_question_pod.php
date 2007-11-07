@@ -60,7 +60,7 @@
 						</ul>
 
 						<? if($question_status == 'asked' && !empty($question_answer)): ?>
-						<div style="display:none;" class="watch_question" id="watch_question_<?= $question_id ?>">
+						<div style="display:none; visibility: hidden" class="watch_question" id="watch_question_<?= $question_id ?>">
 							<div class="close_flag_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none'});"></div>
 							<?= $question_answer ?>
 						</div>
