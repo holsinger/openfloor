@@ -45,11 +45,7 @@ $sections = explode(',', $cms['cms_text']);
 			<table class="accordion_toggle" cellspacing="0" cellpadding="0">
 				<tr>
 					<td width="24" align="left"><img id="left_img_<?=$count?>" src="./images/accordion/left_off.png" border="0" /></td>
-					<td width="100%" align="center">
-						<h2>
-							<?= $section[0] ?>
-						</h2>
-					</td>
+					<td width="100%" align="center" valign="middle" class="accordian_toggle_text"><?= $section[0] ?></td>
 					<td width="24" align="right"><img id="right_img_<?=$count?>" src="./images/accordion/right_off.png" border="0" /></td>
 				</tr>
 			</table>
