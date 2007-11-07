@@ -30,22 +30,23 @@ class Information extends Controller {
 		$this->load->view('welcome_message');
 	}
 	
-	function view ()
+	function view ($cms_string)
 	{
 		$data['cms_id'] = 0;
-		if ( is_string($this->uri->segment(3)) ) {
-			$data['cms_id'] = $this->cms->get_id_from_url($this->uri->segment(3));
-			if ($data['cms_id']>0) $data = $this->cms->get_cms($data['cms_id']);	
+		if ( is_string($cms_string) ) {
+			$data['cms_id'] = $this->cms->get_id_from_url($cms_string);
+			if ($data['cms_id']>0) 
+				$data = $this->cms->get_cms($data['cms_id']);	
 		}
 		
-		if (count($data)>1) $this->load->view('view_message',$data);
-		else if ($this->userauth->isAdmin()) 
-		{
-			redirect('admin/cms/'.$this->uri->segment(3));
+		if (count($data) > 1) 
+			$this->load->view('view_message',$data);
+		else if ($this->userauth->isAdmin()){
+			redirect('admin/cms/'.$cms_string);
 			ob_clean();
 			exit();
-		}
-		else $this->failSafe();
+		}else 
+			$this->failSafe();
 	}
 	
 	/**
