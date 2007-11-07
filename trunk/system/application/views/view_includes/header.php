@@ -45,7 +45,7 @@ $this->load->view('view_layout/view_left_column.php',$data);
 
 	<? if($sub_title): ?>
 	<div class="double_line_container">
-		<h1><?=$sub_title?>></h1>
+		<h1><?=$sub_title?></h1>
 	</div>
 	<? endif; ?>
 	<div>

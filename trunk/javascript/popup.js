@@ -70,6 +70,7 @@ Control.PopUp.prototype = {
 		}
 	},
 	onSrcElemMouseDown : function(event){
+		console.log('Hit!');
 		this.cancel_document_event = true;
 		// If it has an ajax update then use it, this fills the pop box as with a source ajax response
 		if(this.options.ajax_update_url != 'none'){

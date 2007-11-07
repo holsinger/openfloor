@@ -6,8 +6,7 @@ $data['rss'][] = array(	'title' => 'RunPolitics Events Feed',
 						'href' => site_url("feed/events"));
 $data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
-$data['top_banner_text'] = "OPENFLOOR EVENTS";
-
+$data['sub_title'] = "OpenFloor Events";
 // THIS IS TEMP CODE FOR AN EVENT AND NEEDS TO BE REPLACED
 $data['use_temp_top'] = true;
 ?>
