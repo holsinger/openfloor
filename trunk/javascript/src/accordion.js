@@ -49,14 +49,14 @@ accordion.prototype = {
 			},
 			direction : 'vertical',
 			onEvent : 'click',
-			oneventcustom : function(){ console.log('test'); }
+			onChangeAccordion : function(){ }
 		}, options || {});
 				
 		this.duration = ((11-this.options.resizeSpeed)*0.15);
 
 		var accordions = $$('#'+container+' .'+this.options.classNames.toggle);
 		accordions.each(function(accordion) {
-			Event.observe(accordion, this.options.onEvent, this.activate.bind(this, accordion, true), false);
+			Event.observe(accordion, this.options.onEvent, this.activate.bind(this, accordion, true));
 			if (this.options.onEvent == 'click') {
 			  	accordion.onclick = function() {
 					return false;	
@@ -77,7 +77,7 @@ accordion.prototype = {
 	//
 	//  Activate an accordion
 	//
-	activate : function(accordion, after_first) {
+	activate : function(accordion) {
 
 		
 		if (this.animating) {
@@ -90,11 +90,9 @@ accordion.prototype = {
 		this.currentAccordion.setStyle({
 			display: 'block'
 		});		
-		// Added by CTE
 		
-		if(after_first){
-			this.options.oneventcustom(this.currentAccordion);
-		}
+		// Added by CTE
+		this.options.onChangeAccordion($(this.currentAccordion).id);
 		
 		this.currentAccordion.previous(0).addClassName(this.options.classNames.toggleActive);
 

@@ -22,8 +22,19 @@ $sections = explode(',', $cms['cms_text']);
 	Event.observe(window, 'load', loadAccordions, false);
 	
 	function loadAccordions() {
-		var bottomAccordion = new accordion('main_accordion', { onEvent : 'click', oneventcustom : function(id1){ return; } });
+		var bottomAccordion = new accordion('main_accordion', { onEvent : 'click', onChangeAccordion : ChangeAccordianStyle });
 		bottomAccordion.activate($$('#main_accordion .accordion_toggle')[0]);
+	}
+	ChangeAccordianStyle.last_id = false;
+	function ChangeAccordianStyle(content_id){
+		pic_num = content_id.substring(3);
+		if(ChangeAccordianStyle.last_id){
+			$('left_img_'+ChangeAccordianStyle.last_id).src = "./images/accordion/left_off.png";
+			$('right_img_'+ChangeAccordianStyle.last_id).src = "./images/accordion/right_off.png";
+		}
+		$('left_img_'+pic_num).src = "./images/accordion/left_on.png";
+		$('right_img_'+pic_num).src = "./images/accordion/right_on.png";
+		ChangeAccordianStyle.last_id = pic_num;
 	}
 </script>
 
@@ -31,10 +42,19 @@ $sections = explode(',', $cms['cms_text']);
 	<? $count= 0; ?>
 	<? 	foreach($sections as $section):
 			$section = explode(':', $section) ?>
-			<h2 class="accordion_toggle">
-				<?= $section[0] ?>
-			</h2>
-			<div class="accordion_content" id="accordian_content_<?=$count?>">
+			<table class="accordion_toggle" cellspacing="0" cellpadding="0">
+				<tr>
+					<td width="24" align="left"><img id="left_img_<?=$count?>" src="./images/accordion/left_off.png" border="0" /></td>
+					<td width="100%" align="center">
+						<h2>
+							<?= $section[0] ?>
+						</h2>
+					</td>
+					<td width="24" align="right"><img id="right_img_<?=$count?>" src="./images/accordion/right_off.png" border="0" /></td>
+				</tr>
+			</table>
+			<div class="accordion_content" id="ac_<?=$count?>">
+				
 				<? 	$content = $this->cms->get_cms($this->cms->get_id_from_url($section[1])); 
 				echo $content['cms_text']; ?>
 			</div>
