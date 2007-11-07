@@ -360,7 +360,7 @@ class Event extends Controller
 		}
 		
 		// Since this is used by ajax, we need to return viewable material
-		$st = '<h3 class="subheader">Upcoming Events</h3><ul>';
+		$st = '<h3 class="subheader">Future Events</h3><ul>';
 		if(isset($return_array['upcoming_events'])){
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
