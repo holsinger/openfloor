@@ -13,7 +13,7 @@ Control.PopUp.prototype = {
 		
 		// We have a lot of defaults that we use if not defined
 		this.options = Object.extend({
-			src_elem_show_event : 'mousedown',
+			src_elem_event : 'mousedown',
 			popup_placement : 'below',		// Can be "below" or "page_center"
 			hijax: 'false', 
 			hijax_div_class: 'hijax',
