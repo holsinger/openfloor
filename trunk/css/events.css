@@ -23,6 +23,12 @@
 	border-color: #C1D8EA; 
 	border-style: solid;
 }
+/* For one div this overrides some of the subheader settings above */
+#live_events_subheader_div {
+	border: 0px;
+	padding-top: 0px;
+}
+
 #working_town_div {
 	/* used on view_events.php page */
 	padding: 10px;

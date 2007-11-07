@@ -21,7 +21,7 @@ $data['use_temp_top'] = true;
 	<? foreach ($events as $key => $array): ?>   
 		<? if($array['streaming']): ?>
 			
-			<h3 class="subheader">Live Events</h3>
+			<h3 class="subheader" id="live_events_subheader_div">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">
             		<tr>
