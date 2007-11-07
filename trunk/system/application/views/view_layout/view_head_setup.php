@@ -22,8 +22,6 @@
 	#dependency userWindow.css
 	#dependency flag.css
 	#dependency wordcloud.css
-	#dependency googleVideo.css
-	#dependency googleBar.css
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js
@@ -44,12 +42,6 @@
 		username = '<?=$this->userauth->user_name;?>';
 	</script>
 
-	<style type="text/css" media="screen">
-		 @import url("http://www.google.com/uds/css/gsearch.css");
-	</style>
-	<style type="text/css" media="screen">
-		@import url("http://www.google.com/uds/solutions/newsbar/gsnewsbar.css");
-	</style>
     
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>
 </head>

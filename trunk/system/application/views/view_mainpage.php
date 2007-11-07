@@ -20,8 +20,6 @@ CSS DEPENDENCIES
 #dependency all2.css
 #dependency main.css
 #dependency userWindow.css
-#dependency googleVideo.css
-#dependency googleBar.css
 
 JAVASCRIPT DEPENDENCIES
 #dependency /lib/prototype.js
@@ -37,13 +35,6 @@ JAVASCRIPT DEPENDENCIES
 	site_url = '<?= $this->config->site_url();?>';
 	username = '<?=$this->userauth->user_name;?>';
 </script>
-
-<style type="text/css" media="screen">
-	 @import url("http://www.google.com/uds/css/gsearch.css");
-</style>
-<style type="text/css" media="screen">
-	@import url("http://www.google.com/uds/solutions/newsbar/gsnewsbar.css");
-</style>
 
 </head>
 <body>
