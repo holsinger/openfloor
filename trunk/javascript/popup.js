@@ -18,7 +18,9 @@ Control.PopUp.prototype = {
 			hijax: 'false', 
 			hijax_div_class: 'hijax',
 			document_hide_event: 'true',
-			ajax_update_url: 'none'
+			ajax_update_url: 'none',
+			offset_x: 0,					// Both offset values are ignored when placement is "page_center"
+			offset_y: 0
 		}, options || {});
 		// If Hijax is set then create the hijax div and give it the specified class, then hide it
 		if(this.options.hijax == 'true'){
@@ -29,6 +31,13 @@ Control.PopUp.prototype = {
 				visibility: 'hidden',
 				display: 'none'
 			});
+			
+			if (typeof document.body.style.maxHeight != "undefined") {			
+			  	$(this.hijax_div).setStyle({
+					position: 'fixed'
+				});
+			}
+			
 		}
 
 		// Assign Events	
@@ -101,8 +110,8 @@ Control.PopUp.prototype = {
 		$(this.popup_elem_id).setStyle({
 			visibility: visibility_value,
 			display: display_value,
-			left: pos[0],
-			top: pos[1]
+			left: pos[0]+this.options.offset_x,
+			top: pos[1]+this.options.offset_y
 		});
 	},
 	onDocumentMouseDown : function(event){
