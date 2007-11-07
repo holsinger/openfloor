@@ -1,5 +1,6 @@
 <!--
 	#dependency queueUpdater.js
+	#dependency popup.js
 	#dependency question.css
 -->
 <? $profileLink = "user/profile/$user_name" ?>
@@ -51,7 +52,8 @@
 							<li class="flag"><a href="javascript: var none = showBox('login');">Flag</a></li>
 							<? endif; ?>
 							<? if($question_status == 'asked' && !empty($question_answer)): ?>
-							<li class="watch"><a class="link" onclick="queueUpdater.toggleVisibility('watch_question_<?= $question_id ?>')">Watch</a></li>
+							<li class="watch"><a id="popup_<?= $question_id ?>" class="link">Watch</a></li>
+							<!-- <li class="watch"><a class="link" onclick="queueUpdater.toggleVisibility('watch_question_<?= $question_id ?>')">Watch</a></li> -->
 							<!-- <li class="watch"><?= anchor_popup('forums/watch_answer/' . $question_id, 'Watch', array('width' => 450, 'height' => 360, 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no')) ?></li> -->
 							<? endif; ?>
 							
@@ -79,4 +81,12 @@
 		</div>
 	</div>
 </div>
+<? if($question_status == 'asked' && !empty($question_answer)): ?>
+<script type="text/javascript" charset="utf-8">
+	popup_instance_<?= $question_id ?> = new Control.PopUp(
+		'popup_<?= $question_id ?>', 
+		'watch_question_<?= $question_id ?>'
+	);
+</script>
+<? endif; ?>
 <? if ($this->userauth->isAdmin()) echo "<div class='admin-queue-edit-question'>".anchor('question/edit/'.$question_id, 'edit')."</div>"; ?>
