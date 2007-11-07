@@ -15,6 +15,8 @@ $data['event_url'] = $event_url;
 $data['left_nav'] = $global ? 'events' : 'event';
 $tag_execute = '';
 if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
+
+$data['sub_title'] = ucwords(str_replace('_',' ', $event_name));
 ?>
 
 <?$this->load->view('view_includes/header.php',$data);?>

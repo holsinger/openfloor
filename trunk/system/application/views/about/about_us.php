@@ -8,10 +8,11 @@
 <!--
 	#dependency about_us.css
 --> 
-<?$data['left_nav'] = 'about_us';	?>
+<?
+$data['sub_title'] = "About Us";
+$data['left_nav'] = 'about_us';	?>
 <?php $this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div">
-        <h3>About Us</h3>
 		<div id="loading_div">LOADING...</div>
 		<div id="overall_outer_div">
 			<table cellpadding="0" cellspacing="0" border="0">

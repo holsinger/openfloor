@@ -1,10 +1,12 @@
 <? 
 //$data['top_banner_text'] = $contact_page_name;
+$data['sub_title'] = $contact_page_name;
 $this->load->view('view_includes/header.php',$data); 
 $hidden = array('contact_type' => $contact_type);
+
 ?>
 <div id="content_div">
-    <h3><?=$contact_page_name?></h3>
+    <h3></h3>
 	<p>
 		<?=$contact_page_desc?>
 		<? if ($this->userauth->isSuperAdmin()) echo "<br>".anchor("admin/cms/".$contact_type, 'edit'); ?>

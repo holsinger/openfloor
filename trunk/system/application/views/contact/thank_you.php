@@ -1,4 +1,6 @@
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? 
+$data['sub_title'] = $contact_page_name;
+$this->load->view('view_includes/header.php',$data); ?>
 <div id="content_div">
     <h3>Thank You!</h3>
 	<p><?=$thank_you_desc?></p>
