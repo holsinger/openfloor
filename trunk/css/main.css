@@ -369,7 +369,7 @@ BODY {
 .content .col-right .post {
     float: left;
     width: 100%;
-    border-top: 2px solid #C1D7EA;
+/*    border-top: 2px solid #C1D7EA;*/
     margin: 10px 0 0 0;
 }
 
