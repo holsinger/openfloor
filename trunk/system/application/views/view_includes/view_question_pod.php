@@ -59,14 +59,7 @@
 							
 						</ul>
 
-						<? if($question_status == 'asked' && !empty($question_answer)): ?>
-						<div style="display: none; visibility: hidden;" class="watch_question" id="watch_question_<?= $question_id ?>">
-							<!-- <div class="close_flag_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none'});"></div> -->
-							<div class="close_watch_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none',visibility:'hidden'});"></div>
-							<?= $question_answer ?>
-						</div>
-						<? endif; ?>
-
+<!-- hidden div used to be here... -->
 						<? if($view_name == 'question_view') $this->load->view('question/_comments.php') ?>
 						<? if($view_name == 'votes_view') echo $voteHTML ?>
 						<? if($this->userauth->isUser()): ?>
@@ -83,12 +76,28 @@
 	</div>
 </div>
 <? if($question_status == 'asked' && !empty($question_answer)): ?>
+
+<div style="display: none; visibility: hidden;" class="watch_question" id="watch_question_<?= $question_id ?>">
+	<!-- <div class="close_flag_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none'});"></div> -->
+	<div class="close_watch_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none',visibility:'hidden'});"></div>
+	<?= $question_answer ?>
+</div>
+
 <script type="text/javascript" charset="utf-8">
+	_offset_x = 203;
+	_offset_y = 240;
+
+	if(navigator.appVersion.indexOf("MSIE") != -1) {
+		_offset_x += -53;
+		_offset_y += -70;
+	}
+
 	popup_instance_<?= $question_id ?> = new Control.PopUp(
 		'popup_<?= $question_id ?>', 
 		'watch_question_<?= $question_id ?>', {
-			offset_x: 18,
-			offset_y: -2
+			offset_x: _offset_x,
+			offset_y: _offset_y,
+			document_hide_event: false
 		}
 	);
 </script>
