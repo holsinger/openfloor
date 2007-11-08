@@ -20,7 +20,7 @@ Control.PopUp.prototype = {
 			document_hide_event: 'true',
 			ajax_update_url: 'none',
 			offset_x: 0,					// Both offset values are ignored when placement is "page_center"
-			offset_y: 0,
+			offset_y: 0
 		}, options || {});
 		// If Hijax is set then create the hijax div and give it the specified class, then hide it
 		if(this.options.hijax == 'true'){
