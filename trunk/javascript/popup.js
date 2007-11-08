@@ -114,8 +114,8 @@ Control.PopUp.prototype = {
 		$(this.popup_elem_id).setStyle({
 			visibility: visibility_value,
 			display: display_value,
-			left: pos[0]+this.options.offset_x,
-			top: pos[1]+this.options.offset_y
+			left: pos[0]+this.options.offset_x+"px",
+			top: pos[1]+this.options.offset_y+"px"
 		});
 	},
 	onDocumentMouseDown : function(event){
