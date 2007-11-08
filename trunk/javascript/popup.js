@@ -39,7 +39,12 @@ Control.PopUp.prototype = {
 			}
 			
 		}
-
+		// If page_center and a modern browser, set popup_elem_id to be fixed
+		if (typeof document.body.style.maxHeight != "undefined") {			
+		  	$(this.popup_elem_id).setStyle({
+				position: 'fixed'
+			});
+		}
 		// Assign Events	
 		if(this.options.src_elem_event == 'mousedown'){
 			Event.observe(src_elem_id, 'mousedown', this.onSrcElemMouseDown.bindAsEventListener(this));
@@ -79,7 +84,6 @@ Control.PopUp.prototype = {
 		}
 	},
 	onSrcElemMouseDown : function(event){
-		console.log('Hit!');
 		this.cancel_document_event = true;
 		// If it has an ajax update then use it, this fills the pop box as with a source ajax response
 		if(this.options.ajax_update_url != 'none'){
