@@ -86,7 +86,10 @@
 <script type="text/javascript" charset="utf-8">
 	popup_instance_<?= $question_id ?> = new Control.PopUp(
 		'popup_<?= $question_id ?>', 
-		'watch_question_<?= $question_id ?>'
+		'watch_question_<?= $question_id ?>', {
+			offset_x: 18,
+			offset_y: -2
+		}
 	);
 </script>
 <? endif; ?>
