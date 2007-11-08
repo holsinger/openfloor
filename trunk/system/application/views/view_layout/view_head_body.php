@@ -49,5 +49,5 @@
             </div>
             
             <div class="content">
-                <table cellspacing="0" cellpadding="0" border="0">
+                <table cellspacing="0" cellpadding="0" border="0" style="width: 100%;">
 					<tr>

@@ -268,8 +268,7 @@ class Forums extends Controller
 			// $data['rightpods'] = array(	'dynamic'	=>	array(	'event_description'	=>	$event['event_desc'],
 			// 													'event_location'	=>	$event['location']));
 
-			$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('event_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
-										'event_location'=>$data['results'][0]['location']));
+			$data['rightpods'] = "suppress";
 
 			// set vars
 			$data['view_name'] = 'view_queue';
@@ -675,8 +674,7 @@ class Forums extends Controller
 		}
 		
 		// right pods
-		$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('event_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
-									'event_location'=>$data['results'][0]['location']));
+		$data['rightpods'] = "suppress";
 	}
 
 	private function preparePagination(&$data)

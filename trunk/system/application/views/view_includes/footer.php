@@ -13,21 +13,21 @@
 						<? } ?>
                     <?
                     //set vars for right column
-										//$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
-										$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('events'=>array(),'dynamic'=>array());
-										if (isset($cloud)) {
-											$data['rightpods']['dynamic']['top_tags']= $cloud;
-										} else {
-											// $data['cloud'] = FALSE;
-											$cloud = $this->tag_lib->createTagCloud(null);
-											$data['rightpods']['dynamic']['top_tags']= $cloud;
-											
-										}
-										
-										if (!$admin) $this->load->view('view_layout/view_right_column.php',$data); 
-										?>
-                    
-            
+					//$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
+					if($rightpods != 'suppress'){
+						$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('events'=>array(),'dynamic'=>array());
+						if (isset($cloud)) {
+							$data['rightpods']['dynamic']['top_tags']= $cloud;
+						} else {
+							// $data['cloud'] = FALSE;
+							$cloud = $this->tag_lib->createTagCloud(null);
+							$data['rightpods']['dynamic']['top_tags']= $cloud;
+						
+						}
+					
+						if (!$admin) $this->load->view('view_layout/view_right_column.php',$data); 
+					}
+					?>
             	</tr>
             </table>
 			</div>

@@ -90,4 +90,10 @@
 											?>
 						
 	                </td>
-					<td class="col-center" valign="top">
+					<?
+					if($rightpods == 'suppress'){
+						$override_td_style = 'style="width: 89%;"';
+					}else{
+						$override_td_style = '';
+					}?>
+					<td class="col-center" valign="top" <?=$override_td_style?>>
