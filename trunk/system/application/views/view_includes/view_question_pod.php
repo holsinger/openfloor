@@ -52,7 +52,7 @@
 							<li class="flag"><a href="javascript: var none = showBox('login');">Flag</a></li>
 							<? endif; ?>
 							<? if($question_status == 'asked' && !empty($question_answer)): ?>
-							<li class="watch"><a id="popup_<?= $question_id ?>" class="link">Watch</a></li>
+							<li class="watch"><a id="popup_<?= $question_id ?>" class="link" onclick="new Ajax.Updater('hack_<?= $question_id ?>', site_url + 'forums/watch_answer/<?= $question_id ?>')">Watch</a></li>
 							<!-- <li class="watch"><a class="link" onclick="queueUpdater.toggleVisibility('watch_question_<?= $question_id ?>')">Watch</a></li> -->
 							<!-- <li class="watch"><?= anchor_popup('forums/watch_answer/' . $question_id, 'Watch', array('width' => 450, 'height' => 360, 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no')) ?></li> -->
 							<? endif; ?>
@@ -79,8 +79,8 @@
 
 <div style="display: none; visibility: hidden;" class="watch_question" id="watch_question_<?= $question_id ?>">
 	<!-- <div class="close_flag_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none'});"></div> -->
-	<div class="close_watch_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none',visibility:'hidden'});"></div>
-	<?= $question_answer ?>
+	<div class="close_watch_window" onClick="javascript:$('watch_question_<?= $question_id ?>').setStyle({display:'none',visibility:'hidden'});$('watch_question_<?= $question_id ?>').innerHTML='';"></div>
+	<div id="hack_<?= $question_id ?>"><?= $question_answer ?></div>
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -97,7 +97,8 @@
 		'watch_question_<?= $question_id ?>', {
 			offset_x: _offset_x,
 			offset_y: _offset_y,
-			document_hide_event: false
+			document_hide_event: false,
+			hack_id: 'hack_<?= $question_id ?>'
 		}
 	);
 </script>

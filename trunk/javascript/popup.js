@@ -91,6 +91,7 @@ Control.PopUp.prototype = {
 		}
 		// When using mousedown we want the abilit to toggle
 		if($(this.popup_elem_id).getStyle('visibility') == 'visible'){
+			$(this.options.hack_id).innerHTML = '';
 			var visibility_value = "hidden";
 			var display_value = "none";
 		}else{
