@@ -26,8 +26,8 @@ div.close_watch_window {
 	width: 20px;
 	height: 20px;
 	position: absolute;
-	top: -1px;
-	right: -1px;
+	top: -5px;
+	right: -5px;
 	cursor: pointer;
 }
 

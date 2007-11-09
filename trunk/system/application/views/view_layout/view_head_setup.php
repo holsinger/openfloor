@@ -28,11 +28,12 @@
 	#dependency ajaxVideo.js
 	#dependency queueUpdater.js
 	#dependency clock.js
-	#dependency /lib/prototype.js
-	#dependency /src/scriptaculous.js
-	#dependency /src/effects.js
+	dependency effects.js
 	#dependency userWindow.js
 	-->
+	
+	<script src="./javascript/prototype.js" type="text/javascript"></script>
+	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>	
 	
 	<!-- DO NOT REMOVE THIS LINE -->
 	<!-- #dependencies -->
@@ -41,6 +42,8 @@
 		site_url = '<?= $this->config->site_url();?>';
 		username = '<?=$this->userauth->user_name;?>';
 	</script>
+	
+	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
 
     
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>

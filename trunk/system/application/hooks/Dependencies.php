@@ -2,6 +2,8 @@
 
 class Dependencies
 {
+	private $debug = true;
+	
 	public $javascript;
 	public $css;
 	
@@ -43,10 +45,17 @@ class Dependencies
 	private function populate_dependencies()
 	{
 		$ret = '';
-		if(!empty($this->css))	
-			$ret .= '<link rel="stylesheet" type="text/css" href="css/' . implode(',', $this->css) . '" />' . "\n";			// $ret .= '<style type="text/css" media="screen">@import "css/' . implode(',', $this->css) . '";</style>';
-		if(!empty($this->javascript))
-			$ret .= '<script type="text/javascript" charset="utf-8" src="javascript/' . implode(',', $this->javascript) . '"></script>';
+		if(!$this->debug) {
+			if(!empty($this->css))	
+				$ret .= '<link rel="stylesheet" type="text/css" href="css/' . implode(',', $this->css) . '" />' . "\n";
+			if(!empty($this->javascript))
+				$ret .= '<script type="text/javascript" charset="utf-8" src="javascript/' . implode(',', $this->javascript) . '"></script>' . "\n";
+		} else {
+			foreach($this->css as $css)
+				$ret .= "<link rel=\"stylesheet\" type=\"text/css\" href=\"css/$css\" />\n";
+			foreach($this->javascript as $javascript)
+				$ret .= "<script type=\"text/javascript\" charset=\"utf-8\" src=\"javascript/$javascript\"></script>\n";				
+		}		
 		$this->output = str_replace('<!-- #dependencies -->', $ret, $this->output);
 	}
 	

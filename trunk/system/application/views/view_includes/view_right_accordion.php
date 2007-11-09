@@ -14,7 +14,7 @@ $sections = explode(',', $cms['cms_text']);
 ?>
 
 <!-- DEPENDENCIES
-	#dependency /src/accordion.js
+	#dependency accordion.js
 	#dependency accordion.css
 -->
 

@@ -85,8 +85,9 @@ class Forums extends Controller
 	
 	public function watch_answer($id)
 	{
+		$close_button = "<div class=\"close_watch_window\" onClick=\"popup_instance_$id.destroy()\"></div>";
 		$this->question->question_id = $id;
-		echo $this->question->get('question_answer');		
+		echo $close_button . $this->question->get('question_answer');		
 	}
 	
 	public function cp($event = 'presidential_debate', $ajax = null, $can_id = null)
@@ -97,6 +98,7 @@ class Forums extends Controller
 		// = init =
 		// ========
 		$this->userauth->check();
+		$data['rightpods'] = 'suppress';
 		$data['event'] = $event;
 		
 		
@@ -151,7 +153,8 @@ class Forums extends Controller
 			
 			#TODO This solution for no candidates assigned to event is not ideal
 			if(empty($data['candidates'])) redirect();
-			$this->load->view('user/cp', $data);
+			// $this->load->view('user/cp', $data);
+			$this->load->view('event/main', $data);
 		}		
 	}
 	

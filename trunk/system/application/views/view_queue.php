@@ -8,9 +8,6 @@ $data['rss'][] = array(	'title' => 'RunPolitics Events Feed',
 if(!$global)
 $data['rss'][] = array(	'title' => ucwords(str_replace('_',' ', $event_name)) . ' Event Feed', 
 						'href' => site_url("feed/event/$event_name"));
-$data['red_head'] = $event_type.'s';
-$data['tabs'] = $event_type;
-$data['tab_view_question'] = 'active';
 $data['event_url'] = $event_url;
 $data['left_nav'] = $global ? 'events' : 'event';
 $tag_execute = '';

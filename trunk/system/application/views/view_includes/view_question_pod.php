@@ -85,14 +85,14 @@
 
 <script type="text/javascript" charset="utf-8">
 	
-	_offset_x = 0;
-	_offset_y = 0;
-	/**
+	_offset_x = 60;
+	_offset_y = -25;
+	
 	if(navigator.appVersion.indexOf("MSIE") != -1) {
-		_offset_x += -53;
-		_offset_y += -70;
+		_offset_x += -30;
+		_offset_y += 0;
 	}
-	**/
+	
 	popup_instance_<?= $question_id ?> = new Control.PopUp(
 		'popup_<?= $question_id ?>', 
 		{
@@ -100,7 +100,7 @@
 			offset_y: _offset_y,
 			popup_class: "watch_questions",
 			document_hide_event: false,
-			hack_id: 'hack_<?= $question_id ?>'
+			ajax_update_url: site_url + 'forums/watch_answer/<?= $question_id ?>'
 		}
 	);
 </script>
