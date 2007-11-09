@@ -116,8 +116,7 @@ Control.PopUp.prototype = {
 				top: pos[1]+this.options.offset_y+"px"
 			});
 			Event.observe($(this.popup_div), 'mousedown', this.popup_elem_event);
-			//new Ajax.Updater($(this.popup_div), this.options.ajax_update_url, { method: 'get' });
-			$(this.popup_div).innerHTML = "Testing this div right now!";
+			new Ajax.Updater($(this.popup_div), this.options.ajax_update_url, { method: 'get' });
 		}
 
 		
@@ -142,6 +141,11 @@ Control.PopUp.prototype = {
 	},
 	onPopupElemMouseDown : function(event){
 		this.cancel_document_event = true;
+	},
+	destroy : function(){
+		Event.stopObserving($(this.popup_div), 'mousedown', this.popup_elem_event);
+		$(this.popup_div).remove();
+		this.popup_div = false;
 	}
 
 }
