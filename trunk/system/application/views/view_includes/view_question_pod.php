@@ -84,19 +84,21 @@
 </div>
 
 <script type="text/javascript" charset="utf-8">
-	_offset_x = 203;
-	_offset_y = 240;
-
+	
+	_offset_x = 0;
+	_offset_y = 0;
+	/**
 	if(navigator.appVersion.indexOf("MSIE") != -1) {
 		_offset_x += -53;
 		_offset_y += -70;
 	}
-
+	**/
 	popup_instance_<?= $question_id ?> = new Control.PopUp(
 		'popup_<?= $question_id ?>', 
-		'watch_question_<?= $question_id ?>', {
+		{
 			offset_x: _offset_x,
 			offset_y: _offset_y,
+			popup_class: "watch_questions",
 			document_hide_event: false,
 			hack_id: 'hack_<?= $question_id ?>'
 		}
