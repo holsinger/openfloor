@@ -1,4 +1,4 @@
-<? if(!empty($current_question)): ?>
+<? if(!empty($current_question) && $this->userauth->isUser()): ?>
 <script type="text/javascript" language="javascript">
 	if(cpUpdater.current_question_id != <?=$current_question[0]['question_id']?>) cpUpdater.current_question_fade();
 	cpUpdater.current_question_id = <?=$current_question[0]['question_id']?>;

@@ -4,6 +4,8 @@ class Forums extends Controller
 	private $ajax = false;
 	private $global = false;
 	
+	private $_cp_section_size = 10;
+	
 	function __construct()
 	{
 		parent::Controller();
@@ -90,14 +92,14 @@ class Forums extends Controller
 		echo $close_button . $this->question->get('question_answer');		
 	}
 	
-	public function cp($event = 'presidential_debate', $ajax = null, $can_id = null)
+	public function cp($event = 'presidential_debate', $ajax = null, $option_1 = null, $option_2 = null)
 	{
 		#TODO Handle no candidates assigned?
 		
 		// ========
 		// = init =
 		// ========
-		$this->userauth->check();
+		// $this->userauth->check();
 		$data['rightpods'] = 'suppress';
 		$data['event'] = $event;
 		
@@ -108,7 +110,7 @@ class Forums extends Controller
 		$this->event->id = $data['event_id'];
 		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
 		
-		$this->question->event_id = $data['event_id'];
+		$this->question->event_id = $data['event_id'];		
 		// ==========
 		// = output =
 		// ==========
@@ -121,7 +123,8 @@ class Forums extends Controller
 				$this->load->view('user/cp_current_question.php', $data);
 				break;
 			case 'upcoming_questions':
-				if(isset($can_id)) $data['sort'] = $can_id;
+				if(isset($option_1)) $data['sort'] = $option_1;
+				if(isset($option_2)) $data['section'] = $option_2;
 				$this->_upcomingQuestions($data);
 				$this->load->view('user/cp_upcoming_questions.php', $data);
 				break;
@@ -132,17 +135,22 @@ class Forums extends Controller
 				break;
 			case 'your_reaction':
 				$this->_currentQuestion($data);
-				$data['can_id'] = $can_id;
+				$data['can_id'] = $option_1;
 				$this->_yourReaction($data);
 				$this->load->view('user/_userReactSlider.php', $data);
 				break;
 			case 'overall_reaction':
 				$this->_currentQuestion($data);
-				$data['can_id'] = $can_id;
+				$data['can_id'] = $option_1;
 				$this->_overallReaction($data);
 				$this->load->view('user/_overallReaction.php', $data);
 				break;
+			case 'upcoming_questions_count':
+				if(isset($option_1)) $data['sort'] = $option_1;
+				echo $this->_upcoming_questions_count($data);
+				break;
 			default:
+				show_error('Invalid AJAX argument.');
 				break;
 			}
 		} else { // NO AJAX
@@ -814,6 +822,12 @@ EOT;
 	}
 
 	// cp helper functions
+	public function _upcoming_questions_count(&$data)
+	{
+		$this->question->question_status = isset($data['sort']) && $data['sort'] == 'asked' ? 'asked' : 'pending';
+		return $this->question->count_upcoming_questions($data['event_id']);
+	}
+	
 	private function _currentQuestion(&$data)
 	{
 		$this->question->question_status = 'current';
@@ -834,7 +848,10 @@ EOT;
 			if($data['sort'] == 'newest') $this->question->order_by = 'date';
 			else $this->question->question_status = $data['sort'];
 		}	
-		$this->question->limit = 10;
+		
+		if(isset($data['section'])) $this->question->offset = $data['section'] * $this->cp_section_size;
+		$this->question->limit = $this->_cp_section_size;
+		
 		$data['questions'] = $this->question->questionQueue();
 		foreach ($data['questions'] as $key => $row) {
 			if ($this->userauth->isUser()) {

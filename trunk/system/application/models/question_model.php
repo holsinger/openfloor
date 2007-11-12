@@ -20,7 +20,6 @@ class Question_model extends Model
         // Call the Model constructor
         parent::Model();
 		$this->load->model('tag_model');
-		
     }
     
 	public function insertQuestion($questionName='', $questionDesc='', $userID=0, $eventID=0, $questionURLName='')
@@ -51,7 +50,7 @@ class Question_model extends Model
 		return $this->db->affected_rows();
 	}
 	
-	public function questionQueue ()
+	public function questionQueue()
 	{
 		$where = '';
 		$tag_append = '';
@@ -253,6 +252,11 @@ class Question_model extends Model
 			array('question_status' => 'current'),
 			array('question_id' => $question_id)
 		);
+	}
+
+	public function count_upcoming_questions($event_id)
+	{
+		return $this->db->query("SELECT count(*) AS count FROM cn_questions WHERE question_status='{$this->question_status}' AND fk_event_id=$event_id")->row()->count;
 	}
 }
 ?>

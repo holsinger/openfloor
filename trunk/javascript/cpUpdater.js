@@ -1,3 +1,7 @@
+//TODO
+// - total # of questions
+// - getSection call starting at 0
+
 //init obj
 if(typeof cpUpdater === "undefined" || !cpUpdater) {
 	var cpUpdater = {
@@ -56,21 +60,25 @@ cpUpdater.cpUpdate = function() {
 	updaters = new Array();
 	
 	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
-	  frequency: 10
+		frequency: 10,
+		decay: 2
 	}));
 	
 	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort, {
-	  frequency: 10
+		frequency: 10,
+		decay: 2
 	}));
 	
 	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
-	  frequency: 10,
-	  evalScripts: true
+		frequency: 10,
+		evalScripts: true,
+		decay: 2
 	}));
 	
 	cans.each(function(s) {
 		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
-		  frequency: 10
+			frequency: 10,
+			decay: 2
 		}));
 	});
 }
@@ -234,8 +242,6 @@ ColorChange = function() {
 	$('the-current-question').setStyle({'background-color': '#' + nowColor});
 	
 	if(i == 9) {
-		// startHex = 0xEEF8FF;
-		// endHex = 0xFCC6CA;
 		upOrDown = false;
 	}
 	

@@ -19,18 +19,23 @@ if(isset($ajax)) {
 	'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
 }
 
-$comments = '<div id="comment_add"><div class="comment_head"><strong>';
-	if ($this->userauth->isUser()) $comments .= '<img src="./avatars/shrink.php?img='.$this->userauth->user_avatar.'&w=16&h=16">&nbsp;&nbsp;'.anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name);
+if($this->userauth->isUser()) {
+	$comments = '<div id="comment_add"><div class="comment_head"><strong>';
+	$comments .= '<img src="./avatars/shrink.php?img='.$this->userauth->user_avatar.'&w=16&h=16">&nbsp;&nbsp;'.anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name);
 	$comments .= ' why not add to the discussion?</strong></div><br />'
 	. form_open('comment/addCommentAction', array('id' => 'commenting_form_' . $question_id))
-		. form_textarea($attributes)
-		. form_hidden('fk_question_id', $question_id)
-		. form_hidden('event_name', url_title($event_name))
-		. form_hidden('name', $question_name)
-		. form_hidden('event_type', 'question')
-		. "<br /><br />{$submit}"
+	. form_textarea($attributes)
+	. form_hidden('fk_question_id', $question_id)
+	. form_hidden('event_name', url_title($event_name))
+	. form_hidden('name', $question_name)
+	. form_hidden('event_type', 'question')
+	. "<br /><br />{$submit}"
 	. form_close()
-. '<br /><br /></div>';
+	. '<br /><br /></div>';
+} else {
+	echo '&nbsp;<a class="link" onclick="showBox(\'login\')">Login to comment.</a>';
+}
+
 echo $comments; 
 if(isset($ajax)) {
 	echo "<div class=\"close\"><a class=\"link\" onClick=\"$('cp-comments-$question_id').setStyle({display: 'none'});\">close</a></div>";

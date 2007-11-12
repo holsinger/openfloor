@@ -1,8 +1,8 @@
-/* @override http://192.168.0.67/rp/css/ucp.css */
+/* @override 
+	http://192.168.0.67/rp/css/ucp.css
+	http://192.168.0.67/rp/css/event.css
+*/
 
-/***these will override all css stuff*/
-
-/* put the left rounded edge on the track */
 .track-left {
 	position: absolute;
 	width: 5px;
@@ -10,7 +10,6 @@
 	background: transparent url(../images/slider-images-track-left.png) no-repeat top left;
 }
 
-/* put the track and the right rounded edge on the track */
 .track {
 	background: transparent url(../images/slider-images-track-right.png) no-repeat top right;
 }
@@ -29,7 +28,7 @@
 
 #rectangle {
 	background-color: #f1faff;
-	width: 640px;
+/*	width: 640px;*/
 	height: 22px;
 	position: absolute;
 	top: 82px;
@@ -84,16 +83,6 @@ a {
 	background-color: #eef8ff;
 }
 
-/*#ucp .current-question-pod, #ucp .question-pod {
-	width: 804px;
-	height: 28px;
-	margin-top: 10px;
-	background: url(../images/ucp/question-pod-bg.jpg) no-repeat;
-}
-*/
-
-/* BEGIN TEST */
-
 .question-pod{display:block}
 .question-pod0 *{
   display:block;
@@ -132,8 +121,6 @@ a {
   background:#9bb9d5;
   height: 100%;
 }
-
-/* END TEST */
 
 #ucp .current-question-pod {
 }
@@ -249,7 +236,7 @@ a {
 	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
 	background-color: #f1faff;
 	position: absolute;
-	width: 634px;
+/*	width: 634px;*/
 	margin-left: 128px;
 	padding: 3px;
 	height: 16px;
@@ -268,9 +255,11 @@ a {
 	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
 	background-color: #f1faff;
 	float: left;
-	width: 634px;
+	
+/*	width: 634px;*/
 	margin-left: 5px;
 	padding: 3px;
+	width: 84%;
 }
 
 #ucp h1 {

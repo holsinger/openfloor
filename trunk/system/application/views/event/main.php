@@ -1,28 +1,28 @@
 <!-- 
-#dependency all.css
-#dependency ucp.css
+#dependency all2.css
+#dependency event.css
 #dependency userWindow.css
-#dependency overall_reaction.css
+dependency overall_reaction.css
 
 #dependency cpUpdater.js
 -->
 
 <?
 $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; $cans = substr($cans, 0, -2);
-$data['js'] = "debugger; var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
+$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
 
-$data['sub_title'] = "Event";
+$data['sub_title'] = "Event"; // what do we want to call this?
 $this->load->view('view_includes/header.php', $data);
 ?>
 
 <div id="overlay" onclick="hideBox()" style="display:none"></div>
 <div id="hijax" style="display:none" class="ajax_box"></div>
+<? if ($this->userauth->isAdmin()): ?>
+<a class="link" onclick="cpUpdater.enableAJAX()">START</a>
+<a class="link" onclick="cpUpdater.disableAJAX()">STOP</a>
+<? endif; ?>
 
 <div id="ucp">
-	<h1>Dashboard</h1>
-	<img class="close" src="./images/ucp/close.png" onClick="window.close();"/>
-	<div style="clear:both;">
-	<div class="hr-1"></div>
 	<div class="section">
 		<span class="section-title">Current Question:</span>
 	</div>
@@ -51,7 +51,7 @@ $this->load->view('view_includes/header.php', $data);
 				</div>
 				<div id="user-reaction-ajax"></div>
 				<br/><br/>
-				<img src="./images/ucp/ask-a-question.jpg" onClick="javascript:new Effect.toggle('cp-ask-question','blind', {queue: 'end'});"/>
+				<img src="./images/ucp/ask-a-question.jpg" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
 			</td>
 		</tr>
 	</table>
