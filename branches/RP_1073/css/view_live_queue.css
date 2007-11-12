@@ -1,0 +1,156 @@
+/* @override 
+	http://localhost/~Rob/Politic20/css/view_live_queue.css
+	http://localhost/~Rob/RunPolitics/css/view_live_queue.css
+	http://localhost/rp/css/view_live_queue.css
+*/
+
+html {
+	background-color:#0173BA;
+}
+
+h1 {
+	font-weight: normal;
+/*	font-family: Arial Black;*/
+	font-variant: small-caps;
+	font-size: 30px;
+	font-family: Georgia;
+	color: #033D7C;
+	position: absolute;
+	top: 5px;
+	left: 35px;
+}
+
+.cp-votes, .cp-comments {
+	border-style: solid;
+	border-width: 1px;
+	margin-right: 15px;
+	margin-left: 15px;
+	padding: 3px 10px;
+}
+
+#user-reaction img {
+	border-style: none;
+}
+
+span.participants {
+	position: absolute;
+	right: 57px;
+	font-size: 1.4em;
+	font-weight: bold;
+}
+
+#user-reaction table {
+	position: relative;
+	left: 40px;
+	background-color: #f0faff;
+}
+
+#user-reaction th {
+	background-color: #053c7c;
+	color: #f0faff;
+	padding: 3px 8px;
+	text-align: left;
+	font-size: smaller;
+}
+
+#user-reaction tr.alternate {
+	/*background-color: #e1eaef;*/
+}
+
+#user-reaction td {
+	padding: 2px;
+	color: #053c7c;
+}
+.queue-logo {
+	padding:15px;
+}
+body {
+	background-color:#FFFFFF;
+	color:#0173ba;
+	/*height:100%;*/	
+	font-size:16px;
+	min-width:575px;
+}
+.current_question {
+	margin-left:50px;
+	color:#EC2834;
+	font-weight:bold;
+	font-size: 18px;
+}
+.queue-question {
+	margin-left:15px;
+	margin-right:15px;
+	background:#F0FAFF;
+	height:27px;
+	vertical-align: middle;
+	border:1px solid #053C7C;
+	font-weight: bold;
+	margin-top: 8px;
+}
+.question {
+	widht:100%;
+	background:#F0FAFF;
+	vertical-align: middle;
+	font-weight: bold;
+}
+span.votes {
+	border: 5px solid #053C7C;	
+	color:#F04A54;
+	position:relative;
+	top:3px;
+}
+span.votes p {
+		padding: 1px;
+		color:#F04A54;
+		display: inline;
+		background:#ffffff;
+}
+
+h3 {
+	color:#053C7C;
+	width:100%;
+	background:#F0FAFF;
+	left:5px;
+	font-size: 12px;
+	overflow:hidden;
+	padding-top:2px;
+	text-transform: uppercase;
+	font-weight: bold;
+}
+
+.votes {
+	font-weight:bold;	
+}
+
+.votebox {
+	position:relative;
+	top:2px;
+}
+
+.question {
+	margin:20px;
+}
+
+ul.top-nav {
+	margin:0px 0px 0px 0px;
+	background-position:-9px;
+	height:9px;
+}
+.invisi {
+	color: white;
+}
+
+.cp-comments-tab, .cp-votes-tab {
+	position: absolute;
+	right: 50px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-bottom-style: solid;
+	margin: 0;
+	width: 100px;
+	text-align: center;
+}
+
+.cp-votes-tab {
+	right: 160px;
+}
