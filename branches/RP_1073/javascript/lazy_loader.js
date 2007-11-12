@@ -72,7 +72,7 @@ Control.LazyLoader.prototype = {
 		this.segment_divs[this.segment_divs.length] = document.createElement('div');
 		$(this.segment_divs[(this.segment_divs.length - 1)]).innerHTML = 'Loading...';
 		$(this.container_elem_id).appendChild(this.segment_divs[(this.segment_divs.length - 1)]);
-		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'?section='+(this.segment_divs.length - 1), { method: 'get', onComplete : callAfterUpdate });
+		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'/'+(this.segment_divs.length - 1), { method: 'get', onComplete : callAfterUpdate });
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date()
 		var h=now.getHours() * 60;
@@ -111,7 +111,7 @@ Control.LazyLoader.prototype = {
 			}
 		}
 		
-		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'?section='+section_num);
+		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'/'+section_num);
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date();
 		var h=now.getHours() * 60;
