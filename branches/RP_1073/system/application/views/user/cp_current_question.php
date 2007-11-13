@@ -7,10 +7,14 @@
 	<b class="question-pod4"></b>
 	<b class="question-pod5"></b></b>
 	<div class="question-podfg">
-		<div class="score"><?= $current_question[0]['votes'] ?></div>
-		<div class="vote"><? $this->load->view('user/_cp_vote_box', $current_question[0]) ?></div>
-		<div id="the-current-question" class="question"><?=$current_question[0]['question_name']?></div>
-		<div style="clear:both;"></div>
+		<table cellpadding="0" cellspacing="0">
+			<tr>
+				<td><div class="score"><?= $current_question[0]['votes'] ?></div></td>
+				<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $current_question[0]) ?></div></td>
+				<td width="100%"><div class="question"><?=$current_question[0]['question_name']?></div></td>
+				<td><div class="flag"><img src="./images/flag.png"></div></td>
+			</tr>
+		</table>		
 		<div id="cp-comments-<?= $current_question[0]['question_id'] ?>" class="cp-comments" style="height:300;display:none;overflow:auto;">COMMENTS</div>
 		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES</div>
 	</div>

@@ -1,6 +1,7 @@
 /* @override 
 	http://192.168.0.67/rp/css/ucp.css
 	http://192.168.0.67/rp/css/event.css
+	http://localhost/rp2/css/event.css
 */
 
 .track-left {
@@ -171,8 +172,8 @@ a {
 #ucp .vote {
 	float: left;
 	vertical-align: middle;
-	padding-top: 2px;
-	margin-bottom: -2px;
+	width: 44px;
+	margin-top: 1px;
 }
 
 #ucp .votes {
@@ -216,16 +217,14 @@ a {
 }
 
 #ucp .score {
-	width: 74px;
-	height: 23px;
+	width: 73px;
 	background: url(../images/ucp/score-bg.jpg) no-repeat;
 	color: #053c7c;
 	font-size: 17px;
 	font-weight: bold;
 	font-family: Verdana,Geneva,Arial;
-	float: left;
-	margin-left: 5px;
 	text-indent: 4px;
+	margin: 0 5px;
 }
 
 #ucp table {
@@ -254,12 +253,14 @@ a {
 #ucp .question {
 	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
 	background-color: #f1faff;
-	float: left;
-	
-/*	width: 634px;*/
-	margin-left: 5px;
 	padding: 3px;
-	width: 84%;
+	margin: 0 5px;
+}
+
+#ucp .flag {
+	width: 16px;
+	margin-left: 6px;
+	margin-right: 9px;
 }
 
 #ucp h1 {
