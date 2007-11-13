@@ -7,10 +7,10 @@ if(!Control) var Control = {};
 Control.LazyLoader = Class.create();
 
 Control.LazyLoader.prototype = {
-	initialize: function (container_elem_id, ajax_update_url, initial_count, ajax_count_url, options){
+	initialize: function (container_elem_id, ajax_update_url, ajax_count_url, options){
 		this.container_elem_id = container_elem_id;
 		this.ajax_update_url = ajax_update_url;
-		this.item_count = initial_count;
+		this.item_count = 0;
 		this.ajax_count_url = ajax_count_url;
 		this.segment_divs = new Array();
 		this.segment_divs_last_refresh = new Array();
@@ -24,8 +24,10 @@ Control.LazyLoader.prototype = {
 			view_refresh_lapse: 100000			// Default is every minute
 		}, options || {});
 		
-		// Add the initial content
-		this.addNewSegment(this.fillContent.bindAsEventListener(this));
+		// Add Content, first temp then real content added on the callback from the CheckCount() call below
+		$(this.container_elem_id).innerHTML = "Loading Content...";
+		this.init_count_call = true;
+		this.checkCount();		// For the initial count, because of the variable above it actually populates the container initially too
 		
 		// Assign Events
 		this.fillContentEvent = this.fillContent.bindAsEventListener(this);
@@ -33,6 +35,7 @@ Control.LazyLoader.prototype = {
 		Event.observe(window, 'resize', this.fillContentEvent);
 		
 		// Start the periodic count	check
+		
 		this.checkCountHandle = setInterval(this.checkCount.bind(this), this.options.count_refresh_lapse);
 		this.checkRefreshHandle = setInterval(this.refreshView.bind(this), this.options.view_refresh_lapse);
 	},
@@ -83,17 +86,43 @@ Control.LazyLoader.prototype = {
 		clearTimeout(this.checkRefreshHandle);
 		this.update = false;
 	},
-	startUpdating : function(){
-		// Update immediatley first
-		this.checkCount();
-		this.refreshView();
+	startUpdating : function(do_not_update_first){
+		if(do_not_update_first){
+			// Update immediatley first
+			this.checkCount();
+			this.refreshView();
+		}
 		// start the interval
 		this.checkCountHandle = setInterval(this.checkCount.bind(this), this.options.count_refresh_lapse);
 		this.checkRefreshHandle = setInterval(this.refreshView.bind(this), this.options.view_refresh_lapse);
 		// let the class know we mean it!
 		this.update = true;
 	},
-	// CHECK COUNT FUNCTIONS
+	reset : function(ajax_update_url, ajax_count_url){
+		this.ajax_update_url = ajax_update_url;
+		this.item_count = 0;
+		this.ajax_count_url = ajax_count_url;
+		
+		this. stopUpdating();
+		
+		// remove existing divs
+		for(var i = 0; i < this.segment_divs.length; i++){
+			$(this.container_elem_id).removeChild(this.segment_divs[i]);
+		}
+		
+		this.segment_divs = new Array();
+		this.segment_divs_last_refresh = new Array();
+		this.segment_divs_view_range = new Array();
+		
+		// Add Content, first temp then real content added on the callback from the CheckCount() call below
+		$(this.container_elem_id).innerHTML = "Loading Content...";
+		this.init_count_call = true;
+		this.checkCount();		// For the initial count, because of the variable above it actually populates the container initially too
+		
+		this.checkCount();		// For the initial count
+		this.startUpdating(true);
+	},
+	// CHECK COUNT FUNCTIONS, on initial call it calls the first portion to fill in the page.  We must have the count before we can do this!
 	checkCount : function(){
 		new Ajax.Request(this.ajax_count_url,
 		  {
@@ -102,6 +131,12 @@ Control.LazyLoader.prototype = {
 	},
 	checkCountOnSuccessCallback : function(transport){
 		this.item_count = transport.responseText;
+		if(this.init_count_call){
+			$(this.container_elem_id).innerHTML = "";
+			this.addNewSegment(this.fillContent.bindAsEventListener(this));
+			this.init_count_call = false;
+		}
+		
 	},
 	// REFRESH FUNCTIONS
 	refreshView : function(){
