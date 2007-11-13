@@ -50,21 +50,16 @@ cpUpdater.cpUpdateOnce = function() {
 cpUpdater.vote = function(url) {
 	// new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
-	  onSuccess: function(transport) {
-		  cpUpdater.cpUpdateOnce();
-	  }
+		onSuccess: function(transport) {
+			// cpUpdater.cpUpdateOnce();
+			lazy_loader.refreshView();
+		}
 	});
 }
 
 cpUpdater.cpUpdate = function() {
 	
-	upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
-	upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
 	
-	new Control.LazyLoader('upcoming_questions', upcoming_questions_url, 50, upcoming_questions_count_url, {
-		count_refresh_lapse: 100000, 
-		view_refresh_lapse: 10000
-	}); 
 	
 	updaters = new Array();
 	
@@ -117,17 +112,11 @@ cpUpdater.askQuestion = function() {
 }
 
 cpUpdater.disableAJAX = function() {
-	if(ajaxOn) { ajaxOn=false; updaters.each(function(s) {
-			s.stop();
-		}); 
-	}
+	if(lazy_loader.update) lazy_loader.stopUpdating();
 }
 
 cpUpdater.enableAJAX = function() {
-	if(!ajaxOn) { ajaxOn=true; updaters.each(function(s) {
-			s.start();
-		}); 
-	}
+	if(!lazy_loader.update) lazy_loader.startUpdating();	
 }
 
 cpUpdater.viewVotes = function(question_id) {
@@ -209,8 +198,8 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 }
 
 cpUpdater.toggleAJAX = function () {
-	if(ajaxOn) { cpUpdater.disableAJAX(); }
-	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
+	if(lazy_loader.update) { lazy_loader.stopUpdating(); }
+	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { lazy_loader.startUpdating(); }
 }
 
 cpUpdater.toggleVisibility = function(element) {
@@ -264,3 +253,13 @@ ColorChange = function() {
 	if(!upOrDown) i--;
 	
 }
+
+Event.observe(window, 'load', function() {
+  	upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
+	upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
+	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, 50, upcoming_questions_count_url, {
+		count_refresh_lapse: 100000, 
+		view_refresh_lapse: 10000
+	});
+});

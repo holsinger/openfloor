@@ -66,7 +66,7 @@ $this->load->view('view_includes/header.php', $data);
 		</span>
 	</div>
 	<div id="upcoming_questions">		
-		<? $this->load->view('user/cp_upcoming_questions') ?>
+		<?// $this->load->view('user/cp_upcoming_questions') ?>
 	</div>	
 </div>
 

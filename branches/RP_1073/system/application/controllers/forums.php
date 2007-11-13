@@ -154,7 +154,7 @@ class Forums extends Controller
 				break;
 			}
 		} else { // NO AJAX
-			$this->_upcomingQuestions($data);		
+			// $this->_upcomingQuestions($data);		
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
@@ -847,9 +847,12 @@ EOT;
 		if(isset($data['sort'])) {
 			if($data['sort'] == 'newest') $this->question->order_by = 'date';
 			else $this->question->question_status = $data['sort'];
-		}	
+		}
 		
-		if(isset($data['section'])) $this->question->offset = $data['section'] * $this->cp_section_size;
+				
+		if(isset($data['section']))
+			$this->question->offset = $this->_cp_section_size * $data['section'];
+		
 		$this->question->limit = $this->_cp_section_size;
 		
 		$data['questions'] = $this->question->questionQueue();
