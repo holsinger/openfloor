@@ -65,8 +65,8 @@ Control.PopUp.prototype = {
 			client_width = window.innerWidth;
 			client_height = window.innerHeight;
 		}else{
-			client_width = document.body.clientWidth;
-			client_height = document.body.clientHeight;
+			client_width = document.documentElement.clientWidth;
+			client_height = document.documentElement.clientHeight;
 		}
 		return [client_width, client_height];
 	},
@@ -74,7 +74,6 @@ Control.PopUp.prototype = {
 		if(this.options.popup_placement == 'below'){
 			var div_dim = Position.cumulativeOffset($(this.src_elem_id));
 			var top = div_dim[1] + ($(this.src_elem_id).getHeight());
-			//alert(div_dim[0]+" id:"+$(this.src_elem_id).getOffsetParent().id);
 			return [div_dim[0], top];
 		}else if(this.options.popup_placement == 'page_center'){
 			var client_dim = this.getClientDim();
@@ -107,8 +106,8 @@ Control.PopUp.prototype = {
 			var pos = this.showPosition(this.src_elem_id);
 			// Set Style
 			//console.log('Showing!');
+			
 			$(this.popup_div).setStyle({
-				position: "absolute",
 				visibility: "visible",
 				display: "block",
 				left: pos[0]+this.options.offset_x+"px",
@@ -147,7 +146,12 @@ Control.PopUp.prototype = {
 		this.popup_div = document.createElement('div');
 		document.body.appendChild(this.popup_div);
 		$(this.popup_div).addClassName(this.options.popup_div_class);
-		$(this.popup_div).setStyle({ visibility: 'hidden', display: 'none' });
+		if(this.options.popup_placement == 'page_center' && typeof document.body.style.maxHeight != "undefined"){		// The last part will filter out the rancid IE 6
+			var pop_pos = 'fixed';
+		}else{
+			var pop_pos = 'absolute';
+		}
+		$(this.popup_div).setStyle({ position: pop_pos, visibility: 'hidden', display: 'none' });
 		Event.observe($(this.popup_div), 'mousedown', this.popup_elem_event);
 	}
 
