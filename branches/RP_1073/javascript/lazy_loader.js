@@ -87,7 +87,7 @@ Control.LazyLoader.prototype = {
 		this.update = false;
 	},
 	startUpdating : function(do_not_update_first){
-		if(do_not_update_first){
+		if(!do_not_update_first){
 			// Update immediatley first
 			this.checkCount();
 			this.refreshView();
