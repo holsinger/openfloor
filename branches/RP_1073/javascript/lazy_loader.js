@@ -34,28 +34,21 @@ Control.LazyLoader.prototype = {
 		
 		// Start the periodic count	check
 		this.checkCountHandle = setInterval(this.checkCount.bind(this), this.options.count_refresh_lapse);
-		this.checkRefreshHandle = setInterval(this.periodicRefreshView.bind(this), this.options.view_refresh_lapse);
+		this.checkRefreshHandle = setInterval(this.refreshView.bind(this), this.options.view_refresh_lapse);
 	},
 	fillContent : function(){
 		if(this.update){
-			// First find out where we are scrolled on the page
-			var viewport_height = document.viewport.getDimensions().height;
-			var scrolled = document.viewport.getScrollOffsets();
-			var scrolled_pos = scrolled[1] + viewport_height;
-			// Find out which divs are in the current view
-			var min = scrolled[1];
-			var max = min + viewport_height;
-			var within_range = this.getViewportWithinRange();
-			// Draw new segemnts that are found using our handy diff fucntion
-		
+			// Refresh divs that are entering the current view 
+			var within_range = this.getViewportWithinRange();		
 			if(within_range[0] < this.segment_divs_view_range[0]){
-				this.refreshView(within_range[0], true);
+				this.refreshSection(within_range[0], true);
 			}else if(within_range[1] > this.segment_divs_view_range[1]){
-				this.refreshView(within_range[1], true);
+				this.refreshSection(within_range[1], true);
 			}
 		
 			this.segment_divs_view_range = within_range;
 			// Finally make the comparison to add new divs if necessary
+			var scrolled_pos = document.viewport.getScrollOffsets()[1] + document.viewport.getDimensions().height;
 			if(((this.segment_divs.length) * this.options.items_per_section) < this.item_count){
 				// find out where the lowest div is
 				var abs_div_pos = Position.cumulativeOffset($(this.segment_divs[(this.segment_divs.length - 1)]));
@@ -77,7 +70,7 @@ Control.LazyLoader.prototype = {
 		this.segment_divs[this.segment_divs.length] = document.createElement('div');
 		$(this.segment_divs[(this.segment_divs.length - 1)]).innerHTML = 'Loading...';
 		$(this.container_elem_id).appendChild(this.segment_divs[(this.segment_divs.length - 1)]);
-		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'?section='+(this.segment_divs.length - 1), { method: 'get', onComplete : callAfterUpdate });
+		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'/'+(this.segment_divs.length - 1), { method: 'get', onComplete : callAfterUpdate });
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date()
 		var h=now.getHours() * 60;
@@ -93,10 +86,10 @@ Control.LazyLoader.prototype = {
 	startUpdating : function(){
 		// Update immediatley first
 		this.checkCount();
-		this.periodicRefreshView();
+		this.refreshView();
 		// start the interval
 		this.checkCountHandle = setInterval(this.checkCount.bind(this), this.options.count_refresh_lapse);
-		this.checkRefreshHandle = setInterval(this.periodicRefreshView.bind(this), this.options.view_refresh_lapse);
+		this.checkRefreshHandle = setInterval(this.refreshView.bind(this), this.options.view_refresh_lapse);
 		// let the class know we mean it!
 		this.update = true;
 	},
@@ -111,13 +104,13 @@ Control.LazyLoader.prototype = {
 		this.item_count = transport.responseText;
 	},
 	// REFRESH FUNCTIONS
-	periodicRefreshView : function(){
+	refreshView : function(){
 		for(var i = this.segment_divs_view_range[0]; i <= this.segment_divs_view_range[1]; i++){
-			this.refreshView(i, false);
+			this.refreshSection(i, false);
 		}
 	},
 	// Actual part where the view is refreshed.  This is used in two separate places which explains why it is it's own functions
-	refreshView : function(section_num, time_check){
+	refreshSection : function(section_num, time_check){
 		if(time_check){
 			var now=new Date();
 			var h=now.getHours() * 60;
@@ -131,7 +124,7 @@ Control.LazyLoader.prototype = {
 			}
 		}
 		
-		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'?section='+section_num);
+		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'/'+section_num);
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date();
 		var h=now.getHours() * 60;
