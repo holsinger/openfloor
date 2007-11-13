@@ -41,7 +41,7 @@ class Forums extends Controller
 		exit();
 	}
 	
-	public function liveQueue($event = 'presidential_debate', $ajax=null)
+	public function liveQueue($event, $ajax=null)
 	{
 		$data['event'] = $event;
 		
@@ -92,7 +92,7 @@ class Forums extends Controller
 		echo $close_button . $this->question->get('question_answer');		
 	}
 	
-	public function cp($event = 'presidential_debate', $ajax = null, $option_1 = null, $option_2 = null)
+	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
 		#TODO Handle no candidates assigned?
 		
@@ -166,7 +166,7 @@ class Forums extends Controller
 		}		
 	}
 	
-	public function overall_reaction($event = 'presidential_debate', $ajax = null, $can_id = null)
+	public function overall_reaction($event, $ajax = null, $can_id = null)
 	{
 		// ========
 		// = init =
@@ -590,7 +590,7 @@ class Forums extends Controller
 		return $user_id;
 	}
 	
-	public function candidate_dashboard($event_name =  'salt_lake_city_mayoral_forum', $ajax = null)
+	public function candidate_dashboard($event_name, $ajax = null)
 	{
 		$event_id = $this->event->get_id_from_url($event_name);
 		if(!$event_id) redirect();

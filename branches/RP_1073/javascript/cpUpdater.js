@@ -57,6 +57,15 @@ cpUpdater.vote = function(url) {
 }
 
 cpUpdater.cpUpdate = function() {
+	
+	upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
+	upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
+	new Control.LazyLoader('upcoming_questions', upcoming_questions_url, 50, upcoming_questions_count_url, {
+		count_refresh_lapse: 100000, 
+		view_refresh_lapse: 10000
+	}); 
+	
 	updaters = new Array();
 	
 	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
@@ -64,10 +73,10 @@ cpUpdater.cpUpdate = function() {
 		decay: 2
 	}));
 	
-	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort, {
-		frequency: 10,
-		decay: 2
-	}));
+	// updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort, {
+	// 	frequency: 10,
+	// 	decay: 2
+	// }));
 	
 	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
 		frequency: 10,

@@ -5,6 +5,7 @@
 dependency overall_reaction.css
 
 #dependency cpUpdater.js
+#dependency lazy_loader.js
 -->
 
 <?
