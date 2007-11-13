@@ -183,7 +183,7 @@ a {
 	margin-right: 33px;	
 }
 
-#ucp .comments {
+#ucp .comments, #ucp .more_info {
 	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
@@ -206,7 +206,7 @@ a {
 	margin-top: 0;
 }
 
-#ucp .votes, #ucp .comments {
+#ucp .votes, #ucp .comments, #ucp .more_info {
 	color: #fffeff;
 	text-transform: uppercase;
 	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;

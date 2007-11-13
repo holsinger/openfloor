@@ -15,6 +15,7 @@
 				<td><div class="flag"><img src="./images/flag.png"></div></td>
 			</tr>
 		</table>		
+		<div id="cp-info-<?= $current_question[0]['question_id'] ?>" class="cp-info" style="height:300;display:none;overflow:auto;">info</div>
 		<div id="cp-comments-<?= $current_question[0]['question_id'] ?>" class="cp-comments" style="height:300;display:none;overflow:auto;">COMMENTS</div>
 		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES</div>
 	</div>
@@ -27,6 +28,7 @@
 </div>
 <div class="votes" onClick="cpUpdater.viewVotes(<?= $current_question[0]['question_id'] ?>)"><?= $current_question[0]['vote_count'] ?> votes</div>
 <div class="comments" onClick="cpUpdater.viewComments(<?= $current_question[0]['question_id'] ?>, event_name, '<?= url_title($current_question[0]['question_name']) ?>')"><?= $current_question[0]['comment_count'] ?> comments</div>
+<div class="more_info" onClick="cpUpdater.viewInfo('<?= $current_question[0]['question_id'] ?>')">more info</div>
 <div style="clear:both;"></div>
 <? else: ?>
 There is no current question

@@ -39,28 +39,18 @@ function d2h(d) {
 
 cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
-	
-	new Ajax.Updater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort);
-	
-	cans.each(function(s) {
-		new Ajax.Updater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s);
-	});
 }
 
 cpUpdater.vote = function(url) {
-	// new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
 		onSuccess: function(transport) {
-			// cpUpdater.cpUpdateOnce();
+			cpUpdater.cpUpdateOnce();
 			lazy_loader.refreshView();
 		}
 	});
 }
 
 cpUpdater.cpUpdate = function() {
-	
-	
-	
 	updaters = new Array();
 	
 	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
@@ -68,22 +58,17 @@ cpUpdater.cpUpdate = function() {
 		decay: 2
 	}));
 	
-	// updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort, {
-	// 	frequency: 10,
-	// 	decay: 2
-	// }));
-	
-	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
+	new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
 		frequency: 10,
 		evalScripts: true,
 		decay: 2
-	}));
+	});
 	
 	cans.each(function(s) {
-		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
+		new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
 			frequency: 10,
 			decay: 2
-		}));
+		});
 	});
 }
 
@@ -112,11 +97,23 @@ cpUpdater.askQuestion = function() {
 }
 
 cpUpdater.disableAJAX = function() {
-	if(lazy_loader.update) lazy_loader.stopUpdating();
+	if(lazy_loader.update && ajaxOn) {
+		lazy_loader.stopUpdating();
+		ajaxOn=false; 
+		updaters.each(function(s) {
+			s.stop();
+		});
+	}	
 }
 
 cpUpdater.enableAJAX = function() {
-	if(!lazy_loader.update) lazy_loader.startUpdating();	
+	if(!lazy_loader.update && !ajaxOn) {
+		lazy_loader.startUpdating();
+		ajaxOn=true; 
+		updaters.each(function(s) {
+			s.start();
+		});
+	}	
 }
 
 cpUpdater.viewVotes = function(question_id) {
@@ -155,6 +152,11 @@ cpUpdater.viewComments = function(question_id, event_name, question_name) {
 			}
 		});
 	}
+}
+
+cpUpdater.viewInfo = function(question_id) {
+	cpUpdater.toggleVisibility('cp-info-' + question_id);
+	cpUpdater.toggleAJAX();
 }
 
 cpUpdater.voteComment = function (url, question_id, event_name, question_name) {
@@ -198,8 +200,8 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 }
 
 cpUpdater.toggleAJAX = function () {
-	if(lazy_loader.update) { lazy_loader.stopUpdating(); }
-	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { lazy_loader.startUpdating(); }
+	if(lazy_loader.update && ajaxOn) { cpUpdater.disableAJAX(); }
+	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
 }
 
 cpUpdater.toggleVisibility = function(element) {
