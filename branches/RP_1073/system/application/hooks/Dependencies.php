@@ -2,7 +2,7 @@
 
 class Dependencies
 {
-	private $debug = false;
+	private $debug = true;
 	
 	public $javascript;
 	public $css;
@@ -23,7 +23,9 @@ class Dependencies
 	{		
 		$this->get_dependencies();
 		$this->sort_dependencies();
+		$this->clean_up();
 		$this->populate_dependencies();
+		
 	}
 	
 	private function get_dependencies()
@@ -63,6 +65,10 @@ class Dependencies
 	{
 		// make sure .php is appended to the string
 		return substr($view, -4) != '.php' ? $view . '.php' : $view;
+	}
+	
+	private function clean_up(){
+		$this->output = preg_replace("/<!--[^->]*#dependency[^->]*-->/", "", $this->output);
 	}
 }
 
