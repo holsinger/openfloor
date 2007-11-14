@@ -1,7 +1,3 @@
-//TODO
-// - total # of questions
-// - getSection call starting at 0
-
 //init obj
 if(typeof cpUpdater === "undefined" || !cpUpdater) {
 	var cpUpdater = {
@@ -14,28 +10,6 @@ cpUpdater.current_question_id = 0;
 cpUpdater.sliders = new Object;
 ajaxOn = true;
 var sort = 'pending';
-
-var timer;
-var i = 0;
-var startHex = 0xFCC6CA;
-var endHex = 0xEEF8FF;
-var upOrDown = true;
-
-// functions
-
-function fadeHex (hex, hex2, ratio){
-	var r = hex >> 16;
-	var g = hex >> 8 & 0xFF;
-	var b = hex & 0xFF;
-	r += ((hex2 >> 16)-r)*ratio;
-	g += ((hex2 >> 8 & 0xFF)-g)*ratio;
-	b += ((hex2 & 0xFF)-b)*ratio;
-	return(r<<16 | g<<8 | b);
-}
-
-function d2h(d) {
-	return d.toString(16);
-}
 
 cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
@@ -58,17 +32,16 @@ cpUpdater.cpUpdate = function() {
 		decay: 2
 	}));
 	
-	new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
+	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
 		frequency: 10,
 		evalScripts: true,
 		decay: 2
-	});
+	}));
 	
 	cans.each(function(s) {
-		new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
-			frequency: 10,
-			decay: 2
-		});
+		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
+			frequency: 10
+		}));
 	});
 }
 
@@ -201,17 +174,18 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 
 cpUpdater.toggleAJAX = function () {
 	if(lazy_loader.update && ajaxOn) { cpUpdater.disableAJAX(); }
-	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
+	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
 }
 
 cpUpdater.toggleVisibility = function(element) {
-	$$('div[class=cp-comments]', 'div[class=cp-votes]').without($(element)).invoke('setStyle', {display:'none'});
+	$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').without($(element)).invoke('setStyle', {display:'none'});
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
 	$(element).setStyle(style);
 }
 
 cpUpdater.current_question_fade = function() {
-	timer = setInterval('ColorChange()', 75);
+	new Effect.Highlight('the-current-question', {startcolor: '#eef8ff', endcolor: '#fcc6ca', duration: 1.5});
+	// timer = setInterval('ColorChange()', 75);
 }
 
 cpUpdater.change_sort = function(_sort) {
@@ -231,37 +205,24 @@ cpUpdater.change_sort = function(_sort) {
 		$('sort-link-' + _sort).addClassName('cp-sort-link-selected');
 	}
 	
+	ajax_update_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
+	ajax_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
+	lazy_loader.reset(ajax_update_url, ajax_count_url);
+	
 	updaters.each(function(s) { s.stop(); });
 	cpUpdater.cpUpdate();
 	ajaxOn = true;
 }
 
-ColorChange = function() {
-	var ratio = i/9;
-	var nowColor = d2h(fadeHex(startHex, endHex, ratio));
-	$('the-current-question').setStyle({'background-color': '#' + nowColor});
-	
-	if(i == 9) {
-		upOrDown = false;
-	}
-	
-	if(upOrDown) i++;
-	
-	if(i == 0) {
-		upOrDown = true;
-		clearInterval(timer);		
-	}
-	
-	if(!upOrDown) i--;
-	
-}
-
-Event.observe(window, 'load', function() {
-  	upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
+cpUpdater.startLazyLoader = function() {
+	upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
 	upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
 	
-	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, 50, upcoming_questions_count_url, {
+	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, upcoming_questions_count_url, {
 		count_refresh_lapse: 100000, 
 		view_refresh_lapse: 10000
 	});
-});
+}
+
+Event.observe(window, 'load', cpUpdater.startLazyLoader);

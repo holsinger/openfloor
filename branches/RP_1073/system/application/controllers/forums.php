@@ -303,11 +303,10 @@ class Forums extends Controller
 		$data['cloud'] = $this->tag_lib->createTagCloud($event_id);
 		
 		// question tags
-		$this->tag_lib->createTagLinks($data['results']);	
+		$this->tag_lib->createTagLinks($data['results']);
 		
 		// load the view
 		$data['view_name'] = 'view_queue';
-
 		$this->load->view('view_queue',$data);	
 	}		
 	
@@ -834,6 +833,7 @@ EOT;
 	{
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
+		
 		foreach ($data['current_question'] as $key => $row) {
 			if ($this->userauth->isUser()) {
 				$this->vote->type='question';
@@ -841,7 +841,16 @@ EOT;
 			} else { 
 				$data['current_question'][$key]['voted'] = 0; 
 			}
+			
+			// user avatar
+			$image_array = unserialize($data['current_question'][$key]['user_avatar']);
+			$data['current_question'][$key]['avatar_path'] = $image_array ? $image_array['file_name'] : 'image01.jpg';
+
+			// time decay
+			$data['current_question'][$key]['time_diff'] = $this->time_lib->getDecay($data['current_question'][$key]['date']);
 		}
+		// get tag links
+		$this->tag_lib->createTagLinks($data['current_question'], url_title($data['current_question'][$key]['event_name']));
 	}
 	
 	private function _upcomingQuestions(&$data)
@@ -851,21 +860,32 @@ EOT;
 			else $this->question->question_status = $data['sort'];
 		}
 		
-				
+		// determine section for lazy loader		
 		if(isset($data['section']))
-			$this->question->offset = $this->_cp_section_size * $data['section'];
-		
+			$this->question->offset = $this->_cp_section_size * $data['section'];		
 		$this->question->limit = $this->_cp_section_size;
 		
 		$data['questions'] = $this->question->questionQueue();
+
 		foreach ($data['questions'] as $key => $row) {
+			// determine how user voted on this question
 			if ($this->userauth->isUser()) {
 				$this->vote->type='question';
 				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
 			} else { 
 				$data['questions'][$key]['voted'] = 0; 
 			}
+			
+			// user avatar
+			$image_array = unserialize($data['questions'][$key]['user_avatar']);
+			$data['questions'][$key]['avatar_path'] = $image_array ? $image_array['file_name'] : 'image01.jpg';
+			
+			// time decay
+			$data['questions'][$key]['time_diff'] = $this->time_lib->getDecay($data['questions'][$key]['date']);
 		}
+		
+		// get tag links
+		$this->tag_lib->createTagLinks($data['questions'], url_title($data['questions'][$key]['event_name']));
 	}
 	
 	private function _allReactions(&$data)

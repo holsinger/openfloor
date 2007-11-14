@@ -1,8 +1,10 @@
-/* @override 
-	http://192.168.0.67/rp/css/ucp.css
-	http://192.168.0.67/rp/css/event.css
-	http://localhost/rp2/css/event.css
-*/
+/* @override http://localhost/rp2/css/event.css */
+
+.cp-info {
+	background-color: white;
+	padding: 5px;
+	margin: 4px 5px 0;
+}
 
 .track-left {
 	position: absolute;

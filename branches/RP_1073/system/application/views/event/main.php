@@ -22,6 +22,7 @@ $this->load->view('view_includes/header.php', $data);
 <? if ($this->userauth->isAdmin()): ?>
 <a class="link" onclick="cpUpdater.enableAJAX()">START</a>
 <a class="link" onclick="cpUpdater.disableAJAX()">STOP</a>
+<a class="link" onclick="cpUpdater.current_question_fade()">FADE</a>
 <? endif; ?>
 
 <div id="ucp">

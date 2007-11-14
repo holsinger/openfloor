@@ -11,11 +11,16 @@
 			<tr>
 				<td><div class="score"><?= $current_question[0]['votes'] ?></div></td>
 				<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $current_question[0]) ?></div></td>
-				<td width="100%"><div class="question"><?=$current_question[0]['question_name']?></div></td>
+				<td width="100%"><div class="question" id="the-current-question"><img class="sc_image" src="./avatars/shrink.php?img=<?= $current_question[0]['avatar_path'] ?>&w=16&h=16"/>&nbsp;<?=$current_question[0]['question_name']?></div></td>
 				<td><div class="flag"><img src="./images/flag.png"></div></td>
 			</tr>
 		</table>		
-		<div id="cp-info-<?= $current_question[0]['question_id'] ?>" class="cp-info" style="height:300;display:none;overflow:auto;">info</div>
+		<div id="cp-info-<?= $current_question[0]['question_id'] ?>" class="cp-info" style="height:300;display:none;overflow:auto;">
+			<p><b>Posted By: </b><?= $current_question[0]['user_name'] ?> <img class="sc_image" src="./avatars/<?= $current_question[0]['avatar_path'] ?>"/></p>
+			<p><b>When: </b>(<?= $current_question[0]['time_diff'] ?> ago)</p>
+			<?= empty($current_question[0]['tags']) ? '' : '<p><b>Tags: </b>' . implode(', ', $current_question[0]['tags']) . '</p>' ?>
+			<p><b>Description: </b><?= $current_question[0]['question_desc'] ?></p>	
+		</div>
 		<div id="cp-comments-<?= $current_question[0]['question_id'] ?>" class="cp-comments" style="height:300;display:none;overflow:auto;">COMMENTS</div>
 		<div id="cp-votes-<?= $current_question[0]['question_id'] ?>" class="cp-votes" style="height:300;display:none;overflow:auto;">VOTES</div>
 	</div>

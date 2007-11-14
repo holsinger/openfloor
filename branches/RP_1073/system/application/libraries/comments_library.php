@@ -143,7 +143,7 @@ class Comments_library
 					<div class="sc_content">
 						<div class="sc_header">
 							<div class="info">
-								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
+								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16"/>&nbsp;&nbsp;by '
 								.anchor('user/profile/'.$subcomment['user_name'],$user_name).
 								' ('.$time_diff.' ago)'.'
 							</div>	
