@@ -64,11 +64,11 @@ $this->load->view('view_includes/header.php', $data);
 	<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 	<div class="section">
 		<span class="section-title">Upcoming Questions</span>
-		<!-- <span style="float:right;padding-top:3px;cursor:pointer;">
+		<span style="float:right;padding-top:3px;cursor:pointer;">
 			<span id="sort-link-pending" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
 			<span id="sort-link-newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
 			<span id="sort-link-asked" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Asked</span>&nbsp;&nbsp;
-		</span> -->
+		</span>
 	</div>
 	<div id="upcoming_questions">		
 		<?// $this->load->view('user/cp_upcoming_questions') ?>
