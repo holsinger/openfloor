@@ -712,17 +712,28 @@ class Forums extends Controller
 		
 		// pagination style
 		$config['first_link'] = '';
+		$config['first_tag_open'] = '<li class="first"><span>';
+		$config['first_tag_close'] = '</span</li>';
+		
 		$config['last_link'] = '';
+		$config['last_tag_open'] = '<li class="last"><span>';
+		$config['last_tag_close'] = '</span></li>';
+		
 		$config['next_link'] = '&gt';
 		$config['next_tag_open'] = '<li class="next"><span>';
-		$config['next_tag_close'] = '</span></li>';			
+		$config['next_tag_close'] = '</span></li>';	
+				
 		$config['prev_link'] = '&lt';
+		
 		$config['prev_tag_open'] = '<li class="prev"><span>';
 		$config['prev_tag_close'] = '</span></li>';
+		
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$config['cur_tag_open'] = '<li class="current">';
 		$config['cur_tag_close'] = '</li>';
+		
+		// Create pagination object
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 		$data['offset'] = $this->uri->segment($this->uri->total_segments());
