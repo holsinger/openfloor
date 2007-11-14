@@ -57,7 +57,7 @@ class Event_model extends Model
 		return $result['event_id'];
 	}
 	
-	public function get_event ($id,$url='',$date_start='',$date_end='')
+	public function get_event ($id, $url='',$date_start='',$date_end='')
 	{
 		 $result_array = array(); 
 		

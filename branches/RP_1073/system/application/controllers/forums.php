@@ -107,6 +107,8 @@ class Forums extends Controller
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
 
+		$data["event_data"] = $this->event->get_event($data['event_id']);
+
 		$this->event->id = $data['event_id'];
 		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
 		

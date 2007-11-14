@@ -13,7 +13,7 @@ $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; $cans = su
 $data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
 
 $data['left_nav'] = 'dashboard';
-$data['sub_title'] = "Event"; // what do we want to call this?
+$data['sub_title'] = $event_data['event_name']; 
 $this->load->view('view_includes/header.php', $data);
 ?>
 
@@ -25,6 +25,9 @@ $this->load->view('view_includes/header.php', $data);
 <? endif; ?>
 
 <div id="ucp">
+	<div id="event_description"><b>Brief Description:</b> <?=$event_data["event_desc_brief"]?>&nbsp;<a href="javascript: var none = SwithDescription();">See full description</a><br/></div>
+	<div id="event_description_full" style="display:none;"><b>Full Description:</b> <?=$event_data["event_desc"]?><br /><a href="javascript: var none = SwithDescription();">See brief description</a><br/></div>
+	<br />
 	<div class="section">
 		<span class="section-title">Current Question:</span>
 	</div>
@@ -49,7 +52,7 @@ $this->load->view('view_includes/header.php', $data);
 				</div>
 				<div id="user-reaction">
 					Rate the credibility of each candidate's response for each question.
-				<? $this->load->view('user/_cp_user_reaction'); ?>
+					<? $this->load->view('user/_cp_user_reaction'); ?>
 				</div>
 				<div id="user-reaction-ajax"></div>
 				<br/><br/>
@@ -70,5 +73,16 @@ $this->load->view('view_includes/header.php', $data);
 		<?// $this->load->view('user/cp_upcoming_questions') ?>
 	</div>	
 </div>
-
+<script type="text/javascript" charset="utf-8">
+	function SwithDescription(){
+		if($('event_description_full').getStyle('display') == 'none'){
+			Effect.SlideUp('event_description', {  queue: 'end'});
+			Effect.SlideDown('event_description_full', {  queue: 'end'});
+		}else{
+			Effect.SlideUp('event_description_full', {  queue: 'end'});
+			Effect.SlideDown('event_description', {  queue: 'end'});
+		}
+	}
+	
+</script>
 <? $this->load->view('view_includes/footer.php', $data);?>
