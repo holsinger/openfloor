@@ -85,9 +85,9 @@
 												?>
 												<h1>Event</h1>
 												<h2>Sorting</h2>
-												<div id="sort-link-pending" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</div>
-												<div id="sort-link-newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</div>
-												<div id="sort-link-asked" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Asked</div>
+												<div id="sort-link-pending-1" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</div>
+												<div id="sort-link-newest-1" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</div>
+												<div id="sort-link-asked-1" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Asked</div>
 												<?
 												break;
 											default:

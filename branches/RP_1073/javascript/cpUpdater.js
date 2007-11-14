@@ -194,15 +194,25 @@ cpUpdater.change_sort = function(_sort) {
 	sort_links = new Array();
 	sort_links = ['pending', 'newest', 'asked'];
 	sort_links.without(_sort).each(function(s) {
-		if($('sort-link-' + s).hasClassName('cp-sort-link-selected')) {
-			$('sort-link-' + s).removeClassName('cp-sort-link-selected');
-			$('sort-link-' + s).addClassName('cp-sort-link');
+		if($('sort-link-' + s + '-1').hasClassName('cp-sort-link-selected')) {
+			$('sort-link-' + s + '-1').removeClassName('cp-sort-link-selected');
+			$('sort-link-' + s + '-1').addClassName('cp-sort-link');
+		}
+
+		if($('sort-link-' + s + '-2').hasClassName('cp-sort-link-selected')) {
+			$('sort-link-' + s + '-2').removeClassName('cp-sort-link-selected');
+			$('sort-link-' + s + '-2').addClassName('cp-sort-link');
 		}
 	});
 	
-	if($('sort-link-' + _sort).hasClassName('cp-sort-link')) {
-		$('sort-link-' + _sort).removeClassName('cp-sort-link');
-		$('sort-link-' + _sort).addClassName('cp-sort-link-selected');
+	if($('sort-link-' + _sort + '-1').hasClassName('cp-sort-link')) {
+		$('sort-link-' + _sort + '-1').removeClassName('cp-sort-link');
+		$('sort-link-' + _sort + '-1').addClassName('cp-sort-link-selected');
+	}
+
+	if($('sort-link-' + _sort + '-2').hasClassName('cp-sort-link')) {
+		$('sort-link-' + _sort + '-2').removeClassName('cp-sort-link');
+		$('sort-link-' + _sort + '-2').addClassName('cp-sort-link-selected');
 	}
 	
 	ajax_update_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
