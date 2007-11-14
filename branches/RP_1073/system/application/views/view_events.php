@@ -35,7 +35,8 @@ $data['use_temp_top'] = true;
 							</div>
 						</td>
 						<td valign="top">
-							<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
+							<!-- <span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	 -->
+							<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
 							<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 							<b>Where:</b> <?=$array['location'];?><br /><br />
 							<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br/>
@@ -68,7 +69,8 @@ $data['use_temp_top'] = true;
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
-					<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
+					<!-- <span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	 -->
+					<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
 					<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br/>
@@ -98,7 +100,8 @@ $data['use_temp_top'] = true;
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
-					<?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
+					<?//=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
+					<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
 					<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br />

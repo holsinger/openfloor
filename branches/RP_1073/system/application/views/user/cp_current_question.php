@@ -12,7 +12,7 @@
 				<td><div class="score"><?= $current_question[0]['votes'] ?></div></td>
 				<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $current_question[0]) ?></div></td>
 				<td width="100%"><div class="question" id="the-current-question"><img class="sc_image" src="./avatars/shrink.php?img=<?= $current_question[0]['avatar_path'] ?>&w=16&h=16"/>&nbsp;<?=$current_question[0]['question_name']?></div></td>
-				<td><div class="flag"><img src="./images/flag.png"></div></td>
+				<td><div class="flag"><!--<img src="./images/flag.png">--></div></td>
 			</tr>
 		</table>		
 		<div id="cp-info-<?= $current_question[0]['question_id'] ?>" class="cp-info" style="height:300;display:none;overflow:auto;">
