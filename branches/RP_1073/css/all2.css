@@ -8,6 +8,8 @@ a:hover{text-decoration:underline;}
 .link{color:#F04A54;cursor:pointer;}
 .link:hover{text-decoration:underline;cursor:pointer;}
 
+img {border-width: 0px;} 
+
 #content_div table.user-profile {
 	background-color: #d1edfe;
 }
@@ -477,4 +479,19 @@ background-color:#f0faff;
 /* TD fix for IE */
 TD {
 	font-size: 11px;
+}
+/* Loading Reminder */
+.loading_reminder {
+	border-width: 0px 1px 1px 0px;
+	border-style: solid;
+	border-color: #F04A54;
+	color: #F04A54;
+	width: 120px;
+	height: 30px;
+	line-height: 30px;
+	padding-left: 35px;
+	background-color: #FFFFFF;
+	vertical-align: middle;
+	opacity: .9;
+	filter: alpha(opacity=90);
 }
