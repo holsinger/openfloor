@@ -64,11 +64,12 @@ accordion.prototype = {
 			}
 			
 			if (this.options.direction == 'horizontal') {
-				var options = $H({width: '0px'});
+				var options = {width: '0px'};
 			} else {
-				var options = $H({height: '0px'});			
+				var options = {height: '0px'};			
 			}
-			options.merge({display: 'none'});			
+			// options.merge({display: 'none'});			
+			Object.extend(options, {display: 'none'});
 			
 			this.currentAccordion = $(accordion.next(0)).setStyle(options);			
 		}.bind(this));
@@ -97,15 +98,15 @@ accordion.prototype = {
 		this.currentAccordion.previous(0).addClassName(this.options.classNames.toggleActive);
 
 		if (this.options.direction == 'horizontal') {
-			this.scaling = $H({
+			this.scaling = {
 				scaleX: true,
 				scaleY: false
-			});
+			};
 		} else {
-			this.scaling = $H({
+			this.scaling = {
 				scaleX: false,
 				scaleY: true
-			});			
+			};			
 		}
 			
 		if (this.currentAccordion == this.showAccordion) {
@@ -118,7 +119,7 @@ accordion.prototype = {
 	// Deactivate an active accordion
 	//
 	deactivate : function() {
-		var options = $H({
+		var options = {
 		  duration: this.duration,
 			scaleContent: false,
 			transition: Effect.Transitions.sinoidal,
@@ -138,8 +139,9 @@ accordion.prototype = {
 				this.showAccordion = null;
 				this.animating = false;
 			}.bind(this)
-		});    
-    options.merge(this.scaling);
+		};    
+    // options.merge(this.scaling);
+	Object.extend(options, this.scaling);
 
     this.showAccordion.previous(0).removeClassName(this.options.classNames.toggleActive);
     
@@ -150,7 +152,7 @@ accordion.prototype = {
   // Handle the open/close actions of the accordion
   //
 	_handleAccordion : function() {
-		var options = $H({
+		var options = {
 			sync: true,
 			scaleFrom: 0,
 			scaleContent: false,
@@ -159,8 +161,9 @@ accordion.prototype = {
 				originalHeight: this.options.defaultSize.height ? this.options.defaultSize.height : this.currentAccordion.scrollHeight,
 				originalWidth: this.options.defaultSize.width ? this.options.defaultSize.width : this.currentAccordion.scrollWidth
 			}
-		});
-		options.merge(this.scaling);
+		};
+		// options.merge(this.scaling);
+		Object.extend(options, this.scaling);
 		
 		this.effects.push(
 			new Effect.Scale(this.currentAccordion, 100, options)
@@ -169,12 +172,13 @@ accordion.prototype = {
 		if (this.showAccordion) {
 			this.showAccordion.previous(0).removeClassName(this.options.classNames.toggleActive);
 			
-			options = $H({
+			options = {
 				sync: true,
 				scaleContent: false,
 				transition: Effect.Transitions.sinoidal
-			});
-			options.merge(this.scaling);
+			};
+			// options.merge(this.scaling);
+			Object.extend(options, this.scaling);
 			
 			this.effects.push(
 				new Effect.Scale(this.showAccordion, 0, options)

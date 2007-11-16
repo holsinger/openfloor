@@ -44,6 +44,7 @@
 	</script>
 	
 	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
+	<!--[if lt IE 7]><script src="./javascript/IEFixes.js" type="text/javascript" charset="utf-8"></script><![endif]-->
 
     
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>

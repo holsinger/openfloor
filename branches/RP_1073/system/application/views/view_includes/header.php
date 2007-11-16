@@ -11,7 +11,7 @@ else $onload = 'init();';
 <? if ($data['browser'] == 'Internet Explorer' && $data['browserVer'] < 7) { ?>
 	<body onLoad='fixPNG();<?=$onload;?>'>
 <?}else{?>
-	<body onLoad='<?=$onload/*.$js_onload_special*/;?>'>
+	<body onLoad='<?=$onload;?>'>
 <?}?>
 <!--  load AJAX views -->
 <div id="overlay" onclick="hideBox()" style="display:none"></div>
