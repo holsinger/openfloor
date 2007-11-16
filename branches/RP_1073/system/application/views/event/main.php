@@ -53,7 +53,7 @@ $this->load->view('view_includes/header.php', $data);
 					<span class="section-title">Participant Reaction:</span>
 				</div>
 				<div id="user-reaction">
-					Rate the credibility of each candidate's response for each question.
+					Rate the credibility of each candidate's response for the current question.
 					<? $this->load->view('user/_cp_user_reaction'); ?>
 				</div>
 				<div id="user-reaction-ajax"></div>
