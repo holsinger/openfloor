@@ -57,6 +57,7 @@ dependency overall_reaction.css
 			</td>
 		</tr>
 	</table>
+	<? endif; ?>
 	<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 	<div class="section">
 		<span class="section-title">Upcoming Questions</span>
