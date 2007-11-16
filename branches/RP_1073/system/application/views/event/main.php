@@ -33,9 +33,7 @@ dependency overall_reaction.css
 			<span class="section-title">Current Question:</span>
 		</div>
 	
-		<div id="current_question">
-		<? $this->load->view('user/cp_current_question'); ?>
-		</div>		  
+		<div id="current_question"></div>		  
 
 	<div id="current_question"></div>		  
 
