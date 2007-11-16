@@ -89,14 +89,14 @@ cpUpdater.enableAJAX = function() {
 	}	
 }
 
-cpUpdater.viewVotes = function(question_id) {
-	my_loading_reminder.show();
+cpUpdater.viewVotes = function(question_id) {	
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
 		cpUpdater.toggleVisibility('cp-votes-' + question_id);
 		cpUpdater.toggleAJAX();
 	} else {
+		my_loading_reminder.show();
 		new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
 			parameters: {
 				'ajax' : 'true'
@@ -110,14 +110,14 @@ cpUpdater.viewVotes = function(question_id) {
 	}	
 }
 
-cpUpdater.viewComments = function(question_id, event_name, question_name) {
-	my_loading_reminder.show();
+cpUpdater.viewComments = function(question_id, event_name, question_name) {	
 	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
 	
-	if(visible) {
+	if(visible) {	
 		cpUpdater.toggleVisibility('cp-comments-' + question_id);
 		cpUpdater.toggleAJAX();		
 	} else {
+		my_loading_reminder.show();
 		new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
 			parameters: {
 				'ajax' : 'true'
@@ -182,7 +182,8 @@ cpUpdater.toggleAJAX = function () {
 }
 
 cpUpdater.toggleVisibility = function(element) {
-	$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').without($(element)).invoke('setStyle', {display:'none'});
+	$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').without($(element)).invoke('setStyle', {display:'none'});		// Hides all tabs first
+
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
 	$(element).setStyle(style);
 }
@@ -198,21 +199,11 @@ cpUpdater.change_sort = function(_sort) {
 	sort_links = new Array();
 	sort_links = ['pending', 'newest', 'asked'];
 	sort_links.without(_sort).each(function(s) {
-		if($('sort-link-' + s + '-1').hasClassName('cp-sort-link-selected')) {
-			$('sort-link-' + s + '-1').removeClassName('cp-sort-link-selected');
-			$('sort-link-' + s + '-1').addClassName('cp-sort-link');
-		}
-
 		if($('sort-link-' + s + '-2').hasClassName('cp-sort-link-selected')) {
 			$('sort-link-' + s + '-2').removeClassName('cp-sort-link-selected');
 			$('sort-link-' + s + '-2').addClassName('cp-sort-link');
 		}
 	});
-	
-	if($('sort-link-' + _sort + '-1').hasClassName('cp-sort-link')) {
-		$('sort-link-' + _sort + '-1').removeClassName('cp-sort-link');
-		$('sort-link-' + _sort + '-1').addClassName('cp-sort-link-selected');
-	}
 
 	if($('sort-link-' + _sort + '-2').hasClassName('cp-sort-link')) {
 		$('sort-link-' + _sort + '-2').removeClassName('cp-sort-link');
