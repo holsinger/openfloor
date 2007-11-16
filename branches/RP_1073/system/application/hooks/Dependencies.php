@@ -23,7 +23,7 @@ class Dependencies
 	{		
 		$this->get_dependencies();
 		$this->sort_dependencies();
-		$this->clean_up();
+		// $this->clean_up();
 		$this->populate_dependencies();
 		
 	}
