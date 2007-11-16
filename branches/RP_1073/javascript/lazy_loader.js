@@ -133,7 +133,6 @@ Control.LazyLoader.prototype = {
 		this.init_count_call = true;
 		this.checkCount();		// For the initial count, because of the variable above it actually populates the container initially too
 		
-		this.checkCount();		// For the initial count
 		this.startUpdating(true);
 	},
 	// CHECK COUNT FUNCTIONS, on initial call it calls the first portion to fill in the page.  We must have the count before we can do this!

@@ -23,7 +23,7 @@ Control.LoadingReminder.prototype = {
 		}else{
 			var pop_pos = 'absolute';
 		}
-		$(this.reminder_elem_id).setStyle({ position: pop_pos, visibility: 'hidden', display: 'none', top : '0px', left : '0px' });
+		$(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', top : '0px', left : '0px' });
 		Event.observe($(this.reminder_elem_id), 'mousedown', this.popup_elem_event);
 		
 		// IE 6 support, now it gets ugly
@@ -36,7 +36,7 @@ Control.LoadingReminder.prototype = {
 			this.fade_effect.cancel();
 			this.fading = false;
 		}
-		$(this.reminder_elem_id).setStyle({ visibility: 'visible', display: 'block', opacity: "1", filter : "alpha(opacity=100)" });
+		$(this.reminder_elem_id).setStyle({ display: 'block', opacity: "1", filter : "alpha(opacity=100)" });
 		
 		
 	},
@@ -45,7 +45,7 @@ Control.LoadingReminder.prototype = {
 			this.fade_effect = Effect.Fade(this.reminder_elem_id, { duration : 1.5, afterFinish :  this.afterHide.bind(this) });
 			this.fading = true;
 		}else{
-			$(this.reminder_elem_id).setStyle({ visibility: 'hidden', display: 'none'  });
+			$(this.reminder_elem_id).setStyle({ display: 'none'  });
 		}
 		
 		
@@ -58,7 +58,7 @@ Control.LoadingReminder.prototype = {
 		$(this.reminder_elem_id).setStyle({ top : scrolled[1]+'px'});
 	},
 	isVisible : function(){
-		if($(this.reminder_elem_id).getStyle('visibility') == 'visible'){
+		if($(this.reminder_elem_id).getStyle('display') == 'block'){
 			return true;
 		}else{
 			return false;

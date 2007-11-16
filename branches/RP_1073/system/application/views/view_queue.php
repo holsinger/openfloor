@@ -1,6 +1,3 @@
-<!--
-	#dependency events.css
---> 
 <?
 if(isset($rss)) $data['rss'] = $rss;
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
@@ -17,6 +14,9 @@ $data['sub_title'] = ucwords(str_replace('_',' ', $event_name));
 ?>
 
 <?$this->load->view('view_includes/header.php',$data);?>
+<!--
+	#dependency events.css
+-->
 <div id="content_div">
 	<? if(!$global && $event_info['streaming'] ): ?>
 		<div id="participate_live_div">

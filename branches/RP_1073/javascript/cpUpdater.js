@@ -221,8 +221,7 @@ cpUpdater.change_sort = function(_sort) {
 }
 
 cpUpdater.startLazyLoader = function() {
-	upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
-	upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
 	
 	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, upcoming_questions_count_url, {
 		count_refresh_lapse: 100000, 
@@ -232,4 +231,3 @@ cpUpdater.startLazyLoader = function() {
 	});
 }
 
-Event.observe(window, 'load', cpUpdater.startLazyLoader);

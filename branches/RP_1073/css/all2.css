@@ -494,4 +494,8 @@ TD {
 	text-align: center;
 	z-index: 3;
 	font-size: 14px;
+	display: block;
+	position: fixed;
+	top: 0px;
+	left: 0px;
 }

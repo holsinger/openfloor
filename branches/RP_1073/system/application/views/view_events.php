@@ -1,6 +1,4 @@
-<!--
-	#dependency events.css
---> 
+
 <?
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
 						'href' => site_url("feed/events"));
@@ -11,6 +9,9 @@ $data['sub_title'] = "OpenFloor Events";
 $data['use_temp_top'] = true;
 ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
+<!--
+	#dependency events.css
+-->
 <div id="content_div" class="event_content_div">
 	<!-- <span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span> -->
 	<? if($this->userauth->isAdmin()): ?>
