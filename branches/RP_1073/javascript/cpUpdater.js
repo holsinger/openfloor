@@ -90,6 +90,7 @@ cpUpdater.enableAJAX = function() {
 }
 
 cpUpdater.viewVotes = function(question_id) {
+	my_loading_reminder.show();
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
@@ -103,12 +104,14 @@ cpUpdater.viewVotes = function(question_id) {
 			onSuccess: function(transport) {
 				cpUpdater.toggleVisibility('cp-votes-' + question_id);
 				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
 			}
 		});
 	}	
 }
 
 cpUpdater.viewComments = function(question_id, event_name, question_name) {
+	my_loading_reminder.show();
 	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
@@ -122,6 +125,7 @@ cpUpdater.viewComments = function(question_id, event_name, question_name) {
 			onSuccess: function(transport) {
 				cpUpdater.toggleVisibility('cp-comments-' + question_id);
 				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
 			}
 		});
 	}
@@ -231,7 +235,9 @@ cpUpdater.startLazyLoader = function() {
 	
 	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, upcoming_questions_count_url, {
 		count_refresh_lapse: 100000, 
-		view_refresh_lapse: 10000
+		view_refresh_lapse: 10000,
+		onStartAddSection: function() { my_loading_reminder.show(); }, 
+		onFinishAddSection: function() { my_loading_reminder.hide(); }
 	});
 }
 

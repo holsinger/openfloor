@@ -6,6 +6,7 @@ dependency overall_reaction.css
 
 #dependency cpUpdater.js
 #dependency lazy_loader.js
+#dependency loading_reminder.js
 -->
 
 <?
@@ -26,8 +27,8 @@ $this->load->view('view_includes/header.php', $data);
 <? endif; ?>
 
 <div id="ucp">
-	<div id="event_description"><b>Brief Description:</b> <?=$event_data["event_desc_brief"]?>&nbsp;<a href="javascript: var none = SwithDescription();">See full description</a><br/></div>
-	<div id="event_description_full" style="display:none;"><b>Full Description:</b> <?=$event_data["event_desc"]?><br /><a href="javascript: var none = SwithDescription();">See brief description</a><br/></div>
+	<div id="event_description"><b>Description:</b> <?=$event_data["event_desc_brief"]?>&nbsp;<a href="javascript: var none = SwithDescription('show');">See full description</a><br/></div>
+	<div id="event_description_full" style="display:none;"><br /><b>Full Description:</b> <?=$event_data["event_desc"]?><br /><a href="javascript: var none = SwithDescription();">Hide Full Description</a><br/></div>
 	<br />
 	<div class="section">
 		<span class="section-title">Current Question:</span>
@@ -72,14 +73,18 @@ $this->load->view('view_includes/header.php', $data);
 	</div>
 	<div id="upcoming_questions"><?// $this->load->view('user/cp_upcoming_questions') ?></div>	
 </div>
+<div id="loading_reminder_div" class="loading_reminder">Loading</div>
 <script type="text/javascript" charset="utf-8">
-	function SwithDescription(){
-		if($('event_description_full').getStyle('display') == 'none'){
-			Effect.SlideUp('event_description', {  queue: 'end'});
-			Effect.SlideDown('event_description_full', {  queue: 'end'});
+	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');Å
+	
+	function SwithDescription(action){
+		if(action == 'show'){
+			if($('event_description_full').getStyle('display') == 'none'){
+				Effect.SlideDown('event_description_full', {  queue: 'end'});
+			}
+			
 		}else{
 			Effect.SlideUp('event_description_full', {  queue: 'end'});
-			Effect.SlideDown('event_description', {  queue: 'end'});
 		}
 	}
 	

@@ -485,13 +485,12 @@ TD {
 	border-width: 0px 1px 1px 0px;
 	border-style: solid;
 	border-color: #F04A54;
-	color: #F04A54;
+	color: #FFFFFF;
 	width: 120px;
 	height: 30px;
 	line-height: 30px;
 	padding-left: 35px;
-	background-color: #FFFFFF;
+	background-color: #F04A54;
 	vertical-align: middle;
-	opacity: .9;
-	filter: alpha(opacity=90);
+	z-index: 3;
 }

@@ -20,37 +20,44 @@ Control.LazyLoader.prototype = {
 		// We have a lot of defaults that we use if not defined
 		this.options = Object.extend({
 			items_per_section : 10,
+			onStartAddSection : false,
+			onFinishAddSection : false,
 			count_refresh_lapse: 100000,		// Default is every minute
 			view_refresh_lapse: 100000			// Default is every minute
 		}, options || {});
 		
 		// Add Content, first temp then real content added on the callback from the CheckCount() call below
-		$(this.container_elem_id).innerHTML = "Loading Content...";
 		this.init_count_call = true;
 		this.checkCount();		// For the initial count, because of the variable above it actually populates the container initially too
 		
 		// Assign Events
-		this.fillContentEvent = this.fillContent.bindAsEventListener(this);
-		Event.observe(window, 'scroll', this.fillContentEvent);
-		Event.observe(window, 'resize', this.fillContentEvent);
+		this.addSegmentsOnScrollEvent = this.addSegmentsOnScroll.bind(this, false);
+		this.refreshExistingSegmentsOnScrollEvent = this.refreshExistingSegmentsOnScroll.bind(this);
+		
+		Event.observe(window, 'scroll', this.addSegmentsOnScrollEvent);
+		Event.observe(window, 'scroll', this.refreshExistingSegmentsOnScrollEvent);
+		Event.observe(window, 'resize', this.addSegmentsOnScrollEvent);
+		Event.observe(window, 'resize', this.refreshExistingSegmentsOnScrollEvent);
 		
 		// Start the periodic count	check
-		
 		this.checkCountHandle = setInterval(this.checkCount.bind(this), this.options.count_refresh_lapse);
 		this.checkRefreshHandle = setInterval(this.refreshView.bind(this), this.options.view_refresh_lapse);
 	},
-	fillContent : function(){
+	refreshExistingSegmentsOnScroll : function(){
 		if(this.update){
-			// Refresh divs that are entering the current view 
+			// Refresh segments that come into the current view due to scrolling that have already been added.
 			var within_range = this.getViewportWithinRange();		
 			if(within_range[0] < this.segment_divs_view_range[0]){
 				this.refreshSection(within_range[0], true);
 			}else if(within_range[1] > this.segment_divs_view_range[1]){
 				this.refreshSection(within_range[1], true);
 			}
-		
 			this.segment_divs_view_range = within_range;
-			// Finally make the comparison to add new divs if necessary
+		}
+	},
+	addSegmentsOnScroll : function(called_from_callback){
+		if(this.update){
+			// Add More divs if necessary
 			var scrolled_pos = document.viewport.getScrollOffsets()[1] + document.viewport.getDimensions().height;
 			if(((this.segment_divs.length) * this.options.items_per_section) < this.item_count){
 				// find out where the lowest div is
@@ -60,26 +67,34 @@ Control.LazyLoader.prototype = {
 				var bottom_div_half_height = (bottom_div_height / 2);
 				// If we have scrolled past the last half of the last div then add segment
 				if(scrolled_pos+bottom_div_half_height > bottom_div_max){			
-					this.addNewSegment(this.fillContent.bindAsEventListener(this));
-				}else{
+					this.addNewSegment(this.addSegmentsOnScroll.bind(this, true));	
 					return;
 				}
+			}
+			// This part should only be reached if it's not adding a section and it's on a callback from previously adding a section
+			if(this.options.onFinishAddSection && called_from_callback){
+				this.options.onFinishAddSection();
 			}
 		}
 	},
 	addNewSegment : function(callAfterUpdate){
 		if(!callAfterUpdate) callAfterUpdate = function(){ };
+		if(this.options.onStartAddSection){
+			this.options.onStartAddSection();
+		}
 		
 		this.segment_divs[this.segment_divs.length] = document.createElement('div');
-		$(this.segment_divs[(this.segment_divs.length - 1)]).innerHTML = 'Loading...';
 		$(this.container_elem_id).appendChild(this.segment_divs[(this.segment_divs.length - 1)]);
-		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'/'+(this.segment_divs.length - 1), { method: 'get', onComplete : callAfterUpdate });
+		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'/'+(this.segment_divs.length - 1), { method: 'get', onComplete : this.addNewSegmentOnComplete.bind(this) });
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date()
 		var h=now.getHours() * 60;
 		var m=(now.getMinutes() + h) * 60;
 		var s=now.getSeconds() + m;
 		this.segment_divs_last_refresh[(this.segment_divs.length - 1)] = s;
+	},
+	addNewSegmentOnComplete : function(){
+		this.addSegmentsOnScroll(true);
 	},
 	stopUpdating : function(){
 		clearTimeout(this.checkCountHandle);
@@ -115,7 +130,6 @@ Control.LazyLoader.prototype = {
 		this.segment_divs_view_range = new Array();
 		
 		// Add Content, first temp then real content added on the callback from the CheckCount() call below
-		$(this.container_elem_id).innerHTML = "Loading Content...";
 		this.init_count_call = true;
 		this.checkCount();		// For the initial count, because of the variable above it actually populates the container initially too
 		
@@ -133,7 +147,7 @@ Control.LazyLoader.prototype = {
 		this.item_count = transport.responseText;
 		if(this.init_count_call){
 			$(this.container_elem_id).innerHTML = "";
-			this.addNewSegment(this.fillContent.bindAsEventListener(this));
+			this.addNewSegment(this.addSegmentsOnScroll.bindAsEventListener(this));
 			this.init_count_call = false;
 		}
 		
@@ -159,7 +173,7 @@ Control.LazyLoader.prototype = {
 			}
 		}
 		
-		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'/'+section_num);
+		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'/'+section_num, { method: 'get'});
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date();
 		var h=now.getHours() * 60;
