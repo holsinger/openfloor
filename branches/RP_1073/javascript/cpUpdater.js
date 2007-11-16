@@ -197,7 +197,26 @@ cpUpdater.change_sort = function(_sort) {
 	sort = _sort;
 	
 	sort_links = new Array();
-	sort_links = ['pending', 'newest', 'asked'];
+	// Event_timing defined in main.php, this needs to be a member variable when made a class
+	
+	// Change the question title
+	if(sort == 'pending'){
+		if(event_timing == 'past'){
+			$('question_title').innerHTML = "Unanswered Questions";
+		}else{
+			$('question_title').innerHTML = "Upcoming Questions";
+		}
+	}else if(sort == 'newest'){
+		$('question_title').innerHTML = "Newest Questions";
+	}else{
+		$('question_title').innerHTML = "Answered Questions";
+	}
+	// Change the highlights
+	if(event_timing == 'past'){
+		sort_links = ['pending', 'asked'];
+	}else{
+		sort_links = ['pending', 'newest', 'asked'];
+	}
 	sort_links.without(_sort).each(function(s) {
 		if($('sort-link-' + s + '-2').hasClassName('cp-sort-link-selected')) {
 			$('sort-link-' + s + '-2').removeClassName('cp-sort-link-selected');
@@ -213,6 +232,7 @@ cpUpdater.change_sort = function(_sort) {
 	ajax_update_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
 	ajax_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
 	
+	my_loading_reminder.show();
 	lazy_loader.reset(ajax_update_url, ajax_count_url);
 	
 	updaters.each(function(s) { s.stop(); });

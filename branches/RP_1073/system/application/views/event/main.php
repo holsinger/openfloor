@@ -35,40 +35,45 @@ dependency overall_reaction.css
 	
 		<div id="current_question"></div>		  
 
-	<div id="current_question"></div>		  
+		<div id="current_question"></div>		  
 
-	<table class="feed-reaction-panel">
-		<tr>
-			<td>
-				<div id="video_container">
-					<?= $stream_high ?>
-				</div>
-			</td>
-			<td>
-				<div id="user-reaction">
-					Rate the credibility of each candidate's response for the current question.
-					<? $this->load->view('user/_cp_user_reaction'); ?>
-				</div>
-				<div id="user-reaction-ajax"></div>
-				<br/><br/>
-				<img src="./images/ucp/ask-a-question.jpg" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
-			</td>
-		</tr>
-	</table>
+		<table class="feed-reaction-panel">
+			<tr>
+				<td>
+					<div id="video_container">
+						<?= $stream_high ?>
+					</div>
+				</td>
+				<td>
+					<div id="user-reaction">
+						Rate the credibility of each candidate's response for the current question.
+						<? $this->load->view('user/_cp_user_reaction'); ?>
+					</div>
+					<div id="user-reaction-ajax"></div>
+					<br/><br/>
+					<img src="./images/ucp/ask-a-question.jpg" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
+				</td>
+			</tr>
+		</table>
 	<? endif; ?>
 	<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
 	<div class="section">
-		<span class="section-title">Upcoming Questions</span>
+		<span class="section-title" id="question_title"><?= strtotime($event_data['event_date']) >= strtotime(date('Y-m-d')) || $event_data['streaming'] ? "Upcoming Questions" : "Answered Questions" ?> </span>
 		<span style="float:right;padding-top:3px;cursor:pointer;">
 			<span>Sort: </span>
-			<span id="sort-link-pending-2" class="cp-sort-link<?if(strtotime($array['event_date']) >= strtotime(date('Y-m-d'))){ echo "-selected"; }?>" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
-			<span id="sort-link-newest-2" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-			<span id="sort-link-asked-2" class="cp-sort-link<?if(strtotime($array['event_date']) < strtotime(date('Y-m-d'))){ echo "-selected"; }?>" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
+			<? if(strtotime($event_data['event_date']) >= strtotime(date('Y-m-d')) || $event_data['streaming']): ?>
+				<span id="sort-link-pending-2" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
+				<span id="sort-link-newest-2" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
+				<span id="sort-link-asked-2" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
+			<? else: ?>
+				<span id="sort-link-pending-2" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unsanswered</span> | 
+				<span id="sort-link-asked-2" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;			
+			<? endif; ?>
 		</span>
 	</div>
 	<div id="upcoming_questions"></div>	
 </div>
-<div id="loading_reminder_div" class="loading_reminder">Loading</div>
+<div id="loading_reminder_div" class="loading_reminder">Loading...</div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
 	
@@ -83,13 +88,15 @@ dependency overall_reaction.css
 		}
 	}
 	<? // If this is a past event then show answered questions by default ?>
-	<? if(strtotime($array['event_date']) < strtotime(date('Y-m-d'))): ?>
+	<? if(strtotime($event_data['event_date']) < strtotime(date('Y-m-d')) && !$event_data['streaming']): ?>
 		var upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/asked';
+		var event_timing = 'past';
 	<? else: ?>
 		var upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/pending';
+		var event_timing = 'not_past';
 	<? endif; ?>
-	// These variabled used in the function below
 	var upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
 	Event.observe(window, 'load', cpUpdater.startLazyLoader);
 </script>
 <? $this->load->view('view_includes/footer.php', $data);?>
