@@ -164,6 +164,7 @@ class Forums extends Controller
 			#TODO This solution for no candidates assigned to event is not ideal
 			if(empty($data['candidates'])) redirect();
 			// $this->load->view('user/cp', $data);
+			$data['breadcrumb'] = $this->global ? array('Home' => $this->config->site_url()) : array('Home'=>$this->config->site_url(),'Events'=>'event/',$data["event_data"]['event_name']=>'');
 			$this->load->view('event/main', $data);
 		}		
 	}
