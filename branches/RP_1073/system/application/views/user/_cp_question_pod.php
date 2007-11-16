@@ -1,7 +1,12 @@
-<? 	foreach($questions as $question): 
+<? if(isset($current_question_flag) && empty($current_question)): ?>	
+There is no current question
+<? else: ?>
+
+<? 	if(isset($current_question_flag)) $question = $current_question;
+	foreach($questions as $question): 
 		$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ; ?>
 
-<div class="question-pod-container" id="question_container_<?= $question['question_id'] ?>">
+<div class="<?= isset($current_question_flag) ? 'current-question-pod' : 'question-pod-container' ?>" id="question_container_<?= $question['question_id'] ?>">
   <b class="question-pod0">
   <b class="question-pod1"><b></b></b>
   <b class="question-pod2"><b></b></b>
@@ -14,7 +19,7 @@
 		<tr>
 			<td><div class="score"><?= $question['votes'] ?></div></td>
 			<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
-			<td width="100%"><div class="question"><img class="sc_image" src="./avatars/shrink.php?img=<?= $question['avatar_path'] ?>&w=16&h=16"/>&nbsp;<?= $question['question_name'] ?></div></td>
+			<td width="100%"><div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>><img class="sc_image" src="./avatars/shrink.php?img=<?= $question['avatar_path'] ?>&w=16&h=16"/>&nbsp;<?= $question['question_name'] ?></div></td>
 			<td><div class="flag"><!-- <img src="./images/flag.png"> --></div></td>
 		</tr>
 	</table>		
@@ -39,4 +44,5 @@
 <div class="more_info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
 <div style="clear:both;"></div>
 
-<? 	endforeach; ?>	
+<? 	endforeach; ?>
+<? endif; ?>

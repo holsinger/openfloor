@@ -122,13 +122,14 @@ class Forums extends Controller
 			{
 			case 'current_question':
 				$this->_currentQuestion($data);
-				$this->load->view('user/cp_current_question.php', $data);
+				$data['current_question_flag'] = true;
+				$this->load->view('user/_cp_question_pod.php', $data);
 				break;
 			case 'upcoming_questions':
 				if(isset($option_1)) $data['sort'] = $option_1;
 				if(isset($option_2)) $data['section'] = $option_2;
 				$this->_upcomingQuestions($data);
-				$this->load->view('user/cp_upcoming_questions.php', $data);
+				$this->load->view('user/_cp_question_pod.php', $data);
 				break;
 			case 'reaction':
 				$this->_currentQuestion($data);
@@ -846,23 +847,10 @@ EOT;
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
 		
-		foreach ($data['current_question'] as $key => $row) {
-			if ($this->userauth->isUser()) {
-				$this->vote->type='question';
-				$data['current_question'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
-			} else { 
-				$data['current_question'][$key]['voted'] = 0; 
-			}
-			
-			// user avatar
-			$image_array = unserialize($data['current_question'][$key]['user_avatar']);
-			$data['current_question'][$key]['avatar_path'] = $image_array ? $image_array['file_name'] : 'image01.jpg';
-
-			// time decay
-			$data['current_question'][$key]['time_diff'] = $this->time_lib->getDecay($data['current_question'][$key]['date']);
-		}
-		// get tag links
-		$this->tag_lib->createTagLinks($data['current_question'], url_title($data['current_question'][$key]['event_name']));
+		$this->_questions($data);
+		
+		// set question model property back to default
+		$this->question->question_status = 'pending';
 	}
 	
 	private function _upcomingQuestions(&$data)
@@ -877,6 +865,11 @@ EOT;
 			$this->question->offset = $this->_cp_section_size * $data['section'];		
 		$this->question->limit = $this->_cp_section_size;
 		
+		$this->_questions($data);
+	}
+	
+	private function _questions(&$data)
+	{
 		$data['questions'] = $this->question->questionQueue();
 
 		foreach ($data['questions'] as $key => $row) {
@@ -898,6 +891,9 @@ EOT;
 		
 		// get tag links
 		$this->tag_lib->createTagLinks($data['questions'], url_title($data['questions'][$key]['event_name']));
+		
+		// if we're dealing with the current question, we need to save it in a different spot
+		if($this->question->question_status = 'current') $data['current_question'] = $data['questions'];
 	}
 	
 	private function _allReactions(&$data)

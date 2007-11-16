@@ -34,24 +34,16 @@ $this->load->view('view_includes/header.php', $data);
 		<span class="section-title">Current Question:</span>
 	</div>
 
-	<div id="current_question">
-	<? $this->load->view('user/cp_current_question'); ?>
-	</div>		  
+	<div id="current_question"></div>		  
 
 	<table class="feed-reaction-panel">
 		<tr>
 			<td>
-				<div class="section">
-					<span class="section-title">Live Video Feed:</span>
-				</div>
 				<div id="video_container">
 					<?= $stream_high ?>
 				</div>
 			</td>
 			<td>
-				<div class="section">
-					<span class="section-title">Participant Reaction:</span>
-				</div>
 				<div id="user-reaction">
 					Rate the credibility of each candidate's response for the current question.
 					<? $this->load->view('user/_cp_user_reaction'); ?>
@@ -66,12 +58,13 @@ $this->load->view('view_includes/header.php', $data);
 	<div class="section">
 		<span class="section-title">Upcoming Questions</span>
 		<span style="float:right;padding-top:3px;cursor:pointer;">
+			<span>Sort: </span>
 			<span id="sort-link-pending-2" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
 			<span id="sort-link-newest-2" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
 			<span id="sort-link-asked-2" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
 		</span>
 	</div>
-	<div id="upcoming_questions"><?// $this->load->view('user/cp_upcoming_questions') ?></div>	
+	<div id="upcoming_questions"></div>	
 </div>
 <div id="loading_reminder_div" class="loading_reminder">Loading</div>
 <script type="text/javascript" charset="utf-8">
