@@ -68,14 +68,14 @@ $this->load->view('view_includes/header.php', $data);
 		<span style="float:right;padding-top:3px;cursor:pointer;">
 			<span id="sort-link-pending-2" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
 			<span id="sort-link-newest-2" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-			<span id="sort-link-asked-2" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Asked</span>&nbsp;&nbsp;
+			<span id="sort-link-asked-2" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
 		</span>
 	</div>
 	<div id="upcoming_questions"><?// $this->load->view('user/cp_upcoming_questions') ?></div>	
 </div>
 <div id="loading_reminder_div" class="loading_reminder">Loading</div>
 <script type="text/javascript" charset="utf-8">
-	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');Å
+	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
 	
 	function SwithDescription(action){
 		if(action == 'show'){
