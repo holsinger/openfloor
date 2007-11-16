@@ -482,15 +482,16 @@ TD {
 }
 /* Loading Reminder */
 .loading_reminder {
-	border-width: 0px 1px 1px 0px;
+	border-width: 0px;
 	border-style: solid;
 	border-color: #F04A54;
 	color: #FFFFFF;
 	width: 120px;
-	height: 30px;
-	line-height: 30px;
-	padding-left: 35px;
+	height: 25px;
+	line-height: 25px;
 	background-color: #F04A54;
 	vertical-align: middle;
+	text-align: center;
 	z-index: 3;
+	font-size: 14px;
 }
