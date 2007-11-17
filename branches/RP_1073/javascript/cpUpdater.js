@@ -89,7 +89,7 @@ cpUpdater.enableAJAX = function() {
 	}	
 }
 
-cpUpdater.viewVotes = function(question_id) {	
+cpUpdater.viewVotes = function(question_id) {
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
@@ -129,6 +129,18 @@ cpUpdater.viewComments = function(question_id, event_name, question_name) {
 			}
 		});
 	}
+}
+
+cpUpdater.change_comments_sort = function(question_id, event_name, question_name, sort) {
+	my_loading_reminder.show();
+	new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name + '/' + sort, {
+		parameters: {
+			'ajax' : 'true'
+		},
+		onSuccess: function(transport) {
+			my_loading_reminder.hide();
+		}
+	});
 }
 
 cpUpdater.viewInfo = function(question_id) {
