@@ -51,7 +51,7 @@ dependency overall_reaction.css
 					</div>
 					<div id="user-reaction-ajax"></div>
 					<br/><br/>
-					<img src="./images/ucp/ask-a-question.jpg" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
+					<img src="./images/ucp/ask-a-question.png" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
 				</td>
 			</tr>
 		</table>
