@@ -80,11 +80,11 @@ class Comments_library
 						' ('.$time_diff.' ago)'.'
 					</div>	
 					<div class="thumb_block">';
-		$this->question_id = $info['fk_question_id'];
-		$question =  $this->CI->question->get_question($this->question_id);
-		$this->question_name = url_title($question['question_name']);
-		$this->createVoteBox($pod, $voted, $info['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);				
-		$pod .=			
+					$this->question_id = $info['fk_question_id'];
+					$question =  $this->CI->question->get_question($this->question_id);
+					$this->question_name = url_title($question['question_name']);
+					$this->createVoteBox($pod, $voted, $info['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);				
+					$pod .=			
 					'</div>
 					<div class="num_votes">
 						<span class="sc_votes">'.$votes.' VOTES</span>
@@ -104,13 +104,13 @@ class Comments_library
 		}
 		
 		$pod .= "<span style=\"margin: 0px 0px 10px 10px; display: block;\"><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$user_name}'s comment</a></span>".
-		'<div id="subcomment_pod_'.$info['comment_id'].'" style="margin: 0px 0px 10px 10px; display:none;">'
-			.form_open('comment/addCommentAction', array('id' => 'subcommenting_form_' . $info['comment_id']))
-				.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment', 'style' => 'width:98%'))
+		'<div id="subcomment_pod_'.$info['comment_id'].'" style="margin: 0px 0px 10px 10px; display:none;"><br />'
+			.form_open('comment/addCommentAction', array('id' => 'subcommenting_form_' . $info['comment_id'])).
+				form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment', 'style' => 'width:90%'))
 				.form_hidden('parent_id', $info['comment_id'])
 				.form_hidden('event_name', $this->event_name)
 				.form_hidden('name', $this->name)
-				.form_hidden('event_type', $this->type)		
+				.form_hidden('event_type', $this->type)."<br />"	
 				.$submit."&nbsp;&nbsp;".
 				'<input type="button" value="Cancel" class="button" onclick="javascript:new Effect.toggle(\'subcomment_pod_'.$info['comment_id'].'\',\'blind\');"/>'
 			.form_close().

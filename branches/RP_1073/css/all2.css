@@ -270,15 +270,6 @@ select.txt {
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;
 }
-
-textarea.txt {
-	border:2px solid #CCCCCC;
-	position:relative;
-	padding:5px 0 0 4px;
-	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
-	background:#BED3EA;
-	overflow:auto;
-}
 .errorArea {
 	color: #FF0000;	
 	font-weight: bold;
@@ -454,9 +445,9 @@ background-color:#f0faff;
 }
 .info {
 	float:left;
-	position:relative;
 	left:4px;
 	top:2px;
+	padding: 4px;
 }
 #feed{width:495px;}
 .feed_title{font-weight:bold;font-size:12px;};
@@ -466,9 +457,7 @@ background-color:#f0faff;
 }
 
 .sc_image {
-	position:relative;
-	left:2px;
-	top:4px;
+
 }
 
 /* About Us Page */
