@@ -97,24 +97,24 @@ class Comments_library
 		// subcommenting form
 		if($this->ajax) {
 			$submit = $submit = '<input type="button" class="button" value="Comment" onClick="javascript:cpUpdater.submitComment(' . $info['fk_question_id'] . ', \'' . url_title($this->event_name) . '\', \'' . $this->question_name . '\', ' . $info['comment_id'] . ')"/>';
-		}
-		else
+		} else {
 			$submit = ($this->CI->userauth->isUser()) ? 
 			'<input type="submit" value="Comment" class="button"/>' : 
 			'<input type=\'button\' onclick="showBox(\'login\');" value=\'Login to comment\' class=\'button\'/>';
+		}
 		
-		$pod .= "<p><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$user_name}'s comment:</a></p> "
-		.'<div id="subcomment_pod_'.$info['comment_id'].'" style="display:none;">'
-		.form_open('comment/addCommentAction', array('id' => 'subcommenting_form_' . $info['comment_id']))
-		.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment', 'style' => 'width:98%'))
-		.form_hidden('parent_id', $info['comment_id'])
-		.form_hidden('event_name', $this->event_name)
-		.form_hidden('name', $this->name)
-		.form_hidden('event_type', $this->type)		
-		.$submit
-		.form_close()
-		."<br />"
-		."</div>";
+		$pod .= "<span style=\"margin: 0px 0px 10px 10px; display: block;\"><a class=\"link\" onclick=\"javascript:new Effect.toggle('subcomment_pod_{$info['comment_id']}','blind', {queue: 'end'});\">Reply to {$user_name}'s comment</a></span>".
+		'<div id="subcomment_pod_'.$info['comment_id'].'" style="margin: 0px 0px 10px 10px; display:none;">'
+			.form_open('comment/addCommentAction', array('id' => 'subcommenting_form_' . $info['comment_id']))
+				.form_textarea(array('class' => 'txt', 'rows' => 3, 'name' => 'comment', 'style' => 'width:98%'))
+				.form_hidden('parent_id', $info['comment_id'])
+				.form_hidden('event_name', $this->event_name)
+				.form_hidden('name', $this->name)
+				.form_hidden('event_type', $this->type)		
+				.$submit."&nbsp;&nbsp;".
+				'<input type="button" value="Cancel" class="button" onclick="javascript:new Effect.toggle(\'subcomment_pod_'.$info['comment_id'].'\',\'blind\');"/>'
+			.form_close().
+		"</div>";
 				
 		// add subcomments
 		if ($subcomments) {
