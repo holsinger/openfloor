@@ -25,8 +25,8 @@ dependency overall_reaction.css
 <? endif; ?>
 
 <div id="ucp">
-	<div id="event_description"><b>Description:</b> <?=$event_data["event_desc_brief"]?>&nbsp;<a href="javascript: var none = SwithDescription('show');">See full description</a><br/></div>
-	<div id="event_description_full" style="display:none;"><br /><b>Full Description:</b> <?=$event_data["event_desc"]?><br /><a href="javascript: var none = SwithDescription();">Hide Full Description</a><br/></div>
+	<div id="event_description"><b>Description:</b> <?=$event_data["event_desc_brief"]?>&nbsp;<a href="javascript: var none = SwithDescription('show');"  title="See Full Description">See full description</a><br/></div>
+	<div id="event_description_full" style="display:none;"><br /><b>Full Description:</b> <?=$event_data["event_desc"]?><br /><a title="Hide Full Description" href="javascript: var none = SwithDescription();">Hide Full Description</a><br/></div>
 	<br />
 	<? if($event_data['streaming']): ?>
 		<div class="section">
@@ -51,7 +51,7 @@ dependency overall_reaction.css
 					</div>
 					<div id="user-reaction-ajax"></div>
 					<br/><br/>
-					<img src="./images/ucp/ask-a-question.png" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
+					<img src="./images/ucp/ask-a-question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
 				</td>
 			</tr>
 		</table>
@@ -62,17 +62,19 @@ dependency overall_reaction.css
 		<span style="float:right;padding-top:3px;cursor:pointer;">
 			<span>Sort: </span>
 			<? if(strtotime($event_data['event_date']) >= strtotime(date('Y-m-d')) || $event_data['streaming']): ?>
-				<span id="sort-link-pending-2" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
-				<span id="sort-link-newest-2" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-				<span id="sort-link-asked-2" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
+				<span id="sort-link-pending-2" title="Upcoming" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
+				<span id="sort-link-newest-2" title="Newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
+				<span id="sort-link-asked-2" title="Answered" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
 			<? else: ?>
-				<span id="sort-link-pending-2" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unsanswered</span> | 
-				<span id="sort-link-asked-2" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;			
+				<span id="sort-link-pending-2" title="Unanswered" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unanswered</span> | 
+				<span id="sort-link-asked-2" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;			
 			<? endif; ?>
 		</span>
 	</div>
+	<div id="error_div"></div>
 	<div id="upcoming_questions"></div>	
 </div>
+
 <div id="loading_reminder_div" class="loading_reminder">Loading...</div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');

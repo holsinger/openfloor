@@ -244,22 +244,24 @@ cpUpdater.change_sort = function(_sort) {
 	ajax_update_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
 	ajax_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
 	
-	my_loading_reminder.show();
 	lazy_loader.reset(ajax_update_url, ajax_count_url);
 	
+	// Should this be here?????
 	updaters.each(function(s) { s.stop(); });
 	cpUpdater.cpUpdate();
 	ajaxOn = true;
 }
 
 cpUpdater.startLazyLoader = function() {
-	
-	
 	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, upcoming_questions_count_url, {
 		count_refresh_lapse: 100000, 
 		view_refresh_lapse: 10000,
-		onStartAddSection: function() { my_loading_reminder.show(); }, 
-		onFinishAddSection: function() { my_loading_reminder.hide(); }
+		onStartAddSection: function() { 
+			my_loading_reminder.show(); 
+		}, 
+		onFinishAddSection: function() { 
+			my_loading_reminder.hide(); 
+		}
 	});
 }
 

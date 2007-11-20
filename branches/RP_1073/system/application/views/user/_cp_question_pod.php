@@ -24,8 +24,8 @@ There is no current question
 		</tr>
 	</table>		
 	<div id="cp-info-<?= $question['question_id'] ?>" class="cp-info" style="height:300;display:none;overflow:auto;">
-		<p><b>Posted By: </b><?= $question['user_name'] ?> <img class="sc_image" src="./avatars/<?= $question['avatar_path'] ?>"/></p>
-		<p><b>When: </b>(<?= $question['time_diff'] ?> ago)</p>
+		<p><img class="sc_image" src="./avatars/<?= $question['avatar_path'] ?>"/></p>
+		<p><b>Posted By: </b><?= $question['user_name'] ?> (<?= $question['time_diff'] ?> ago)</p>
 		<?= empty($question['tags']) ? '' : '<p><b>Tags: </b>' . implode(', ', $question['tags']) . '</p>' ?>
 		<p><b>Description: </b><?= $question['question_desc'] ?></p>	
 	</div>
@@ -39,9 +39,9 @@ There is no current question
   <b class="question-pod2"><b></b></b>
   <b class="question-pod1"><b></b></b></b>
 </div>
-<div class="votes" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)"><?= $question['vote_count'] ?> votes</div>
-<div class="comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')"><?= $question['comment_count'] ?> comments</div>
-<div class="more_info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
+<div class="votes" title="Vote History" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)"><?= $question['vote_count'] ?> votes</div>
+<div class="comments" title="Comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')"><?= $question['comment_count'] ?> comments</div>
+<div class="more_info" title="More Info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
 <div style="clear:both;"></div>
 
 <? 	endforeach; ?>
