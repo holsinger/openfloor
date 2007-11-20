@@ -1,9 +1,9 @@
 <? if(isset($ajax)): ?>
-<div class="change_sort" style="float:left;">Sort comments by: 
-	<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'date')">date</a>, 
-	<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'votes')">votes</a>
-</div>
-<div class="close"><a class="link" onClick="$('cp-comments-<?= $question_id ?>').setStyle({display: 'none'});">hide</a></div>
+	<div class="change_sort" style="float:left;">Sort comments by: 
+		<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'date')">date</a>, 
+		<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'votes')">votes</a>
+	</div>
+	<div class="close"><a class="link" onClick="$('cp-comments-<?= $question_id ?>').setStyle({display: 'none'});">close</a></div>
 <? endif; ?>
 <br/>
 <br/>

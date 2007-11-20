@@ -25,8 +25,14 @@ dependency overall_reaction.css
 <? endif; ?>
 
 <div id="ucp">
-	<div id="event_description"><b>Description:</b> <?=$event_data["event_desc_brief"]?>&nbsp;<a href="javascript: var none = SwithDescription('show');"  title="See Full Description">See full description</a><br/></div>
-	<div id="event_description_full" style="display:none;"><br /><b>Full Description:</b> <?=$event_data["event_desc"]?><br /><a title="Hide Full Description" href="javascript: var none = SwithDescription();">Hide Full Description</a><br/></div>
+	<? if(!$event_data['streaming']): ?>
+		<div><b>When:</b> <?=date("F j, Y, g:i a", strtotime($event_data['event_date']))?></div>
+		<div><b>Where:</b> <?=$event_data["location"]?><br /><br /></div>
+	<? endif; ?>
+	<div><b>Description:</b></div> 
+	<div id="event_description"><?=$event_data["event_desc_brief"]?><br /></div>
+	<div id="event_description_full" style="display:none;"><br /><?=$event_data["event_desc"]?></div>
+	<div><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
 	<? if($event_data['streaming']): ?>
 		<div class="section">
@@ -79,14 +85,15 @@ dependency overall_reaction.css
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
 	
-	function SwithDescription(action){
-		if(action == 'show'){
-			if($('event_description_full').getStyle('display') == 'none'){
-				Effect.SlideDown('event_description_full', {  queue: 'end'});
-			}
+	function SwithDescription(){
+		if($('event_description_full').getStyle('display') == 'none'){
+			Effect.SlideUp('event_description', {duration: .5,   queue: 'end'});
+			Effect.SlideDown('event_description_full', {  queue: 'end', afterFinish : function() { $('description_text').innerHTML = "Hide full description"; }});
 			
 		}else{
 			Effect.SlideUp('event_description_full', {  queue: 'end'});
+			Effect.SlideDown('event_description', { duration: .5,  queue: 'end', afterFinish : function(){ $('description_text').innerHTML = "See full description"; }});
+			
 		}
 	}
 	<? // If this is a past event then show answered questions by default ?>

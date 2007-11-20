@@ -26,8 +26,10 @@ class Votes extends Controller
 		$data['display_name'] = $this->user->displayName($data['user_name']);
 		//set user avatar
 		$image_array = unserialize($data['user_avatar']);
-		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
-		else $data['avatar_path'] = "./images/image01.jpg";
+		if ($image_array) 
+			$data['avatar_path'] = "./avatars/".$image_array['file_name'];
+		else 
+			$data['avatar_path'] = "./images/image01.jpg";
 		//get time diff
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);
 		
@@ -48,7 +50,8 @@ class Votes extends Controller
 		// retrieve votes information
 		$votes = $this->vote_model->getVotesByQuestion($question_id);
 		
-		$voteHTML = '';
+		$voteHTML = '<div style="background-color: #FFFFFF">';
+		if(isset($_POST['ajax'])) $voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div><br />";
 		foreach ($votes as $vote) {			
 			#resize image
 			$vote_image_array = unserialize($vote['user_avatar']);
@@ -60,7 +63,7 @@ class Votes extends Controller
 			$voteHTML .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
 			.anchor("user/profile/".$vote['user_name'], $this->user_model->displayName($vote['user_name'])) . ' ' . $vote_value . ' ' .$vote_time.' ago </div>';
 		}
-		$voteHTML.='<br />';
+		$voteHTML.='</div><br />';
 		if(isset($_POST['ajax'])) $voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div>";
 				
 		$data['voteHTML'] = $voteHTML;
