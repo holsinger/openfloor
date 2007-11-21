@@ -365,7 +365,7 @@ class Event extends Controller
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
 				//$st .= $array['event_name']."<br />";
-				$st .= '<li>'.anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
+				$st .= '<li>'.anchor($this->config->site_url().'forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
 				if($count == 1){
 					break;
 				}
