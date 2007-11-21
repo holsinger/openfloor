@@ -93,7 +93,9 @@ Control.LazyLoader.prototype = {
 		
 		this.segment_divs[this.segment_divs.length] = document.createElement('div');
 		$(this.container_elem_id).appendChild(this.segment_divs[(this.segment_divs.length - 1)]);
-		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'/'+(this.segment_divs.length - 1), { method: 'get', onComplete : this.addNewSegmentOnComplete.bind(this) });
+		var date = new Date();
+		var timestamp = date.getTime();
+		new Ajax.Updater($(this.segment_divs[(this.segment_divs.length - 1)]), this.ajax_update_url+'/'+(this.segment_divs.length - 1)+'/'+timestamp, { method: 'post', onComplete : this.addNewSegmentOnComplete.bind(this) });
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date()
 		var h=now.getHours() * 60;
@@ -152,7 +154,9 @@ Control.LazyLoader.prototype = {
 		if(!this.init_populate_complete && this.options.onStartAddSection){
 			this.options.onStartAddSection();
 		}
-		new Ajax.Request(this.ajax_count_url,
+		var date = new Date();
+		var timestamp = date.getTime();
+		new Ajax.Request(this.ajax_count_url+'/'+timestamp,
 		  {
 		    onSuccess: this.checkCountOnSuccessCallback.bind(this)
 		  });
@@ -186,8 +190,9 @@ Control.LazyLoader.prototype = {
 				return;
 			}
 		}
-		
-		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'/'+section_num, { method: 'get'});
+		var date = new Date();
+		var timestamp = date.getTime();
+		new Ajax.Updater($(this.segment_divs[section_num]), this.ajax_update_url+'/'+section_num+'/'+timestamp, { method: 'post'});
 		// Set a time stamp for this section so it can be refreshed accordingly
 		var now=new Date();
 		var h=now.getHours() * 60;
