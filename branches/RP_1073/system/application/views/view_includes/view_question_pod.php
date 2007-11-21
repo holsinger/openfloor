@@ -32,7 +32,7 @@
 									<span id="ls_story_link-<?= $question_id; ?>"></span>
 								</p>
 								<p>
-									Event: <?=anchor("forums/queue/event/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
+									Event: <?=anchor("forums/cp/".url_title($event_name),$event_name);?><span id="ls_adminlinks-5" style="display:none"></span>
 								</p>
 								<p>
 									Tags: <? if(!empty($tags)) echo implode(', ',$tags);?>
