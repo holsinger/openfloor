@@ -51,7 +51,10 @@ class Votes extends Controller
 		$votes = $this->vote_model->getVotesByQuestion($question_id);
 		
 		$voteHTML = '<div style="background-color: #FFFFFF">';
-		if(isset($_POST['ajax'])) $voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div><br />";
+		if(isset($_POST['ajax'])) $voteHTML .= "
+		<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div>
+		<div>&nbsp;</div>
+		<br />";
 		foreach ($votes as $vote) {			
 			#resize image
 			$vote_image_array = unserialize($vote['user_avatar']);
