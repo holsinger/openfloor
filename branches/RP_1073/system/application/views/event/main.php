@@ -41,8 +41,6 @@ dependency overall_reaction.css
 	
 		<div id="current_question"></div>		  
 
-		<div id="current_question"></div>		  
-
 		<table class="feed-reaction-panel">
 			<tr>
 				<td>
