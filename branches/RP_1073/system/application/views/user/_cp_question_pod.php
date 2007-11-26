@@ -27,7 +27,7 @@ if(isset($current_question_flag)) $question = $current_question;
 			<div id="cp-info-<?= $question['question_id'] ?>" class="cp-info" style="display:none;overflow:auto;">
 				<div class="close" style=\"position:relative; top:-5px;\"><a class="link" onClick="$('cp-info-<?= $question['question_id'] ?>').setStyle({display: 'none'});">close</a></div>
 				<p><img class="sc_image" src="./avatars/<?= $question['avatar_path'] ?>"/></p>
-				<p><b>Posted By: </b><?= $question['user_name'] ?> (<?= $question['time_diff'] ?> ago)</p>
+				<p><b>Posted By: </b><?= anchor('/user/profile/' . $question['user_name'], $question['user_name']) ?> (<?= $question['time_diff'] ?> ago)</p>
 				<?= empty($question['tags']) ? '' : '<p><b>Tags: </b>' . implode(', ', $question['tags']) . '</p>' ?>
 				<p><b>Description: </b><?= $question['question_desc'] ?></p>
 				<div class="close" style=\"position:relative; top:-5px;\"><a class="link" onClick="$('cp-info-<?= $question['question_id'] ?>').setStyle({display: 'none'});">close</a></div>	
