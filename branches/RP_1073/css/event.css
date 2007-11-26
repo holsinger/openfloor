@@ -323,3 +323,10 @@ a {
 	margin: 2px;
 	text-align: left;
 }
+
+.reaction_handle {
+	width: 19px; 
+	height: 20px; 
+	background: url(../images/slider-images-handle.png); 
+	float: left;
+}
