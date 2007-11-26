@@ -337,9 +337,20 @@ class Event extends Controller
 	public function view($event_name)
 	{
 		$data['event'] = $this->event->get_event(null, $event_name);
+		$temp_participants = $this->event->getCansInEvent($this->event->get_id_from_url($event_name));
+		$temp_count = 0;
+		foreach($temp_participants as $v){
+			$data['event']['participants'] .= $this->candidate->linkToProfile($v);
+			if($temp_count < (count($temp_participants) - 1) ){
+				$data['event']['participants'] .= ', ';
+			}
+			
+			$temp_count++;
+		}
 		$data['event_url'] = "event/$event_name";
 		
 		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(), 'Events' => 'event/', 'Event Details' => '');
 		$this->load->view('event/view',$data);
 	}
 	

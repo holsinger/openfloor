@@ -29,12 +29,12 @@ $sections = explode(',', $cms['cms_text']);
 	function ChangeAccordianStyle(content_id){
 		pic_num = content_id.substring(3);
 		if(ChangeAccordianStyle.last_id >= 0){
-			$('left_img_'+ChangeAccordianStyle.last_id).src = "./images/accordion/left_off.png";
-			$('right_img_'+ChangeAccordianStyle.last_id).src = "./images/accordion/right_off.png";
+			$('left_img_'+ChangeAccordianStyle.last_id).writeAttribute('src' , "images/accordion/left_off.png");
+			$('right_img_'+ChangeAccordianStyle.last_id).writeAttribute('src', "images/accordion/right_off.png");
 		}
 		if(ChangeAccordianStyle.last_id != pic_num){
-			$('left_img_'+pic_num).src = "./images/accordion/left_on.png";
-			$('right_img_'+pic_num).src = "./images/accordion/right_on.png";
+			$('left_img_'+pic_num).writeAttribute('src', "images/accordion/left_on.png");
+			$('right_img_'+pic_num).writeAttribute('src', "images/accordion/right_on.png");
 			ChangeAccordianStyle.last_id = pic_num;
 		}else{
 			ChangeAccordianStyle.last_id = -1;

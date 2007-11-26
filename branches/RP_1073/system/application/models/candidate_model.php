@@ -107,6 +107,7 @@ class Candidate_model extends Model
 		if($image) return site_url("/user/profile/$user_name");		
 		$display_name = $this->nameByUser($can_id);
 		if($popup) return anchor_popup("/user/profile/$user_name", $display_name);
+			
 		return anchor("/user/profile/$user_name", $display_name);
 	}
 }
