@@ -2,6 +2,7 @@ BODY {
     text-align: center;
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size: 11px;
+	font-size-adjust: none;
     color: #464646;
     background: #F0FAFF url("../images/body-bg.jpg") repeat-y left top;
 }
@@ -319,7 +320,7 @@ BODY {
 
 .content .col-right {
     width: 32%;
-	padding: 0% 1% 0% 1%;
+	padding: 0 8px 0 8px;
 	border-left: 2px solid #C6DDEF;
 }
 
