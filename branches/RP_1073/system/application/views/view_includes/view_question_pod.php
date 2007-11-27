@@ -25,7 +25,7 @@
 									<tr><td style="height: 5px;"></td></tr>
 									<tr>
 										<td class='vote_box'>
-											<span><?=anchor("votes/who/{$question_id}", (is_numeric($votes))?$votes:0 );?></span>
+											<h3><?=anchor("votes/who/{$question_id}", (is_numeric($votes))?$votes:0 );?></h3>
 										</td>
 										<td style="padding-left: 5px;" valign="top">
 											<h3>

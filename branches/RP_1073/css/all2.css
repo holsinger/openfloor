@@ -488,7 +488,7 @@ TD {
 	top: 0px;
 	left: 0px;
 }
-.vote_box span{
+.vote_box h3{
 	border: border-width: 0px;
 	border-style: solid;
 	border-width: 1px;
@@ -500,7 +500,7 @@ TD {
 	text-align: center;
 	vertical-align: middle;
 }
-.vote_box span a{
+.vote_box h3 a{
 	text-align: center;
 	vertical-align: middle;
 }
