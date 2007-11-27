@@ -488,15 +488,19 @@ TD {
 	top: 0px;
 	left: 0px;
 }
-.vote_box h3{
+.vote_box span{
 	border: border-width: 0px;
 	border-style: solid;
-	border-width: solid;
+	border-width: 1px;
 	border-color: #D5D5D5;
 	color:#033D7C;
 	background-color: #FFFFFF;
 	width:40px;
 	height:40px;
+	text-align: center;
+	vertical-align: middle;
+}
+.vote_box span a{
 	text-align: center;
 	vertical-align: middle;
 }
