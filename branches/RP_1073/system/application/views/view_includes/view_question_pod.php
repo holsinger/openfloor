@@ -24,7 +24,9 @@
 								<table width="100%" cellpadding="0" cellspacing="0">
 									<tr><td style="height: 5px;"></td></tr>
 									<tr>
-										<td style="background-color: #FFFFFF; width: 40px; height: 20px;; border:1px solid #6F808A" valign="middle" align="center"><h3><?=(is_numeric($votes))?$votes:0;?></h3></td>
+										<td class='vote_box'>
+											<h3><?=(is_numeric($votes))?$votes:0;?></h3>
+										</td>
 										<td style="padding-left: 5px;" valign="top">
 											<h3>
 											<? if($view_name == 'question_view') {
