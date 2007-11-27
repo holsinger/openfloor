@@ -10,7 +10,7 @@ $data['left_nav'] = $global ? 'events' : 'event';
 $tag_execute = '';
 if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 
-$data['sub_title'] = ucwords(str_replace('_',' ', $event_name));
+$data['sub_title'] = $event_name ? ucwords(str_replace('_',' ', $event_name)) : ucwords(str_replace('_',' ', $tag));
 ?>
 
 <?$this->load->view('view_includes/header.php',$data);?>
