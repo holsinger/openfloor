@@ -488,3 +488,12 @@ TD {
 	top: 0px;
 	left: 0px;
 }
+.vote_box h3{
+	border: border-width: 0px;
+	border-style: solid;
+	border-color: #000000;
+	color:#033D7C;
+	background-color: #FFFFFF;
+	width:20px;
+	height:40px;
+}
