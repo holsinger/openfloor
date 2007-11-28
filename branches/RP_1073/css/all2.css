@@ -503,4 +503,6 @@ TD {
 .vote_box h3 a{
 	text-align: center;
 	vertical-align: middle;
+	padding-top:15px;
+	color:#033D7C;
 }
