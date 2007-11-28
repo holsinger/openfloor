@@ -518,7 +518,7 @@ TD {
 .checkbox {
 	background:transparent url(../images/votedCheckBox.png) repeat scroll 0%;
 	float:left;
-	height:19px;
+	height:17px;
 	width:19px;	
     position:relative;
 }

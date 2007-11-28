@@ -20,7 +20,7 @@ if(isset($current_question_flag)) $question = $current_question;
 				<tr>
 					<td><div class="score"><?= $question['votes'] ?></div></td>
 					<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
-					<td width="100%"><div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>><a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/shrink.php?img=<?=$question['avatar_path'];?>&w=16&h=16">&nbsp;<?= $question['question_name'] ?></div></td>
+					<td width="100%"><div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>><a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/shrink.php?img=<?=$question['avatar_path'];?>&w=16&h=16"></a>&nbsp;<?= $question['question_name'] ?></div></td>
 					<td><div class="flag"><!-- <img src="./images/flag.png"> --></div></td>
 				</tr>
 			</table>		
