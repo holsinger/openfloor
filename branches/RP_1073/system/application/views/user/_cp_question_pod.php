@@ -1,5 +1,5 @@
 <? if(isset($current_question_flag) && empty($current_question)): ?>	
-There is no current question
+	&nbsp;<strong>There is no current question</strong>
 <? else: ?>
 
 <? 	
