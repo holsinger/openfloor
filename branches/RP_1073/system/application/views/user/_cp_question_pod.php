@@ -20,13 +20,13 @@ if(isset($current_question_flag)) $question = $current_question;
 				<tr>
 					<td><div class="score"><?= $question['votes'] ?></div></td>
 					<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
-					<td width="100%"><div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>><?= anchor('/user/profile/' . $question['user_name'], '<img class="sc_image" src="./avatars/shrink.php?img='.$question['avatar_path'].'&w=16&h=16"/>');?>&nbsp;<?= $question['question_name'] ?></div></td>
+					<td width="100%"><div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>><a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/shrink.php?img=<?=$question['avatar_path'];?>&w=16&h=16">&nbsp;<?= $question['question_name'] ?></div></td>
 					<td><div class="flag"><!-- <img src="./images/flag.png"> --></div></td>
 				</tr>
 			</table>		
 			<div id="cp-info-<?= $question['question_id'] ?>" class="cp-info" style="display:none;overflow:auto;">
 				<div class="close" style=\"position:relative; top:-5px;\"><a class="link" onClick="$('cp-info-<?= $question['question_id'] ?>').setStyle({display: 'none'});">close</a></div>
-				<?= anchor('/user/profile/' . $question['user_name'], '<img class="sc_image" src="./avatars/'.$question['avatar_path'].'"/>');?><br />
+				<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/<?=$question['avatar_path'];?>"/></a><br />
 				<b>Posted By: </b><?= anchor('/user/profile/' . $question['user_name'], $question['user_name']) ?> (<?= $question['time_diff'] ?> ago)<br />
 				<?= empty($question['tags']) ? '' : '<b>Tags: </b>' . implode(', ', $question['tags']) . '<br />' ?>
 				<b>Description: </b><?= $question['question_desc'] ?><br />
