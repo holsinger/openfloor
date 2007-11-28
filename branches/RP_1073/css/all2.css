@@ -508,7 +508,7 @@ TD {
 	display: block;
 }
 #karma_star {
-	background:transparent url(../images/karma_star_default.png) repeat scroll 0%;
+	background:transparent url(../images/karma_star_default.png) no-repeat scroll 0%;
 	float:left;
 	height:20px;
 	width:19px;	
@@ -516,9 +516,9 @@ TD {
 	top:-4px;
 }
 .checkbox {
-	background:transparent url(../images/votedCheckBox.png) repeat scroll 0%;
+	background:transparent url(../images/votedCheckBox.png) no-repeat scroll 0%;
 	float:left;
 	height:17px;
-	width:19px;	
+	width:22px;	
     position:relative;
 }
