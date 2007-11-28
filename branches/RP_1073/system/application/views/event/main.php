@@ -40,6 +40,8 @@ dependency overall_reaction.css
 	<div id="event_description_full" style="display:none; font-weight: normal;"><br /><?=$event_data["event_desc"]?></div>
 	<div><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
+	<div style="text-align: center;"><img src="./images/ucp/ask-a-question2.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/></div>
+	<div id="cp-ask-question" style="display:none; text-align: center;"><? $this->load->view('question/_submit_question_form') ?></div>
 	<? if($event_data['streaming']): ?>
 		<div class="section">
 			<span class="section-title">Current Question:</span>
@@ -60,13 +62,11 @@ dependency overall_reaction.css
 						<? $this->load->view('user/_cp_user_reaction'); ?>
 					</div>
 					<div id="user-reaction-ajax"></div>
-					<br/><br/>
-					<img src="./images/ucp/ask-a-question2.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
 				</td>
 			</tr>
 		</table>
 	<? endif; ?>
-	<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
+	
 	<div class="section">
 		<span class="section-title" id="question_title"><?= strtotime($event_data['event_date']) >= strtotime(date('Y-m-d')) || $event_data['streaming'] ? "Upcoming Questions" : "Answered Questions" ?> </span>
 		<span style="float:right;padding-top:3px;cursor:pointer;">
