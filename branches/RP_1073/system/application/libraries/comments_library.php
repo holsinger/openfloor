@@ -64,8 +64,10 @@ class Comments_library
 		
 		#resize image
 		$image_array = unserialize($info['user_avatar']);
-		if ($image_array) $avatar_path = $image_array['file_name'];
-		else $avatar_path = "image01.jpg";
+		if ($image_array) 
+			$avatar_path = $image_array['file_name'];
+		else 
+			$avatar_path = "image01.jpg";
 		
 		//get time diff
 		$time_array = explode(', ', timespan(strtotime($info['date'])));
@@ -148,8 +150,8 @@ class Comments_library
 								' ('.$time_diff.' ago)'.'
 							</div>	
 							<div class="thumb_block">';
-				$this->createVoteBox($pod, $voted, $subcomment['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);
-				$pod .=			
+								$this->createVoteBox($pod, $voted, $subcomment['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);
+								$pod .=			
 							'</div>
 							<div class="num_votes">
 								<span class="sc_votes">'.$votes.' VOTES</span>

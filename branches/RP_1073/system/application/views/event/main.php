@@ -31,7 +31,7 @@ dependency overall_reaction.css
 	<? endif; ?>
 	<div><b>Description:</b></div> 
 	<div id="event_description"><?=$event_data["event_desc_brief"]?><br /></div>
-	<div id="event_description_full" style="display:none;"><br /><?=$event_data["event_desc"]?></div>
+	<div id="event_description_full" style="display:none; font-weight: normal;"><br /><?=$event_data["event_desc"]?></div>
 	<div><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
 	<? if($event_data['streaming']): ?>

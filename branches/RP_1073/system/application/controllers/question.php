@@ -247,16 +247,19 @@ class Question extends Controller
 		$comments_library->sort = $sort;
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
+		
+		// If ajax then use different view, otherwise setup breadtrail and all
 		if(isset($_POST['ajax'])) { 
 			$data['ajax'] = true;
 			$this->load->view('question/_comments', $data); 
+		}else{
+			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"forums/queue/event/".url_title($data['event_name']));
+			$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
+
+			$data['view_name'] = 'question_view';
+			$this->load->view('question/question_view.php', $data);
 		}
 		
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$data['event_name']))=>"forums/queue/event/".url_title($data['event_name']));
-		$data['rightpods'] = array('dynamic'=>array('event_description'=>$data['event_desc'],'event_location'=>$data['location']));
-		
-		$data['view_name'] = 'question_view';
-		$this->load->view('question/question_view.php', $data);
 	}
 	
 	function voteup($question_id = 0)
