@@ -226,17 +226,15 @@ a {
 }
 
 #ucp .score {
-	width: 32px;
-	/*background: url(../images/ucp/score-bg.jpg) no-repeat;*/
-	background:#FFFFFF;
-	padding:2px;
+	width: 50px;
 	color: #053c7c;
+	background-color: white;
 	font-size: 17px;
 	font-weight: bold;
 	font-family: Verdana,Geneva,Arial;
 	text-indent: 4px;
 	margin: 0 5px;
-	text-align: middle;
+	text-align: center;
 }
 
 #ucp table {
