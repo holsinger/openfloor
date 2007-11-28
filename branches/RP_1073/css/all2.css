@@ -507,3 +507,7 @@ TD {
 	color:#033D7C;
 	display: block;
 }
+#karma_star {
+	background:url(../images/karma_star_default.png) no-repeat 0 100%;
+	text-indent: -10;
+}

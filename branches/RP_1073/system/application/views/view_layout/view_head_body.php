@@ -18,7 +18,7 @@
                 <ul class="right" id="userLogin">
 					<? if ($this->userauth->isUser()):?>
 						<li class="login">Welcome, <?=anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name);?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span></li>
-						<li><img src="images/karma_star_default.png" style='top:4px;'></li>
+						<li><span id='karma_star'>*</span>
 						<li>)</li>
 						<li class="separator">|</li>
 						<li><?=anchor('user/profile/'.$this->userauth->user_name,'Manage Account');?></li>
