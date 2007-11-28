@@ -510,4 +510,5 @@ TD {
 #karma_star {
 	background:url(../images/karma_star_default.png) no-repeat 0 100%;
 	text-indent: -10;
+	width:18px;
 }
