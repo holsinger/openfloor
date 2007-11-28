@@ -177,7 +177,7 @@ class Comments_library
 			} elseif ($voted < 0) {
 				$pod .= "<img src=\"./images/thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
 				#$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-				$pod .= " <div class='checkbox'></div>;
+				$pod .= " <div class='checkbox'></div>";
 			} elseif ($voted > 0) {
 				$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 				$pod .= "<img src=\"./images/thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
@@ -189,8 +189,8 @@ class Comments_library
 			error_log('nonajax');
 			if ($voted < 0) {
 				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
-				#$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
-				$pod .= " <div class='checkbox'></div>;
+				//$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
+				$pod .= " <div class='checkbox'></div>";
 			} else if ($voted > 0) {
 				$pod .= " <img src='./images/votedCheckBox.png' border='0'>";
 				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
