@@ -1,6 +1,6 @@
 .news-summary{
-	margin:0 45px 0 36px;
-	padding:7px 0 0 85px;
+	margin:0 36px 0 36px;
+	padding:7px 0 0 0;
 	overflow: visible;
 	position:relative;
 }
@@ -60,6 +60,7 @@ a.vote_digit:hover {
 }
 .describtion{background:#F0FAFF url(../images/bg-descr.gif) repeat-y 0 0;}
 .describtion-frame{background:url(../images/bg-descr.gif) repeat-y 100% 0;}
+.descr-tl{background:url(../images/bg-descr-left-top-corner.png) no-repeat 0 0;}
 .descr-tr{background:url(../images/descr-r-corner.gif) no-repeat 100% 0;}
 .descr-bl{background:url(../images/bg-bottom-l-corner.gif) no-repeat 0 100%;}
 .descr-br{background:url(../images/bg-descr-right-r-corner.gif) no-repeat 100% 100%;padding:5px 10px 0 6px;}

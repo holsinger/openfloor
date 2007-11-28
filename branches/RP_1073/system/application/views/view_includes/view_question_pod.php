@@ -24,7 +24,7 @@
 								<table width="100%" cellpadding="0" cellspacing="0">
 									<tr><td style="height: 5px;"></td></tr>
 									<tr>
-										<td class='vote_box'>
+										<td class='vote_box' valign="middle">
 											<h3><?=anchor("votes/who/{$question_id}", (is_numeric($votes))?$votes:0 );?></h3>
 										</td>
 										<td style="padding-left: 5px;" valign="top">
