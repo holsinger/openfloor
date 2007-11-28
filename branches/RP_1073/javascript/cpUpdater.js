@@ -24,25 +24,27 @@ cpUpdater.vote = function(url) {
 	});
 }
 
-cpUpdater.cpUpdate = function() {
+cpUpdater.cpUpdate = function(disable_current_questions) {
 	updaters = new Array();
-	
-	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
-		frequency: 10,
-		decay: 2
-	}));
-	
-	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
-		frequency: 10,
-		evalScripts: true,
-		decay: 2
-	}));
-	
-	cans.each(function(s) {
-		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
-			frequency: 10
+	if(!disable_current_questions){
+		updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
+			frequency: 10,
+			decay: 2
 		}));
-	});
+
+		updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
+			frequency: 10,
+			evalScripts: true,
+			decay: 2
+		}));
+
+		cans.each(function(s) {
+			updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
+				frequency: 10
+			}));
+		});
+	}
+	
 }
 
 cpUpdater.askQuestion = function() {

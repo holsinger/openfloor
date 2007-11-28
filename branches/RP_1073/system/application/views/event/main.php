@@ -1,6 +1,12 @@
 <?
 $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; $cans = substr($cans, 0, -2);
-$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
+
+if($event_data['streaming']){
+	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
+}else{	// Disable the current questions related periodic updating
+	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate(true);";
+}
+
 
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 
