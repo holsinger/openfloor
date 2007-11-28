@@ -508,7 +508,8 @@ TD {
 	display: block;
 }
 #karma_star {
-	background:url(../images/karma_star_default.png) no-repeat 0 100%;
-	text-indent: -10;
-	width:18px;
+	background:transparent url(../images/karma_star_default.png) repeat scroll 0%;
+	float:left;
+	height:20px;
+	width:19px;
 }
