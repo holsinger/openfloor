@@ -101,11 +101,11 @@ BODY {
 .top-menu LI.login A {
     color: #F04A54;
     font-weight: bold;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .top-menu LI.login A:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .top-menu LI.login .star {

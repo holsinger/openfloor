@@ -17,7 +17,7 @@
                 </ul>
                 <ul class="right" id="userLogin">
 					<? if ($this->userauth->isUser()):?>
-						<li class="login">Welcome, <?=anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name,'user');?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span></li>
+						<li class="login">Welcome, <?=anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name);?>&nbsp;(<span onClick="showBox('karma_explained');" class='link'><?=$this->userauth->user_karma;?></span></li>
 						<li><img src="images/karma_star_default.png" style='top:4px;'></li>
 						<li>)</li>
 						<li class="separator">|</li>
@@ -25,7 +25,7 @@
 						<li class="separator">|</li>
 						<li><?=anchor('user/logout/',"Logout");?></li>
 					<? else: ?>
-						<li><a onClick="showBox('login');">Login</a></li>
+						<li><a onClick="showBox('login');" class='link'>Login</a></li>
 						<li class="separator">|</li>					
 						<li><?= anchor('user/createAccount','Create Account');?></li>
 					<? endif; ?>
