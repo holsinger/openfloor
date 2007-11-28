@@ -53,3 +53,7 @@ strong.slogan{
 	background: none;
 	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/images/karma_star_default.png', sizingMethod='crop');
 }
+.checkbox{
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/images/votedCheckBox.png', sizingMethod='crop');
+}
