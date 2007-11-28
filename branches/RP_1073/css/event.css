@@ -226,8 +226,10 @@ a {
 }
 
 #ucp .score {
-	width: 73px;
-	background: url(../images/ucp/score-bg.jpg) no-repeat;
+	width: 32px;
+	/*background: url(../images/ucp/score-bg.jpg) no-repeat;*/
+	background:#FFFFFF;
+	padding:2px;
 	color: #053c7c;
 	font-size: 17px;
 	font-weight: bold;
