@@ -510,6 +510,32 @@ class Forums extends Controller
 		}
 	}
 	
+	// ==============================================================================================
+	// = EditQuestion - This is used for editing the question on the event view stuff (formerly cp) =
+	// ==============================================================================================
+	public function EditQuestion($question_id, $option){
+		// If update then it's called from ajax and needs not show anything
+		if($option == 'update'){
+			error_log($_POST['question_desc']);
+			// Clear out the answer if it's pending
+			if($_POST['question_status'] == 'pending'){
+				$_POST['question_answer'] = '';
+			}
+			$changed = $this->question->updateQuestion($question_id, $_POST);
+			//$data['alert'] = "Question Updated";
+			if($changed > 0){
+				echo("1");
+			}else{
+				echo("0");
+			}
+			
+			return;
+		}
+		$data['question'] = $this->question->get_question($question_id);
+		$data['alert'] = $alert;
+		$this->load->view('question/edit_question',$data);
+	}
+	
 	private function adminCandidate($action, $name = null)
 	{
 		$data['error'] = '';

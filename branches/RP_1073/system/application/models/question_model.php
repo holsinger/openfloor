@@ -46,6 +46,7 @@ class Question_model extends Model
 		if (isset($array['question_status'])) $this->db->set ('question_status',$array['question_status']);
 		if (isset($array['question_answer'])) $this->db->set ('question_answer',$array['question_answer']);
 		$this->db->update('cn_questions');
+		error_log(trim($this->db->last_query()));
 		log_message('debug', "updateQuestion:".trim($this->db->last_query()));
 		return $this->db->affected_rows();
 	}

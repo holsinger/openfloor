@@ -23,7 +23,8 @@ if(isset($current_question_flag)) $question = $current_question;
 					<td width="100%"><div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>><a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/shrink.php?img=<?=$question['avatar_path'];?>&w=16&h=16"></a>&nbsp;<?= $question['question_name'] ?></div></td>
 					<td><div class="flag"><!-- <img src="./images/flag.png"> --></div></td>
 				</tr>
-			</table>		
+			</table>
+			<div id="cp-admin-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">ADMIN</div>		
 			<div id="cp-info-<?= $question['question_id'] ?>" class="cp-info" style="display:none;overflow:auto;">
 				<div class="close" style=\"position:relative; top:-5px;\"><a class="link" onClick="$('cp-info-<?= $question['question_id'] ?>').setStyle({display: 'none'});">close</a></div>
 				<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/<?=$question['avatar_path'];?>"/></a><br />
@@ -46,6 +47,9 @@ if(isset($current_question_flag)) $question = $current_question;
 		<div class="votes" title="Vote History" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)"><?= $question['vote_count'] ?> votes</div>
 		<div class="comments" title="Comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')"><?= $question['comment_count'] ?> comments</div>
 		<div class="more_info" title="More Info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
+		<? if($this->userauth->isAdmin()): ?>
+			<div class="more_info" title="Admin" onClick="cpUpdater.viewAdmin('<?= $question['question_id'] ?>')">Admin</div>
+		<? endif; ?>
 		<div style="clear:both;"></div>
 
 	<? 	endforeach; ?>

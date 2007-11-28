@@ -91,6 +91,27 @@ cpUpdater.enableAJAX = function() {
 	}	
 }
 
+cpUpdater.viewAdmin = function(question_id) {
+	visible = !($('cp-admin-' + question_id).getStyle('display') == 'none');
+	
+	if(visible) {
+		cpUpdater.toggleVisibility('cp-admin-' + question_id);
+		cpUpdater.toggleAJAX();
+	} else {
+		my_loading_reminder.show();
+		new Ajax.Updater('cp-admin-' + question_id, site_url + 'forums/EditQuestion/' + question_id, {
+			parameters: {
+				'ajax' : 'true'
+			},
+			onSuccess: function(transport) {
+				cpUpdater.toggleVisibility('cp-admin-' + question_id);
+				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
+			}
+		});
+	}	
+}
+
 cpUpdater.viewVotes = function(question_id) {
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
@@ -266,4 +287,37 @@ cpUpdater.startLazyLoader = function() {
 		}
 	});
 }
+// ==================================================================================
+// = ChangeQuestionStatus - Used as admin to change show or hide the asked box only =
+// ==================================================================================
+cpUpdater.ChangeQuestionStatus = function(elem) {
+	if(elem.value == 'asked' || elem.value == 'current'){
+		$('question_status_div').setStyle({ display : 'block' });
+	}else{
+		$('question_status_div').setStyle({ display : 'none' });
+	}
+}
+// ==================================================================================
+// = UpdateQuestionOnSucess - Call Back function when updating a question		    =
+// ==================================================================================
+cpUpdater.UpdateQuestionOnSucess = function(transport) { 
+	if(transport.responseText){
+		$('question_error_div').innerHTML = "Updated Successfully!";
+		
+		// Change the highlights
+		if(event_timing == 'past'){
+			sort_links = ['pending', 'asked'];
+		}else{
+			sort_links = ['pending', 'newest', 'asked'];
+		}
 
+		sort_links.each(function(s){
+			if( $('sort-link-'+ s + '-2').hasClassName('cp-sort-link-selected') ){
+				setTimeout("cpUpdater.change_sort('"+s+"')",  1500);
+			}
+		});
+	}else{
+		$('question_error_div').innerHTML = "Could not update!";
+	}
+	
+}
