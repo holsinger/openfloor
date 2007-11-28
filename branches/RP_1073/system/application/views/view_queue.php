@@ -24,8 +24,7 @@ $data['sub_title'] = $event_name ? ucwords(str_replace('_',' ', $event_name)) : 
 			<div style="background-color: #0173ba; margin: 10px -6px -6px -6px; padding: 4px 3px 0px 10px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($event_name)?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
 		</div>
 	<? endif; ?>
-	
-	<h3><?=$queue_title;?></h3>
+
 	<div id="queue">
 		<? if(isset($ajax)) ob_clean(); ?>
 		<? if(!isset($ajax)): ?>
