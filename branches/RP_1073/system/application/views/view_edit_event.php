@@ -86,12 +86,12 @@ function richField($name, $value)
 	                );
 
 	echo form_format("Streaming:", form_dropdown('streaming', $format, $this->validation->streaming));
+	echo form_format("Event Finished:", form_dropdown('event_finished', $format, $this->validation->event_finished));	
 	?>
-	
 	<br /><br />
 	<br /><br />
 	<?= (isset($avatar_image_name) && !empty($avatar_image_name))?form_hidden('old_avatar','./avatars/'.$avatar_image_name):'';?>
-	<?= form_submit('','Edit Event','class="button"'); ?>
+	<?= form_submit('','Update Event','class="button"'); ?>
 	<br /><br />
 	<small>* required fields</small>
 	<?= form_close(); ?>

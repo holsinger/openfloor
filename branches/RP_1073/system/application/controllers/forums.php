@@ -108,6 +108,17 @@ class Forums extends Controller
 		if(!$data['event_id']) exit();
 
 		$data["event_data"] = $this->event->get_event($data['event_id']);
+		
+		$temp_participants = $this->event->getCansInEvent($data['event_id']);
+		$temp_count = 0;
+		foreach($temp_participants as $v){
+			$data['event_data']['participants'] .= $this->candidate->linkToProfile($v);
+			if($temp_count < (count($temp_participants) - 1) ){
+				$data['event_data']['participants'] .= ', ';
+			}
+			
+			$temp_count++;
+		}
 
 		$this->event->id = $data['event_id'];
 		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';

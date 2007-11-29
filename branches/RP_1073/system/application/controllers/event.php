@@ -93,6 +93,7 @@ class Event extends Controller
 		$fields['stream_low']	= ( isset($_POST['stream_low']) ) ? $_POST['stream_low']:"";
 		$fields['blocked_ips']	= ( isset($_POST['blocked_ips']) ) ? $_POST['blocked_ips']:"";
 		$fields['streaming']	= ( isset($_POST['streaming']) ) ? $_POST['streaming']:"";
+		$fields['event_finished']	= ( isset($_POST['event_finished']) ) ? $_POST['event_finished']:"";
 		
 		// participating candidates
 		$data['candidates'] = $this->candidate->getCandidates();
@@ -201,6 +202,7 @@ class Event extends Controller
 		$rules['stream_low'] = "trim|max_length[65535]";
 		$rules['blocked_ips'] = "trim|max_length[65535]";
 		$rules['streaming'] = '';
+		$rules['event_finished'] = '';
 		#TODO is validation even being performed??
 		if ( !$error ) {
 			//add event url name to array
@@ -220,9 +222,9 @@ class Event extends Controller
 				$error = 'Error editing event or no changes were made';
 				$this->edit_event($event_id, $error);
 			}
-		} //if no error
-		$this->view_events($error);
-		
+		}else{ //if no error
+			$this->view_events($error);
+		}
 		
 	}
 	
@@ -401,4 +403,8 @@ class Event extends Controller
 		echo($st);
 	}
 	
+	public function finish_event_ajax($event_id)
+	{
+		echo $this->event->set_event_to_finished($event_id);
+	}
 }

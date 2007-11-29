@@ -105,10 +105,17 @@ class Event_model extends Model
 	public function getCansInEvent($event_id, $full = false)
 	{
 		$candidates = $this->db->getwhere('cn_idx_candidates_events', array('fk_event_id' => $event_id))->result_array();
+		
 		$return = array();
-		foreach($candidates as $v) $return[] = $v['fk_can_id'];
-		if(!$full) return $return;
-		return $this->db->query('SELECT can_id, can_display_name FROM cn_candidates WHERE can_id IN(' . implode(',', $return) . ')')->result_array();
+		foreach($candidates as $v){
+			$return[] = $v['fk_can_id'];
+		} 
+		if(!$full){
+			return $return;
+		}else{
+			return $this->db->query('SELECT can_id, can_display_name FROM cn_candidates WHERE can_id IN(' . implode(',', $return) . ')')->result_array();
+		}
+		
 	}
 
 	public function rss_upcoming_questions($event_id)
@@ -132,6 +139,12 @@ class Event_model extends Model
 	public function rss_events()
 	{
 		return $this->db->select('event_id, event_name, event_desc')->orderby('event_date', 'desc')->get('cn_events')->result();
+	}
+
+	public function set_event_to_finished($event_id)
+	{
+		$this->db->query("UPDATE cn_events SET event_finished = 1 WHERE event_id = $event_id");
+		return $this->db->affected_rows();
 	}
 }
 ?>

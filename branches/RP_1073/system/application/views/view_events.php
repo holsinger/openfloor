@@ -20,7 +20,7 @@ $data['use_temp_top'] = true;
 	<!-- FIRST, LIVE EVENTS -->
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
-		<? if($array['streaming']): ?>
+		<? if($array['streaming'] && !$array['event_finished']): ?>
 			
 			<h3 class="subheader" id="live_events_subheader_div">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
@@ -66,7 +66,7 @@ $data['use_temp_top'] = true;
 		<h3 class="subheader" id="upcoming_events_title">Future Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
-        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !($array['streaming']) ): ?>
+        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !$array['event_finished'] ): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
@@ -97,7 +97,7 @@ $data['use_temp_top'] = true;
         <? //echo $this->table->generate($events)?>
         <h3 class="subheader" id="past_events_title">Past Events</h3>
         <? foreach ($events as $key => $array): ?>
-        	<? if (strtotime($array['event_date']) < strtotime(date('Y-m-d'))): ?>
+        	<? if ($array['event_finished']): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
