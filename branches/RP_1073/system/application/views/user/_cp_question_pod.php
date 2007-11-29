@@ -48,7 +48,7 @@ if(isset($current_question_flag)) $question = $current_question;
 		<div class="comments" title="Comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')"><?= $question['comment_count'] ?> comments</div>
 		<div class="more_info" title="More Info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
 		<? if($this->userauth->isAdmin()): ?>
-			<div class="more_info" title="Admin" onClick="cpUpdater.viewAdmin('<?= $question['question_id'] ?>')">Admin</div>
+			<div class="more_info" title="Admin" onClick="cpUpdater.viewAdmin('<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
 		<? endif; ?>
 		<div style="clear:both;"></div>
 

@@ -35,6 +35,6 @@ $answer_format = array(
 			<?=form_format("Question Answer: *",form_textarea($answer_format),'Write a the answer to the question.' );?>
 		</div>
 		<br /><br />
-		<input type="button" class="button" value="Update Question" onclick="new Ajax.Request(site_url+'forums/EditQuestion/<?=$question['question_id']?>/update', { parameters: $('question_edit_form').serialize(true), onSuccess : cpUpdater.UpdateQuestionOnSucess });">	
+		<input type="button" class="button" value="Update Question" onclick="new Ajax.Request(site_url+'forums/EditQuestion/<?=$question['question_id']?>/<?=$event_id?>/update', { parameters: $('question_edit_form').serialize(true), onSuccess : cpUpdater.UpdateQuestionOnSucess });">	
 	</form>
 </div>

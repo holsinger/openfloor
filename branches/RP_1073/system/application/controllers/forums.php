@@ -513,27 +513,35 @@ class Forums extends Controller
 	// ==============================================================================================
 	// = EditQuestion - This is used for editing the question on the event view stuff (formerly cp) =
 	// ==============================================================================================
-	public function EditQuestion($question_id, $option){
+	public function EditQuestion($question_id, $event_id, $option){
 		// If update then it's called from ajax and needs not show anything
 		if($option == 'update'){
-			error_log($_POST['question_desc']);
 			// Clear out the answer if it's pending
 			if($_POST['question_status'] == 'pending'){
 				$_POST['question_answer'] = '';
 			}
+			// If the question is changed to current then be sure to clear out existing current question and set to "asked"
+			if($_POST['question_status'] == 'current'){
+				$old_current_question = $this->question->singleCurrent($event_id, $question_id);
+				if($old_current_question && $old_current_question != $question_id){
+					$this->question->set_asked_time($old_current_question);
+				}
+			}
+			// Update and return response based on whether it worked
 			$changed = $this->question->updateQuestion($question_id, $_POST);
-			//$data['alert'] = "Question Updated";
 			if($changed > 0){
 				echo("1");
 			}else{
 				echo("0");
 			}
-			
-			return;
+		// Do this on intial page load
+		}else{
+			$data['question'] = $this->question->get_question($question_id);
+			$data['event_id'] = $event_id;
+			$data['alert'] = $alert;
+			$this->load->view('question/edit_question',$data);
 		}
-		$data['question'] = $this->question->get_question($question_id);
-		$data['alert'] = $alert;
-		$this->load->view('question/edit_question',$data);
+		
 	}
 	
 	private function adminCandidate($action, $name = null)

@@ -91,7 +91,7 @@ cpUpdater.enableAJAX = function() {
 	}	
 }
 
-cpUpdater.viewAdmin = function(question_id) {
+cpUpdater.viewAdmin = function(question_id, event_id) {
 	visible = !($('cp-admin-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {
@@ -99,7 +99,7 @@ cpUpdater.viewAdmin = function(question_id) {
 		cpUpdater.toggleAJAX();
 	} else {
 		my_loading_reminder.show();
-		new Ajax.Updater('cp-admin-' + question_id, site_url + 'forums/EditQuestion/' + question_id, {
+		new Ajax.Updater('cp-admin-' + question_id, site_url + 'forums/EditQuestion/' + question_id + '/' + event_id, {
 			parameters: {
 				'ajax' : 'true'
 			},
