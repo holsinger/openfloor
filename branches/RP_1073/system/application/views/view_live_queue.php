@@ -9,8 +9,8 @@
 	<meta name="generator" content="TextMate http://macromates.com/">
 	<meta name="author" content="Rob Stefanussen">
 	<link rel="stylesheet" type="text/css" href="css/all.css" /><link rel="stylesheet" type="text/css" href="css/view_live_queue.css" />
-	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
-	<script src="javascript/src/scriptaculous.js" type="text/javascript"></script>
+	<script src="./javascript/prototype.js" type="text/javascript"></script>
+	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>
 	<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';var event_name = '<?=$event?>';</script>
 	<script type="text/javascript" src="javascript/textsizer.js"></script>
 
