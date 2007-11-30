@@ -7,7 +7,7 @@
 	<base href="<?= $this->config->site_url();?>" />
 	<title>Admin Dashboard</title>
 	<link rel="stylesheet" type="text/css" href="css/admin_dashboard.css" />
-	<script type="text/javascript" src="javascript/lib/prototype.js"></script>
+	<script src="./javascript/prototype.js" type="text/javascript"></script>
 	<script type="text/javascript">
 	site_url = '<?= $this->config->site_url();?>';
 	var event_name = '<?=$event?>';
