@@ -22,6 +22,7 @@ li.link_a {border-right:2px solid #daf8fa;}
 
 #getStarted {position:relative; width:99%; background:#daf8fa; height:36px;margin:35px auto;}
 #getStarted h3 {position:relative; margin:0 auto;top:2px; height:31px; width:186px; background:url(../images/splash/getstarted.png) center no-repeat;}
+#getStarted2 h3 {position:relative; margin:0 auto;top:2px; height:31px; width:186px; background:url(../images/splash/getstarted.png) center no-repeat;}
 h3 a{display:block;color:white;font-size:1.10em; text-decoration:none;position:relative;top:4px;width:186px; text-align:center;}
 #footer {position:relative;width:692px;background:url(../images/splash/bottom_back.png) center no-repeat; height:74px; margin:0 auto;}
 #footer ul {list-style-type:none;}
