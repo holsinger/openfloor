@@ -19,6 +19,7 @@
 <meta name="robots" content="all" />
 <title>Run Politics</title>
 <link href="css/splash.css" rel="stylesheet" type="text/css" />
+<link href="css/userWindow.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <!--  load AJAX views -->
