@@ -28,8 +28,8 @@
 <div id="back">
   <div id="banner">
     <ul class="topLinks">
-      <li class="link_a"><a href="<?= $this->config->site_url();?>/user/login">LOGIN</a></li>
-      <li class="link_b"><a href="<?= $this->config->site_url();?>/user/createAccount">CREATE ACCOUNT</a></li>
+      <li class="link_a"><a href="<?= $this->config->site_url();?>user/login">LOGIN</a></li>
+      <li class="link_b"><a href="<?= $this->config->site_url();?>user/createAccount">CREATE ACCOUNT</a></li>
     </ul>
     <h1><span>Run Politics</span></h1>
     <h3><span>You are the party!</span></h3>
@@ -54,13 +54,17 @@
     </ul>
   </div>
   <div id="about">
-  	<br/>
+  <br/>
+  	<h2>Welcome</h2>
     <p>
-    <?= $cms_text; ?>
+    Welcome to RunPolitics, your gateway into the political world. This site is intended<br/> 
+    to be a department store of information about the politics that affect you, <br/> 
+    a place to find information, opinions of other people like you, and some statistics <br/>
+    about the politicians who represent you. Click the button below to jump right in. 
 	</p
   </div>
   <div id="getStarted">
-    <h3><a href="<?= $this->config->site_url();?>/event">Get Started!</a></h3>
+    <h3><a href="<?= $this->config->site_url();?>event">Get Started!</a></h3>
   </div>
   <div id="footer">
     <ul>
@@ -68,10 +72,10 @@
         <h2>RUNPOLITICS</h2>
         <ul class="inner_nav">
           <li class="a1"><a href="http://blog.runpolitics.com">Our Blog<span class="divider">|</span></a></li>
-          <li class="a2"><a href="<?= $this->config->site_url();?>/information/aboutUs">About Us<span class="divider">|</span></a></li>
+          <li class="a2"><a href="<?= $this->config->site_url();?>information/aboutUs">About Us<span class="divider">|</span></a></li>
           <li class="a4"><a href="http://www.zazzle.com/runpolitics">Shop</a></li>
-          <li class="a2"><a href="<?= $this->config->site_url();?>/information/view/terms_of_use">Terms of Use<span class="divider">|</span></a></li>
-          <li class="a3"><a href="<?= $this->config->site_url();?>/information/press">Press</a></li>
+          <li class="a2"><a href="<?= $this->config->site_url();?>information/view/terms_of_use">Terms of Use<span class="divider">|</span></a></li>
+          <li class="a3"><a href="<?= $this->config->site_url();?>information/press">Press</a></li>
           <?/*<li class="b4"><a href="#">Terms &amp; Conditions</a></li>*/ ?>
           
         </ul>
@@ -90,9 +94,9 @@
       <li class="bottomC">
         <h2>HELP &amp; INFO</h2>
         <ul class="inner_nav">
-          <li class="c1"><a href="<?= $this->config->site_url();?>/information/view/event_instructions">Help Center<span class="divider">|</span></a></li>
-          <li class="c2"><a href="/information/view/faq">FAQ</a></li>
-          <li class="c2"><a href="/information/view/privacy_policy">Privacy Policy</a></li>
+          <li class="c1"><a href="<?= $this->config->site_url();?>information/view/event_instructions">Help Center<span class="divider">|</span></a></li>
+          <li class="c2"><a href="information/view/faq">FAQ</a></li>
+          <li class="c2"><a href="information/view/privacy_policy">Privacy Policy</a></li>
         </ul>
       </li>
       <li class="bottomD">
