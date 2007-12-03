@@ -81,6 +81,11 @@
 												</div>
 						                    <?
 											break;
+											case 'dashboard':
+												?>
+												<h1>Event</h1>
+												<?
+												break;
 											default:
 											?>
 											

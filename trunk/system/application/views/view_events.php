@@ -1,6 +1,4 @@
-<!--
-	#dependency events.css
---> 
+
 <?
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
 						'href' => site_url("feed/events"));
@@ -8,9 +6,12 @@ $data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
 $data['sub_title'] = "OpenFloor Events";
 // THIS IS TEMP CODE FOR AN EVENT AND NEEDS TO BE REPLACED
-$data['use_temp_top'] = true;
+//$data['use_temp_top'] = true;
 ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
+<!--
+	#dependency events.css
+-->
 <div id="content_div" class="event_content_div">
 	<!-- <span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span> -->
 	<? if($this->userauth->isAdmin()): ?>
@@ -19,7 +20,7 @@ $data['use_temp_top'] = true;
 	<!-- FIRST, LIVE EVENTS -->
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
-		<? if($array['streaming']): ?>
+		<? if($array['streaming'] && !$array['event_finished']): ?>
 			
 			<h3 class="subheader" id="live_events_subheader_div">Live Events</h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
@@ -35,7 +36,8 @@ $data['use_temp_top'] = true;
 							</div>
 						</td>
 						<td valign="top">
-							<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
+							<!-- <span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	 -->
+							<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
 							<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 							<b>Where:</b> <?=$array['location'];?><br /><br />
 							<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br/>
@@ -43,7 +45,7 @@ $data['use_temp_top'] = true;
 						</td>
 					</tr>
             	</table>
-				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 3px 3px 0px 3px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($array['event_name'])?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
+				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 3px 3px 0px 3px; text-align: center"><?=anchor('forums/cp/'.url_title($array['event_name']),'<img src="./images/events/participate_now_button.png" border="0" />', array("title" => "Participate Now"))?></div>
             </div>
             <br />
 		
@@ -64,11 +66,12 @@ $data['use_temp_top'] = true;
 		<h3 class="subheader" id="upcoming_events_title">Future Events</h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
-        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !($array['streaming']) ): ?>
+        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !$array['event_finished'] ): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
-					<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
+					<!-- <span style="display: block; padding-bottom: 5px;"><?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	 -->
+					<span style="display: block; padding-bottom: 5px;"><?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br /></span>	
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
 					<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br/>
@@ -94,11 +97,12 @@ $data['use_temp_top'] = true;
         <? //echo $this->table->generate($events)?>
         <h3 class="subheader" id="past_events_title">Past Events</h3>
         <? foreach ($events as $key => $array): ?>
-        	<? if (strtotime($array['event_date']) < strtotime(date('Y-m-d'))): ?>
+        	<? if ($array['event_finished']): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
-					<?=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
+					<?//=anchor('forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
+					<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
 					<b>Description:</b> <?=$array['event_desc_brief'];?>&nbsp;<?= anchor('/event/view/' . url_title($array['event_name']), 'more...') ?><br />

@@ -1,3 +1,17 @@
+<?
+$cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; $cans = substr($cans, 0, -2);
+
+if($event_data['streaming']){
+	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
+}else{	// Disable the current questions related periodic updating
+	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate(true);";
+}
+
+
+$data['left_nav'] = 'dashboard';
+$data['sub_title'] = $event_data['event_name']; 
+$this->load->view('view_includes/header.php', $data);
+?>
 <!-- 
 #dependency all2.css
 #dependency event.css
@@ -5,68 +19,131 @@
 dependency overall_reaction.css
 
 #dependency cpUpdater.js
+#dependency lazy_loader.js
+#dependency loading_reminder.js
 -->
-
-<?
-$cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; $cans = substr($cans, 0, -2);
-$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
-
-$data['sub_title'] = "Event"; // what do we want to call this?
-$this->load->view('view_includes/header.php', $data);
-?>
-
-<div id="overlay" onclick="hideBox()" style="display:none"></div>
-<div id="hijax" style="display:none" class="ajax_box"></div>
 <? if ($this->userauth->isAdmin()): ?>
-<a class="link" onclick="cpUpdater.enableAJAX()">START</a>
-<a class="link" onclick="cpUpdater.disableAJAX()">STOP</a>
+	<div><b>Administration:</b></div> 
+	<? if(!$event_data["event_finished"]): ?>
+		<input value="Finish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/finish_event_ajax/<?=$event_data['event_id']?>',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });">
+	<? endif; ?>
+	<input value="Edit Event" class="button" type="button" onclick="window.location=site_url+'event/edit_event/<?=$event_data['event_id']?>'">
+	<!-- <a class="link" onclick="cpUpdater.enableAJAX()">START</a>
+		<a class="link" onclick="cpUpdater.disableAJAX()">STOP</a>
+		<a class="link" onclick="cpUpdater.current_question_fade()">FADE</a> -->
+	<br />
+	<br />
 <? endif; ?>
 
 <div id="ucp">
-	<div class="section">
-		<span class="section-title">Current Question:</span>
+	<? if(!$event_data['streaming']): ?>
+		<div><b>When:</b> <?=date("F j, Y, g:i a", strtotime($event_data['event_date']))?></div>
+		<div><b>Where:</b> <?=$event_data["location"]?><br /><br /></div>
+	<? endif; ?>
+	
+	<div><b>Description:</b></div> 
+	<div id="event_description"><?=$event_data["event_desc_brief"]?><br /></div>
+	<div id="event_description_full" style="display:none; font-weight: normal;">
+		<br />Candidates: <?=$event_data['participants']?>
+		<br /><?=$event_data["event_desc"]?>
 	</div>
+	
+	<div><br/><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
+	<br />
+	<? if(!$event_data["event_finished"]): ?>
+		<div style="text-align: center;"><img src="./images/ucp/ask-a-question2.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/></div>
+		<div id="cp-ask-question" style="display:none; text-align: center;"><? $this->load->view('question/_submit_question_form') ?></div>
+	<? endif; ?>
+	
+	<? if($event_data['streaming'] && !$event_data["event_finished"]): ?>
+		<div class="section">
+			<span class="section-title">Current Question:</span>
+		</div>
+	
+		<div id="current_question"></div>		  
 
-	<div id="current_question">
-	<? $this->load->view('user/cp_current_question'); ?>
-	</div>		  
-
-	<table class="feed-reaction-panel">
-		<tr>
-			<td>
-				<div class="section">
-					<span class="section-title">Live Video Feed:</span>
-				</div>
-				<div id="video_container">
-					<?= $stream_high ?>
-				</div>
-			</td>
-			<td>
-				<div class="section">
-					<span class="section-title">Participant Reaction:</span>
-				</div>
-				<div id="user-reaction">
-					Rate the credibility of each candidate's response for each question.
-				<? $this->load->view('user/_cp_user_reaction'); ?>
-				</div>
-				<div id="user-reaction-ajax"></div>
-				<br/><br/>
-				<img src="./images/ucp/ask-a-question.jpg" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/>
-			</td>
-		</tr>
-	</table>
-	<div id="cp-ask-question" style="display:none"><? $this->load->view('question/_submit_question_form') ?></div>
+		<table class="feed-reaction-panel">
+			<tr>
+				<td>
+					<div id="video_container">
+						<?= $stream_high ?>
+					</div>
+				</td>
+				<td>
+					<div id="user-reaction">
+						Rate the credibility of each candidate's response for the current question.
+						<? $this->load->view('user/_cp_user_reaction'); ?>
+					</div>
+					<div id="user-reaction-ajax"></div>
+				</td>
+			</tr>
+		</table>
+	<? elseif($event_data["event_finished"]): ?>
+		<div class="section">
+			<span class="section-title">Event Review:</span>
+		</div>		  
+		<table class="feed-reaction-panel">
+			<tr>
+				<td>
+					<div id="video_container">
+						Click play to watch the events entire footage or you can watch the answer to each question by clicking on the "answer" tab below each question.
+						<?= $stream_high ?>
+					</div>
+				</td>
+				<td>
+					<div id="user-reaction">
+						This shows aggregate user reaction for each candidate over the entire event.
+						<? $this->load->view('user/_cp_user_reaction'); ?>
+					</div>
+					<div id="user-reaction-ajax"></div>
+				</td>
+			</tr>
+		</table>		
+	<? endif; ?>
+	
 	<div class="section">
-		<span class="section-title">Upcoming Questions</span>
+		<span class="section-title" id="question_title"><?= strtotime($event_data['event_date']) >= strtotime(date('Y-m-d')) || $event_data['streaming'] ? "Upcoming Questions" : "Answered Questions" ?> </span>
 		<span style="float:right;padding-top:3px;cursor:pointer;">
-			<span id="sort-link-pending" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
-			<span id="sort-link-newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-			<span id="sort-link-asked" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Asked</span>&nbsp;&nbsp;
+			<span>Sort: </span>
+			<? if(!$event_data["event_finished"]): ?>
+				<span id="sort-link-pending-2" title="Upcoming" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
+				<span id="sort-link-newest-2" title="Newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
+				<span id="sort-link-asked-2" title="Answered" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
+			<? else: ?>
+				<span id="sort-link-pending-2" title="Unanswered" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unanswered</span> | 
+				<span id="sort-link-asked-2" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;			
+			<? endif; ?>
 		</span>
 	</div>
-	<div id="upcoming_questions">		
-		<? $this->load->view('user/cp_upcoming_questions') ?>
-	</div>	
+	<div id="error_div"></div>
+	<div id="upcoming_questions"></div>	
 </div>
 
+<div id="loading_reminder_div" class="loading_reminder">Loading...</div>
+<script type="text/javascript" charset="utf-8">
+	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
+	
+	function SwithDescription(){
+		if($('event_description_full').getStyle('display') == 'none'){
+			Effect.SlideUp('event_description', {duration: .5,   queue: 'end'});
+			Effect.SlideDown('event_description_full', {  queue: 'end', afterFinish : function() { $('description_text').innerHTML = "Hide full description"; }});
+			
+		}else{
+			Effect.SlideUp('event_description_full', {  queue: 'end'});
+			Effect.SlideDown('event_description', { duration: .5,  queue: 'end', afterFinish : function(){ $('description_text').innerHTML = "See full description"; }});
+			
+		}
+	}
+	<? // If this is a past event then show answered questions by default ?>
+	<? if($event_data["event_finished"]): ?>
+		var upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/asked';
+		var event_timing = 'past';
+	<? else: ?>
+		var upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/pending';
+		var event_timing = 'not_past';
+	<? endif; ?>
+	var upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
+	Event.observe(window, 'load', cpUpdater.startLazyLoader);
+</script>
 <? $this->load->view('view_includes/footer.php', $data);?>

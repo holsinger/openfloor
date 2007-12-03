@@ -1,6 +1,3 @@
-<!--
-	#dependency events.css
---> 
 <?
 if(isset($rss)) $data['rss'] = $rss;
 $data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
@@ -13,10 +10,13 @@ $data['left_nav'] = $global ? 'events' : 'event';
 $tag_execute = '';
 if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 
-$data['sub_title'] = ucwords(str_replace('_',' ', $event_name));
+$data['sub_title'] = $event_name ? ucwords(str_replace('_',' ', $event_name)) : ucwords(str_replace('_',' ', $tag));
 ?>
 
 <?$this->load->view('view_includes/header.php',$data);?>
+<!--
+	#dependency events.css
+-->
 <div id="content_div">
 	<? if(!$global && $event_info['streaming'] ): ?>
 		<div id="participate_live_div">
@@ -24,8 +24,7 @@ $data['sub_title'] = ucwords(str_replace('_',' ', $event_name));
 			<div style="background-color: #0173ba; margin: 10px -6px -6px -6px; padding: 4px 3px 0px 10px; text-align: center"><img src="./images/events/participate_now_button.png" border="0" class="link" onclick="window.open(site_url+'forums/cp/<?=url_title($event_name)?>','dashboard', 'width=1015,height=700,scrollbars=yes,status=no,resizable=yes,screenx=0,screeny=0');" /></div>
 		</div>
 	<? endif; ?>
-	
-	<h3><?=$queue_title;?></h3>
+
 	<div id="queue">
 		<? if(isset($ajax)) ob_clean(); ?>
 		<? if(!isset($ajax)): ?>

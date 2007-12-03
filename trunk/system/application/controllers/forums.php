@@ -12,6 +12,7 @@ class Forums extends Controller
 		// models
 		$this->load->model('candidate_model', 'candidate');
 		$this->load->model('event_model','event');
+		$this->load->model('comments_model','comments');
 		$this->load->model('flag_model','flag');
 		$this->load->model('question_model','question');
 		$this->load->model('tag_model', 'tag');
@@ -41,7 +42,7 @@ class Forums extends Controller
 		exit();
 	}
 	
-	public function liveQueue($event = 'presidential_debate', $ajax=null)
+	public function liveQueue($event, $ajax=null)
 	{
 		$data['event'] = $event;
 		
@@ -72,9 +73,13 @@ class Forums extends Controller
 				break;
 			case 'upcoming_questions':
 				foreach($data['questions'] as $question) {
-						$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ;
-						echo "<div class='queue-question'><span class=\"votes\"><p>{$question['votes']} $votes<p></span>";
-						echo "<span class=\"question\">{$question['question_name']}</span></div><br />";
+					//$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ;
+					echo '
+						<div class="queue-question">
+							<span class="votes"><span class="inner_container">'.$question['votes'].'</span></span>
+							<span class="question">'.$question['question_name'].'</span>
+						</div>
+						<br />';
 				}
 				break;
 			default:
@@ -85,6 +90,63 @@ class Forums extends Controller
 		}
 	}
 	
+	// ===================================================================================================
+	// = candidateQueue - This is the controller for the dashboard that candidates watch during an event =
+	// ===================================================================================================
+	public function candidateQueue($event_name, $ajax = false){
+		$data['event_name'] = $event_name;
+		$event_id = $this->event->get_id_from_url($event_name);
+		if(!$event_id) exit();
+		
+		// get questions, first upcoming and then current
+		$this->question->event_id = $event_id;
+		$data['questions'] = $this->question->questionQueue();
+		$this->question->question_status = 'current';
+		$data['current_question'] = $this->question->questionQueue();
+		
+		// Get the comments for the current question, build the html since it's used on intial display and ajax display.  Should be changed later to use views
+		$comments = $this->comments->getCommentsByQuestion($data['current_question'][0]["question_id"]);
+		$data['comment_html'].='<span class="comments_title">Comments</span>';
+		foreach($comments AS $comment){
+			$data['comment_html'].="<div class=\"comment\">{$comment['comment']} - {$comment['user_name']}</div>";
+			$sub_comments = $this->comments->getChildrenByComment($comment['comment_id']);
+			foreach($sub_comments AS $sub_comment){
+				$data['comment_html'].="<div class=\"sub_comment\">{$sub_comment['comment']} - {$sub_comment['user_name']}</div>";
+			}
+		}
+		
+		// if an AJAX request is being made
+		if($ajax){
+			if($ajax == "current_question"){
+				if($data['current_question'][0]['question_name']){
+					echo '<p>'.$data['current_question'][0]['question_name']."</p>{$data['comment_html']}";
+				}else{
+					echo "<p>There is not a current question</p>";
+				}
+				
+			}else{
+				$count=1;
+				foreach($data['questions'] as $question) {
+					//$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ;
+					echo '
+					<div class="queue-question">
+						<span class="question">'.$question['question_name'].'</span>
+					</div>
+					<br />';
+					if($count <3){
+						$count++;
+					}else{
+						break;
+					}
+				}
+			}
+			
+		} else { // if no AJAX request is being made, load the view
+			$this->load->view('event/CandidateQueue.php', $data);
+		}		
+	}
+	
+	// I think this function below is depricated - CTE
 	public function watch_answer($id)
 	{
 		$close_button = "<div class=\"close_watch_window\" onClick=\"popup_instance_$id.destroy()\"></div>";
@@ -92,7 +154,7 @@ class Forums extends Controller
 		echo $close_button . $this->question->get('question_answer');		
 	}
 	
-	public function cp($event = 'presidential_debate', $ajax = null, $option_1 = null, $option_2 = null)
+	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
 		#TODO Handle no candidates assigned?
 		
@@ -107,6 +169,19 @@ class Forums extends Controller
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
 
+		$data["event_data"] = $this->event->get_event($data['event_id']);
+		
+		$temp_participants = $this->event->getCansInEvent($data['event_id']);
+		$temp_count = 0;
+		foreach($temp_participants as $v){
+			$data['event_data']['participants'] .= $this->candidate->linkToProfile($v);
+			if($temp_count < (count($temp_participants) - 1) ){
+				$data['event_data']['participants'] .= ', ';
+			}
+			
+			$temp_count++;
+		}
+
 		$this->event->id = $data['event_id'];
 		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
 		
@@ -120,13 +195,14 @@ class Forums extends Controller
 			{
 			case 'current_question':
 				$this->_currentQuestion($data);
-				$this->load->view('user/cp_current_question.php', $data);
+				$data['current_question_flag'] = true;
+				$this->load->view('user/_cp_question_pod.php', $data);
 				break;
 			case 'upcoming_questions':
 				if(isset($option_1)) $data['sort'] = $option_1;
 				if(isset($option_2)) $data['section'] = $option_2;
 				$this->_upcomingQuestions($data);
-				$this->load->view('user/cp_upcoming_questions.php', $data);
+				$this->load->view('user/_cp_question_pod.php', $data);
 				break;
 			case 'reaction':
 				$this->_currentQuestion($data);
@@ -154,7 +230,7 @@ class Forums extends Controller
 				break;
 			}
 		} else { // NO AJAX
-			$this->_upcomingQuestions($data);		
+			// $this->_upcomingQuestions($data);		
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
@@ -162,11 +238,12 @@ class Forums extends Controller
 			#TODO This solution for no candidates assigned to event is not ideal
 			if(empty($data['candidates'])) redirect();
 			// $this->load->view('user/cp', $data);
+			$data['breadcrumb'] = $this->global ? array('Home' => $this->config->site_url()) : array('Home'=>$this->config->site_url(),'Events'=>'event/',$data["event_data"]['event_name']=>'');
 			$this->load->view('event/main', $data);
 		}		
 	}
 	
-	public function overall_reaction($event = 'presidential_debate', $ajax = null, $can_id = null)
+	public function overall_reaction($event, $ajax = null, $can_id = null)
 	{
 		// ========
 		// = init =
@@ -301,163 +378,12 @@ class Forums extends Controller
 		$data['cloud'] = $this->tag_lib->createTagCloud($event_id);
 		
 		// question tags
-		$this->tag_lib->createTagLinks($data['results']);	
+		$this->tag_lib->createTagLinks($data['results']);
 		
 		// load the view
 		$data['view_name'] = 'view_queue';
-
 		$this->load->view('view_queue',$data);	
 	}		
-	
-	public function videoQueue ($uri_array,$event_id) 
-	{
-		if($this->ajax) $data['ajax'] = true;
-		$data['event_type'] = 'video';
-		
-		$this->load->model('Video_model','video2');
-		//event
-		$this->video2->event_id = $event_id;		
-		$data['event_name'] = $uri_array['event'];
-		//video
-		if (isset($uri_array['video'])) {
-			if (is_numeric($uri_array['video'])) // change all is_numeric, is_string groups to if, elseif logic
-				$this->video2->video_id = $uri_array['video'];
-			elseif (is_string($uri_array['video']))
-				$this->video2->video_id = $this->video->get_id_from_url($uri_array['video']);
-				
-			$data['video_view'] = true;
-		}
-		
-		//user
-		if (isset($uri_array['user']) && is_numeric($uri_array['user'])) 
-			$this->video2->user_id = $uri_array['user'];
-		if (isset($uri_array['user']) && is_string($uri_array['user'])) 
-			$this->video2->user_id = $this->user->get_id_from_name($uri_array['user']); 
-			
-		//tag
-		if (isset($uri_array['tag']) && is_numeric($uri_array['tag'])) $this->video2->tag_id = $uri_array['tag'];
-		if (isset($uri_array['tag']) && is_string($uri_array['tag'])) {
-			$this->video2->tag_id = $this->tag->get_id_from_tag($uri_array['tag']);
-			$data['tag'] = $uri_array['tag'];
-		}
-		//set default sort link
-		$type = ucfirst($data['event_type']);
-		$sort_active = 'upcoming';
-		$queue_title = 'Upcoming '.$type.'s';
-		
-		//create sorting options
-		if (isset($uri_array['sort']) )
-		{
-			//order by date
-			if ( $uri_array['sort'] == 'newest')
-			{
-				$this->video2->order_by = 'date';
-				$sort_active = 'newest';
-				$queue_title = 'Newest '.$type.'s';
-			}
-			//limit to asked videos
-			if ( $uri_array['sort'] == 'asked')
-			{
-				$this->video2->video_status = 'asked';
-				$sort_active = 'asked';
-				$queue_title = 'Asked '.$type.'s';
-			}
-			//limit to current video
-			if ( $uri_array['sort'] == 'current')
-			{
-				$this->video2->video_status = 'current';
-				$sort_active = 'current';
-				$queue_title = 'Current '.$type;
-			}
-		}
-		$data['sort'] = $sort_active;
-		
-		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));			
-		//set a sorting array
-		$sort_array = array('<strong>Sort '.$data['event_type'].'s by:</strong>');		
-		($sort_active == 'upcoming') ? array_push($sort_array,'Score'):array_push( $sort_array,anchor("forums/queue/{$data['event_url']}",'Score') );
-		($sort_active == 'newest') ? array_push($sort_array,'Newest'):array_push( $sort_array,anchor("forums/queue/{$data['event_url']}/sort/newest",'Newest') ); 
-		
-		$data['sort_array'] = $sort_array;
-		//var_dump($sort_array);
-
-		if ( isset($uri_array['sort']) ) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
-		$data['queue_title'] = $queue_title;
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
-		
-		// pagination
-		if(isset($event_id))
-		{		
-			$segment_array = $this->uri->segment_array();
-			if(is_numeric($segment_array[$this->uri->total_segments()]))
-				array_pop($segment_array);				
-			$base_url = implode('/', $segment_array);				
-
-			$pagination_per_page = '5';			
-			// $this->video2->limit = $pagination_per_page;
-			// 			
-			// 				if(is_numeric($this->uri->segment($this->uri->total_segments())))
-			// 					$this->video2->offset = $this->uri->segment($this->uri->total_segments());
-			$offset = (is_numeric($this->uri->segment($this->uri->total_segments())))?$this->uri->segment($this->uri->total_segments()):0;
-		
-			$data['results'] = $this->video2->videoQueue();
-			$total_rows = count($data['results']);
-			$data['results'] = array_splice($data['results'], $offset, $pagination_per_page);
-		
-			$this->load->library('pagination');
-			$config['base_url'] = site_url($base_url);
-			$config['total_rows'] = $total_rows;
-			$config['per_page'] = $pagination_per_page;
-			$config['uri_segment'] = $this->uri->total_segments();//add some style
-			$config['first_link'] = '';
-			$config['last_link'] = '';
-			$config['next_link'] = '&gt';
-			$config['next_tag_open'] = '<li class="next"><span>';
-			$config['next_tag_close'] = '</span></li>';			
-			$config['prev_link'] = '&lt';
-			$config['prev_tag_open'] = '<li class="prev"><span>';
-			$config['prev_tag_close'] = '</span></li>';
-			$config['num_tag_open'] = '<li>';
-			$config['num_tag_close'] = '</li>';
-			$config['cur_tag_open'] = '<li class="current">';
-			$config['cur_tag_close'] = '</li>';
-			$this->pagination->initialize($config);
-			$data['pagination'] = $this->pagination->create_links();
-			$data['offset'] = $this->uri->segment($this->uri->total_segments());
-			if(!is_numeric($data['offset'])) $data['offset'] = 0;
-		}
-		
-		//set user score			
-		foreach ($data['results'] as $key => $row) {
-			if ($this->userauth->isUser()) {
-				$this->vote->type='video';
-				$score = $this->vote->votedScore($row['video_id'],$this->userauth->user_id);
-				if ($score > 0) $data['results'][$key]['voted'] = 'up';
-				else if ($score < 0) $data['results'][$key]['voted'] = 'down';
-				else $data['results'][$key]['voted'] = false;
-			} else $data['results'][$key]['voted'] = false;
-		}
-		
-		// tag cloud - this section might need a little tweaking
-		if (isset($event_id) && !empty($data['results'])) {
-			$this->load->model('tag_model');
-			$this->load->library('wordcloud');
-			$this->tag_model->type = 'video';
-			$words = $this->tag_model->getAllReferencedTags($event_id);
-			if(!empty($words)) {
-				$cloud = new wordCloud($words);
-				$cloud_array = $cloud->showCloud('array');
-				$this->load->library('tag_lib');
-				$data['cloud'] = $this->tag_lib->createTagLink($cloud_array);
-				// create tag links for all tags in queue
-				foreach($data['results'] as $k1=>$question) 
-					foreach($question['tags'] as $k2=>$tag) 
-						$data['results'][$k1]['tags'][$k2]=$this->tag_lib->createTagLink($tag);		
-			}
-		}
-		
-		$this->load->view('view_queue',$data);	
-	}
 	
 	public function create($what)
 	{
@@ -506,6 +432,53 @@ class Forums extends Controller
 			break;
 		}
 	}
+	
+	// ==============================================================================================
+	// = EditQuestion - This is used for editing the question on the event view stuff (formerly cp) =
+	// ==============================================================================================
+	public function EditQuestion($question_id, $event_id, $option){
+		// If update then it's called from ajax and needs not show anything
+		if($option == 'update'){
+			// Clear out the answer if it's pending
+			if($_POST['question_status'] == 'pending'){
+				$_POST['question_answer'] = '';
+			}
+			// If the question is changed to current then be sure to clear out existing current question and set to "asked"
+			if($_POST['question_status'] == 'current'){
+				$old_current_question = $this->question->singleCurrent($event_id, $question_id);
+				if($old_current_question && $old_current_question != $question_id){
+					$this->question->set_asked_time($old_current_question);
+				}
+			}
+			// Update and return response based on whether it worked
+			$changed = $this->question->updateQuestion($question_id, $_POST);
+			if($changed > 0){
+				echo("1");
+			}else{
+				echo("0");
+			}
+		// Do this on intial page load
+		}else{
+			$data['question'] = $this->question->get_question($question_id);
+			$data['event_id'] = $event_id;
+			$data['alert'] = $alert;
+			$this->load->view('question/edit_question',$data);
+		}
+		
+	}
+	
+	// ==============================================================================================
+	// = ShowAnswer - This is used to show the answer video when there is actually an answer        =
+	// ==============================================================================================
+	public function ShowAnswer($question_id){
+		$q_data = $this->question->get_question($question_id);
+		
+		echo('
+			<div id="video_container" style="margin: 10px">
+				'.$q_data['question_answer'].'
+			</div>
+		');
+	}	
 	
 	private function adminCandidate($action, $name = null)
 	{
@@ -590,7 +563,7 @@ class Forums extends Controller
 		return $user_id;
 	}
 	
-	public function candidate_dashboard($event_name =  'salt_lake_city_mayoral_forum', $ajax = null)
+	public function candidate_dashboard($event_name, $ajax = null)
 	{
 		$event_id = $this->event->get_id_from_url($event_name);
 		if(!$event_id) redirect();
@@ -711,17 +684,28 @@ class Forums extends Controller
 		
 		// pagination style
 		$config['first_link'] = '';
+		$config['first_tag_open'] = '<li class="first"><span>';
+		$config['first_tag_close'] = '</span</li>';
+		
 		$config['last_link'] = '';
+		$config['last_tag_open'] = '<li class="last"><span>';
+		$config['last_tag_close'] = '</span></li>';
+		
 		$config['next_link'] = '&gt';
 		$config['next_tag_open'] = '<li class="next"><span>';
-		$config['next_tag_close'] = '</span></li>';			
+		$config['next_tag_close'] = '</span></li>';	
+				
 		$config['prev_link'] = '&lt';
+		
 		$config['prev_tag_open'] = '<li class="prev"><span>';
 		$config['prev_tag_close'] = '</span></li>';
+		
 		$config['num_tag_open'] = '<li>';
 		$config['num_tag_close'] = '</li>';
 		$config['cur_tag_open'] = '<li class="current">';
 		$config['cur_tag_close'] = '</li>';
+		
+		// Create pagination object
 		$this->pagination->initialize($config);
 		$data['pagination'] = $this->pagination->create_links();
 		$data['offset'] = $this->uri->segment($this->uri->total_segments());
@@ -832,14 +816,11 @@ EOT;
 	{
 		$this->question->question_status = 'current';
 		$data['current_question'] = $this->question->questionQueue();
-		foreach ($data['current_question'] as $key => $row) {
-			if ($this->userauth->isUser()) {
-				$this->vote->type='question';
-				$data['current_question'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
-			} else { 
-				$data['current_question'][$key]['voted'] = 0; 
-			}
-		}
+		
+		$this->_questions($data);
+		
+		// set question model property back to default
+		$this->question->question_status = 'pending';
 	}
 	
 	private function _upcomingQuestions(&$data)
@@ -847,20 +828,42 @@ EOT;
 		if(isset($data['sort'])) {
 			if($data['sort'] == 'newest') $this->question->order_by = 'date';
 			else $this->question->question_status = $data['sort'];
-		}	
+		}
 		
-		if(isset($data['section'])) $this->question->offset = $data['section'] * $this->cp_section_size;
+		// determine section for lazy loader		
+		if(isset($data['section']))
+			$this->question->offset = $this->_cp_section_size * $data['section'];		
 		$this->question->limit = $this->_cp_section_size;
 		
+		$this->_questions($data);
+	}
+	
+	private function _questions(&$data)
+	{
 		$data['questions'] = $this->question->questionQueue();
+
 		foreach ($data['questions'] as $key => $row) {
+			// determine how user voted on this question
 			if ($this->userauth->isUser()) {
 				$this->vote->type='question';
 				$data['questions'][$key]['voted'] = $this->vote->votedScore($row['question_id'],$this->userauth->user_id);
 			} else { 
 				$data['questions'][$key]['voted'] = 0; 
 			}
+			
+			// user avatar
+			$image_array = unserialize($data['questions'][$key]['user_avatar']);
+			$data['questions'][$key]['avatar_path'] = $image_array ? $image_array['file_name'] : 'image01.jpg';
+			
+			// time decay
+			$data['questions'][$key]['time_diff'] = $this->time_lib->getDecay($data['questions'][$key]['date']);
 		}
+		
+		// get tag links
+		$this->tag_lib->createTagLinks($data['questions'], url_title($data['questions'][$key]['event_name']));
+		
+		// if we're dealing with the current question, we need to save it in a different spot
+		if($this->question->question_status = 'current') $data['current_question'] = $data['questions'];
 	}
 	
 	private function _allReactions(&$data)

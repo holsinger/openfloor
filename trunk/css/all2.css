@@ -8,6 +8,8 @@ a:hover{text-decoration:underline;}
 .link{color:#F04A54;cursor:pointer;}
 .link:hover{text-decoration:underline;cursor:pointer;}
 
+img {border-width: 0px;} 
+
 #content_div table.user-profile {
 	background-color: #d1edfe;
 }
@@ -81,19 +83,39 @@ a:hover{text-decoration:underline;}
 	display:block;
 	width:93px;
 	height:24px;
-	background:url(../images/text-prev.gif);
+	background:url(../images/text-prev.gif) no-repeat;
 	text-indent:-9999px;
 	overflow:hidden;
 }
 .pagers .list ul li.next a{
 	width:63px;
-	background:url(../images/text-next.gif);
+	background:url(../images/text-next.gif) no-repeat;
 }
 
 .pagers .list ul li.next{
 	background:none;
 	padding:0;
 	margin:0;
+}
+.pagers .list ul li.last a{
+	width:63px;
+	background:url(../images/pagination/text-last.png) no-repeat;
+}
+.pagers .list ul li.last{
+	background:none;
+	padding:0;
+	margin:0;
+	margin-left: 5px;
+}
+.pagers .list ul li.first a{
+	width:74px;
+	background:url(../images/pagination/text-first.png) no-repeat;
+}
+.pagers .list ul li.first{
+	background:none;
+	padding:0;
+	margin:0;
+	margin-right: 5px;
 }
 /* news-summary */
 .news-summary{
@@ -247,15 +269,6 @@ select.txt {
 	position:relative;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;
-}
-
-textarea.txt {
-	border:2px solid #CCCCCC;
-	position:relative;
-	padding:5px 0 0 4px;
-	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
-	background:#BED3EA;
-	overflow:auto;
 }
 .errorArea {
 	color: #FF0000;	
@@ -432,9 +445,9 @@ background-color:#f0faff;
 }
 .info {
 	float:left;
-	position:relative;
 	left:4px;
 	top:2px;
+	padding: 4px;
 }
 #feed{width:495px;}
 .feed_title{font-weight:bold;font-size:12px;};
@@ -444,9 +457,7 @@ background-color:#f0faff;
 }
 
 .sc_image {
-	position:relative;
-	left:2px;
-	top:4px;
+
 }
 
 /* About Us Page */
@@ -457,4 +468,57 @@ background-color:#f0faff;
 /* TD fix for IE */
 TD {
 	font-size: 11px;
+}
+/* Loading Reminder */
+.loading_reminder {
+	border-width: 0px;
+	border-style: solid;
+	border-color: #F04A54;
+	color: #FFFFFF;
+	width: 120px;
+	height: 25px;
+	line-height: 25px;
+	background-color: #F04A54;
+	vertical-align: middle;
+	text-align: center;
+	z-index: 3;
+	font-size: 14px;
+	display: block;
+	position: fixed;
+	top: 0px;
+	left: 0px;
+}
+.vote_box h3{
+	border: border-width: 0px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #D5D5D5;
+	color:#033D7C;
+	background-color: #FFFFFF;
+	width:40px;
+	height:40px;
+	text-align: center;
+	vertical-align: middle;
+}
+.vote_box h3 a{
+	text-align: center;
+	vertical-align: middle;
+	padding-top:10px;
+	color:#033D7C;
+	display: block;
+}
+#karma_star {
+	background:transparent url(../images/karma_star_default.png) no-repeat scroll 0%;
+	float:left;
+	height:20px;
+	width:19px;	
+    position:relative;
+	top:-4px;
+}
+.checkbox {
+	background:transparent url(../images/votedCheckBox.png) no-repeat scroll 0%;
+	float:left;
+	height:17px;
+	width:22px;	
+    position:relative;
 }

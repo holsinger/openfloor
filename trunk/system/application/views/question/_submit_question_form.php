@@ -57,11 +57,11 @@
 	<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
 	<br />
 	<? if(isset($ajax)): ?>
-	<?/*<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>*/?>
-	<input type="button" value='Submit Question' class="button" onClick="javascript:cpUpdater.askQuestion();">
-	<input type="button" value='Cancel' class="button" onClick="$('cp-ask-question').setStyle({display: 'none'});"/>
+		<?/*<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>*/?>
+		<input type="button" value='Submit Question' class="button" onClick="javascript:cpUpdater.askQuestion();">
+		<input type="button" value='Cancel' class="button" onClick="$('cp-ask-question').setStyle({display: 'none'});"/>
 	<? else: ?>
-	<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
+		<?= form_submit('','Submit '.ucfirst($event_type),'class="button"'); ?>		
 	<? endif; ?>
 	<br />
 	<br />

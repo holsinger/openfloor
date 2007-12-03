@@ -42,7 +42,7 @@ class Comments_model extends Model
 				parent_id = 0
 			ORDER BY 
 				$this->order_by
-			DESC");
+			ASC");
 		
 		if($query->num_rows() == 0)
 			return false;
@@ -103,8 +103,9 @@ class Comments_model extends Model
 				FROM 
 					cn_votes 
 				WHERE 
-					fk_comment_id=comment_id 
-				GROUP BY fk_comment_id), 0) as votes, 
+					fk_comment_id=comment_id
+				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_comment_id = comment_id GROUP BY fk_user_id)	 					
+				GROUP BY fk_comment_id), 0) as votes,
 				comment, 
 				fk_user_id,
 				fk_video_id, 

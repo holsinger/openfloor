@@ -34,8 +34,8 @@
 $active_group = "default";
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "p20";
-$db['default']['password'] = "p20";
+$db['default']['username'] = "root";
+$db['default']['password'] = "root";
 $db['default']['database'] = "politic20";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";

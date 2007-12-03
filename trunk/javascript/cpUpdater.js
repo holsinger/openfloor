@@ -1,7 +1,3 @@
-//TODO
-// - total # of questions
-// - getSection call starting at 0
-
 //init obj
 if(typeof cpUpdater === "undefined" || !cpUpdater) {
 	var cpUpdater = {
@@ -15,72 +11,40 @@ cpUpdater.sliders = new Object;
 ajaxOn = true;
 var sort = 'pending';
 
-var timer;
-var i = 0;
-var startHex = 0xFCC6CA;
-var endHex = 0xEEF8FF;
-var upOrDown = true;
-
-// functions
-
-function fadeHex (hex, hex2, ratio){
-	var r = hex >> 16;
-	var g = hex >> 8 & 0xFF;
-	var b = hex & 0xFF;
-	r += ((hex2 >> 16)-r)*ratio;
-	g += ((hex2 >> 8 & 0xFF)-g)*ratio;
-	b += ((hex2 & 0xFF)-b)*ratio;
-	return(r<<16 | g<<8 | b);
-}
-
-function d2h(d) {
-	return d.toString(16);
-}
-
 cpUpdater.cpUpdateOnce = function() {
 	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
-	
-	new Ajax.Updater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort);
-	
-	cans.each(function(s) {
-		new Ajax.Updater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s);
-	});
 }
 
 cpUpdater.vote = function(url) {
-	// new Effect.Opacity (id,{duration:.5, from:1.0, to:0.7});
 	new Ajax.Request(url, {
-	  onSuccess: function(transport) {
-		  cpUpdater.cpUpdateOnce();
-	  }
+		onSuccess: function(transport) {
+			cpUpdater.cpUpdateOnce();
+			lazy_loader.refreshView();
+		}
 	});
 }
 
-cpUpdater.cpUpdate = function() {
+cpUpdater.cpUpdate = function(disable_current_questions) {
 	updaters = new Array();
-	
-	updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
-		frequency: 10,
-		decay: 2
-	}));
-	
-	updaters.push(new Ajax.PeriodicalUpdater('upcoming_questions', site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort, {
-		frequency: 10,
-		decay: 2
-	}));
-	
-	updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
-		frequency: 10,
-		evalScripts: true,
-		decay: 2
-	}));
-	
-	cans.each(function(s) {
-		updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
+	if(!disable_current_questions){
+		updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
 			frequency: 10,
 			decay: 2
 		}));
-	});
+
+		updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
+			frequency: 10,
+			evalScripts: true,
+			decay: 2
+		}));
+
+		cans.each(function(s) {
+			updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
+				frequency: 10
+			}));
+		});
+	}
+	
 }
 
 cpUpdater.askQuestion = function() {
@@ -108,17 +72,44 @@ cpUpdater.askQuestion = function() {
 }
 
 cpUpdater.disableAJAX = function() {
-	if(ajaxOn) { ajaxOn=false; updaters.each(function(s) {
+	if(lazy_loader.update && ajaxOn) {
+		lazy_loader.stopUpdating();
+		ajaxOn=false; 
+		updaters.each(function(s) {
 			s.stop();
-		}); 
-	}
+		});
+	}	
 }
 
 cpUpdater.enableAJAX = function() {
-	if(!ajaxOn) { ajaxOn=true; updaters.each(function(s) {
+	if(!lazy_loader.update && !ajaxOn) {
+		lazy_loader.startUpdating();
+		ajaxOn=true; 
+		updaters.each(function(s) {
 			s.start();
-		}); 
-	}
+		});
+	}	
+}
+
+cpUpdater.viewAdmin = function(question_id, event_id) {
+	visible = !($('cp-admin-' + question_id).getStyle('display') == 'none');
+	
+	if(visible) {
+		cpUpdater.toggleVisibility('cp-admin-' + question_id);
+		cpUpdater.toggleAJAX();
+	} else {
+		my_loading_reminder.show();
+		new Ajax.Updater('cp-admin-' + question_id, site_url + 'forums/EditQuestion/' + question_id + '/' + event_id, {
+			parameters: {
+				'ajax' : 'true'
+			},
+			onSuccess: function(transport) {
+				cpUpdater.toggleVisibility('cp-admin-' + question_id);
+				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
+			}
+		});
+	}	
 }
 
 cpUpdater.viewVotes = function(question_id) {
@@ -128,6 +119,7 @@ cpUpdater.viewVotes = function(question_id) {
 		cpUpdater.toggleVisibility('cp-votes-' + question_id);
 		cpUpdater.toggleAJAX();
 	} else {
+		my_loading_reminder.show();
 		new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
 			parameters: {
 				'ajax' : 'true'
@@ -135,18 +127,20 @@ cpUpdater.viewVotes = function(question_id) {
 			onSuccess: function(transport) {
 				cpUpdater.toggleVisibility('cp-votes-' + question_id);
 				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
 			}
 		});
 	}	
 }
 
-cpUpdater.viewComments = function(question_id, event_name, question_name) {
+cpUpdater.viewComments = function(question_id, event_name, question_name) {	
 	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
 	
-	if(visible) {
+	if(visible) {	
 		cpUpdater.toggleVisibility('cp-comments-' + question_id);
 		cpUpdater.toggleAJAX();		
 	} else {
+		my_loading_reminder.show();
 		new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
 			parameters: {
 				'ajax' : 'true'
@@ -154,9 +148,27 @@ cpUpdater.viewComments = function(question_id, event_name, question_name) {
 			onSuccess: function(transport) {
 				cpUpdater.toggleVisibility('cp-comments-' + question_id);
 				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
 			}
 		});
 	}
+}
+
+cpUpdater.change_comments_sort = function(question_id, event_name, question_name, sort) {
+	my_loading_reminder.show();
+	new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name + '/' + sort, {
+		parameters: {
+			'ajax' : 'true'
+		},
+		onSuccess: function(transport) {
+			my_loading_reminder.hide();
+		}
+	});
+}
+
+cpUpdater.viewInfo = function(question_id) {
+	cpUpdater.toggleVisibility('cp-info-' + question_id);
+	cpUpdater.toggleAJAX();
 }
 
 cpUpdater.voteComment = function (url, question_id, event_name, question_name) {
@@ -200,58 +212,112 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 }
 
 cpUpdater.toggleAJAX = function () {
-	if(ajaxOn) { cpUpdater.disableAJAX(); }
-	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
+	if(lazy_loader.update && ajaxOn) { cpUpdater.disableAJAX(); }
+	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
 }
 
 cpUpdater.toggleVisibility = function(element) {
-	$$('div[class=cp-comments]', 'div[class=cp-votes]').without($(element)).invoke('setStyle', {display:'none'});
+	$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').without($(element)).invoke('setStyle', {display:'none'});		// Hides all tabs first
+
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
 	$(element).setStyle(style);
 }
 
 cpUpdater.current_question_fade = function() {
-	timer = setInterval('ColorChange()', 75);
+	new Effect.Highlight('the-current-question', {startcolor: '#eef8ff', endcolor: '#fcc6ca', duration: 1.5});
+	// timer = setInterval('ColorChange()', 75);
 }
 
 cpUpdater.change_sort = function(_sort) {
 	sort = _sort;
 	
 	sort_links = new Array();
-	sort_links = ['pending', 'newest', 'asked'];
+	// Event_timing defined in main.php, this needs to be a member variable when made a class
+	
+	// Change the question title
+	if(sort == 'pending'){
+		if(event_timing == 'past'){
+			$('question_title').innerHTML = "Unanswered Questions";
+		}else{
+			$('question_title').innerHTML = "Upcoming Questions";
+		}
+	}else if(sort == 'newest'){
+		$('question_title').innerHTML = "Newest Questions";
+	}else{
+		$('question_title').innerHTML = "Answered Questions";
+	}
+	// Change the highlights
+	if(event_timing == 'past'){
+		sort_links = ['pending', 'asked'];
+	}else{
+		sort_links = ['pending', 'newest', 'asked'];
+	}
 	sort_links.without(_sort).each(function(s) {
-		if($('sort-link-' + s).hasClassName('cp-sort-link-selected')) {
-			$('sort-link-' + s).removeClassName('cp-sort-link-selected');
-			$('sort-link-' + s).addClassName('cp-sort-link');
+		if($('sort-link-' + s + '-2').hasClassName('cp-sort-link-selected')) {
+			$('sort-link-' + s + '-2').removeClassName('cp-sort-link-selected');
+			$('sort-link-' + s + '-2').addClassName('cp-sort-link');
 		}
 	});
-	
-	if($('sort-link-' + _sort).hasClassName('cp-sort-link')) {
-		$('sort-link-' + _sort).removeClassName('cp-sort-link');
-		$('sort-link-' + _sort).addClassName('cp-sort-link-selected');
+
+	if($('sort-link-' + _sort + '-2').hasClassName('cp-sort-link')) {
+		$('sort-link-' + _sort + '-2').removeClassName('cp-sort-link');
+		$('sort-link-' + _sort + '-2').addClassName('cp-sort-link-selected');
 	}
 	
+	ajax_update_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
+	ajax_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	
+	lazy_loader.reset(ajax_update_url, ajax_count_url);
+	
+	// Should this be here?????
 	updaters.each(function(s) { s.stop(); });
 	cpUpdater.cpUpdate();
 	ajaxOn = true;
 }
 
-ColorChange = function() {
-	var ratio = i/9;
-	var nowColor = d2h(fadeHex(startHex, endHex, ratio));
-	$('the-current-question').setStyle({'background-color': '#' + nowColor});
-	
-	if(i == 9) {
-		upOrDown = false;
+cpUpdater.startLazyLoader = function() {
+	lazy_loader = new Control.LazyLoader('upcoming_questions', upcoming_questions_url, upcoming_questions_count_url, {
+		count_refresh_lapse: 100000, 
+		view_refresh_lapse: 10000,
+		onStartAddSection: function() { 
+			my_loading_reminder.show(); 
+		}, 
+		onFinishAddSection: function() { 
+			my_loading_reminder.hide(); 
+		}
+	});
+}
+// ==================================================================================
+// = ChangeQuestionStatus - Used as admin to change show or hide the asked box only =
+// ==================================================================================
+cpUpdater.ChangeQuestionStatus = function(elem) {
+	if(elem.value == 'asked' || elem.value == 'current'){
+		$('question_status_div').setStyle({ display : 'block' });
+	}else{
+		$('question_status_div').setStyle({ display : 'none' });
 	}
-	
-	if(upOrDown) i++;
-	
-	if(i == 0) {
-		upOrDown = true;
-		clearInterval(timer);		
+}
+// ==================================================================================
+// = UpdateQuestionOnSucess - Call Back function when updating a question		    =
+// ==================================================================================
+cpUpdater.UpdateQuestionOnSucess = function(transport) { 
+	if(transport.responseText){
+		$('question_error_div').innerHTML = "Updated Successfully!";
+		
+		// Change the highlights
+		if(event_timing == 'past'){
+			sort_links = ['pending', 'asked'];
+		}else{
+			sort_links = ['pending', 'newest', 'asked'];
+		}
+
+		sort_links.each(function(s){
+			if( $('sort-link-'+ s + '-2').hasClassName('cp-sort-link-selected') ){
+				setTimeout("cpUpdater.change_sort('"+s+"')",  1500);
+			}
+		});
+	}else{
+		$('question_error_div').innerHTML = "Could not update!";
 	}
-	
-	if(!upOrDown) i--;
 	
 }

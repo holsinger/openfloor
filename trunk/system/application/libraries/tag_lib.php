@@ -8,12 +8,15 @@ class Tag_lib {
 		$this->CI=& get_instance();
 	}
 	
-	public function createTagLink($arg)
+	public function createTagLink($arg, $event = null)
 	{
 		$global = false;
 		if(is_array($arg)) $type = true;		// array passed, we want to generate html for a tag cloud
 		elseif(is_string($arg)) $type = false;	// string passed, we want to create a single link
 		else exit();							// invalid argument
+		
+		// if an event is specified, then we do not want a dynamic tag link, return a static one
+		if(isset($event)) return anchor("forums/queue/event/$event/tag/$arg", $arg);
 		
 		$segment_array = $this->CI->uri->segment_array();
 		
@@ -45,12 +48,12 @@ class Tag_lib {
 		}		
 	}
 	
-	public function createTagLinks(&$result)
+	public function createTagLinks(&$result, $event = null)
 	{
 		foreach($result as $k1=>$question)
 		 	if(!empty($question['tags']))
 				foreach($question['tags'] as $k2=>$tag) 
-					$result[$k1]['tags'][$k2]=$this->createTagLink($tag);
+					$result[$k1]['tags'][$k2]=$this->createTagLink($tag, $event);
 	}
 	
 	public function createTagCloud($event_id)

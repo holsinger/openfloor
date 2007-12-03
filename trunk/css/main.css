@@ -2,6 +2,7 @@ BODY {
     text-align: center;
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size: 11px;
+	font-size-adjust: none;
     color: #464646;
     background: #F0FAFF url("../images/body-bg.jpg") repeat-y left top;
 }
@@ -100,11 +101,11 @@ BODY {
 .top-menu LI.login A {
     color: #F04A54;
     font-weight: bold;
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .top-menu LI.login A:hover {
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 .top-menu LI.login .star {
@@ -152,7 +153,7 @@ BODY {
 }
 
 .content .col-center {
-	padding: 0 1% 50px 1%;
+	padding: 0 8px 50px 8px;
 	width: 53%;
 	border-left: 2px solid #C6DDEF;
 	height: 1%;
@@ -319,7 +320,7 @@ BODY {
 
 .content .col-right {
     width: 32%;
-	padding: 0 1% 0 1%;
+	padding: 0 8px 0 8px;
 	border-left: 2px solid #C6DDEF;
 }
 
@@ -597,7 +598,6 @@ select.txt {
 
 textarea.txt {
 	border:2px solid #CCCCCC;
-	position:relative;
 	padding:5px 0 0 4px;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;

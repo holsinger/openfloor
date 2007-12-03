@@ -6,3 +6,7 @@
 .header .logo {
     left: -92px;
 }
+
+div {
+	font-weight: normal;
+}

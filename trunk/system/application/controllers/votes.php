@@ -26,8 +26,10 @@ class Votes extends Controller
 		$data['display_name'] = $this->user->displayName($data['user_name']);
 		//set user avatar
 		$image_array = unserialize($data['user_avatar']);
-		if ($image_array) $data['avatar_path'] = "./avatars/".$image_array['file_name'];
-		else $data['avatar_path'] = "./images/image01.jpg";
+		if ($image_array) 
+			$data['avatar_path'] = "./avatars/".$image_array['file_name'];
+		else 
+			$data['avatar_path'] = "./images/image01.jpg";
 		//get time diff
 		$data['time_diff'] = $this->time_lib->getDecay($data['date']);
 		
@@ -48,20 +50,32 @@ class Votes extends Controller
 		// retrieve votes information
 		$votes = $this->vote_model->getVotesByQuestion($question_id);
 		
-		$voteHTML = '';
-		foreach ($votes as $vote) {			
-			#resize image
-			$vote_image_array = unserialize($vote['user_avatar']);
-			if ($vote_image_array) $vote_avatar_path = $vote_image_array['file_name'];
-			else $vote_avatar_path = "image01.jpg";
+		$voteHTML = '
+		<div style="background-color: #FFFFFF">';
+			if(isset($_POST['ajax'])) {	// top close
+				$voteHTML .= "
+				<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div>
+				<div>&nbsp;</div>
+				<br />";	// This "br" is added because of IE 
+			}
+			foreach ($votes as $vote) {			
+				#resize image
+				$vote_image_array = unserialize($vote['user_avatar']);
+				if ($vote_image_array) $vote_avatar_path = $vote_image_array['file_name'];
+				else $vote_avatar_path = "image01.jpg";
 			
-			$vote_time = $this->time_lib->getDecay($vote['timestamp']);
-			$vote_value = ($vote['vote_value'] > 0) ? 'voted <img src="./images/thumbsUp.png"> in favor' : 'voted <img src="./images/thumbsDown.png"> against' ;
-			$voteHTML .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
-			.anchor("user/profile/".$vote['user_name'], $this->user_model->displayName($vote['user_name'])) . ' ' . $vote_value . ' ' .$vote_time.' ago </div>';
-		}
-		$voteHTML.='<br />';
-		if(isset($_POST['ajax'])) $voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div>";
+				$vote_time = $this->time_lib->getDecay($vote['timestamp']);
+				$vote_value = ($vote['vote_value'] > 0) ? 'voted <img src="./images/thumbsUpHistory.png"> in favor' : 'voted <img src="./images/thumbsDownHistory.png"> against' ;
+				$voteHTML .= '<div class="votes_head">'.'<img class="sc_image" src="./avatars/shrink.php?img='.$vote_avatar_path.'&w=16&h=16">&nbsp;&nbsp;'
+				.anchor("user/profile/".$vote['user_name'], $this->user_model->displayName($vote['user_name'])) . ' ' . $vote_value . ' ' .$vote_time.' ago </div>';
+			}
+			if(isset($_POST['ajax'])){
+				$voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"$('cp-votes-$question_id').setStyle({display: 'none'});\">close</a></div>";
+			}
+		$voteHTML.='
+		</div>
+		<br />';
+		
 				
 		$data['voteHTML'] = $voteHTML;
 		if(isset($_POST['ajax'])) { echo $data['voteHTML']; exit(); }

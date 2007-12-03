@@ -41,7 +41,13 @@ class Event extends Controller
 		
 		
 		foreach($events as $k=>$v) {
-			if ($this->userauth->isAdmin()) $events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit')." | ".anchor('forums/liveQueue/' . url_title($v['event_name']), 'Live Queue')." | ".anchor("admin/dashboard/".url_title($v['event_name']), 'Admin Dashboard')." | ".anchor("forums/overall_reaction/".url_title($v['event_name']), 'Overall Reaction');
+			if ($this->userauth->isAdmin()) {
+				$events[$k]['edit'] = anchor("event/edit_event/{$v['event_id']}", 'Edit')." | ".
+				anchor('forums/liveQueue/' . url_title($v['event_name']), 'Live Queue')." | ".
+				anchor('forums/candidateQueue/' . url_title($v['event_name']), 'Candidate Queue')." | ".
+				anchor("admin/dashboard/".url_title($v['event_name']), 'Admin Dashboard')." | ".
+				anchor("forums/overall_reaction/".url_title($v['event_name']), 'Overall Reaction');
+			}
 			$file_name = '';
 			if (is_array($temp_array = unserialize($events[$k]['event_avatar']))) $file_name = $temp_array['file_name'];
 			$events[$k]['event_avatar'] = $file_name;
@@ -93,6 +99,7 @@ class Event extends Controller
 		$fields['stream_low']	= ( isset($_POST['stream_low']) ) ? $_POST['stream_low']:"";
 		$fields['blocked_ips']	= ( isset($_POST['blocked_ips']) ) ? $_POST['blocked_ips']:"";
 		$fields['streaming']	= ( isset($_POST['streaming']) ) ? $_POST['streaming']:"";
+		$fields['event_finished']	= ( isset($_POST['event_finished']) ) ? $_POST['event_finished']:"";
 		
 		// participating candidates
 		$data['candidates'] = $this->candidate->getCandidates();
@@ -201,6 +208,7 @@ class Event extends Controller
 		$rules['stream_low'] = "trim|max_length[65535]";
 		$rules['blocked_ips'] = "trim|max_length[65535]";
 		$rules['streaming'] = '';
+		$rules['event_finished'] = '';
 		#TODO is validation even being performed??
 		if ( !$error ) {
 			//add event url name to array
@@ -220,9 +228,9 @@ class Event extends Controller
 				$error = 'Error editing event or no changes were made';
 				$this->edit_event($event_id, $error);
 			}
-		} //if no error
-		$this->view_events($error);
-		
+		}else{ //if no error
+			$this->view_events($error);
+		}
 		
 	}
 	
@@ -337,9 +345,20 @@ class Event extends Controller
 	public function view($event_name)
 	{
 		$data['event'] = $this->event->get_event(null, $event_name);
+		$temp_participants = $this->event->getCansInEvent($this->event->get_id_from_url($event_name));
+		$temp_count = 0;
+		foreach($temp_participants as $v){
+			$data['event']['participants'] .= $this->candidate->linkToProfile($v);
+			if($temp_count < (count($temp_participants) - 1) ){
+				$data['event']['participants'] .= ', ';
+			}
+			
+			$temp_count++;
+		}
 		$data['event_url'] = "event/$event_name";
 		
 		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
+		$data['breadcrumb'] = array('Home'=>$this->config->site_url(), 'Events' => 'event/', 'Event Details' => '');
 		$this->load->view('event/view',$data);
 	}
 	
@@ -365,7 +384,7 @@ class Event extends Controller
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
 				//$st .= $array['event_name']."<br />";
-				$st .= '<li>'.anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
+				$st .= '<li>'.anchor($this->config->site_url().'forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
 				if($count == 1){
 					break;
 				}
@@ -378,7 +397,7 @@ class Event extends Controller
 		$st .= '</ul><h3 class="subheader">Past Events</h3><ul>';
 		$count = 0;
 		foreach ($return_array['past_events'] as $key => $array){
-			$st .= '<li>'.anchor($this->config->site_url().'forums/queue/event/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
+			$st .= '<li>'.anchor($this->config->site_url().'forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
 			
 			if($count == 1){
 				break;
@@ -390,4 +409,8 @@ class Event extends Controller
 		echo($st);
 	}
 	
+	public function finish_event_ajax($event_id)
+	{
+		echo $this->event->set_event_to_finished($event_id);
+	}
 }

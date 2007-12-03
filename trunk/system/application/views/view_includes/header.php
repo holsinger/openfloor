@@ -8,11 +8,7 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) $onload = implode
 else $onload = 'init();';
 	$this->load->view('view_layout/view_head_setup.php',$data);
 ?>
-<? if ($data['browser'] == 'Internet Explorer' && $data['browserVer'] < 7) { ?>
-	<body onLoad='fixPNG();<?=$onload;?>'>
-<?}else{?>
-	<body onLoad='<?=$onload/*.$js_onload_special*/;?>'>
-<?}?>
+<body onLoad='<?=$onload;?>'>
 <!--  load AJAX views -->
 <div id="overlay" onclick="hideBox()" style="display:none"></div>
 <div id="hijax" style="display:none"></div>
@@ -45,12 +41,16 @@ $this->load->view('view_layout/view_left_column.php',$data);
 
 	<? if($sub_title): ?>
 	<div class="double_line_container">
-		<h1><?=$sub_title?></h1>
+			<h1><?=$sub_title?></h1>
+			<!-- <div style="float: right">
+						<?=anchor("test", '<img src="./images/main/help_question_mark.png" border="0" />', array("title" => "Help Me"))?>
+						</div> -->
 	</div>
 	<? endif; ?>
-	<div>
-		<? 
-		if(isset($breadcrumb)){
+	
+	<? if(isset($breadcrumb)): ?>
+		<div>
+			<?
 			foreach ($breadcrumb as $key => $link){
 				if($link != ""){
 					echo anchor($link,$key)."&nbsp;>&nbsp;";
@@ -58,7 +58,7 @@ $this->load->view('view_layout/view_left_column.php',$data);
 					echo $key;
 				}
 			}
-		}
-		?>
-	</div>
-	<br />
+			?>
+		</div>
+		<br />
+	<? endif; ?>

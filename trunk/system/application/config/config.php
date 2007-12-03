@@ -12,7 +12,7 @@
 |
 */
 // $config['base_url']	= "http://www.politic20.com";
-$config['base_url']	= "http://localhost/~Rob/RunPolitics";
+$config['base_url']	= "http://192.168.0.86/RunPolitics";
 
 /*
 |--------------------------------------------------------------------------
@@ -79,7 +79,7 @@ $config['language']	= "english";
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 
 /*

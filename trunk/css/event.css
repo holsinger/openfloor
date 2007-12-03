@@ -1,7 +1,10 @@
-/* @override 
-	http://192.168.0.67/rp/css/ucp.css
-	http://192.168.0.67/rp/css/event.css
-*/
+/* @override http://localhost/rp2/css/event.css */
+
+.cp-info {
+	background-color: white;
+	padding: 5px;
+	margin: 4px 5px 0;
+}
 
 .track-left {
 	position: absolute;
@@ -41,14 +44,16 @@
 }
 
 .cp-comments {
-	margin-top: 29px;
+	margin-top: 6px;
 	margin-right: 6px;
 	margin-left: 6px;
 	background-color: #fff;
 }
 
 .cp-votes {
-	margin: 29px 6px -10px;
+	background-color: white;
+	padding: 5px;
+	margin: 4px 5px 0;
 }
 
 
@@ -68,6 +73,11 @@ a {
 
 #ucp .close {
 	float: right;
+	margin: 3px;
+}
+
+#ucp .change_sort {
+	float: left;
 	margin: 3px;
 }
 
@@ -171,8 +181,8 @@ a {
 #ucp .vote {
 	float: left;
 	vertical-align: middle;
-	padding-top: 2px;
-	margin-bottom: -2px;
+	width: 44px;
+	margin-top: 1px;
 }
 
 #ucp .votes {
@@ -182,7 +192,7 @@ a {
 	margin-right: 33px;	
 }
 
-#ucp .comments {
+#ucp .comments, #ucp .more_info {
 	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
@@ -205,7 +215,7 @@ a {
 	margin-top: 0;
 }
 
-#ucp .votes, #ucp .comments {
+#ucp .votes, #ucp .comments, #ucp .more_info {
 	color: #fffeff;
 	text-transform: uppercase;
 	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
@@ -216,16 +226,17 @@ a {
 }
 
 #ucp .score {
-	width: 74px;
-	height: 23px;
-	background: url(../images/ucp/score-bg.jpg) no-repeat;
+	width: 50px;
 	color: #053c7c;
+	background-color: white;
 	font-size: 17px;
 	font-weight: bold;
 	font-family: Verdana,Geneva,Arial;
-	float: left;
-	margin-left: 5px;
 	text-indent: 4px;
+	margin: 0 5px;
+	text-align: center;
+	border-right:1px solid #053C7C;
+	border-bottom:1px solid #053C7C;
 }
 
 #ucp table {
@@ -254,12 +265,14 @@ a {
 #ucp .question {
 	font: small "Lucida Grande", Lucida, Verdana, sans-serif;
 	background-color: #f1faff;
-	float: left;
-	
-/*	width: 634px;*/
-	margin-left: 5px;
 	padding: 3px;
-	width: 84%;
+	margin: 0 5px;
+}
+
+#ucp .flag {
+	width: 16px;
+	margin-left: 6px;
+	margin-right: 9px;
 }
 
 #ucp h1 {
@@ -312,4 +325,11 @@ a {
 	border: 1px solid #f04a54;
 	margin: 2px;
 	text-align: left;
+}
+
+.reaction_handle {
+	width: 19px; 
+	height: 20px; 
+	background: url(../images/slider-images-handle.png); 
+	float: left;
 }
