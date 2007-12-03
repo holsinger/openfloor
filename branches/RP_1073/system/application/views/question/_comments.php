@@ -8,7 +8,6 @@
 <br/>
 <br/>
 <div id="comments">
-	<? // This is god awful, either put the html all on this page or none (should be all) - CE ?>
 	<?=isset($comments_body)?$comments_body.'<br/>':''?>
 </div>
 <?

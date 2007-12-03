@@ -25,6 +25,7 @@ if(isset($current_question_flag)) $question = $current_question;
 				</tr>
 			</table>
 			<div id="cp-admin-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">ADMIN</div>		
+			<div id="cp-answer-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">ANSWER</div>		
 			<div id="cp-info-<?= $question['question_id'] ?>" class="cp-info" style="display:none;overflow:auto;">
 				<div class="close" style=\"position:relative; top:-5px;\"><a class="link" onClick="$('cp-info-<?= $question['question_id'] ?>').setStyle({display: 'none'});">close</a></div>
 				<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/<?=$question['avatar_path'];?>"/></a><br />
@@ -47,9 +48,13 @@ if(isset($current_question_flag)) $question = $current_question;
 		<div class="votes" title="Vote History" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)"><?= $question['vote_count'] ?> votes</div>
 		<div class="comments" title="Comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')"><?= $question['comment_count'] ?> comments</div>
 		<div class="more_info" title="More Info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
+		<? if($question['question_answer']): ?>
+			<div class="more_info" title="Answer" onClick="cpUpdater.viewAnswer('<?= $question['question_id'] ?>');">Answer</div>
+		<? endif; ?>
 		<? if($this->userauth->isAdmin()): ?>
 			<div class="more_info" title="Admin" onClick="cpUpdater.viewAdmin('<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
 		<? endif; ?>
+		
 		<div style="clear:both;"></div>
 
 	<? 	endforeach; ?>

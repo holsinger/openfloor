@@ -6,7 +6,7 @@ $data['left_nav'] = 'events';
 $data['red_head'] = 'Events';
 $data['sub_title'] = "OpenFloor Events";
 // THIS IS TEMP CODE FOR AN EVENT AND NEEDS TO BE REPLACED
-$data['use_temp_top'] = true;
+//$data['use_temp_top'] = true;
 ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 <!--
