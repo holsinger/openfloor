@@ -61,7 +61,7 @@
     to be a department store of information about the politics that affect you, <br/> 
     a place to find information, opinions of other people like you, and some statistics <br/>
     about the politicians who represent you. Click the button below to jump right in. 
-	</p
+	</p>
   </div>
   <div id="getStarted">
     <h3><a href="<?= $this->config->site_url();?>event">Get Started!</a></h3>
@@ -73,9 +73,9 @@
         <ul class="inner_nav">
           <li class="a1"><a href="http://blog.runpolitics.com">Our Blog<span class="divider">|</span></a></li>
           <li class="a2"><a href="<?= $this->config->site_url();?>information/aboutUs">About Us<span class="divider">|</span></a></li>
-          <li class="a4"><a href="http://www.zazzle.com/runpolitics">Shop</a></li>
-          <li class="a2"><a href="<?= $this->config->site_url();?>information/view/terms_of_use">Terms of Use<span class="divider">|</span></a></li>
-          <li class="a3"><a href="<?= $this->config->site_url();?>information/press">Press</a></li>
+          <li class="a3"><a href="http://www.zazzle.com/runpolitics">Shop</a></li>
+          <li class="a4"><a href="<?= $this->config->site_url();?>information/view/terms_of_use">Terms of Use<span class="divider">|</span></a></li>
+          <li class="a5"><a href="<?= $this->config->site_url();?>information/press">Press</a></li>
           <?/*<li class="b4"><a href="#">Terms &amp; Conditions</a></li>*/ ?>
           
         </ul>
@@ -87,8 +87,8 @@
           <?/*<li class="c2"><a href="#">Jaiku<span class="divider">|</span></a></li> */?>
           <li class="b2"><a href="http://www.myspace.com/politic20">Myspace<span class="divider">|</span></a></li>
           <li class="b3"><a href="http://www.facebook.com/profile.php?id=14468770213">Facebook</a></li>
-          <li class="b3"><a href="http://runpolitics.tumblr.com/">Tumblr<span class="divider">|</span></a></li>
-          <li class="b4"><a href="http://www.pownce.com/runpolitics">Pownce</a></li>
+          <li class="b4"><a href="http://runpolitics.tumblr.com/">Tumblr<span class="divider">|</span></a></li>
+          <li class="b5"><a href="http://www.pownce.com/runpolitics">Pownce</a></li>
         </ul>
       </li>
       <li class="bottomC">
@@ -96,7 +96,7 @@
         <ul class="inner_nav">
           <li class="c1"><a href="<?= $this->config->site_url();?>information/view/event_instructions">Help Center<span class="divider">|</span></a></li>
           <li class="c2"><a href="information/view/faq">FAQ</a></li>
-          <li class="c2"><a href="information/view/privacy_policy">Privacy Policy</a></li>
+          <li class="c3"><a href="information/view/privacy_policy">Privacy Policy</a></li>
         </ul>
       </li>
       <li class="bottomD">
