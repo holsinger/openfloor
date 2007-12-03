@@ -39,7 +39,7 @@
 |
 */
 
-$route['default_controller'] = "event";
+$route['default_controller'] = "splash";
 $route['scaffolding_trigger'] = "";
 
 
