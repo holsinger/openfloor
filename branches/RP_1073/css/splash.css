@@ -2,13 +2,13 @@
 /* CSS Document */
 * {margin:0; padding:0;}
 body {background-color:#3e62a2; font-family:sans-serif; font-size:85%; color:#686868;}
-#back {top:12px;position:relative;margin:0 auto; width:703px; height: 700px; background-image:url(images/splash/main_back.png);}
-#front {top:20px;position:relative;left:50%;margin-left:-432px; width:864px; height: 306px; background-image:url(images/splash/horizontal_back.png);}
-#banner {background:url(images/splash/banner_back.png) center no-repeat;height:88px;top:5px; position:relative;}
+#back {top:12px;position:relative;margin:0 auto; width:703px; height: 700px; background-image:url(../images/splash/main_back.png);}
+#front {top:20px;position:relative;left:50%;margin-left:-432px; width:864px; height: 306px; background-image:url(../images/splash/horizontal_back.png);}
+#banner {background:url(../images/splash/banner_back.png) center no-repeat;height:88px;top:5px; position:relative;}
 #banner h1 span{display:none;}
 #banner h3 span{display:none;}
-#banner h1 {height:84px; width:261px; background:url(images/splash/logo.png); position:relative; top:10px; left:20px;}
-#banner h3 {height:31px; width:221px; background:url(images/splash/uparty.png); position:relative; top:-27px; left:460px;}
+#banner h1 {height:84px; width:261px; background:url(../images/splash/logo.png); position:relative; top:10px; left:20px;}
+#banner h3 {height:31px; width:221px; background:url(../images/splash/uparty.png); position:relative; top:-27px; left:460px;}
 
 #about {left:90px;position:relative; top:20px; word-spacing:.1em;}
 #about ul {margin-left:15px;}
@@ -17,13 +17,13 @@ h2 {color:#4281cf; padding:10px 0 10px 0; font-size:1.3em; font-weight:bolder;}
 ul.topLinks {position:absolute; top:10px; left:480px;}
 ul.topLinks li{list-style-type:none;float:left;}
 ul.topLinks a {display:block;padding:0 10px 0 10px;color:red;text-decoration:none;font-weight:bold;}
-ul.topLinks a:hover { color:white; background:red;/*border-bottom:1px dotted red;*/} 
+ul.topLinks a:hover { color:red; background:transparent; text-decoration:underline;/*border-bottom:1px dotted red;*/} 
 li.link_a {border-right:2px solid #daf8fa;}
 
 #getStarted {position:relative; width:99%; background:#daf8fa; height:36px;margin:35px auto;}
-#getStarted h3 {position:relative; margin:0 auto;top:2px; height:31px; width:186px; background:url(images/splash/getstarted.png) center no-repeat;}
+#getStarted h3 {position:relative; margin:0 auto;top:2px; height:31px; width:186px; background:url(../images/splash/getstarted.png) center no-repeat;}
 h3 a{display:block;color:white;font-size:1.10em; text-decoration:none;position:relative;top:4px;width:186px; text-align:center;}
-#footer {position:relative;width:692px;background:url(images/splash/bottom_back.png) center no-repeat; height:74px; margin:0 auto;}
+#footer {position:relative;width:692px;background:url(../images/splash/bottom_back.png) center no-repeat; height:74px; margin:0 auto;}
 #footer ul {list-style-type:none;}
 #footer ul li {float:left; padding-left:10px; padding-top:10px; height:65px;}
 .bottomB, .bottomC, .bottomD {border-left:2px solid white;}
@@ -43,16 +43,18 @@ ul.inner_nav {padding:0;margin:-3px 0 0 0; list-style-type:none;}
 ul.nav {width:800px;list-style-type:none;padding:0;margin:0 auto; padding:25px;}
 ul.nav li{position:relative;width:254px; height:248px;}
 li.fist , li.question {float:left;}
-li.fist {background:url(images/splash/fist.png) center no-repeat;}
-li.question {left:15px;background:url(images/splash/question.png) center no-repeat;}
-li.megaphone {float:right;background:url(images/splash/megaphone.png) center no-repeat;}
-li.fist h3{background:url(images/splash/demand.png) center no-repeat; position:relative; width:100%; height:24px; top:10px;}
-li.question h3{background:url(images/splash/ask.png) center no-repeat; position:relative; width:100%; height:24px; top:10px;}
-li.megaphone h3{background:url(images/splash/participate.png) center no-repeat; position:relative; width:100%; height:26px;top:10px;}
+li.fist {background:url(../images/splash/fist.png) center no-repeat;}
+li.question {left:15px;background:url(../images/splash/question.png) center no-repeat;}
+li.megaphone {float:right;background:url(../images/splash/megaphone.png) center no-repeat;}
+li.fist h3{background:url(../images/splash/demand.png) center no-repeat; position:relative; width:100%; height:24px; top:10px;}
+li.question h3{background:url(../images/splash/ask.png) center no-repeat; position:relative; width:100%; height:24px; top:10px;}
+li.megaphone h3{background:url(../images/splash/participate.png) center no-repeat; position:relative; width:100%; height:26px;top:10px;}
 ul.nav p {width:220px; position:relative; text-align:center; margin:0 auto; top:160px; color:white; font-size:1em; font-weight:bold;}
-ul.nav a {display:block; left:100px;text-decoration:none;position:relative;margin:0 auto; top:165px; width:23px; height:14px; background:url(images/splash/GG.png) center no-repeat;}
+ul.nav a {display:block; left:100px;text-decoration:none;position:relative;margin:0 auto; top:165px; width:23px; height:14px; background:url(../images/splash/GG.png) center no-repeat;}
+.more_info {display:block; left:100px;text-decoration:none;position:relative;margin:0 auto; top:150px; text-indent:-50px; width:23px; height:14px; color:red; cursor:pointer; background:url(../images/splash/GG.png) center no-repeat;}
 ul.nav a span{display:none;}
 ul.nav li h3 span{display:none;}
+p{width:525px};
 
 
 
