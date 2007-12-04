@@ -99,8 +99,8 @@
 	        <h2>HELP &amp; INFO</h2>
 	        <ul class="inner_nav">
 	          <li class="c1"><a href="<?= $this->config->site_url();?>information/view/event_instructions">Help Center<span class="divider">|</span></a></li>
-	          <li class="c2"><a href="<?= $this->config->site_url();?>information/view/faq">FAQ</a></li>
-	          <li class="c3">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="<?= $this->config->site_url();?>information/view/privacy_policy">Privacy Policy</a></li>
+	          <li class="c2"><a href="<?= $this->config->site_url();?>information/view/faq">FAQ&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a></li>
+	          <li class="c3"><a href="<?= $this->config->site_url();?>information/view/privacy_policy">Privacy Policy</a></li>
 	        </ul>
 	      </li>
 	      <li class="bottomD">
