@@ -102,7 +102,7 @@ dependency overall_reaction.css
 	<? endif; ?>
 	
 	<div class="section">
-		<span class="section-title" id="question_title"><?= strtotime($event_data['event_date']) >= strtotime(date('Y-m-d')) || $event_data['streaming'] ? "Upcoming Questions" : "Answered Questions" ?> </span>
+		<span class="section-title" id="question_title"><?= !$event_data["event_finished"] ? "Upcoming Questions" : "Answered Questions" ?> </span>
 		<span style="float:right;padding-top:3px;cursor:pointer;">
 			<span>Sort: </span>
 			<? if(!$event_data["event_finished"]): ?>
