@@ -3,7 +3,7 @@
 		<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'date')">date</a>, 
 		<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'votes')">votes</a>
 	</div>
-	<div class="close"><a class="link" onClick="$('cp-comments-<?= $question_id ?>').setStyle({display: 'none'});">close</a></div>
+	<div class="close"><a class="link" onClick="cpUpdater.viewComments(<?=$question_id?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>');">close</a></div>
 <? endif; ?>
 <br/>
 <br/>
@@ -46,10 +46,8 @@ if($this->userauth->isUser()) {
 } else {
 	echo '&nbsp;<a class="link" onclick="showBox(\'login\')">Login to comment.</a>';
 }
-echo $comments; 
-if(isset($ajax)) {
-	echo "<div class=\"close\"><a class=\"link\" onClick=\"$('cp-comments-$question_id').setStyle({display: 'none'});\">close</a></div>
-	<br /><br /><br />";
-	exit();
-}
-?>
+echo $comments; ?>
+<? if(isset($ajax)): ?>
+	<div class="close"><a class="link" onClick="cpUpdater.viewComments(<?=$question_id?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>');">close</a></div>
+	<br /><br /><br />
+<? endif; ?>

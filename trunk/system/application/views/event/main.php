@@ -51,7 +51,7 @@ dependency overall_reaction.css
 	<div><br/><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
 	<? if(!$event_data["event_finished"]): ?>
-		<div style="text-align: center;"><img src="./images/ucp/ask-a-question2.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'new Effect.toggle(\'cp-ask-question\',\'blind\', {queue: \'end\'})' : 'showBox(\'login\')' ?>"/></div>
+		<div style="text-align: center;"><img src="./images/ucp/ask-a-question2.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : 'showBox(\'login\')' ?>"/></div>
 		<div id="cp-ask-question" style="display:none; text-align: center;"><? $this->load->view('question/_submit_question_form') ?></div>
 	<? endif; ?>
 	

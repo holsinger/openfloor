@@ -112,6 +112,27 @@ cpUpdater.viewAdmin = function(question_id, event_id) {
 	}	
 }
 
+cpUpdater.viewAnswer = function(question_id) {
+	visible = !($('cp-answer-' + question_id).getStyle('display') == 'none');
+	
+	if(visible) {
+		cpUpdater.toggleVisibility('cp-answer-' + question_id);
+		cpUpdater.toggleAJAX();
+	} else {
+		my_loading_reminder.show();
+		new Ajax.Updater('cp-answer-' + question_id, site_url + 'forums/ShowAnswer/' + question_id, {
+			parameters: {
+				'ajax' : 'true'
+			},
+			onSuccess: function(transport) {
+				cpUpdater.toggleVisibility('cp-answer-' + question_id);
+				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
+			}
+		});
+	}	
+}
+
 cpUpdater.viewVotes = function(question_id) {
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
@@ -211,9 +232,21 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 	});
 }
 
+cpUpdater.toggleNewQuestion = function(){
+	if(!lazy_loader.update){ 
+		$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').invoke('setStyle', {display:'none'});
+		cpUpdater.toggleAJAX();	 
+	}
+	
+	new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
+}
+
 cpUpdater.toggleAJAX = function () {
-	if(lazy_loader.update && ajaxOn) { cpUpdater.disableAJAX(); }
-	else if ($$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { cpUpdater.enableAJAX(); }
+	if(lazy_loader.update && ajaxOn) { 
+		cpUpdater.disableAJAX(); 
+	} else if ($$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { 
+		cpUpdater.enableAJAX(); 
+	}
 }
 
 cpUpdater.toggleVisibility = function(element) {
