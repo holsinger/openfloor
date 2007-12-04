@@ -112,6 +112,27 @@ cpUpdater.viewAdmin = function(question_id, event_id) {
 	}	
 }
 
+cpUpdater.viewAnswer = function(question_id) {
+	visible = !($('cp-answer-' + question_id).getStyle('display') == 'none');
+	
+	if(visible) {
+		cpUpdater.toggleVisibility('cp-answer-' + question_id);
+		cpUpdater.toggleAJAX();
+	} else {
+		my_loading_reminder.show();
+		new Ajax.Updater('cp-answer-' + question_id, site_url + 'forums/ShowAnswer/' + question_id, {
+			parameters: {
+				'ajax' : 'true'
+			},
+			onSuccess: function(transport) {
+				cpUpdater.toggleVisibility('cp-answer-' + question_id);
+				cpUpdater.toggleAJAX();
+				my_loading_reminder.hide();
+			}
+		});
+	}	
+}
+
 cpUpdater.viewVotes = function(question_id) {
 	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
 	
