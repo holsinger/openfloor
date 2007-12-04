@@ -26,7 +26,7 @@ class Karma extends Controller {
 	function view_karma()
 	{
 			//set latest time
-			$history_time = time() - 3600*24*7;#one week
+			$history_time = time() - 3600*24*7*52*2;#one week
 
 			$data['output'] = $this->karmacalc->set_coeff();
 			$data['output'] .= $this->karmacalc->set_time($history_time);
