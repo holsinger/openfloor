@@ -248,7 +248,6 @@ class Forums extends Controller
 		// ========
 		// = init =
 		// ========
-		$this->userauth->check();
 		$data['event'] = $event;
 		
 		$data['event_id'] = $this->event->get_id_from_url($event);
@@ -269,6 +268,7 @@ class Forums extends Controller
 			$this->_overallReaction($data);
 			$this->load->view('user/_overallReaction.php', $data);				
 		} else { // NO AJAX
+			$this->userauth->check();
 			$this->_currentQuestion($data);
 			if(empty($data['current_question'])) exit('This event has no current question.');
 			$this->_overallReactions($data);
