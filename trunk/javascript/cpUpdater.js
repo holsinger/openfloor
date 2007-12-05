@@ -16,8 +16,10 @@ cpUpdater.cpUpdateOnce = function() {
 }
 
 cpUpdater.vote = function(url) {
+	my_loading_reminder.show();
 	new Ajax.Request(url, {
 		onSuccess: function(transport) {
+			my_loading_reminder.hide();
 			cpUpdater.cpUpdateOnce();
 			lazy_loader.refreshView();
 		}
