@@ -183,7 +183,12 @@ class Forums extends Controller
 		}
 
 		$this->event->id = $data['event_id'];
-		$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
+		if($data['event_data']["event_finished"]){
+			$data['post_event_stream_high'] = $data['event_data']['post_event_stream_high'] ? $data['event_data']['post_event_stream_high'] : '<p><b>The footage for this past event is not yet available.<br /><br />Please check back at a later time.</b></p>';
+		}else{
+			$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
+		}
+		
 		
 		$this->question->event_id = $data['event_id'];		
 		// ==========
