@@ -1,4 +1,5 @@
 <?php
+$data['sub_title'] = $header; 
 $table_template = ($type == 'vote') ?
 array('Voted' => 'vote_value', 'Event' => 'event_name', 'Question' => 'question_name') :
 array('Event' => 'event_name', 'Question' => 'question_name') ;
@@ -9,7 +10,6 @@ array('Event' => 'event_name', 'Question' => 'question_name') ;
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-	<h3><?=$header?></h3>
 	<p>
 	<table class="user-profile">
 	<tr><? foreach($table_template as $k => $v) echo "<th>$k</th>" ?></tr>

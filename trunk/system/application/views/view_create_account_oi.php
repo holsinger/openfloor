@@ -1,8 +1,10 @@
-<? $data['red_head'] = 'Welcome'; ?>
+<? 
+$data['red_head'] = 'Welcome'; 
+$data['sub_title'] = "Create Account"; 
+?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <h3>Create Account</h3>	
   	<div class='errorArea'><?=$error;?></div>
 	<div id="account_form">
 	

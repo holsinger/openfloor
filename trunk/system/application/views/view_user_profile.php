@@ -1,11 +1,11 @@
 <?
 //echo '<pre>'; print_r($data); echo '</pre>';
 $data['red_head'] = 'Welcome';
+$data['sub_title'] = ($candidate) ? 'Candidate Profile' : 'User Profile'; 
 ?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <h2><?= ($candidate) ? 'Candidate' : 'User' ?> Profile</h2>	
   	<div class='errorArea'><?=$error?></div>
 	<?
 	echo "<br /><p style='float:right;margin-right:25px;'><img src='{$avatar_image_path}'></p>";

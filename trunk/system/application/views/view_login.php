@@ -1,8 +1,10 @@
-<? $data['red_head'] = 'Welcome'; ?>
+<? 
+$data['red_head'] = 'Welcome'; 
+$data['sub_title'] = "Login"; 
+?>
 <? $this->load->view('view_includes/header.php',$data); ?>
 
 <div id="content_div">
-  <h2>Login</h2>	
   	<div class='errorArea'><?=$error;?></div>
   	<br />
 	<div id="login_form">

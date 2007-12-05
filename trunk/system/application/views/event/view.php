@@ -1,5 +1,7 @@
 <?php
 $data['left_nav'] = 'event';
+$data['sub_title'] = $event['event_name']." Event Details"; 
+
 $display_titles = array('participants' => 'Participants',
 						'event_desc_brief' => 'Brief Description',
 						'event_desc' => 'Full Description',
@@ -14,7 +16,6 @@ $display_titles = array('participants' => 'Participants',
 <? $this->load->view('view_includes/header.php', $data);?>
 
 <div id="content_div">
-  <h2>Event Details</h2>
 	<span><? $img = !empty($event['event_avatar']) ? "<img src=\"./avatars/{$event['event_avatar']}\">" : ''; echo $img; ?></span>
 	<span><h3><?= $event['event_name'] ?></h3></span>
 	<? foreach($display_titles as $k => $v): ?>

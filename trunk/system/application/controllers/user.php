@@ -27,12 +27,14 @@ class User extends Controller {
 		$this->view_users();
 	
 	}
+	
 	function loginToDo () {
 		$func_args = func_get_args();
 		$data['location'] = implode('/', $func_args);
 		$data['error'] = 'Please login to do that.';
 		$this->load->view('view_login',$data);
 	}
+	
 	function login () {
 		$rules['user_name'] = "trim|required|min_length[3]|max_length[75]|xss_clean";
 		$rules['user_password'] = "trim|required|md5|xss_clean";
@@ -67,6 +69,7 @@ class User extends Controller {
 		ob_clean();
 		exit();
 	}
+	
 	function createAccount ($error='') {
 		$data['error'] = str_replace('_',' ',$error);
 	
@@ -685,7 +688,7 @@ class User extends Controller {
 		}
 		
 		foreach($data['result'] as $k => $v) {
-			$data['result'][$k]['event_name'] = anchor('forums/queue/event/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+			$data['result'][$k]['event_name'] = anchor('forums/cp/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
 			$data['result'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
 		}
 		

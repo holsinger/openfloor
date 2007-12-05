@@ -93,12 +93,27 @@ dependency overall_reaction.css
 				<td>
 					<div id="user-reaction">
 						This shows aggregate user reaction for each candidate over the entire event.
-						<? $this->load->view('user/_cp_user_reaction'); ?>
+						<table>
+							<tr><th class="candidate">Candidate</th><th class="reaction" style="width">Reaction</th></tr>		
+							<? $class = '' ?>
+							<? foreach($candidates as $v): ?>
+							<tr<?=$class?>>
+								<td><?=$v['can_display_name']?></td>
+								<td><div id="overall-reaction-<?=$v['can_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
+							</tr>
+							<? $class = $class ? '' : ' class="alternate"' ?>
+							<? endforeach; ?>
+						</table>
 					</div>
 					<div id="user-reaction-ajax"></div>
 				</td>
 			</tr>
-		</table>		
+		</table>	
+		<script type="text/javascript" charset="utf-8">
+			<? foreach($candidates as $v): ?>
+				new Ajax.Updater('overall-reaction-<?=$v["can_id"]?>', site_url + 'forums/overall_reaction/' + event_name + '/overall_reaction/<?=$v["can_id"]?>');
+			<? endforeach; ?>
+		</script>	
 	<? endif; ?>
 	
 	<div class="section">
