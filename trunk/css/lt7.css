@@ -61,20 +61,20 @@ strong.slogan{
 /* splash page stuff */
 #bg_front{
 	background: none;
-	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://192.168.0.86/RunPolitics/images/splash/horizontal_back.png', sizingMethod='crop');
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/RunPolitics/images/splash/horizontal_back.png', sizingMethod='crop');
 }
 
 #banner h3 {
 	background: none;
-	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://192.168.0.86/RunPolitics/images/splash/uparty.png', sizingMethod='crop');
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/RunPolitics/images/splash/uparty.png', sizingMethod='crop');
 }
 #banner h1 {
 	background: none;
-	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://192.168.0.86/RunPolitics/images/splash/logo.png', sizingMethod='crop');
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/RunPolitics/images/splash/logo.png', sizingMethod='crop');
 }
 #bg_footer{
 	background: none;
-	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://192.168.0.86/RunPolitics/images/splash/bottom_back.png', sizingMethod='crop');
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/RunPolitics/images/splash/bottom_back.png', sizingMethod='crop');
 }
 #getStarted {
 	margin-bottom: 5px;
