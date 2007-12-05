@@ -79,7 +79,7 @@
 	          <li class="a2"><a href="<?= $this->config->site_url();?>information/aboutUs">About Us<span class="divider">|</span></a></li>
 	          <li class="a3"><a href="http://www.zazzle.com/runpolitics">Shop</a></li>
 	          <li class="a4"><a href="<?= $this->config->site_url();?>information/view/terms_of_use">Terms of Use<span class="divider">|</span></a></li>
-	          <li class="a5"><a href="<?= $this->config->site_url();?>information/press">Press</a></li>
+	          <li class="a5"><a href="<?= $this->config->site_url();?>information/view/press">Press</a></li>
 	          <?/*<li class="b4"><a href="#">Terms &amp; Conditions</a></li>*/ ?>
           
 	        </ul>
