@@ -4,7 +4,7 @@ BODY {
     font-size: 11px;
 	font-size-adjust: none;
     color: #464646;
-    background: #F0FAFF url("../images/body-bg.jpg") repeat-y left top;
+    background: #3E62A2 url("../images/body-bg.jpg") repeat-y left top;
 }
 
 #root {
@@ -28,7 +28,7 @@ BODY {
     position: relative;
     top: -2px;
     left: -2px;
-    background: url("../images/frame/ctl.gif") no-repeat left top;
+    background: url("../images/frame/ctl.png") no-repeat left top;
 }
 
 .frame .ctr {
@@ -36,7 +36,7 @@ BODY {
     float: left;
     position: relative;
     left: 4px;
-    background: url("../images/frame/ctr.gif") no-repeat right top;
+    background: url("../images/frame/ctr.png") no-repeat right top;
 }
 
 .frame .cbr {
@@ -44,7 +44,7 @@ BODY {
     float: left;
     position: relative;
     top: 4px;
-    background: url("../images/frame/cbr.gif") no-repeat right bottom;
+    background: url("../images/frame/cbr.png") no-repeat right bottom;
 }
 
 .frame .cbl {
@@ -52,7 +52,7 @@ BODY {
     float: left;
     position: relative;
     left: -4px;
-    background: url("../images/frame/cbl.gif") no-repeat left bottom;
+    background: url("../images/frame/cbl.png") no-repeat left bottom;
     margin-right: -2px;
 }
 
