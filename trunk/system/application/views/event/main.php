@@ -7,7 +7,6 @@ if($event_data['streaming']){
 	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate(true);";
 }
 
-
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 
 $this->load->view('view_includes/header.php', $data);
@@ -25,6 +24,7 @@ dependency overall_reaction.css
 <? if ($this->userauth->isAdmin()): ?>
 	<div><b>Administration:</b></div> 
 	<? if(!$event_data["event_finished"]): ?>
+		<input value="Next Question" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });">
 		<input value="Finish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/finish_event_ajax/<?=$event_data['event_id']?>',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });">
 	<? endif; ?>
 	<input value="Edit Event" class="button" type="button" onclick="window.location=site_url+'event/edit_event/<?=$event_data['event_id']?>'">
@@ -87,7 +87,7 @@ dependency overall_reaction.css
 				<td>
 					<div id="video_container">
 						Click play to watch the events entire footage or you can watch the answer to each question by clicking on the "answer" tab below each question.
-						<?= $stream_high ?>
+						<?= $post_event_stream_high ?>
 					</div>
 				</td>
 				<td>

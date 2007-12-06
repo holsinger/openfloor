@@ -12,8 +12,8 @@
         <div class="frame"><div class="ctl"><div class="ctr"><div class="cbr"><div class="cbl">
             <div class="top-menu">
                 <ul class="left">
-                    <li><?=anchor('', 'HOME')?></li>
-					<? if ($this->userauth->isAdmin()) echo "<li>&nbsp;&nbsp;".anchor('admin/', 'ADMIN')."</li>";?>
+                    <li><?=anchor('', 'OPENFLOOR HOME')?></li>
+					<? if ($this->userauth->isAdmin()) echo "<li>&nbsp;|&nbsp;".anchor('admin/', 'ADMIN')."</li>";?>
                 </ul>
                 <ul class="right" id="userLogin">
 					<? if ($this->userauth->isUser()):?>

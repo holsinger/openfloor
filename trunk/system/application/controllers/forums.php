@@ -472,6 +472,21 @@ class Forums extends Controller
 		
 	}
 	
+	// ========================================================
+	// = NextQuestion - Changes to the next question manually =
+	// ========================================================
+	public function next_question($event_id)
+	{
+		// First get the next question
+		$question_id = $this->question->get_next_question($event_id);
+		// Then set the old current to asked
+		$old_current_question = $this->question->singleCurrent($event_id, $question_id);
+		$this->question->set_asked_time($old_current_question);
+		// Update the next question to the current question
+		$data_array['question_status'] = "current";
+		$changed = $this->question->updateQuestion($question_id, $data_array);
+		echo($changed);
+	}
 	// ==============================================================================================
 	// = ShowAnswer - This is used to show the answer video when there is actually an answer        =
 	// ==============================================================================================

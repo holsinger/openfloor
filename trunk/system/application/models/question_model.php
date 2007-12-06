@@ -181,6 +181,53 @@ class Question_model extends Model
 		return $this->db->query("SELECT event_name, question_name FROM cn_questions, cn_events WHERE fk_event_id = event_id AND fk_user_id = $user_id $limit")->result_array();
 	}	
 
+	// ============================================================================
+	// = get_next_question - Returns the next question that has the highest votes =
+	// ============================================================================
+	public function get_next_question($event_id)
+	{
+		$query = $this->db->query(
+			"SELECT 
+				question_id, 
+				IFNULL((SELECT 
+					cast(format(sum(vote_value)/10,0) as signed) AS number 
+				FROM 
+					cn_votes 
+				WHERE 
+					fk_question_id=question_id 
+				AND vote_id IN (SELECT max(vote_id) FROM cn_votes WHERE fk_question_id = question_id GROUP BY fk_user_id)	 					
+				GROUP BY fk_question_id), 0) as votes,
+				(SELECT count(*) FROM cn_comments WHERE fk_question_id=question_id) as comment_count,
+				question_name, 
+				question_desc,
+				question_status,
+				question_answer,
+				cn_questions.timestamp as date, 
+				user_name,
+				user_id, 
+				user_avatar,
+				event_name,
+				event_desc,
+				event_url_name,
+				location
+			FROM 
+				cn_questions, 
+				cn_events, 
+				cn_users
+			WHERE 
+				cn_questions.fk_user_id=user_id 
+				AND event_id = $event_id
+				AND question_status = 'pending'
+			AND 
+				fk_event_id=event_id 
+			ORDER BY 
+				$this->order_by DESC
+			LIMIT 1"
+		);
+		$results = $query->result_array();
+		return $results[0]['question_id']; 
+	}
+
 	public function rss_questions_by_tag($tag)
 	{
 		$tag = $this->db->escape($tag);
