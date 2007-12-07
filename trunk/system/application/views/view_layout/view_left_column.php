@@ -1,5 +1,4 @@
 <?php
-
 ?>
 				<td class="col-left" valign="top">
 	                    
@@ -29,14 +28,10 @@
 											
 							                    <? /* <div id='event_pop' style="position:absolute;left:90px;top:188px;z-index:3000;"><img src="images/live_pop.gif" onLoad="new Effect.Shake($('event_pop')); window.setTimeout('Effect.Squish(\'event_pop\', {duration:.3})',4000);"></div> */?>
 
-												<h1>EVENT</h1>
+												<h1>NAVIGATION</h1>
 												<div class="col_left_item_container">
-								                    <h2>Questions</h2>
-								                    
-								                    <?=anchor("question/add/{$event_url}","Ask a Question");?>
-								                    <?= anchor("forums/queue/{$event_url}/sort/upcoming","View Upcoming");?>
-								                    <?= anchor("forums/queue/{$event_url}/sort/newest","View Newest");?>
-								                    <?= anchor("forums/queue/{$event_url}/sort/asked","View Asked");?>
+								                    <!-- <h2>Questions</h2> -->
+								                    <?=anchor("cp/{$event_url}","Participate");?>
 													<h2>RSS Feeds</h2>
 													<?= anchor('feed/events', 'Events Feed') ?>
 													<?= anchor("feed/$event_url", 'Current Questions Feed') ?>
@@ -47,16 +42,14 @@
 											break;
 											case 'events':
 											?>
-												<h1>HOME</h1>
+												<h1>NAVIGATION</h1>
 												<div class="col_left_item_container">
-			                    					Click on an <i>Event Name</i> to get started.
 													<br />
-													<br />
-													<a href="javascript: var none = new Effect.ScrollTo($('upcoming_events_title'));">Future Events</a>
-													<a href="javascript: var none = new Effect.ScrollTo($('past_events_title'));">Past Events</a>
+													<a href="javascript: var none = new Effect.ScrollTo($('upcoming_events_title'));">Future <?=$left_nav_data['title']?></a>
+													<a href="javascript: var none = new Effect.ScrollTo($('past_events_title'));">Past <?=$left_nav_data['title']?></a>
 													<br />
 													<h2>RSS Feeds</h2>
-													<?= anchor('feed/events','All Events');?>
+													<?= anchor('feed/events','All '.$left_nav_data['title']);?>
 	 												<br />
 
 													<span onClick="showBox('event_instructions');" class="help">HELP</span>
@@ -83,7 +76,7 @@
 											break;
 											case 'dashboard':
 												?>
-												<h1>Event</h1>
+												<h1>NAVIGATION</h1>
 												<?
 												break;
 											default:

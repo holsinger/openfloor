@@ -1,10 +1,8 @@
 
 <?
-$data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 
-						'href' => site_url("feed/events"));
-$data['left_nav'] = 'events';
+$data['rss'][] = array(	'title' => 'RunPolitics Events Feed', 'href' => site_url("feed/events"));
 $data['red_head'] = 'Events';
-$data['sub_title'] = "OpenFloor Events";
+$data['sub_title'] = $page_title;
 // THIS IS TEMP CODE FOR AN EVENT AND NEEDS TO BE REPLACED
 //$data['use_temp_top'] = true;
 ?>
@@ -22,7 +20,7 @@ $data['sub_title'] = "OpenFloor Events";
 	<? foreach ($events as $key => $array): ?>   
 		<? if($array['streaming'] && !$array['event_finished']): ?>
 			
-			<h3 class="subheader" id="live_events_subheader_div">Live Events</h3>
+			<h3 class="subheader" id="live_events_subheader_div"><?=$live_title?></h3>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">
             		<tr>
@@ -63,7 +61,7 @@ $data['sub_title'] = "OpenFloor Events";
     <!-- NEXT, UPCOMING EVENTS -->
   	<div id="event_view">
 		<? //echo $this->table->generate($events)?>
-		<h3 class="subheader" id="upcoming_events_title">Future Events</h3>
+		<h3 class="subheader" id="upcoming_events_title"><?=$future_title?></h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
         	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !$array['event_finished'] ): ?>
@@ -95,7 +93,7 @@ $data['sub_title'] = "OpenFloor Events";
 		<!-- FINALLY, PAST EVENTS -->
         <br />
         <? //echo $this->table->generate($events)?>
-        <h3 class="subheader" id="past_events_title">Past Events</h3>
+        <h3 class="subheader" id="past_events_title"><?=$past_title?></h3>
         <? foreach ($events as $key => $array): ?>
         	<? if ($array['event_finished']): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">

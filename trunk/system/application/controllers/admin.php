@@ -31,13 +31,11 @@ class Admin extends Controller {
 		$this->cms();
 	}
 	
-	function cms ()
+	function cms ($cms_url)
 	{
 		$data['cms_id'] = 0;
-		if ( is_string($this->uri->segment(3)) ) {
-			$data['cms_id'] = $this->cms->get_id_from_url($this->uri->segment(3));
-			//$data['cms_name'] = $this->uri->segment(3);
-		}
+		$data['cms_id'] = $this->cms->get_id_from_url($cms_url);
+
 		$rules['cms_name'] = "trim|xss_clean";
 		$rules['custom_1'] = "trim|xss_clean";
 		$rules['custom_2'] = "trim|xss_clean";
@@ -65,6 +63,7 @@ class Admin extends Controller {
 		$fields['cms_text']	= ( isset($_POST['cms_text']) ) ? $_POST['cms_text']:"";
 		$fields['custom_1']	= ( isset($_POST['custom_1']) ) ? $_POST['custom_1']:"";
 		$fields['custom_2']	= ( isset($_POST['custom_2']) ) ? $_POST['custom_2']:"";
+		$fields['site_section']	= ( isset($_POST['site_section']) ) ? $_POST['site_section']:"";
 				
 		//get update info
 		if ($data['cms_id']>0) $data = $this->cms->get_cms($data['cms_id']);	

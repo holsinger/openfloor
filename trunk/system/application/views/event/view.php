@@ -1,6 +1,6 @@
 <?php
 $data['left_nav'] = 'event';
-$data['sub_title'] = $event['event_name']." Event Details"; 
+$data['sub_title'] = $event['event_name']." Details"; 
 
 $display_titles = array('participants' => 'Participants',
 						'event_desc_brief' => 'Brief Description',

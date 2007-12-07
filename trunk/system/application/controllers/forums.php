@@ -19,6 +19,7 @@ class Forums extends Controller
 		$this->load->model('video_model', 'video');
 		$this->load->model('vote_model','vote');
 		$this->load->model('reaction_model','reaction');
+		$this->load->model('cms_model','cms');
 		
 		// libraries
 		$this->load->library('flag_lib');
@@ -243,7 +244,7 @@ class Forums extends Controller
 			#TODO This solution for no candidates assigned to event is not ideal
 			if(empty($data['candidates'])) redirect();
 			// $this->load->view('user/cp', $data);
-			$data['breadcrumb'] = $this->global ? array('Home' => $this->config->site_url()) : array('Home'=>$this->config->site_url(),'Events'=>'event/',$data["event_data"]['event_name']=>'');
+			$data['breadcrumb'] = $this->global ? array($this->cms->get_cms_text('', "home_name") => $this->config->site_url()) : array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), $this->cms->get_cms_text('', "forums_name")=>'event/',$data["event_data"]['event_name']=>'');
 			$this->load->view('event/main', $data);
 		}		
 	}
@@ -351,15 +352,13 @@ class Forums extends Controller
 		// prepare sorting information
 		$this->prepareSort($data);		
 
-		$data['breadcrumb'] = $this->global ? array('Home' => $this->config->site_url()) : array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>'');
+		$data['breadcrumb'] = $this->global ? array($this->cms->get_cms_text('', "home_name") => $this->config->site_url(), $this->cms->get_cms_text('', "forums_name") => 'event/') : array($this->cms->get_cms_text('', "home_name") => $this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>'');
 		
 		// Load the question queue from the model
 		$data['results'] = $this->question2->questionQueue();
 		
 		if(empty($data['results'])) {
 			$event = $this->event->get_event($event_id);
-			// $data['rightpods'] = array(	'dynamic'	=>	array(	'event_description'	=>	$event['event_desc'],
-			// 													'event_location'	=>	$event['location']));
 
 			$data['rightpods'] = $this->global ? array() : array(	'dynamic'=>array('event_details'=>$this->createDescriptionHTML($data) . $this->createParticipantsHTML($event_id), 
 										'event_location'=>$data['results'][0]['location']));

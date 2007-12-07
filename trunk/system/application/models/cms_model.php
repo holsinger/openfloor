@@ -31,12 +31,19 @@ class Cms_model extends Model
  	public function update_cms($array)
     {
     	if ( isset($array['cms_name']) ) {
-    		$this->db->set('cms_name',$array['cms_name']);    		
-			$this->db->set('cms_url',url_title($array['cms_name']));
+    		$this->db->set('cms_name',$array['cms_name']); 
+			// prepend the section if it is entered (added this way for backwards compatability)
+   			if(isset($array['site_section'])){
+				$this->db->set('cms_url',url_title($array['site_section'])."_".url_title($array['cms_name']));
+			}else{
+				$this->db->set('cms_url',url_title($array['cms_name']));
+			}
+			
     	}
 		if ( isset($array['cms_text']) ) $this->db->set('cms_text',$array['cms_text']);
 		if ( isset($array['custom_1']) ) $this->db->set('custom_1',$array['custom_1']);
 		if ( isset($array['custom_2']) ) $this->db->set('custom_2',$array['custom_2']);
+		if ( isset($array['site_section']) ) $this->db->set('site_section',$array['site_section']);
 		$this->db->where('cms_id',$array['cms_id']);
 		$this->db->update('cms');
 			
@@ -44,7 +51,7 @@ class Cms_model extends Model
 		return $this->db->affected_rows();
     }
 
-	public function get_cms ($id, $url='')
+	public function get_cms ($id='', $url='')
 	{
 		$result_array = array(); 
 		if ($id) $this->db->where('cms_id',$id);
@@ -59,17 +66,39 @@ class Cms_model extends Model
 		else 
 			return false;
 	}
+
+	public function get_cms_text ($id='', $url='')
+	{
+		$result_array = array(); 
+		if ($id) $where = "WHERE cms_id = $id";
+		if ($url) $where = "WHERE cms_url = '$url'";
+		
+		$query = $this->db->query("SELECT cms_text FROM cms $where");
+		log_message('debug', "getCMS:".trim($this->db->last_query()));
+		return $query->row()->cms_text;
+	}
 	
 	public function get_all_cms ()
 	{
-		 $result_array = array(); 
-		 $query = $this->db->get('cms');
-		 log_message('debug', "getCMS:".trim($this->db->last_query()));
-		 $result_array = $query->result_array();
-		 if (count($result_array)>0) 
-			return $result_array;
-		 else 
-			return false;
+		// Get site sections
+		$query = $this->db->query("SELECT site_section FROM cms GROUP BY site_section");
+		$results = $query->result_array();	
+		
+		// Get each of the values
+		$return_array = array();
+		foreach($results as $section) {
+			$section_name = $section['site_section'];
+			if($section_name){
+				$where = "= '$section_name'";
+			}else{
+				$where = "IS NULL";
+			}
+			$query = $this->db->query("SELECT * FROM cms WHERE site_section $where");
+			log_message('debug', "getCMS:".trim($this->db->last_query()));
+			$return_array[$section_name] = $query->result_array();
+				
+		}
+		return $return_array; 
 	}
    
 	/**

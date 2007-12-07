@@ -61,9 +61,15 @@ class Event extends Controller
 
 		// tag cloud
 		$data['cloud'] = $this->tag_lib->createTagCloud(null);
-		
+		// Last of the page setup, including the breadcrumb and titles which are generated dynamically
+		$data['page_title'] = $this->cms->get_cms_text('', "forums_name");
+		$data['future_title'] = $this->cms->get_cms_text('', "forums_future_title");
+		$data['past_title'] = $this->cms->get_cms_text('', "forums_past_title");
+		$data['live_title'] = $this->cms->get_cms_text('', "forums_live_title");
 		$data['rightpods'] = array('accordion' => array(), 'dynamic'=>array());
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(), 'Events' => "");	
+		$data['left_nav'] = 'events';  
+		$data['left_nav_data'] = array('title' => $this->cms->get_cms_text('', "forums_navigation_title") );
+		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name") => $this->config->site_url(), $data['page_title'] => "");	
 		$this->load->view('view_events',$data);
 	}
 	
@@ -358,7 +364,7 @@ class Event extends Controller
 		$data['event_url'] = "event/$event_name";
 		
 		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
-		$data['breadcrumb'] = array('Home'=>$this->config->site_url(), 'Events' => 'event/', 'Event Details' => '');
+		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', 'Details' => '');
 		$this->load->view('event/view',$data);
 	}
 	

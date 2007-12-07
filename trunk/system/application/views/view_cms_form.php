@@ -48,8 +48,16 @@
               'class'       => 'txt',
         );
 		echo form_format("Custom 2: ",form_input($format2),'Additional field to store information if needed' ); 
-		?>
 		
+		$format3 = array(
+              'name'        => 'site_section',
+              'id'          => 'site_section',
+              'value'       => (isset($site_section))?$site_section:$this->validation->site_section,
+              'size'        => '50',
+              'class'       => 'txt',
+        );
+		echo form_format("Site Section: ",form_input($format3),'Which section of the site this information is used for.' ); 
+		?>
 		<br /><br />
 		<?= form_hidden('cms_id',$cms_id); ?>
 		<?= form_submit('','Submit','class="button"'); ?>

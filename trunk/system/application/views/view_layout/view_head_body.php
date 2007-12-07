@@ -12,7 +12,7 @@
         <div class="frame"><div class="ctl"><div class="ctr"><div class="cbr"><div class="cbl">
             <div class="top-menu">
                 <ul class="left">
-                    <li><?=anchor('', 'OPENFLOOR HOME')?></li>
+                    <li><?=anchor('/event', 'OPENFLOOR HOME')?></li>
 					<? if ($this->userauth->isAdmin()) echo "<li>&nbsp;|&nbsp;".anchor('admin/', 'ADMIN')."</li>";?>
                 </ul>
                 <ul class="right" id="userLogin">
