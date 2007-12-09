@@ -268,7 +268,7 @@ class Event extends Controller
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
 		
-		$this->load->view('view_manage_events',$data);
+		$this->load->view('event/manage_events_one',$data);
 	}
 	
 	public function create_event_action() 
@@ -374,18 +374,18 @@ class Event extends Controller
 		$massaged_data = Array();  // for the sake of readability.
 		// Massage the information
 		foreach ($events as $key => $array){
-			error_log($array['event_name']." - ".strtotime($array['event_date'])." ".strtotime(date('Y-m-d')));
 			if (strtotime($array['event_date']) >= strtotime(date('Y-m-d')) ){
-				error_log("Counted upcoming");
 				$return_array['upcoming_events'][] = $array;
 			}elseif (strtotime($array['event_date']) < strtotime(date('Y-m-d'))){
-				error_log('Counted Past');
 				$return_array['past_events'][] = $array;
 			}
 		}
-		
+		// Header
+		$st.='<div class="double_line_container">
+			<span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C">'.$this->cms->get_cms_text('', "forums_name").'</span>
+		</div>';
 		// Since this is used by ajax, we need to return viewable material
-		$st = '<h3 class="subheader">Future Events</h3><ul>';
+		$st .= '<h3 class="subheader">'.$this->cms->get_cms_text('', "forums_future_title").'</h3><ul>';
 		if(isset($return_array['upcoming_events'])){
 			$count = 0;
 			foreach ($return_array['upcoming_events'] as $key => $array){
@@ -400,7 +400,7 @@ class Event extends Controller
 			$st .= '<li>We are working hard to bring our OpenFloor Events to your town!</li>';
 		}
 		
-		$st .= '</ul><h3 class="subheader">Past Events</h3><ul>';
+		$st .= '</ul><h3 class="subheader">'.$this->cms->get_cms_text('', "forums_past_title").'</h3><ul>';
 		$count = 0;
 		foreach ($return_array['past_events'] as $key => $array){
 			$st .= '<li>'.anchor($this->config->site_url().'forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>', array('title' => $array['event_name'])).'</li>';
