@@ -65,7 +65,7 @@ $data['sub_title'] = $page_title;
 		<h3 class="subheader" id="upcoming_events_title"><?=$future_title?></h3>
 		<? $count=0; ?>
         <? foreach ($events as $key => $array): ?>              
-        	<? if (strtotime($array['event_date']) > strtotime(date('Y-m-d')) && !$array['event_finished'] ): ?>
+        	<? if (!$array['event_finished'] ): ?>
                 <div id="event<?=$array['event_id'];?>" class="event-summary">
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
