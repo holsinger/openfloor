@@ -35,9 +35,7 @@ $data['sub_title'] = $page_title;
 						</td>
 						<td valign="top">
 							<span style="display: block; padding-bottom: 5px;">
-								<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>
-								&nbsp;&nbsp;
-								<?= anchor('/event/view/' . url_title($array['event_name']), '[Founder Contact Info]') ?><br />
+								<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>Å<br />
 							</span>	
 							<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 							<b>Where:</b> <?=$array['location'];?><br /><br />
@@ -72,9 +70,7 @@ $data['sub_title'] = $page_title;
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
 					<span style="display: block; padding-bottom: 5px;">
-						<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>
-						&nbsp;&nbsp;
-						<?= anchor('/event/view/' . url_title($array['event_name']), '[Founder Contact Info]') ?><br />
+						<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 					</span>
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
@@ -106,9 +102,7 @@ $data['sub_title'] = $page_title;
                 	<div style="float:left; padding: 0px 5px 5px 0px;"><?= !empty($array['event_avatar']) ? "<img src=\"./avatars/{$array['event_avatar']}\">" : '' ?></div>
 					
 					<span style="display: block; padding-bottom: 5px;">
-						<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>
-						&nbsp;&nbsp;
-						<?= anchor('/event/view/' . url_title($array['event_name']), '[Founder Contact Info]') ?><br />
+						<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 					</span>
 					<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 					<b>Where:</b> <?=$array['location'];?><br /><br />
