@@ -19,8 +19,9 @@ $data['sub_title'] = $page_title;
 	<? $count=0; ?>
 	<? foreach ($events as $key => $array): ?>   
 		<? if($array['streaming'] && !$array['event_finished']): ?>
-			
-			<h3 class="subheader" id="live_events_subheader_div"><?=$live_title?></h3>
+			<? if($count == 0):?>
+				<h3 class="subheader" id="live_events_subheader_div"><?=$live_title?></h3>
+			<? endif; ?>
 			<div id="event<?=$array['event_id'];?>" class="event-summary">
             	<table border="0" cellspacing="0" cellpadding="0">
             		<tr>
