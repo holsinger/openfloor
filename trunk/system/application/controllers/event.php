@@ -268,7 +268,7 @@ class Event extends Controller
 		$this->validation->set_fields($fields);
 		$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/');
 		
-		$this->load->view('event/view_manage_events',$data);
+        $this->load->view('view_manage_events',$data); 
 	}
 	
 	public function create_event_action() 
