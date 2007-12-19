@@ -36,7 +36,7 @@ $data['sub_title'] = $page_title;
 						</td>
 						<td valign="top">
 							<span style="display: block; padding-bottom: 5px;">
-								<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?>Å<br />
+								<?=anchor('forums/cp/'.url_title($array['event_name']),'<strong>'.$array['event_name'].'</strong>');?><br />
 							</span>	
 							<b>When:</b> <?=date("F j, Y, g:i a", strtotime($array['event_date']));?><br />
 							<b>Where:</b> <?=$array['location'];?><br /><br />
