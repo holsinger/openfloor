@@ -8,9 +8,9 @@
  * @package default
  **/
 
-/**
- * Define DocBlock
- **/
+/*
+	TODO Could probably be combined with the forums controller.  The forums controller may be the better name too since events is too specific.
+*/
 
 
 class Event extends Controller
@@ -54,8 +54,49 @@ class Event extends Controller
 	 * @return void
 	 * @author Clark Endrizzi, Rob Stef
 	 **/
-	public function view_events($error='')
-	{
+	public function view_events($error=''){
+		$this->load->helper('url');
+		//$this->load->library('table');
+		
+		$data['cms_id'] = $this->cms->get_id_from_url('ConventionNext');
+		$data = $this->cms->get_cms($data['cms_id']);	
+			
+		$events = $this->event->getEventsByDate();
+		//echo '<pre>'; print_r($events); echo '</pre>'; exit();
+		
+		
+		foreach($events as $k=>$v) {
+			if ($this->userauth->isAdmin()) {
+				$events[$k]['edit'] = anchor("event/admin_panel/{$v['event_id']}", 'Admin')." | ".
+				anchor('forums/liveQueue/' . url_title($v['event_name']), 'Live Queue')." | ".
+				anchor('forums/candidateQueue/' . url_title($v['event_name']), 'Candidate Queue')." | ".
+				anchor("admin/dashboard/".url_title($v['event_name']), 'Admin Dashboard')." | ".
+				anchor("forums/overall_reaction/".url_title($v['event_name']), 'Overall Reaction');
+			}
+			$file_name = '';
+			if (is_array($temp_array = unserialize($events[$k]['event_avatar']))) $file_name = $temp_array['file_name'];
+			$events[$k]['event_avatar'] = $file_name;
+		}
+			
+		$data['events'] = $events;
+		$data['error'] = $error;		
+		
+		//$this->table->set_heading('id', 'name', 'desc', 'avatar', 'sunlightid', 'date', 'location', 'edit');
+		// $data['rightpods'] = array('gvideo'=>array(),'gblog'=>array(),'dynamic'=>array());
+
+		// tag cloud
+		$data['cloud'] = $this->tag_lib->createTagCloud(null);
+		// Last of the page setup, including the breadcrumb and titles which are generated dynamically
+		$data['page_title'] = $this->cms->get_cms_text('', "forums_name");
+		$data['future_title'] = $this->cms->get_cms_text('', "forums_future_title");
+		$data['past_title'] = $this->cms->get_cms_text('', "forums_past_title");
+		$data['live_title'] = $this->cms->get_cms_text('', "forums_live_title");
+		$data['rightpods'] = array('accordion' => array(), 'dynamic'=>array());
+		$data['left_nav'] = 'events';  
+		$data['left_nav_data'] = array('title' => $this->cms->get_cms_text('', "forums_navigation_title") );
+		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name") => $this->config->site_url(), $data['page_title'] => "");	
+		$this->load->view('view_events',$data);
+	}
 
 	/**
 	 * Referenced by the create_event function.  Basically if the user has some unfinished events then it will take them here.
@@ -64,7 +105,6 @@ class Event extends Controller
 	 * @author Clark Endrizzi
 	 **/
 	public function event_resume(){
-		
 		redirect("/event/create_event/".$_POST['unfinished_event'], 'location');
 	}
 	
