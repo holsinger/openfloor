@@ -513,26 +513,6 @@ class Event extends Controller
 		
 	}
 		
-	public function view($event_name)
-	{
-		$data['event'] = $this->event->get_event(null, $event_name);
-		$temp_participants = $this->event->getCansInEvent($this->event->get_id_from_url($event_name));
-		$temp_count = 0;
-		foreach($temp_participants as $v){
-			$data['event']['participants'] .= $this->candidate->linkToProfile($v);
-			if($temp_count < (count($temp_participants) - 1) ){
-				$data['event']['participants'] .= ', ';
-			}
-			
-			$temp_count++;
-		}
-		$data['event_url'] = "event/$event_name";
-		
-		$data['event']['event_avatar'] = is_array($temp_array = unserialize($data['event']['event_avatar'])) ? $temp_array['file_name'] : '' ;
-		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', 'Details' => '');
-		$this->load->view('event/view',$data);
-	}
-	
 	/**
 	 * Gets the events for the ride sidebar and returns the HTML (TODO: this does not follow good MVC implementation patterns)
 	 *
