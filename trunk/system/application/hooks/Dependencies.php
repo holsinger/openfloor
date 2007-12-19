@@ -2,7 +2,7 @@
 
 class Dependencies
 {
-	private $debug = false;
+	private $debug = true;
 	
 	public $javascript;
 	public $css;

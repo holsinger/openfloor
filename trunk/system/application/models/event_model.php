@@ -22,12 +22,20 @@ class Event_model extends Model
 		if ( isset($_POST['event_avatar']) ) $this->db->set('event_avatar',$_POST['event_avatar']);
 		if ( isset($_POST['event_date']) ) $this->db->set('event_date',$_POST['event_date']);
 		if ( isset($_POST['location']) ) $this->db->set('location',$_POST['location']);
+		if ( isset($_POST['creator_id']) ) $this->db->set('creator_id',$_POST['creator_id']);
+		if ( isset($_POST['stream_low']) ) $this->db->set('stream_low',$_POST['stream_low']);
+		if ( isset($_POST['stream_high']) ) $this->db->set('stream_high',$_POST['stream_high']);
 		$this->db->insert('cn_events');
 		log_message('debug', "EVENT:insertEvent:".trim($this->db->last_query()));
 		$event_id = $this->db->insert_id();
 		
 		return $event_id;
     }
+
+	function get_unfinished_events_by_creator($creator_id){
+		$query = $this->db->query('SELECT * FROM cn_events WHERE creator_id = '.$creator_id.' AND input_complete = 0 ORDER BY  event_date');
+		return $query->result_array();
+	}
 
 	function update_event_form($event_id,$array)
     {
@@ -39,13 +47,13 @@ class Event_model extends Model
     
 	public function getEvents()
 	{
-		$query = $this->db->query('SELECT * FROM cn_events');
+		$query = $this->db->query('SELECT * FROM cn_events WHERE input_complete = 1');
 		return $query->result_array();
 	}
 	
 	public function getEventsByDate()
 	{
-		$query = $this->db->query('SELECT * FROM cn_events ORDER BY event_date DESC');
+		$query = $this->db->query('SELECT * FROM cn_events WHERE input_complete = 1 ORDER BY event_date DESC');
 		return $query->result_array();
 	}
 		
@@ -59,18 +67,20 @@ class Event_model extends Model
 	
 	public function get_event ($id, $url='',$date_start='',$date_end='')
 	{
-		 $result_array = array(); 
-		
-		 if ($id) $this->db->where('event_id',$id);
-		 if ($url) $this->db->where('event_url_name',$url);
-		
-		 $query = $this->db->get('cn_events');
-		 log_message('debug', "EVENT:getEvent:".trim($this->db->last_query()));
-		 $result_array = $query->result_array();
-		 if (count($result_array)> 0) 
+		$result_array = array(); 
+		if ($id) $this->db->where('event_id',$id);
+		if ($url) $this->db->where('event_url_name',$url);
+
+		$query = $this->db->get('cn_events');
+		log_message('debug', "EVENT:getEvent:".trim($this->db->last_query()));
+		$result_array = $query->result_array();
+
+		if (count($result_array) > 0){
 			return $result_array[0];
-		 else 
+		}else{
 			return false; 
+		} 
+			
 		 
 	}
 	
@@ -141,9 +151,9 @@ class Event_model extends Model
 		return $this->db->select('event_id, event_name, event_desc')->orderby('event_date', 'desc')->get('cn_events')->result();
 	}
 
-	public function set_event_to_finished($event_id)
+	public function UpdateField($event_id, $field_name, $field_value)
 	{
-		$this->db->query("UPDATE cn_events SET event_finished = 1 WHERE event_id = $event_id");
+		$this->db->query("UPDATE cn_events SET $field_name = '$field_value' WHERE event_id = $event_id");
 		return $this->db->affected_rows();
 	}
 }

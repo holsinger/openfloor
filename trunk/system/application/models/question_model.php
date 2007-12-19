@@ -45,6 +45,8 @@ class Question_model extends Model
 		if (isset($array['question_desc'])) $this->db->set ('question_desc',$array['question_desc']);
 		if (isset($array['question_status'])) $this->db->set ('question_status',$array['question_status']);
 		if (isset($array['question_answer'])) $this->db->set ('question_answer',$array['question_answer']);
+		if (isset($array['flag_reason'])) $this->db->set ('flag_reason',$array['flag_reason']);
+		if (isset($array['flag_reason_other'])) $this->db->set ('flag_reason_other',$array['flag_reason_other']);
 		$this->db->update('cn_questions');
 		error_log(trim($this->db->last_query()));
 		log_message('debug', "updateQuestion:".trim($this->db->last_query()));
@@ -98,7 +100,9 @@ class Question_model extends Model
 				event_name,
 				event_desc,
 				event_url_name,
-				location
+				location,
+				flag_reason,
+				flag_reason_other
 			FROM 
 				cn_questions, 
 				cn_events, 
@@ -136,7 +140,7 @@ class Question_model extends Model
 		 $result_array = array(); 
 		 if ($id) $this->db->where('question_id',$id);
 		 if ($url) $this->db->where('question_url_name',$url);
-		if($this->event_id) $this->db->where('fk_event_id', $this->event_id);
+		 if($this->event_id) $this->db->where('fk_event_id', $this->event_id);
 		 $query = $this->db->get('cn_questions');
 		 log_message('debug', "QUESTIONS:getQuestions:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();

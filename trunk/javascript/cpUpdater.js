@@ -278,25 +278,27 @@ cpUpdater.change_sort = function(_sort) {
 		}
 	}else if(sort == 'newest'){
 		$('question_title').innerHTML = "Newest Questions";
+	}else if(sort == 'deleted'){
+		$('question_title').innerHTML = "Deleted Questions";
 	}else{
 		$('question_title').innerHTML = "Answered Questions";
 	}
 	// Change the highlights
 	if(event_timing == 'past'){
-		sort_links = ['pending', 'asked'];
+		sort_links = ['pending', 'asked', 'deleted'];
 	}else{
-		sort_links = ['pending', 'newest', 'asked'];
+		sort_links = ['pending', 'newest', 'asked', 'deleted'];
 	}
 	sort_links.without(_sort).each(function(s) {
-		if($('sort-link-' + s + '-2').hasClassName('cp-sort-link-selected')) {
-			$('sort-link-' + s + '-2').removeClassName('cp-sort-link-selected');
-			$('sort-link-' + s + '-2').addClassName('cp-sort-link');
+		if($('sort-link-' + s).hasClassName('cp-sort-link-selected')) {
+			$('sort-link-' + s).removeClassName('cp-sort-link-selected');
+			$('sort-link-' + s).addClassName('cp-sort-link');
 		}
 	});
 
-	if($('sort-link-' + _sort + '-2').hasClassName('cp-sort-link')) {
-		$('sort-link-' + _sort + '-2').removeClassName('cp-sort-link');
-		$('sort-link-' + _sort + '-2').addClassName('cp-sort-link-selected');
+	if($('sort-link-' + _sort).hasClassName('cp-sort-link')) {
+		$('sort-link-' + _sort).removeClassName('cp-sort-link');
+		$('sort-link-' + _sort).addClassName('cp-sort-link-selected');
 	}
 	
 	ajax_update_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/' + sort;
@@ -330,6 +332,21 @@ cpUpdater.ChangeQuestionStatus = function(elem) {
 		$('question_status_div').setStyle({ display : 'block' });
 	}else{
 		$('question_status_div').setStyle({ display : 'none' });
+	}
+	if(elem.value == 'deleted'){
+		$('question_delete_div').setStyle({ display : 'block' });
+	}else{
+		$('question_delete_div').setStyle({ display : 'none' });
+	}
+}
+// ==================================================================================
+// = ChangeDeleteReason - Used as admin to change show or hide the asked box only =
+// ==================================================================================
+cpUpdater.ChangeDeleteReason = function(elem) {
+	if(elem.value == 'other'){
+		$('delete_reason_other_div').setStyle({ display : 'block' });
+	}else{
+		$('delete_reason_other_div').setStyle({ display : 'none' });
 	}
 }
 // ==================================================================================

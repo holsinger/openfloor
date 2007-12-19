@@ -3,11 +3,47 @@
 class Candidate_model extends Model 
 {
 	private $action;
+	private $data;
+	private $id;
 	
 	function __construct()
     {
         parent::Model();
     }
+
+	public function SetData($arg_data){
+		$this->data = $arg_data;
+	}
+	
+	public function SetID($arg_id){
+		$this->id = $arg_id;
+	}
+
+	public function InsertCandidate(){
+		$this->db->insert('cn_candidates', $this->data); 
+		return $this->db->insert_id();
+	}
+	
+	public function UpdateCandidate(){
+		$this->db->where('can_id', (int) $this->id);
+		$this->db->update('cn_candidates', $this->data);
+		
+		return $this->db->affected_rows();
+	}
+	
+	public function DeleteCandidate(){
+		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $this->id));
+		$this->db->delete('cn_candidates', array('can_id' => $this->id));
+	}
+	
+	public function InsertCandidateEventAssociation($can_id, $event_id){
+		$data = array(
+			"fk_can_id" 	=> $can_id,
+			"fk_event_id"	=> $event_id
+		);
+		$this->db->insert("cn_idx_candidates_events", $data);
+		return $this->db->insert_id();
+	}
 
 	public function user_name($can_id)
 	{
@@ -72,8 +108,7 @@ class Candidate_model extends Model
 	
 	private function adminCandidate()
 	{
-		if(isset($_POST))
-		{
+		if(isset($_POST)){
 			unset($_POST['submitted']);
 			if(isset($_POST['can_password_confirm'])) unset($_POST['can_password_confirm']);
 			
@@ -92,6 +127,7 @@ class Candidate_model extends Model
 		}
 		return false;
 	}
+
 
 	public function canAvatar($can_id)
 	{

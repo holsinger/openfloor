@@ -23,6 +23,7 @@ class UserAuth {
 		define('SL_BLOCKED',100);
 			
 		$this->CI->load->model('User_model','user');
+		$this->CI->load->model('event_model','event');
 		$this->CI->load->helper('url');
 		
 		//set user vars
@@ -98,6 +99,31 @@ class UserAuth {
 		
 		if ( $this->CI->user->check_status (SL_ADMIN) ) return TRUE;
 		else return FALSE;
+	}
+	
+	/**
+	 * Returns whether the user qualifies as an administrator.  This returns true if the user has specific permissions for the event or 
+	 * if the user is an admin.  Used when checking for admin rights for events.
+	 *
+	 * @return boolean
+	 * @author Clark Endrizzi
+	 */
+	public function isEventAdmin($event_id){
+		if ( !$this->CI->user->is_logged_in($this->CI->session->userdata('user_id')) ) return FALSE;
+		// First check for admin through the normal method
+		if($this->isAdmin()){
+			return TRUE;
+		}else{
+			$event_data = $this->CI->event->get_event($event_id);
+			if( $event_data['creator_id'] == $this->CI->session->userdata('user_id') ){
+				return TRUE;
+			}else{
+				/*
+					TODO Add extra permission checking when the feature is added.
+				*/
+				return FALSE;
+			}
+		}
 	}
 	
 	/**

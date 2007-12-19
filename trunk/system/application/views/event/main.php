@@ -21,16 +21,18 @@ dependency overall_reaction.css
 #dependency lazy_loader.js
 #dependency loading_reminder.js
 -->
-<? if ($this->userauth->isAdmin()): ?>
+<? if ($this->userauth->isEventAdmin($event_data['event_id'])): ?>
 	<div><b>Administration:</b></div> 
-	<? if(!$event_data["event_finished"]): ?>
+	<? if(!$event_data['streaming'] && !$event_data["event_finished"]): ?>
+		<input value="Start Streaming" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stream event.') } });">
+	<? elseif(!$event_data["event_finished"]): ?>
+		<input value="Stop Streaming" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stop streaming event.') } });">
+		<input value="Finish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });">
 		<input value="Next Question" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });">
-		<input value="Finish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/finish_event_ajax/<?=$event_data['event_id']?>',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });">
+	<? else: ?>
+		<input value="Unfinish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not unfinish event.') } });">
 	<? endif; ?>
-	<input value="Edit Event" class="button" type="button" onclick="window.location=site_url+'event/edit_event/<?=$event_data['event_id']?>'">
-	<!-- <a class="link" onclick="cpUpdater.enableAJAX()">START</a>
-		<a class="link" onclick="cpUpdater.disableAJAX()">STOP</a>
-		<a class="link" onclick="cpUpdater.current_question_fade()">FADE</a> -->
+	<input value="Admin Panel" class="button" type="button" onclick="window.location=site_url+'event/admin_panel/<?=$event_data['event_id']?>'">
 	<br />
 	<br />
 <? endif; ?>
@@ -119,14 +121,16 @@ dependency overall_reaction.css
 	<div class="section">
 		<span class="section-title" id="question_title"><?= !$event_data["event_finished"] ? "Upcoming Questions" : "Answered Questions" ?> </span>
 		<span style="float:right;padding-top:3px;cursor:pointer;">
-			<span>Sort: </span>
+			<span>Show: </span>
 			<? if(!$event_data["event_finished"]): ?>
-				<span id="sort-link-pending-2" title="Upcoming" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
-				<span id="sort-link-newest-2" title="Newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-				<span id="sort-link-asked-2" title="Answered" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;
+				<span id="sort-link-pending" title="Upcoming" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
+				<span id="sort-link-newest" title="Newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
+				<span id="sort-link-asked" title="Answered" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span> | 
+				<span id="sort-link-deleted" title="Deleted" class="cp-sort-link" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;
 			<? else: ?>
-				<span id="sort-link-pending-2" title="Unanswered" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unanswered</span> | 
-				<span id="sort-link-asked-2" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span>&nbsp;&nbsp;			
+				<span id="sort-link-pending" title="Unanswered" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unanswered</span> | 
+				<span id="sort-link-asked" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span> | 		
+				<span id="sort-link-deleted" title="Deleted" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;			
 			<? endif; ?>
 		</span>
 	</div>
