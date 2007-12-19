@@ -3,7 +3,7 @@
  * This controller has to do with events.  Right now it handles the viewing and editing of events only, and not the live event functionality (look to the forums controller for this)
  *
  * @author Clark Endrizzi, Rob Stef, James Klien
- * @version $Id$
+ * @version none
  * @copyright Run_Polictics, 19 December, 2007
  * @package default
  **/
@@ -297,8 +297,7 @@ class Event extends Controller
 			$data['candidates'][$i] = $this->candidate->getCandidate( $data['candidates'][$i]['fk_can_id'] );
 		}
 		if(isset($_POST['did_submit'])){
-			print_r($_POST);
-			//$show_form = false;
+			$show_form = false;
 		}
 		// If initial or validation fails, show form
 		if ($show_form){
