@@ -1,12 +1,12 @@
 <strong>Speakers:</strong>
 <table cellpadding="0" cellspacing="0">
-	<? if(count($candidates) > 0): ?>
+	<? if(count($users) > 0): ?>
 		<tr>
 			<th style="height: 25px; ">&nbsp;Name</th>
 		</tr>
-		<? foreach($candidates AS $candidate): ?>
+		<? foreach($users AS $user): ?>
 			<tr>
-				<td style="padding: 3px 15px 3px 0px;"><?=$candidate['can_display_name']?></td>
+				<td style="padding: 3px 15px 3px 0px;"><?=$user['can_display_name']?></td>
 			</tr>
 		<? endforeach; ?>
 	<? endif; ?>

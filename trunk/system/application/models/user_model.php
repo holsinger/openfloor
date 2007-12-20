@@ -14,12 +14,20 @@ class User_model extends Model {
         parent::Model();
     }
     
-    function get_last_ten_users()
+	/**
+	 * Gets the last 10 numbers, or how many are specified.
+	 *
+	 * @param int $num
+	 * @return void
+	 * @author Rob Stef, Clark Endrizzi
+	 **/
+    function get_last_ten_users($num = 10)
     {
-        $query = $this->db->get('cn_users', 10);
+        $query = $this->db->get('cn_users', $num);
         return $query->result();
     }
 
+	
     public function activate($password, $timestamp)
     {
     	$this->db->set('user_status', true);
@@ -28,9 +36,79 @@ class User_model extends Model {
 		$this->db->update('cn_users');
 		return $this->db->affected_rows();
     }	
+	
+	/**
+	 * Add a new record to the user table.  Pass the data which is an associative array with field_name => field_value pairs
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function InsertUser($data){
+		$this->db->insert('cn_users', $data); 
+		return $this->db->insert_id();
+	}
+	
+	/**
+	 * Update a user record.  Pass the id to be updated and the data which is an associative array with field_name => field_value pairs
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function UpdateCandidate($user_id, $data){
+		$this->db->where('user_id', (int) $user_id);
+		$this->db->update('cn_users', $data);
+		
+		return $this->db->affected_rows();
+	}
 
 	/**
-     * this function will insert data from a posted form
+	 * Inserts the association record that is used between and user and an event.  Should this be on this model?
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function InsertUserEventAssociation($user_id, $event_id){
+		$data = array(
+			"fk_user_id" 	=> $user_id,
+			"fk_event_id"	=> $event_id
+		);
+		$this->db->insert("cn_idx_users_events", $data);
+		return $this->db->insert_id();
+	}
+
+	/**
+	 * Deletes the association record that is used between and user and an event.  Should this be on this model?
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function DeleteUserEventAssociation( $user_id, $event_id){
+		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $user_id, 'fk_event_id' => $event_id));
+	}
+
+	/**
+	 * Gets all the different users for a single event
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function GetUsersInEvent($event_id){
+		return $this->db->select('fk_user_id')->from('cn_idx_users_events')->where('fk_event_id', $event_id)->get()->result_array();
+	}
+	
+	/**
+	 * This function will do a search for the field provides with any record that contains the search_string.  Perhaps fuzzy is a little strong.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function FuzzySearch($field_name, $search_string){
+		$query = $this->db->query("SELECT * FROM cn_users WHERE $field_name LIKE '%$search_string%'");
+		return $query->result_array();
+	}
+
+	/**
+     * this function will insert data from a posted form  (This maybe should be deprecated in light of the InsertUser function - CTE)
      */	
     function insert_user_form($can_id = null)
     {
@@ -55,7 +133,7 @@ class User_model extends Model {
     }
 		
     /**
-     * this function will update data from a posted form
+     * this function will update data from a posted form  (This maybe should be deprecated in light of the UpdateUser function - CTE)
      */	
     function update_user_form()
     {
@@ -112,7 +190,7 @@ class User_model extends Model {
 	 * @retun array (user_id,user_name,user_email,user_avatar,user_openid)
 	 * @autho James Kleinschnitz
 	 * */
-	function get_user ($user_id,$user_name='',$user_email='',$user_openid='') {
+	function get_user ($user_id, $user_name='', $user_email='', $user_openid='') {
 		if ( $user_id ) $this->db->where('user_id',$user_id);
 		if ( $user_name ) $this->db->where('user_name',$user_name);
 		if ( $user_email ) $this->db->where('user_email',$user_email);

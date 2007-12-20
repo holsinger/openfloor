@@ -10,29 +10,28 @@ $this->load->view('view_includes/header.php', $data);
 <div id="content_div">
   	<div class='errorArea'><?=$this->validation->error_string;?></div>
 	<div id="account_form">
-		<?= form_open_multipart(($can_id)?"event/manage_candidate/$event_id/$can_id":"event/manage_candidate/$event_id", array('name'=>'my_form')); ?>	
+		<?= form_open_multipart(($user_id)?"event/manage_candidate/$event_id/$user_id":"event/manage_candidate/$event_id", array('name'=>'my_form')); ?>	
 			<label>Speaker Display Name: *</label>
 			<small>Write speaker's name as you want it displayed.</small><br />
-			<input name="can_display_name" value="<?=$can_display_name?>" class="txt" size="48" maxlength="100">
+			<input name="display_name" value="<?=$display_name?>" class="txt" size="48" maxlength="100">
 			<br /><br />
 			<label>Speaker Email Address: *</label>
 			<small>Write the speaker's email address.</small><br />
-			<input name="can_email" size="48" class="txt" value="<?=$can_email?>" />
+			<input name="user_email" size="48" class="txt" value="<?=$user_email?>" />
 			<br /><br />
 			<label>Speaker Biography: *</label>
 			<small>Write a bio of the the speaker.</small><br />
-			<!-- <textarea name="can_bio" rows="3" cols="48" class="txt"><?=$can_bio?></textarea> -->
 			<?
-		     $oFCKeditor = new FCKeditor('can_bio') ;
+		     $oFCKeditor = new FCKeditor('bio') ;
 		     $oFCKeditor->BasePath = 'fckeditor/' ;
 		     $oFCKeditor->Height = '200';  $oFCKeditor->Width = '500';  $oFCKeditor->ToolbarSet = 'Basic';
-			 $oFCKeditor->Value	 = $can_bio;
+			 $oFCKeditor->Value	 = $bio;
 			 $oFCKeditor->Create() ;
 			?>
 			<br /><br />
 			<label>Speaker Avatar</label>
 			<small>Must be less then 1024 kb & 1024px768px (image will be resized)</small><br />
-			<?= form_upload('userfile','$event_avatar','class="txt"') ?>
+			<?= form_upload('user_avatar','$user_avatar','class="txt"') ?>
 			<br /><br />
 			<br /><br />
 			<input type="button" onclick="window.location='event/create_event_two/<?=$event_id?>';" class="button" value="Cancel">

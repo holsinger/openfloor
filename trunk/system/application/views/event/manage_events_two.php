@@ -5,7 +5,7 @@ $this->load->view('view_includes/header.php', $data);
 <div id="content_div">
 	<div id="account_form">
 		<? $hidden = array('did_submit' => 'true'); ?>
-		<?= form_open('event/create_event_two/'.$event_id.'/'.$option, array('name'=>'my_form')); ?>
+		<?= form_open('event/create_event_two/'.$event_id.'/'.$option, array('name'=>'my_form'), $hidden); ?>
 			<label>Add Speakers:</label>
 			<table cellpadding="0" cellspacing="0">
 				<? if(count($candidates) > 0): ?>
@@ -13,11 +13,11 @@ $this->load->view('view_includes/header.php', $data);
 						<th style="height: 25px; ">&nbsp;Name</th>
 						<th colspan="2">&nbsp;Options</th>
 					</tr>
-					<? foreach($candidates AS $candidate): ?>
+					<? foreach($users AS $user): ?>
 						<tr>
 							<td style="padding: 3px 15px 3px 0px;"><?=$candidate['can_display_name']?></td>
-							<td style="padding: 3px 4px 3px 0px;"><input type="button" value="Edit" onclick="window.location=site_url+'event/manage_candidate/<?=$event_id?>/<?=$candidate['can_id']?>';"></td>
-							<td style="padding: 3px 4px 3px 0px;"><input type="button" value="Delete" onclick="if( confirm('Are you sure you want to delete the speaker \'<?=$candidate['can_display_name']?>\'?') ){ DeleteCandidate(<?=$candidate['can_id']?>); }"></td>
+							<td style="padding: 3px 4px 3px 0px;"><input type="button" value="Edit" onclick="window.location=site_url+'event/manage_candidate/<?=$event_id?>/<?=$user['user_id']?>';"></td>
+							<td style="padding: 3px 4px 3px 0px;"><input type="button" value="Delete" onclick="if( confirm('Are you sure you want to delete the speaker \'<?=$user['display_name']?>\'?') ){ DeleteCandidate(<?=$user['user_id']?>); }"></td>
 						</tr>
 					<? endforeach; ?>
 				<? else: ?>
@@ -27,7 +27,7 @@ $this->load->view('view_includes/header.php', $data);
 				<? endif; ?>
 			</table>
 			<br /><br />
-			<input type="button" value="Add Speaker" onclick="window.location=site_url+'event/manage_candidate/<?=$event_id?>';">
+			<input type="button" value="Add Speaker" onclick="window.location=site_url+'event/search_candidate/<?=$event_id?>';">
 			<br /><br />
 			<br /><br />
 			<?if($option == 'edit'):?>

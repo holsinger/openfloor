@@ -22,7 +22,7 @@ class Event extends Controller
 		
 		$this->load->model('Event_model','event');
 		$this->load->model('Cms_model','cms');
-		$this->load->model('Candidate_model', 'candidate');
+		$this->load->model('user_model', 'user');
 		$this->load->model('tag_model', 'tag');
 		
 		$this->load->library('validation');
@@ -292,9 +292,9 @@ class Event extends Controller
 		// by default we show the form for step one, unless, it's a post and validation works out
 		$show_form = true;
 		$data['event_id'] = $event_id;
-		$data['candidates'] = $this->candidate->cansInEvent($event_id);
-		for($i = 0; $i < count($data['candidates']); $i++){
-			$data['candidates'][$i] = $this->candidate->getCandidate( $data['candidates'][$i]['fk_can_id'] );
+		$data['users'] = $this->user->GetUsersInEvent($event_id);
+		for($i = 0; $i < count($data['users']); $i++){
+			$data['users'][$i] = $this->user->get_user( $data['users'][$i]['fk_user_id'] );
 		}
 		if(isset($_POST['did_submit'])){
 			$show_form = false;
@@ -404,7 +404,41 @@ class Event extends Controller
 	 * @author Clark Endrizzi
 	 **/
 	public function search_candidate($event_id){
+		#check that user is allowed
+		$this->userauth->isUser();	
 		
+		$show_form = true;		// by default we show the form for step one, unless, it's a post and validation works out
+		
+		if($_POST){	
+			// Setup the data to show on the form (used if validation is false)
+			$data = $_POST;
+			// Set validation rules
+			$rules['display_name'] = "trim|required|max_length[100]|xss_clean";
+			$this->validation->set_rules($rules);
+			// Set the name of the fields for validation errors (if any)
+			$fields['display_name']		= 	"Speaker Display Name"; 
+			$this->validation->set_fields($fields);
+			// Check validation
+			if ($this->validation->run()){
+				$show_form = false;
+			}
+		}
+		
+		// If initial or validation fails, show form
+		if ($show_form){
+			// Page Setup Stuff
+			$data['page_title'] = "Add Speaker";
+
+			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
+			
+			$data['event_id'] = $event_id;
+			$data['user_id'] = $user_id;
+			$this->load->view('candidate/speaker_search',$data);
+		}else{
+			// Show view
+			redirect("/event/create_event_two/$event_id", 'location');
+			
+		}
 	}
 	
 	/**
@@ -413,7 +447,7 @@ class Event extends Controller
 	 * @return (view)
 	 * @author Clark Endrizzi
 	 **/
-	public function manage_candidate($event_id, $can_id){
+	public function manage_candidate($event_id, $user_id){
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);	
 		
@@ -423,14 +457,14 @@ class Event extends Controller
 			// Setup the data to show on the form (used if validation is false)
 			$data = $_POST;
 			// Set validation rules
-			$rules['can_display_name'] = "trim|required|max_length[100]|xss_clean";
-			$rules['can_bio'] = "trim|required|max_length[65535]|xss_clean";
-			$rules['can_email'] = "trim|required|max_length[150]|xss_clean";
+			$rules['display_name'] = "trim|required|max_length[100]|xss_clean";
+			$rules['bio'] = "trim|required|max_length[65535]|xss_clean";
+			$rules['user_email'] = "trim|required|max_length[150]|xss_clean";
 			$this->validation->set_rules($rules);
 			// Set the name of the fields for validation errors (if any)
-			$fields['can_display_name']		= 	"Speaker Display Name"; 
-			$fields['can_bio']		= 	"Speaker Biography";
-			$fields['can_email']	= 	"Speaker Email";
+			$fields['display_name']		= 	"Speaker Display Name"; 
+			$fields['bio']		= 	"Speaker Biography";
+			$fields['user_email']	= 	"Speaker Email";
 			$this->validation->set_fields($fields);
 			// Check validation
 			if ($this->validation->run()){
@@ -439,9 +473,9 @@ class Event extends Controller
 		}else{
 			// Inititial page load
 			// If event_id is set it is an update, if not then it's new and we'll want to set the default values for a new form.
-			if($can_id){				
+			if($user_id){				
 				// pull from db
-				$data = $this->candidate->getCandidate($can_id);
+				$data = $this->user->get_user($user_id);
 			}
 			
 		}
@@ -449,7 +483,7 @@ class Event extends Controller
 		// If initial or validation fails, show form
 		if ($show_form){
 			// Page Setup Stuff
-			if($can_id){
+			if($user_id){
 				$data['page_title'] = "Edit Speaker";
 			}else{
 				$data['page_title'] = "Create Speaker";
@@ -457,7 +491,7 @@ class Event extends Controller
 			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
 			
 			$data['event_id'] = $event_id;
-			$data['can_id'] = $can_id;
+			$data['user_id'] = $user_id;
 			$this->load->view('candidate/manage_candidate',$data);
 		}else{
 			// Upload file first
@@ -497,19 +531,34 @@ class Event extends Controller
 			}
 			// Database stuff now
 			if ( $can_id ) {
-				$this->candidate->SetID($can_id);
-				$this->candidate->SetData($_POST);
-				$this->candidate->UpdateCandidate();
+				$this->user->UpdateUser($user_id, $_POST);
 			}else{
-				$this->candidate->SetData($_POST);
-				$last_id = $this->candidate->InsertCandidate();
-				$last_can_id = $this->candidate->InsertCandidateEventAssociation($last_id, $event_id);
+				$last_id = $this->user->InsertUser($_POST);
+				$last_can_id = $this->user->InsertUserEventAssociation($last_id, $event_id);
 			}
 			// Show view
 			redirect("/event/create_event_two/$event_id", 'location');
 			
 		}
 		
+	}
+		
+	/**
+	 * Using the provided search_string it searches the user db for like names.  This is used during the creation of an event, when the user adds new speakers.
+	 *
+	 * I broke a cardinal rule by adding html, but it was just so little html.  If desired, it can be changed to using a view.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function user_name_from_search_ajax(){
+		$users = $this->user->FuzzySearch("display_name", $_POST['display_name']);
+		$st = '<ul>';
+		foreach($users as $user){
+			$st .= '<li>'.$user['display_name'].'</li>';
+		}
+		$st .= '</ul>';
+		echo($st);
 	}
 		
 	/**
@@ -609,9 +658,9 @@ class Event extends Controller
 		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
 		if($tab == 'two'){
 			$data['event_id'] = $event_id;
-			$data['candidates'] = $this->candidate->cansInEvent($event_id);
-			for($i = 0; $i < count($data['candidates']); $i++){
-				$data['candidates'][$i] = $this->candidate->getCandidate( $data['candidates'][$i]['fk_can_id'] );
+			$data['users'] = $this->user->GetUsersInEvent($event_id);
+			for($i = 0; $i < count($data['users']); $i++){
+				$data['users'][$i] = $this->user->get_user( $data['users'][$i]['fk_user_id'] );
 			}
 		}elseif($tab == 'four'){
 			
@@ -634,9 +683,9 @@ class Event extends Controller
 		// return info
 		if($tab == 'two'){
 			$data['event_id'] = $event_id;
-			$data['candidates'] = $this->candidate->cansInEvent($event_id);
-			for($i = 0; $i < count($data['candidates']); $i++){
-				$data['candidates'][$i] = $this->candidate->getCandidate( $data['candidates'][$i]['fk_can_id'] );
+			$data['users'] = $this->user->GetUsersInEvent($event_id);
+			for($i = 0; $i < count($data['users']); $i++){
+				$data['users'][$i] = $this->user->get_user( $data['users'][$i]['fk_user_id'] );
 			}
 		}elseif($tab == 'four'){
 			

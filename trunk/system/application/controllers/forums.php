@@ -36,6 +36,12 @@ class Forums extends Controller
 		$this->load->scaffolding('cn_questions');
 	}
 	
+	/**
+	 * Goes directly back to the view events page.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	function index () 
 	{
 		redirect('event/');
@@ -43,6 +49,7 @@ class Forums extends Controller
 		exit();
 	}
 	
+
 	public function liveQueue($event, $ajax=null)
 	{
 		$data['event'] = $event;
@@ -91,9 +98,12 @@ class Forums extends Controller
 		}
 	}
 	
-	// ===================================================================================================
-	// = candidateQueue - This is the controller for the dashboard that candidates watch during an event =
-	// ===================================================================================================
+	/**
+	 * This is the controller for the dashboard that candidates watch during an event
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	public function candidateQueue($event_name, $ajax = false){
 		$data['event_name'] = $event_name;
 		$event_id = $this->event->get_id_from_url($event_name);
@@ -155,6 +165,12 @@ class Forums extends Controller
 		echo $close_button . $this->question->get('question_answer');		
 	}
 	
+	/**
+	 * This is the most important function.  Shows the forums.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
 		#TODO Handle no candidates assigned?
@@ -248,6 +264,7 @@ class Forums extends Controller
 			$this->load->view('event/main', $data);
 		}		
 	}
+	
 	
 	public function overall_reaction($event, $ajax = null, $can_id = null)
 	{
@@ -437,9 +454,12 @@ class Forums extends Controller
 		}
 	}
 	
-	// ==============================================================================================
-	// = EditQuestion - This is used for editing the question on the event view stuff (formerly cp) =
-	// ==============================================================================================
+	/**
+	 * Used through ajax for the ADMIN TAB.  This both shows and updates.  If $option is set to 
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	public function EditQuestion($question_id, $event_id, $option){
 		// If update then it's called from ajax and needs not show anything
 		if($option == 'update'){
@@ -471,9 +491,12 @@ class Forums extends Controller
 		
 	}
 	
-	// ========================================================
-	// = NextQuestion - Changes to the next question manually =
-	// ========================================================
+	/**
+	 * Changes to the next question based on the votes
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	public function next_question($event_id)
 	{
 		// First get the next question
@@ -486,9 +509,13 @@ class Forums extends Controller
 		$changed = $this->question->updateQuestion($question_id, $data_array);
 		echo($changed);
 	}
-	// ==============================================================================================
-	// = ShowAnswer - This is used to show the answer video when there is actually an answer        =
-	// ==============================================================================================
+
+	/**
+	 * Used through ajax to the ANSWER TAB.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
 	public function ShowAnswer($question_id){
 		$q_data = $this->question->get_question($question_id);
 		
@@ -609,11 +636,13 @@ class Forums extends Controller
 		redirect("forums/candidate_dashboard/$event_name");
 	}
 	
+	// Why does these exist - CTE?
 	public function stream_high($event) 
 	{
 		$this->videoFeed($event, 'high');
 	}
 	
+	// Why does this exist - CTE?
 	public function stream_low($event)
 	{
 		$this->videoFeed($event, 'low');

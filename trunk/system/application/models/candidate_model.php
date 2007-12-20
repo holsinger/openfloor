@@ -1,5 +1,4 @@
 <?php
-
 class Candidate_model extends Model 
 {
 	private $action;
