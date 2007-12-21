@@ -44,7 +44,7 @@ $this->load->view('view_includes/header.php', $data);
 			<br /><br />
 			<br /><br />
 			<?if($option == 'edit'):?>
-				<?= form_submit('','Update Information','class="button"'); ?>
+				<?= form_submit('','Finish Updating','class="button"'); ?>
 			<? else: ?>
 				<input type="button" onclick="window.location='event/create_event/<?=$event_id?>';" class="button" value="Last Step">
 				<? if(count($users) > 0): ?>
