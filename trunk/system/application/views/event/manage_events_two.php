@@ -47,7 +47,7 @@ $this->load->view('view_includes/header.php', $data);
 				<?= form_submit('','Update Information','class="button"'); ?>
 			<? else: ?>
 				<input type="button" onclick="window.location='event/create_event/<?=$event_id?>';" class="button" value="Last Step">
-				<? if(count($candidates) > 0): ?>
+				<? if(count($users) > 0): ?>
 					<?= form_submit('','Next Step','class="button"'); ?>
 				<? else: ?>
 					<input type="button" onclick="alert('You must have at least one speaker to continue.')" class="button" value="Next Step">
