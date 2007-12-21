@@ -28,10 +28,16 @@ $this->load->view('view_includes/header.php', $data);
 			 $oFCKeditor->Value	 = $bio;
 			 $oFCKeditor->Create() ;
 			?>
-			<br /><br />
+			<br />
 			<label>Speaker Avatar</label>
 			<small>Must be less then 1024 kb & 1024px768px (image will be resized)</small><br />
 			<?= form_upload('user_avatar','$user_avatar','class="txt"') ?>
+			<br /><br />
+			<?= form_checkbox('invite_speaker', 'invite', TRUE) ?> Email speaker an invitation.
+			<br /><br />
+			<label>Invitation Text:</label>
+			<small>Write any text you would like to have included with the invitation to the speaker.</small><br />
+			<textarea name="invitation_text" rows="2" cols="48" class="txt"><?=$invitation_text?></textarea>
 			<br /><br />
 			<br /><br />
 			<input type="button" onclick="window.location='event/create_event_two/<?=$event_id?>';" class="button" value="Cancel">

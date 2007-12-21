@@ -111,3 +111,9 @@ top: 1px;
 padding-top: 4px; /* must change with respect to padding (X) above and below */
 }
 /* end css tabs */
+label{
+	display: block;
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-top: 7px;
+}

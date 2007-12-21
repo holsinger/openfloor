@@ -12,7 +12,7 @@
 |
 */
 // $config['base_url']	= "http://www.politic20.com";
-$config['base_url']	= "http://192.168.0.86/RunPolitics";
+$config['base_url']	= "http://192.168.1.101/RunPolitics";
 
 /*
 |--------------------------------------------------------------------------

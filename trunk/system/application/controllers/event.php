@@ -305,6 +305,7 @@ class Event extends Controller
 			$data['page_title'] = "Create ".$this->cms->get_cms_text('', "forums_navigation_title");
 			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
 			$data['option'] = $option;
+			$data['current_user_id'] = $this->CI->session->userdata('user_id');
 			// Get 
 			$this->load->view('event/manage_events_two',$data);
 		}else{
@@ -392,9 +393,15 @@ class Event extends Controller
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function delete_speaker($can_id){
-		$this->candidate->SetID($can_id);
-		$this->candidate->DeleteCandidate();
+	public function delete_speaker($user_id, $event_id, $option){
+		error_log("Deleting");
+		// Check that this can be done here
+		
+		// Delete
+		$this->user->DeleteUserEventAssociation($user_id, $event_id);
+		if($option == 'delete'){
+			$this->user->DeleteUser($user_id);
+		}
 	}
 	
 	/**
@@ -403,25 +410,14 @@ class Event extends Controller
 	 * @return (depends)
 	 * @author Clark Endrizzi
 	 **/
-	public function search_candidate($event_id){
+	public function search_candidate($event_id, $add_user_id){
 		#check that user is allowed
 		$this->userauth->isUser();	
 		
 		$show_form = true;		// by default we show the form for step one, unless, it's a post and validation works out
 		
-		if($_POST){	
-			// Setup the data to show on the form (used if validation is false)
-			$data = $_POST;
-			// Set validation rules
-			$rules['display_name'] = "trim|required|max_length[100]|xss_clean";
-			$this->validation->set_rules($rules);
-			// Set the name of the fields for validation errors (if any)
-			$fields['display_name']		= 	"Speaker Display Name"; 
-			$this->validation->set_fields($fields);
-			// Check validation
-			if ($this->validation->run()){
-				$show_form = false;
-			}
+		if($add_user_id){	
+			$show_form = false;
 		}
 		
 		// If initial or validation fails, show form
@@ -435,6 +431,7 @@ class Event extends Controller
 			$data['user_id'] = $user_id;
 			$this->load->view('candidate/speaker_search',$data);
 		}else{
+			$last_can_id = $this->user->InsertUserEventAssociation($add_user_id, $event_id);
 			// Show view
 			redirect("/event/create_event_two/$event_id", 'location');
 			
@@ -447,7 +444,7 @@ class Event extends Controller
 	 * @return (view)
 	 * @author Clark Endrizzi
 	 **/
-	public function manage_candidate($event_id, $user_id){
+	public function manage_candidate($event_id, $user_id = false, $default_display_name = false){
 		#check that user is allowed
 		$this->userauth->check(SL_ADMIN);	
 		
@@ -459,7 +456,7 @@ class Event extends Controller
 			// Set validation rules
 			$rules['display_name'] = "trim|required|max_length[100]|xss_clean";
 			$rules['bio'] = "trim|required|max_length[65535]|xss_clean";
-			$rules['user_email'] = "trim|required|max_length[150]|xss_clean";
+			$rules['user_email']	= "callback_validation_email_duplication_check";
 			$this->validation->set_rules($rules);
 			// Set the name of the fields for validation errors (if any)
 			$fields['display_name']		= 	"Speaker Display Name"; 
@@ -467,13 +464,13 @@ class Event extends Controller
 			$fields['user_email']	= 	"Speaker Email";
 			$this->validation->set_fields($fields);
 			// Check validation
-			if ($this->validation->run()){
+			if ($this->validation->run() && !$this->user->userExists(array('user_email' => $_POST['user_email'])) ){
 				$show_form = false;
 			}
 		}else{
 			// Inititial page load
 			// If event_id is set it is an update, if not then it's new and we'll want to set the default values for a new form.
-			if($user_id){				
+			if($user_id && $user_id != 'none'){				
 				// pull from db
 				$data = $this->user->get_user($user_id);
 			}
@@ -483,7 +480,7 @@ class Event extends Controller
 		// If initial or validation fails, show form
 		if ($show_form){
 			// Page Setup Stuff
-			if($user_id){
+			if($user_id && $user_id != 'none'){	
 				$data['page_title'] = "Edit Speaker";
 			}else{
 				$data['page_title'] = "Create Speaker";
@@ -492,6 +489,11 @@ class Event extends Controller
 			
 			$data['event_id'] = $event_id;
 			$data['user_id'] = $user_id;
+
+			if($default_display_name){
+				$data['display_name'] = $default_display_name;
+			}
+			
 			$this->load->view('candidate/manage_candidate',$data);
 		}else{
 			// Upload file first
@@ -533,14 +535,61 @@ class Event extends Controller
 			if ( $can_id ) {
 				$this->user->UpdateUser($user_id, $_POST);
 			}else{
+				$invite_speaker = $_POST['invite_speaker']; unset($_POST['invite_speaker']);
+				$invitation_text = $_POST['invitation_text']; unset($_POST['invitation_text']);
+				$_POST['creator_id'] = $this->CI->session->userdata('user_id');
+				
 				$last_id = $this->user->InsertUser($_POST);
 				$last_can_id = $this->user->InsertUserEventAssociation($last_id, $event_id);
+				// Email if options was selected
+				if($invite_speaker == 'invite'){
+					error_log("Trying to send email to {$_POST['user_email']}!");
+					//send mail
+					$this->load->library('email');
+					$config['mailtype'] = 'html';
+					$config['wordwrap'] = TRUE;				
+					$this->email->initialize($config);
+					$this->email->from('contact@runpolitics.com', 'RunPolitics.com Invitation');
+					$this->email->to($_POST['user_email']);
+					// vars
+					$this->user->user_id = $last_id;
+					$timestamp = $this->user->get('timestamp');
+					$url = site_url('user/invite_accept/' . $_POST['user_password'] . '/' . base64_encode($timestamp));
+					$message = 'You have been invited to participate in an event.  Please click on this link to activate your account: ' . $url;
+					if($invitation_text){
+						$message .= '<br /><br />Clark Endrizzi wrote the following:<br />'.$invitation_text;
+					}
+					// set subject
+					$this->email->subject('Runpolictics.com  Invitation');
+					$this->email->message($message);
+					// send
+					$this->email->send();
+				}
 			}
+			
 			// Show view
 			redirect("/event/create_event_two/$event_id", 'location');
 			
 		}
 		
+	}
+
+	/**
+	 * A custom validation callback that is used for the validation of the email field.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_email_duplication_check($str){
+		if(!$str){
+			$this->validation->set_message('validation_email_duplication_check', 'The field "Speaker Email Address" requires a value.');
+			return FALSE;
+		}elseif ( $this->user->userExists(array('user_email' => $str)) ){
+			$this->validation->set_message('validation_email_duplication_check', 'The email address "'.$_POST['user_email'].'" is already in use.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
 	}
 		
 	/**
@@ -555,7 +604,7 @@ class Event extends Controller
 		$users = $this->user->FuzzySearch("display_name", $_POST['display_name']);
 		$st = '<ul>';
 		foreach($users as $user){
-			$st .= '<li>'.$user['display_name'].'</li>';
+			$st .= '<li id="'.$user['user_id'].'">'.$user['display_name'].'</li>';
 		}
 		$st .= '</ul>';
 		echo($st);
@@ -693,5 +742,17 @@ class Event extends Controller
 			$data = $this->event->get_event($event_id);
 		}
 		$this->load->view('event/admin_panel_tab_'.$tab ,$data);
+	}
+	
+	/**
+	 * Shows detailed information on a user (used when someone is adding a new user)
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function show_user_info_ajax($user_id){
+		// return info
+		$data = $this->user->get_user($user_id);
+		$this->load->view('user/ajax_view_user_info', $data);
 	}
 }

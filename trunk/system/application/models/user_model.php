@@ -54,13 +54,23 @@ class User_model extends Model {
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function UpdateCandidate($user_id, $data){
+	public function UpdateUser($user_id, $data){
 		$this->db->where('user_id', (int) $user_id);
 		$this->db->update('cn_users', $data);
 		
 		return $this->db->affected_rows();
 	}
 
+	/**
+	 * Deletes a user that is specified by an id in the argument list
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function DeleteUser($user_id){
+		$this->db->delete('cn_users', array('user_id' => $user_id));
+	}
+	
 	/**
 	 * Inserts the association record that is used between and user and an event.  Should this be on this model?
 	 *
@@ -83,7 +93,7 @@ class User_model extends Model {
 	 * @author Clark Endrizzi
 	 **/
 	public function DeleteUserEventAssociation( $user_id, $event_id){
-		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $user_id, 'fk_event_id' => $event_id));
+		$this->db->delete('cn_idx_users_events', array('fk_user_id' => $user_id, 'fk_event_id' => $event_id));
 	}
 
 	/**
