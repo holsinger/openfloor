@@ -380,6 +380,12 @@ class User extends Controller {
 		$this->load->view('view_create_account',$data);
 	}
 	
+	/**
+	 * Shows the users profile
+	 *
+	 * @return void
+	 * @author Rob Stef, Clark Endrizzi
+	 **/
 	function profile () {
 		//allow segment 3 to be an id or username
 		$error = $this->error;
@@ -389,38 +395,18 @@ class User extends Controller {
 		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
 		$data = $this->user->get_user($user_id,$user_name);
 		
-		#TODO - Abstract event, question anchor code
-		
-		// users last 10 votes
-		$data['votes'] = $this->vote->getVotesByUser($data['user_id']);
-		foreach($data['votes'] as $k => $v) {
-			$data['votes'][$k]['event_name'] = anchor('forums/cp/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
-			$data['votes'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
-		}
-		
-		// users last 10 questions
-		$data['questions'] =  $this->question->getQuestionsByUser($data['user_id']);
-		foreach($data['questions'] as $k => $v) {
-			$data['questions'][$k]['event_name'] = anchor('forums/cp/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
-			$data['questions'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
-		}
-		
 		//set error if there is one
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
 
-		if (is_string($data['user_avatar']) && is_array(unserialize($data['user_avatar'])) )
-
-		{
+		if (is_string($data['user_avatar']) && is_array(unserialize($data['user_avatar'])) ){
 			$image_array = unserialize($data['user_avatar']);
 			
 			$data['avatar_image_name'] = $image_array['file_name'];
 			$data['avatar_image_height'] = $image_array['image_height'];
 			$data['avatar_image_width'] = $image_array['image_width'];
 			$data['avatar_image_path'] = "./avatars/".$image_array['file_name'];
-		}
-		else 
-		{				
+		}else {				
 			$data['avatar_image_path'] = './images/image01.jpg';
 		}
 		//exit(var_dump($data));
@@ -432,10 +418,38 @@ class User extends Controller {
 		$data['display_name'] = $this->user->displayName($data['user_name']);
 		$data['bio'] = $this->user->bio($data['user_name']);
 				
-		$this->load->view('view_user_profile',$data);
+		$this->load->view('user/view_user_profile',$data);
 	}
 	
-
+	/**
+	 * Returns information about the user and their question history
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function profile_ajax($user_id, $tab='1'){
+		$data = $this->user->get_user($user_id);
+		if($tab == 1){
+			$this->load->view('user/ajax_profile_info',$data);
+		}elseif($tab == 2){
+			// users last 10 questions
+			$data['questions'] =  $this->question->getQuestionsByUser($data['user_id']);
+			foreach($data['questions'] as $k => $v) {
+				$data['questions'][$k]['event_name'] = anchor('forums/cp/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+				$data['questions'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
+			}
+			$this->load->view('user/ajax_profile_question',$data);
+		}elseif($tab == 3){
+			// users last 10 votes
+			$data['votes'] = $this->vote->getVotesByUser($data['user_id']);
+			foreach($data['votes'] as $k => $v) {
+				$data['votes'][$k]['event_name'] = anchor('forums/cp/' . url_title($v['event_name']), substr($v['event_name'], 0, 20) . '...');
+				$data['votes'][$k]['question_name'] = anchor('question/view/' . url_title($v['event_name']) . '/' . url_title($v['question_name']), substr($v['question_name'],0,50) . '...');
+			}
+			$this->load->view('user/ajax_profile_vote',$data);
+		}
+	}
+	
 	/**
 	 * this function will check the captcha
 	 **/

@@ -310,7 +310,7 @@ class Event extends Controller
 			$this->load->view('event/manage_events_two',$data);
 		}else{
 			if($option == 'edit'){
-				redirect("/event/admin_panel/$event_id/two", 'location');
+				redirect("/event/admin_panel/$event_id/2", 'location');
 			}else{
 				redirect("/event/create_event_three/$event_id", 'location');
 			}
@@ -378,7 +378,7 @@ class Event extends Controller
 			$this->event->update_event_form($event_id,$_POST);
 			$data = $this->event->get_event($event_id);
 			if($option == 'edit'){
-				redirect("/event/admin_panel/$event_id/three", 'location');
+				redirect("/event/admin_panel/$event_id/3", 'location');
 			}else{
 				redirect("/event/admin_panel/".url_title($data['event_id']), 'location');
 			}
@@ -697,21 +697,19 @@ class Event extends Controller
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function admin_panel($event_id, $tab=""){
+	public function admin_panel($event_id, $tab="1"){
 		// Check for permissions
 		
-		// set default tab
-		$tab = ($tab)?$tab:"one";
 		// Show page
 		$data['event_id'] = $event_id;
 		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
-		if($tab == 'two'){
+		if($tab == 2){
 			$data['event_id'] = $event_id;
 			$data['users'] = $this->user->GetUsersInEvent($event_id);
 			for($i = 0; $i < count($data['users']); $i++){
 				$data['users'][$i] = $this->user->get_user( $data['users'][$i]['fk_user_id'] );
 			}
-		}elseif($tab == 'four'){
+		}elseif($tab == 4){
 			
 		}else{
 			$data = $this->event->get_event($event_id);
@@ -730,13 +728,13 @@ class Event extends Controller
 		// Check for permissions
 		
 		// return info
-		if($tab == 'two'){
+		if($tab == 2){
 			$data['event_id'] = $event_id;
 			$data['users'] = $this->user->GetUsersInEvent($event_id);
 			for($i = 0; $i < count($data['users']); $i++){
 				$data['users'][$i] = $this->user->get_user( $data['users'][$i]['fk_user_id'] );
 			}
-		}elseif($tab == 'four'){
+		}elseif($tab == 4){
 			
 		}else{
 			$data = $this->event->get_event($event_id);
