@@ -301,8 +301,10 @@ class User extends Controller {
 	/**
 	 * Shows the users profile
 	 *
+	 * Uses dynamic_tabs (js library).  THis in effect calls the profile ajax function below this to populate each section.
+	 *
 	 * @return void
-	 * @author ????, Clark Endrizzi (major updates)
+	 * @author ????, Clark Endrizzi (Basically rewrote)
 	 **/
 	function profile () {
 		//allow segment 3 to be an id or username
@@ -340,7 +342,7 @@ class User extends Controller {
 	}
 	
 	/**
-	 * Returns information about the user and their question history
+	 * Returns information about the user and their question history.  Used by the profile section (currently).
 	 *
 	 * @return void
 	 * @author Clark Endrizzi

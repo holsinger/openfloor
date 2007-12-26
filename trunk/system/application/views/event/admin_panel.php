@@ -4,6 +4,7 @@ $this->load->view('view_includes/header.php', $data);
 ?>
 <!--
 	#dependency tabs.css
+	#dependency events.css
 	#dependency dynamic_tabs.js
 -->
 <div id="content_div">
@@ -15,7 +16,6 @@ $this->load->view('view_includes/header.php', $data);
 			<!-- <li id="dyn_tab_4"><span id="dyn_text_4">Permissions</span></li> -->
 		</ul>
 	</div>
-	<br />
 	<div id="admin_content" style="position: relative; width: 90%"></div>
 </div>
 <script type="text/javascript" charset="utf-8">

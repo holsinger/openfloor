@@ -1,3 +1,7 @@
+<? if($avatar_image_path): ?>
+	<img src="<?=$avatar_image_path?>" border="0" />
+	<br /><br />
+<? endif; ?>
 <strong>Event Name:</strong><br/>
 <span class="field_display"><?=$event_name?></span>
 <br /><br />

@@ -738,6 +738,16 @@ class Event extends Controller
 			
 		}else{
 			$data = $this->event->get_event($event_id);
+			if (is_string($data['event_avatar']) && is_array(unserialize($data['event_avatar'])) ){
+				$image_array = unserialize($data['event_avatar']);
+
+				$data['avatar_image_name'] = $image_array['file_name'];
+				$data['avatar_image_height'] = $image_array['image_height'];
+				$data['avatar_image_width'] = $image_array['image_width'];
+				$data['avatar_image_path'] = "./avatars/".$image_array['file_name'];
+			}else {				
+				//$data['avatar_image_path'] = './avatars/image02.jpg';
+			}
 		}
 		$this->load->view('event/admin_panel_tab_'.$tab ,$data);
 	}
