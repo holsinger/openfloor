@@ -7,4 +7,6 @@
 <strong>Bio:</strong><br/>
 <span class="field_display"><?=$bio?></span>
 <br /><br /><br />
-<input type="button" class="button" onclick="window.location='user/edit_user/<?=$user_id?>';" value="Edit Information" />
+<? if($edit_permission): ?>
+	<input type="button" class="button" onclick="window.location='user/edit_user/<?=$user_id?>';" value="Edit Information" />
+<? endif; ?>

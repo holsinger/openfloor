@@ -19,6 +19,8 @@ class User extends Controller {
 		$this->load->library('validation');
 		
 		$this->load->scaffolding('cn_users');
+		
+		$this->CI=& get_instance();
 	}
 	
 	function index()
@@ -175,12 +177,80 @@ class User extends Controller {
 		$this->load->view('user/activation_email_sent');
 	}
 	
+	/**
+	 * Activates the users account
+	 *
+	 * @return void
+	 * @author Rob Stef, Clark Endrizzi (Modified, commented)
+	 **/
 	public function activate($password, $timestamp)
 	{
 		$result = $this->user->activate($password, $timestamp);
-		if($result == 1) 	$data['error'] = 'Your account has been activated.';
-		else 				$data['error'] = 'A system error has occurred, your account could not be activated';
+		if($result == 1){
+			$data['error'] = 'Your account has been activated.';
+		}else{
+			$data['error'] = 'A system error has occurred, your account could not be activated';
+		}		
 		$this->load->view('view_login', $data);
+	}
+
+	/**
+	 * This is where the link goes that a user is sent by email.  
+	 *
+	 * Before this user can actually become a fully registered user, they need to set a password and user_name, which is done here.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function invite_accept($user_id, $timestamp){
+		// by default we show the form for step one, unless, it's a post and validation works out
+		$show_form = true;
+		
+		if(isset($_POST['user_name'])){
+			// Setup the data to show on the form (used if validation is false)
+			$data = $_POST;
+			// Set validation rules
+			$rules['user_name'] 	= "callback_validation_username_duplication_check";
+			$rules['password_1']	= "required|callback_validation_password_check";
+			$this->validation->set_rules($rules);
+			// Set the name of the fields for validation errors (if any)
+			$fields['user_name']	= 	"User Name";
+			$fields['password_1']	= 	"Password";
+			$this->validation->set_fields($fields);
+			// Check validation
+			if($this->validation->run()){
+				$show_form = false;
+			}
+		}
+		// If initial or validation fails, show form
+		if ($show_form){
+			// Page Setup Stuff
+			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), "Setup Account"  => "");
+			$data['user_id'] = $user_id;
+			$data['timestamp'] = $timestamp;
+			// Get 
+			$this->load->view('user/finish_invite',$data);
+		}else{
+			// Database stuff
+			if($_POST['password_1']){
+				$_POST['user_password'] = MD5($_POST['password_1']);
+				unset($_POST['password_1']);  unset($_POST['password_2']);
+			}else{
+				unset($_POST['password_1']);  unset($_POST['password_2']);
+			}
+			unset($_POST['user_id']);
+			$_POST['user_security_level'] = '4';	// Must set this before account can be used.
+			$this->user->UpdateUser($user_id, $_POST);
+			
+			$result = $this->user->complete_invite($user_id, $timestamp);
+			if($result == 1){
+				$data['error'] = 'Your account is created.';
+			}else{
+				$data['error'] = 'A system error has occurred, your account could not be activated';
+			}		
+			$this->load->view('view_login', $data);
+		}
+		
 	}
 
 	function loginOpenID () {	
@@ -308,13 +378,11 @@ class User extends Controller {
 	 **/
 	function profile () {
 		//allow segment 3 to be an id or username
-		$error = $this->error;
 		$user_id = '';
 		$user_name = '';
 		if ( is_numeric($this->uri->segment(3)) ) $user_id = $this->uri->segment(3);
 		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
 		$data = $this->user->get_user($user_id,$user_name);
-		
 		//set error if there is one
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
@@ -349,6 +417,11 @@ class User extends Controller {
 	 **/
 	public function profile_ajax($user_id, $tab='1'){
 		$data = $this->user->get_user($user_id);
+		// Get permission level
+		if($this->CI->session->userdata('user_id') == $user_id || $this->userauth->isAdmin()){
+			$data['edit_permission'] = true;
+		}
+		// Do different things for each profile tab
 		if($tab == 1){
 			$this->load->view('user/ajax_profile_info',$data);
 		}elseif($tab == 2){
@@ -442,8 +515,10 @@ class User extends Controller {
 	 * @author Clark Endrizzi
 	 **/
 	public function edit_user($user_id){
-		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);	
+		#check that user is allowed, must be admin or the person
+		if($this->CI->session->userdata('user_id') != $user_id){
+			$this->userauth->check(SL_ADMIN);
+		}	
 		// by default we show the form for step one, unless, it's a post and validation works out
 		$show_form = true;
 		

@@ -35,6 +35,20 @@ class User_model extends Model {
 		$this->db->where('timestamp', base64_decode($timestamp));
 		$this->db->update('cn_users');
 		return $this->db->affected_rows();
+    }
+
+	/**
+	 * Completes the last stuff required for a user to become setup from an invitation.  Similar to activate but without the password
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function complete_invite($user_id, $timestamp){
+    	$this->db->set('user_status', true);
+		$this->db->where('user_id', $user_id);
+		$this->db->where('timestamp', base64_decode($timestamp));
+		$this->db->update('cn_users');
+		return $this->db->affected_rows();
     }	
 	
 	/**

@@ -543,7 +543,7 @@ class Event extends Controller
 				$last_can_id = $this->user->InsertUserEventAssociation($last_id, $event_id);
 				// Email if options was selected
 				if($invite_speaker == 'invite'){
-					error_log("Trying to send email to {$_POST['user_email']}!");
+					
 					//send mail
 					$this->load->library('email');
 					$config['mailtype'] = 'html';
@@ -554,16 +554,18 @@ class Event extends Controller
 					// vars
 					$this->user->user_id = $last_id;
 					$timestamp = $this->user->get('timestamp');
-					$url = site_url('user/invite_accept/' . $_POST['user_password'] . '/' . base64_encode($timestamp));
-					$message = 'You have been invited to participate in an event.  Please click on this link to activate your account: ' . $url;
+					$url = anchor('user/invite_accept/' . $last_id . '/' . base64_encode($timestamp), "Finish Setting Up Account");
+					$message = 'You have been invited to participate in an event.  Please click on this link to finish setting up your account: ' . $url;
 					if($invitation_text){
-						$message .= '<br /><br />Clark Endrizzi wrote the following:<br />'.$invitation_text;
+						$user_data = $this->user->get_user($this->CI->session->userdata('user_id'));
+						$message .= '<br /><br />'.$user_data['display_name'].' wrote the following:<br />'.$invitation_text;
 					}
 					// set subject
 					$this->email->subject('Runpolictics.com  Invitation');
 					$this->email->message($message);
 					// send
 					$this->email->send();
+					error_log("Trying to send email to {$_POST['user_email']}!  Message included: ".$message);
 				}
 			}
 			
