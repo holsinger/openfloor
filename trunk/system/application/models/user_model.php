@@ -406,12 +406,19 @@ class User_model extends Model {
 			$array = $query->result_array();
 			return $array[0]['user_karma'];			
 	}
-
-	public function userExists($user)
-	{
-		$array_keys = array_keys($user);
-		if(!in_array($array_keys[0], array('user_name', 'user_email')) || count($user) != 1)
+	/**
+	 * Checks that the user exists either by the sent criteria.  Seems like this could be done in a standard where function.
+	 *
+	 * @return void
+	 * @author ???, Clark Endrizzi (Updated and commented)
+	 **/
+	public function userExists($user){
+		// Check to make sure the right arguments were given
+		/*
+		if(!in_array($user, array('user_name', 'user_email')) || count($user) != 1){
 			show_error('User_model::userExists: malformed argument');
+		}*/
+		// If so run it
 		$result = $this->db->getwhere('cn_users', $user)->row_array();
 		return empty($result) ? false : true ;
 	}

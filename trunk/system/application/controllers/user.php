@@ -12,6 +12,7 @@ class User extends Controller {
 		$this->load->library('wordcloud');
 		
 		$this->load->model('User_model','user');
+		$this->load->model('Cms_model','cms');
 		$this->load->model('vote_model','vote');
 		$this->load->model('question_model', 'question');
 		
@@ -19,7 +20,6 @@ class User extends Controller {
 		
 		$this->load->scaffolding('cn_users');
 	}
-	
 	
 	function index()
 	{
@@ -83,7 +83,6 @@ class User extends Controller {
 		
 		$this->load->view('view_create_account',$data);
 	}
-	
 	
 	function createAccountOI ($error='') {
 		$data['error'] = str_replace('_',' ',$error);
@@ -384,7 +383,7 @@ class User extends Controller {
 	 * Shows the users profile
 	 *
 	 * @return void
-	 * @author Rob Stef, Clark Endrizzi
+	 * @author ????, Clark Endrizzi (major updates)
 	 **/
 	function profile () {
 		//allow segment 3 to be an id or username
@@ -516,29 +515,113 @@ class User extends Controller {
 	}
 	
 	/**
-	 * Edit User
-	 */
-	public function edit_user($user_id, $error='')
-	{
+	 * This is the controller used when editing a user
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function edit_user($user_id){
 		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);
+		$this->userauth->check(SL_ADMIN);	
+		// by default we show the form for step one, unless, it's a post and validation works out
+		$show_form = true;
 		
-		$data['user_id'] = $user_id;
-		$data['error'] = str_replace('_',' ',$error);		
-		
-		$user = $this->db->getwhere('cn_users', array('user_id'=>$user_id))->row();
-		
-		foreach($user as $k=>$v)
-			$_POST[$k] = $v;
-		
-		$fields['user_name']	= ( isset($_POST['user_name']) ) ? $_POST['user_name']:"";
-		$fields['user_password']	= ( isset($_POST['user_password']) ) ? $_POST['user_password']:"";
-		$fields['user_avatar']	= ( isset($_POST['user_avatar']) ) ? $_POST['user_avatar']:"";
-		
-		$this->validation->set_fields($fields);
-		$this->load->view('view_edit_user',$data);
+		if(isset($_POST['user_name'])){
+			// Setup the data to show on the form (used if validation is false)
+			$data = $_POST;
+			$data['user_id'] = $user_id;
+			// Set validation rules
+			$rules['display_name'] 	= "trim|required|xss_clean";
+			$rules['user_name'] 	= "callback_validation_username_duplication_check";
+			$rules['bio'] 			= "trim|xss_clean";
+			$rules['password_1']	= "callback_validation_password_check";
+			$rules['user_email']	= "callback_validation_email_duplication_check";
+			$this->validation->set_rules($rules);
+			// Set the name of the fields for validation errors (if any)
+			$fields['display_name']	= 	"Display Name"; 
+			$fields['user_name']	= 	"User Name";
+			$fields['bio']			= 	"Biography";
+			$fields['password_1']	= 	"Password Fields";
+			$this->validation->set_fields($fields);
+			// Check validation
+			if($this->validation->run()){
+				$show_form = false;
+			}
+		}else{
+			$data = $this->user->get_user($user_id);
+		}
+		// If initial or validation fails, show form
+		if ($show_form){
+			// Page Setup Stuff
+			$data['page_title'] = "Create ".$this->cms->get_cms_text('', "forums_navigation_title");
+			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), "User Profile"=>$this->config->site_url().'user/profile/'.$data['user_name'], $data['page_title']  => "");
+			// Get 
+			$this->load->view('user/edit_user',$data);
+		}else{
+			if($_POST['password_1']){
+				$_POST['user_password'] = MD5($_POST['password_1']);
+				unset($_POST['password_1']);  unset($_POST['password_2']);
+			}else{
+				unset($_POST['password_1']);  unset($_POST['password_2']);
+			}
+			unset($_POST['user_id']);
+			$this->user->UpdateUser($user_id, $_POST);
+			redirect('user/profile/'.$data['user_name'], 'location');
+		}
 	}
 	
+	/**
+	 * A custom validation callback that is used to validate the password fields
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_password_check($str){
+		if ($_POST['password_1'] != $_POST['password_2']){
+			$this->validation->set_message('validation_password_check', 'The password fields do not match.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+	
+	/**
+	 * A custom validation callback that is used for the validation of the email field.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_email_duplication_check($str){
+		if(!$str){
+			$this->validation->set_message('validation_email_duplication_check', 'The field "Email Address" requires a value.');
+			return FALSE;
+		}elseif ( $this->user->userExists(array('user_email' => $str, 'user_id != ' => $_POST['user_id'])) ){
+			$this->validation->set_message('validation_email_duplication_check', 'The email address "'.$_POST['user_email'].'" is already in use.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+	
+	/**
+	 * A custom validation callback that is used for the validation of the user_name field.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_username_duplication_check($str){
+		if(!$str){
+			$this->validation->set_message('validation_username_duplication_check', 'The field "User Name" requires a value.');
+			return FALSE;
+		}elseif ( $this->user->userExists(array('user_name' => $str, 'user_id != ' => $_POST['user_id'])) ){
+			$this->validation->set_message('validation_username_duplication_check', 'The username "'.$str.'" is already in use.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+	
+	// This function is deprecated, CTE
 	public function edit_user_action($user_id)
 	{
 		#check that user is allowed

@@ -135,10 +135,10 @@ class Event extends Controller
 			$data = $_POST;
 			$data['event_time'] = (string)$_POST['event_time'];
 			// Set validation rules
-			$rules['event_name'] = "trim|required|max_length[100]|xss_clean";
-			$rules['event_desc'] = "trim|required|max_length[65535]";
+			$rules['event_name'] 	= "trim|required|max_length[100]|xss_clean";
+			$rules['event_desc'] 	= "trim|required|max_length[65535]";
 			$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
-			$rules['location'] = "trim|max_length[65535]";
+			$rules['location'] 		= "trim|max_length[65535]";
 			$rules['event_time']	= "callback_validation_time_check";
 			$this->validation->set_rules($rules);
 			// Set the name of the fields for validation errors (if any)

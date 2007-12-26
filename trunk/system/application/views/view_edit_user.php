@@ -1,5 +1,4 @@
 <? $this->load->view('view_includes/header.php'); ?>
-
 <div id="content_div">
   <h2>Edit User </h2>	
   	<div class='errorArea'><?=$error;?></div>
@@ -19,5 +18,4 @@
 	</div>
 
 </div>
-
 <? $this->load->view('view_includes/footer.php'); ?>
