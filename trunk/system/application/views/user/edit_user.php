@@ -5,7 +5,7 @@ $this->load->view('view_includes/header.php', $data); ?>
 <div id="content_div">
   	<div class='errorArea'><?=$this->validation->error_string;?></div>
 	<div id="account_form">
-		<?= form_open('user/edit_user/'.$user_id, array('name'=>'my_form') , array("user_id" => $user_id)) ?>
+		<?= form_open_multipart('user/edit_user/'.$user_id, array('name'=>'my_form') , array("user_id" => $user_id)) ?>
 			<label>User Name: *</label>
 			<small>The username.</small><br />
 			<input name="user_name" value="<?=$user_name?>" size="30" class="txt" maxlength="100">
@@ -25,7 +25,7 @@ $this->load->view('view_includes/header.php', $data); ?>
 			<br /><br />
 			<label>Avatar</label>
 			<small>Must be less then 1024 kb & 1024px768px (image will be resized)</small><br />
-			<?= form_upload('user_avatar',$user_avatar,'class="txt"') ?>
+			<?= form_upload('userfile', '','class="txt"') ?>
 			<br /><br />
 			<label>Bio:</label>
 			<small>Write a biography.</small><br />

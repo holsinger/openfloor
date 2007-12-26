@@ -183,6 +183,7 @@ class User extends Controller {
 		$this->load->view('view_login', $data);
 	}
 	
+	// This is deprecated
 	public function updateProfile()
 	{
 		//echo '<pre>'; print_r($_POST); echo'</pre>'; exit();
@@ -558,6 +559,39 @@ class User extends Controller {
 			// Get 
 			$this->load->view('user/edit_user',$data);
 		}else{
+			// Upload file first
+			if(!empty($_FILES['userfile']['name'])){
+				$config['upload_path'] = './avatars/';
+				$config['allowed_types'] = 'gif|jpg|png';
+				$config['max_size']	= '1024';
+				$config['max_width']  = '1024';
+				$config['max_height']  = '768';
+				$config['overwrite']  = FALSE;
+				$config['encrypt_name']  = TRUE;
+
+				$this->load->library('upload', $config);
+
+				if ( !$this->upload->do_upload()){
+					show_error($this->upload->display_errors());
+				}else{
+					$data['upload_data'] = $this->upload->data();
+
+					//resize image
+					$config = array();
+					$config['image_library'] = 'GD2';
+					$config['source_image'] = './avatars/'.$data['upload_data']['file_name'];
+					#$config['create_thumb'] = TRUE;
+					$config['maintain_ratio'] = TRUE;
+					$config['width'] = 100;
+					$config['height'] = 75;			
+					$this->load->library('image_lib', $config);			
+					$this->image_lib->resize();
+					if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
+					$_POST['user_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
+					//echo '<pre>'; print_r($_POST); echo '</pre>';	exit();	
+				}
+			}
+			// Database stuff
 			if($_POST['password_1']){
 				$_POST['user_password'] = MD5($_POST['password_1']);
 				unset($_POST['password_1']);  unset($_POST['password_2']);
@@ -571,7 +605,7 @@ class User extends Controller {
 	}
 	
 	/**
-	 * A custom validation callback that is used to validate the password fields
+	 * A custom validation callback that is used to validate the password fields.  It only called for the first one but that is enough.
 	 *
 	 * @return void
 	 * @author Clark Endrizzi
@@ -619,38 +653,6 @@ class User extends Controller {
 		}else{
 			return TRUE;
 		}
-	}
-	
-	// This function is deprecated, CTE
-	public function edit_user_action($user_id)
-	{
-		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);
-		
-		$error = false;
-		
-		$rules['user_name'] = "trim|required|xss_clean";
-		$rules['user_password'] = "trim|required|xss_clean";
-		$rules['user_avatar'] = "trim";
-		
-		$this->validation->set_rules($rules);
-					
-		if ($this->validation->run() == FALSE) $error = $this->validation->error_string;
-		
-		if ( !$error ) {
-			$affected_rows = $this->user->update_user_form_admin($user_id);
-			//make sure a row was affected
-			if ( $affected_rows > 0 ) {
-				redirect('user/on_edit_success');
-				ob_clean();
-				exit();
-			} else {
-				$error = 'Error Editing User or no updates were made';
-			}
-		} //if no error
-				
-		//send back the error
-		$this->edit_user($user_id, $error);
 	}
 	
 	function createCaptcha () {

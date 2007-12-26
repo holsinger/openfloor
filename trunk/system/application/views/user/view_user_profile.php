@@ -15,6 +15,7 @@ $this->load->view('view_includes/header.php',$data);
 		<strong><?=$display_name?></strong>
 	</div>
 	<br /><br /><br />
+	<br /><br /><br />
 	<div id="section">
 		<ul class="tabnav">
 			<li id="dyn_tab_1"><span id="dyn_text_1">User Information</span></li>

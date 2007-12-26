@@ -527,7 +527,7 @@ class Event extends Controller
 					$this->load->library('image_lib', $config);			
 					$this->image_lib->resize();
 					if ($this->image_lib->display_errors()) $error =  $this->image_lib->display_errors();
-					$_POST['event_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
+					$_POST['user_avatar'] = isset($data['upload_data']) ?  serialize($data['upload_data']) : '' ;
 					//echo '<pre>'; print_r($_POST); echo '</pre>';	exit();	
 				}
 			}
