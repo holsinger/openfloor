@@ -598,6 +598,7 @@ textarea.txt {
 	padding:5px 0 0 4px;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;
+	overflow:auto;
 }
 .errorArea {
 	color: #FF0000;	
