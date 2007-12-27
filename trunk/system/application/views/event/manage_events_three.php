@@ -57,6 +57,7 @@ $this->load->view('view_includes/header.php', $data);
 			<br /><br />
 			
 			<? if($option == 'edit'): ?>
+				<input type="button" name="cancel_but" value="Cancel" id="cancel_but" onclick="window.location=site_url+'event/admin_panel/<?=$event_id?>/3';" class="button">
 				<?= form_submit('','Update Information','class="button"'); ?>
 			<? else: ?>
 				<input type="button" onclick="window.location='event/create_event_two/<?=$event_id?>';" class="button" value="Last Step">

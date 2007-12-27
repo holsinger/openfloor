@@ -55,6 +55,7 @@ $this->load->view('view_includes/header.php', $data);
 			<textarea name="location" rows="3" cols="48" class="txt"><?=$location?></textarea>
 			<br /><br />
 			<? if($option == 'edit'): ?>
+				<input type="button" name="cancel_but" value="Cancel" id="cancel_but" onclick="window.location=site_url+'event/admin_panel/<?=$event_id?>';" class="button">
 				<?= form_submit('','Update Information','class="button"'); ?>
 			<? else: ?>
 				<?= form_submit('','Next Step','class="button"'); ?>
