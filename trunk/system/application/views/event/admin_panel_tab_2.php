@@ -20,4 +20,4 @@
 	<? endif; ?>
 </table>
 <br /><br /><br />
-<input type="button" class="button" onclick="window.location='event/create_event_two/<?=$event_id?>/edit';" value="Edit Information" />
+<input type="button" class="button" onclick="window.location=site_url+'event/create_event_two/<?=$event_id?>/edit';" value="Edit Information" />

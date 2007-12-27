@@ -17,4 +17,4 @@
 <strong>Event Location:</strong><br/>
 <span class="field_display"><?=$location?></span>
 <br /><br /><br />
-<input type="button" class="button" onclick="window.location='event/create_event/<?=$event_id?>/edit';" value="Edit Information" />
+<input type="button" class="button" onclick="window.location=site_url+'event/create_event/<?=$event_id?>/edit';" value="Edit Information" />
