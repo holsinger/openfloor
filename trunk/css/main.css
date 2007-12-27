@@ -581,7 +581,6 @@ input.txt {
 	/*width:168px;*/
 	height:19px;
 	border:2px solid #CCCCCC;
-	position:relative;
 	padding:5px 0 0 4px;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	/*background:#BED3EA url(../images/bg-header-input.gif);*/
@@ -590,7 +589,6 @@ input.txt {
 
 select.txt {
 	border:2px solid #CCCCCC;
-	position:relative;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;
 }
@@ -600,7 +598,6 @@ textarea.txt {
 	padding:5px 0 0 4px;
 	font:12px Verdana, Geneva, Arial, Helvetica, sans-serif;
 	background:#BED3EA;
-	overflow:auto;
 }
 .errorArea {
 	color: #FF0000;	
