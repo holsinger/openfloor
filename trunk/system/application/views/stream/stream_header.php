@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<?= $this->config->site_url();?>" />
 	<title>Live ConventionNEXT Feed</title>
-	<link rel="stylesheet" type="text/css" href="css/all.css" />
+	<link rel="stylesheet" type="text/css" href="css/all2.css" />
 	<style type="text/css">body{min-width:10px;}</style>
 	<!-- Date: 2007-08-02 -->
 </head>
