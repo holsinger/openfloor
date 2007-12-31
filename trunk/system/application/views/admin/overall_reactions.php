@@ -6,7 +6,7 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<base href="<?= $this->config->site_url();?>" />
 	<title>myControlPanel</title>
-	<!-- <link rel="stylesheet" type="text/css" href="css/all.css" /> -->
+	<!-- <link rel="stylesheet" type="text/css" href="css/all2.css" /> -->
 	<link rel="stylesheet" type="text/css" href="css/overall_reaction.css" />
 	<script src="./javascript/prototype.js" type="text/javascript"></script>
 	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>
