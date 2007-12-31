@@ -108,6 +108,7 @@ class User_model extends Model {
 	 **/
 	public function DeleteUserEventAssociation( $user_id, $event_id){
 		$this->db->delete('cn_idx_users_events', array('fk_user_id' => $user_id, 'fk_event_id' => $event_id));
+		error_log($this->db->last_query());
 	}
 
 	/**

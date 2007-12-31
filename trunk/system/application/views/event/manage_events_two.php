@@ -62,7 +62,7 @@ $this->load->view('view_includes/header.php', $data);
 		new Ajax.Request(site_url+'event/delete_speaker/'+user_id+'/<?=$event_id?>/'+option,
 		  {
 		    onSuccess: function(transport){
-		      window.location = '<?=$this->config->site_url()?>event/create_event_two/<?=$event_id?>';
+		      window.location = '<?=$this->config->site_url()?>event/create_event_two/<?=$event_id?>/<?=$option?>';
 		    }
 		  });
 	}

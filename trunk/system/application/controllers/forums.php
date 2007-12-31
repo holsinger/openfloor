@@ -94,7 +94,7 @@ class Forums extends Controller
 				break;
 			}
 		} else { // if no AJAX request is being made, load the view
-			$this->load->view('view_live_queue', $data);
+			$this->load->view('event/live_queue', $data);
 		}
 	}
 	
@@ -259,7 +259,6 @@ class Forums extends Controller
 			
 			#TODO This solution for no candidates assigned to event is not ideal
 			if(empty($data['candidates'])) redirect();
-			// $this->load->view('user/cp', $data);
 			$data['breadcrumb'] = $this->global ? array($this->cms->get_cms_text('', "home_name") => $this->config->site_url()) : array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), $this->cms->get_cms_text('', "forums_name")=>'event/',$data["event_data"]['event_name']=>'');
 			$this->load->view('event/main', $data);
 		}		

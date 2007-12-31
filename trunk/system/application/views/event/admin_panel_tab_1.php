@@ -12,7 +12,7 @@
 <span class="field_display"><?=$event_desc?></span>
 <br /><br />
 <strong>Event Date:</strong><br/>
-<span class="field_display"><?=$event_date?></span>
+<span class="field_display"><?=date("F j, Y, g:i a", strtotime($event_date));?></span>
 <br /><br />
 <strong>Event Location:</strong><br/>
 <span class="field_display"><?=$location?></span>

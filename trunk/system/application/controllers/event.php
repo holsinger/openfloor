@@ -432,8 +432,14 @@ class Event extends Controller
 			$this->load->view('candidate/speaker_search',$data);
 		}else{
 			$last_can_id = $this->user->InsertUserEventAssociation($add_user_id, $event_id);
+			$event_data = $this->event->get_event($event_id);
+			if($event_data['input_complete']){
+				$edit_append = "/edit";
+			}else{
+				$edit_append = "";
+			}
 			// Show view
-			redirect("/event/create_event_two/$event_id", 'location');
+			redirect("/event/create_event_two/$event_id".$edit_append, 'location');
 			
 		}
 	}
@@ -538,7 +544,7 @@ class Event extends Controller
 				$invite_speaker = $_POST['invite_speaker']; unset($_POST['invite_speaker']);
 				$invitation_text = $_POST['invitation_text']; unset($_POST['invitation_text']);
 				$_POST['creator_id'] = $this->CI->session->userdata('user_id');
-				$_POST['user_name'] = "temp_".rand();
+				$_POST['user_name'] = url_title($_POST['display_name'], 'underscore')."_".rand();	// Need to add a temp unique name
 				$last_id = $this->user->InsertUser($_POST);
 				$last_can_id = $this->user->InsertUserEventAssociation($last_id, $event_id);
 				// Email if options was selected
@@ -568,9 +574,15 @@ class Event extends Controller
 					error_log("Trying to send email to {$_POST['user_email']}!  Message included: ".$message);
 				}
 			}
-			
+			// If editing then it will be complete
+			$event_data = $this->event->get_event($event_id);
+			if($event_data['input_complete']){
+				$edit_append = "/edit";
+			}else{
+				$edit_append = "";
+			}
 			// Show view
-			redirect("/event/create_event_two/$event_id", 'location');
+			redirect("/event/create_event_two/$event_id".$edit_append, 'location');
 			
 		}
 		
