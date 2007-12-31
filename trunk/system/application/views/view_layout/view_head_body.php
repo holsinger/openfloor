@@ -25,7 +25,7 @@
 						<li class="separator">|</li>
 						<li><?=anchor('user/logout/',"Logout");?></li>
 					<? else: ?>
-						<li><a onClick="showBox('login');" class='link'>Login</a></li>
+						<li><a onClick="showBox('login');  $('username').focus();" class='link'>Login</a></li>
 						<li class="separator">|</li>					
 						<li><?= anchor('user/createAccount','Create Account');?></li>
 					<? endif; ?>
