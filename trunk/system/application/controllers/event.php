@@ -538,7 +538,7 @@ class Event extends Controller
 				$invite_speaker = $_POST['invite_speaker']; unset($_POST['invite_speaker']);
 				$invitation_text = $_POST['invitation_text']; unset($_POST['invitation_text']);
 				$_POST['creator_id'] = $this->CI->session->userdata('user_id');
-				
+				$_POST['user_name'] = "temp_".rand();
 				$last_id = $this->user->InsertUser($_POST);
 				$last_can_id = $this->user->InsertUserEventAssociation($last_id, $event_id);
 				// Email if options was selected
