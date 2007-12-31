@@ -7,7 +7,7 @@
 		<title>view_live_queue</title>
 		<meta name="generator" content="TextMate http://macromates.com/">
 		<meta name="author" content="Rob Stefanussen">
-		<link rel="stylesheet" type="text/css" href="css/all.css" />
+		<link rel="stylesheet" type="text/css" href="css/all2.css" />
 		<link rel="stylesheet" type="text/css" href="css/CandidateQueue.css" />
 		<script src="./javascript/prototype.js" type="text/javascript"></script>
 		<script src="./javascript/scriptaculous.js" type="text/javascript"></script>
