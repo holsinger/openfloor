@@ -1,7 +1,7 @@
 <? 
 include("./fckeditor/fckeditor.php");
 $data['sub_title'] = $page_title;
-$this->load->view('view_includes/header.php', $data);
+$this->load->view('view_layout/header.php', $data);
 ?>
 <!--
 	#dependency scal.js
@@ -76,4 +76,4 @@ $this->load->view('view_includes/header.php', $data);
 		$('date_selected').value = date.format('yyyy-mm-dd');
 	}
 </script>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

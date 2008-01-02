@@ -6,7 +6,7 @@ $display_titles = array(//'can_name' => 'Profile Name',
 						'can_email' => 'Email Address'*/);
 ?>
 
-<? $this->load->view('view_includes/header.php');?>
+<? $this->load->view('view_layout/header.php');?>
 
 <div id="content_div">
   <h2>Candidate Profile</h2>
@@ -19,4 +19,4 @@ $display_titles = array(//'can_name' => 'Profile Name',
 	<? if($this->userauth->isAdmin()) echo anchor('forums/edit/candidate/' . url_title($candidate['can_display_name']), 'edit') ?>	
 </div>
 
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

@@ -10,19 +10,23 @@ class Candidate_model extends Model
         parent::Model();
     }
 
+	// Deprecated, not used - CTE
 	public function SetData($arg_data){
 		$this->data = $arg_data;
 	}
 	
+	// Deprecated, not used anymore - CTE
 	public function SetID($arg_id){
 		$this->id = $arg_id;
 	}
 
+	// Deprecated, not used anymore - CTE
 	public function InsertCandidate(){
 		$this->db->insert('cn_candidates', $this->data); 
 		return $this->db->insert_id();
 	}
 	
+	// Deprecated, this table is not used - CTE
 	public function UpdateCandidate(){
 		$this->db->where('can_id', (int) $this->id);
 		$this->db->update('cn_candidates', $this->data);
@@ -30,11 +34,13 @@ class Candidate_model extends Model
 		return $this->db->affected_rows();
 	}
 	
+	// Deprecated - CTE
 	public function DeleteCandidate(){
 		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $this->id));
 		$this->db->delete('cn_candidates', array('can_id' => $this->id));
 	}
 	
+	// Deprecated - CTE
 	public function InsertCandidateEventAssociation($can_id, $event_id){
 		$data = array(
 			"fk_can_id" 	=> $can_id,
@@ -79,9 +85,9 @@ class Candidate_model extends Model
 		return $result[0]['can_id'];
 	}
 	
-	public function nameByUser($fk_can_id)
+	public function nameByUser($fk_user_id)
 	{
-		return $this->db->select('can_display_name')->from('cn_candidates')->where('can_id', $fk_can_id)->get()->row()->can_display_name;
+		return $this->db->select('display_name')->from('cn_users')->where('user_id', $fk_user_id)->get()->row()->display_name;
 	}
 	
 	public function authenticate($can_id, $can_password)
@@ -96,13 +102,13 @@ class Candidate_model extends Model
 		$result = $this->db->get('cn_candidates')->result_array();
 		$array = array();
 		foreach($result as $v)
-			$array[$v['can_id']] = $v['can_display_name'];
+			$array[$v['user_id']] = $v['can_display_name'];
 		return $array;	
 	}
 	
 	public function cansInEvent($event_id)
 	{
-		return $this->db->select('fk_can_id')->from('cn_idx_candidates_events')->where('fk_event_id', $event_id)->get()->result_array();
+		return $this->db->select('fk_can_id')->from('cn_idx_users_events')->where('fk_event_id', $event_id)->get()->result_array();
 	}
 	
 	private function adminCandidate()
@@ -127,7 +133,6 @@ class Candidate_model extends Model
 		return false;
 	}
 
-
 	public function canAvatar($can_id)
 	{
 		$return = $this->db->select('user_avatar')->from('cn_users')->where('fk_can_id', $can_id)->get()->row()->user_avatar;
@@ -136,13 +141,16 @@ class Candidate_model extends Model
 		return $return['file_name'];
 	}
 	
-	public function linkToProfile($can_id, $image = false, $popup = false)
+	public function linkToProfile($user_id, $image = false, $popup = false)
 	{
-		$user_name = $this->user_name($can_id);
-		if($image) return site_url("/user/profile/$user_name");		
-		$display_name = $this->nameByUser($can_id);
-		if($popup) return anchor("/user/profile/$user_name", $display_name);
-			
+		$user_name = $this->user_name($user_id);
+		if($image){
+			return site_url("/user/profile/$user_name");	
+		} 	
+		$display_name = str_replace(" ", "&nbsp;", $this->nameByUser($user_id));
+		if($popup){
+			return anchor("/user/profile/$user_name", $display_name);
+		} 
 		return anchor("/user/profile/$user_name", $display_name);
 	}
 }

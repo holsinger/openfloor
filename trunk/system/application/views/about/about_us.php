@@ -11,7 +11,7 @@
 <?
 $data['sub_title'] = "About Us";
 $data['left_nav'] = 'about_us';	?>
-<?php $this->load->view('view_includes/header.php',$data); ?>
+<?php $this->load->view('view_layout/header.php',$data); ?>
 <div id="content_div">
 		<div id="loading_div">LOADING...</div>
 		<div id="overall_outer_div">
@@ -131,4 +131,4 @@ $data['left_nav'] = 'about_us';	?>
 	
 
 </script>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

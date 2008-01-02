@@ -1,7 +1,7 @@
 <? 
 //$data['top_banner_text'] = $contact_page_name;
 $data['sub_title'] = $contact_page_name;
-$this->load->view('view_includes/header.php',$data); 
+$this->load->view('view_layout/header.php',$data); 
 $hidden = array('contact_type' => $contact_type);
 
 ?>
@@ -25,4 +25,4 @@ $hidden = array('contact_type' => $contact_type);
 		<?= form_submit('','Submit','class="button"'); ?>
 		<?= form_close(); ?>
 </div>
-<? $this->load->view('view_includes/footer.php',$data); ?>
+<? $this->load->view('view_layout/footer.php',$data); ?>

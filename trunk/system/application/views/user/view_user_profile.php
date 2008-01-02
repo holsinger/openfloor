@@ -1,7 +1,7 @@
 <?
 $data['red_head'] = 'Welcome';
 $data['sub_title'] = 'User Profile'; 
-$this->load->view('view_includes/header.php',$data); 
+$this->load->view('view_layout/header.php',$data); 
 ?>
 <!--
 	#dependency tabs.css
@@ -30,4 +30,4 @@ $this->load->view('view_includes/header.php',$data);
 <script type="text/javascript" charset="utf-8">
 	new Control.DynamicTabs(3, 'user_content', site_url+'user/profile_ajax/<?=$user_id?>/');
 </script>
-<? $this->load->view('view_includes/footer.php'); ?>  				
+<? $this->load->view('view_layout/footer.php'); ?>  				

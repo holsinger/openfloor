@@ -1,5 +1,5 @@
 <? $data['red_head'] = 'Results'; ?>
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 
 <div id="content_div">
   <h3>Who's Your Government</h3>	
@@ -17,4 +17,4 @@
 		</div>
 	</form>            
 </div> 
-<? $this->load->view('view_includes/footer.php'); ?>  				
+<? $this->load->view('view_layout/footer.php'); ?>  				

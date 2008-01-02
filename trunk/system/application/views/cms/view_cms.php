@@ -3,7 +3,7 @@ $data['red_head'] = 'Admin';
 $data['sub_title'] = "View Content Pages";
 ?>
 <? $data['admin'] = TRUE; ?>
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 <div id="admin_content">
 		<? foreach ($results as $section_name => $section): ?>
 			<? $final_section_name = $section_name ? ucwords(str_replace('_', ' ', $section_name)) : "(No Section Defined)"; ?>
@@ -18,4 +18,4 @@ $data['sub_title'] = "View Content Pages";
 			</div>
 		<? endforeach; ?>
 </div>
-<? $this->load->view('view_includes/footer.php',$data); ?>
+<? $this->load->view('view_layout/footer.php',$data); ?>

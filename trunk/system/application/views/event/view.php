@@ -13,7 +13,7 @@ $display_titles = array('participants' => 'Participants',
 						'other_instructions' => 'Other Instructions');
 ?>
 
-<? $this->load->view('view_includes/header.php', $data);?>
+<? $this->load->view('view_layout/header.php', $data);?>
 
 <div id="content_div">
 	<span><? $img = !empty($event['event_avatar']) ? "<img src=\"./avatars/{$event['event_avatar']}\">" : ''; echo $img; ?></span>
@@ -27,4 +27,4 @@ $display_titles = array('participants' => 'Participants',
 	<? if($this->userauth->isAdmin()) echo anchor("event/edit_event/{$event['event_id']}", 'edit') ?>	
 </div>
 
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

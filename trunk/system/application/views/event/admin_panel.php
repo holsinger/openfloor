@@ -1,6 +1,6 @@
 <? 
 $data['sub_title'] = "Admin Panel";
-$this->load->view('view_includes/header.php', $data);
+$this->load->view('view_layout/header.php', $data);
 ?>
 <!--
 	#dependency tabs.css
@@ -21,4 +21,4 @@ $this->load->view('view_includes/header.php', $data);
 <script type="text/javascript" charset="utf-8">
 	new Control.DynamicTabs(3, 'admin_content', site_url+'event/admin_panel_tab_ajax/<?=$event_id?>/', { initial_tab: <?=$tab?> });
 </script>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

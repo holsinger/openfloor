@@ -34,7 +34,7 @@ if($action == 'create') $submit_text = "Add Candidate";
 else 					$submit_text = "Edit Candidate";
 ?>
 
-<? $this->load->view('view_includes/header.php');?>
+<? $this->load->view('view_layout/header.php');?>
 
 <div id="content_div">
 	<? if($action == 'create'): ?>
@@ -63,4 +63,4 @@ else 					$submit_text = "Edit Candidate";
 	<?= form_close() ?>
 </div>
 
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

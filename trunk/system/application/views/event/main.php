@@ -1,5 +1,9 @@
 <?
-$cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; $cans = substr($cans, 0, -2);
+$cans = ''; 
+foreach($candidates as $v){
+	$cans .= "'{$v['user_id']}', "; 
+	$cans = substr($cans, 0, -2);
+} 
 
 if($event_data['streaming']){
 	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
@@ -9,7 +13,7 @@ if($event_data['streaming']){
 
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 
-$this->load->view('view_includes/header.php', $data);
+$this->load->view('view_layout/header.php', $data);
 ?>
 <!-- 
 #dependency all2.css
@@ -101,7 +105,7 @@ dependency overall_reaction.css
 							<? foreach($candidates as $v): ?>
 							<tr<?=$class?>>
 								<td><?=$v['can_display_name']?></td>
-								<td><div id="overall-reaction-<?=$v['can_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
+								<td><div id="overall-reaction-<?=$v['user_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
 							</tr>
 							<? $class = $class ? '' : ' class="alternate"' ?>
 							<? endforeach; ?>
@@ -113,7 +117,7 @@ dependency overall_reaction.css
 		</table>	
 		<script type="text/javascript" charset="utf-8">
 			<? foreach($candidates as $v): ?>
-				new Ajax.Updater('overall-reaction-<?=$v["can_id"]?>', site_url + 'forums/overall_reaction/' + event_name + '/overall_reaction/<?=$v["can_id"]?>');
+				new Ajax.Updater('overall-reaction-<?=$v["user_id"]?>', site_url + 'forums/overall_reaction/' + event_name + '/overall_reaction/<?=$v["user_id"]?>');
 			<? endforeach; ?>
 		</script>	
 	<? endif; ?>
@@ -165,4 +169,4 @@ dependency overall_reaction.css
 	
 	Event.observe(window, 'load', cpUpdater.startLazyLoader);
 </script>
-<? $this->load->view('view_includes/footer.php', $data);?>
+<? $this->load->view('view_layout/footer.php', $data);?>

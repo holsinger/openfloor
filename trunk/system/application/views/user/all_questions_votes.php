@@ -7,7 +7,7 @@ array('Event' => 'event_name', 'Question' => 'question_name') ;
 	
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 
 <div id="content_div">
 	<p>
@@ -24,4 +24,4 @@ array('Event' => 'event_name', 'Question' => 'question_name') ;
 	</p>
 </div>	
 
-<?$this->load->view('view_includes/footer.php');?>
+<?$this->load->view('view_layout/footer.php');?>

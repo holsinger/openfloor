@@ -1,7 +1,7 @@
 <? 
 include("./fckeditor/fckeditor.php");
 $data['sub_title'] = $page_title;
-$this->load->view('view_includes/header.php', $data);
+$this->load->view('view_layout/header.php', $data);
 ?>
 <!--
 	#dependency scal.js
@@ -50,4 +50,4 @@ $this->load->view('view_includes/header.php', $data);
 <script type="text/javascript" charset="utf-8">
 
 </script>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

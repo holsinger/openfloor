@@ -1,6 +1,6 @@
 <? 
 $data['sub_title'] = "Resume Event";
-$this->load->view('view_includes/header.php', $data);
+$this->load->view('view_layout/header.php', $data);
 ?>
 <div id="content_div">
 	<div id="account_form">
@@ -22,4 +22,4 @@ $this->load->view('view_includes/header.php', $data);
 		<?= form_close(); ?>
 	</div>
 </div>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

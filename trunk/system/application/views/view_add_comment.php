@@ -3,7 +3,7 @@ $data['red_head'] = 'Add comment';
 $data['left_nav'] = 'event';
 ?>
 
-<?$this->load->view('view_includes/header.php',$data);?>
+<?$this->load->view('view_layout/header.php',$data);?>
 
 <div id="content_div">
 	<h3>Add a comment</h3>
@@ -18,4 +18,4 @@ $data['left_nav'] = 'event';
 	?>
 </div>
 
-<?$this->load->view('view_includes/footer.php');?>
+<?$this->load->view('view_layout/footer.php');?>

@@ -2,7 +2,7 @@
 $data['red_head'] = 'Welcome'; 
 $data['sub_title'] = "Create Account"; 
 ?>
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 
 <div id="content_div">
   	<div class='errorArea'><?=$error;?></div>
@@ -61,4 +61,4 @@ $data['sub_title'] = "Create Account";
 	</div>
 	
 </div>
-<? $this->load->view('view_includes/footer.php'); ?>  				
+<? $this->load->view('view_layout/footer.php'); ?>  				

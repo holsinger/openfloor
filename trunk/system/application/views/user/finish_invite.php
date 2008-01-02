@@ -1,7 +1,7 @@
 <? 
 include("./fckeditor/fckeditor.php");
 $data['sub_title'] = "Setup Account";
-$this->load->view('view_includes/header.php', $data); ?>
+$this->load->view('view_layout/header.php', $data); ?>
 <div id="content_div">
   	<div class='errorArea'><?=$this->validation->error_string;?></div>
 	<div id="account_form">
@@ -23,4 +23,4 @@ $this->load->view('view_includes/header.php', $data); ?>
 	</div>
 
 </div>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

@@ -112,18 +112,26 @@ class Event_model extends Model
 		$this->db->delete('cn_idx_candidates_events', array('fk_can_id' => $can_id, 'fk_event_id' => $event_id));
 	}
 
+	/**
+	 * Get candidates within an event
+	 *
+	 * @return void
+	 * @author Clark Endrizzi, Rob Stef
+	 **/
 	public function getCansInEvent($event_id, $full = false)
 	{
-		$candidates = $this->db->getwhere('cn_idx_candidates_events', array('fk_event_id' => $event_id))->result_array();
-		
-		$return = array();
-		foreach($candidates as $v){
-			$return[] = $v['fk_can_id'];
-		} 
-		if(!$full){
-			return $return;
-		}else{
-			return $this->db->query('SELECT can_id, can_display_name FROM cn_candidates WHERE can_id IN(' . implode(',', $return) . ')')->result_array();
+		$candidates = $this->db->getwhere('cn_idx_users_events', array('fk_event_id' => $event_id))->result_array();
+
+		if(count($candidates) > 0 ){
+			$return = array();
+			foreach($candidates as $v){
+				$return[] = $v['fk_user_id'];
+			} 
+			if(!$full){
+				return $return;
+			}else{
+				return $this->db->query('SELECT user_id, display_name FROM cn_users WHERE user_id IN(' . implode(',', $return) . ')')->result_array();
+			}
 		}
 		
 	}

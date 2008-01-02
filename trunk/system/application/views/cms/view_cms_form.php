@@ -2,7 +2,7 @@
 <? $data['left_nav'] = 'admin'; ?>
 <? $data['admin'] = TRUE; ?>
 
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 <? include("./fckeditor/fckeditor.php"); ?>
 <div id="admin_content">
     <h3>Manage Content</h3>
@@ -63,4 +63,4 @@
 		<?= form_submit('','Submit','class="button"'); ?>
 		<?= form_close(); ?>
 </div>
-<? $this->load->view('view_includes/footer.php',$data); ?>
+<? $this->load->view('view_layout/footer.php',$data); ?>

@@ -1,6 +1,6 @@
 <?php if (!defined('BASEPATH')) exit('No direct script access allowed');?>
 
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 
 <div id="content_div">
 	<h3>Reset Password</h3>	
@@ -12,4 +12,4 @@
 	<?=form_close()?>
 </div>
 
-<?$this->load->view('view_includes/footer.php');?>
+<?$this->load->view('view_layout/footer.php');?>

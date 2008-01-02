@@ -1,4 +1,4 @@
-<? $this->load->view('view_includes/header.php');?>
+<? $this->load->view('view_layout/header.php');?>
 
 <div id="content_div">
   <h2>Create an event</h2>	
@@ -67,4 +67,4 @@
 	
 </div>
 
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

@@ -14,7 +14,7 @@
 	ajaxOn = true;
 	site_url = '<?= $this->config->site_url();?>';
 	var event_name = '<?=$event?>';
-	var cans = [<? $cans = ''; foreach($candidates as $v) $cans .= "'{$v['can_id']}', "; echo substr($cans, 0, -2); ?>];	
+	var cans = [<? $cans = ''; foreach($candidates as $v) $cans .= "'{$v['user_id']}', "; echo substr($cans, 0, -2); ?>];	
 	</script>
 	<script type="text/javascript" src="javascript/orUpdater.js"></script>
 	<script type="text/javascript">orUpdater.orUpdate();</script>
@@ -47,7 +47,7 @@
 							<? foreach($candidates as $v): ?>
 							<tr<?=$class?>>
 								<td><?=$v['can_display_name']?></td>
-								<td><div id="overall-reaction-<?=$v['can_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
+								<td><div id="overall-reaction-<?=$v['user_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
 							</tr>
 							<? $class = $class ? '' : ' class="alternate"' ?>
 							<? endforeach; ?>

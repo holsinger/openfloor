@@ -10,7 +10,7 @@ $can_bio_attrs = array(					'name' => 'can_bio',
 						            	'cols' => '48');									
 ?>
 
-<? $this->load->view('view_includes/header.php');?>
+<? $this->load->view('view_layout/header.php');?>
 <div id="content_div">	
   <h2>Edit Candidate Biography</h2>	
   	<div class='errorArea'><?=$error;?></div>
@@ -20,4 +20,4 @@ $can_bio_attrs = array(					'name' => 'can_bio',
 		<p><?= form_submit(null, 'Edit', 'class="button"') ?></p>
 		<?= form_close() ?>
 </div>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

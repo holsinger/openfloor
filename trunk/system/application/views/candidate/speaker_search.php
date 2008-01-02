@@ -1,7 +1,7 @@
 <? 
 include("./fckeditor/fckeditor.php");
 $data['sub_title'] = $page_title;
-$this->load->view('view_includes/header.php', $data);
+$this->load->view('view_layout/header.php', $data);
 ?>
 <!--
 	#dependency autocomplete.css
@@ -75,4 +75,4 @@ $this->load->view('view_includes/header.php', $data);
 		window.location = site_url+'event/search_candidate/<?=$event_id?>/'+current_selection;
 	}
 </script>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

@@ -6,7 +6,7 @@ $data['sub_title'] = $page_title;
 // THIS IS TEMP CODE FOR AN EVENT AND NEEDS TO BE REPLACED
 //$data['use_temp_top'] = true;
 ?>
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 <!--
 	#dependency events.css
 -->
@@ -120,4 +120,4 @@ $data['sub_title'] = $page_title;
 		</div>
 
 </div>
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

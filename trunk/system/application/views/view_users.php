@@ -1,5 +1,5 @@
 <? $data['red_head'] = 'Users'; ?>
-<? $this->load->view('view_includes/header.php',$data); ?>
+<? $this->load->view('view_layout/header.php',$data); ?>
 
 <div id="content_div">
 
@@ -27,4 +27,4 @@
 
 </div>
 
-<? $this->load->view('view_includes/footer.php'); ?>
+<? $this->load->view('view_layout/footer.php'); ?>

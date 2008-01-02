@@ -13,7 +13,7 @@ if(isset($vars['tag'])) $tag_execute = "tag='{$vars['tag']}';";
 $data['sub_title'] = $event_name ? ucwords(str_replace('_',' ', $event_name)) : ucwords(str_replace('_',' ', $tag));
 ?>
 
-<?$this->load->view('view_includes/header.php',$data);?>
+<?$this->load->view('view_layout/header.php',$data);?>
 <!--
 	#dependency events.css
 -->
@@ -48,5 +48,5 @@ $data['sub_title'] = $event_name ? ucwords(str_replace('_',' ', $event_name)) : 
 </div>
 <?
 $data['pagination'] = $pagination;
-$this->load->view('view_includes/footer.php',$data);
+$this->load->view('view_layout/footer.php',$data);
 ?>

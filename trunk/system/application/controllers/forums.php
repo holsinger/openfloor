@@ -174,18 +174,11 @@ class Forums extends Controller
 	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
 		#TODO Handle no candidates assigned?
-		
-		// ========
-		// = init =
-		// ========
-		// $this->userauth->check();
-		$data['rightpods'] = 'suppress';
+		$data['rightpods'] = 'suppress';	// Make it so the right column won't show up
 		$data['event'] = $event;
-		
-		
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
-
+		
 		$data["event_data"] = $this->event->get_event($data['event_id']);
 		
 		$temp_participants = $this->event->getCansInEvent($data['event_id']);
@@ -205,7 +198,6 @@ class Forums extends Controller
 		}else{
 			$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
 		}
-		
 		
 		$this->question->event_id = $data['event_id'];		
 		// ==========
@@ -233,13 +225,13 @@ class Forums extends Controller
 				break;
 			case 'your_reaction':
 				$this->_currentQuestion($data);
-				$data['can_id'] = $option_1;
+				$data['user_id'] = $option_1;
 				$this->_yourReaction($data);
 				$this->load->view('user/_userReactSlider.php', $data);
 				break;
 			case 'overall_reaction':
 				$this->_currentQuestion($data);
-				$data['can_id'] = $option_1;
+				$data['user_id'] = $option_1;
 				$this->_overallReaction($data);
 				$this->load->view('user/_overallReaction.php', $data);
 				break;
@@ -263,7 +255,6 @@ class Forums extends Controller
 			$this->load->view('event/main', $data);
 		}		
 	}
-	
 	
 	public function overall_reaction($event, $ajax = null, $can_id = null)
 	{
@@ -647,6 +638,7 @@ class Forums extends Controller
 		$this->videoFeed($event, 'low');
 	}
 	
+	// Might be deprecated - CTE
 	private function videoFeed($event, $stream)
 	{
 		$event = $this->event->get_event(null, $event);
@@ -915,18 +907,21 @@ EOT;
 	
 	private function _allReactions(&$data)
 	{
-		if(empty($data['current_question'])) $data['candidates'] = array();
-		else{
+		if(empty($data['current_question'])){
+			$data['candidates'] = array();
+		}else{
 			$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 			$this->reaction->user_id		= $this->userauth->user_id;
 		}
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
+		
 		foreach($data['candidates'] as $k => $v) {
-			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['can_id']);
-			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
-			$data['candidates'][$k]['link_to_profile'] = $this->candidate->linkToProfile($v['can_id'], false, true);
-			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['can_id'], true) . '"><img src="./avatars/shrink.php?img='.$this->candidate->canAvatar($v['can_id']).'&w=16&h=16"/></a>';
+			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['user_id']);
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['user_id'])/10)*100, 0) . '%';
+			$data['candidates'][$k]['link_to_profile'] = $this->candidate->linkToProfile($v['user_id'], false, true);
+			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['user_id'], true) . '"><img src="./avatars/shrink.php?img='.$this->candidate->canAvatar($v['user_id']).'&w=16&h=16"/></a>';
 		}
+		
 	}
 	
 	private function _yourReaction(&$data)
@@ -938,14 +933,15 @@ EOT;
 	
 	private function _overallReactions(&$data)
 	{
-		if(empty($data['current_question'])) $data['candidates'] = array();
-		else{
+		if(empty($data['current_question'])){
+			$data['candidates'] = array();
+		}else{
 			$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 			$this->reaction->user_id		= $this->userauth->user_id;
 		}
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
 		foreach($data['candidates'] as $k => $v) {
-			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['can_id'])/10)*100, 0) . '%';
+			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['user_id'])/10)*100, 0) . '%';
 		}
 	}
 	
@@ -953,7 +949,7 @@ EOT;
 	{
 		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 		$this->reaction->user_id		= $this->userauth->user_id;		
-		$data['overall_reaction'] = round(($this->reaction->overallReaction($data['can_id'])/10)*100, 0) . '%';
+		$data['overall_reaction'] 		= round(($this->reaction->overallReaction($data['user_id'])/10)*100, 0).'%';
 	}
 	
 	private function _submitQuestion(&$data)
