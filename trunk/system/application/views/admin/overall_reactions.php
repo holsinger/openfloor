@@ -46,8 +46,12 @@
 							<? $class = '' ?>
 							<? foreach($candidates as $v): ?>
 							<tr<?=$class?>>
-								<td><?=$v['can_display_name']?></td>
-								<td><div id="overall-reaction-<?=$v['user_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
+								<td><?=$v['display_name']?></td>
+								<td>
+									<div id="overall-reaction-<?=$v['user_id']?>">
+										<div class="overall-reaction-meter-total"><div class="overall-reaction-meter" style="width: <?=$v['overall_reaction']?>; height: 15px"></div></div>
+									</div>
+								</td>
 							</tr>
 							<? $class = $class ? '' : ' class="alternate"' ?>
 							<? endforeach; ?>

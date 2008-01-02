@@ -231,7 +231,7 @@ class Forums extends Controller
 				break;
 			case 'overall_reaction':
 				$this->_currentQuestion($data);
-				$data['user_id'] = $option_1;
+				$data['speaker_id'] = $option_1;
 				$this->_overallReaction($data);
 				$this->load->view('user/_overallReaction.php', $data);
 				break;
@@ -256,7 +256,7 @@ class Forums extends Controller
 		}		
 	}
 	
-	public function overall_reaction($event, $ajax = null, $can_id = null)
+	public function overall_reaction($event, $ajax = null, $speaker_id = null)
 	{
 		// ========
 		// = init =
@@ -277,7 +277,7 @@ class Forums extends Controller
 		if(isset($ajax)) // AJAX
 		{
 			$this->_currentQuestion($data);
-			$data['can_id'] = $can_id;
+			$data['speaker_id'] = $speaker_id;
 			$this->_overallReaction($data);
 			$this->load->view('user/_overallReaction.php', $data);				
 		} else { // NO AJAX
@@ -939,6 +939,7 @@ EOT;
 			$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 			$this->reaction->user_id		= $this->userauth->user_id;
 		}
+		
 		$data['candidates'] = $this->event->getCansInEvent($data['event_id'], true);
 		foreach($data['candidates'] as $k => $v) {
 			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['user_id'])/10)*100, 0) . '%';
@@ -949,7 +950,7 @@ EOT;
 	{
 		$this->reaction->question_id 	= $data['current_question'][0]['question_id'];
 		$this->reaction->user_id		= $this->userauth->user_id;		
-		$data['overall_reaction'] 		= round(($this->reaction->overallReaction($data['user_id'])/10)*100, 0).'%';
+		$data['overall_reaction'] 		= round(($this->reaction->overallReaction($data['speaker_id'])/10)*100, 0).'%';
 	}
 	
 	private function _submitQuestion(&$data)
