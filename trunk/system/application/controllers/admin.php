@@ -69,12 +69,12 @@ class Admin extends Controller {
 		if ($data['cms_id']>0) $data = $this->cms->get_cms($data['cms_id']);	
 
 		$this->validation->set_fields($fields);
-		$this->load->view('view_cms_form',$data);		
+		$this->load->view('cms/view_cms_form',$data);		
 	}
 	
 	function view () {
 		$data['results'] = $this->cms->get_all_cms();
-		$this->load->view('view_cms',$data);			
+		$this->load->view('cms/view_cms',$data);			
 	}
 	
 	public function dashboard($event = 'presidential_debate', $ajax = null)
