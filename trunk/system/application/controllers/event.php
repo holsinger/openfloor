@@ -49,7 +49,7 @@ class Event extends Controller
 	}
 	
 	/**
-	 * This returns all the events when a user wants to see the full list	
+	 * This returns all the events when a user wants to see the full list (This is the semi-default page)	
 	 *
 	 * @return void
 	 * @author Clark Endrizzi, Rob Stef
@@ -95,7 +95,7 @@ class Event extends Controller
 		$data['left_nav'] = 'events';  
 		$data['left_nav_data'] = array('title' => $this->cms->get_cms_text('', "forums_navigation_title") );
 		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name") => $this->config->site_url(), $data['page_title'] => "");	
-		$this->load->view('view_events',$data);
+		$this->load->view('event/view_events',$data);
 	}
 
 	/**
