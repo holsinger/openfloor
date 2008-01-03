@@ -34,7 +34,8 @@ class Reaction_model extends Model
 			$reaction = $this->db->query("	SELECT avg(reaction) AS overall_reaction 
 											FROM cn_reactions 
 											WHERE reaction_id IN (SELECT max(reaction_id) FROM cn_reactions WHERE fk_question_id = {$this->question_id} AND fk_can_id = $user_id GROUP BY fk_user_id) 
-											GROUP BY fk_user_id")->row();
+											")->row();
+											error_log($this->db->last_query());
  			return empty($reaction) ? 5 : $reaction->overall_reaction ;		
 		}else{
 			return 0;
