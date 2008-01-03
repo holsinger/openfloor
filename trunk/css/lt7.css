@@ -83,4 +83,12 @@ strong.slogan{
 	position: relative;
 }
 #footer ul li {padding-top:3px;}
-
+ /* Thumbs */
+.thumbs_up {
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/RunPolitics/images/thumbsUpTransparent.png', sizingMethod='crop');	
+}
+.thumbs_down {
+	background: none;
+	filter: progid:dximagetransform.microsoft.alphaimageloader(src='http://www.runpolitics.com/RunPolitics/images/thumbsDownTransparent.png', sizingMethod='crop');	
+}
