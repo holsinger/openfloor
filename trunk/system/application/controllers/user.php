@@ -1,6 +1,12 @@
 <?php
-class User extends Controller {
+/**
+ * User Controller.  Used by pages that concern themselves with user management and more.
+ *
+ * @package default
+ * @author Clark Endrizzi, James, and Rob
+ **/
 
+class User extends Controller {
 	var $error = '';
 	
 	function __construct()
@@ -23,13 +29,24 @@ class User extends Controller {
 		$this->CI=& get_instance();
 	}
 	
+	/**
+	 * Default action, shows the users
+	 *
+	 * @return void
+	 * @author ???
+	 **/
 	function index()
 	{
 		//default show create account form
 		$this->view_users();
-	
 	}
 	
+	/**
+	 * Works like login, but is coming from a user doing the action and allows the user to resume what they were trying to do
+	 *
+	 * @return void
+	 * @author ????
+	 **/
 	function loginToDo () {
 		$func_args = func_get_args();
 		$data['location'] = implode('/', $func_args);
@@ -37,6 +54,12 @@ class User extends Controller {
 		$this->load->view('view_login',$data);
 	}
 	
+	/**
+	 * Basic login form
+	 *
+	 * @return void
+	 * @author ???
+	 **/
 	function login () {
 		$rules['user_name'] = "trim|required|min_length[3]|max_length[75]|xss_clean";
 		$rules['user_password'] = "trim|required|md5|xss_clean";
@@ -63,6 +86,12 @@ class User extends Controller {
 		}
 	}
 	
+	/**
+	 * Basic logout functionality (removes the session variables)
+	 *
+	 * @return void
+	 * @author ????
+	 **/
 	function logout() {
 		//destroy session
 		$this->session->sess_destroy();
