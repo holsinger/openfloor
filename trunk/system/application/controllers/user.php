@@ -187,11 +187,14 @@ class User extends Controller {
 	{
 		$result = $this->user->activate($password, $timestamp);
 		if($result == 1){
-			$data['error'] = 'Your account has been activated.';
+			$user_data = $this->user->get_user_custom("timestamp", base64_decode($timestamp) );
+			$this->user->login_user($user_data['user_name'], $user_data['user_id']);
+			redirect("/event", 'location');
 		}else{
 			$data['error'] = 'A system error has occurred, your account could not be activated';
+			$this->load->view('view_login', $data);
 		}		
-		$this->load->view('view_login', $data);
+		
 	}
 
 	/**
@@ -244,11 +247,14 @@ class User extends Controller {
 			
 			$result = $this->user->complete_invite($user_id, $timestamp);
 			if($result == 1){
-				$data['error'] = 'Your account is created.';
+				//$data['error'] = 'Your account is created.';
+				$this->user->login_user($_POST['user_name'], $user_id);
+				redirect("/event", 'location');
 			}else{
 				$data['error'] = 'A system error has occurred, your account could not be activated';
+				$this->load->view('view_login', $data);
 			}		
-			$this->load->view('view_login', $data);
+			
 		}
 		
 	}

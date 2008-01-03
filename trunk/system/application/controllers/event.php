@@ -140,6 +140,7 @@ class Event extends Controller
 			$rules['event_desc_brief'] = "trim|required|max_length[150]|xss_clean";
 			$rules['location'] 		= "trim|max_length[65535]";
 			$rules['event_time']	= "callback_validation_time_check";
+			$rules['event_date']	= "callback_validation_date_check";
 			$this->validation->set_rules($rules);
 			// Set the name of the fields for validation errors (if any)
 			$fields['event_name']		= 	"Event Name"; 
@@ -275,6 +276,23 @@ class Event extends Controller
 			return FALSE;
 		}else{
 			return TRUE;
+		}
+	}
+	
+	/**
+	 * A custom validation callback that ensures the date is not before the current date (which is not allowed)
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_date_check($str)
+	{
+		error_log(substr($str, 0, 10));
+		if( strtotime( substr($str, 0, 10)) < strtotime(date('Y-m-d')) ){
+			$this->validation->set_message('validation_date_check', 'The "Event Date" cannot be before "'.date('M, d  Y').'".');
+			return false;
+		}else{
+			return true;
 		}
 	}
 	

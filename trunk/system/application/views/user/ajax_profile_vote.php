@@ -7,7 +7,7 @@
 	</tr>
 	<? $rowClass = 'normal'; 
 	foreach($votes as $k => $v): ?>
-	<? $vote_value = ($v['vote_value'] > 0) ? '<img src="./images/thumbsUp.png">' : '<img src="./images/thumbsDown.png">'; ?>
+	<? $vote_value = ($v['vote_value'] > 0) ? '<img src="./images/thumbsUpTransparent.png">' : '<img src="./images/thumbsDownTransparent.png">'; ?>
 	<tr class="<?=$rowClass?>">
 		<td><?=$vote_value?></td>
 		<td><?=$v['event_name']?></td>
