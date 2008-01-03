@@ -378,11 +378,15 @@ class User extends Controller {
 	 **/
 	function profile () {
 		//allow segment 3 to be an id or username
+		/*
+			TODO Get rid of this fugly stuff below to just accept id's (which may be the case, I think it was only for cand. with strings)
+		*/
 		$user_id = '';
 		$user_name = '';
 		if ( is_numeric($this->uri->segment(3)) ) $user_id = $this->uri->segment(3);
 		if ( is_string($this->uri->segment(3)) ) $user_name = $this->uri->segment(3); 
 		$data = $this->user->get_user($user_id,$user_name);
+		
 		//set error if there is one
 		$data['error'] = (count($data) > 0)?$error:'No user record found for: '.$this->uri->segment(3);
 		$data['owner'] = $this->user->is_logged_in($user_id,$user_name);
@@ -397,14 +401,9 @@ class User extends Controller {
 		}else {				
 			$data['avatar_image_path'] = './images/image01.jpg';
 		}
-		//exit(var_dump($data));
+		
 		//admin is also an owner
 		if ( $this->userauth->isAdmin() ) $data['owner'] = TRUE;
-		
-		// if user is a candidate, set appropriate variables
-		$data['candidate'] = isset($data['fk_can_id']);
-		$data['display_name'] = $this->user->displayName($data['user_name']);
-		$data['bio'] = $this->user->bio($data['user_name']);
 				
 		$this->load->view('user/view_user_profile',$data);
 	}
