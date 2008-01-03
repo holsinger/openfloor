@@ -70,7 +70,6 @@ class Event extends Controller
 				$events[$k]['edit'] = anchor("event/admin_panel/{$v['event_id']}", 'Admin')." | ".
 				anchor('forums/liveQueue/' . url_title($v['event_name']), 'Live Queue')." | ".
 				anchor('forums/candidateQueue/' . url_title($v['event_name']), 'Candidate Queue')." | ".
-				anchor("admin/dashboard/".url_title($v['event_name']), 'Admin Dashboard')." | ".
 				anchor("forums/overall_reaction/".url_title($v['event_name']), 'Overall Reaction');
 			}
 			$file_name = '';
