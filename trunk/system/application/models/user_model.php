@@ -212,8 +212,8 @@ class User_model extends Model {
 	 * @param string user_name
 	 * @param string user_email
 	 * @param string user_openid
-	 * @retun array (user_id,user_name,user_email,user_avatar,user_openid)
-	 * @autho James Kleinschnitz
+	 * @return array (user_id,user_name,user_email,user_avatar,user_openid)
+	 * @author James Kleinschnitz
 	 * */
 	function get_user ($user_id, $user_name='', $user_email='', $user_openid='') {
 		if ( $user_id ) $this->db->where('user_id',$user_id);
@@ -233,12 +233,33 @@ class User_model extends Model {
 	}
 	
 	/**
+	 * This is like the the function above, but you specify what field to search by instead of a long list, this could probably replace the above
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function get_user_custom($field, $value)
+	{
+		$this->db->where($field,$value);
+		$query = $this->db->get('cn_users');
+		
+		log_message('debug', "GET_USER_CUSTOM:".$this->db->last_query());
+		if ($query->num_rows() > 0) {
+			$user_array = $query->result_array();
+			unset ($user_array[0]['user_password']);
+			return $user_array[0];
+		} else {
+			return array();
+		}
+	}
+	
+	/**
 	 * this function determine if a user is logged in
 	 * 
 	 * @param string user_id
 	 * @param string user_name
-	 * @retun boolean 
-	 * @autho James Kleinschnitz
+	 * @return boolean 
+	 * @author James Kleinschnitz
 	 * */
 	function is_logged_in ($user_id,$user_name='') {
 		//return true if input value == sessions and logged in is set
@@ -262,7 +283,7 @@ class User_model extends Model {
 		#TODO remove user_name from the sessions use userauth obj
 		$data['user_name'] = $user_name; 
 		$data['user_id'] = $user_id;
-		$data['logged_in'] = "asdjfhlak#adsfLKJHJ";
+		$data['logged_in'] = "asdjfhlak#adsfLKJHJ";  // By Thors axe!  What the hell?  - CTE
 		
 		$this->session->set_userdata($data);
 		return true;
