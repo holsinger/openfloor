@@ -1,9 +1,11 @@
 <strong>Display Name:</strong><br/>
 <span class="field_display"><?=$display_name?></span>
 <br /><br />
-<strong>User Email:</strong><br/>
-<span class="field_display"><?=$user_email?></span>
-<br /><br />
+<? if($edit_permission): ?>
+	<strong>User Email:</strong><br/>
+	<span class="field_display"><?=$user_email?></span>
+	<br /><br />
+<? endif; ?>
 <strong>Bio:</strong><br/>
 <span class="field_display"><?=$bio?></span>
 <br /><br /><br />
