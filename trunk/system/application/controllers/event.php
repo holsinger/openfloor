@@ -270,7 +270,7 @@ class Event extends Controller
 	 * @author Clark Endrizzi
 	 **/
 	public function validation_time_check($str){
-		if (!preg_match('/[0-9][0-9]:[0-9][0-9]/', $str)){
+		if (!preg_match('/[0-9][0-9]:[0-9][0-9]/', $str) && !preg_match('/[0-9]:[0-9][0-9]/', $str)){
 			$this->validation->set_message('validation_time_check', 'The "Event Time" needs to be in the format of ##:## (ie 09:30).');
 			return FALSE;
 		}else{
