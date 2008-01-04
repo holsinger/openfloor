@@ -117,7 +117,7 @@ class Event extends Controller
 	 **/
 	public function create_event($event_id = "none", $option = ""){
 		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);	
+		$this->userauth->isUser();	
 		// by default we show the form for step one, unless, it's a post and validation works out
 		$show_form = true;
 		
@@ -305,7 +305,7 @@ class Event extends Controller
 	 **/
 	public function create_event_two($event_id, $option){
 		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);	
+		$this->userauth->isUser();
 		// by default we show the form for step one, unless, it's a post and validation works out
 		$show_form = true;
 		$data['event_id'] = $event_id;
@@ -469,7 +469,7 @@ class Event extends Controller
 	 **/
 	public function manage_candidate($event_id, $user_id = false, $default_display_name = false){
 		#check that user is allowed
-		$this->userauth->check(SL_ADMIN);	
+		$this->userauth->isUser();
 		
 		$show_form = true;		// by default we show the form for step one, unless, it's a post and validation works out
 		
@@ -565,31 +565,28 @@ class Event extends Controller
 				$last_id = $this->user->InsertUser($_POST);
 				$last_can_id = $this->user->InsertUserEventAssociation($last_id, $event_id);
 				// Email if options was selected
-				if($invite_speaker == 'invite'){
-					
-					//send mail
-					$this->load->library('email');
-					$config['mailtype'] = 'html';
-					$config['wordwrap'] = TRUE;				
-					$this->email->initialize($config);
-					$this->email->from('contact@runpolitics.com', 'RunPolitics.com Invitation');
-					$this->email->to($_POST['user_email']);
-					// vars
-					$this->user->user_id = $last_id;
-					$timestamp = $this->user->get('timestamp');
-					$url = anchor('user/invite_accept/' . $last_id . '/' . base64_encode($timestamp), "Finish Setting Up Account");
-					$message = 'You have been invited to participate in an event.  Please click on this link to finish setting up your account: ' . $url;
-					if($invitation_text){
-						$user_data = $this->user->get_user($this->CI->session->userdata('user_id'));
-						$message .= '<br /><br />'.$user_data['display_name'].' wrote the following:<br />'.$invitation_text;
-					}
-					// set subject
-					$this->email->subject('Runpolictics.com  Invitation');
-					$this->email->message($message);
-					// send
-					$this->email->send();
-					error_log("Trying to send email to {$_POST['user_email']}!  Message included: ".$message);
+				$this->load->library('email');
+				$config['mailtype'] = 'html';
+				$config['wordwrap'] = TRUE;				
+				$this->email->initialize($config);
+				$this->email->from('contact@runpolitics.com', 'RunPolitics.com Invitation');
+				$this->email->to($_POST['user_email']);
+				// vars
+				$this->user->user_id = $last_id;
+				$timestamp = $this->user->get('timestamp');
+				$url = anchor('user/invite_accept/' . $last_id . '/' . base64_encode($timestamp), "Finish Setting Up Account");
+				$message = 'You have been invited to participate in an event.  Please click on this link to finish setting up your account: ' . $url;
+				if($invitation_text){
+					$user_data = $this->user->get_user($this->CI->session->userdata('user_id'));
+					$message .= '<br /><br />'.$user_data['display_name'].' wrote the following:<br />'.$invitation_text;
 				}
+				// set subject
+				$this->email->subject('Runpolictics.com  Invitation');
+				$this->email->message($message);
+				// send
+				$this->email->send();
+				error_log("Trying to send email to {$_POST['user_email']}!  Message included: ".$message);
+				
 			}
 			// If editing then it will be complete
 			$event_data = $this->event->get_event($event_id);
@@ -730,6 +727,7 @@ class Event extends Controller
 	 **/
 	public function admin_panel($event_id, $tab="1"){
 		// Check for permissions
+		$this->userauth->isUser();
 		
 		// Show page
 		$data['event_id'] = $event_id;
