@@ -31,7 +31,7 @@ $this->load->view('view_layout/view_head_setup.php',$data);
 	$data['sort_array'] = (isset($sort_array)) ? $sort_array:'';
 	$data['left_nav'] = (isset($left_nav)) ? $left_nav:'';
 	$data['breadcrumb'] = (isset($breadcrumb)) ? $breadcrumb:array('Home'=>$this->config->site_url());
-	if ($this->userauth->isAdmin()) $data['breadcrumb']['Admin'] = '/admin';
+	// LEFT COLUMN
 	$this->load->view('view_layout/view_left_column.php',$data); 
 	?>
 	<? if($sub_title): ?>
