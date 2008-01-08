@@ -66,7 +66,13 @@ class Cms_model extends Model
 		else 
 			return false;
 	}
-
+	
+	/**
+	 * Gets the text for a cms entry, either based on the id or the url
+	 *
+	 * @return void
+	 * @author James ??
+	 **/
 	public function get_cms_text ($id='', $url='')
 	{
 		$result_array = array(); 
@@ -74,7 +80,8 @@ class Cms_model extends Model
 		if ($url) $where = "WHERE cms_url = '$url'";
 		
 		$query = $this->db->query("SELECT cms_text FROM cms $where");
-		log_message('debug', "getCMS:".trim($this->db->last_query()));
+		error_log("CMS ". $this->db->last_query());
+		log_message('get_cms_text sql', "getCMS:".trim($this->db->last_query()));
 		return $query->row()->cms_text;
 	}
 	

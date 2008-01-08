@@ -9,7 +9,7 @@
     <?echo anchor('forums/create/candidate','Add Candidate');?><br/>
     <?echo anchor('admin/view','view all');?>
     <br />
-	<?= form_open('admin/'); ?>
+	<?= form_open('admin/cms/'.$cms_url); ?>
     <?
 		$format = array(
               'name'        => 'cms_name',

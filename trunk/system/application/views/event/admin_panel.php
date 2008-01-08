@@ -12,7 +12,7 @@ $this->load->view('view_layout/header.php', $data);
 		<ul class="tabnav">
 			<li id="dyn_tab_1"><span id="dyn_text_1">General Information</span></li>
 			<li id="dyn_tab_2"><span id="dyn_text_2">Speakers</span></li>
-			<li id="dyn_tab_3"><span id="dyn_text_3">Additional Information</span></li>
+			<li id="dyn_tab_3"><span id="dyn_text_3">Event Access</span></li>
 			<!-- <li id="dyn_tab_4"><span id="dyn_text_4">Permissions</span></li> -->
 		</ul>
 	</div>

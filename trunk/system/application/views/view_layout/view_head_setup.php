@@ -10,6 +10,12 @@
 		foreach($rss as $feed)
 			echo "<link rel=\"alternate\" type=\"application/rss+xml\" title=\"{$feed['title']}\" href=\"{$feed['href']}\" />\n";
 	?>
+	<?
+	// This will bring in any addition code as needed in the head section.  The RSS stuff should be merged to use this since it's more dynamic - CTE
+	foreach($head_include as $h_view):?>
+		<?="<!--dynamically included $h_view-->"?>
+		<?$this->load->view('view_head_includes/'.$h_view);?>
+	<?endforeach;?>
 	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie6.css" /><![endif]-->
 	<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie7.css" /><![endif]-->
 	

@@ -75,3 +75,8 @@ label{
 	padding-bottom: 5px;
 	padding-top: 7px;
 }
+
+.form_indent {
+	padding-left: 30px; 
+	padding-top: 5px;
+}

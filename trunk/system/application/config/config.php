@@ -11,8 +11,8 @@
 |	http://www.your-site.com/
 |
 */
-$config['base_url']	= "http://www.politic20.com";
-
+//$config['base_url']	= "http://www.politic20.com";
+$config['base_url']	= "http://192.168.0.86/RunPolitics";
 /*
 |--------------------------------------------------------------------------
 | Index File

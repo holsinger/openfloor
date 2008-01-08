@@ -249,8 +249,6 @@ class Forums extends Controller
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
 			
-			#TODO This solution for no candidates assigned to event is not ideal
-			if(empty($data['candidates'])) redirect();
 			$data['breadcrumb'] = $this->global ? array($this->cms->get_cms_text('', "home_name") => $this->config->site_url()) : array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), $this->cms->get_cms_text('', "forums_name")=>'event/',$data["event_data"]['event_name']=>'');
 			$this->load->view('event/main', $data);
 		}		
@@ -862,16 +860,26 @@ EOT;
 		$this->question->question_status = 'pending';
 	}
 	
+	/**
+	 * Gets the upcoming questions, used above by the cp function (do we need it as a separate function?)
+	 *
+	 * @return void
+	 * @author Rob Stef, Clark Endrizzi (cleaned up)
+	 **/
 	private function _upcomingQuestions(&$data)
 	{
 		if(isset($data['sort'])) {
-			if($data['sort'] == 'newest') $this->question->order_by = 'date';
-			else $this->question->question_status = $data['sort'];
+			if($data['sort'] == 'newest'){
+				$this->question->order_by = 'date';
+			} else{
+				$this->question->question_status = $data['sort'];
+			} 
 		}
 		
 		// determine section for lazy loader		
-		if(isset($data['section']))
+		if(isset($data['section'])){
 			$this->question->offset = $this->_cp_section_size * $data['section'];		
+		}
 		$this->question->limit = $this->_cp_section_size;
 		
 		$this->_questions($data);

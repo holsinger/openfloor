@@ -355,16 +355,21 @@ class Event extends Controller
 			// Setup the data to show on the form (used if validation is false)
 			$data = $_POST;
 			// Set validation rules
-			$rules['moderator_info'] = "xss_clean";
-			$rules['agenda'] = "xss_clean";
-			$rules['rules'] = "xss_clean";
-			$rules['other_instructions'] = "xss_clean";
+			if($_POST['password_protect']){
+				$rules['password_protect_password'] = "callback_validation_password_check|required";
+			}
+			if ($_POST['email_invite']) {
+				$rules['recipients'] = "required|xss_clean";
+			}
+			if ($_POST['domain_limit']) {
+				$rules['domain_limit_name'] = "callback_validation_domain_name_check|required";
+			}
 			$this->validation->set_rules($rules);
 			// Set the name of the fields for validation errors (if any)
-			$fields['moderator_info']	= 	"Moderator Information"; 
-			$fields['agenda']		= 	"Agenda";
-			$fields['rules']	= 	"Rules";
-			$fields['other_instructions']		= 	"Other Instructions";
+			$fields['password_protect_password']	= 	"Private Password"; 
+			$fields['recipients']		= 	"Recipients";
+			$fields['domain_limit_name']	= 	"Domain Name";
+			
 			$this->validation->set_fields($fields);
 			// Check validation
 			if ($this->validation->run()){
@@ -384,10 +389,15 @@ class Event extends Controller
 		if ($show_form){
 			// Page Setup Stuff
 			$data['event_id'] = $event_id;
-			$data['page_title'] = "Create ".$this->cms->get_cms_text('', "forums_navigation_title");
+			if($option == 'edit'){
+				$data['page_title'] = "Edit ".$this->cms->get_cms_text('', "forums_navigation_title");
+			}else{
+				$data['page_title'] = "Create ".$this->cms->get_cms_text('', "forums_navigation_title")." Step Three";
+			}
 			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
 			$data['option'] = $option;
-			
+			$data['public_disclaimer'] = $this->cms->get_cms_text('', "forums_public_disclaimer");
+			$data['private_disclaimer'] = $this->cms->get_cms_text('', "forums_private_disclaimer");
 			$this->load->view('event/manage_events_three',$data);
 			return;
 		}else{
@@ -402,6 +412,36 @@ class Event extends Controller
 			
 		}
 		
+	}
+	
+	/**
+	 * Custom validation callback for step three.  Because we use the inline label stuff we need to make sure that value is never the one present.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_domain_name_check($str){
+		if (  $str == "Domain Name" ){
+			$this->validation->set_message('validation_domain_name_check', 'The "Domain Name" field requires a value.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
+	}
+	
+	/**
+	 * Custom validation callback for step three.  Because we use the inline label stuff we need to make sure that value is never the one present.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function validation_password_check($str){
+		if (  $str == "********" ){
+			$this->validation->set_message('validation_password_check', 'The "Private Password" field requires a value.');
+			return FALSE;
+		}else{
+			return TRUE;
+		}
 	}
 
 	/**
@@ -791,5 +831,24 @@ class Event extends Controller
 		// return info
 		$data = $this->user->get_user($user_id);
 		$this->load->view('user/ajax_view_user_info', $data);
+	}
+	
+	public function temp($value='')
+	{
+		$data['public_disclaimer'] = $this->cms->get_cms_text('', "forums_public_disclaimer");
+		$data['private_disclaimer'] = $this->cms->get_cms_text('', "forums_private_disclaimer");
+		$this->load->view('event/manage_events_three_temp', $data);
+	}
+	
+	/**
+	 * Does the callback page that is used by the plaxo addressbook stuff (when puttin in a new event)
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function plaxo_callback()
+	{
+		
+		$this->load->view('misc/plaxo_callback', $data);
 	}
 }

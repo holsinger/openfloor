@@ -7,7 +7,7 @@ $data['sub_title'] = "View Content Pages";
 <div id="admin_content">
 		<? foreach ($results as $section_name => $section): ?>
 			<? $final_section_name = $section_name ? ucwords(str_replace('_', ' ', $section_name)) : "(No Section Defined)"; ?>
-			<strong><?=$final_section_name."<br />"?></strong>
+			<strong><?=$final_section_name_section_name."<br />"?></strong>
 			<div style="margin-left: 20px;">
 				<? foreach($section as $cms_data): ?>
 					<?=anchor('admin/cms/'.$cms_data['cms_url'],'edit')?>
