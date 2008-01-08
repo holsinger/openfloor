@@ -50,7 +50,7 @@ $this->load->view('view_layout/header.php', $data);
 			?>
 			<?=form_dropdown("am_pm", $drop_array, $am_pm)?>
 			<br /><br />
-			<label>Event Location: *</label>
+			<label>Event Location:</label>
 			<small>Write a description of the event location, directions etc.</small><br />
 			<textarea name="location" rows="3" cols="48" class="txt"><?=$location?></textarea>
 			<br /><br />
