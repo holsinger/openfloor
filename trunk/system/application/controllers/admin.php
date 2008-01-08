@@ -28,9 +28,15 @@ class Admin extends Controller {
 	
 	function index()
 	{
-		$this->cms();
+		$this->site_admin();
 	}
 	
+	/**
+	 * Shows the edit page for a cms entry
+	 *
+	 * @return void
+	 * @author Clark Endrizzi, etc
+	 **/
 	function cms ($cms_url)
 	{
 		$data['cms_id'] = 0;
@@ -47,12 +53,12 @@ class Admin extends Controller {
 		} else {
 			if ($_POST['cms_id']) {				
 				$this->cms->update_cms($_POST);
-				redirect('admin/view/');
+				redirect('admin/');
 				ob_clean();
 				exit();
 			} else {
 				$this->cms->insert_cms_form();
-				redirect('admin/view/');
+				redirect('admin/');
 				ob_clean();
 				exit();
 			}
@@ -72,6 +78,12 @@ class Admin extends Controller {
 		$this->load->view('cms/view_cms_form',$data);		
 	}
 	
+	/**
+	 * Views a cms entry, this is sometimes used a a generic page that can simply use cms content for the page.
+	 *
+	 * @return void
+	 * @author ????
+	 **/
 	function view () {
 		$data['results'] = $this->cms->get_all_cms();
 		$this->load->view('cms/view_cms',$data);			
@@ -130,6 +142,61 @@ class Admin extends Controller {
 		}
 	}
 	
+	/**
+	 * Displays the site administration section.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function site_admin($tab)
+	{
+		$data['tab'] = $tab;
+		$this->load->view('admin/site_admin_home',$data);
+	}
+	
+	/**
+	 * Displays the site tab ajax stuff
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function site_admin_ajax($tab)
+	{
+		// Check for permissions
+		
+		// return info
+		if($tab == 1){
+			$data['results'] = $this->cms->get_all_cms();
+		}elseif($tab == 2){
+			$this->db->orderby("user_name", "asc");
+			$users = $this->db->get('cn_users')->result_array();
+			foreach($users as $k=>$v) 
+			{
+				if ($this->userauth->isAdmin()) $users[$k]['edit'] = anchor("user/edit_user/{$v['user_id']}", 'Edit');
+
+				if (is_string($users[$k]['user_avatar']) && is_array(unserialize($users[$k]['user_avatar'])) )
+				{
+					$image_array = unserialize($users[$k]['user_avatar']);
+
+					$users[$k]['avatar_image_name'] = $image_array['file_name'];
+					$users[$k]['avatar_image_height'] = 20;
+					$users[$k]['avatar_image_width'] = 20;
+					$users[$k]['avatar_image_path'] = "./avatars/shrink.php?img=".$image_array['file_name']."&w=20&h=20";
+				} 
+				else
+				{
+					$users[$k]['avatar_image_name'] = "image01.jpg";
+					$users[$k]['avatar_image_height'] = 20;
+					$users[$k]['avatar_image_width'] = 20;
+					$users[$k]['avatar_image_path'] = "./avatars/shrink.php?img=image01.jpg&w=20&h=20";   //"./images/image01.jpg";
+				}
+			}
+			$data['users'] = $users;
+		}elseif($tab == 3){
+		}
+		$this->load->view('admin/site_admin_tab_'.$tab ,$data);
+	}	
+	
 	private function _current_question(&$data)
 	{
 		$data['current_question'] = $this->question->current_question($this->event_id);
@@ -154,5 +221,6 @@ class Admin extends Controller {
 	{
 		$data['last_10_questions'] = $this->question->last_10();
 	}
+
 }
 ?>
