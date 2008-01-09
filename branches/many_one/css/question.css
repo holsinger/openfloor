@@ -1,0 +1,115 @@
+.news-summary{
+	margin:0 36px 0 36px;
+	padding:7px 0 0 0;
+	overflow: visible;
+	position:relative;
+}
+.raiting{
+	width:85px;
+	height:67px;
+	float:left;
+	position:relative;
+	margin:0 0 0 -85px;
+	display:inline;
+	overflow:hidden;
+	background:url(../images/bg-raiting.png);
+}
+a.voteup,
+a.votedown,
+a.up,
+a.down{
+	width:18px;
+	height:17px;
+	overflow:hidden;
+	display:block;
+	position:absolute;
+	top:7px;
+	left:7px;
+	text-indent:-9999px;
+	background:url(../images/thumbsUp.png);
+}
+a.voteup
+{
+	background:url(../images/votedCheckBox.png);
+}
+a.down{
+	top:42px;
+	background:url(../images/thumbsDown.png);
+}
+a.votedown
+{		
+	top:42px;
+	background:url(../images/votedCheckBox.png);
+}
+a.vote_digit {
+	width:51px;
+	height:51px;
+	text-align:center;
+	line-height:51px;
+	font-size:20px;
+	font-weight:bold;
+	text-decoration:none;
+	color:#053C7C;
+	position:absolute;
+	top:5px;
+	left:29px;
+	display:block;
+}
+a.vote_digit:hover {
+	text-decoration:none;
+}
+.describtion{background:#F0FAFF url(../images/bg-descr.gif) repeat-y 0 0;}
+.describtion-frame{background:url(../images/bg-descr.gif) repeat-y 100% 0;}
+.descr-tl{background:url(../images/bg-descr-left-top-corner.png) no-repeat 0 0;}
+.descr-tr{background:url(../images/descr-r-corner.gif) no-repeat 100% 0;}
+.descr-bl{background:url(../images/bg-bottom-l-corner.gif) no-repeat 0 100%;}
+.descr-br{background:url(../images/bg-descr-right-r-corner.gif) no-repeat 100% 100%;padding:5px 10px 0 6px;}
+.describtion h3{
+	margin:0;
+	font-size:16px;
+}
+.describtion .autor{
+	overflow:hidden;
+	padding:5px 0 14px 0;
+	color:#93A2B4;
+	font-size:10px;
+}
+.describtion .autor p{margin:2px 0 0 0;}
+.describtion .autor img{
+	float:left;
+	margin:0 6px 0 0;
+	border:1px solid #6F808A;
+}
+.describtion p{
+	margin:0;	
+	width:335px !important;	
+}
+.describtion p a.more{
+	margin:0;
+	font-size:10px;
+}
+.describtion ul.options{
+	margin:11px 0 0 0;
+	font-size:10px;
+	padding:0 0 8px 0;
+	overflow:hidden;
+	width:100%;
+	list-style:none;
+}
+.describtion ul.options a{text-decoration:none; padding:0 0 0 18px;float:left;height:13px;line-height:13px;}
+.describtion ul.options a:hover{text-decoration:underline;}
+.describtion ul.options li{
+	float:left;
+	background:url(../images/divider.gif) no-repeat right;
+	padding:0 8px 0 0;
+	margin:0 7px 0 0;
+}
+
+.describtion ul.options li.watch a {
+	background:url(../images/ico-watch.png) no-repeat left;
+}
+.describtion ul.options li.tell-friend{background:none;}
+.describtion ul.options li.tell-friend a{background:url(../images/ico-mail.gif) no-repeat left;}
+.describtion ul.options li.trackback a{background:url(../images/ico-trackback.gif) no-repeat left;}
+.describtion ul.options li.discuss a{background:url(../images/ico-discuss.gif) no-repeat left;}
+.describtion ul.options li.flag a{background:url(../images/RP_Questions_flag.png) no-repeat left;}

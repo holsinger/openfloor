@@ -1,0 +1,31 @@
+#loading_div {
+	position: relative; 
+	font-size: 2em; 
+	text-align: center;
+}
+#outer_about_div {
+	position: relative; 
+	overflow: hidden; 
+	width: 0px; 
+	height: 700px; 
+	border: 0px solid #000000; 
+	z-index: 3;
+}
+#inner_about_div {
+	position: relative; 
+	height: 344px; 
+	width: 4000px; 
+	z-index: 2;
+}
+#overall_outer_div {
+	position: relative; 
+	overflow: hidden; 
+	width: 100%
+}
+#about_bio {
+	visibility: hidden; 
+	width: 250px; 
+	top: 350px; 
+	position: absolute; 
+	margin-top: 10px
+}
