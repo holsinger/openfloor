@@ -86,7 +86,7 @@ P.S. Try out the included versions to see how they work and have fun!
 }
 .scal .daybox{
 	float:left;
-	border:1px solid black;
+	border:1px solid #E4F2FD;
 	width: 40px;
 	color:black;
 	text-align:center;	
@@ -95,7 +95,7 @@ P.S. Try out the included versions to see how they work and have fun!
     display: none;
 }
 .scal .dayboxname{
-	background-color: black;
+	background-color: #E4F2FD;
 	color:white;
 	font-size:16pt;
 }

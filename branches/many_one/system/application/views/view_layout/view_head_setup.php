@@ -4,7 +4,7 @@
 	<base href="<?= $this->config->site_url();?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-	<title>Run Politics<?=$sub_title ? ' - '.$sub_title : ""?></title>
+	<title>Many One</title>
 	<?
 	if(isset($rss))
 		foreach($rss as $feed)
@@ -16,16 +16,11 @@
 		<?="<!--dynamically included $h_view-->"?>
 		<?$this->load->view('view_head_includes/'.$h_view);?>
 	<?endforeach;?>
-	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie6.css" /><![endif]-->
-	<!--[if gt IE 6]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/ie7.css" /><![endif]-->
-	
 	<!-- 
 	CSS DEPENDENCIES
-	#dependency all2.css
-	#dependency main.css
-	#dependency userWindow.css
-	#dependency flag.css
-	#dependency wordcloud.css
+	#dependency many_one_globalReset.css
+	#dependency many_one_global.css
+	
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js

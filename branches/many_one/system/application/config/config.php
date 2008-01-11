@@ -12,7 +12,7 @@
 |
 */
 //$config['base_url']	= "http://www.politic20.com";
-$config['base_url']	= "http://192.168.0.86/RunPolitics";
+$config['base_url']	= "http://192.168.0.86/many_one";
 /*
 |--------------------------------------------------------------------------
 | Index File
@@ -297,6 +297,5 @@ $config['time_reference'] = 'local';
 |
 */
 $config['rewrite_short_tags'] = FALSE;
-
 
 ?>

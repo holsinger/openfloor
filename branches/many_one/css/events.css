@@ -80,3 +80,11 @@ label{
 	padding-left: 30px; 
 	padding-top: 5px;
 }
+
+/* Many One Overwrites */
+form div {
+	padding-left: 0px;
+}
+table, table td, table th {
+	border: 0px;
+}

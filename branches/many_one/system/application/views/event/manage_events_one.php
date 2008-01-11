@@ -9,6 +9,17 @@ $this->load->view('view_layout/header.php', $data);
 	#dependency events.css
 -->
 <div id="content_div">
+	<div id="title">
+		<div class="top"></div>
+		<h1>Create Event</h1>
+	</div>
+	<div style="padding-left: 10px;">
+		Events allow community participation.
+		<br /><br />
+	</div>
+	<div class="header">
+		<h3>Event Details</h3>
+	</div>
   	<div class='errorArea'><?=$this->validation->error_string;?></div>
 	<div id="account_form">
 		<?= form_open_multipart(($event_id)?"event/create_event/$event_id/$option":"event/create_event/", array('name'=>'my_form')); ?>
@@ -63,6 +74,11 @@ $this->load->view('view_layout/header.php', $data);
 			<br /><br />
 			<small>* required fields</small>
 		<?= form_close(); ?>
+	</div>
+	<div style="margin-top: 20px">
+		<strong>
+		POWERED BY OPENFLOOR TECHNOLOGY
+		</strong>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">

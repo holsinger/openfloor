@@ -1,8 +1,8 @@
 <table>
 	<tr>
-		<th class="candidate">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Speaker&nbsp;&nbsp;&nbsp;&nbsp;</th>
-		<th style="background-color:#08397b;">Your Reaction</th>
-		<th class="reaction">Overall</th>
+		<th class="candidate">&nbsp;&nbsp;Speaker</th>
+		<th style="background-color:#3561b7;">Your Reaction</th>
+		<th class="reaction">Overall&nbsp;&nbsp;</th>
 	</tr>
 	<? $class = '' ?>
 	<? foreach($candidates as $v): ?>

@@ -1,59 +1,41 @@
-
-						<? if (isset($pagination)) { ?>
-		                <div class="pagers">
-		                	<div class="list"	>
-										<?= (isset($foot)) ? $foot:'';?>
-										<!-- pagers list start here -->
-										<ul>
-											<?=(isset($pagination)) ? $pagination:'';?>
-										</ul>
-							</div>
-						</div>
-						<div style="clear:both;"></div>
-						<? } ?>
-                    <?
-                    //set vars for right column
-					//$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('gvideo'=>array(),'gblog'=>array());
-					if($rightpods != 'suppress'){
-						$data['rightpods'] = (isset($rightpods)) ? $rightpods:array('events'=>array(),'dynamic'=>array());
-						if (isset($cloud)) {
-							$data['rightpods']['dynamic']['top_tags']= $cloud;
-						} else {
-							// $data['cloud'] = FALSE;
-							$cloud = $this->tag_lib->createTagCloud(null);
-							$data['rightpods']['dynamic']['top_tags']= $cloud;
-						
-						}
-					
-						if (!$admin) $this->load->view('view_layout/view_right_column.php',$data); 
-					}
-					?>
-            	</tr>
-            </table>
-			</div>
-            <div class="footer">Copyright &copy; 2007 RunPolitics.com. All Rights Reserved. Reproduction in whole<br />or part in any form or medium without express written permission is strictly prohibited.</div>
-			<div class="contact_us">
-	                <?=anchor("event/","EVENTS");?>
-	                <span class="separator">|</span>
-					<a href="<?=$this->config->site_url()?>contact/showForm/contact_us">CONTACT US</a>
-					<span class="separator">|</span>
-					<?=anchor("information/aboutUs","ABOUT US");?>
-	                <span class="separator">|</span>
-	                <?=anchor("information/view/faq","FAQ");?>
-	                <span class="separator">|</span>
-					<a href="http://blog.runpolitics.com">BLOG</a>
-			</div>
-        </div></div></div></div></div>
+    		</div>
+			<? /*
+	        <div id="sidebar" class="sash">
+				<div class="box search" id="zmid_3">
+		  			<div id="">
+						<form id="header-search" name="sitesearch" enctype="application/x-www-form-urlencoded" method="post" action="">
+							<fieldset>
+								<div>
+									<div class="iefix nolabel">
+										<input id="search-field" onFocus="return setSearchfocus(this.form.name)" name="q" value="Search Site" type="text" class="text" />
+										<input id="search-button" value="GO" src="/themes/newbase/i/button_go.gif" type="image" class="image" name="search-button" />
+										<input name="__module" value="SiteSearch" type="hidden" class="hidden" />
+									</div>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<p>
+					<a href="/register/"><img src="/themes/newbase/i/join-manyone.gif" alt="Join ManyOne Today!" /></a>
+				</p>
+				<div class="box actions" id="pmid_1596">
+	  				<a name="anchor_1596" class="anchor"> </a>
+					<div class="header">
+	  					<h3>Action Items</h3>
+					</div>
+					<ul>
+	  					<li><a class="print" href="javascript:window.print()">Print</a></li>
+					</ul>
+				</div>
+			</div> */ ?>
+		</div>
+	    <div id="footer">
+	        <p>
+				© Copyright 2007 ManyOne. All rights reserved. <a xmlns="" href="<?=$this->config->item('m1_url')?>/"> ManyOne Home</a> | <a xmlns="" href="<?=$this->config->item('m1_url')?>/about/">About ManyOne</a> | <a xmlns="" href="<?=$this->config->item('m1_url')?>/terms/">Terms of Service</a> | <a xmlns="" href="<?=$this->config->item('m1_url')?>/privacy/">Privacy Policy</a> | <a xmlns="" href="<?=$this->config->item('m1_url')?>/contact/">Contact</a>
+			</p>
+	        <p></p>
+	    </div>
     </div>
-	
-<script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
-    
-    </script>
-    
-    <script type="text/javascript">
-    
-    _uacct = "UA-1010094-3";
-    urchinTracker();
-    </script>
 </body>
 </html>

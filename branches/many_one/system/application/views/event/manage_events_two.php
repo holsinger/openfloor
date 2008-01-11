@@ -2,11 +2,25 @@
 $data['sub_title'] = $page_title." Step Two";
 $this->load->view('view_layout/header.php', $data);
 ?>
+<!--
+	#dependency events.css
+-->
 <div id="content_div">
+	<div id="title">
+		<div class="top"></div>
+		<h1>Create Event</h1>
+	</div>
+	<div style="padding-left: 10px;">
+		Events allow community participation.
+		<br /><br />
+	</div>
+	<div class="header">
+		<h3>Event Speakers</h3>
+	</div>
 	<div id="account_form">
 		<? $hidden = array('did_submit' => 'true'); ?>
 		<?= form_open('event/create_event_two/'.$event_id.'/'.$option, array('name'=>'my_form'), $hidden); ?>
-			<label>Add Speakers:</label>
+			<!-- <label>Add Speakers:</label> -->
 			<table cellpadding="0" cellspacing="0">
 				<? if(count($users) > 0): ?>
 					<tr>
@@ -40,7 +54,7 @@ $this->load->view('view_layout/header.php', $data);
 				<? endif; ?>
 			</table>
 			<br /><br />
-			<input type="button" value="Add Speaker" onclick="window.location=site_url+'event/search_candidate/<?=$event_id?>';">
+			<input class="image" type="image" value="add speaker" src="images/many_one/button_add_speaker.png" name="add_speaker" onclick="window.location=site_url+'event/search_candidate/<?=$event_id?>';" />
 			<br /><br />
 			<br /><br />
 			<?if($option == 'edit'):?>
@@ -50,11 +64,16 @@ $this->load->view('view_layout/header.php', $data);
 				<? if(count($users) > 0): ?>
 					<?= form_submit('','Next Step','class="button"'); ?>
 				<? else: ?>
-					<input type="button" onclick="alert('You must have at least one speaker to continue.')" class="button" value="Next Step">
+					<input type="button" onclick="alert('You must have at least one speaker to continue.')" class="button" value="Add Event">
 				<? endif; ?>
 			<? endif; ?>
 			<br /><br />
 		<?= form_close(); ?>
+	</div>
+	<div style="margin-top: 20px">
+		<strong>
+		POWERED BY OPENFLOOR TECHNOLOGY
+		</strong>
 	</div>
 </div>
 <script type="text/javascript" charset="utf-8">

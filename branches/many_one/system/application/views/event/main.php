@@ -16,7 +16,6 @@ $data['sub_title'] = $event_data['event_name'];
 $this->load->view('view_layout/header.php', $data);
 ?>
 <!-- 
-#dependency all2.css
 #dependency event.css
 #dependency userWindow.css
 dependency overall_reaction.css
@@ -46,7 +45,6 @@ dependency overall_reaction.css
 		<div><b>When:</b> <?=date("F j, Y, g:i a", strtotime($event_data['event_date']))?></div>
 		<div><b>Where:</b> <?=$event_data["location"]?><br /><br /></div>
 	<? endif; ?>
-	
 	<div><b>Description:</b></div> 
 	<div id="event_description"><?=$event_data["event_desc_brief"]?><br /></div>
 	<div id="event_description_full" style="display:none; font-weight: normal;">
@@ -57,13 +55,17 @@ dependency overall_reaction.css
 	<div><br/><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
 	<? if(!$event_data["event_finished"]): ?>
-		<div style="text-align: center;"><img src="./images/ucp/ask-a-question2.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : 'showBox(\'login\')' ?>"/></div>
-		<div id="cp-ask-question" style="display:none; text-align: center;"><? $this->load->view('question/_submit_question_form') ?></div>
+		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : $this->config->item('m1_url').'/login/' ?>"/></div>
+		<div id="cp-ask-question" style="display:none; text-align: center; margin-bottom: 5px;">
+			<div style="width: 500px; text-align: left; margin-left: 278px; background-color: #F2F2F2; padding: 5px;">
+			<? $this->load->view('question/_submit_question_form') ?>
+			</div>
+		</div>
 	<? endif; ?>
 	
 	<? if($event_data['streaming'] && !$event_data["event_finished"]): ?>
 		<div class="section">
-			<span class="section-title">Current Question:</span>
+			<h3>Current Question</h3>
 		</div>
 	
 		<div id="current_question"></div>		  
@@ -121,10 +123,11 @@ dependency overall_reaction.css
 			<? endforeach; ?>
 		</script>	
 	<? endif; ?>
-	
+	<br /><br />
 	<div class="section">
-		<span class="section-title" id="question_title"><?= !$event_data["event_finished"] ? "Upcoming Questions" : "Answered Questions" ?> </span>
-		<span style="float:right;padding-top:3px;cursor:pointer;">
+		<h3 id="question_title"><?= !$event_data["event_finished"] ? "Upcoming Questions" : "Answered Questions" ?></h3>
+		<!-- <div class="section-title" id="question_title" style=" "><?= !$event_data["event_finished"] ? "Upcoming Questions" : "Answered Questions" ?> </div> -->
+		<span style="float:right;padding-top:3px;cursor:pointer; margin-top: -20px">
 			<span>Show: </span>
 			<? if(!$event_data["event_finished"]): ?>
 				<span id="sort-link-pending" title="Upcoming" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
@@ -140,9 +143,14 @@ dependency overall_reaction.css
 	</div>
 	<div id="error_div"></div>
 	<div id="upcoming_questions"></div>	
+	<div style="margin-top: 20px; text-align: center;">
+		<strong>
+		POWERED BY OPENFLOOR TECHNOLOGY
+		</strong>
+	</div>
 </div>
 
-<div id="loading_reminder_div" class="loading_reminder">Loading...</div>
+<div id="loading_reminder_div" class="loading_reminder">&nbsp;<img style="padding-top: 2px;" src="images/many_one/ajax-loader.gif"></div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
 	
