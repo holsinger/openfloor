@@ -187,18 +187,18 @@ a {
 #ucp .votes_on {
 	width: 75px;
 	height: 15px;
-	background: url(../images/ucp/comments-open.png) no-repeat;
+	background: url(../images/ucp/comments-tab-open.png) no-repeat;
 	margin-right: 33px;	
 }
 
-#ucp .comments, #ucp .more_info {
+#ucp .comments, #ucp .info, #ucp .answer, #ucp .admin {
 	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
 	margin-right: 5px;	
 }
 
-#ucp .comments_on, #ucp .more_info_on {
+#ucp .comments_on, #ucp .info_on, #ucp .answer_on, #ucp .admin_on {
 	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab-open.png) no-repeat;
@@ -221,7 +221,7 @@ a {
 	margin-top: 0;
 }
 
-#ucp .votes, #ucp .comments, #ucp .more_info {
+#ucp .votes, #ucp .comments, #ucp .info, #ucp .answer, #ucp .admin {
 	color: #fffeff;
 	text-transform: uppercase;
 	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
@@ -348,8 +348,8 @@ a {
 
 .reaction_handle {
 	width: 19px; 
-	height: 20px; 
-	background: url(../images/many_one/voter_handle.png); 
+	height: 19px; 
+	background: url(../images/many_one/many_handle.png); 
 	float: left;
 }
 

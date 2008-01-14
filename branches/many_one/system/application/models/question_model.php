@@ -135,15 +135,24 @@ class Question_model extends Model
 		return $results;
 	}
 	
+	/**
+	 * Returns a question record
+	 *
+	 * @return void
+	 * @author Rob S, Clark Endrizzi (cleaned up)
+	 **/
 	public function get_question ($id, $url='')
 	{
 		 $result_array = array(); 
+		
 		 if ($id) $this->db->where('question_id',$id);
 		 if ($url) $this->db->where('question_url_name',$url);
 		 if($this->event_id) $this->db->where('fk_event_id', $this->event_id);
+		
 		 $query = $this->db->get('cn_questions');
 		 log_message('debug', "QUESTIONS:getQuestions:".trim($this->db->last_query()));
 		 $result_array = $query->result_array();
+		
 		 return $result_array[0];
 	}
 	

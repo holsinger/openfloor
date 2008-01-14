@@ -254,6 +254,18 @@ class Forums extends Controller
 		}		
 	}
 	
+	/**
+	 * Gets information for a question to be viewed on the information tab of a question.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function get_question_info($question_id)
+	{
+		$data = $this->question->get_question($question_id);
+		$this->load->view('event/ajax_question_info', $data);
+	}
+	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)
 	{
 		// ========

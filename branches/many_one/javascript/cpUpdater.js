@@ -7,6 +7,7 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 
 // vars
 cpUpdater.current_question_id = 0;
+cpUpdater.current_tab = false;
 cpUpdater.sliders = new Object;
 ajaxOn = true;
 var sort = 'pending';
@@ -93,90 +94,46 @@ cpUpdater.enableAJAX = function() {
 	}	
 }
 
-cpUpdater.viewAdmin = function(question_id, event_id) {
-	visible = !($('cp-admin-' + question_id).getStyle('display') == 'none');
+cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2){
+	//visible = !($('cp-tab-body-' + question_id).getStyle('display') == 'none');
 	
-	if(visible) {
-		cpUpdater.toggleVisibility('cp-admin-' + question_id);
-		cpUpdater.toggleAJAX();
+	if(tab_name == cpUpdater.current_tab_name) {	
+		$("cp_tab_body_"+question_id).setStyle({display:'none'});
+		cpUpdater.toggleAJAX();					// turns off ajax calls
+		cpUpdater.current_tab_name = false;
+		$("cp_"+tab_name+"_tab_"+question_id).removeClassName(tab_name+"_on");
+		
 	} else {
 		my_loading_reminder.show();
-		new Ajax.Updater('cp-admin-' + question_id, site_url + 'forums/EditQuestion/' + question_id + '/' + event_id, {
+		if(tab_name == "comments"){
+			url = site_url + 'question/view/' + option_1 + '/' + option_2;  			// option 1 is event name, 2 is question name
+		}else if(tab_name == "votes"){
+			url = site_url + 'votes/who/' + question_id;							
+		}else if(tab_name == "info"){
+			url = site_url + 'forums/get_question_info/' + question_id;
+		}else if(tab_name == "admin"){
+			url = site_url + 'forums/EditQuestion/' + question_id + '/' + event_id;		// option 1 is event id
+		}else if(tab_name == 'answer'){
+			url = site_url + 'forums/ShowAnswer/' + question_id
+		}
+		
+		new Ajax.Updater('cp_tab_body_' + question_id, url, {
 			parameters: {
 				'ajax' : 'true'
 			},
 			onSuccess: function(transport) {
-				cpUpdater.toggleVisibility('cp-admin-' + question_id);
-				cpUpdater.toggleAJAX();
+				$("cp_tab_body_"+question_id).setStyle({display:'block'});
+				cpUpdater.toggleAJAX();			// turns off ajax calls
 				my_loading_reminder.hide();
-			}
-		});
-	}	
-}
-
-cpUpdater.viewAnswer = function(question_id) {
-	visible = !($('cp-answer-' + question_id).getStyle('display') == 'none');
-	
-	if(visible) {
-		cpUpdater.toggleVisibility('cp-answer-' + question_id);
-		cpUpdater.toggleAJAX();
-	} else {
-		my_loading_reminder.show();
-		new Ajax.Updater('cp-answer-' + question_id, site_url + 'forums/ShowAnswer/' + question_id, {
-			parameters: {
-				'ajax' : 'true'
-			},
-			onSuccess: function(transport) {
-				cpUpdater.toggleVisibility('cp-answer-' + question_id);
-				cpUpdater.toggleAJAX();
-				my_loading_reminder.hide();
-			}
-		});
-	}	
-}
-
-cpUpdater.viewVotes = function(question_id) {
-	visible = !($('cp-votes-' + question_id).getStyle('display') == 'none');
-	
-	if(visible) {
-		cpUpdater.toggleVisibility('cp-votes-' + question_id);
-		cpUpdater.toggleAJAX();
-	} else {
-		my_loading_reminder.show();
-		new Ajax.Updater('cp-votes-' + question_id, site_url + 'votes/who/' + question_id, {
-			parameters: {
-				'ajax' : 'true'
-			},
-			onSuccess: function(transport) {
-				cpUpdater.toggleVisibility('cp-votes-' + question_id);
-				cpUpdater.toggleAJAX();
-				my_loading_reminder.hide();
-			}
-		});
-	}	
-}
-
-cpUpdater.viewComments = function(question_id, event_name, question_name, button_elem) {	
-	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
-	
-	if(visible) {	
-		cpUpdater.toggleVisibility('cp-comments-' + question_id, button_elem);
-		cpUpdater.toggleAJAX();		
-	} else {
-		my_loading_reminder.show();
-		new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
-			parameters: {
-				'ajax' : 'true'
-			},
-			onSuccess: function(transport) {
-				cpUpdater.toggleVisibility('cp-comments-' + question_id);
-				cpUpdater.toggleAJAX();
-				my_loading_reminder.hide();
+				$("cp_"+tab_name+"_tab_"+question_id).addClassName(tab_name+"_on");
+				if(cpUpdater.current_tab_name){
+					$("cp_"+cpUpdater.current_tab_name+"_tab_"+question_id).removeClassName(cpUpdater.current_tab_name+"_on");
+				}
+				cpUpdater.current_tab_name = tab_name;
 			}
 		});
 	}
-}
-
+},
 cpUpdater.change_comments_sort = function(question_id, event_name, question_name, sort) {
 	my_loading_reminder.show();
 	new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name + '/' + sort, {
@@ -187,11 +144,6 @@ cpUpdater.change_comments_sort = function(question_id, event_name, question_name
 			my_loading_reminder.hide();
 		}
 	});
-}
-
-cpUpdater.viewInfo = function(question_id) {
-	cpUpdater.toggleVisibility('cp-info-' + question_id);
-	cpUpdater.toggleAJAX();
 }
 
 cpUpdater.voteComment = function (url, question_id, event_name, question_name) {
@@ -251,16 +203,8 @@ cpUpdater.toggleAJAX = function () {
 	}
 }
 
-cpUpdater.toggleVisibility = function(element, button_elem) {
-	$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').without($(element)).invoke('setStyle', {display:'none'});		// Hides all tabs first
-
-	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
-	$(element).setStyle(style);	
-	
-}
-
 cpUpdater.current_question_fade = function() {
-	new Effect.Highlight('the-current-question', {startcolor: '#eef8ff', endcolor: '#fcc6ca', duration: 1.5});
+	new Effect.Highlight('the-current-question', {startcolor: '#ffffff', endcolor: '#F2F6FE', duration: 1.5});
 	// timer = setInterval('ColorChange()', 75);
 }
 

@@ -39,7 +39,6 @@ dependency overall_reaction.css
 	<br />
 	<br />
 <? endif; ?>
-
 <div id="ucp">
 	<? if(!$event_data['streaming']): ?>
 		<div><b>When:</b> <?=date("F j, Y, g:i a", strtotime($event_data['event_date']))?></div>
