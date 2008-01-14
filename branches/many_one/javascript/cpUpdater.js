@@ -156,11 +156,11 @@ cpUpdater.viewVotes = function(question_id) {
 	}	
 }
 
-cpUpdater.viewComments = function(question_id, event_name, question_name) {	
+cpUpdater.viewComments = function(question_id, event_name, question_name, button_elem) {	
 	visible = !($('cp-comments-' + question_id).getStyle('display') == 'none');
 	
 	if(visible) {	
-		cpUpdater.toggleVisibility('cp-comments-' + question_id);
+		cpUpdater.toggleVisibility('cp-comments-' + question_id, button_elem);
 		cpUpdater.toggleAJAX();		
 	} else {
 		my_loading_reminder.show();
@@ -251,11 +251,12 @@ cpUpdater.toggleAJAX = function () {
 	}
 }
 
-cpUpdater.toggleVisibility = function(element) {
+cpUpdater.toggleVisibility = function(element, button_elem) {
 	$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').without($(element)).invoke('setStyle', {display:'none'});		// Hides all tabs first
 
 	style = $(element).getStyle('display') == 'none' ? {display:'block'} : {display:'none'};
-	$(element).setStyle(style);
+	$(element).setStyle(style);	
+	
 }
 
 cpUpdater.current_question_fade = function() {

@@ -178,9 +178,16 @@ a {
 }
 
 #ucp .votes {
-	width: 55px;
+	width: 75px;
 	height: 15px;
-	background: url(../images/ucp/votes-tab.jpg) no-repeat;
+	background: url(../images/ucp/comments-tab.jpg) no-repeat;
+	margin-right: 33px;	
+}
+
+#ucp .votes_on {
+	width: 75px;
+	height: 15px;
+	background: url(../images/ucp/comments-open.png) no-repeat;
 	margin-right: 33px;	
 }
 
@@ -188,6 +195,13 @@ a {
 	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
+	margin-right: 5px;	
+}
+
+#ucp .comments_on, #ucp .more_info_on {
+	width: 75px;
+	height: 15px;
+	background: url(../images/ucp/comments-tab-open.png) no-repeat;
 	margin-right: 5px;	
 }
 

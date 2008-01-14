@@ -47,7 +47,7 @@ if(isset($current_question_flag)) $question = $current_question;
 		</div>
 		
 		<div class="votes" title="Vote History" onClick="cpUpdater.viewVotes(<?= $question['question_id'] ?>)"><?= $question['vote_count'] ?> votes</div>
-		<div class="comments" title="Comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>')"><?= $question['comment_count'] ?> comments</div>
+		<div class="comments" title="Comments" onClick="cpUpdater.viewComments(<?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>', this)"><?= $question['comment_count'] ?> comments</div>
 		<div class="more_info" title="More Info" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>')">more info</div>
 		<? if($question['question_answer']): ?>
 			<div class="more_info" title="Answer" onClick="cpUpdater.viewAnswer('<?= $question['question_id'] ?>');">Answer</div>
