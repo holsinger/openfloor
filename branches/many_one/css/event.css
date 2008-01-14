@@ -370,4 +370,19 @@ table td {
 table, table td, table th {
 	border: 0px;
 }
+/* Label */
+form label, form div label{
+	display: block;
+	font-weight: bold;
+	padding-bottom: 5px;
+	padding-top: 7px;
+	float: none;
+	margin-left: 0px;
+}
 
+form div {
+	padding-left: 0px;
+}
+textarea {
+	background-color: #FFFFFF;
+}

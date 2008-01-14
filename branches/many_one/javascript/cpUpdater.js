@@ -112,7 +112,7 @@ cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2)
 		}else if(tab_name == "info"){
 			url = site_url + 'forums/get_question_info/' + question_id;
 		}else if(tab_name == "admin"){
-			url = site_url + 'forums/EditQuestion/' + question_id + '/' + event_id;		// option 1 is event id
+			url = site_url + 'forums/EditQuestion/' + question_id + '/' + option_1;		// option 1 is event id
 		}else if(tab_name == 'answer'){
 			url = site_url + 'forums/ShowAnswer/' + question_id
 		}
