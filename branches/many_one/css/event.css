@@ -351,6 +351,15 @@ a {
 	height: 19px; 
 	background: url(../images/many_one/many_handle.png); 
 	float: left;
+	cursor: pointer;
+}
+
+.reaction_handle_voted {
+	width: 19px; 
+	height: 19px; 
+	background: url(../images/many_one/many_handle_voted.png); 
+	float: left;
+	cursor: pointer;
 }
 
 /* Overwrite Many One stuff */

@@ -32,10 +32,10 @@ if(isset($current_question_flag)) $question = $current_question;
 		<div id="cp_comments_tab_<?= $question['question_id'] ?>" class="comments" title="Comments" onClick="cpUpdater.view_tab_section('comments', <?= $question['question_id'] ?>, event_name, '<?= url_title($question['question_name']) ?>', this)"><?= $question['comment_count'] ?> comments</div>
 		<div id="cp_info_tab_<?= $question['question_id'] ?>" class="info" title="More Info" onClick="cpUpdater.view_tab_section('info', '<?= $question['question_id'] ?>')">more info</div>
 		<? if($question['question_answer']): ?>
-			<div id="cp_answer_tab_<?= $question['question_id'] ?>" class="answer" title="Answer" onClick="cpUpdater.viewAnswer('answer','<?= $question['question_id'] ?>');">Answer</div>
+			<div id="cp_answer_tab_<?= $question['question_id'] ?>" class="answer" title="Answer" onClick="cpUpdater.view_tab_section('answer','<?= $question['question_id'] ?>');">Answer</div>
 		<? endif; ?>
 		<? if($this->userauth->isEventAdmin($event_id)): ?>
-			<div id="cp_admin_tab_<?= $question['question_id'] ?>" class="admin" title="Admin" onClick="cpUpdater.viewAdmin('admin','<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
+			<div id="cp_admin_tab_<?= $question['question_id'] ?>" class="admin" title="Admin" onClick="cpUpdater.view_tab_section('admin','<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
 		<? endif; ?>
 		
 		<div style="clear:both;"></div>

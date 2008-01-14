@@ -169,7 +169,7 @@ class Forums extends Controller
 	 * This is the most important function.  Shows the forums.
 	 *
 	 * @return void
-	 * @author Clark Endrizzi
+	 * @author Clark Endrizzi, Rob S (started it, structure still follows it a bit)
 	 **/
 	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
