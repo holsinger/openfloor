@@ -493,7 +493,7 @@ div.box.search form div div.nolabel {
 	float: left;
 	display: inline;
 	color: #3561b7;
-	background: url(http://192.168.0.86/many_one/images/many_one/logo_16x16.gif) no-repeat;
+	background: url(../images/many_one/logo_16x16.gif) no-repeat;
 	padding: 2px 0 2px 22px;
 	margin-left: 10px;
 	font-size: 11px;
@@ -692,13 +692,13 @@ div.box.search form div div.nolabel {
 /* Content
 ----------------------------------------------------------------------*/
 div#title {
-	background: url(http://192.168.0.86/many_one/images/many_one/bg_contentRoundBottom.gif) no-repeat 0 100%;
+	background: url(../images/many_one/bg_contentRoundBottom.gif) no-repeat 0 100%;
 	padding: 15px 20px;
 	margin-bottom: 15px;
 	zoom: 1;
 }
 div#title .top {
-	background: url(http://192.168.0.86/many_one/images/many_one/bg_contentRoundTop.gif) no-repeat;
+	background: url(../images/many_one/bg_contentRoundTop.gif) no-repeat;
 	height: 10px;
 	margin: -15px -20px 0 -20px;
 }
@@ -910,13 +910,13 @@ div.box p.links a {
 	padding-right: 7px;
 }
 div.box div.header {
-	background: url(http://192.168.0.86/many_one/images/many_one/bg_contentRoundTop.gif) no-repeat;
+	background: url(../images/many_one/bg_contentRoundTop.gif) no-repeat;
 	border-bottom: 10px solid #3561b7;
 	padding: 10px 15px 0 15px;
 }
 /* Added by CTE */
 div.header {
-	background: url(http://192.168.0.86/many_one/images/many_one/bg_contentRoundTop.gif) no-repeat;
+	background: url(../images/many_one/bg_contentRoundTop.gif) no-repeat;
 	border-bottom: 10px solid #3561b7;
 	padding: 10px 15px 0 15px;
 	width: 508px;
@@ -2338,7 +2338,7 @@ span.sIFR-alternate {
 
 /* Loading Reminder */
 .loading_reminder {
-	background: url(http://192.168.0.86/many_one/images/many_one/bg_loader.gif) no-repeat;
+	background: url(../images/many_one/bg_loader.gif) no-repeat;
 	border-width: 0px;
 	border-style: solid;
 	border-color: #FFFFFF;

@@ -49,12 +49,9 @@ class Votes extends Controller
 			
 		// retrieve votes information
 		$votes = $this->vote_model->getVotesByQuestion($question_id);
-		
-		$voteHTML = '
-		<div style="background-color: #FFFFFF">';
 			if(isset($_POST['ajax'])) {	// top close
 				$voteHTML .= "
-				<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"cpUpdater.viewVotes($question_id);\">close</a></div>
+				<div class=\"close\" style=\"position:relative;top:-5px;\"><a onClick=\"cpUpdater.viewVotes($question_id);\"><img src=\"./images/many_one/button_close_x.png\" border=\"0\" /></a></div>
 				<div>&nbsp;</div>
 				<br />";	// This "br" is added because of IE 
 			}
@@ -70,10 +67,9 @@ class Votes extends Controller
 				.anchor("user/profile/".$vote['user_name'], $this->user_model->displayName($vote['user_name'])) . ' ' . $vote_value . ' ' .$vote_time.' ago </div>';
 			}
 			if(isset($_POST['ajax'])){
-				$voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"cpUpdater.viewVotes($question_id);\">close</a></div>";
+				$voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"cpUpdater.viewVotes($question_id);\"><img src=\"./images/many_one/button_close_x.png\" border=\"0\" /></a></div>";
 			}
 		$voteHTML.='
-		</div>
 		<br />';
 		
 				

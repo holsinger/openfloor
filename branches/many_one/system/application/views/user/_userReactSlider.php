@@ -2,7 +2,7 @@
 <div id="track<?=$user_id?>" class="track" style="width:150px; height:9px;">
 	<div id="track<?=$user_id?>-left" class="track-left"></div>
 	<div id="handle<?=$user_id?>" <?= $this->userauth->isUser() ? '' : 'onclick="showBox(\'login\')"' ?> style="width:19px; height:20px;">
-		<div id="handle-img-<?=$user_id?>" class="reaction_handle"9></div>
+		<div id="handle-img-<?=$user_id?>" class="reaction_handle"></div>
 	</div>
 </div>
 <script type="text/javascript" language="javascript">

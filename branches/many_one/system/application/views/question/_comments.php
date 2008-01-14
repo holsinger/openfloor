@@ -3,7 +3,11 @@
 		<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'date')">date</a>, 
 		<a class="link" onclick="cpUpdater.change_comments_sort(<?= $question_id ?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>', 'votes')">votes</a>
 	</div>
-	<div class="close"><a class="link" onClick="cpUpdater.viewComments(<?=$question_id?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>');">close</a></div>
+	<div class="close">
+		<a onClick="cpUpdater.viewComments(<?=$question_id?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>');">
+			<img src="./images/many_one/button_close_x.png" border="0" />
+		</a>
+	</div>
 <? endif; ?>
 <br/>
 <br/>
@@ -48,6 +52,10 @@ if($this->userauth->isUser()) {
 }
 echo $comments; ?>
 <? if(isset($ajax)): ?>
-	<div class="close"><a class="link" onClick="cpUpdater.viewComments(<?=$question_id?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>');">close</a></div>
+	<div class="close">
+		<a class="link" onClick="cpUpdater.viewComments(<?=$question_id?>, '<?= url_title($event_name) ?>', '<?= url_title($question_name) ?>');">
+			<img src="./images/many_one/button_close_x.png" border="0" />
+		</a>
+	</div>
 	<br /><br /><br />
 <? endif; ?>

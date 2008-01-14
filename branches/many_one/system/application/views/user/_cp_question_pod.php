@@ -26,8 +26,8 @@ if(isset($current_question_flag)) $question = $current_question;
 			</table>
 			<div id="cp-admin-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">ADMIN</div>		
 			<div id="cp-answer-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">ANSWER</div>		
-			<div id="cp-info-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">
-				<div class="close" style="position:relative; top:-5px;"><a class="link" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>');">close</a></div>
+			<div id="cp-info-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto; padding-top: 4px; ">
+				<div class="close" style="position:relative; top:-5px;"><a onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>');"><img src="./images/many_one/button_close_x.png" border="0" /></a></div>
 				<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>"><img class="sc_image" src="./avatars/<?=$question['avatar_path'];?>"/></a><br />
 				<strong>Posted By: </strong><?= anchor('/user/profile/' . $question['user_name'], $question['user_name']) ?> (<?= $question['time_diff'] ?> ago)<br />
 				<?= empty($question['tags']) ? '' : '<b>Tags: </b>' . implode(', ', $question['tags']) . '<br />' ?>
@@ -38,11 +38,11 @@ if(isset($current_question_flag)) $question = $current_question;
 						<strong>Other Reason: </strong><?= $question['flag_reason_other'] ?><br />
 					<? endif; ?>
 				<? endif; ?>
-				<div class="close" style="position:relative; top:-5px;"><a class="link" onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>');">close</a></div>
+				<div class="close" style="position:relative; top:-5px;"><a onClick="cpUpdater.viewInfo('<?= $question['question_id'] ?>');"><img src="./images/many_one/button_close_x.png" border="0" /></a></div>
 				<br />	
 			</div>
 			<div id="cp-comments-<?= $question['question_id'] ?>" class="cp-comments" style="display:none;overflow:auto;">COMMENTS</div>
-		    <div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none;overflow:auto;">VOTES</div>
+		    <div id="cp-votes-<?= $question['question_id'] ?>" class="cp-votes" style="display:none;overflow:auto; padding-top: 4px;">VOTES</div>
 		  </div>
 		</div>
 		
