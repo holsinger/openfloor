@@ -11,8 +11,12 @@ if(isset($current_question_flag)) $question = $current_question;
 		  <div class="question-podfg">
 			<table cellpadding="0" cellspacing="0" style="margin-top: 5px; margin-bottom: 5px;">
 				<tr>
-					<td style="padding-left: 5px;"><div class="score" title='Question Score'><?= $question['votes'] ?></div></td>
-					<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
+					<?if(!isset($current_question_flag)):?>
+						<td style="padding-left: 5px;"><div class="score" title='Question Score'><?= $question['votes'] ?></div></td>
+						<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
+					<?else:?>
+						<td><div class="flag"><!-- <img src="./images/flag.png"> --></div></td>
+					<?endif;?>
 					<td width="100%">
 						<div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>>
 							<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>">
