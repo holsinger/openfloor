@@ -20,14 +20,20 @@
 .cp-sort-link {
 	color: #f04a54;
 	cursor: pointer;
-	padding: 0px 2px;
+	padding: 2px;
 }
 
-.cp-sort-link:hover, .cp-sort-link-selected {
+.cp-sort-link-selected {
 	background-color: #f04a54;
 	color: white;
+	padding: 2px;
 }
 
+.cp-sort-link:hover{
+	background-color: #f68b90;
+	color: white;
+	padding: 2px;
+}
 
 #rectangle {
 	background-color: #f1faff;
