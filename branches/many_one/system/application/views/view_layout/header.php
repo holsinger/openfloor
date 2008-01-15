@@ -14,7 +14,7 @@ $this->load->view('view_layout/view_head_setup.php',$data);
 <body onLoad='<?=$onload;?>'>
 	<div id="advertisement">
 		<div class="box ad" id="adzone_1">
-			<iframe src="<?=$this->config->item('m1_url')?>/AdFrame.php?adzoneid=1" frameborder="0" scrolling="no" width="728" height="90" marginwidth="0" marginheight="0"></iframe>
+			<!-- <iframe src="<?=$this->config->item('m1_url')?>/AdFrame.php?adzoneid=1" frameborder="0" scrolling="no" width="728" height="90" marginwidth="0" marginheight="0"></iframe> -->
 		</div>
 		<div class="adv">Advertisement</div> 
 	</div>
