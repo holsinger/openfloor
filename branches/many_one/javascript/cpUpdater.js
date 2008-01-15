@@ -95,7 +95,10 @@ cpUpdater.enableAJAX = function() {
 }
 
 cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2){
-	$$('div[class=cp-comments]').invoke('setStyle', {display:'none'});
+	if(question_id != cpUpdater.current_question_id){
+		$$('div[class=cp-comments]').invoke('setStyle', {display:'none'});
+	}
+	
 
 	if(tab_name == cpUpdater.current_tab_name && question_id == cpUpdater.current_question_id) {	
 		$("cp_tab_body_"+question_id).setStyle({display:'none'});

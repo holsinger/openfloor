@@ -35,16 +35,13 @@ class Question extends Controller
 		$data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event']));
 		if (isset($uri_array['sort'])) $data['event_url'] = $this->uri->assoc_to_uri(array('event'=>$uri_array['event'],'sort'=>$uri_array['sort']));
 		//event
-		if (isset($uri_array['event'])) 
-		{
+		if (isset($uri_array['event'])) {
 			$data['breadcrumb'] = array('Home'=>$this->config->site_url(),'Events'=>'event/',ucwords(str_replace('_',' ',$uri_array['event']))=>"forums/queue/{$data['event_url']}");
 			$uri_array = $this->event->get_event(0,$uri_array['event']);
 			$data['event_id'] = $uri_array['event_id'];
 			$data['event_name'] = $uri_array['event_name'];
 			$data['event_type'] = $uri_array['event_type'];  
-		}
-		else
-		{
+		}else{
 			$data['event_id'] = 0;
 			$data['event_name'] = '';
 		}
