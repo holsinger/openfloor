@@ -1,0 +1,9 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /many_one/
+	RewriteRule ^css/(.*\.css) combine.php?type=css&files=$1
+	RewriteRule ^javascript/(.*\.js) combine.php?type=javascript&files=$1
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php/$1 [L]
+</IfModule>
