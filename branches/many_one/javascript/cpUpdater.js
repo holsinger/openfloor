@@ -7,7 +7,7 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 
 // vars
 cpUpdater.current_question_id = 0;
-cpUpdater.current_tab = false;
+cpUpdater.current_tab_name = false;
 cpUpdater.sliders = new Object;
 ajaxOn = true;
 var sort = 'pending';
@@ -95,12 +95,13 @@ cpUpdater.enableAJAX = function() {
 }
 
 cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2){
-	//visible = !($('cp-tab-body-' + question_id).getStyle('display') == 'none');
-	
-	if(tab_name == cpUpdater.current_tab_name) {	
+	$$('div[class=cp-comments]').invoke('setStyle', {display:'none'});
+
+	if(tab_name == cpUpdater.current_tab_name && question_id == cpUpdater.current_question_id) {	
 		$("cp_tab_body_"+question_id).setStyle({display:'none'});
 		cpUpdater.toggleAJAX();					// turns off ajax calls
 		cpUpdater.current_tab_name = false;
+		cpUpdater.current_question_id = false;
 		$("cp_"+tab_name+"_tab_"+question_id).removeClassName(tab_name+"_on");
 		
 	} else {
@@ -127,9 +128,10 @@ cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2)
 				my_loading_reminder.hide();
 				$("cp_"+tab_name+"_tab_"+question_id).addClassName(tab_name+"_on");
 				if(cpUpdater.current_tab_name){
-					$("cp_"+cpUpdater.current_tab_name+"_tab_"+question_id).removeClassName(cpUpdater.current_tab_name+"_on");
+					$("cp_"+cpUpdater.current_tab_name+"_tab_"+cpUpdater.current_question_id).removeClassName(cpUpdater.current_tab_name+"_on");
 				}
 				cpUpdater.current_tab_name = tab_name;
+				cpUpdater.current_question_id = question_id;
 			}
 		});
 	}
@@ -188,7 +190,7 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 
 cpUpdater.toggleNewQuestion = function(){
 	if(!lazy_loader.update){ 
-		$$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').invoke('setStyle', {display:'none'});
+		$$('div[class=cp-comments]').invoke('setStyle', {display:'none'});
 		cpUpdater.toggleAJAX();	 
 	}
 	
@@ -198,7 +200,7 @@ cpUpdater.toggleNewQuestion = function(){
 cpUpdater.toggleAJAX = function () {
 	if(lazy_loader.update && ajaxOn) { 
 		cpUpdater.disableAJAX(); 
-	} else if ($$('div[class=cp-comments]', 'div[class=cp-votes]', 'div[class=cp-info]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { 
+	} else if ($$('div[class=cp-comments]').collect(function(n){ return n.getStyle('display'); }).indexOf('block') == -1) { 
 		cpUpdater.enableAJAX(); 
 	}
 }
