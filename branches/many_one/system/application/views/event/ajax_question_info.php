@@ -8,7 +8,7 @@
 	<img class="sc_image" src="./avatars/<?=$avatar_path;?>"/>
 </a>
 <br />
-<strong>Posted By: </strong><?= anchor('/user/profile/' . $question['user_name'], $question['user_name']) ?> (<?= $question['time_diff'] ?> ago)<br />
+<strong>Posted By: </strong><?= anchor('/user/profile/' . $user_info['user_name'], $user_info['user_name']) ?> (<?= $time_diff ?> ago)<br />
 <?= empty($question['tags']) ? '' : '<b>Tags: </b>' . implode(', ', $tags) . '<br />' ?>
 <strong>Description: </strong><?= $question_desc ?><br />
 <? if($question['question_status'] == 'deleted'): ?>

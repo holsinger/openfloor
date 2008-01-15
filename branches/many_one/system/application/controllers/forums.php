@@ -173,7 +173,6 @@ class Forums extends Controller
 	 **/
 	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
-		#TODO Handle no candidates assigned?
 		$data['rightpods'] = 'suppress';	// Make it so the right column won't show up
 		$data['event'] = $event;
 		$data['event_id'] = $this->event->get_id_from_url($event);
@@ -263,6 +262,10 @@ class Forums extends Controller
 	public function get_question_info($question_id)
 	{
 		$data = $this->question->get_question($question_id);
+		$image_array = unserialize($data['user_avatar']);
+		$data['avatar_path'] = $image_array ? $image_array['file_name'] : 'image01.jpg';
+		$data['time_diff'] = $this->time_lib->getDecay($data['timestamp']);
+		$data['user_info'] = $this->user->get_user($data['fk_user_id']);
 		$this->load->view('event/ajax_question_info', $data);
 	}
 	
