@@ -337,11 +337,13 @@ a {
 
 .overall-reaction-meter {
 	background-color: #f04a54;
+	background: url(../images/ucp/score_bg.png); 
 }
 
 .overall-reaction-meter-total {
 	background-color: #caedff;
 	border: 1px solid #f04a54;
+	background: url(../images/ucp/score_bg_outer.png); 
 	margin: 2px;
 	text-align: left;
 }
