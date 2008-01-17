@@ -35,7 +35,9 @@ dependency overall_reaction.css
 	<? else: ?>
 		<input value="Unfinish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not unfinish event.') } });">
 	<? endif; ?>
-	<input value="Admin Panel" class="button" type="button" onclick="window.location=site_url+'event/admin_panel/<?=$event_data['event_id']?>'">
+	<? if(!$event_data['event_finished']): ?>
+		<input value="Admin Panel" class="button" type="button" onclick="window.location=site_url+'event/admin_panel/<?=$event_data['event_id']?>'">
+	<? endif; ?>
 	<br />
 	<br />
 <? endif; ?>
