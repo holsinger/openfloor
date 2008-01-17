@@ -135,6 +135,12 @@ cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2)
 				}
 				cpUpdater.current_tab_name = tab_name;
 				cpUpdater.current_question_id = question_id;
+				// Scroll to it if required
+				setTimeout(function() { 
+					if($("cp_"+tab_name+"_tab_"+question_id).cumulativeOffset()[1] > document.viewport.getScrollOffsets()[1]+document.viewport.getHeight() ){
+						new Effect.ScrollTo("cp_"+tab_name+"_tab_"+question_id, { offset: -(document.viewport.getHeight())+25 }); 
+					}
+				}, 500); 
 			}
 		});
 	}

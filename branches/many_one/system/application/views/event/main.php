@@ -87,7 +87,7 @@ dependency overall_reaction.css
 		</table>
 	<? elseif($event_data["event_finished"]): ?>
 		<div class="section">
-			<span class="section-title">Event Review:</span>
+			<h3>Event Review:</h3>
 		</div>		  
 		<table class="feed-reaction-panel">
 			<tr>
@@ -101,14 +101,17 @@ dependency overall_reaction.css
 					<div id="user-reaction">
 						This shows aggregate user reaction for each candidate over the entire event.
 						<table>
-							<tr><th class="candidate">Candidate</th><th class="reaction" style="width">Reaction</th></tr>		
+							<tr>
+								<th class="candidate">&nbsp;&nbsp;Candidate</th>
+								<th class="reaction">&nbsp;&nbsp;Reaction</th>
+							</tr>		
 							<? $class = '' ?>
 							<? foreach($candidates as $v): ?>
-							<tr<?=$class?>>
-								<td><?=$v['can_display_name']?></td>
-								<td><div id="overall-reaction-<?=$v['user_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
-							</tr>
-							<? $class = $class ? '' : ' class="alternate"' ?>
+								<tr <?=$class?>>
+									<td><?=$v['display_name']?></td>
+									<td><div id="overall-reaction-<?=$v['user_id']?>"><?$this->load->view('user/_overallReaction', $v)?></div></td>
+								</tr>
+								<? $class = $class ? '' : ' class="alternate"' ?>
 							<? endforeach; ?>
 						</table>
 					</div>
@@ -136,16 +139,14 @@ dependency overall_reaction.css
 			<? else: ?>
 				<span id="sort-link-pending" title="Unanswered" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unanswered</span> | 
 				<span id="sort-link-asked" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span> | 		
-				<span id="sort-link-deleted" title="Deleted" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;			
+				<span id="sort-link-deleted" title="Deleted" class="cp-sort-link" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;			
 			<? endif; ?>
 		</span>
 	</div>
 	<div id="error_div"></div>
 	<div id="upcoming_questions"></div>	
 	<div style="margin-top: 20px; text-align: center;">
-		<strong>
-		POWERED BY OPENFLOOR TECHNOLOGY
-		</strong>
+			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.png" border="0" /></a>
 	</div>
 </div>
 

@@ -169,11 +169,13 @@ a {
 #ucp #user-reaction .candidate {
 	width: 125px;
 	background: url(../images/many_one/candidate_top_left.gif) no-repeat left;
+	background-color: #3561B7;
 }
 
 #ucp #user-reaction .reaction {
 	width: 80px;
 	background: url(../images/many_one/candidate_top_right.gif) no-repeat right;
+	background-color: #3561B7;
 }
 
 #ucp .vote {
@@ -197,11 +199,18 @@ a {
 	margin-right: 33px;	
 }
 
-#ucp .comments, #ucp .info, #ucp .answer, #ucp .admin {
+#ucp .comments, #ucp .info, #ucp .admin {
 	width: 75px;
 	height: 15px;
 	background: url(../images/ucp/comments-tab.jpg) no-repeat;
 	margin-right: 5px;	
+}
+
+#ucp .answer {
+	width: 75px;
+	height: 15px;
+	background: url(../images/ucp/comments-tab-highlight.jpg) no-repeat;
+	margin-right: 5px;
 }
 
 #ucp .comments_on, #ucp .info_on, #ucp .answer_on, #ucp .admin_on {
