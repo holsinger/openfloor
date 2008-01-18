@@ -6,6 +6,7 @@ $this->load->view('view_layout/header.php', $data);
 <!--
 	#dependency scal.js
 	#dependency scal.css
+	#dependency event.css
 -->
 <div id="content_div">
   	<div class='errorArea'><?=$this->validation->error_string;?></div>

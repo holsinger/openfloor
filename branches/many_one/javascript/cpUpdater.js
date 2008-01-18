@@ -27,12 +27,12 @@ cpUpdater.vote = function(url) {
 	});
 }
 
-cpUpdater.cpUpdate = function(disable_current_questions) {
+cpUpdater.cpUpdate = function(stream_update) {
 	updaters = new Array();
-	if(!disable_current_questions){
+	if(stream_update){
 		updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
 			frequency: 10,
-			decay: 2
+			decay: 0
 		}));
 
 		updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {

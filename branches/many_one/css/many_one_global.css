@@ -1519,11 +1519,11 @@ div.box.portalContent ul li.img img {
 
 /* div.box -> Comments
 -----------------------------------*/
-div.box.comments {
+/*div.box.comments {
 	border-top: 11px solid #3561b7;
 	border-bottom: 1px solid #fff;
 	margin: 0;
-}
+}*/
 div.box.comments div.header {
 	padding: 15px 10px;
 	background: #f2f2f2;

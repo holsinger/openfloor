@@ -1,12 +1,15 @@
 <? if(isset($current_question_flag) && empty($current_question)): ?>	
 	&nbsp;<strong>There is no current question</strong>
 <? else: ?>
-
-<? 	
-if(isset($current_question_flag)) $question = $current_question;
+	<? 	
+	if(isset($current_question_flag)) $question = $current_question;
+	$count = 0; 	// Used for IE 6 hack
 	foreach($questions as $question): 
-		$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ; ?>
-
+		$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ; 
+		# IE 6 has this nasty bug where if I don't insert this section below, the first pod for every return will not have it's background applied
+		if(($this->agent->browser() == "Internet Explorer" && $this->agent->version() < 7) && $count == 0): ?>
+			<div style="overflow: hidden; height: 0px; margin-top: -22px"><img src="http://192.168.0.86/many_one/images/many_one/bg_question_pod.gif" /></div>
+		<? endif; ?>
 		<div class="<?= isset($current_question_flag) ? 'current-question-pod' : 'question-pod-container' ?>" id="question_container_<?= $question['question_id'] ?>">
 		  <div class="question-podfg">
 			<table cellpadding="0" cellspacing="0" style="margin-top: 5px; margin-bottom: 5px;">
@@ -41,8 +44,7 @@ if(isset($current_question_flag)) $question = $current_question;
 		<? if($this->userauth->isEventAdmin($event_id)): ?>
 			<div id="cp_admin_tab_<?= $question['question_id'] ?>" class="admin" title="Admin" onClick="cpUpdater.view_tab_section('admin','<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
 		<? endif; ?>
-		
 		<div style="clear:both;"></div>
-
+		<? $count++; ?>
 	<? 	endforeach; ?>
 <? endif; ?>

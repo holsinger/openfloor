@@ -74,7 +74,7 @@ class Votes extends Controller
 				$voteHTML .= "<div class=\"close\" style=\"position:relative;top:-5px;\"><a class=\"link\" onClick=\"cpUpdater.view_tab_section('votes', $question_id);\"><img src=\"./images/many_one/button_close_x.png\" border=\"0\" /></a></div>";
 			}
 		$voteHTML.='
-		<br />';
+		<br /><br />';
 		
 				
 		$data['voteHTML'] = $voteHTML;

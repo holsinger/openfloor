@@ -6,9 +6,9 @@ foreach($candidates as $v){
 } 
 
 if($event_data['streaming']){
-	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate();";
-}else{	// Disable the current questions related periodic updating
-	$data['js'] = "var event_name = '$event'; var cans = [$cans]; cpUpdater.cpUpdate(true);";
+	$data['js'] = "var event_name = '$event'; var cans = [$cans];";
+}else{    // Disable the current questions related periodic updating
+	$data['js'] = "var event_name = '$event'; var cans = [$cans];";
 }
 
 $data['left_nav'] = 'dashboard';
@@ -167,7 +167,7 @@ dependency overall_reaction.css
 			
 		}
 	}
-	<? // If this is a past event then show answered questions by default ?>
+	// If this is a past event then show answered questions by default
 	<? if($event_data["event_finished"]): ?>
 		var upcoming_questions_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions/asked';
 		var event_timing = 'past';
@@ -178,5 +178,14 @@ dependency overall_reaction.css
 	var upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
 	
 	Event.observe(window, 'load', cpUpdater.startLazyLoader);
+	Event.observe(window, 'load', StartUpdater);
+	function StartUpdater(){
+		<? if($event_data['streaming']): ?>
+			cpUpdater.cpUpdate(true);
+		<? else: ?>
+			cpUpdater.cpUpdate(false);
+		<? endif; ?>
+		
+	}
 </script>
 <? $this->load->view('view_layout/footer.php', $data);?>

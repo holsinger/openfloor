@@ -54,7 +54,9 @@ $this->load->view('view_layout/header.php', $data);
 				<? endif; ?>
 			</table>
 			<br /><br />
-			<input class="image" type="image" value="add speaker" src="images/many_one/button_add_speaker.png" name="add_speaker" onclick="window.location=site_url+'event/search_candidate/<?=$event_id?>';" />
+				<a href="javascript: window.location=site_url+'event/search_candidate/<?=$event_id?>';">
+					<input class="image" type="image" value="add speaker" src="images/many_one/button_add_speaker.png" name="add_speaker"  />
+				</a>
 			<br /><br />
 			<br /><br />
 			<?if($option == 'edit'):?>

@@ -23,3 +23,5 @@
 	</a>
 </div>
 <br />
+<? // Added below TR for IE 6 ?>
+<br />
