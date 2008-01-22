@@ -2,9 +2,8 @@
 $cans = ''; 
 foreach($candidates as $v){
 	$cans .= "'{$v['user_id']}', "; 
-	$cans = substr($cans, 0, -2);
 } 
-
+$cans = substr($cans, 0, -2);
 $data['js'] = "var event_name = '$event'; var cans = [$cans];";
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 

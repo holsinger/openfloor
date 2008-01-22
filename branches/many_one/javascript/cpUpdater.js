@@ -81,7 +81,12 @@ cpUpdater.ajaxCurrentQuestion = function(speaker_id){
 cpUpdater.ajaxUpdateCurrentQuestion = function(){
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name+'/pod', {
 		onSuccess: function(transport) {
+			$('current_question').setStyle({visibility: "hidden"});
 			$('current_question').innerHTML = transport.responseText;
+			$('the-current-question').setStyle({backgroundColor: "#FFFFFF"});
+			$('current_question').setStyle({visibility: "visible"});
+			new Effect.Highlight('the-current-question', {startcolor: '#ffffff', endcolor: '#F2F6FE', duration: 1.5});
+			$('the-current-question').setStyle({backgroundColor: "#F2F6FE"});
 	  	}
 	});
 	
@@ -120,9 +125,12 @@ cpUpdater.disableAJAX = function() {
 		});
 		for(var i = 0; i < cans.length; i++){
 			clearInterval(cpUpdater.reaction_updater_id[i]);
+			cpUpdater.reaction_updater_id[i] = false;
 		}
 		
 		clearInterval(cpUpdater.current_question_updater_id);
+		cpUpdater.current_question_updater_id = false;
+		
 	}	
 }
 
@@ -135,12 +143,17 @@ cpUpdater.enableAJAX = function() {
 		});
 		
 		for(var i = 0; i < cans.length; i++){
-			cpUpdater.ajaxReaction(cans[i]);  // Initial call
-			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
+			if(!cpUpdater.reaction_updater_id[i]){
+				cpUpdater.ajaxReaction(cans[i]);  // Initial call
+				cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
+			}
+			
+		}
+		if(!cpUpdater.current_question_updater_id){
+			cpUpdater.ajaxCurrentQuestion();
+			cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 		}
 		
-		cpUpdater.ajaxCurrentQuestion();
-		current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 	}	
 }
 

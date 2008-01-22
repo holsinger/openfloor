@@ -26,7 +26,7 @@ Control.LazyLoader.prototype = {
 			onStartAddSection : false,
 			onFinishAddSection : false,
 			count_refresh_lapse: 100000,		// Default is every minute
-			view_refresh_lapse: 100000,			// Default is every minute
+			view_refresh_lapse: 100000			// Default is every minute
 		}, options || {});
 		
 		// Add Content, first temp then real content added on the callback from the CheckCount() call below
