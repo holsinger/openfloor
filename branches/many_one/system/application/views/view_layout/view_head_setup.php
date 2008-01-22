@@ -33,7 +33,7 @@
 	
 	<script src="./javascript/prototype.js" type="text/javascript"></script>
 	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>	
-	
+	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
 	<!-- DO NOT REMOVE THIS LINE -->
 	<!-- #dependencies -->
 	
@@ -41,8 +41,6 @@
 		site_url = '<?= $this->config->site_url();?>';
 		username = '<?=$this->userauth->user_name;?>';
 	</script>
-	
-	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
 	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/lt7.css" /><![endif]-->
 
     

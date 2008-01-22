@@ -136,7 +136,6 @@ a {
 }
 
 #ucp .feed-reaction-panel td {
-	width: 50%;
 	vertical-align: top;
 	text-align: center;
 }
@@ -159,6 +158,17 @@ a {
 	vertical-align: middle;
 	padding: 0px;
 }
+#ucp #user-reaction .candidate {
+	width: 140px;
+	background: url(../images/many_one/candidate_top_left.gif) no-repeat left;
+	background-color: #3561B7;
+}
+
+#ucp #user-reaction .reaction {
+	width: 70px;
+	background: url(../images/many_one/candidate_top_right.gif) no-repeat right;
+	background-color: #3561B7;
+}
 
 #ucp #user-reaction td {
 	text-align: left;
@@ -166,17 +176,7 @@ a {
 	padding-left: 5px;
 }
 
-#ucp #user-reaction .candidate {
-	width: 125px;
-	background: url(../images/many_one/candidate_top_left.gif) no-repeat left;
-	background-color: #3561B7;
-}
 
-#ucp #user-reaction .reaction {
-	width: 80px;
-	background: url(../images/many_one/candidate_top_right.gif) no-repeat right;
-	background-color: #3561B7;
-}
 
 #ucp .vote {
 	float: left;
@@ -338,7 +338,7 @@ a {
 }
 
 #ucp img {
-	cursor: pointer;
+/*	cursor: pointer;*/
 }
 
 #ucp .cp-comments, #ucp .cp-votes {

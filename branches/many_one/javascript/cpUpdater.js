@@ -6,6 +6,13 @@ if(typeof cpUpdater === "undefined" || !cpUpdater) {
 }
 
 // vars
+cpUpdater.reaction_updater_id = new Array();
+for(var i = 0; i < cans.length; i++){
+	cpUpdater.reaction_updater_id[i] = false;
+	
+}	
+cpUpdater.current_question_updater_id = false;
+cpUpdater.current_question_last_value = false;
 cpUpdater.current_question_id = 0;
 cpUpdater.current_tab_name = false;
 cpUpdater.sliders = new Object;
@@ -30,23 +37,58 @@ cpUpdater.vote = function(url) {
 cpUpdater.cpUpdate = function(stream_update) {
 	updaters = new Array();
 	if(stream_update){
-		updaters.push(new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/cp/' + event_name + '/current_question', {
-			frequency: 10,
-			decay: 0
-		}));
-
+		// No idea what this is for ???
 		updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
 			frequency: 10,
 			evalScripts: true,
 			decay: 2
 		}));
-
-		cans.each(function(s) {
-			updaters.push(new Ajax.PeriodicalUpdater('overall-reaction-' + s, site_url + 'forums/cp/' + event_name + '/overall_reaction/' + s, {
-				frequency: 10
-			}));
-		});
+		// Changes the overall reaction field
+		for(var i = 0; i < cans.length; i++){
+			cpUpdater.ajaxReaction(cans[i]);  // Initial call
+			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
+		}
+		// Switches the current question when necessary
+		cpUpdater.ajaxCurrentQuestion();
+		current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 	}
+	
+}
+
+// Used above as part of the interval call
+cpUpdater.ajaxReaction = function(speaker_id){
+	new Ajax.Request(site_url + 'forums/ajax_get_overall_response/'+ event_name +'/'+speaker_id, {
+	  onSuccess: function(transport) {
+		//alert(transport.responseText);
+		
+		$('overall-reaction-meter-'+speaker_id).setStyle(
+			{
+				width: transport.responseText
+			}
+		);
+	  }
+	});
+}
+
+// Used above as part of the interval call, this checks to see if there is a new question, and will only show the new question if there is.  
+// This is done for efficiency.
+cpUpdater.ajaxCurrentQuestion = function(speaker_id){
+	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name, {
+		onSuccess: function(transport) {
+			if(transport.responseText != cpUpdater.current_question_last_value){
+				cpUpdater.ajaxUpdateCurrentQuestion();
+				cpUpdater.current_question_last_value = transport.responseText;
+			}
+	  	}
+	});
+}
+// used with the above function, it will actually display the new current question
+cpUpdater.ajaxUpdateCurrentQuestion = function(){
+	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name+'/pod', {
+		onSuccess: function(transport) {
+			$('current_question').innerHTML = transport.responseText;
+	  	}
+	});
 	
 }
 
@@ -81,6 +123,10 @@ cpUpdater.disableAJAX = function() {
 		updaters.each(function(s) {
 			s.stop();
 		});
+		for(var i = 0; i < cans.length; i++){
+			clearInterval(cpUpdater.reaction_updater_id[i]);
+			clearInterval(cpUpdater.current_question_updater_id);
+		}
 	}	
 }
 
@@ -91,6 +137,14 @@ cpUpdater.enableAJAX = function() {
 		updaters.each(function(s) {
 			s.start();
 		});
+		
+		for(var i = 0; i < cans.length; i++){
+			cpUpdater.ajaxReaction(cans[i]);  // Initial call
+			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
+		}
+		
+		cpUpdater.ajaxCurrentQuestion();
+		current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 	}	
 }
 

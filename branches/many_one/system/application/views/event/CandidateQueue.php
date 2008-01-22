@@ -1,33 +1,29 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-   "http://www.w3.org/TR/html4/loose.dtd">
-<html lang="en">
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<base href="<?= $this->config->site_url();?>" />
-		<title>view_live_queue</title>
-		<meta name="generator" content="TextMate http://macromates.com/">
-		<meta name="author" content="Rob Stefanussen">
-		<link rel="stylesheet" type="text/css" href="css/all2.css" />
-		<link rel="stylesheet" type="text/css" href="css/CandidateQueue.css" />
-		<script src="./javascript/prototype.js" type="text/javascript"></script>
-		<script src="./javascript/scriptaculous.js" type="text/javascript"></script>
-		<script type="text/javascript">site_url = '<?= $this->config->site_url();?>';</script>
-	</head>
-	<body>
-			<br />
-			<span class='queue-logo'>
-				<h1>OpenFloor Events</h1>
-			</span>
-			<br />
-		
-			<h3>&nbsp;&nbsp;Current Question:</h3>	
-			<div id="current_question" class="current_question">
-			</div>
-			<h3>&nbsp;&nbsp;Upcoming Questions:</h3>
-			<div id="upcoming_questions" class="upcoming_questions">
-			</div>
-	</body>
-</html>
+<?
+$this->load->view('view_layout/header.php', $data);
+?>
+<!-- 
+#dependency event.css
+
+-->
+<div id="ucp">
+	<div class="section">
+		<h3>Speaker Queue</h3>
+	</div>
+	
+	<br />
+	<div class="section">
+		<h3>Your Current Question</h3>
+	</div>
+	<div style="margin: 10px;">
+		<input type="button" value="Answer Finished" onclick="new Ajax.Request(site_url+'forums/next_question/<?=$event_id?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });">
+	</div>
+	<div id="current_question" class="current_question"></div>	
+	<div class="section">
+		<h3>Upcoming Questions</h3>
+	</div>
+	<div id="upcoming_questions" class="upcoming_questions">
+	</div>
+</div>
 <script type="text/javascript" charset="utf-8">
 	new Ajax.PeriodicalUpdater('current_question', site_url + 'forums/candidateQueue/<?=$event_name?>/current_question', {
 	  frequency: 10
@@ -37,3 +33,6 @@
 	  frequency: 10
 	});	
 </script>
+<?
+$this->load->view('view_layout/footer.php', $data);
+?>

@@ -206,11 +206,6 @@ class Forums extends Controller
 		{
 			switch($ajax)
 			{
-			case 'current_question':
-				$this->_currentQuestion($data);
-				$data['current_question_flag'] = true;
-				$this->load->view('user/_cp_question_pod.php', $data);
-				break;
 			case 'upcoming_questions':
 				if(isset($option_1)) $data['sort'] = $option_1;
 				if(isset($option_2)) $data['section'] = $option_2;
@@ -228,12 +223,6 @@ class Forums extends Controller
 				$this->_yourReaction($data);
 				$this->load->view('user/_userReactSlider.php', $data);
 				break;
-			case 'overall_reaction':
-				$this->_currentQuestion($data);
-				$data['speaker_id'] = $option_1;
-				$this->_overallReaction($data);
-				$this->load->view('user/_overallReaction.php', $data);
-				break;
 			case 'upcoming_questions_count':
 				if(isset($option_1)) $data['sort'] = $option_1;
 				echo $this->_upcoming_questions_count($data);
@@ -243,7 +232,6 @@ class Forums extends Controller
 				break;
 			}
 		} else { // NO AJAX
-			// $this->_upcomingQuestions($data);		
 			$this->_currentQuestion($data);
 			$this->_allReactions($data);
 			$this->_submitQuestion($data);
@@ -267,6 +255,48 @@ class Forums extends Controller
 		$data['time_diff'] = $this->time_lib->getDecay($data['timestamp']);
 		$data['user_info'] = $this->user->get_user($data['fk_user_id']);
 		$this->load->view('event/ajax_question_info', $data);
+	}
+	
+	/**
+	 * Returns the percentage for the overall reaction (aggregate reaction) to be used in the progress bar like indicator
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_get_overall_response($event_name, $speaker_id)
+	{
+		//echo("You called with speaker id: ".$speaker_id);
+		$event_id = $this->event->get_id_from_url($event_name);
+		$this->question->event_id = $event_id;
+		
+		$this->_currentQuestion($data);
+		$data['speaker_id'] = $speaker_id;
+		$this->_overallReaction($data);
+		
+		echo($data['overall_reaction']);
+	}
+	
+	/**
+	 * Used for getting the current question
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_get_current_question($event_name, $mode = "")
+	{
+		$event_id = $this->event->get_id_from_url($event_name);
+		$this->question->event_id = $event_id;
+		$this->_currentQuestion($data);
+		
+		if($mode == 'pod'){
+			$data['current_question_flag'] = true;
+			$data['event_id'] = $event_id;
+			$this->load->view('user/_cp_question_pod.php', $data);
+		}else{
+			
+			echo($data['questions'][0]['question_id']);
+			
+		}
 	}
 	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)

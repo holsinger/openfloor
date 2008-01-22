@@ -5,12 +5,7 @@ foreach($candidates as $v){
 	$cans = substr($cans, 0, -2);
 } 
 
-if($event_data['streaming']){
-	$data['js'] = "var event_name = '$event'; var cans = [$cans];";
-}else{    // Disable the current questions related periodic updating
-	$data['js'] = "var event_name = '$event'; var cans = [$cans];";
-}
-
+$data['js'] = "var event_name = '$event'; var cans = [$cans];";
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 
 $this->load->view('view_layout/header.php', $data);
@@ -31,6 +26,7 @@ dependency overall_reaction.css
 	<? elseif(!$event_data["event_finished"]): ?>
 		<input value="Stop Streaming" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stop streaming event.') } });">
 		<input value="Finish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });">
+		<input value="Advance Queue" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });">
 		<input value="Next Question" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });">
 	<? else: ?>
 		<input value="Unfinish Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not unfinish event.') } });">
@@ -73,7 +69,7 @@ dependency overall_reaction.css
 
 		<table class="feed-reaction-panel">
 			<tr>
-				<td>
+				<td style="width: 50%">
 					<div id="video_container">
 						<?= $stream_high ?>
 					</div>
