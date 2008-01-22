@@ -37,20 +37,15 @@ cpUpdater.vote = function(url) {
 cpUpdater.cpUpdate = function(stream_update) {
 	updaters = new Array();
 	if(stream_update){
-		// No idea what this is for ???
-		updaters.push(new Ajax.PeriodicalUpdater('user-reaction-ajax', site_url + 'forums/cp/' + event_name + '/reaction', {
-			frequency: 10,
-			evalScripts: true,
-			decay: 2
-		}));
 		// Changes the overall reaction field
 		for(var i = 0; i < cans.length; i++){
 			cpUpdater.ajaxReaction(cans[i]);  // Initial call
 			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
 		}
+		
 		// Switches the current question when necessary
 		cpUpdater.ajaxCurrentQuestion();
-		current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
+		cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 	}
 	
 }
@@ -125,8 +120,9 @@ cpUpdater.disableAJAX = function() {
 		});
 		for(var i = 0; i < cans.length; i++){
 			clearInterval(cpUpdater.reaction_updater_id[i]);
-			clearInterval(cpUpdater.current_question_updater_id);
 		}
+		
+		clearInterval(cpUpdater.current_question_updater_id);
 	}	
 }
 
