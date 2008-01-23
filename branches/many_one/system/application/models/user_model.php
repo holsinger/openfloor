@@ -444,7 +444,7 @@ class User_model extends Model {
 	}
 	/**
 	 * Checks that the user exists either by the sent criteria.  Seems like this could be done in a standard where function.
-	 *
+	 * 
 	 * @return void
 	 * @author ???, Clark Endrizzi (Updated and commented)
 	 **/
@@ -533,6 +533,17 @@ class User_model extends Model {
 	public function get($field)
 	{
 		return $this->db->select($field)->where('user_id', $this->user_id)->get('cn_users')->row()->$field;
+	}
+	
+	/**
+	 * this function will return true if argument is an active user 
+	 * @param string username
+	 * @return boolean
+	 * @author James Kleinschnitz
+	 **/
+	public function is_username($value='')
+	{
+		return $this->userExists(array('user_name'=>$value,'user_status'=>1));
 	}
 }
 ?>

@@ -39,9 +39,46 @@
 |
 */
 
-$route['default_controller'] = "splash";
+$route['default_controller'] = "event";
 $route['scaffolding_trigger'] = "";
+//more url clean up
+$route['login'] = 'user/login';
+$route['logout'] = 'user/logout';
+$route['create_account'] = 'user/createAccount';
+$route['signup'] = 'user/createAccount';
 
+//we need these to keep controller paths working  (all controllers need to be here)
+$route['admin/([a-zA-Z0-9_\-\/\.]+)'] = "admin/$1";
+$route['admin'] = "admin";
+$route['comment/([a-zA-Z0-9_\-\/\.]+)'] = "comment/$1";
+$route['comment'] = "comment";
+$route['contact/([a-zA-Z0-9_\-\/\.]+)'] = "contact/$1";
+$route['contact'] = "contact";
+$route['event/([a-zA-Z0-9_\-\/\.]+)'] = "event/$1";
+$route['event'] = "event";
+$route['feed/([a-zA-Z0-9_\-\/\.]+)'] = "feed/$1";
+$route['feed'] = "feed";
+$route['flag/([a-zA-Z0-9_\-\/\.]+)'] = "flag/$1";
+$route['flag'] = "flag";
+$route['forums/([a-zA-Z0-9_\-\/\.]+)'] = "forums/$1";
+$route['forums'] = "forums";
+$route['information/([a-zA-Z0-9_\-\/\.]+)'] = "information/$1";
+$route['information'] = "information";
+$route['karma/([a-zA-Z0-9_\-\/\.]+)'] = "karma/$1";
+$route['karma'] = "karma";
+$route['question/([a-zA-Z0-9_\-\/\.]+)'] = "question/$1";
+$route['question'] = "question";
+$route['user/([a-zA-Z0-9_\-\/\.]+)'] = "user/$1";
+$route['user'] = "user";
+//$route['url/([a-zA-Z0-9_\-\/\.]+)'] = "url/$1";
+//$route['url'] = "url";
+$route['votes/([a-zA-Z0-9_\-\/\.]+)'] = "votes/$1";
+$route['votes'] = "votes";
+$route['your_government/([a-zA-Z0-9_\-\/\.]+)'] = "your_government/$1";
+$route['your_government'] = "your_government";
+
+//this allows for wildcard short urls
+$route['([a-zA-Z0-9_\-\/\.]+)'] = "url/tiny/$1";
 
 
 
