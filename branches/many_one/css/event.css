@@ -379,6 +379,17 @@ a {
 	cursor: pointer;
 }
 
+.reaction_handle_slide {
+	width: 19px; 
+	height: 19px;
+	line-height: 19px;
+	vertical-align: middle;
+	text-align: center;
+	color: #f04a54;
+	background: url(../images/ucp/slider_generic.png); 
+	float: left;
+	cursor: pointer;
+}
 /* Overwrite Many One stuff */
 table td {
 	padding: 0px;

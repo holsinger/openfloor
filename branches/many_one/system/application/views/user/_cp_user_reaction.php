@@ -42,6 +42,8 @@
 					new Ajax.Request('forums/react/' + v + '/' + <?=$v['user_id']?> + '/' + cpUpdater.current_question_id, {
 				 		onSuccess: function(transport) {
 							cpUpdater.enableAJAX();
+							$('handle-img-<?=$v["user_id"]?>').innerHTML = "";
+							$('handle-img-<?=$v["user_id"]?>').removeClassName('reaction_handle_slide');
 							$('handle-img-<?=$v["user_id"]?>').addClassName('reaction_handle_voted');
 				  		}
 					});
@@ -49,6 +51,8 @@
 				},
 				onSlide: function(v) {
 					cpUpdater.disableAJAX();
+					$('handle-img-<?=$v["user_id"]?>').addClassName('reaction_handle_slide');
+					$('handle-img-<?=$v["user_id"]?>').innerHTML = v;
 				}
 			});
 
