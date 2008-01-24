@@ -403,3 +403,14 @@ form div {
 textarea {
 	background-color: #FFFFFF;
 }
+
+.sp_arrow {
+	background-color: #FFFFFF;
+	width: 15px;
+	height: 18px;
+	padding: 0px;
+}
+.sp_arrow_selected {
+	background: url(../images/ucp/speaker_arrow.png) no-repeat #FFFFFF;
+	width: 15px;
+}

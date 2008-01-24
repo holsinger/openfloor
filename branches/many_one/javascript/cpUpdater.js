@@ -52,15 +52,21 @@ cpUpdater.cpUpdate = function(stream_update) {
 
 // Used above as part of the interval call
 cpUpdater.ajaxReaction = function(speaker_id){
-	new Ajax.Request(site_url + 'forums/ajax_get_overall_response/'+ event_name +'/'+speaker_id, {
+	new Ajax.Request(site_url + 'forums/ajax_get_respondent_info/'+ event_name +'/'+speaker_id, {
 	  onSuccess: function(transport) {
-		//alert(transport.responseText);
-		
+		eval('var response = '+transport.responseText);
+		// Change the rating bar
 		$('overall-reaction-meter-'+speaker_id).setStyle(
 			{
-				width: transport.responseText
+				width: response.reaction
 			}
 		);
+		// Change the class if current user
+		if(response.selected == '1'){
+			$$('.sp_arrow_selected').invoke('removeClassName', 'sp_arrow_selected');
+			$('current_area_'+speaker_id).addClassName('sp_arrow_selected');
+		}
+		
 	  }
 	});
 }
@@ -79,6 +85,7 @@ cpUpdater.ajaxCurrentQuestion = function(speaker_id){
 }
 // used with the above function, it will actually display the new current question
 cpUpdater.ajaxUpdateCurrentQuestion = function(){
+	// Get New Current Question
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name+'/pod', {
 		onSuccess: function(transport) {
 			$('current_question').setStyle({visibility: "hidden"});
@@ -89,7 +96,27 @@ cpUpdater.ajaxUpdateCurrentQuestion = function(){
 			$('the-current-question').setStyle({backgroundColor: "#F2F6FE"});
 	  	}
 	});
-	
+	// Update sliders for new question
+	/*
+	cpUpdater.sliders[<?=$v['user_id']?>].options.onChange = null;
+	cpUpdater.sliders[<?=$v['user_id']?>].options.onSlide = null;
+	cpUpdater.sliders[<?=$v['user_id']?>].setValue(<?=($v['user_reaction'] == -1)?(5/10):($v['user_reaction']/10)?>);
+	cpUpdater.sliders[<?=$v['user_id']?>].options.onChange =	
+		function(v) {
+			url = 'forums/react/' + Math.round(v*10) + '/' + <?=$v['user_id']?> + '/' + cpUpdater.current_question_id;
+			new Ajax.Request(url, {
+		 		onSuccess: function(transport) {
+					cpUpdater.enableAJAX();
+					$('handle-img-<?=$v['user_id']?>').addClassName('reaction_handle_voted');
+		  		}
+			}); 
+		};
+	cpUpdater.sliders[<?=$v['user_id']?>].options.onSlide = 
+		function(v) {
+			cpUpdater.disableAJAX();
+		};		
+	cpUpdater.sliders[<?=$v['user_id']?>].setEnabled();
+	*/
 }
 
 cpUpdater.askQuestion = function() {
@@ -374,19 +401,24 @@ cpUpdater.ChangeDeleteReason = function(elem) {
 cpUpdater.UpdateQuestionOnSucess = function(transport) { 
 	if(transport.responseText){
 		$('question_error_div').innerHTML = "Updated Successfully!";
+		eval('var response = '+transport.responseText);
+		setTimeout('cpUpdater.view_tab_section("admin", '+response.question_id+', '+response.event_id+')', 2000);
 		
+		// ROB put this in before, I don't know if it's needed so I'm commenting it out for now - CTE
 		// Change the highlights
-		if(event_timing == 'past'){
-			sort_links = ['pending', 'asked'];
-		}else{
-			sort_links = ['pending', 'newest', 'asked'];
-		}
-
-		sort_links.each(function(s){
-			if( $('sort-link-'+ s + '-2').hasClassName('cp-sort-link-selected') ){
-				setTimeout("cpUpdater.change_sort('"+s+"')",  1500);
-			}
-		});
+		// if(event_timing == 'past'){
+		// 			sort_links = ['pending', 'asked'];
+		// 		}else{
+		// 			sort_links = ['pending', 'newest', 'asked'];
+		// 		}
+		// 
+		// 		sort_links.each(function(s){
+		// 			if( $('sort-link-'+ s + '-2').hasClassName('cp-sort-link-selected') ){
+		// 				setTimeout("cpUpdater.change_sort('"+s+"')",  1500);
+		// 			}
+		// 		});
+		
+		
 	}else{
 		$('question_error_div').innerHTML = "Could not update!";
 	}

@@ -263,17 +263,20 @@ class Forums extends Controller
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function ajax_get_overall_response($event_name, $speaker_id)
+	public function ajax_get_respondent_info($event_name, $speaker_id)
 	{
-		//echo("You called with speaker id: ".$speaker_id);
 		$event_id = $this->event->get_id_from_url($event_name);
 		$this->question->event_id = $event_id;
 		
 		$this->_currentQuestion($data);
 		$data['speaker_id'] = $speaker_id;
 		$this->_overallReaction($data);
+		// Respondants
+		$status = $this->user->GetRespondent($event_id, $speaker_id);
+		$return_array['reaction'] = $data['overall_reaction'];
+		$return_array['selected'] = $status[0]['current_responder'];
 		
-		echo($data['overall_reaction']);
+		echo(json_encode($return_array));
 	}
 	
 	/**
@@ -510,7 +513,9 @@ class Forums extends Controller
 			// Update and return response based on whether it worked
 			$changed = $this->question->updateQuestion($question_id, $_POST);
 			if($changed > 0){
-				echo("1");
+				$json['question_id'] = $question_id;
+				$json['event_id'] = $event_id;
+				echo(json_encode($json));
 			}else{
 				echo("0");
 			}
@@ -541,6 +546,53 @@ class Forums extends Controller
 		$data_array['question_status'] = "current";
 		$changed = $this->question->updateQuestion($question_id, $data_array);
 		echo($changed);
+	}
+
+	/**
+	 * Moves queue in desired direction.  This happens by moving through each respondent for each question, then changing to this next question and vise versa.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function move_queue($direction, $event_id)
+	{
+		if($direction == 'forward'){
+			//Get Current question
+			$respondents = $this->user->GetUsersInEvent($event_id);
+			// This may be not as efficient as doing an array search, etc - CTE
+			for($i = 0; $i < count($respondents); $i++){
+				if($respondents[$i]['current_responder']){
+					// Now we need to figure out if we just need to got to the next responder or switch questions
+					if(($i + 1) == count($respondents)){	// Change questions
+						// Get the next questions in the queue
+						$next_question_id = $this->question->get_next_question($event_id);
+
+						$old_current_question_id = $this->question->singleCurrent($event_id, $next_question_id);
+						$this->question->set_asked_time($old_current_question_id);
+						
+						$data_array['question_status'] = "current";
+						$changed = $this->question->updateQuestion($next_question_id, $data_array);
+						// Select the first respondant since it resets upons getting a new question
+						$data['current_responder'] = '0';
+						$this->user->UpdateUserEventAssociation($respondents[$i]['id'], $data);
+						
+						$data['current_responder'] = '1';
+						$this->user->UpdateUserEventAssociation($respondents[0]['id'], $data);
+					}else{										// Shift focus to next responder
+						// Update current record
+						$data['current_responder'] = '0';
+						$this->user->UpdateUserEventAssociation($respondents[$i]['id'], $data);
+						// Update new selected record
+						$data['current_responder'] = '1';
+						$this->user->UpdateUserEventAssociation($respondents[($i + 1)]['id'], $data);
+						
+					}
+				}
+			}
+			
+		}else{  // backward
+			
+		}
 	}
 
 	/**

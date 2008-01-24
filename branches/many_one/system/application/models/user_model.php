@@ -108,17 +108,42 @@ class User_model extends Model {
 	 **/
 	public function DeleteUserEventAssociation( $user_id, $event_id){
 		$this->db->delete('cn_idx_users_events', array('fk_user_id' => $user_id, 'fk_event_id' => $event_id));
-		error_log($this->db->last_query());
+		
 	}
 
 	/**
-	 * Gets all the different users for a single event
+	 * Gets all the different users (Respondants) for a single event
 	 *
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
 	public function GetUsersInEvent($event_id){
-		return $this->db->select('fk_user_id')->from('cn_idx_users_events')->where('fk_event_id', $event_id)->get()->result_array();
+		return $this->db->select('*')->from('cn_idx_users_events')->where('fk_event_id', $event_id)->orderby("id", "asc")->get()->result_array();
+	}
+	
+	/**
+	 * Get Event Status
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function GetRespondent($event_id, $respondent_id){
+		$return_array = $this->db->select('*')->from('cn_idx_users_events')->where(array('fk_event_id' => $event_id, 'fk_user_id' => $respondent_id))->get()->result_array();
+		//echo($this->db->last_query());
+		return $return_array;
+	}
+	
+	/**
+	 * Updates the user event association.  Called it this to be consistent to the above functions
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function UpdateUserEventAssociation($association_id, $data){
+		$this->db->where('id', (int) $association_id);
+		$this->db->update('cn_idx_users_events', $data);
+		
+		return $this->db->affected_rows();
 	}
 	
 	/**

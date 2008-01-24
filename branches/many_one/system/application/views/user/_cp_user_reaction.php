@@ -8,7 +8,7 @@
 	<? $class = '' ?>
 	<? foreach($candidates as $v): ?>
 		<tr<?=$class?>>
-			<td class="sp_arrow"><img src="./images/ucp/speaker_arrow.png" border="0" /></td>
+			<td class="sp_arrow" id="current_area_<?=$v['user_id']?>"></td>
 			<td><?= $v['avatar'] . '&nbsp;' . $v['link_to_profile'] ?></td>
 			<td><div id="your-reaction-<?=$v['user_id']?>">
 					<div id="track<?=$v['user_id']?>" class="track" style="width:150; height:9px;">
@@ -35,20 +35,16 @@
 
 			// horizontal slider control
 			slider = new Control.Slider('handle<?=$v['user_id']?>', 'track<?=$v['user_id']?>', {
-				sliderValue: <?=($user_reaction == -1)?(5/10):($v['user_reaction']/10)?>,
+				range:$R(0,10),
+				values:[0,1,2,3,4,5,6,7,8,9,10],
+				sliderValue: <?=($user_reaction == -1)?(5):($v['user_reaction'])?>,
 				onChange: function(v) {
-					// v = parseFloat(v);
-					// 					var remainder = v % .1;
-					// 					if(remainder){						
-					// 						cpUpdater.sliders[<?=$v['user_id']?>].setValue(v.toFixed(1));
-					// 						console.log(v.toFixed(1));
-						new Ajax.Request('forums/react/' + Math.round(v*10) + '/' + <?=$v['user_id']?> + '/' + cpUpdater.current_question_id, {
-					 		onSuccess: function(transport) {
-								cpUpdater.enableAJAX();
-								$('handle-img-<?=$v["user_id"]?>').addClassName('reaction_handle_voted');
-					  		}
-						});
-					// }
+					new Ajax.Request('forums/react/' + v + '/' + <?=$v['user_id']?> + '/' + cpUpdater.current_question_id, {
+				 		onSuccess: function(transport) {
+							cpUpdater.enableAJAX();
+							$('handle-img-<?=$v["user_id"]?>').addClassName('reaction_handle_voted');
+				  		}
+					});
 					 
 				},
 				onSlide: function(v) {
@@ -57,7 +53,6 @@
 			});
 
 			cpUpdater.sliders[<?=$v['user_id']?>] = slider;
-
 		// ]]>
 		</script>	
 	<? endforeach; ?>
