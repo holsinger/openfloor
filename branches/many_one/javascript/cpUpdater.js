@@ -77,14 +77,14 @@ cpUpdater.ajaxCurrentQuestion = function(speaker_id){
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name, {
 		onSuccess: function(transport) {
 			if(transport.responseText != cpUpdater.current_question_last_value){
-				cpUpdater.ajaxUpdateCurrentQuestion();
+				cpUpdater.ajaxUpdateCurrentQuestion(transport.responseText);
 				cpUpdater.current_question_last_value = transport.responseText;
 			}
 	  	}
 	});
 }
 // used with the above function, it will actually display the new current question
-cpUpdater.ajaxUpdateCurrentQuestion = function(){
+cpUpdater.ajaxUpdateCurrentQuestion = function(new_question_id){
 	// Get New Current Question
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name+'/pod', {
 		onSuccess: function(transport) {
@@ -96,27 +96,51 @@ cpUpdater.ajaxUpdateCurrentQuestion = function(){
 			$('the-current-question').setStyle({backgroundColor: "#F2F6FE"});
 	  	}
 	});
+	
 	// Update sliders for new question
-	/*
-	cpUpdater.sliders[<?=$v['user_id']?>].options.onChange = null;
-	cpUpdater.sliders[<?=$v['user_id']?>].options.onSlide = null;
-	cpUpdater.sliders[<?=$v['user_id']?>].setValue(<?=($v['user_reaction'] == -1)?(5/10):($v['user_reaction']/10)?>);
-	cpUpdater.sliders[<?=$v['user_id']?>].options.onChange =	
-		function(v) {
-			url = 'forums/react/' + Math.round(v*10) + '/' + <?=$v['user_id']?> + '/' + cpUpdater.current_question_id;
-			new Ajax.Request(url, {
-		 		onSuccess: function(transport) {
-					cpUpdater.enableAJAX();
-					$('handle-img-<?=$v['user_id']?>').addClassName('reaction_handle_voted');
-		  		}
-			}); 
-		};
-	cpUpdater.sliders[<?=$v['user_id']?>].options.onSlide = 
-		function(v) {
-			cpUpdater.disableAJAX();
-		};		
-	cpUpdater.sliders[<?=$v['user_id']?>].setEnabled();
-	*/
+	new Ajax.Request(site_url + 'forums/ajax_get_slider_info/'+ event_name+'/'+new_question_id, {
+		onSuccess: function(transport) {
+			eval('var response = '+transport.responseText);
+			for(var i = 0; i < parseInt(response.count); i++){
+				eval('var current_user_id = response.user_'+i);
+				console.log(current_user_id);
+				// Because setValue will fire the events, we want to null them out before using it
+				cpUpdater.sliders[current_user_id].options.onChange = null;
+				cpUpdater.sliders[current_user_id].options.onSlide = null;
+				eval('var current_value = parseInt(response.value_'+i+')');
+				console.log(current_value);
+				cpUpdater.sliders[current_user_id].setValue((current_value == -1)?(5):(current_value));
+				if(current_value == -1){
+					if($('handle-img-'+current_user_id).hasClassName('reaction_handle_voted')){
+						$('handle-img-'+current_user_id).removeClassName('reaction_handle_voted');
+						$('handle-img-'+current_user_id).addClassName('reaction_handle');  console.log("added");
+					}
+				}else{
+					if(!$('handle-img-'+current_user_id).hasClassName('reaction_handle_voted')){
+						$('handle-img-'+current_user_id).addClassName('reaction_handle_voted');
+					}
+				}
+				// Reset the events with the new question id
+				cpUpdater.sliders[current_user_id].options.onChange = function(v) {
+					new Ajax.Request('forums/react/' + v + '/' + current_user_id + '/' + new_question_id, {
+				 		onSuccess: function(transport) {
+							cpUpdater.enableAJAX();
+							$('handle-img-'+current_user_id).innerHTML = "";
+							$('handle-img-'+current_user_id).removeClassName('reaction_handle_slide');
+							$('handle-img-'+current_user_id).addClassName('reaction_handle_voted');
+				  		}
+					});
+					 
+				}
+				cpUpdater.sliders[current_user_id].options.onSlide = function(v) {
+					cpUpdater.disableAJAX();
+					$('handle-img-'+current_user_id).addClassName('reaction_handle_slide');
+					$('handle-img-'+current_user_id).innerHTML = v;
+				}
+			}
+	  	}
+	});
+	
 }
 
 cpUpdater.askQuestion = function() {

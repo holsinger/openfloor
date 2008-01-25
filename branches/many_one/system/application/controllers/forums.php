@@ -301,6 +301,30 @@ class Forums extends Controller
 			
 		}
 	}
+
+	/**
+	 * Returns the percentage for the overall reaction (aggregate reaction) to be used in the progress bar like indicator
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_get_slider_info($event_name, $new_question_id)
+	{		
+		$event_id = $this->event->get_id_from_url($event_name);
+		$this->reaction->question_id 	= $new_question_id;
+		$this->reaction->user_id		= $this->userauth->user_id;
+	
+		$data['respondents'] = $this->event->getCansInEvent($event_id, true);
+		
+		$return_array['count'] = count($data['respondents']);
+		$count = 0;
+		foreach($data['respondents'] as $k => $v) {
+			$return_array['user_'.$count] = $v['user_id'];
+			$return_array['value_'.$count] = $this->reaction->canUserReaction($v['user_id']);
+			$count++;
+		}
+		echo(json_encode($return_array));
+	}
 	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)
 	{
