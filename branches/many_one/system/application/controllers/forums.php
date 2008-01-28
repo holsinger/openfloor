@@ -315,15 +315,13 @@ class Forums extends Controller
 		$this->reaction->user_id		= $this->userauth->user_id;
 	
 		$data['respondents'] = $this->event->getCansInEvent($event_id, true);
-		
-		$return_array['count'] = count($data['respondents']);
+		$data['new_question_id'] = $new_question_id;
 		$count = 0;
 		foreach($data['respondents'] as $k => $v) {
-			$return_array['user_'.$count] = $v['user_id'];
-			$return_array['value_'.$count] = $this->reaction->canUserReaction($v['user_id']);
+			$data['respondents'][$count]['slider_value'] = $this->reaction->canUserReaction($v['user_id']);
 			$count++;
 		}
-		echo(json_encode($return_array));
+		$this->load->view('event/ajax_slider_update.php', $data);
 	}
 	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)
