@@ -354,27 +354,36 @@ class Event extends Controller
 		if($_POST){	
 			// Setup the data to show on the form (used if validation is false)
 			$data = $_POST;
-			// Set validation rules
-			if($_POST['password_protect']){
-				$rules['password_protect_password'] = "callback_validation_password_check|required";
-			}
-			if ($_POST['email_invite']) {
-				$rules['recipients'] = "required|xss_clean";
-			}
-			if ($_POST['domain_limit']) {
-				$rules['domain_limit_name'] = "callback_validation_domain_name_check|required";
-			}
-			$this->validation->set_rules($rules);
-			// Set the name of the fields for validation errors (if any)
-			$fields['password_protect_password']	= 	"Private Password"; 
-			$fields['recipients']		= 	"Recipients";
-			$fields['domain_limit_name']	= 	"Domain Name";
 			
-			$this->validation->set_fields($fields);
-			// Check validation
-			if ($this->validation->run()){
+			#First determin what the access type is
+			if ($_POST['access_type'] == 'public') {
+				#event is public, complete the event
 				$show_form = false;
-			}
+			} elseif ($_POST['access_type'] == 'private') {
+				
+				// Set validation rules
+				if($_POST['password_protect']){
+					$rules['password_protect_password'] = "callback_validation_password_check|required";
+				}
+				if ($_POST['email_invite']) {
+					$rules['recipients'] = "required|xss_clean";
+				}
+				if ($_POST['domain_limit']) {
+					$rules['domain_limit_name'] = "callback_validation_domain_name_check|required";
+				}
+				$this->validation->set_rules($rules);
+				// Set the name of the fields for validation errors (if any)
+				$fields['password_protect_password']	= 	"Private Password"; 
+				$fields['recipients']		= 	"Recipients";
+				$fields['domain_limit_name']	= 	"Domain Name";
+
+				$this->validation->set_fields($fields);
+				// Check validation
+				if ($this->validation->run()){
+					$show_form = false;
+				}
+			}// end if else access type
+			
 		}else{
 			// Inititial page load
 			// If event_id is set it is an update, if not then it's new and we'll want to set the default values for a new form.
