@@ -1,7 +1,7 @@
 <table>
 	<tr>
 		<th class="sp_arrow"></th>
-		<th class="candidate">&nbsp;&nbsp;Speaker</th>
+		<th class="candidate">&nbsp;&nbsp;Respondent</th>
 		<th style="background-color:#3561b7;">Your Reaction</th>
 		<th class="reaction">Overall&nbsp;&nbsp;</th>
 	</tr>
@@ -37,6 +37,8 @@
 				values:[0,1,2,3,4,5,6,7,8,9,10]
 			});
 			cpUpdater.sliders[<?=$v['user_id']?>] = slider;
+			
+			// On slide events, etc, are set using an ajax call
 		// ]]>
 		</script>	
 	<? endforeach; ?>

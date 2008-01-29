@@ -178,8 +178,12 @@ class Forums extends Controller
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
 		
+		
 		$data["event_data"] = $this->event->get_event($data['event_id']);
 		
+		// The respondent format and where we can figure out 
+		$data['user_id'] = $this->userauth->user_id;
+		$data['is_respondent'] = false;
 		$temp_participants = $this->event->getCansInEvent($data['event_id']);
 		$temp_count = 0;
 		foreach($temp_participants as $v){
@@ -187,8 +191,11 @@ class Forums extends Controller
 			if($temp_count < (count($temp_participants) - 1) ){
 				$data['event_data']['participants'] .= ', ';
 			}
-			
 			$temp_count++;
+			// Check to see if this user is a respondent
+			if($v == $data['user_id']){
+				$data['is_respondent'] = true;
+			}
 		}
 
 		$this->event->id = $data['event_id'];
@@ -322,6 +329,12 @@ class Forums extends Controller
 			$count++;
 		}
 		$this->load->view('event/ajax_slider_update.php', $data);
+	}
+	
+	public function ajax_user_ping($value)
+	{
+		# code...
+		echo("Hi");
 	}
 	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)

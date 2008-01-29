@@ -12,6 +12,7 @@ for(var i = 0; i < cans.length; i++){
 	
 }	
 cpUpdater.current_question_updater_id = false;
+cpUpdater.active_participant_updater_id = false;
 cpUpdater.current_question_last_value = false;
 cpUpdater.current_question_id = 0;
 cpUpdater.current_tab_name = false;
@@ -40,12 +41,16 @@ cpUpdater.cpUpdate = function(stream_update) {
 		// Changes the overall reaction field
 		for(var i = 0; i < cans.length; i++){
 			cpUpdater.ajaxReaction(cans[i]);  // Initial call
-			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
+			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);	// Ten Seconds
 		}
 		
 		// Switches the current question when necessary
 		cpUpdater.ajaxCurrentQuestion();
-		cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
+		cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);		// Ten Seconds
+		
+		// Starts the active user pinging
+		cpUpdater.ajaxParticipantPing();
+		cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 90000);	// One Minute, 30 Seconds
 	}
 	
 }
@@ -55,12 +60,14 @@ cpUpdater.ajaxReaction = function(speaker_id){
 	new Ajax.Request(site_url + 'forums/ajax_get_respondent_info/'+ event_name +'/'+speaker_id, {
 	  onSuccess: function(transport) {
 		eval('var response = '+transport.responseText);
-		// Change the rating bar
-		$('overall-reaction-meter-'+speaker_id).setStyle(
-			{
-				width: response.reaction
-			}
-		);
+		if(!cpUpdater.is_respondent){
+			// Change the rating bar
+			$('overall-reaction-meter-'+speaker_id).setStyle(
+				{
+					width: response.reaction
+				}
+			);
+		}
 		// Change the class if current user
 		if(response.selected == '1'){
 			$$('.sp_arrow_selected').invoke('removeClassName', 'sp_arrow_selected');
@@ -96,10 +103,19 @@ cpUpdater.ajaxUpdateCurrentQuestion = function(new_question_id){
 			$('the-current-question').setStyle({backgroundColor: "#F2F6FE"});
 	  	}
 	});
+	if(!cpUpdater.is_respondent){
+		// Update sliders for new question
+		new Ajax.Request(site_url + 'forums/ajax_get_slider_info/'+ event_name+'/'+new_question_id);
+	}
 	
-	// Update sliders for new question
-	new Ajax.Request(site_url + 'forums/ajax_get_slider_info/'+ event_name+'/'+new_question_id);
-	
+}
+
+cpUpdater.ajaxParticipantPing = function(){
+	new Ajax.Request(site_url + 'forums/ajax_user_ping/'+ event_id, {
+		onSuccess: function(transport) {
+			console.log(transport.responseText);
+	  	}
+	});
 }
 
 cpUpdater.askQuestion = function() {
@@ -133,6 +149,7 @@ cpUpdater.disableAJAX = function() {
 		updaters.each(function(s) {
 			s.stop();
 		});
+		
 		for(var i = 0; i < cans.length; i++){
 			clearInterval(cpUpdater.reaction_updater_id[i]);
 			cpUpdater.reaction_updater_id[i] = false;
@@ -141,6 +158,8 @@ cpUpdater.disableAJAX = function() {
 		clearInterval(cpUpdater.current_question_updater_id);
 		cpUpdater.current_question_updater_id = false;
 		
+		clearInterval(cpUpdater.active_participant_updater_id);
+		cpUpdater.active_participant_updater_id = false;
 	}	
 }
 
@@ -157,13 +176,18 @@ cpUpdater.enableAJAX = function() {
 				cpUpdater.ajaxReaction(cans[i]);  // Initial call
 				cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);
 			}
-			
+		
 		}
+		
 		if(!cpUpdater.current_question_updater_id){
 			cpUpdater.ajaxCurrentQuestion();
 			cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 		}
 		
+		if(!cpUpdater.active_participant_updater_id){
+			cpUpdater.ajaxParticipantPing();
+			cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 100000);	// One Minute
+		}
 	}	
 }
 

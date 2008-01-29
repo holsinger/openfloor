@@ -4,7 +4,7 @@ foreach($candidates as $v){
 	$cans .= "'{$v['user_id']}', "; 
 } 
 $cans = substr($cans, 0, -2);
-$data['js'] = "var event_name = '$event'; var cans = [$cans];";
+$data['js'] = "var event_name = '$event'; var event_id = {$event_data['event_id']}; var cans = [$cans];";
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 
 $this->load->view('view_layout/header.php', $data);
@@ -64,25 +64,47 @@ dependency overall_reaction.css
 		<div class="section">
 			<h3>Current Question</h3>
 		</div>
-	
-		<div id="current_question"></div>		  
 
-		<table class="feed-reaction-panel">
-			<tr>
-				<td style="width: 50%">
-					<div id="video_container">
-						<?= $stream_high ?>
-					</div>
-				</td>
-				<td>
-					<div id="user-reaction">
-						Rate the credibility of each candidate's response for the current question.
-						<? $this->load->view('user/_cp_user_reaction'); ?>
-					</div>
-					<div id="user-reaction-ajax"></div>
-				</td>
-			</tr>
-		</table>
+		<div id="current_question"></div>
+		<? if($is_respondent): ?>
+			<table class="feed-reaction-panel">
+				<tr>
+					<td style="width: 50%">
+						<div id="video_container">
+							<?= $stream_high ?>
+						</div>
+						<div>
+							<input type="button" name="start_response" value="Start Response" id="start_response">
+							<input type="button" name="finish_response" value="Finish Response" id="finish_response">
+						</div>
+					</td>
+					<td>
+						<div id="user-reaction">
+							Hello Respondent
+							<? $this->load->view('event/respondent_reaction'); ?>
+						</div>
+						<div id="user-reaction-ajax"></div>
+					</td>
+				</tr>
+			</table>
+		<? else: ?>
+			<table class="feed-reaction-panel">
+				<tr>
+					<td style="width: 50%">
+						<div id="video_container">
+							<?= $stream_high ?>
+						</div>
+					</td>
+					<td>
+						<div id="user-reaction">
+							Rate the credibility of each candidate's response for the current question.
+							<? $this->load->view('user/_cp_user_reaction'); ?>
+						</div>
+						<div id="user-reaction-ajax"></div>
+					</td>
+				</tr>
+			</table>
+		<? endif; ?>
 	<? elseif($event_data["event_finished"]): ?>
 		<div class="section">
 			<h3>Event Review:</h3>
@@ -172,6 +194,7 @@ dependency overall_reaction.css
 		var event_timing = 'not_past';
 	<? endif; ?>
 	var upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
+	cpUpdater.is_respondent = <?=($is_respondent)?"true":"false"?>;
 	
 	Event.observe(window, 'load', cpUpdater.startLazyLoader);
 	Event.observe(window, 'load', StartUpdater);
