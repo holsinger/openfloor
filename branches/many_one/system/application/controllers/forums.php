@@ -20,6 +20,7 @@ class Forums extends Controller
 		$this->load->model('vote_model','vote');
 		$this->load->model('reaction_model','reaction');
 		$this->load->model('cms_model','cms');
+		$this->load->model('participant_model','participant');
 		
 		// libraries
 		$this->load->library('flag_lib');
@@ -331,10 +332,25 @@ class Forums extends Controller
 		$this->load->view('event/ajax_slider_update.php', $data);
 	}
 	
-	public function ajax_user_ping($value)
+	/**
+	 * Used when a user is participating.  It will ping the application to let us know they are still there.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_user_ping($event_id, $user_id)
 	{
-		# code...
-		echo("Hi");
+		$record = $this->participant->GetParticipantByUserId();
+		// Check if user record exists, if so then update, if not then create a new one (and update after)
+		if(count($record) > 0){
+			$record['fk_user_id'] = $user_id;
+			$record['fk_event_id'] = $event_id;
+			$record['timestamp'] = 'NOW()';
+			$this->participant->InsertParticipant($record);
+		}else{
+			$data['timestamp'] = 'NOW()';
+			$this->participant->UpdateParticipantByUserId($user_id, $data);
+		}
 	}
 	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)

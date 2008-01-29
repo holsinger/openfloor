@@ -40,16 +40,6 @@ class participant_model extends Model {
 		$this->db->delete('event_participants', array('id' => $id));
 	}
 	
-	/**
-	 * Used to estaablish that a user is actively participating in an event
-	 *
-	 * @return void
-	 * @author Clark Endrizzi
-	 **/
-	public function PingParticipantRecord($event_id, $user_id)
-	{
-		// If first time create new record, otherwise update the timestamp
-	}
 	
 	/**
 	 * Returns the number of current active users, this means any user that has pinged withing the last two minutes.
@@ -60,6 +50,11 @@ class participant_model extends Model {
 	public function GetActiveUsersForEvent($event_id)
 	{
 		# code...
+	}
+	
+	public function GetParticipantByUserId($user_id='')
+	{
+		return $this->db->select('*')->from('event_participants')->where('fk_user_id', $user_id)->get()->result_array();
 	}
 }
 ?>
