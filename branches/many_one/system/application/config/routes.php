@@ -45,6 +45,7 @@ $route['scaffolding_trigger'] = "";
 $route['login'] = 'user/login';
 $route['logout'] = 'user/logout';
 $route['create_account'] = 'user/createAccount';
+$route['create_event'] = 'event/create_event';
 $route['signup'] = 'user/createAccount';
 
 //we need these to keep controller paths working  (all controllers need to be here)

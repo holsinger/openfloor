@@ -4,5 +4,6 @@
 | Many One Url
 |--------------------------------------------------------------------------
 */
-$config['m1_url'] = "http://stage.m1.csp1.solutionset.com";
+$config['m1_url'] = "http://beta.manyone.net";
+$config['access_type'] = 'public'; #public|private|NULL
 ?>

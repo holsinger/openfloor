@@ -328,6 +328,13 @@ class Event extends Controller
 		}else{
 			if($option == 'edit'){
 				redirect("/event/admin_panel/$event_id/2", 'location');
+			} elseif ( $this->config->item('access_type')=='public' ) {
+				$_POST = array();
+				$_POST['input_complete'] = "1";
+				$_POST['access_type'] = "public";
+				$this->event->update_event_form($event_id,$_POST);
+				$data = $this->event->get_event($event_id);
+				redirect("/event/admin_panel/".url_title($data['event_id']), 'location');
 			}else{
 				redirect("/event/create_event_three/$event_id", 'location');
 			}
@@ -348,6 +355,11 @@ class Event extends Controller
 		$this->userauth->isUser();	
 		// by default we show the form for step one, unless, it's a post and validation works out
 		$show_form = true;
+		
+		#check to see if step three is editable based on custom config
+		if ($this->config->item('access_type')=='public') {
+			$show_form = false;
+		}
 		
 		// If post is set then we know it's coming from the submission, from which we'll want to post data and we'll want to set rules
 		// for catching any errors.  If not then it can ban a new form or an update, in which case we do different things below.
@@ -778,6 +790,15 @@ class Event extends Controller
 		// Check for permissions
 		$this->userauth->isUser();
 		
+		#set default num tabs
+		$num_tabs = 3;
+		
+		#determine num tabs based on config settings
+		if ($this->config->item('access_type')=='public') {
+			$tab = 1;
+			$num_tabs = 2;
+		}#end if public set by default
+		
 		// Show page
 		$data['event_id'] = $event_id;
 		$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
@@ -787,12 +808,19 @@ class Event extends Controller
 			for($i = 0; $i < count($data['users']); $i++){
 				$data['users'][$i] = $this->user->get_user( $data['users'][$i]['fk_user_id'] );
 			}
+		}elseif ($tab == 3) {
+			# do not allow access to this tab if config sets a default of public
+			if ($this->config->item('access_type')=='public') {
+				$tab = 1;
+				$num_tabs = 2;
+			}#end if public set by default
 		}elseif($tab == 4){
 			
 		}else{
 			$data = $this->event->get_event($event_id);
 		}
 		$data['tab'] = $tab;
+		$data['num_tabs'] = $num_tabs;
 		$this->load->view('event/admin_panel',$data);
 	}
 	

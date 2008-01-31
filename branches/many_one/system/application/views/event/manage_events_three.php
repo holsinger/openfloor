@@ -38,13 +38,13 @@ $this->load->view('view_layout/header.php', $setup);
 				</div>
 				<br />
 				
-				<? if($option != "edit"): ?>
+				<?# if($option != "edit"): ?>
 					<?=form_checkbox('email_invite', '1', $email_invite, 'id = "email_invite"  onclick="enable_disable();"')?>&nbsp;Send Email Invite<br />
 					<div class="form_indent">
 						<textarea id="recipient_list" name="recipients" class="txt"><?=$recipients?></textarea><br />
 						<a href="#" onclick="showPlaxoABChooser('recipient_list', site_url+'event/plaxo_callback'); return false"><img src="http://www.plaxo.com/images/abc/buttons/add_button.gif" alt="Add from my address book" /></a>
 					</div>
-				<? endif; ?>
+				<? #endif; ?>
 				
 				<?=form_checkbox('domain_limit', '1', $domain_limit, 'id = "domain_limit"  onclick="enable_disable();"')?>&nbsp;Limit Access to Email Domain<br />
 				<div class="form_indent"><input type="text" name="domain_limit_name" value="<?=$domain_limit_name?>" id="domain_limit_name" class="txt"></div>
