@@ -422,11 +422,13 @@ class Forums extends Controller
 	public function ajax_participant($event_id)
 	{
 		$respondent = $this->user->GetCurrentRespondentInEvent($event_id);
-
-		$past_vote = $this->vote->ParticipantLastVote($this->userauth->user_id, $respondent[0]['id']);
-		$data['past_vote'] = $past_vote->vote_value;
-		$data['respondent'] = $respondent[0];
-		$this->load->view('event/ajax_participant.php', $data);
+		if(count($respondent)){
+			$past_vote = $this->vote->ParticipantLastVote($this->userauth->user_id, $respondent[0]['id']);
+			$data['past_vote'] = $past_vote->vote_value;
+			$data['respondent'] = $respondent[0];
+			$this->load->view('event/ajax_participant.php', $data);
+		}
+		
 	}
 	
 	/**
