@@ -10,13 +10,16 @@
 		if(($this->agent->browser() == "Internet Explorer" && $this->agent->version() < 7) && $count == 0): ?>
 			<div style="overflow: hidden; height: 0px; margin-top: -22px"><img src="http://192.168.0.86/many_one/images/many_one/bg_question_pod.gif" /></div>
 		<? endif; ?>
+		
 		<div class="<?= isset($current_question_flag) ? 'current-question-pod' : 'question-pod-container' ?>" id="question_container_<?= $question['question_id'] ?>">
 		  <div class="question-podfg">
 			<table cellpadding="0" cellspacing="0" style="margin-top: 5px; margin-bottom: 5px;">
 				<tr>
 					<?if(!isset($current_question_flag)):?>
 						<td style="padding-left: 5px;"><div class="score" title='Question Score'><?= $question['votes'] ?></div></td>
-						<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
+						<? if($question['question_status'] != 'asked' && !$event_data["event_finished"] && !$is_respondent):?>
+							<td><div class="vote"><? $this->load->view('user/_cp_vote_box', $question) ?></div></td>
+						<? endif; ?>
 					<?else:?>
 						<td><div class="flag"><!-- <img src="./images/flag.png"> --></div></td>
 					<?endif;?>
