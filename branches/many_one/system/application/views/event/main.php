@@ -4,7 +4,7 @@ foreach($candidates as $v){
 	$cans .= "'{$v['user_id']}', "; 
 } 
 $cans = substr($cans, 0, -2);
-$data['js'] = "var event_name = '$event'; var event_id = {$event_data['event_id']}; var cans = [$cans];";
+$data['js'] = "var event_name = '$event'; var event_id = {$event_data['event_id']}; var user_id = $user_id; var cans = [$cans];";
 $data['left_nav'] = 'dashboard';
 $data['sub_title'] = $event_data['event_name']; 
 $this->load->view('view_layout/header.php', $data);
@@ -51,7 +51,7 @@ dependency overall_reaction.css
 	
 	<div><br/><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
-	<? if(!$event_data["event_finished"]): ?>
+	<? if(!$event_data["event_finished"] && !$is_respondent): ?>
 		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : $this->config->item('m1_url').'/login/' ?>"/></div>
 		<div id="cp-ask-question" style="display:none; text-align: center; margin-bottom: 5px;">
 			<div style="width: 500px; text-align: left; margin-left: 278px; background-color: #F2F2F2; padding: 5px;">
@@ -65,25 +65,20 @@ dependency overall_reaction.css
 			<h3>Current Question</h3>
 		</div>
 
-		<div id="current_question"></div>
+		<div id="current_question">loading...</div>
 		<? if($is_respondent): ?>
 			<table class="feed-reaction-panel">
 				<tr>
 					<td style="width: 50%">
-						<div id="video_container">
-							<?= $stream_high ?>
-						</div>
-						<div>
-							<input type="button" name="start_response" value="Start Response" id="start_response">
-							<input type="button" name="finish_response" value="Finish Response" id="finish_response">
+						<div id="respondent_div">
+							loading...
 						</div>
 					</td>
 					<td>
 						<div id="user-reaction">
-							Hello Respondent
+							The following shows the order of the respondents and which respondent is currently on tap to respond.
 							<? $this->load->view('event/respondent_reaction'); ?>
 						</div>
-						<div id="user-reaction-ajax"></div>
 					</td>
 				</tr>
 			</table>
@@ -100,7 +95,6 @@ dependency overall_reaction.css
 							Rate the credibility of each candidate's response for the current question.
 							<? $this->load->view('user/_cp_user_reaction'); ?>
 						</div>
-						<div id="user-reaction-ajax"></div>
 					</td>
 				</tr>
 			</table>

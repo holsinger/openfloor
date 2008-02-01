@@ -23,10 +23,10 @@ class participant_model extends Model {
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function UpdateParticipantByUserId($user_id, $data){
-		$this->db->where('user_id', (int) $user_id);
+	public function UpdateParticipant($id, $data){
+		$this->db->where('id', (int) $id);
 		$this->db->update('event_participants', $data);
-	
+		echo($this->db->last_query());
 		return $this->db->affected_rows();
 	}
 
@@ -47,14 +47,22 @@ class participant_model extends Model {
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function GetActiveUsersForEvent($event_id)
+	public function GetActiveParticipantsForEvent($event_id)
 	{
-		# code...
+		$sql = "SELECT COUNT(*) AS count 
+		FROM event_participants
+		WHERE fk_event_id = $event_id AND timestamp > SUBTIME(NOW(), '00:02:00')";
+		
+		return $this->db->query($sql)->row()->count;
 	}
 	
-	public function GetParticipantByUserId($user_id='')
+	public function GetParticipantInEvent($user_id, $event_id)
 	{
-		return $this->db->select('*')->from('event_participants')->where('fk_user_id', $user_id)->get()->result_array();
+		$where_array = array(
+			"fk_user_id" => $user_id,
+			"fk_event_id"=> $event_id
+			);
+		return $this->db->select('*')->from('event_participants')->where($where_array)->get()->result_array();
 	}
 }
 ?>

@@ -283,6 +283,7 @@ class Forums extends Controller
 		$status = $this->user->GetRespondent($event_id, $speaker_id);
 		$return_array['reaction'] = $data['overall_reaction'];
 		$return_array['selected'] = $status[0]['current_responder'];
+		$return_array['status'] = $status[0]['status'];
 		
 		echo(json_encode($return_array));
 	}
@@ -340,17 +341,111 @@ class Forums extends Controller
 	 **/
 	public function ajax_user_ping($event_id, $user_id)
 	{
-		$record = $this->participant->GetParticipantByUserId();
+		$record = $this->participant->GetParticipantInEvent($user_id, $event_id);
 		// Check if user record exists, if so then update, if not then create a new one (and update after)
-		if(count($record) > 0){
+		if(count($record) == 0){
 			$record['fk_user_id'] = $user_id;
 			$record['fk_event_id'] = $event_id;
-			$record['timestamp'] = 'NOW()';
+			$record['timestamp'] = date('Y-m-d H:i:s');
 			$this->participant->InsertParticipant($record);
 		}else{
-			$data['timestamp'] = 'NOW()';
-			$this->participant->UpdateParticipantByUserId($user_id, $data);
+			$data['timestamp'] = date('Y-m-d H:i:s');
+			$this->participant->UpdateParticipant($record[0]['id'], $data);
 		}
+	}
+	
+	/**
+	 * undocumented function
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_question_answered_rating($event_id, $respondent_id)
+	{
+		$result_array = $this->participant->GetActiveParticipantsForEvent($event_id);
+		echo($result_array[0]['count']);
+	}
+	
+	/**
+	 * This is used by the respondent to check when different respondent dialogs should be shown.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_respondent_status($event_id, $respondent_id, $view = false)
+	{
+		$return_array = $this->user->GetRespondent($event_id, $respondent_id);
+		if(!$view){
+			$this->question->event_id = $event_id;
+			$this->_currentQuestion($data);
+			$json_array['current_responder'] = $return_array[0]['current_responder'];
+			$json_array['current_id'] = $data['questions'][0]['question_id'];
+			if($return_array[0]['status'] == 'responding'){
+				$json_array['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%'; 
+			}
+			echo json_encode($json_array);
+		}else{
+			$data['respondent'] = $return_array[0];
+			$data['event_id'] = $event_id;
+			$data['respondent_id'] = $respondent_id;
+			$data['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%';
+			$this->load->view('event/ajax_respondent_status.php', $data);
+		}
+	}
+	
+	/**
+	 * Called by the respondent to change their response.  IE, when they want to start responding to a question, etc.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_response_change($event_id, $user_id, $action)
+	{
+		$respondent = $this->user->GetRespondent($event_id, $user_id);
+		if($action == 'start'){
+			$data['status'] = 'responding';
+			$this->user->UpdateUserEventAssociation($respondent[0]['id'], $data);
+		}else{		// finish
+			$data['status'] = '';
+			$this->user->UpdateUserEventAssociation($respondent[0]['id'], $data);
+			$this->move_queue("forward", $event_id);
+		}
+		
+	}
+	
+	/**
+	 * This is what gets called to provide the participant dialogs.  So to show the "Not Answered" Button, etc.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_participant($event_id)
+	{
+		$respondent = $this->user->GetCurrentRespondentInEvent($event_id);
+
+		$past_vote = $this->vote->ParticipantLastVote($this->userauth->user_id, $respondent[0]['id']);
+		$data['past_vote'] = $past_vote->vote_value;
+		$data['respondent'] = $respondent[0];
+		$this->load->view('event/ajax_participant.php', $data);
+	}
+	
+	/**
+	 * This function is what a participant uses to vote on a respondent (not answered)
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_participant_vote($event_id, $user_id, $type)
+	{
+		$this->vote->type = 'answer';
+		$respondent = $this->user->GetCurrentRespondentInEvent($event_id);
+		echo($respondent[0]['id']);
+		if($type == "up"){
+			$this->vote->voteup($user_id, $respondent[0]['id']);
+		}else{
+			$this->vote->votedown($user_id, $respondent[0]['id']);
+		}
+		
 	}
 	
 	public function overall_reaction($event, $ajax = null, $speaker_id = null)
@@ -625,6 +720,7 @@ class Forums extends Controller
 						$changed = $this->question->updateQuestion($next_question_id, $data_array);
 						// Select the first respondant since it resets upons getting a new question
 						$data['current_responder'] = '0';
+						$data['status'] = '';
 						$this->user->UpdateUserEventAssociation($respondents[$i]['id'], $data);
 						
 						$data['current_responder'] = '1';
@@ -632,6 +728,7 @@ class Forums extends Controller
 					}else{										// Shift focus to next responder
 						// Update current record
 						$data['current_responder'] = '0';
+						$data['status'] = '';
 						$this->user->UpdateUserEventAssociation($respondents[$i]['id'], $data);
 						// Update new selected record
 						$data['current_responder'] = '1';

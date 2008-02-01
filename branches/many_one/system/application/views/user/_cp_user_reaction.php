@@ -42,6 +42,12 @@
 		// ]]>
 		</script>	
 	<? endforeach; ?>
+	<tr>
+		<td></td>
+		<td colspan="3">
+			<div id="user_reaction_ajax"></div>
+		</td>
+	</tr>
 </table>
 
 

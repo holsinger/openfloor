@@ -37,6 +37,8 @@ cpUpdater.vote = function(url) {
 
 cpUpdater.cpUpdate = function(stream_update) {
 	updaters = new Array();
+	last_respondent_current = "start";
+	last_respondent_question_id = false;
 	if(stream_update){
 		// Changes the overall reaction field
 		for(var i = 0; i < cans.length; i++){
@@ -48,9 +50,19 @@ cpUpdater.cpUpdate = function(stream_update) {
 		cpUpdater.ajaxCurrentQuestion();
 		cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);		// Ten Seconds
 		
-		// Starts the active user pinging
+		// Starts the active user pinging, this does not get stopped when disable ajax is called 
 		cpUpdater.ajaxParticipantPing();
-		cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 90000);	// One Minute, 30 Seconds
+		cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 60000);	// One Minute, 30 Seconds
+		
+		if(cpUpdater.is_respondent){
+			// Update sliders for new question
+			cpUpdater.ajaxRespondentStatus();
+			setInterval('cpUpdater.ajaxRespondentStatus()', 10000);
+		}else{
+			// Update sliders for new question
+			cpUpdater.ajaxParticipant();
+			setInterval('cpUpdater.ajaxParticipant()', 10000);
+		}
 	}
 	
 }
@@ -111,9 +123,60 @@ cpUpdater.ajaxUpdateCurrentQuestion = function(new_question_id){
 }
 
 cpUpdater.ajaxParticipantPing = function(){
-	new Ajax.Request(site_url + 'forums/ajax_user_ping/'+ event_id, {
+	new Ajax.Request(site_url + 'forums/ajax_user_ping/'+ event_id + '/' + user_id, {
 		onSuccess: function(transport) {
-			console.log(transport.responseText);
+			//console.log(transport.responseText);
+	  	}
+	});
+}
+
+cpUpdater.ajaxRespondentStatus = function(){
+	new Ajax.Request(site_url + 'forums/ajax_respondent_status/'+ event_id + '/' + user_id, {
+		onSuccess: function(transport) {
+			eval('var response = '+transport.responseText);
+			
+			if(last_respondent_current != response.current_responder || last_respondent_question_id != response.current_id){
+				cpUpdater.ajaxChangeRespondentStatus(transport.responseText);
+				last_respondent_current = response.current_responder;
+				last_respondent_question_id = response.current_id;
+			}
+			if(response.unanswered_percent){
+				$('respondent_unanswered_meter').setStyle({
+					width: response.unanswered_percent
+				});
+			}
+	  	}
+	});
+}
+
+cpUpdater.ajaxChangeRespondentStatus = function(){
+	new Ajax.Request(site_url + 'forums/ajax_respondent_status/'+ event_id + '/' + user_id + '/1', {
+		onSuccess: function(transport) {
+			$('respondent_div').innerHTML = transport.responseText;
+	  	}
+	});
+}
+
+cpUpdater.ajaxRespondentAction = function(action){
+	new Ajax.Request(site_url+'forums/ajax_response_change/'+ event_id + '/' + user_id + '/'+action,  { 
+		onSuccess: function(transport){    
+			cpUpdater.ajaxChangeRespondentStatus();
+		} 
+	});
+}
+
+cpUpdater.ajaxParticipant = function(){
+	new Ajax.Request(site_url + 'forums/ajax_participant/'+ event_id, {
+		onSuccess: function(transport) {
+			$('user_reaction_ajax').innerHTML = transport.responseText;
+	  	}
+	});
+}
+
+cpUpdater.ajaxParticipantVote = function(type){
+	new Ajax.Request(site_url + 'forums/ajax_participant_vote/'+ event_id+'/'+user_id+'/'+type, {
+		onSuccess: function(transport) {
+			cpUpdater.ajaxParticipant();
 	  	}
 	});
 }
@@ -158,8 +221,8 @@ cpUpdater.disableAJAX = function() {
 		clearInterval(cpUpdater.current_question_updater_id);
 		cpUpdater.current_question_updater_id = false;
 		
-		clearInterval(cpUpdater.active_participant_updater_id);
-		cpUpdater.active_participant_updater_id = false;
+		// clearInterval(cpUpdater.active_participant_updater_id);
+		// cpUpdater.active_participant_updater_id = false;
 	}	
 }
 
@@ -184,10 +247,10 @@ cpUpdater.enableAJAX = function() {
 			cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 		}
 		
-		if(!cpUpdater.active_participant_updater_id){
-			cpUpdater.ajaxParticipantPing();
-			cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 100000);	// One Minute
-		}
+		// if(!cpUpdater.active_participant_updater_id){
+		// 			cpUpdater.ajaxParticipantPing();
+		// 			cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 100000);	// One Minute
+		// }
 	}	
 }
 

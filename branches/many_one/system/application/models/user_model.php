@@ -122,13 +122,27 @@ class User_model extends Model {
 	}
 	
 	/**
+	 * Gets The current respondent
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function GetCurrentRespondentInEvent($event_id){
+		$where = array(
+			"fk_event_id"		=>	$event_id,
+			"current_responder"	=>	'1'
+		);
+		return $this->db->select('*')->from('cn_idx_users_events')->where($where)->get()->result_array();
+	}
+	
+	/**
 	 * Get Event Status
 	 *
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function GetRespondent($event_id, $respondent_id){
-		$return_array = $this->db->select('*')->from('cn_idx_users_events')->where(array('fk_event_id' => $event_id, 'fk_user_id' => $respondent_id))->get()->result_array();
+	public function GetRespondent($event_id, $user_id){
+		$return_array = $this->db->select('*')->from('cn_idx_users_events')->where(array('fk_event_id' => $event_id, 'fk_user_id' => $user_id))->get()->result_array();
 		//echo($this->db->last_query());
 		return $return_array;
 	}

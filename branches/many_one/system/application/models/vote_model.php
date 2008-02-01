@@ -10,7 +10,6 @@ class Vote_model extends Model
         // Call the Model constructor
         parent::Model();
     }
-    
 	
 	public function voteup($fk_user_id, $fk)
 	{
@@ -24,6 +23,9 @@ class Vote_model extends Model
 				break;
 			case 'comment':
 				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_comment_id) VALUES (10, $fk_user_id, $fk)");
+				break;
+			case 'answer':
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_answer_respondent_id) VALUES (1, $fk_user_id, $fk)");
 				break;
 			default:
 				exit(); // error
@@ -43,6 +45,9 @@ class Vote_model extends Model
 				break;
 			case 'comment':
 				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_comment_id) VALUES (-10, $fk_user_id, $fk)");
+				break;
+			case 'answer':
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_answer_respondent_id) VALUES (-1, $fk_user_id, $fk)");
 				break;
 			default:
 				exit(); // error
@@ -119,6 +124,36 @@ class Vote_model extends Model
 										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_user_id = $user_id GROUP BY fk_question_id) 
 									ORDER BY v.timestamp DESC
 									$limit")->result_array();
+	}
+	
+	/**
+	 * Returns the number of unanswered respondent votes
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function RespondentUnansweredCount($respondent_id, $user_id = false)
+	{
+		if($user_id){
+			$optional_where = "fk_user_id = $user_id AND";
+		}
+		return $this->db->query("	SELECT count(*) AS count
+									FROM cn_votes
+									WHERE $optional_where
+										vote_id 
+										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_answer_respondent_id = $respondent_id AND vote_value > 0 GROUP BY fk_user_id)
+									")->row()->count;
+	}
+	
+	public function ParticipantLastVote($user_id, $respondent_id)
+	{
+		return $this->db->query("	SELECT * 
+									FROM cn_votes
+									WHERE 
+										fk_user_id = $user_id AND
+										fk_answer_respondent_id = $respondent_id
+									ORDER BY timestamp DESC
+									LIMIT 1")->row();
 	}
 	
 	public function getVotesByVideo($video_id)

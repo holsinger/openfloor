@@ -425,3 +425,8 @@ textarea {
 	background: url(../images/ucp/speaker_arrow.png) no-repeat #FFFFFF;
 	width: 15px;
 }
+
+#user_reaction_ajax {
+	padding-top: 15px;
+	text-align: center;
+}
