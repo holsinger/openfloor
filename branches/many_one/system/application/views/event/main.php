@@ -52,7 +52,7 @@ dependency overall_reaction.css
 	<div><br/><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
 	<? if(!$event_data["event_finished"] && !$is_respondent): ?>
-		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : $this->config->item('m1_url').'/login/' ?>"/></div>
+		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : 'window.location=\''.$this->config->item('m1_url').'/login/\';' ?>"/></div>
 		<div id="cp-ask-question" style="display:none; text-align: center; margin-bottom: 5px;">
 			<div style="width: 500px; text-align: left; margin-left: 278px; background-color: #F2F2F2; padding: 5px;">
 			<? $this->load->view('question/_submit_question_form') ?>
