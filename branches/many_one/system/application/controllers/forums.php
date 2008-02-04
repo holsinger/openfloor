@@ -250,6 +250,39 @@ class Forums extends Controller
 	}
 	
 	/**
+	 * Changes the status of an event.  
+	 *
+	 *  There are three different event state modes.  These modes are controlled by two different fields for each event:  event_finished and streaming.
+	 *  Before live: (streaming and event_finished are false)
+	 *  Live: (streamins is true, event_finsished is false)
+	 *  Finished (streamiing is hopefully false, event_finished is true)
+	 *
+	 * @return void
+	 * @author Clark Endrizzi
+	 **/
+	public function ajax_change_event_status($event_id, $status){
+		switch ($status) {
+			case "stream":
+		    	echo $this->event->UpdateField($event_id, "streaming", "1");
+				// Move event status forward
+				$respondent = $this->user->GetCurrentRespondentInEvent($event_id);
+				if(!count($respondent)){
+					$this->move_queue("forward", $event_id);
+				}
+			    break;
+			case "no_stream":
+		    	echo $this->event->UpdateField($event_id, "streaming", "0");
+			    break;
+			case "finish":
+		    	echo $this->event->UpdateField($event_id, "event_finished", "1");
+			    break;
+			case "no_finish":
+				echo $this->event->UpdateField($event_id, "event_finished", "0");
+				break;
+		}
+	}
+	
+	/**
 	 * Gets information for a question to be viewed on the information tab of a question.
 	 *
 	 * @return void
@@ -708,8 +741,11 @@ class Forums extends Controller
 			//Get Current question
 			$respondents = $this->user->GetUsersInEvent($event_id);
 			// This may be not as efficient as doing an array search, etc - CTE
+			$no_current_respondent = true;
 			for($i = 0; $i < count($respondents); $i++){
+				
 				if($respondents[$i]['current_responder']){
+					$no_current_respondent = false;
 					// Now we need to figure out if we just need to got to the next responder or switch questions
 					if(($i + 1) == count($respondents)){	// Change questions
 						// Get the next questions in the queue
@@ -738,8 +774,19 @@ class Forums extends Controller
 						
 					}
 				}
+				
+				
 			}
-			
+			if($no_current_respondent){
+				error_log("No current respondent");
+				// Get the next questions in the queue
+				$next_question_id = $this->question->get_next_question($event_id);
+				$data_array['question_status'] = "current";
+				$changed = $this->question->updateQuestion($next_question_id, $data_array);
+				// Select the first respondant since it resets upons getting a new question
+				$data['current_responder'] = '1';
+				$this->user->UpdateUserEventAssociation($respondents[0]['id'], $data);
+			}
 		}else{  // backward
 			
 		}
