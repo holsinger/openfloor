@@ -408,20 +408,22 @@ class Forums extends Controller
 	public function ajax_respondent_status($event_id, $respondent_id, $view = false)
 	{
 		$return_array = $this->user->GetRespondent($event_id, $respondent_id);
+		$this->question->event_id = $event_id;
+		$this->_currentQuestion($data);
+		error_log("Question ID: ".$data['questions'][0]['question_id']);
 		if(!$view){
 			$this->question->event_id = $event_id;
-			$this->_currentQuestion($data);
 			$json_array['current_responder'] = $return_array[0]['current_responder'];
 			$json_array['current_id'] = $data['questions'][0]['question_id'];
 			if($return_array[0]['status'] == 'responding'){
-				$json_array['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%'; 
+				$json_array['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id'], $data['questions'][0]['question_id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%'; 
 			}
 			echo json_encode($json_array);
 		}else{
 			$data['respondent'] = $return_array[0];
 			$data['event_id'] = $event_id;
 			$data['respondent_id'] = $respondent_id;
-			$data['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%';
+			$data['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id'], $data['questions'][0]['question_id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%';
 			$this->load->view('event/ajax_respondent_status.php', $data);
 		}
 	}
@@ -474,11 +476,16 @@ class Forums extends Controller
 	{
 		$this->vote->type = 'answer';
 		$respondent = $this->user->GetCurrentRespondentInEvent($event_id);
-		echo($respondent[0]['id']);
+		// Get Current Question
+		$this->question->event_id = $event_id;
+		$this->_currentQuestion($data);
+		
+		$this->vote->type = "answer";
+		echo($data['questions'][0]['question_id']);
 		if($type == "up"){
-			$this->vote->voteup($user_id, $respondent[0]['id']);
+			$this->vote->voteup($user_id, $respondent[0]['id'], $data['questions'][0]['question_id']);
 		}else{
-			$this->vote->votedown($user_id, $respondent[0]['id']);
+			$this->vote->votedown($user_id, $respondent[0]['id'], $data['questions'][0]['question_id']);
 		}
 		
 	}

@@ -28,7 +28,6 @@
 		<? $class = $class ? '' : ' class="alternate"' ?>
 		<script type="text/javascript" language="javascript">
 		// <![CDATA[
-
 			cpUpdater.current_question_id = <?= empty($current_question) ? 0 : $current_question[0]['question_id'] ?>;
 
 			// horizontal slider control

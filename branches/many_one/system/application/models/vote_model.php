@@ -11,7 +11,7 @@ class Vote_model extends Model
         parent::Model();
     }
 	
-	public function voteup($fk_user_id, $fk)
+	public function voteup($fk_user_id, $fk, $fk_2 = false)
 	{
 		switch($this->type)
 		{
@@ -25,7 +25,7 @@ class Vote_model extends Model
 				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_comment_id) VALUES (10, $fk_user_id, $fk)");
 				break;
 			case 'answer':
-				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_answer_respondent_id) VALUES (1, $fk_user_id, $fk)");
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_answer_respondent_id, fk_question_id) VALUES (1, $fk_user_id, $fk, $fk_2)");
 				break;
 			default:
 				exit(); // error
@@ -33,7 +33,7 @@ class Vote_model extends Model
 		}
 	}
 	
-	public function votedown($fk_user_id, $fk)
+	public function votedown($fk_user_id, $fk, $fk_2 = false)
 	{
 		switch($this->type)
 		{
@@ -47,7 +47,7 @@ class Vote_model extends Model
 				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_comment_id) VALUES (-10, $fk_user_id, $fk)");
 				break;
 			case 'answer':
-				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_answer_respondent_id) VALUES (-1, $fk_user_id, $fk)");
+				$this->db->query("INSERT INTO cn_votes (vote_value, fk_user_id, fk_answer_respondent_id, fk_question_id) VALUES (-1, $fk_user_id, $fk, $fk_2)");
 				break;
 			default:
 				exit(); // error
@@ -132,8 +132,8 @@ class Vote_model extends Model
 	 * @return void
 	 * @author Clark Endrizzi
 	 **/
-	public function RespondentUnansweredCount($respondent_id, $user_id = false)
-	{
+	public function RespondentUnansweredCount($respondent_id, $question_id, $user_id = false)
+	{                                 
 		if($user_id){
 			$optional_where = "fk_user_id = $user_id AND";
 		}
@@ -141,8 +141,9 @@ class Vote_model extends Model
 									FROM cn_votes
 									WHERE $optional_where
 										vote_id 
-										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_answer_respondent_id = $respondent_id AND vote_value > 0 GROUP BY fk_user_id)
+										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_answer_respondent_id = $respondent_id AND fk_question_id = $question_id AND vote_value > 0 GROUP BY fk_user_id)
 									")->row()->count;
+		
 	}
 	
 	public function ParticipantLastVote($user_id, $respondent_id)
