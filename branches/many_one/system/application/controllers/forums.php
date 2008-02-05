@@ -410,7 +410,6 @@ class Forums extends Controller
 		$return_array = $this->user->GetRespondent($event_id, $respondent_id);
 		$this->question->event_id = $event_id;
 		$this->_currentQuestion($data);
-		error_log("Question ID: ".$data['questions'][0]['question_id']);
 		if(!$view){
 			$this->question->event_id = $event_id;
 			$json_array['current_responder'] = $return_array[0]['current_responder'];

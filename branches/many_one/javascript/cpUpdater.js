@@ -220,9 +220,6 @@ cpUpdater.disableAJAX = function() {
 		
 		clearInterval(cpUpdater.current_question_updater_id);
 		cpUpdater.current_question_updater_id = false;
-		
-		// clearInterval(cpUpdater.active_participant_updater_id);
-		// cpUpdater.active_participant_updater_id = false;
 	}	
 }
 
@@ -246,11 +243,6 @@ cpUpdater.enableAJAX = function() {
 			cpUpdater.ajaxCurrentQuestion();
 			cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 		}
-		
-		// if(!cpUpdater.active_participant_updater_id){
-		// 			cpUpdater.ajaxParticipantPing();
-		// 			cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 100000);	// One Minute
-		// }
 	}	
 }
 
