@@ -415,14 +415,14 @@ class Forums extends Controller
 			$json_array['current_responder'] = $return_array[0]['current_responder'];
 			$json_array['current_id'] = $data['questions'][0]['question_id'];
 			if($return_array[0]['status'] == 'responding'){
-				$json_array['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id'], $data['questions'][0]['question_id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%'; 
-			}
+				$json_array['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id'], $data['questions'][0]['question_id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)); 
+			}			
 			echo json_encode($json_array);
 		}else{
 			$data['respondent'] = $return_array[0];
 			$data['event_id'] = $event_id;
 			$data['respondent_id'] = $respondent_id;
-			$data['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id'], $data['questions'][0]['question_id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100)).'%';
+			$data['unanswered_percent'] = (100 - ($this->vote->RespondentUnansweredCount($return_array[0]['id'], $data['questions'][0]['question_id']) / $this->participant->GetActiveParticipantsForEvent($event_id) * 100));
 			$this->load->view('event/ajax_respondent_status.php', $data);
 		}
 	}

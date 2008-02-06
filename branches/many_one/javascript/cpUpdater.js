@@ -140,9 +140,22 @@ cpUpdater.ajaxRespondentStatus = function(){
 				last_respondent_current = response.current_responder;
 				last_respondent_question_id = response.current_id;
 			}
+			if(parseInt(response.unanswered_percent) >= 75){
+				$('respondent_unanswered_meter').addClassName('overall-reaction-meter-green');
+				$('respondent_unanswered_meter').removeClassName('overall-reaction-meter-yellow');
+				$('respondent_unanswered_meter').removeClassName('overall-reaction-meter');
+			}else if(parseInt(response.unanswered_percent) >= 50){
+				$('respondent_unanswered_meter').addClassName('overall-reaction-meter-yellow');
+				$('respondent_unanswered_meter').removeClassName('overall-reaction-meter');
+				$('respondent_unanswered_meter').removeClassName('overall-reaction-meter-green');
+			}else{
+				$('respondent_unanswered_meter').addClassName('overall-reaction-meter');
+				$('respondent_unanswered_meter').removeClassName('overall-reaction-meter-yellow');
+				$('respondent_unanswered_meter').removeClassName('overall-reaction-meter-green');
+			}
 			if(response.unanswered_percent){
 				$('respondent_unanswered_meter').setStyle({
-					width: response.unanswered_percent
+					width: response.unanswered_percent+"%"
 				});
 			}
 	  	}

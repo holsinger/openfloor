@@ -354,11 +354,27 @@ a {
 	background-color: #f04a54;
 	background: url(../images/ucp/score_bg.png); 
 }
+.overall-reaction-meter-yellow {
+	background-color: #f04a54;
+	background: url(../images/ucp/score_bg_yellow.png); 
+}
+.overall-reaction-meter-green {
+	background-color: #f04a54;
+	background: url(../images/ucp/score_bg_green.png); 
+}
 
 .overall-reaction-meter-total {
 	background-color: #caedff;
 	border: 1px solid #f04a54;
 	background: url(../images/ucp/score_bg_outer.png); 
+	margin: 2px;
+	text-align: left;
+}
+
+.overall-reaction-meter-respondent {
+	background-color: #caedff;
+	border: 1px solid #CCCCCC;
+	background: url(../images/ucp/score_bg_grey.png); 
 	margin: 2px;
 	text-align: left;
 }
