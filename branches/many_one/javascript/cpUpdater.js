@@ -20,16 +20,11 @@ cpUpdater.sliders = new Object;
 ajaxOn = true;
 var sort = 'pending';
 
-cpUpdater.cpUpdateOnce = function() {
-	new Ajax.Updater('current_question', site_url + 'forums/cp/' + event_name + '/current_question');
-}
-
 cpUpdater.vote = function(url) {
 	my_loading_reminder.show();
 	new Ajax.Request(url, {
 		onSuccess: function(transport) {
 			my_loading_reminder.hide();
-			cpUpdater.cpUpdateOnce();
 			lazy_loader.refreshView();
 		}
 	});
