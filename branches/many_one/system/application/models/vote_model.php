@@ -141,7 +141,8 @@ class Vote_model extends Model
 									FROM cn_votes
 									WHERE $optional_where
 										vote_id 
-										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_answer_respondent_id = $respondent_id AND fk_question_id = $question_id AND vote_value > 0 GROUP BY fk_user_id)
+										IN (SELECT max(vote_id) FROM cn_votes WHERE fk_answer_respondent_id = $respondent_id AND fk_question_id = $question_id GROUP BY fk_user_id)
+										AND vote_value > 0
 									")->row()->count;
 		
 	}
