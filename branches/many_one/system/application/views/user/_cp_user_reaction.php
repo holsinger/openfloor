@@ -27,18 +27,13 @@
 		</tr>
 		<? $class = $class ? '' : ' class="alternate"' ?>
 		<script type="text/javascript" language="javascript">
-		// <![CDATA[
 			cpUpdater.current_question_id = <?= empty($current_question) ? 0 : $current_question[0]['question_id'] ?>;
-
 			// horizontal slider control
 			slider = new Control.Slider('handle-img-<?=$v['user_id']?>', 'track<?=$v['user_id']?>', {
 				range:$R(0,10),
 				values:[0,1,2,3,4,5,6,7,8,9,10]
 			});
 			cpUpdater.sliders[<?=$v['user_id']?>] = slider;
-			
-			// On slide events, etc, are set using an ajax call
-		// ]]>
 		</script>	
 	<? endforeach; ?>
 	<tr>

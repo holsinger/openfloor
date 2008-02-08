@@ -91,8 +91,13 @@ cpUpdater.ajaxCurrentQuestion = function(speaker_id){
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name, {
 		onSuccess: function(transport) {
 			if(transport.responseText != cpUpdater.current_question_last_value){
-				cpUpdater.ajaxUpdateCurrentQuestion(transport.responseText);
-				cpUpdater.current_question_last_value = transport.responseText;
+				if(transport.responseText != 'none'){
+					cpUpdater.ajaxUpdateCurrentQuestion(transport.responseText);
+					cpUpdater.current_question_last_value = transport.responseText;
+				}else{
+					$('current_question').innerHTML = "&nbsp;Waiting for a current question.";
+				}
+				
 			}
 	  	}
 	});
@@ -348,7 +353,7 @@ cpUpdater.submitComment = function(question_id, event_name, question_name, paren
 			'ajax'				: 'true'
 		},
 		onSuccess: function(transport) {
-			new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
+			new Ajax.Updater('cp_tab_body_' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
 				parameters: {
 					'ajax' : 'true'
 				}

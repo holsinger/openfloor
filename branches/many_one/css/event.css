@@ -6,6 +6,13 @@
 	margin: 4px 5px 0;
 }
 
+.cp_info_title {
+	float:left;
+	left:4px;
+	top:2px;
+	padding: 4px;
+}
+
 .track-left {
 	position: absolute;
 	width: 5px;
@@ -15,6 +22,8 @@
 
 .track {
 	background: transparent url(../images/slider-images-track-right.png) no-repeat top right;
+	width: 130px;
+	height: 9px;
 }
 
 .cp-sort-link {
@@ -445,4 +454,45 @@ textarea {
 #user_reaction_ajax {
 	padding-top: 15px;
 	text-align: center;
+}
+/* =============== */
+/* = Subcomments = */
+/* =============== */
+.sc_container
+{
+background-color: #f0faff;
+}
+
+.sc_leftnav
+{
+float: left;
+width: 57px;
+}
+
+.sc_content
+{
+margin-left: 57px;
+background-color:#f0faff;
+}
+
+.sc_header {
+	height:29px;
+	background-color:#c6e5f6;
+}
+.sc_header_can {
+	height:29px;
+	background-color: #D2D2D2;
+}
+.thumb_block, .num_votes {
+	float: right;
+}
+.thumb_block {
+	background-color:#0173ba;
+	padding:5px;
+}
+.num_votes {
+	margin-top:3px;
+	padding:4px;
+	height:15px;
+	background-color:#ffffff;
 }

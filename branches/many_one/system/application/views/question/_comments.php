@@ -10,7 +10,7 @@
 	</div>
 <? endif; ?>
 <br/>
-<br/>
+<br/><br />
 <div id="comments">
 	<?=isset($comments_body)?$comments_body.'<br/>':''?>
 </div>
@@ -52,10 +52,10 @@ if($this->userauth->isUser()) {
 }
 echo $comments; ?>
 <? if(isset($ajax)): ?>
-	<div class="close">
+	<div class="close" style="margin-bottom: 10px;">
 		<a class="link" onClick="cpUpdater.view_tab_section('comments', <?=$question_id?>);">
 			<img src="./images/many_one/button_close_x.png" border="0" />
 		</a>
 	</div>
-	<br /><br /><br />
+	<br /><br />
 <? endif; ?>

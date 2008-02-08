@@ -338,9 +338,12 @@ class Forums extends Controller
 			$data['event_id'] = $event_id;
 			$this->load->view('user/_cp_question_pod.php', $data);
 		}else{
-			
-			echo($data['questions'][0]['question_id']);
-			
+			if(count($data['questions'])){
+				echo($data['questions'][0]['question_id']);
+			}else{
+				echo('none');
+			}
+				
 		}
 	}
 

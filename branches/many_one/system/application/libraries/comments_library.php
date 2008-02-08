@@ -76,7 +76,7 @@ class Comments_library
 		'<div class="sc_container">
 			<div class="c_content">
 				<div class="'.$comment_class.'">
-					<div class="info">
+					<div class="cp_info_title">
 						<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
 						.anchor('user/profile/'.$info['user_name'],$user_name).
 						' ('.$time_diff.' ago)'.'
@@ -92,7 +92,7 @@ class Comments_library
 						<span class="sc_votes">'.$votes.' VOTES</span>
 					</div>		
 				</div>
-				<p>'.$info['comment'].'</p>
+				<p style="padding: 5px;">'.$info['comment'].'</p>
 			</div>
 		</div>';
 		
@@ -144,7 +144,7 @@ class Comments_library
 					</div>
 					<div class="sc_content">
 						<div class="sc_header">
-							<div class="info">
+							<div class="cp_info_title">
 								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16"/>&nbsp;&nbsp;by '
 								.anchor('user/profile/'.$subcomment['user_name'],$user_name).
 								' ('.$time_diff.' ago)'.'
@@ -157,7 +157,7 @@ class Comments_library
 								<span class="sc_votes">'.$votes.' VOTES</span>
 							</div>		
 						</div>
-						<p>'.$subcomment['comment'].'</p>
+						<p style="padding: 5px;">'.$subcomment['comment'].'</p>
 					</div>
 				</div>';
 			}
