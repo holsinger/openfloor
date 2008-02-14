@@ -250,6 +250,92 @@ class Forums extends Controller
 	}
 	
 	/**
+<<<<<<< .mine
+	 * This is a widget version of the queue
+	 * This is the most important function.  Shows the forums.
+	 *
+	 * @return void
+	 * @author Clark Endrizzi, Rob S (started it, structure still follows it a bit) Widgetized by James Kleinschnitz
+	 **/
+	public function widget($event, $ajax = null, $option_1 = null, $option_2 = null)
+	{
+		$data['rightpods'] = 'suppress';	// Make it so the right column won't show up
+		$data['event'] = $event;
+		$data['event_id'] = $this->event->get_id_from_url($event);
+		if(!$data['event_id']) exit();
+		
+		
+		$data["event_data"] = $this->event->get_event($data['event_id']);
+		
+		// The respondent format and where we can figure out 
+		$data['user_id'] = $this->userauth->user_id;
+		$data['is_respondent'] = false;
+		$temp_participants = $this->event->getCansInEvent($data['event_id']);
+		$temp_count = 0;
+		foreach($temp_participants as $v){
+			$data['event_data']['participants'] .= $this->candidate->linkToProfile($v);
+			if($temp_count < (count($temp_participants) - 1) ){
+				$data['event_data']['participants'] .= ', ';
+			}
+			$temp_count++;
+			// Check to see if this user is a respondent
+			if($v == $data['user_id']){
+				$data['is_respondent'] = true;
+			}
+		}
+
+		$this->event->id = $data['event_id'];
+		if($data['event_data']["event_finished"]){
+			$data['post_event_stream_high'] = $data['event_data']['post_event_stream_high'] ? $data['event_data']['post_event_stream_high'] : '<p><b>The footage for this past event is not yet available.<br /><br />Please check back at a later time.</b></p>';
+		}else{
+			$data['stream_high'] = $this->event->streaming() ? $this->event->get('stream_high') : '<p><b>This event is not live yet.</p><b>You will need to refresh your browser when<br/>the event starts for the feed to activate.</b></p>';
+		}
+		
+		$this->question->event_id = $data['event_id'];		
+		// ==========
+		// = output =
+		// ==========
+		if(isset($ajax)) // AJAX
+		{
+			switch($ajax)
+			{
+			case 'upcoming_questions':
+				if(isset($option_1)) $data['sort'] = $option_1;
+				if(isset($option_2)) $data['section'] = $option_2;
+				$this->_upcomingQuestions($data);
+				$this->load->view('user/_cp_question_pod.php', $data);
+				break;
+			case 'reaction':
+				$this->_currentQuestion($data);
+				$this->_allReactions($data);
+				$this->load->view('user/_cp_js_update', $data);
+				break;
+			case 'your_reaction':
+				$this->_currentQuestion($data);
+				$data['user_id'] = $option_1;
+				$this->_yourReaction($data);
+				$this->load->view('user/_userReactSlider.php', $data);
+				break;
+			case 'upcoming_questions_count':
+				if(isset($option_1)) $data['sort'] = $option_1;
+				echo $this->_upcoming_questions_count($data);
+				break;
+			default:
+				show_error('Invalid AJAX argument.');
+				break;
+			}
+		} else { // NO AJAX
+			$this->_currentQuestion($data);
+			$this->_allReactions($data);
+			$this->_submitQuestion($data);
+			
+			$data['breadcrumb'] = $this->global ? array($this->cms->get_cms_text('', "home_name") => $this->config->site_url()) : array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), $this->cms->get_cms_text('', "forums_name")=>'event/',$data["event_data"]['event_name']=>'');
+			$this->load->view('event/widget', $data);
+		}		
+	}
+	
+	/**
+=======
 	 * Changes the status of an event.  
 	 *
 	 *  There are three different event state modes.  These modes are controlled by two different fields for each event:  event_finished and streaming.
@@ -283,6 +369,7 @@ class Forums extends Controller
 	}
 	
 	/**
+>>>>>>> .r1339
 	 * Gets information for a question to be viewed on the information tab of a question.
 	 *
 	 * @return void
