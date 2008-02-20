@@ -2,7 +2,7 @@
 
 class Url extends Controller {
 
-	private $debug = true;
+	private $debug = false;
 
 	function __construct()
 	{
