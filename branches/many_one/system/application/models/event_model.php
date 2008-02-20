@@ -147,7 +147,6 @@ class Event_model extends Model
 	{
 		return $this->db->select($field)->where('event_id', $this->id)->get('cn_events')->row()->$field;
 	}
-
 	public function streaming()
 	{
 		if(!isset($this->id)) exit();

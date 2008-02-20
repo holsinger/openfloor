@@ -795,7 +795,6 @@ class Event extends Controller
 		
 		#determine num tabs based on config settings
 		if ($this->config->item('access_type')=='public') {
-			$tab = 1;
 			$num_tabs = 2;
 		}#end if public set by default
 		
@@ -812,7 +811,6 @@ class Event extends Controller
 			# do not allow access to this tab if config sets a default of public
 			if ($this->config->item('access_type')=='public') {
 				$tab = 1;
-				$num_tabs = 2;
 			}#end if public set by default
 		}elseif($tab == 4){
 			
