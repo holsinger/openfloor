@@ -49,6 +49,9 @@ $this->load->view('view_layout/view_head_setup.php',$data);
     				<li id="nav_170" class="selected ">
       					<a class="selected " href="<?=$this->config->item('m1_url')?>/communities/groups/profile/1078/?topic=8774">Portal Home</a>
     				</li>
+					<li class="selected" id="nav_176">
+					    <a class="selected" href="<?= $this->config->site_url();?>">OpenFloor Events</a>
+                    </li>
     				<li id="nav_174">
       					<a href="<?=$this->config->item('m1_url')?>/communities/groups/members/1078/?topic=8774">Members</a>
 
