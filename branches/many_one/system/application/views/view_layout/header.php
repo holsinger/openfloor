@@ -33,7 +33,16 @@ $this->load->view('view_layout/view_head_setup.php',$data);
 				<span class="last">&gt;</span>
 				Northwest
 			</div>
-			<div id="dashboard" class="clearfix"><ul xmlns="" class="loginmenu"><li><a href="<?=$this->config->item('m1_url')?>/register/">Join Now</a> |</li><li><a href="<?=$this->config->item('m1_url')?>/login/">Login</a></li></ul></div>
+			<div id="dashboard" class="clearfix">
+				<ul xmlns="" class="loginmenu">
+					<? /*
+					<li><a href="<?=$this->config->item('m1_url')?>/register/">Join Now</a> |</li>
+					<li><a href="<?=$this->config->item('m1_url')?>/login/">Login</a></li>
+					*/ ?>
+					<li><a href="<?= $this->config->site_url();?>create_account/">Join Now</a> |</li>
+					<li><a href="<?= $this->config->site_url();?>login/">Login</a></li>					
+				</ul>
+			</div>
 			<div class="box main-logo-wrapper" id="zmid_21">
   				<div id="logo" class="portal-scope user-logo-image">
 				    <a href="/communities/groups/profile/1078/">
