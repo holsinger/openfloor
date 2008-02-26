@@ -31,7 +31,7 @@ $data['sub_title'] = $page_title;
 								<?
 								$atts = array('width' => '372',	'height' => '280', 'scrollbars' => 'no', 'status' => 'no', 'resizable' => 'no',	'screenx' => '0', 'screeny' => '0');
 								?>
-								<?=anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'View Live Feed', $atts)?>
+								<?= /*anchor_popup('forums/stream_high/' . url_title($array['event_name']), 'View Live Feed', $atts)*/?>
 							</div>
 						</td>
 						<td valign="top">
