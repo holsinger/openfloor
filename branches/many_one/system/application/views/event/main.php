@@ -65,7 +65,7 @@ dependency overall_reaction.css
 		</div>
 
 		<div id="current_question">loading...</div>
-		<? if($is_respondent): ?>
+		<? if($is_respondent) { ?>
 			<table class="feed-reaction-panel">
 				<tr>
 					<td style="width: 50%">
@@ -81,12 +81,42 @@ dependency overall_reaction.css
 					</td>
 				</tr>
 			</table>
-		<? else: ?>
+			<? } else if($this->userauth->isEventAdmin($event_data['event_id'])) { ?>
+				<table class="feed-reaction-panel">
+					<tr>
+						<td style="width: 50%">
+							<br/>
+							<div>Video Broadcaster</div>
+							<div id="broadcaster_div">
+								<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="360" height="290" id="broadcast" align="middle">
+								<param name="allowScriptAccess" value="sameDomain" />
+								<param name="movie" value="./flash/broadcast.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="./flash/broadcast.swf" quality="high" bgcolor="#ffffff" width="360" height="290" name="videochat" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								</object>
+							</div>
+						</td>
+						<td>
+							<div id="user-reaction">
+								The following shows the order of the respondents and which respondent is currently on tap to respond.
+								<? $this->load->view('event/respondent_reaction'); ?>
+							</div>
+						</td>
+					</tr>
+				</table>
+		<? } else { ?>
 			<table class="feed-reaction-panel">
 				<tr>
 					<td style="width: 50%">
 						<div id="video_container">
-							<?= $stream_high ?>
+							<?
+							if (strlen($stream_high)>1) {
+								echo $stream_high;
+							} else { ?>
+								<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="410" height="345" id="player" align="middle">
+								<param name="allowScriptAccess" value="sameDomain" />
+								<param name="allowFullScreen" value="true" />
+								<param name="movie" value="./flash/player.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" />	<embed src="./flash/player.swf" quality="high" bgcolor="#000000" width="410" height="345" name="player" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								</object>
+						   <? } ?>
 						</div>
 					</td>
 					<td>
@@ -97,7 +127,7 @@ dependency overall_reaction.css
 					</td>
 				</tr>
 			</table>
-		<? endif; ?>
+		<? } ?>
 	<? elseif($event_data["event_finished"]): ?>
 		<div class="section">
 			<h3>Event Review:</h3>
