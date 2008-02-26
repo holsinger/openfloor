@@ -89,8 +89,10 @@ dependency overall_reaction.css
 							<div>Video Broadcaster</div>
 							<div id="broadcaster_div">
 								<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="360" height="290" id="broadcast" align="middle">
+								<param name="FlashVars" value="server_url=stream.runpolitics.com/live" />
+								<param name="FlashVars" value="stream_name=stream<?= $event_data['event_id'];?>" />
 								<param name="allowScriptAccess" value="sameDomain" />
-								<param name="movie" value="./flash/broadcast.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="./flash/broadcast.swf" quality="high" bgcolor="#ffffff" width="360" height="290" name="videochat" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								<param name="movie" value="./flash/broadcast.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="./flash/broadcast.swf" quality="high" bgcolor="#ffffff" width="360" height="290" name="videochat" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="server_url=stream.runpolitics.com/live&stream_name=stream<?= $event_data['event_id'];?>"/>
 								</object>
 							</div>
 						</td>
@@ -114,7 +116,9 @@ dependency overall_reaction.css
 								<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="410" height="345" id="player" align="middle">
 								<param name="allowScriptAccess" value="sameDomain" />
 								<param name="allowFullScreen" value="true" />
-								<param name="movie" value="./flash/player.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" />	<embed src="./flash/player.swf" quality="high" bgcolor="#000000" width="410" height="345" name="player" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
+								<param name="FlashVars" value="server_url=stream.runpolitics.com/live" />
+								<param name="FlashVars" value="stream_name=stream<?= $event_data['event_id'];?>" />
+								<param name="movie" value="./flash/player.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" />	<embed src="./flash/player.swf" quality="high" bgcolor="#000000" width="410" height="345" name="player" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="server_url=stream.runpolitics.com/live&stream_name=stream<?= $event_data['event_id'];?>"/>
 								</object>
 						   <? } ?>
 						</div>
