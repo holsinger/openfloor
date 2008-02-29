@@ -20,8 +20,12 @@ dependency overall_reaction.css
 -->
 <div id="overlay" onclick="hideBox()" style="display:none"></div>
 <div id="hijax" style="display:none"></div>
+<div id="ask_question_div" class="ask_question" onclick="cpUpdater.toggleNewQuestion();new Effect.ScrollTo($('cp-ask-question'));">
+	<h2><?=$event_data['event_name'];?></h2>
+	&nbsp;<a>CLICK TO ASK A QUESTION</a>
+</div>
+<br/><br/><br/><br/><br/><br/>
 <div id='top_lock'>
-<h2 class='widget_section'><?=$event_data['event_name'];?></h2>
 	<?/*?><div id="video_container">
 		<?= $stream_high ?>
 	</div>
@@ -186,14 +190,17 @@ dependency overall_reaction.css
 	<div id="upcoming_questions"></div>	
 	</div> <!-- end body_lock -->
 	<div id='bottom_lock' style="margin-top: 20px; text-align: center;">
-			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.png" border="0" /></a>
+			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.gif" border="0" /></a>
 	</div>
 </div>
 
 
 <div id="loading_reminder_div" class="loading_reminder">&nbsp;<img style="padding-top: 2px;" src="images/many_one/ajax-loader.gif"></div>
 <script type="text/javascript" charset="utf-8">
-	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
+	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div','left');
+	
+	var ask_question = new Control.LoadingReminder('ask_question_div','right');
+	ask_question.show();
 	
 	function SwithDescription(){
 		if($('event_description_full').getStyle('display') == 'none'){

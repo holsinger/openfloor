@@ -7,8 +7,9 @@ if(!Control) var Control = {};
 Control.LoadingReminder = Class.create();
 
 Control.LoadingReminder.prototype = {
-	initialize: function (reminder_elem_id ,options){
+	initialize: function (reminder_elem_id ,position,options){
 		this.reminder_elem_id = reminder_elem_id;
+		this.position = position;
 		this.fade_effect = "";
 		this.fading = false;
 		
@@ -23,7 +24,8 @@ Control.LoadingReminder.prototype = {
 		}else{
 			var pop_pos = 'absolute';
 		}
-		$(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', top : '0px', left : '0px' });
+		if (this.position == 'left') $(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', top : '0px', left : '0px' });
+		if (this.position == 'right') $(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', top : '0px', right : '0px' });
 		Event.observe($(this.reminder_elem_id), 'mousedown', this.popup_elem_event);
 		
 		// IE 6 support, now it gets ugly

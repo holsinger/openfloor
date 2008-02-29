@@ -193,13 +193,17 @@ dependency overall_reaction.css
 	<div id="error_div"></div>
 	<div id="upcoming_questions"></div>	
 	<div style="margin-top: 20px; text-align: center;">
-			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.png" border="0" /></a>
+			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.gif" border="0" /></a>
 	</div>
 </div>
 
 <div id="loading_reminder_div" class="loading_reminder">&nbsp;<img style="padding-top: 2px;" src="images/many_one/ajax-loader.gif"></div>
+<div id="ask_question_div" class="ask_question" onclick="cpUpdater.toggleNewQuestion();scroll(0,75);">&nbsp;</div>
 <script type="text/javascript" charset="utf-8">
-	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div');
+	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div','left');
+	
+	var ask_question = new Control.LoadingReminder('ask_question_div','right');
+	ask_question.show();
 	
 	function SwithDescription(){
 		if($('event_description_full').getStyle('display') == 'none'){

@@ -20,6 +20,7 @@
 	CSS DEPENDENCIES
 	#dependency many_one_globalReset.css
 	#dependency many_one_global.css
+	#dependency lightview.css
 	
 	
 	JAVASCRIPT DEPENDENCIES
@@ -27,12 +28,15 @@
 	#dependency ajaxVideo.js
 	#dependency queueUpdater.js
 	#dependency clock.js
-	dependency effects.js
+	#dependency effects.js
 	#dependency userWindow.js
+	#dependency lightview.js
 	-->
 	
-	<script src="./javascript/prototype.js" type="text/javascript"></script>
-	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>	
+	<?/*<script src="./javascript/prototype.js" type="text/javascript"></script>
+	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>*/?>	
+	<script src="./javascript/protoculous.js" type="text/javascript"></script>
+	
 	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
 	<!-- DO NOT REMOVE THIS LINE -->
 	<!-- #dependencies -->
