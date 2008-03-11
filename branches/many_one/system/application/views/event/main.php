@@ -10,7 +10,7 @@ $data['sub_title'] = $event_data['event_name'];
 $this->load->view('view_layout/header.php', $data);
 ?>
 <!-- 
-#dependency event.css
+#dependency <?=$this->config->item('custom_theme');?>_event.css
 #dependency userWindow.css
 dependency overall_reaction.css
 
@@ -18,6 +18,8 @@ dependency overall_reaction.css
 #dependency lazy_loader.js
 #dependency loading_reminder.js
 -->
+<div><h1><?=$event_data['event_name'];?></h1></div> 
+<br/>
 <? if ($this->userauth->isEventAdmin($event_data['event_id'])): ?>
 	<div><b>Administration:</b></div> 
 	<? if(!$event_data['streaming'] && !$event_data["event_finished"]): ?>
@@ -51,7 +53,7 @@ dependency overall_reaction.css
 	<div><br/><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
 	<br />
 	<? if(!$event_data["event_finished"] && !$is_respondent): ?>
-		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : 'window.location=\''.$this->config->item('m1_url').'/login/\';' ?>"/></div>
+		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" class="link" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : 'showBox(\'login\');'?>"/></div>
 		<div id="cp-ask-question" style="display:none; text-align: center; margin-bottom: 5px;">
 			<div style="width: 500px; text-align: left; margin-left: 278px; background-color: #F2F2F2; padding: 5px;">
 			<? $this->load->view('question/_submit_question_form') ?>
@@ -74,9 +76,10 @@ dependency overall_reaction.css
 						</div>
 					</td>
 					<td>
+						<br/>
 						<div id="user-reaction">
-							The following shows the order of the respondents and which respondent is currently on tap to respond.
-							<? $this->load->view('event/respondent_reaction'); ?>
+							<?$text['msg'] = "The following shows the order of the respondents and which respondent is currently on tap to respond.";?>
+							<? $this->load->view('event/respondent_reaction',$text); ?>
 						</div>
 					</td>
 				</tr>
@@ -86,20 +89,22 @@ dependency overall_reaction.css
 					<tr>
 						<td style="width: 50%">
 							<br/>
-							<div>Video Broadcaster</div>
+							<div class="sectionSmall"><h3>Video Broadcaster</h3></div>
 							<div id="broadcaster_div">
-								<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="360" height="290" id="broadcast" align="middle">
+							<?/*	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0" width="360" height="290" id="broadcast" align="middle">
 								<param name="FlashVars" value="server_url=stream.runpolitics.com/live" />
 								<param name="FlashVars" value="stream_name=stream<?= $event_data['event_id'];?>" />
 								<param name="allowScriptAccess" value="sameDomain" />
-								<param name="movie" value="./flash/broadcast.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" /><embed src="./flash/broadcast.swf" quality="high" bgcolor="#ffffff" width="360" height="290" name="videochat" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="server_url=stream.runpolitics.com/live&stream_name=stream<?= $event_data['event_id'];?>"/>
-								</object>
+								<param name="movie" value="./flash/broadcast.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#ffffff" />*/?>
+								<embed src="./flash/broadcast.swf" quality="high" bgcolor="#ffffff" width="360" height="290" name="videochat" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="server_url=localhost/videochat&stream_name=stream<?= $event_data['event_id'];?>"/>
+							<?/*	</object>*/?>
 							</div>
 						</td>
 						<td>
+							<br/>
 							<div id="user-reaction">
-								The following shows the order of the respondents and which respondent is currently on tap to respond.
-								<? $this->load->view('event/respondent_reaction'); ?>
+								<? $text['msg'] = "The following shows the order of the respondents and which respondent is currently on tap to respond.";?>
+								<? $this->load->view('event/respondent_reaction',$text); ?>
 							</div>
 						</td>
 					</tr>
@@ -108,18 +113,21 @@ dependency overall_reaction.css
 			<table class="feed-reaction-panel">
 				<tr>
 					<td style="width: 50%">
+						<br/>
+						<div class="sectionSmall"><h3>Video Player</h3></div>
 						<div id="video_container">
 							<?
 							if (strlen($stream_high)>1) {
 								echo $stream_high;
 							} else { ?>
-								<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="410" height="345" id="player" align="middle">
+							<? /*	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0" width="410" height="345" id="player" align="middle">
 								<param name="allowScriptAccess" value="sameDomain" />
 								<param name="allowFullScreen" value="true" />
 								<param name="FlashVars" value="server_url=stream.runpolitics.com/live" />
 								<param name="FlashVars" value="stream_name=stream<?= $event_data['event_id'];?>" />
-								<param name="movie" value="./flash/player.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" />	<embed src="./flash/player.swf" quality="high" bgcolor="#000000" width="410" height="345" name="player" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="server_url=stream.runpolitics.com/live&stream_name=stream<?= $event_data['event_id'];?>"/>
-								</object>
+								<param name="movie" value="./flash/player.swf" /><param name="quality" value="high" /><param name="bgcolor" value="#000000" />	*/?>
+								<embed src="./flash/player.swf" quality="high" bgcolor="#000000" width="410" height="345" name="player" align="middle" allowScriptAccess="sameDomain" allowFullScreen="true" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" FlashVars="server_url=localhost/videochat&stream_name=stream<?= $event_data['event_id'];?>"/>
+							<?/*	</object> */?>
 						   <? } ?>
 						</div>
 					</td>
@@ -140,18 +148,15 @@ dependency overall_reaction.css
 			<tr>
 				<td>
 					<div id="video_container">
-						Click play to watch the events entire footage or you can watch the answer to each question by clicking on the "answer" tab below each question.
+						<p>Click play to watch the events entire footage or you can watch the answer to each question by clicking on the "answer" tab below each question.</p>
 						<?= $post_event_stream_high ?>
 					</div>
 				</td>
 				<td>
 					<div id="user-reaction">
-						This shows aggregate user reaction for each candidate over the entire event.
 						<table>
-							<tr>
-								<th class="candidate">&nbsp;&nbsp;Candidate</th>
-								<th class="reaction">&nbsp;&nbsp;Reaction</th>
-							</tr>		
+							<div class="sectionSmall"><h3>Candidate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overall Reaction:</h3></div>			
+							<p>This shows aggregate user reaction for each candidate over the entire event.</p>
 							<? $class = '' ?>
 							<? foreach($candidates as $v): ?>
 								<tr <?=$class?>>
@@ -192,18 +197,11 @@ dependency overall_reaction.css
 	</div>
 	<div id="error_div"></div>
 	<div id="upcoming_questions"></div>	
-	<div style="margin-top: 20px; text-align: center;">
-			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.gif" border="0" /></a>
-	</div>
 </div>
 
-<div id="loading_reminder_div" class="loading_reminder">&nbsp;<img style="padding-top: 2px;" src="images/many_one/ajax-loader.gif"></div>
-<div id="ask_question_div" class="ask_question" onclick="cpUpdater.toggleNewQuestion();scroll(0,75);">&nbsp;</div>
+<div id="loading_reminder_div" class="loading_reminder"><img style="padding-top: 2px;" src="images/openfloor/ajax-loader.gif">LOADING</div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div','left');
-	
-	var ask_question = new Control.LoadingReminder('ask_question_div','right');
-	ask_question.show();
 	
 	function SwithDescription(){
 		if($('event_description_full').getStyle('display') == 'none'){

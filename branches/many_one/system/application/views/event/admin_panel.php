@@ -9,6 +9,7 @@ $this->load->view('view_layout/header.php', $data);
 -->
 <div id="content_div">
 	<div id="section">
+		<a href="forums/cp/<?=$event_url_name?>">&lt; back to event</a>
 		<ul class="tabnav">
 			<li id="dyn_tab_1"><span id="dyn_text_1">General Information</span></li>
 			<li id="dyn_tab_2"><span id="dyn_text_2">Speakers</span></li>

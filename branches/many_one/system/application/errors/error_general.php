@@ -28,7 +28,7 @@ margin: 			0 0 4px 0;
 </head>
 <body>
 	<div id="content">
-	<img src='http://www.runpolitics.com/images/logo.png'>
+	<img src='http://www.openfloortech.com/images/logo.png'>
 	<br /><br />
 	<br /><br />
 	<h1>Oops! We should fix this!</h1>

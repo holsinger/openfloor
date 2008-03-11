@@ -41,6 +41,7 @@ a {
 a:hover {
 	text-decoration: underline;
 }
+.link{color:#F04A54;cursor:pointer;}
 
 /* Text
 ----------------------------------------------------------------------*/

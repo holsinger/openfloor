@@ -175,12 +175,19 @@ class Forums extends Controller
 	public function cp($event, $ajax = null, $option_1 = null, $option_2 = null)
 	{
 		$data['rightpods'] = 'suppress';	// Make it so the right column won't show up
-		$data['event'] = $event;
-		$data['event_id'] = $this->event->get_id_from_url($event);
-		if(!$data['event_id']) exit();
 		
+		//use url or id to get event data
+		if (is_numeric($event)) {
+			$data['event_id'] = $event;
+			$data["event_data"] = $this->event->get_event($data['event_id']);
+			$data['event'] = $data["event_data"]['event_url_name'];
+		} else {
+			$data['event'] = $event;
+			$data['event_id'] = $this->event->get_id_from_url($event);
+			$data["event_data"] = $this->event->get_event($data['event_id']);
+		} 
+		if(!$data['event_id']) exit();		
 		
-		$data["event_data"] = $this->event->get_event($data['event_id']);
 		
 		// The respondent format and where we can figure out 
 		$data['user_id'] = $this->userauth->user_id;
@@ -250,7 +257,6 @@ class Forums extends Controller
 	}
 	
 	/**
-<<<<<<< .mine
 	 * This is a widget version of the queue
 	 * This is the most important function.  Shows the forums.
 	 *
@@ -335,7 +341,6 @@ class Forums extends Controller
 	}
 	
 	/**
-=======
 	 * Changes the status of an event.  
 	 *
 	 *  There are three different event state modes.  These modes are controlled by two different fields for each event:  event_finished and streaming.
@@ -369,7 +374,6 @@ class Forums extends Controller
 	}
 	
 	/**
->>>>>>> .r1339
 	 * Gets information for a question to be viewed on the information tab of a question.
 	 *
 	 * @return void

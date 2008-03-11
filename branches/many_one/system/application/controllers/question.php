@@ -242,6 +242,7 @@ class Question extends Controller
 		$comments_library = new Comments_library();
 		$comments_library->ajax = isset($_POST['ajax']);
 		$comments_library->sort = $sort;
+		$comments_library->custom_theme = (strlen($this->config->item('custom_theme'))>1) ? $this->config->item('custom_theme').'/':'';
 		$comments_library->type = $data['event_type'];
 		$data['comments_body'] = $comments_library->createComments($result[0]);
 		

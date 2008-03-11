@@ -30,7 +30,7 @@ dependency overall_reaction.css
 		<?= $stream_high ?>
 	</div>
 	<? if(!$event_data["event_finished"] && !$is_respondent): ?>
-		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : $this->config->item('m1_url').'/login/' ?>"/></div>
+		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : $this->config->item('custom_url').'/login/' ?>"/></div>
 	<? endif; ?>*/?>
 
 	<div id="cp-ask-question" style="display:none; text-align: center; margin-bottom: 5px;">

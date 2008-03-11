@@ -1,9 +1,7 @@
+
+<div class="sectionSmall"><h3>Respondents</h3></div>
+<p><?=$msg;?></p>
 <table>
-	<tr>
-		<th class="sp_arrow"></th>
-		<th class="candidate">&nbsp;&nbsp;Respondents</th>
-		<th class="reaction">&nbsp;&nbsp;</th>
-	</tr>
 	<? $class = '' ?>
 	<? foreach($candidates as $v): ?>
 		<tr<?=$class?>>

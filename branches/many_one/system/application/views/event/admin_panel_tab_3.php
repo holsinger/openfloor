@@ -15,3 +15,4 @@
 <?endif;?>
 <br />
 <input type="button" class="button" onclick="window.location=site_url+'event/create_event_three/<?=$event_id?>/edit';" value="Edit Information" />
+<input type="button" name="back_but" value="Back to Event" id="back_but" onclick="window.location=site_url+'forums/cp/<?=$event_url_name?>';" class="button">

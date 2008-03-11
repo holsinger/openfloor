@@ -2,9 +2,30 @@ var my_width  = 0;
 var my_height = 0;
     
 function showBox(id){
-    $('overlay').show();
+    element = $(id);
+	if (!element) {
+		
+		Lightview.show({
+		  href: site_url+'/information/viewAjax/'+id,
+		  rel: 'ajax',
+		  options: {
+		    autosize: false,
+		    topclose: false,
+		    ajax: {
+		      method: 'post',
+		      onSuccess: function(transport){
+		      var response = transport.responseText;
+				/*alert(response);*/
+		      }
+			}
+		  }
+		});	
+	} else {
+	Lightview.show({href:'#'+id,options: {autosize: true}});
+	}
+    /*$('overlay').show();
     center(id);
-    return false;
+    return false;*/
 }
 
 function hideBox(id){

@@ -1,10 +1,5 @@
 <table>
-	<tr>
-		<th class="sp_arrow"></th>
-		<th class="candidate">&nbsp;&nbsp;Respondent</th>
-		<th style="background-color:#3561b7;">Your Reaction</th>
-		<th class="reaction">Overall&nbsp;&nbsp;</th>
-	</tr>
+	<div class="sectionSmall"><h3>Respondent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Reaction&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overall</h3></div>
 	<? $class = '' ?>
 	<? foreach($candidates as $v): ?>
 		<tr<?=$class?>>

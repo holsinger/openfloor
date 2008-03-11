@@ -822,5 +822,26 @@ class User extends Controller {
 		
 		$this->load->view('user/all_questions_votes.php', $data);
 	}
+	
+	/** create users from passed info **/
+	public function create_demo_user ($user_name,$password='') {
+		$user_name = 'demoUser'.rand(0,1000).date('d');
+		$data['user_name']=$user_name;
+		$data['display_name']=$user_name;
+		$data['user_email']=$user_name."@home.com";
+		$data['user_password']=(strlen($password)>0) ? $password:md5($user_name);
+		$data['user_security_level']=4;
+		$data['user_status']=1;
+		
+		$user_id = $this->user->InsertUser($data);
+		
+		$this->user->login_user($user_name,$user_id);
+		//redirect somewhere
+		if (isset($_POST['redirect'])) redirect($_POST['redirect']); 
+		else redirect('/');
+		ob_clean();
+		exit();
+	}
+		
 }
 ?>

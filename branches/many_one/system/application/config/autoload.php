@@ -77,7 +77,7 @@ $autoload['plugin'] = array();
 |
 */
 
-$autoload['config'] = array('many_one_config');
+$autoload['config'] = array('custom_config');
 
 
 /*

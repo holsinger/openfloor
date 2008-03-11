@@ -4,6 +4,7 @@ class Comments_library
 {
 	public $type;
 	public $ajax;
+	public $custom_theme;
 	private $name;
 	private $event_name;
 	private $question_name;
@@ -85,7 +86,7 @@ class Comments_library
 					$this->question_id = $info['fk_question_id'];
 					$question =  $this->CI->question->get_question($this->question_id);
 					$this->question_name = url_title($question['question_name']);
-					$this->createVoteBox($pod, $voted, $info['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);				
+					$this->createVoteBox($pod, $voted, $info['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax,$this->custom_theme);				
 					$pod .=			
 					'</div>
 					<div class="num_votes">
@@ -150,7 +151,7 @@ class Comments_library
 								' ('.$time_diff.' ago)'.'
 							</div>	
 							<div class="thumb_block">';
-								$this->createVoteBox($pod, $voted, $subcomment['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax);
+								$this->createVoteBox($pod, $voted, $subcomment['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax,$this->custom_theme);
 								$pod .=			
 							'</div>
 							<div class="num_votes">
@@ -166,35 +167,35 @@ class Comments_library
 		return $pod;
 	}
 	
-	private function createVoteBox(&$pod, $voted, $id, $question_id = '', $event_name = '', $question_name = '', $ajax = false)
+	private function createVoteBox(&$pod, $voted, $id, $question_id = '', $event_name = '', $question_name = '', $ajax = false,$custom_theme='')
 	{
 		if($ajax)
 		{
 			$site_url = site_url();
 			if(!$this->CI->userauth->isUser()) {
-				$pod .= "<img onclick=\"showBox('login')\" src='./images/thumbsUp.png' border='0'>";
-				$pod .= "<img onclick=\"showBox('login')\" src='./images/thumbsDown.png' border='0'>";
+				$pod .= "<img onclick=\"showBox('login')\" src='./images/{$custom_theme}thumbsUp.png' class='link' border='0'>";
+				$pod .= "<img onclick=\"showBox('login')\" src='./images/{$custom_theme}thumbsDown.png' class='link' border='0'>";
 			} elseif ($voted < 0) {
-				$pod .= "<img src=\"./images/thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
-				$pod .= " <img src='./images/votedCheckBoxBGcom.png' border='0'>";
+				$pod .= "<img src=\"./images/{$custom_theme}thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\" class='link' />";
+				$pod .= " <img src='./images/{$custom_theme}votedCheckBoxBGcom.png' border='0'>";
 			} elseif ($voted > 0) {
-				$pod .= " <img src='./images/votedCheckBoxBGcom.png' border='0'>";
-				$pod .= "<img src=\"./images/thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
+				$pod .= " <img src='./images/{$custom_theme}votedCheckBoxBGcom.png' border='0'>";
+				$pod .= "<img src=\"./images/{$custom_theme}thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\" class='link' />";
 			} else {
-				$pod .= "<img src=\"./images/thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
-				$pod .= "<img src=\"./images/thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\"/>";
+				$pod .= "<img src=\"./images/{$custom_theme}thumbsUp.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\" class='link' />";
+				$pod .= "<img src=\"./images/{$custom_theme}thumbsDown.png\" onClick=\"cpUpdater.voteComment('{$site_url}comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}', '$question_id', '$event_name', '$question_name')\" class='link' />";
 			}
 		} else {
 			error_log('nonajax');
 			if ($voted < 0) {
-				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
+				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/{$custom_theme}thumbsUp.png' class='link' border='0'>");
 				$pod .= " <img src='./images/votedCheckBoxBGcom.png' border='0'>";
 			} else if ($voted > 0) {
 				$pod .= " <img src='./images/votedCheckBoxBGcom.png' border='0'>";
-				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
+				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/{$custom_theme}thumbsDown.png' class='link' border='0'>");
 			} else {
-				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsUp.png' border='0'>");
-				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/thumbsDown.png' border='0'>");
+				$pod .= anchor("/comment/voteUp/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/{$custom_theme}thumbsUp.png' class='link' border='0'>");
+				$pod .= " ".anchor("/comment/voteDown/$id/{$this->name}/{$this->event_name}/{$this->type}/{$this->sort}", "<img src='./images/{$custom_theme}thumbsDown.png' class='link' border='0'>");
 			}
 		}		
 	}

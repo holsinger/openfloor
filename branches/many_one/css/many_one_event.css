@@ -319,15 +319,17 @@ a {
 
 #ucp .section {
 	background: url(../images/many_one/bg_contentRoundTopLarge.gif) no-repeat;
-	border-bottom: 10px solid #3561b7;
+	border-bottom: 10px solid #3561B7;
 	padding: 10px 15px 0 15px;
 	width: 926px;
 	margin-bottom: 5px;
-	/*background-color: #e4f2fd;
-		border-top: 2px solid #c1d8ea;
-		height: 21px;
-		margin-top: 10px;
-		margin-bottom: 10px;*/
+}
+#ucp .sectionSmall {
+	background: url(../images/many_one/bg_contentRoundTopSmall.gif) no-repeat;
+	border-bottom: 10px solid #3561B7;
+	padding: 10px 15px 0 15px;
+	width: 370px;
+	margin-bottom: 5px;
 }
 
 #ucp .ask-a-question-container {

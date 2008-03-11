@@ -88,3 +88,10 @@ form div {
 table, table td, table th {
 	border: 0px;
 }
+.theme_section {
+	text-align:left;
+	padding:5px;
+}
+.theme_section span {
+	width:215px;
+}

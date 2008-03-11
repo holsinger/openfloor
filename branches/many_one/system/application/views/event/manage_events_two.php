@@ -6,6 +6,7 @@ $this->load->view('view_layout/header.php', $data);
 	#dependency events.css
 -->
 <div id="content_div">
+	<a href="forums/cp/<?=$event_url_name?>">&lt; back to event</a>
 	<div id="title">
 		<div class="top"></div>
 		<h1>Create Event</h1>
@@ -61,6 +62,7 @@ $this->load->view('view_layout/header.php', $data);
 			<br /><br />
 			<?if($option == 'edit'):?>
 				<?= form_submit('','Finish Updating','class="button"'); ?>
+				<input type="button" name="back_but" value="Back to Event" id="back_but" onclick="window.location=site_url+'forums/cp/<?=$event_url_name?>';" class="button">
 			<? else: ?>
 				<input type="button" onclick="window.location='event/create_event/<?=$event_id?>';" class="button" value="Previous Step">
 				<? if(count($users) > 0): ?>

@@ -159,6 +159,8 @@ $this->load->view('view_layout/header.php', $data);
 			<br /><br />
 			<? if($option == 'edit'): ?>
 				<input type="button" name="cancel_but" value="Cancel" id="cancel_but" onclick="window.location=site_url+'event/admin_panel/<?=$event_id?>';" class="button">
+				
+				<input type="button" name="back_but" value="Back to Event" id="back_but" onclick="window.location=site_url+'forums/cp/<?=$event_url_name?>';" class="button">
 				<?= form_submit('','Update Information','class="button"'); ?>
 			<? else: ?>
 				<?= form_submit('','Next Step','class="button"'); ?>

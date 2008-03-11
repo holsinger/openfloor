@@ -30,12 +30,11 @@
 | make active.  By default there is only one group (the "default" group).
 |
 */
-
 $active_group = "default";
 
 $db['default']['hostname'] = "localhost";
-$db['default']['username'] = "root";
-$db['default']['password'] = "root";
+$db['default']['username'] = "politic20";
+$db['default']['password'] = "politic20";
 $db['default']['database'] = "politic20";
 $db['default']['dbdriver'] = "mysql";
 $db['default']['dbprefix'] = "";

@@ -4,7 +4,7 @@
 	<base href="<?= $this->config->site_url();?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-	<title>Many One</title>
+	<title><?= $this->config->item('custom_title');?></title>
 	<?
 	if(isset($rss))
 		foreach($rss as $feed)
@@ -18,8 +18,8 @@
 	<?endforeach;?>
 	<!-- 
 	CSS DEPENDENCIES
-	#dependency many_one_globalReset.css
-	#dependency many_one_global.css
+	#dependency <?= $this->config->item('custom_theme');?>_globalReset.css
+	#dependency <?= $this->config->item('custom_theme');?>_global.css
 	#dependency lightview.css
 	
 	
@@ -29,8 +29,8 @@
 	#dependency queueUpdater.js
 	#dependency clock.js
 	#dependency effects.js
-	#dependency userWindow.js
 	#dependency lightview.js
+	#dependency userWindow.js
 	-->
 	
 	<?/*<script src="./javascript/prototype.js" type="text/javascript"></script>

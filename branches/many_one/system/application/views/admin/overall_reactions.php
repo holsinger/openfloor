@@ -42,7 +42,7 @@
 					</div>
 					<div id="overall-reaction">
 						<table>
-							<tr><th>Candidate</th><th>Overall Reaction</th></tr>		
+							<span class="sectionSmall">Candidate&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overall Reaction:</span>		
 							<? $class = '' ?>
 							<? foreach($candidates as $v): ?>
 							<tr<?=$class?>>

@@ -323,7 +323,9 @@ class Event extends Controller
 			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
 			$data['option'] = $option;
 			$data['current_user_id'] = $this->CI->session->userdata('user_id');
-			// Get 
+			// Get event url
+			$url = $this->event->get_event($event_id);
+			$data['event_url_name'] = $url['event_url_name'];
 			$this->load->view('event/manage_events_two',$data);
 		}else{
 			if($option == 'edit'){
@@ -433,6 +435,61 @@ class Event extends Controller
 			
 		}
 		
+	}
+	
+	
+	/**
+	 * Step Four of the event creation process.  Also used for editing since they both use a common interface
+	 *
+     * Edit mode is enabled by using passing the event_id for the first parameter and "Edit" in the second
+	 *
+	 * @return void
+	 * @author James Kleinschnitz
+	 **/
+	public function create_event_four($event_id, $option){
+		#check that user is allowed
+		$this->userauth->isUser();	
+		// by default we show the form for step one, unless, it's a post and validation works out
+		$show_form = true;
+		
+		//check to see if this allowed via the config file		
+		
+		//check to see if we are posting data
+		if($_POST) {
+			
+		}else{
+			// Inititial page load
+			// If event_id is set it is an update, if not then it's new and we'll want to set the default values for a new form.
+			if($event_id != 'none'){
+				// pull from db
+				$data = $this->event->get_event($event_id);
+			}
+		}
+		
+		//show form
+		if ($show_form){
+			// Page Setup Stuff
+			$data['event_id'] = $event_id;
+			if($option == 'edit'){
+				$data['page_title'] = "Edit ".$this->cms->get_cms_text('', "forums_navigation_title");
+			}else{
+				$data['page_title'] = "Create ".$this->cms->get_cms_text('', "forums_navigation_title")." Step Four";
+			}
+			$data['breadcrumb'] = array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(),$this->cms->get_cms_text('', "forums_name")=>'event/', $data['page_title']  => "");
+			$data['option'] = $option;
+			$this->load->view('event/manage_events_four',$data);
+			return;
+		}else{
+			$_POST['input_complete'] = "1";
+			$this->event->update_event_form($event_id,$_POST);
+			$data = $this->event->get_event($event_id);
+			if($option == 'edit'){
+				redirect("/event/admin_panel/$event_id/4", 'location');
+			}else{
+				redirect("/event/admin_panel/".url_title($data['event_id']), 'location');
+			}
+			
+		}
 	}
 	
 	/**
