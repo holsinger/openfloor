@@ -400,8 +400,8 @@ a {
 }
 
 .reaction_handle_voted {
-	width: 19px; 
-	height: 19px; 
+	width: 18px; 
+	height: 17px; 
 	background: url(../images/openfloor/many_handle_voted.png); 
 	float: left;
 	cursor: pointer;
@@ -413,7 +413,7 @@ a {
 	line-height: 19px;
 	vertical-align: middle;
 	text-align: center;
-	color: #f04a54;
+	color: #0055A4;
 	background: url(../images/ucp/slider_generic.png); 
 	float: left;
 	cursor: pointer;
@@ -445,12 +445,12 @@ textarea {
 
 .sp_arrow {
 	background-color: #FFFFFF;
-	width: 15px;
-	height: 18px;
+	width: 19px;
+	height: 19px;
 	padding: 0px;
 }
 .sp_arrow_selected {
-	background: url(../images/ucp/speaker_arrow.png) no-repeat #FFFFFF;
+	background: url(../images/openfloor/speaker_arrow.png) no-repeat #FFFFFF;
 	width: 15px;
 }
 
