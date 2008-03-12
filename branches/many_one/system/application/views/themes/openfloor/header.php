@@ -8,7 +8,7 @@
 			<div id="dashboard" class="clearfix">
 				<ul xmlns="" class="loginmenu">
 					<? if (strlen($this->session->userdata['user_name'])>1) {?>
-					<li>Welcome <?=$this->session->userdata['user_name'];?></li>	|
+					<li style="color:#444D3E;">Welcome <?=$this->session->userdata['user_name'];?></li>
 					<li><a href='logout/'>Logout</a></li>				
 					<?} else {?>	
 					<li><a href='#login' class='lightview' title=' :: :: autosize: true' >Login</a></li>					

@@ -2343,7 +2343,7 @@ span.sIFR-alternate {
 	border-width: 0px;
 	border-style: solid;
 	border-color: #FFFFFF;
-	color: #5378c1;
+	color: #FFFFFF;
 	width: 120px;
 	height: 35px;
 	line-height: 35px;
@@ -2352,6 +2352,7 @@ span.sIFR-alternate {
 	z-index: 3;
 	font-size: 14px;
 	display: block;
+	text-indent:-1000;
 	position: fixed;
 }
 

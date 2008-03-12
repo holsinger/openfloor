@@ -8,7 +8,7 @@ $data['sub_title'] = $page_title;
 ?>
 <? $this->load->view('view_layout/header.php',$data); ?>
 <!--
-	#dependency events.css
+	#dependency <?=$this->config->item('custom_theme');?>_events.css
 -->
 <div id="content_div" class="event_content_div">
 	<!-- <span style="font-weight: normal; font-family: Arial Black;	font-variant: small-caps; font-size: 25px; font-family: Georgia; color: #033D7C"> OpenFloor Events</span> -->
@@ -47,7 +47,11 @@ $data['sub_title'] = $page_title;
 						</td>
 					</tr>
             	</table>
-				<div style="background-color: #0173ba; margin: 5px -6px -10px -6px; padding: 3px 3px 0px 3px; text-align: center"><?=anchor('forums/cp/'.url_title($array['event_name']),'<img src="./images/events/participate_now_button.png" border="0" />', array("title" => "Participate Now"))?></div>
+				<div class="highlight_bottom">
+					<div class="highlight_button">
+						<a href="<?= $this->config->site_url();?>forums/cp/<?=url_title($array['event_name']);?>" alt="PARTICIPATE NOW!"><span>PARTICIPATE NOW!</span></a>
+					</div>
+				</div>
             </div>
             <br />
 		
@@ -88,11 +92,15 @@ $data['sub_title'] = $page_title;
 			<div id="working_town_div">
 				<table cellspacing="0" cellpadding="0" border="0">
 					<tr>
-						<td style="padding-right: 15px;"><img src="./images/events/upcoming_event_calendar.png" /></td>
+						<td style="padding-right: 15px;"><img src="./images/<?=$this->config->item('custom_theme');?>/upcoming_event_calendar.png" /></td>
 						<td valign="middle" align="left" width="100%">We are working hard to bring our OpenFloor Events to your town!  Stay tuned...</td>
 					</tr>
 				</table>
-				<div style="background-color: #0173ba; margin: 5px -10px -10px -10px; padding: 3px 3px 0px 3px; text-align: center"><?=anchor("contact/showForm/request_an_event/","<img src='./images/events/RP_Events_Demand_Event.png' border='0'>");?></div>
+				<div class="highlight_bottom">					
+					<div class="highlight_button">
+						<a href="<?= $this->config->site_url();?>contact/showForm/request_an_event" alt="CREATE EVENT"><span>CREATE EVENT</span></a>
+					</div>
+				</div>
 			</div>
 		<? endif; ?>
 		<!-- FINALLY, PAST EVENTS -->
@@ -117,8 +125,10 @@ $data['sub_title'] = $page_title;
            <? endif; ?>
         <? endforeach; ?>
         </div>
-		<div style="background-color: #0173ba; text-align: center">
-			<?=anchor("contact/showForm/request_an_event/","<img src='./images/events/RP_Events_Demand_Event.png' border='0'>");?>
+		<div class="highlight_bottom">						
+					<div class="highlight_button">
+						<a href="<?= $this->config->site_url();?>contact/showForm/request_an_event" alt="CREATE EVENT"><span>CREATE EVENT</span></a>
+					</div>
 		</div>
 
 </div>

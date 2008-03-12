@@ -199,7 +199,7 @@ dependency overall_reaction.css
 	<div id="upcoming_questions"></div>	
 </div>
 
-<div id="loading_reminder_div" class="loading_reminder"><img style="padding-top: 2px;" src="images/openfloor/ajax-loader.gif">LOADING</div>
+<div id="loading_reminder_div" class="loading_reminder"><img style="padding-top: 2px;" src="images/<?=$this->config->item('custom_theme');?>/ajax-loader.gif">LOADING</div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div','left');
 	

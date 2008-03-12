@@ -1,11 +1,11 @@
 .user-summary,
 .event-summary {
 	border-width: 1px 1px 1px 1px;
-	border-color: #C1D8EA;
+	border-color: #9F9F9F;
 	border-style: solid;
 	padding: 6px 6px 10px 6px;
 	margin-left: 0px;
-	background-color: #f1faff;
+	background-color: #BFBFBF;
 	zoom:1;	   /* Fixes top and bottom margin widths for IE */
 }
 
@@ -20,7 +20,7 @@
 	color: #033D7C;
 	padding-top: 7px; 
 	border-width: 2px 0px 0px 0px; 
-	border-color: #C1D8EA; 
+	border-color: #9F9F9F; 
 	border-style: solid;
 }
 /* For one div this overrides some of the subheader settings above */
@@ -31,10 +31,10 @@
 
 #working_town_div {
 	/* used on view_events.php page */
-	padding: 10px;
-	border: 1px solid #C1D8EA;
+	padding: 5px;
+	border: 1px solid #9F9F9F;
 	text-align: center;
-	background-color: #f1faff;
+	background-color: #BFBFBF;
 	zoom:1;	   /* Fixes top and bottom margin widths for IE */
 }
 
@@ -42,12 +42,13 @@
 	/* Used for H3 tags on the event page */
 	margin-top: 3px;
 	margin-bottom: 6px;
+	color:#0055A4;
 }
 
 #participate_live_div {
 	/* used on view_events.php page */
 	padding: 6px;
-	border: 1px solid #C1D8EA;
+	border: 1px solid #9F9F9F;
 	text-align: center;
 }
 /* Edit Page */
@@ -94,4 +95,52 @@ table, table td, table th {
 }
 .theme_section span {
 	width:215px;
+}
+.highlight_bottom {
+	background-color:#444D3E;
+	margin-bottom:-10px;
+	margin-left:-6px;
+	margin-right:-6px;
+	margin-top:5px;
+	padding-bottom:0px;
+	padding-left:3px;
+	padding-right:3px;
+	padding-top:3px;
+	height:45px;
+	text-align:center;
+}
+/*button*/
+div.highlight_button {
+	/*float: left;*/
+	width: 170px;
+	height: 42px;
+	margin:0pt auto;
+}
+
+
+div.highlight_button a {
+	display: block;
+	margin: 0px;
+	overflow: hidden;
+	text-decoration: none;
+	height: 100%;
+	background: url('../images/openfloor/highlight.png') top left no-repeat;
+	color: #FFFFFF;
+	font-family: 'Tahoma Bold';
+	font-size:14px;
+	font-weight: bold;
+	line-height: 42px;
+	text-align: center;
+}
+
+
+div.highlight_button span {
+	position: relative;
+	top:2px;
+	}
+
+
+div.highlight_button a:hover {
+	background-position: -170px 0;
+	color: #FFFFFF;
 }
