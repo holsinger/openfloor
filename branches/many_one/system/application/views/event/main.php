@@ -133,8 +133,8 @@ dependency overall_reaction.css
 					</td>
 					<td>
 						<div id="user-reaction">
-							Rate the credibility of each candidate's response for the current question.
-							<? $this->load->view('user/_cp_user_reaction'); ?>
+							<?$data['msg']="Rate the credibility of each candidate's response for the current question.";?>
+							<? $this->load->view('user/_cp_user_reaction',$data); ?>
 						</div>
 					</td>
 				</tr>

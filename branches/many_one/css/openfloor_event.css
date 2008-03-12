@@ -94,7 +94,7 @@ a {
 }
 
 #ucp #user-reaction .alternate {
-	background-color: #eef8ff;
+	background-color: #BFBFBF;
 }
 
 .question-pod{display:block}
@@ -150,7 +150,7 @@ a {
 }
 
 #user-reaction {
-	/*width: 350px;*/
+	width: 400px;
 	margin: 0 auto;
 }
 
@@ -326,7 +326,7 @@ a {
 }
 #ucp .sectionSmall {
 	background: url(../images/many_one/bg_contentRoundTopSmall.gif) no-repeat;
-	border-bottom: 10px solid #444d3e;
+	border-bottom: 10px solid #444D3E;
 	padding: 10px 15px 0 15px;
 	width: 370px;
 	margin-bottom: 5px;
@@ -363,7 +363,7 @@ a {
 
 .overall-reaction-meter {
 	background-color: #f04a54;
-	background: url(../images/ucp/score_bg.png); 
+	background: url(../images/openfloor/score_bg.png); 
 }
 .overall-reaction-meter-yellow {
 	background-color: #f04a54;
@@ -375,11 +375,12 @@ a {
 }
 
 .overall-reaction-meter-total {
-	background-color: #caedff;
-	border: 1px solid #f04a54;
-	background: url(../images/ucp/score_bg_outer.png); 
+	background-color: #B4B4B4;
+	border: 1px solid #444D3E;
+	background: url(../images/openfloor/score_bg_outer.png); 
 	margin: 2px;
 	text-align: left;
+	width:75px;
 }
 
 .overall-reaction-meter-respondent {
@@ -393,7 +394,7 @@ a {
 .reaction_handle {
 	width: 19px; 
 	height: 19px; 
-	background: url(../images/many_one/many_handle.png); 
+	background: url(../images/openfloor/many_handle.png); 
 	float: left;
 	cursor: pointer;
 }
@@ -401,7 +402,7 @@ a {
 .reaction_handle_voted {
 	width: 19px; 
 	height: 19px; 
-	background: url(../images/many_one/many_handle_voted.png); 
+	background: url(../images/openfloor/many_handle_voted.png); 
 	float: left;
 	cursor: pointer;
 }

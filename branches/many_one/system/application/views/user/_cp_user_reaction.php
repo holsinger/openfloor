@@ -1,5 +1,7 @@
 <table>
-	<div class="sectionSmall"><h3>Respondent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Reaction&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overall</h3></div>
+	<br/>
+	<div class="sectionSmall"><h3>Respondent&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Your Reaction&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Overall</h3></div>
+	<p><?=$msg?></p>
 	<? $class = '' ?>
 	<? foreach($candidates as $v): ?>
 		<tr<?=$class?>>
