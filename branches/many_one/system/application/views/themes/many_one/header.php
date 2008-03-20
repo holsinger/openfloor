@@ -1,4 +1,8 @@
 <body onLoad='<?=$onload;?>'>
+	<!--
+		#dependency <?= $this->config->item('custom_theme');?>_globalReset.css
+		#dependency <?= $this->config->item('custom_theme');?>_global.css
+	-->
 	<div id="advertisement">
 		<div class="box ad" id="adzone_1">
 			<!-- <iframe src="<?=$this->config->item('m1_url')?>/AdFrame.php?adzoneid=1" frameborder="0" scrolling="no" width="728" height="90" marginwidth="0" marginheight="0"></iframe> -->

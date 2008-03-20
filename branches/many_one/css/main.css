@@ -1,4 +1,4 @@
-BODY {
+body {
     text-align: center;
     font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
     font-size: 11px;
@@ -10,16 +10,16 @@ BODY {
 #root {
     margin: auto;
     text-align: left;
-	width: 95%;
-	min-width: 970px;
+	width: 975;
+	min-width: 975px;
 }
 
 .frame {
-    width: 100%;
-    float: left;
-    border: 2px solid #97BCDC;
-    background: #FFFFFF;
-    margin: 15px 0 45px 0;
+    border:2px solid #97BCDC;
+    background:#FFFFFF;
+    margin: 0pt auto;
+    width: 975px;  
+	float:left;
 }
 
 .frame .ctl {

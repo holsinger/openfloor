@@ -30,8 +30,9 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 	<?endforeach;?>
 	<!-- 
 	CSS DEPENDENCIES
-	#dependency many_one_globalReset.css
-	#dependency many_one_global.css
+	#dependency openfloor_globalReset.css
+	#dependency openfloor_global.css
+	#dependency lightview.css
 	
 	
 	JAVASCRIPT DEPENDENCIES
@@ -40,11 +41,14 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 	#dependency queueUpdater.js
 	#dependency clock.js
 	dependency effects.js
+	#dependency lightview.js
 	#dependency userWindow.js
 	-->
 	
-	<script src="./javascript/prototype.js" type="text/javascript"></script>
-	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>	
+	<?/*<script src="./javascript/prototype.js" type="text/javascript"></script>
+	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>*/?>	
+	<script src="./javascript/protoculous.js" type="text/javascript"></script>
+	
 	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
 	<!-- DO NOT REMOVE THIS LINE -->
 	<!-- #dependencies -->

@@ -17,11 +17,8 @@
 		<?$this->load->view('view_head_includes/'.$h_view);?>
 	<?endforeach;?>
 	<!-- 
-	CSS DEPENDENCIES
-	#dependency <?= $this->config->item('custom_theme');?>_globalReset.css
-	#dependency <?= $this->config->item('custom_theme');?>_global.css
-	#dependency lightview.css
-	
+	CSS DEPENDENCIES	
+	#dependency lightview.css	
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js

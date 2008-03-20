@@ -380,6 +380,7 @@ a {
 	background: url(../images/ucp/score_bg_outer.png); 
 	margin: 2px;
 	text-align: left;
+	width:75px;
 }
 
 .overall-reaction-meter-respondent {

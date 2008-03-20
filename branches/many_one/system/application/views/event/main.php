@@ -11,14 +11,11 @@ $this->load->view('view_layout/header.php', $data);
 ?>
 <!-- 
 #dependency <?=$this->config->item('custom_theme');?>_event.css
-#dependency userWindow.css
-dependency overall_reaction.css
 
 #dependency cpUpdater.js
 #dependency lazy_loader.js
 #dependency loading_reminder.js
 -->
-<div><h1><?=$event_data['event_name'];?></h1></div> 
 <br/>
 <? if ($this->userauth->isEventAdmin($event_data['event_id'])): ?>
 	<div><b>Administration:</b></div> 

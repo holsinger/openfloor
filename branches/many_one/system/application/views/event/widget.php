@@ -11,15 +11,12 @@ $this->load->view('view_layout/widget_header.php', $data);
 ?>
 <!-- 
 #dependency event_widget.css
-#dependency userWindow.css
-dependency overall_reaction.css
 
 #dependency cpUpdater.js
 #dependency lazy_loader.js
 #dependency loading_reminder.js
 -->
-<div id="overlay" onclick="hideBox()" style="display:none"></div>
-<div id="hijax" style="display:none"></div>
+
 <div id="ask_question_div" class="ask_question" onclick="cpUpdater.toggleNewQuestion();new Effect.ScrollTo($('cp-ask-question'));">
 	<h2><?=$event_data['event_name'];?></h2>
 	&nbsp;<a>CLICK TO ASK A QUESTION</a>
@@ -194,8 +191,7 @@ dependency overall_reaction.css
 	</div>
 </div>
 
-
-<div id="loading_reminder_div" class="loading_reminder">&nbsp;<img style="padding-top: 2px;" src="images/many_one/ajax-loader.gif"></div>
+<div id="loading_reminder_div" class="loading_reminder"><img style="padding-top: 2px;" src="images/openfloor/ajax-loader.gif">LOADING</div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div','left');
 	

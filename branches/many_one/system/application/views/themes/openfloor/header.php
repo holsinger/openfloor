@@ -1,4 +1,8 @@
 <body onLoad='<?=$onload;?>'>
+	<!--
+		#dependency <?= $this->config->item('custom_theme');?>_globalReset.css
+		#dependency <?= $this->config->item('custom_theme');?>_global.css
+	-->
 	<?$this->load->view("ajax/{$this->config->item('custom_theme')}_login",$data);?>
 	<br/>
     <div id="wrapper">
@@ -54,3 +58,4 @@
 			</div> 
 			*/ ?>
     		<div id="content" style="width:96%; margin: 0% 2% 2% 2%;">
+			<div><h1><?=$sub_title?></h1></div>
