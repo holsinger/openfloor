@@ -245,7 +245,7 @@ a {
 	margin-top: 0;
 }
 
-#ucp .votes, #ucp .comments, #ucp .info, #ucp .answer, #ucp .admin {
+#ucp .votes, #ucp .comments, #ucp .info, #ucp .answer, #ucp .admin, #ucp .delete {
 	color: #fffeff;
 	text-transform: uppercase;
 	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;

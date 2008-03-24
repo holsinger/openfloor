@@ -4,11 +4,14 @@
 		<img src="./images/many_one/button_close_x.png" border="0" />
 	</a>
 </div>
-<a href="<?= $this->config->site_url();?>/user/profile/<?=$user_name;?>">
+<a href="javascript:showUrl('/user/profile/<?=$user_info['user_name'];?>/true');">
 	<img class="sc_image" src="./avatars/<?=$avatar_path;?>"/>
 </a>
 <br />
-<strong>Posted By: </strong><?= anchor('/user/profile/' . $user_info['user_name'], $user_info['user_name']) ?> (<?= $time_diff ?> ago)<br />
+<strong>Posted By: </strong>
+	<a href="javascript:showUrl('/user/profile/<?=$user_info['user_name'];?>/true');"><?= $user_info['user_name']; ?></a>
+
+ (<?= $time_diff ?> ago)<br />
 <?= empty($question['tags']) ? '' : '<b>Tags: </b>' . implode(', ', $tags) . '<br />' ?>
 <strong>Description: </strong><?= $question_desc ?><br />
 <? if($question['question_status'] == 'deleted'): ?>

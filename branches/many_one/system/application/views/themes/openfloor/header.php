@@ -15,7 +15,7 @@
 					<li style="color:#444D3E;">Welcome <?=$this->session->userdata['user_name'];?></li>
 					<li><a href='logout/'>Logout</a></li>				
 					<?} else {?>	
-					<li><a href='#login' class='lightview' title=' :: :: autosize: true' >Login</a></li>					
+					<li><a href='#login' class='lightview' title=' :: :: autosize: true, topclose:true' >Login</a></li>					
 					<?}?>
 				</ul>
 			</div>

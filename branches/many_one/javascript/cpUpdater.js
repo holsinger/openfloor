@@ -213,6 +213,7 @@ cpUpdater.askQuestion = function() {
 				new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
 			} else {
 				$('cp-ask-question').innerHTML = transport.responseText;
+				new Effect.ScrollTo($('top_lock'),{offset:-75});
 			}
 		}
 	});
@@ -309,7 +310,8 @@ cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2)
 			}
 		});
 	}
-},
+}
+
 cpUpdater.change_comments_sort = function(question_id, event_name, question_name, sort) {
 	my_loading_reminder.show();
 	new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name + '/' + sort, {
@@ -411,10 +413,11 @@ cpUpdater.change_sort = function(_sort) {
 		sort_links = ['pending', 'newest', 'asked', 'deleted'];
 	}
 	sort_links.without(_sort).each(function(s) {
+		if ($('sort-link-' + s)) {
 		if($('sort-link-' + s).hasClassName('cp-sort-link-selected')) {
 			$('sort-link-' + s).removeClassName('cp-sort-link-selected');
 			$('sort-link-' + s).addClassName('cp-sort-link');
-		}
+		}}
 	});
 
 	if($('sort-link-' + _sort).hasClassName('cp-sort-link')) {

@@ -1,7 +1,7 @@
 <?
 $data['red_head'] = 'Welcome';
 $data['sub_title'] = 'User Profile'; 
-$this->load->view('view_layout/header.php',$data); 
+if (!$ajax) $this->load->view('view_layout/header.php',$data); 
 ?>
 <!--
 	#dependency tabs.css
@@ -15,6 +15,7 @@ $this->load->view('view_layout/header.php',$data);
 		<strong><?=$display_name?></strong>
 	</div>
 	<br /><br /><br />
+	<? if (!$ajax) {?>
 	<br /><br /><br />
 	<div id="section">
 		<ul class="tabnav">
@@ -26,8 +27,11 @@ $this->load->view('view_layout/header.php',$data);
 	<br />
 	<div id="user_content" style="position: relative; width: 90%"></div>
   	<div class='errorArea'><?=$error?></div>
+	<? } else {?>
+		<div id="user_content" style="position: relative; width: 300px;"><strong>Bio:</strong><?=$bio;?></div>
+	<?}?>
 </div>
 <script type="text/javascript" charset="utf-8">
 	new Control.DynamicTabs(3, 'user_content', site_url+'user/profile_ajax/<?=$user_id?>/');
 </script>
-<? $this->load->view('view_layout/footer.php'); ?>  				
+<? if (!$ajax) $this->load->view('view_layout/footer.php'); ?>  				

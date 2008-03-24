@@ -411,7 +411,7 @@ class User extends Controller {
 	 * @return void
 	 * @author ????, Clark Endrizzi (Basically rewrote)
 	 **/
-	function profile () {
+	function profile ($user,$ajax=false) {
 		//allow segment 3 to be an id or username
 		/*
 			TODO Get rid of this fugly stuff below to just accept id's (which may be the case, I think it was only for cand. with strings)
@@ -439,7 +439,7 @@ class User extends Controller {
 		
 		//admin is also an owner
 		if ( $this->userauth->isAdmin() ) $data['owner'] = TRUE;
-				
+		$data['ajax']=$ajax;		
 		$this->load->view('user/view_user_profile',$data);
 	}
 	
@@ -825,7 +825,7 @@ class User extends Controller {
 	
 	/** create users from passed info **/
 	public function create_demo_user ($user_name,$password='') {
-		$user_name = 'demoUser'.rand(0,1000).date('d');
+		$user_name = $_POST['user_name'];
 		$data['user_name']=$user_name;
 		$data['display_name']=$user_name;
 		$data['user_email']=$user_name."@home.com";

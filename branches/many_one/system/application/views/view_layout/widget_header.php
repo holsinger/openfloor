@@ -16,7 +16,7 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 	<base href="<?= $this->config->site_url();?>" />
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 	<link rel="icon" href="./favicon.ico" type="image/x-icon"/>
-	<title>Many One</title>
+	<title><?= $this->config->item('custom_title');?></title>
 	<?
 	if(isset($rss))
 		foreach($rss as $feed)

@@ -16,10 +16,46 @@ $this->load->view('view_layout/widget_header.php', $data);
 #dependency lazy_loader.js
 #dependency loading_reminder.js
 -->
-
-<div id="ask_question_div" class="ask_question" onclick="cpUpdater.toggleNewQuestion();new Effect.ScrollTo($('cp-ask-question'));">
+<?$this->load->view("ajax/{$this->config->item('custom_theme')}_login",$data);?>
+<div id="create_account" style="display:none;">
+	<h2>Create Account</h2>
+	<form id="user_create_form">
+	<?= form_format("Username: *",form_input('user_name',(isset($this->validation->user_name))?$this->validation->user_name:'','class="txt"') ); ?>
+	<? if ( !isset($openID) ) echo form_format("Password: *",form_password('user_password','','class="txt"') ); ?>
+	<? if ( !isset($openID) ) echo form_format("Password Confirm: *",form_password('password_confirm','','class="txt"') ); ?>
+	
+	<?
+	if (isset($openID_email)) $email = $openID_email;
+	else if (isset($this->validation->user_email)) $email = $this->validation->user_email;
+	else $email= '';
+	?>
+	<?= form_format("Email: *",form_input('user_email',$email,'class="txt"') ); ?>
+	
+	
+	<br /><br />
+	<?		
+	echo $capimage;
+	echo '<br />';
+	echo '<label>Enter the above characters: *</label>';
+	echo form_input('captcha','','class="txt"')
+	?>
+	<br /><br />
+	<input type="button" class="button" value="Create Account" onclick="new Ajax.Request(site_url+'user/create', { parameters: $('user_create_form').serialize(true), onSuccess : cpUpdater.UpdateQuestionOnSucess });">
+	<br /><br />
+	<small>* required fields</small>
+	<?= form_close(); ?>
+</div>
+<div id="ask_question_div" class="ask_question" >
+	<div style="float:right;font-size:9px;">
+		<? if (strlen($this->session->userdata['user_name'])>1) {?>
+		<?=$this->session->userdata['user_name'];?>&nbsp;&nbsp;<br/>
+		<a href='logout/'>Logout</a>&nbsp;&nbsp;			
+		<?} else {?>	
+		<a class='link' onClick="showBox('login');">Login</a>&nbsp;&nbsp;<br><a class='link' onClick="showBox('create_account');">Create Account</a>&nbsp;&nbsp;				
+		<?}?>
+	</div>
 	<h2><?=$event_data['event_name'];?></h2>
-	&nbsp;<a>CLICK TO ASK A QUESTION</a>
+	&nbsp;<a class="link" onclick="<?= (strlen($this->session->userdata['user_name'])>1) ? 'cpUpdater.toggleNewQuestion();new Effect.ScrollTo($(\'cp-ask-question\'));':'showBox(\'login\');';?>">CLICK TO ASK A QUESTION</a>
 </div>
 <br/><br/><br/><br/><br/><br/>
 <div id='top_lock'>
@@ -30,7 +66,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 		<div style="text-align: center; margin-bottom: 4px;"><img src="./images/many_one/button_ask_question.png" title="Ask a Question" alt="Ask a Question" onclick="<?= $this->userauth->isUser() ? 'cpUpdater.toggleNewQuestion();' : $this->config->item('custom_url').'/login/' ?>"/></div>
 	<? endif; ?>*/?>
 
-	<div id="cp-ask-question" style="display:none; text-align: center; margin-bottom: 5px;">
+	<div id="cp-ask-question" style="display:none; background-color: #F2F2F2;margin-bottom: 5px;">
 		<div style="width: 490px; text-align: left; background-color: #F2F2F2; padding: 5px;">
 			<? $this->load->view('question/_submit_question_form') ?>
 		</div>
@@ -43,14 +79,15 @@ $this->load->view('view_layout/widget_header.php', $data);
 		<div class='widget_section' onClick="Fold('admin','admin_tab');"> <span id="admin_tab">-</span> Administration: </div>
 		<div id='admin'> 
 		<? if(!$event_data['streaming'] && !$event_data["event_finished"]): ?>
-			<input value="Start Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stream event.') } });">
+			<input value="Start Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/widget/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stream event.') } });">
 		<? elseif(!$event_data["event_finished"]): ?>
-			<input value="Stop Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stop streaming event.') } });">
-			<input value="Close Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });"><br/>
+			<input value="Stop Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_stream',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/widget/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not stop streaming event.') } });">
+			<input value="Close Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/widget/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not end the event.') } });"><br/>
+			<? /*
 			<input class="button" type="button" onclick="window.open('http://prelive.ustream.tv/broadcaster/IBo6cdjuzGo0x.6P6qk6b69fwm3Ftefb', '_blank', 'width=700,height=430,scrollbars=no,status=no,resizable=yes,screenx=20,screeny=20');" style="background: rgb(69, 110, 189) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" value="Launch Video Broadcaster"/><br/>
 			<!-- this only applies to a multi respondent event -->
-			<input value="Advance Queue" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/move_queue/forward/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });"> (Mutli-Respondent Events Only)<br />
-			<input value="Goto The Next Question" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });">
+			<input value="Advance Queue" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/move_queue/forward/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });"> (Mutli-Respondent Events Only)<br /> */ ?>
+			<input value="Goto The Next Question" class="button" id= "next_question" type="button" onclick="this.value='Advancing Question!';this.enabled=false;my_loading_reminder.show();new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){  $('next_question').value='Goto The Next Question';$('next_question').enabled=true; }, onFailure: function(){ alert('Could not change question.') } });my_loading_reminder.hide();">
 		
 		<? else: ?>
 			<input value="Reopen Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not unfinish event.') } });">
@@ -114,7 +151,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 						</span>*/?>
 						<span>
 							<div id="user-reaction">
-								Rate the credibility of each candidate's response for the current question.
+								Rate the Respondents response to the current question.
 								<? $this->load->view('user/_cp_user_reaction'); ?>
 							</div>
 						</span>
@@ -174,12 +211,16 @@ $this->load->view('view_layout/widget_header.php', $data);
 			<? if(!$event_data["event_finished"]): ?>
 				<span id="sort-link-pending" title="Upcoming" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('pending')">Upcoming</span> | 
 				<span id="sort-link-newest" title="Newest" class="cp-sort-link" onClick="cpUpdater.change_sort('newest')">Newest</span> | 
-				<span id="sort-link-asked" title="Answered" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span> | 
-				<span id="sort-link-deleted" title="Deleted" class="cp-sort-link" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;
+				<span id="sort-link-asked" title="Answered" class="cp-sort-link" onClick="cpUpdater.change_sort('asked')">Answered</span>  
+				<? if ($this->config->item('custom_show_deleted') || $this->userauth->isEventAdmin($event_id)) {?>
+				| <span id="sort-link-deleted" title="Deleted" class="cp-sort-link" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;			
+				<? } ?>
 			<? else: ?>
 				<span id="sort-link-pending" title="Unanswered" class="cp-sort-link" onClick="cpUpdater.change_sort('pending')">Unanswered</span> | 
-				<span id="sort-link-asked" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span> | 		
-				<span id="sort-link-deleted" title="Deleted" class="cp-sort-link" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;			
+				<span id="sort-link-asked" title="Answered" class="cp-sort-link-selected" onClick="cpUpdater.change_sort('asked')">Answered</span> 		
+				<? if ($this->config->item('custom_show_deleted') || $this->userauth->isEventAdmin($event_id)) {?>
+				| <span id="sort-link-deleted" title="Deleted" class="cp-sort-link" onClick="cpUpdater.change_sort('deleted')">Deleted</span>&nbsp;&nbsp;			
+				<? } ?>
 			<? endif; ?>
 		</span>
 	</div>

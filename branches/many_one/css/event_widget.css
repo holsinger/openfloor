@@ -251,7 +251,15 @@ a {
 	margin-right: 5px;
 }
 
-#ucp .comments_on, #ucp .info_on, #ucp .answer_on, #ucp .admin_on {
+#ucp .delete {
+	width: 75px;
+	height: 15px;
+	background: #0055A4;
+	margin-right: 5px;
+}
+
+
+#ucp .comments_on, #ucp .info_on, #ucp .answer_on, #ucp .admin_on, #ucp .delete_on {
 	width: 75px;
 	height: 15px;
 	background: #CCCCCC;
@@ -274,7 +282,7 @@ a {
 	margin-top: 0;
 }
 
-#ucp .votes, #ucp .comments, #ucp .info, #ucp .answer, #ucp .admin {
+#ucp .votes, #ucp .comments, #ucp .info, #ucp .answer, #ucp .admin, #ucp .delete {
 	color: #ffffff;
 	text-transform: uppercase;
 	font: bold xx-small "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;

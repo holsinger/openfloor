@@ -12,21 +12,21 @@ var Lightview = {
 
   // Configuration
   options: {
-    backgroundColor: '#ffffff',                            // Background color of the view
-    border: 12,                                            // Size of the border
+    backgroundColor: '#cccccc',                            // Background color of the view
+    border: 5,                                            // Size of the border
     buttons: { opacity: { normal: 0.65, hover: 1 } },      // Opacity of inner buttons
     cyclic: false,                                         // Makes galleries/sets cyclic, no end/begin.
     images: '../images/lightview/',                        // The directory of the images, from this file
     imgNumberTemplate: 'Image #{position} of #{total}',    // Want a different language? change it here
     overlay: {                                             // Overlay
-      background: '#000',                                  // Background color, Mac Firefox & Safari use overlay.png
+      background: '#444D3E',                                  // Background color, Mac Firefox & Safari use overlay.png
       opacity: 0.85,
-      display: true
+      display: false
     },
     preloadHover: true,                                    // Preload images on mouseover
     radius: 12,                                            // Corner radius of the border
     removeTitles: true,                                    // Set to false if you want to keep title attributes intact
-    resizeDuration: 1.0,                                   // When effects are used, the duration of resizing in seconds
+    resizeDuration: .1,                                   // When effects are used, the duration of resizing in seconds
     slideshow: { delay: 5, display: true },                // Seconds each image is visible in slideshow
     titleSplit: '::',                                      // The characters you want to split title with
     transition: function(pos) {                            // Or your own transition

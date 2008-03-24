@@ -25,7 +25,8 @@
 					<?endif;?>
 					<td width="100%">
 						<div class="question"<?= isset($current_question_flag) ? ' id="the-current-question"' : '' ?>>
-							<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>">
+							<?/*<a href="<?= $this->config->site_url();?>/user/profile/<?=$question['user_name'];?>">*/?>
+								<a href="javascript:showUrl('/user/profile/<?=$question['user_name'];?>/true');">
 								<img class="sc_image" src="./avatars/shrink.php?img=<?=$question['avatar_path'];?>&w=16&h=16">
 							</a>&nbsp;
 							<?= $question['question_name'] ?>
@@ -46,6 +47,9 @@
 		<? endif; ?>
 		<? if($this->userauth->isEventAdmin($event_id)): ?>
 			<div id="cp_admin_tab_<?= $question['question_id'] ?>" class="admin" title="Admin" onClick="cpUpdater.view_tab_section('admin','<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
+			<? if($this->config->item('custom_deleted_tab')){ ?>
+				<div id="cp_delete_tab_<?= $question['question_id'] ?>" class="delete" title="Delete" onclick="my_loading_reminder.show();new Ajax.Request(site_url+'forums/DeleteQuestion/<?=$question['question_id']?>', {method: 'get',onSuccess : cpUpdater.UpdateQuestionOnSucess });my_loading_reminder.hide();">Delete</div>
+			<? } ?>
 		<? endif; ?>
 		<div style="clear:both;"></div>
 		<? $count++; ?>

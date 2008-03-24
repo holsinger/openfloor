@@ -270,6 +270,8 @@ class Forums extends Controller
 		$data['event_id'] = $this->event->get_id_from_url($event);
 		if(!$data['event_id']) exit();
 		
+		//get captcha for account creation
+		$data['capimage'] = $this->createCaptcha();
 		
 		$data["event_data"] = $this->event->get_event($data['event_id']);
 		
@@ -338,6 +340,30 @@ class Forums extends Controller
 			$data['breadcrumb'] = $this->global ? array($this->cms->get_cms_text('', "home_name") => $this->config->site_url()) : array($this->cms->get_cms_text('', "home_name")=>$this->config->site_url(), $this->cms->get_cms_text('', "forums_name")=>'event/',$data["event_data"]['event_name']=>'');
 			$this->load->view('event/widget', $data);
 		}		
+	}
+	
+	function createCaptcha () {
+		//build captch
+		$this->load->plugin('captcha');
+		$vals = array(
+						'img_path'	 => './captcha/',
+						'img_url'	 => 'captcha/'
+					);
+		
+		$cap = create_captcha($vals);
+	
+		$image = array(
+						'captcha_id'	=> '',
+						'captcha_time'	=> $cap['time'],
+						'ip_address'	=> $this->input->ip_address(),
+						'word'			=> $cap['word']
+					);
+	
+		$query = $this->db->insert_string('captcha', $image);
+		$this->db->query($query);
+	
+		//add image to data
+		return $cap['image'];
 	}
 	
 	/**
@@ -808,6 +834,28 @@ class Forums extends Controller
 			$this->load->view('question/edit_question',$data);
 		}
 		
+	}
+	
+	/**
+	* delete question via onClick tab
+	*
+	*@return void
+	*@author James Kleinschnitz
+	**/
+	public function DeleteQuestion($question_id) {
+		$delete_array = array();
+		$delete_array['question_status']='deleted';
+		$delete_array['flag_reason']='other';
+		$delete_array['flag_reason_other']='admin deleted';
+						
+		$changed = $this->question->updateQuestion($question_id, $delete_array);
+		if($changed > 0){
+			$json['question_id'] = $question_id;
+			$json['event_id'] = $event_id;
+			echo(json_encode($json));
+		}else{
+			echo("0");
+		}
 	}
 	
 	/**
