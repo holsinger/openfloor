@@ -10,7 +10,7 @@
 	<?= form_open('user/create_demo_user'); ?>
 	<?= form_hidden('redirect',$this->uri->uri_string()); ?>
 	<?= form_format("Username: ",form_input('user_name','','class="txt" id="username"') ); ?><br/>
-	<?= form_submit('','Use a Demo Account','class="button"'); ?>
+	<?= form_submit('','Get a One Time Account','class="button"'); ?>
 	<?= form_close(); ?>
 	
 	<?= form_open('user/login'); ?>

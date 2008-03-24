@@ -49,9 +49,9 @@ $this->load->view('view_layout/widget_header.php', $data);
 	<div style="float:right;font-size:9px;">
 		<? if (strlen($this->session->userdata['user_name'])>1) {?>
 		<?=$this->session->userdata['user_name'];?>&nbsp;&nbsp;<br/>
-		<a href='logout/'>Logout</a>&nbsp;&nbsp;			
+		<?/*<a href='logout/'>Logout</a>&nbsp;&nbsp;*/?>			
 		<?} else {?>	
-		<a class='link' onClick="showBox('login');">Login</a>&nbsp;&nbsp;<br><a class='link' onClick="showBox('create_account');">Create Account</a>&nbsp;&nbsp;				
+		<a class='link' onClick="showBox('login');">Login</a>&nbsp;&nbsp;<br><?/*<a class='link' onClick="showBox('create_account');">Create Account</a>&nbsp;&nbsp;*/?>
 		<?}?>
 	</div>
 	<h2><?=$event_data['event_name'];?></h2>

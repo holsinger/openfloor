@@ -1,46 +1,6 @@
 <html>
 <head>
 <title>OpenFloor Widget</title>
-<script type="text/javascript">
-/*************************************************************************
-  This code is from Dynamic Web Coding at http://www.dyn-web.com/
-  See Terms of Use at http://www.dyn-web.com/bus/terms.html
-  regarding conditions under which you may use this code.
-  This notice must be retained in the code as is!
-*************************************************************************/
-
-function getDocHeight(doc) {
-  var docHt = 0, sh, oh;
-  if (doc.height) docHt = doc.height;
-  else if (doc.body) {
-    if (doc.body.scrollHeight) docHt = sh = doc.body.scrollHeight;
-    if (doc.body.offsetHeight) docHt = oh = doc.body.offsetHeight;
-    if (sh && oh) docHt = Math.max(sh, oh);
-  }
-  return docHt;
-}
-
-function setIframeHeight(iframeName) {
-  var iframeWin = window.frames[iframeName];
-  var iframeEl = document.getElementById? document.getElementById(iframeName): document.all? document.all[iframeName]: null;
-  if ( iframeEl && iframeWin ) {
-    iframeEl.style.height = "auto"; // helps resize (for some) if new doc shorter than previous  
-    //var docHt = getDocHeight(iframeWin.document);
-    var docHt = window.innerHeight;
-	// need to add to height to be sure it will all show
-    if (docHt) iframeEl.style.height = docHt - 15 + "px";
-  }
-}
-
-function loadIframe(iframeName, url) {
-  if ( window.frames[iframeName] ) {
-    window.frames[iframeName].location = url;   
-    return false;
-  }
-  else return true;
-}
-</script>
-</head>
 </head>
 
 <body>
@@ -50,7 +10,7 @@ function loadIframe(iframeName, url) {
 	<div id="maininnerblock">
 
 		<div align="center" id="row3-b2" style="width:510px;">
-			<iframe src="http://localhost/m1/forums/widget/salt_lake_city_council_fourth_district_candidate_debate" scrolling="yes" frameborder="1" id="ContentCenter" name="ContentCenter" height="95%" width="97%">
+			<iframe src="http://demo.openfloor.com/forums/widget/openfloor_demo" scrolling="yes" frameborder="1" id="ContentCenter" name="ContentCenter" height="95%" width="97%">
 			<p>
 			If you can read this, it means that either your browser 
 			doesn't support iframes, or that you have
