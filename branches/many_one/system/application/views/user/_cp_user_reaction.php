@@ -5,7 +5,11 @@
 	<? $class = '' ?>
 	<? foreach($candidates as $v): ?>
 		<tr<?=$class?>>
-			<td class="sp_arrow" id="current_area_<?=$v['user_id']?>"></td>
+			<? if ($this->config->item('respondent_interface')):?>
+				<td class="sp_arrow" id="current_area_<?=$v['user_id']?>"></td>
+			<? else: ?>
+				<td></td>
+			<? endif; ?>	
 			<td><?= $v['avatar'] . '&nbsp;' . $v['link_to_profile'] ?></td>
 			<td>
 				<div id="your-reaction-<?=$v['user_id']?>">

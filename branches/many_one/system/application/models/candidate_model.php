@@ -55,6 +55,11 @@ class Candidate_model extends Model
 		return $this->db->select('user_name')->from('cn_users')->where('fk_can_id', $can_id)->get()->row()->user_name;
 	}
 	
+	public function userUsername($user_id)
+	{
+		return $this->db->select('user_name')->from('cn_users')->where('user_id', $user_id)->get()->row()->user_name;
+	}
+	
 	public function addCandidate()
 	{
 		$this->action = 'create';
@@ -143,14 +148,18 @@ class Candidate_model extends Model
 	
 	public function linkToProfile($user_id, $image = false, $popup = false)
 	{
-		$user_name = $this->user_name($user_id);
-		if($image){
+		$user_name = $this->userUsername($user_id);
+		if($image && !$popup){
 			return site_url("/user/profile/$user_name");	
 		} 	
 		$display_name = str_replace(" ", "&nbsp;", $this->nameByUser($user_id));
-		if($popup){
-			return anchor("/user/profile/$user_name", $display_name);
+		if($popup && !$image){
+			//return anchor("/user/profile/$user_name", $display_name);
+			return "<a href=\"javascript:showUrl('/user/profile/{$user_name}/true');\">{$display_name}</a>";
 		} 
+		if ($image && $popup) {
+			return "javascript:showUrl('/user/profile/{$user_name}/true');";
+		}
 		return anchor("/user/profile/$user_name", $display_name);
 	}
 }

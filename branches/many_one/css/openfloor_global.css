@@ -2338,7 +2338,7 @@ span.sIFR-alternate {
 
 /* Loading Reminder */
 .loading_reminder {
-	background:#FFF url(../images/many_one/bg-loader.gif) no-repeat;
+	background:#FFF url(../images/openfloor/bg-loader.gif) no-repeat;
 	border-left:2px solid #444D3E;
 	border-right:2px solid #444D3E;
 	border-bottom:2px solid #444D3E;
@@ -2356,7 +2356,7 @@ span.sIFR-alternate {
 
 /* Floating ask question */
 .ask_question {
-	background:#D9D9D9;
+	background:#D9D9D9 url(../images/openfloor/alpha.gif) no-repeat;
 	font-width:bold;
 	color: #5378c1;
 	width: 101%;

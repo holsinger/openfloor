@@ -124,7 +124,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 		</div>
 		<div class="widget_section" onClick="Fold('af_sect','af_tab');"><span id='af_tab'>-</span> Answer Feedback</div>
 		<div id='af_sect'>
-			<? if($is_respondent): ?>
+			<? if($is_respondent && $this->config->item('respondent_interface')): ?>
 				<div class="feed-reaction-panel">
 					<div>
 						<span style="float:left;">

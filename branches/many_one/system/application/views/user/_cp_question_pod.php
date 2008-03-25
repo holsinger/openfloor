@@ -47,7 +47,7 @@
 		<? endif; ?>
 		<? if($this->userauth->isEventAdmin($event_id)): ?>
 			<div id="cp_admin_tab_<?= $question['question_id'] ?>" class="admin" title="Admin" onClick="cpUpdater.view_tab_section('admin','<?= $question['question_id'] ?>', <?=$event_id?>);">Admin</div>
-			<? if($this->config->item('custom_deleted_tab')){ ?>
+			<? if($this->config->item('custom_deleted_tab') && !$question['question_answer']){ ?>
 				<div id="cp_delete_tab_<?= $question['question_id'] ?>" class="delete" title="Delete" onclick="my_loading_reminder.show();new Ajax.Request(site_url+'forums/DeleteQuestion/<?=$question['question_id']?>', {method: 'get',onSuccess : cpUpdater.UpdateQuestionOnSucess });my_loading_reminder.hide();">Delete</div>
 			<? } ?>
 		<? endif; ?>

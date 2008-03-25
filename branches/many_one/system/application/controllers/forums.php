@@ -1369,7 +1369,7 @@ EOT;
 			$data['candidates'][$k]['user_reaction'] = $this->reaction->canUserReaction($v['user_id']);
 			$data['candidates'][$k]['overall_reaction'] = round(($this->reaction->overallReaction($v['user_id'])/10)*100, 0) . '%';
 			$data['candidates'][$k]['link_to_profile'] = $this->candidate->linkToProfile($v['user_id'], false, true);
-			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['user_id'], true) . '"><img src="./avatars/shrink.php?img='.$this->candidate->canAvatar($v['user_id']).'&w=16&h=16"/></a>';
+			$data['candidates'][$k]['avatar'] = '<a href="' . $this->candidate->linkToProfile($v['user_id'], true,true) . '"><img src="./avatars/shrink.php?img='.$this->candidate->canAvatar($v['user_id']).'&w=16&h=16"/></a>';
 		}
 		
 	}

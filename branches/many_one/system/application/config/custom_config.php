@@ -12,4 +12,5 @@ $config['custom_title'] ='OpenFloor';
 $config['custom_show_deleted'] = false;
 $config['custom_deleted_tab'] = true;
 $config['stream_url'] = '';
+$config['respondent_interface'] = false;
 ?>
