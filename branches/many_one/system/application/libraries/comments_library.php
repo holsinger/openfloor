@@ -158,7 +158,8 @@ class Comments_library
 							'</div>
 							<div class="num_votes">
 								<span class="sc_votes">'.$votes.' VOTES</span>
-							</div>		
+							</div>
+									
 						</div>
 						<p style="padding: 5px;">'.$subcomment['comment'].'</p>
 					</div>
