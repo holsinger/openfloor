@@ -27,9 +27,11 @@ class Comments_library
 		$_name_ = ($this->type == 'question') ? 'question_name' : 'video_title' ;
 		
 		// deal with sorting
+		/*
 		$dateSort = ($this->sort == 'date') ? 'Date' : anchor("question/view/{$result['event_url_name']}/" . url_title($result['question_name']), 'Date');
 		$votesSort = ($this->sort == 'votes') ? 'Votes' : anchor("question/view/{$result['event_url_name']}/" . url_title($result['question_name']) . '/votes', 'Votes');
 		$commentHtml = $this->ajax ? '' : "<div class=\"comments-sort\">Sort comments by: $dateSort | $votesSort</div>";
+		*/
 		
 		$id = $result[$_id_];
 		$this->name = url_title($result[$_name_]);
@@ -141,7 +143,7 @@ class Comments_library
 				$pod .= 
 				'<div class="sc_container">
 					<div class="sc_leftnav">
-						<img src="./images/'.$this->config->item('custom_theme').'/Comment_SubcommentArrow.gif"/>
+						<img src="./images/Comment_SubcommentArrow.gif"/>
 					</div>
 					<div class="sc_content">
 						<div class="sc_header">

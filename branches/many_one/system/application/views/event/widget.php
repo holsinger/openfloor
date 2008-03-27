@@ -291,12 +291,14 @@ $this->load->view('view_layout/widget_header.php', $data);
 	function startupCurtain () {
 		Lightview.show({href:'#curtain_call',options: {autosize: true,topclose: true}});
 		
-		cpUpdater.startLazyLoader();
-		<? if($event_data['streaming']): ?>
-			cpUpdater.cpUpdate(true);
-		<? else: ?>
-			cpUpdater.cpUpdate(false);
-		<? endif; ?>
+		  cpUpdater.startLazyLoader();
+			<? if($event_data['streaming']): ?>
+				cpUpdater.cpUpdate(true);
+			<? else: ?>
+				cpUpdater.cpUpdate(false);
+			<? endif; ?>
+	
+				
 	}
 	
 	/*Event.observe(window, 'load', ResizeWidget);

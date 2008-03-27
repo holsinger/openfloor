@@ -401,7 +401,6 @@ cpUpdater.toggleNewQuestion = function(){
 		cpUpdater.toggleAJAX();	 
 	}
 	new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
-	document.add_question_form.question.focus();
 }
 
 cpUpdater.toggleAJAX = function () {

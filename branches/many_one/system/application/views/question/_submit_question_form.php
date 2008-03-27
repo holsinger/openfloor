@@ -20,7 +20,7 @@
               'id'          => 'question',
               'value'       => $this->validation->question,
               'maxlength'   => '100',
-              'size'        => '48',
+              'size'        => '65',
               'class'       => 'txt'
             );		
 	echo form_format("Question: *",form_input($format),'Enter a question you would like asked.' );
