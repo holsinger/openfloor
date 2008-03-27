@@ -40,13 +40,13 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 	#dependency ajaxVideo.js
 	#dependency queueUpdater.js
 	#dependency clock.js
-	dependency effects.js
+	
 	#dependency lightview.js
 	#dependency userWindow.js
 	-->
 	
-	<?/*<script src="./javascript/prototype.js" type="text/javascript"></script>
-	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>*/?>	
+	<?/*<script src="./javascript/prototype6.js" type="text/javascript"></script>
+	<script src="./javascript/scriptaculous6.js" type="text/javascript"></script>*/?>
 	<script src="./javascript/protoculous.js" type="text/javascript"></script>
 	
 	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
@@ -57,10 +57,9 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 		site_url = '<?= $this->config->site_url();?>';
 		username = '<?=$this->userauth->user_name;?>';
 	</script>
-	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/lt7.css" /><![endif]-->
+	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/<?= $this->config->item('custom_title');?>lt7.css" /><![endif]-->
 
-    
-	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>
+
 </head>
 <body onLoad='<?=$onload;?>'>
 

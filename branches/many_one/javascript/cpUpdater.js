@@ -217,6 +217,8 @@ cpUpdater.askQuestion = function() {
 			}
 		}
 	});
+	cpUpdater.cpUpdate(true);
+	ajaxOn = true;
 }
 
 cpUpdater.disableAJAX = function() {
@@ -258,6 +260,28 @@ cpUpdater.enableAJAX = function() {
 			cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);
 		}
 	}	
+}
+
+//function for going to the next question
+cpUpdater.nextQuestion = function(id) {
+	var button = $('next_question');
+	button.value='Advancing Question!';
+	button.disabled=true;
+	button.setStyle('background-color:#444;');
+	my_loading_reminder.show();
+	new Ajax.Request(site_url+'forums/next_question/'+id,  { 
+		onSuccess: function(transport){  
+			setTimeout("$('next_question').value='Goto The Next Question';",5000);
+			setTimeout("$('next_question').disabled=false;",5000);
+			setTimeout("$('next_question').setStyle('background-color:#0055A4;')",5000);			
+		}, 
+		onFailure: function(){ 
+			button.value='Could not change question. Please Refresh Page!';
+			button.setStyle('background-color:#FF0000');
+		} });
+	cpUpdater.cpUpdate(true);
+	ajaxOn = true;
+	my_loading_reminder.hide();
 }
 
 cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2){
@@ -369,7 +393,6 @@ cpUpdater.toggleNewQuestion = function(){
 		$$('div[class=cp-comments]').invoke('setStyle', {display:'none'});
 		cpUpdater.toggleAJAX();	 
 	}
-	
 	new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
 }
 

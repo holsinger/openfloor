@@ -59,6 +59,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 </div>
 <br/><br/><br/><br/><br/><br/>
 <div id='top_lock'>
+	<a class="link" onclick="cpUpdater.toggleNewQuestion();">CLICK TO ASK A QUESTION</a>
 	<?/*?><div id="video_container">
 		<?= $stream_high ?>
 	</div>
@@ -87,14 +88,15 @@ $this->load->view('view_layout/widget_header.php', $data);
 			<input class="button" type="button" onclick="window.open('http://prelive.ustream.tv/broadcaster/IBo6cdjuzGo0x.6P6qk6b69fwm3Ftefb', '_blank', 'width=700,height=430,scrollbars=no,status=no,resizable=yes,screenx=20,screeny=20');" style="background: rgb(69, 110, 189) none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" value="Launch Video Broadcaster"/><br/>
 			<!-- this only applies to a multi respondent event -->
 			<input value="Advance Queue" class="button" type="button" onclick="new Ajax.Request(site_url+'forums/move_queue/forward/<?=$event_data['event_id']?>',  { onSuccess: function(transport){    }, onFailure: function(){ alert('Could not change question.') } });"> (Mutli-Respondent Events Only)<br /> */ ?>
-			<input value="Goto The Next Question" class="button" id= "next_question" type="button" onclick="this.value='Advancing Question!';this.enabled=false;my_loading_reminder.show();new Ajax.Request(site_url+'forums/next_question/<?=$event_data['event_id']?>',  { onSuccess: function(transport){  $('next_question').value='Goto The Next Question';$('next_question').enabled=true; }, onFailure: function(){ alert('Could not change question.') } });my_loading_reminder.hide();">
+			<input value="Goto The Next Question" class="button" id="next_question" type="button" onclick="cpUpdater.nextQuestion(<?=$event_data['event_id'];?>);">
 		
 		<? else: ?>
 			<input value="Reopen Event" class="button" type="button" onclick="new Ajax.Request(site_url+'event/change_event_status_ajax/<?=$event_data['event_id']?>/no_finish',  { onSuccess: function(transport){ if(transport.responseText){ window.location = site_url+'forums/cp/<?=url_title($event_data['event_name'])?>'; }  }, onFailure: function(){ alert('Could not unfinish event.') } });">
 		<? endif; ?>
 		<? if(!$event_data['event_finished']): ?>
 			<br />
-			<input value="Edit Event" class="button" type="button" onclick="window.location=site_url+'event/admin_panel/<?=$event_data['event_id']?>'">
+			<?/*<input value="Edit Event" class="button" type="button" onclick="window.location=site_url+'event/admin_panel/<?=$event_data['event_id']?>'">*/?>
+			<input class="button" type="button" onclick="window.open(site_url+'event/admin_panel/<?=$event_data['event_id']?>', '_blank', 'width=1024,height=768,scrollbars=no,status=no,resizable=yes,screenx=20,screeny=20');" value="Edit Event"/>
 		<? endif; ?>
 		</div><!-- end admin-- >
 	<? endif; ?>

@@ -1,4 +1,4 @@
-<div class="link" onclick="showBox('question_suggestions');">Learn how to ask great questions here.</div>
+<?/*<div class="link" onclick="showBox('question_suggestions');">Learn how to ask great questions here.</div>*/?>
 
 <?= form_open('question/add/'.$event_url, array('id' => 'add_question_form')); ?>
 	<div class='errorArea'><?= isset($error)?$error:'' ?></div>		
@@ -54,7 +54,7 @@
 	<br />
 	<?= form_hidden('submitted','true'); ?>
 	<?= form_hidden('event_url',$event_url); ?>
-	<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>
+	<?/*<div class="link" onclick="showBox('disclaimer');">Disclaimer</div>*/?>
 	<br />
 	<? if(isset($ajax)): ?>
 		<?/*<a onClick="javascript:cpUpdater.askQuestion();">Submit Question</a>*/?>
