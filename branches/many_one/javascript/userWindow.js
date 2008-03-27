@@ -19,6 +19,7 @@ function showBox(id){
 		});	
 	} else {
 	Lightview.show({href:'#'+id,options: {autosize: true,topclose: true}});
+	Field.focus('username');
 	}
 }
 

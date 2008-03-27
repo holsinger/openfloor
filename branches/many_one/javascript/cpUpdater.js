@@ -219,6 +219,7 @@ cpUpdater.askQuestion = function() {
 	});
 	cpUpdater.cpUpdate(true);
 	ajaxOn = true;
+	cpUpdater.startLazyLoader();
 }
 
 cpUpdater.disableAJAX = function() {
@@ -282,6 +283,7 @@ cpUpdater.nextQuestion = function(id) {
 	cpUpdater.cpUpdate(true);
 	ajaxOn = true;
 	my_loading_reminder.hide();
+	cpUpdater.startLazyLoader();
 }
 
 cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2){
@@ -343,6 +345,11 @@ cpUpdater.change_comments_sort = function(question_id, event_name, question_name
 			'ajax' : 'true'
 		},
 		onSuccess: function(transport) {
+			new Ajax.Updater('cp_tab_body_' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
+				parameters: {
+					'ajax' : 'true'
+				}
+			});
 			my_loading_reminder.hide();
 		}
 	});
@@ -351,7 +358,7 @@ cpUpdater.change_comments_sort = function(question_id, event_name, question_name
 cpUpdater.voteComment = function (url, question_id, event_name, question_name) {
 	new Ajax.Request(url, {
 		onSuccess: function(transport) {
-			new Ajax.Updater('cp-comments-' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
+			new Ajax.Updater('cp_tab_body_' + question_id, site_url + 'question/view/' + event_name + '/' + question_name, {
 				parameters: {
 					'ajax' : 'true'
 				}
@@ -394,6 +401,7 @@ cpUpdater.toggleNewQuestion = function(){
 		cpUpdater.toggleAJAX();	 
 	}
 	new Effect.toggle('cp-ask-question','blind', {queue: 'end'});
+	document.add_question_form.question.focus();
 }
 
 cpUpdater.toggleAJAX = function () {

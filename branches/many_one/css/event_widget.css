@@ -525,9 +525,10 @@ background-color:#9F9F9F;
 .thumb_block {
 	background-color:#444D3E;
 	padding:5px;
+	margin-top:-13px;
 }
 .num_votes {
-	margin-top:3px;
+	margin-top:-10px;
 	padding:4px;
 	height:15px;
 	background-color:#ffffff;
@@ -568,4 +569,9 @@ line-height:1.3em;
 }
 #cq_sect {
 	border-bottom:5px solid inherit;
+}
+.empty_que {
+	text-align: center;
+	background-color: #CCC;
+	padding: 15px;
 }

@@ -5,5 +5,6 @@
 			</p>
 	    </div>
     </div>
+    <?= $this->config->item('tracking_code'); ?>
 </body>
 </html>

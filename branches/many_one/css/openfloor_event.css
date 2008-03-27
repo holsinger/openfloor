@@ -510,3 +510,8 @@ background: #0055A4 url(../images/openfloor/tab_bl.gif) no-repeat;
 .rrbo div {
 background: url(../images/openfloor/tab_br.gif) no-repeat top right;
 }
+.empty_que {
+	text-align: center;
+	background-color: #CCC;
+	padding: 15px;
+}

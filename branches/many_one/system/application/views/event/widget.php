@@ -59,7 +59,6 @@ $this->load->view('view_layout/widget_header.php', $data);
 </div>
 <br/><br/><br/><br/><br/><br/>
 <div id='top_lock'>
-	<a class="link" onclick="cpUpdater.toggleNewQuestion();">CLICK TO ASK A QUESTION</a>
 	<?/*?><div id="video_container">
 		<?= $stream_high ?>
 	</div>
@@ -227,7 +226,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 		</span>
 	</div>
 	<div id="error_div"></div>
-	<div id="upcoming_questions"></div>	
+	<div id="upcoming_questions"><div class='empty_que'><h2>Loading Questions<h2></div></div>		
 	</div> <!-- end body_lock -->
 	<div id='bottom_lock' style="margin-top: 20px; text-align: center;">
 			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.gif" border="0" /></a>
@@ -273,9 +272,15 @@ $this->load->view('view_layout/widget_header.php', $data);
 	var upcoming_questions_count_url = site_url + 'forums/cp/' + event_name + '/upcoming_questions_count';
 	cpUpdater.is_respondent = <?=($is_respondent)?"true":"false"?>;
 	
-	Event.observe(window, 'load', cpUpdater.startLazyLoader);
-	Event.observe(window, 'load', StartUpdater);
+	
+	// Event.observe(window, 'load', cpUpdater.startLazyLoader);
+	<? if (strlen($this->session->userdata['user_name'])<1 && $this->config->item('curtain_call')) {?>
+		Event.observe(window, 'load', startupCurtain);
+	<? } else { ?>
+		Event.observe(window, 'load', StartUpdater);
+	<? } ?>
 	function StartUpdater(){
+		cpUpdater.startLazyLoader();
 		<? if($event_data['streaming']): ?>
 			cpUpdater.cpUpdate(true);
 		<? else: ?>
@@ -283,6 +288,17 @@ $this->load->view('view_layout/widget_header.php', $data);
 		<? endif; ?>
 		
 	}
+	function startupCurtain () {
+		Lightview.show({href:'#curtain_call',options: {autosize: true,topclose: true}});
+		
+		cpUpdater.startLazyLoader();
+		<? if($event_data['streaming']): ?>
+			cpUpdater.cpUpdate(true);
+		<? else: ?>
+			cpUpdater.cpUpdate(false);
+		<? endif; ?>
+	}
+	
 	/*Event.observe(window, 'load', ResizeWidget);
 	function ResizeWidget(){
 		var resize_height = document.viewport.getHeight() - ($('top_lock').getHeight()+$('cq_sect').getHeight()+$('bottom_lock').getHeight());
@@ -290,4 +306,8 @@ $this->load->view('view_layout/widget_header.php', $data);
 		$('body_lock').style.height = resize_height+'px';	
 	}*/
 </script>
+
+<? $data['curtain'] = true; ?>
+<? $this->load->view("ajax/{$this->config->item('custom_theme')}_login",$data);?>
+
 <? $this->load->view('view_layout/widget_footer.php', $data);?>

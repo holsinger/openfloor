@@ -8,7 +8,7 @@
 		$votes = ($question['votes'] == 1) ? 'vote ' : 'votes' ; 
 		# IE 6 has this nasty bug where if I don't insert this section below, the first pod for every return will not have it's background applied
 		if(($this->agent->browser() == "Internet Explorer" && $this->agent->version() < 7) && $count == 0): ?>
-			<div style="overflow: hidden; height: 0px; margin-top: -22px"><img src="http://192.168.0.86/many_one/images/many_one/bg_question_pod.gif" /></div>
+			<div style="overflow: hidden; height: 0px; margin-top: -22px"></div>
 		<? endif; ?>
 		
 		<div class="<?= isset($current_question_flag) ? 'current-question-pod' : 'question-pod-container' ?>" id="question_container_<?= $question['question_id'] ?>">
@@ -54,4 +54,14 @@
 		<div style="clear:both;"></div>
 		<? $count++; ?>
 	<? 	endforeach; ?>
+	<?
+	//lets make sure we are showing something
+	
+	if ($count === 0) {
+	?>
+		<div class="empty_que">
+			<h3>There are no Questions Here.</h3>
+			<strong>Either they have all been answered or we are waiting for you to ask one.</strong>
+		</div>
+	<? } ?>
 <? endif; ?>

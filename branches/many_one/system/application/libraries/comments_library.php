@@ -141,7 +141,7 @@ class Comments_library
 				$pod .= 
 				'<div class="sc_container">
 					<div class="sc_leftnav">
-						<img src="./images/P20_Comment_SubcommentArrow.png"/>
+						<img src="./images/'.$this->config->item('custom_theme').'/Comment_SubcommentArrow.gif"/>
 					</div>
 					<div class="sc_content">
 						<div class="sc_header">

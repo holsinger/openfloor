@@ -8,7 +8,7 @@ background-color:	#fff;
 margin:				40px;
 font-family:		Lucida Grande, Verdana, Sans-serif;
 font-size:			12px;
-color:				#000;
+color:				#0055A4;
 text-align: center;
 }
 
@@ -21,7 +21,7 @@ padding:			20px 20px 12px 20px;
 h1 {
 font-weight:		normal;
 font-size:			14px;
-color:				#990000;
+color:				#0055A4;
 margin: 			0 0 4px 0;
 }
 </style>
@@ -35,8 +35,8 @@ margin: 			0 0 4px 0;
 	<!-- <div id="content"> -->
 		<!--<h1><?php echo $heading; ?></h1>-->
 		<?php 
-		echo $message; 
-		// mail('kleinschnitz@wikireview.com',$heading,$message);
+		//echo $message; 
+		mail('webmaster@openfloortech.com',$heading,$message);
 		?>
 	<!-- </div> -->
 	</div>

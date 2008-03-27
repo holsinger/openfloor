@@ -826,6 +826,8 @@ class User extends Controller {
 	/** create users from passed info **/
 	public function create_demo_user ($user_name,$password='') {
 		$user_name = $_POST['user_name'];
+	  //get a unique version of submitted username
+		$user_name = $this->buildUniqueUserName($user_name);
 		$data['user_name']=$user_name;
 		$data['display_name']=$user_name;
 		$data['user_email']=$user_name."@home.com";
@@ -841,6 +843,18 @@ class User extends Controller {
 		else redirect('/');
 		ob_clean();
 		exit();
+	}
+	
+	function buildUniqueUserName($user_name){
+	
+		if ($this->user->userExists(array('user_name' => $user_name))) {
+		  $rand = rand(0,100);
+			$user_name = $user_name.$rand;
+			
+			return $this->buildUniqueUserName($user_name);
+		} else {
+			return $user_name;
+		}
 	}
 		
 }
