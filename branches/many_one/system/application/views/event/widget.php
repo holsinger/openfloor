@@ -123,43 +123,46 @@ $this->load->view('view_layout/widget_header.php', $data);
 			<div id="current_question">loading...</div>
 			<br/>
 		</div>
-		<div class="widget_section" onClick="Fold('af_sect','af_tab');"><span id='af_tab'>-</span> Answer Feedback</div>
-		<div id='af_sect'>
-			<? if($is_respondent && $this->config->item('respondent_interface')): ?>
-				<div class="feed-reaction-panel">
-					<div>
-						<span style="float:left;">
-							<div id="respondent_div">
-								loading...
-							</div>
-						</span>
-						<span style="float:right;">
-							<div>
-								The following shows the order of the respondents and which respondent is currently on tap to respond.
-								<? $this->load->view('event/respondent_reaction'); ?>
-							</div>
-						</span>
-						<span style="clear:both;" />
+		
+		<? if ($this->config->item('respondent_interface')) { ?>
+			<div class="widget_section" onClick="Fold('af_sect','af_tab');"><span id='af_tab'>-</span> Answer Feedback</div>
+			<div id='af_sect'>
+				<? if($is_respondent && $this->config->item('respondent_interface')): ?>
+					<div class="feed-reaction-panel">
+						<div>
+							<span style="float:left;">
+								<div id="respondent_div">
+									loading...
+								</div>
+							</span>
+							<span style="float:right;">
+								<div>
+									The following shows the order of the respondents and which respondent is currently on tap to respond.
+									<? $this->load->view('event/respondent_reaction'); ?>
+								</div>
+							</span>
+							<span style="clear:both;" />
+						</div>
 					</div>
-				</div>
-			<? else: ?>
-				<div class="feed-reaction-panel">
-					<div>
-						<?/*?><span style="width: 50%">
-							<div id="video_container">
-								<?= $stream_high ?>
-							</div>
-						</span>*/?>
-						<span>
-							<div id="user-reaction">
-								Rate the Respondents response to the current question.
-								<? $this->load->view('user/_cp_user_reaction'); ?>
-							</div>
-						</span>
+				<? else: ?>
+					<div class="feed-reaction-panel">
+						<div>
+							<?/*?><span style="width: 50%">
+								<div id="video_container">
+									<?= $stream_high ?>
+								</div>
+							</span>*/?>
+							<span>
+								<div id="user-reaction">
+									Rate the Respondents response to the current question.
+									<? $this->load->view('user/_cp_user_reaction'); ?>
+								</div>
+							</span>
+						</div>
 					</div>
-				</div>
-			<? endif; ?>
-		</div>	
+				<? endif; ?>
+			</div>	
+		<? } ?>
 		<div class="widget_section" >&nbsp; Dynamic Question Queue</div>
 		<div id="body_lock">
 		
@@ -282,7 +285,11 @@ $this->load->view('view_layout/widget_header.php', $data);
 	function StartUpdater(){
 		cpUpdater.startLazyLoader();
 		<? if($event_data['streaming']): ?>
-			cpUpdater.cpUpdate(true);
+			<? if($this->config->item('respondent_interface')): ?>
+				cpUpdater.cpUpdate(true,true);
+			<? else: ?>
+				cpUpdater.cpUpdate(true,false);
+			<? endif; ?>
 		<? else: ?>
 			cpUpdater.cpUpdate(false);
 		<? endif; ?>
@@ -290,23 +297,23 @@ $this->load->view('view_layout/widget_header.php', $data);
 	}
 	function startupCurtain () {
 		Lightview.show({href:'#curtain_call',options: {autosize: true,topclose: true}});
-		
-		  cpUpdater.startLazyLoader();
-			<? if($event_data['streaming']): ?>
-				cpUpdater.cpUpdate(true);
-			<? else: ?>
-				cpUpdater.cpUpdate(false);
-			<? endif; ?>
+			
+			document.observe('lightview:hidden', function(event) {
 	
+				cpUpdater.startLazyLoader();
+				<? if($event_data['streaming']): ?>
+					<? if($this->config->item('respondent_interface')): ?>
+						cpUpdater.cpUpdate(true,true);
+					<? else: ?>
+						cpUpdater.cpUpdate(true,false);
+					<? endif; ?>
+				<? else: ?>
+					cpUpdater.cpUpdate(false);
+				<? endif; ?>
+			});
 				
 	}
 	
-	/*Event.observe(window, 'load', ResizeWidget);
-	function ResizeWidget(){
-		var resize_height = document.viewport.getHeight() - ($('top_lock').getHeight()+$('cq_sect').getHeight()+$('bottom_lock').getHeight());
-		if (resize_height<250) resize_height = 250;
-		$('body_lock').style.height = resize_height+'px';	
-	}*/
 </script>
 
 <? $data['curtain'] = true; ?>

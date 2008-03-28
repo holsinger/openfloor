@@ -30,8 +30,6 @@
 	#dependency userWindow.js
 	-->
 	
-	<?/*<script src="./javascript/prototype.js" type="text/javascript"></script>
-	<script src="./javascript/scriptaculous.js" type="text/javascript"></script>*/?>	
 	<script src="./javascript/protoculous.js" type="text/javascript"></script>
 	
 	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>

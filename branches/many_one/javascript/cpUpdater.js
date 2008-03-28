@@ -30,36 +30,42 @@ cpUpdater.vote = function(url) {
 	});
 }
 
-cpUpdater.cpUpdate = function(stream_update) {
+cpUpdater.cpUpdate = function(stream_update,respondents) {
 	updaters = new Array();
 	last_respondent_current = "start";
 	last_respondent_question_id = false;
 	if(stream_update){
-		// Changes the overall reaction field
-		for(var i = 0; i < cans.length; i++){
-			cpUpdater.ajaxReaction(cans[i]);  // Initial call
-			cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);	// Ten Seconds
-		}
-		
+		if (respondents) {
+			// Changes the overall reaction field
+			for(var i = 0; i < cans.length; i++){
+				cpUpdater.ajaxReaction(cans[i]);  // Initial call
+				cpUpdater.reaction_updater_id[i] = setInterval('cpUpdater.ajaxReaction('+cans[i]+')', 10000);	// Ten Seconds
+			}
+			
+			// Switches the current question when necessary
+			cpUpdater.ajaxCurrentQuestion();
+			cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);		// Ten Seconds
+			
+			// Starts the active user pinging, this does not get stopped when disable ajax is called 
+			cpUpdater.ajaxParticipantPing();
+			cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 60000);	// One Minute, 30 Seconds
+			
+			if(cpUpdater.is_respondent){
+				// Update sliders for new question
+				cpUpdater.ajaxRespondentStatus();
+				setInterval('cpUpdater.ajaxRespondentStatus()', 10000);
+			}else{
+				// Update sliders for new question
+				cpUpdater.ajaxParticipant();
+				setInterval('cpUpdater.ajaxParticipant()', 10000);
+			}
+		}//end if respondents 
+				
 		// Switches the current question when necessary
 		cpUpdater.ajaxCurrentQuestion();
 		cpUpdater.current_question_updater_id = setInterval('cpUpdater.ajaxCurrentQuestion()', 10000);		// Ten Seconds
 		
-		// Starts the active user pinging, this does not get stopped when disable ajax is called 
-		cpUpdater.ajaxParticipantPing();
-		cpUpdater.active_participant_updater_id = setInterval('cpUpdater.ajaxParticipantPing()', 60000);	// One Minute, 30 Seconds
-		
-		if(cpUpdater.is_respondent){
-			// Update sliders for new question
-			cpUpdater.ajaxRespondentStatus();
-			setInterval('cpUpdater.ajaxRespondentStatus()', 10000);
-		}else{
-			// Update sliders for new question
-			cpUpdater.ajaxParticipant();
-			setInterval('cpUpdater.ajaxParticipant()', 10000);
-		}
 	}
-	
 }
 
 // Used above as part of the interval call
@@ -87,12 +93,12 @@ cpUpdater.ajaxReaction = function(speaker_id){
 
 // Used above as part of the interval call, this checks to see if there is a new question, and will only show the new question if there is.  
 // This is done for efficiency.
-cpUpdater.ajaxCurrentQuestion = function(speaker_id){
+cpUpdater.ajaxCurrentQuestion = function(speaker_id,respondent){
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name, {
 		onSuccess: function(transport) {
 			if(transport.responseText != cpUpdater.current_question_last_value){
 				if(transport.responseText != 'none'){
-					cpUpdater.ajaxUpdateCurrentQuestion(transport.responseText);
+					cpUpdater.ajaxUpdateCurrentQuestion(transport.responseText,respondent);
 					cpUpdater.current_question_last_value = transport.responseText;
 				}else{
 					$('current_question').innerHTML = "&nbsp;Waiting for a current question.";
@@ -103,7 +109,7 @@ cpUpdater.ajaxCurrentQuestion = function(speaker_id){
 	});
 }
 // used with the above function, it will actually display the new current question
-cpUpdater.ajaxUpdateCurrentQuestion = function(new_question_id){
+cpUpdater.ajaxUpdateCurrentQuestion = function(new_question_id,respondent){
 	// Get New Current Question
 	new Ajax.Request(site_url + 'forums/ajax_get_current_question/'+ event_name+'/pod', {
 		onSuccess: function(transport) {
@@ -115,7 +121,7 @@ cpUpdater.ajaxUpdateCurrentQuestion = function(new_question_id){
 			$('the-current-question').setStyle({backgroundColor: "#F2F6FE"});
 	  	}
 	});
-	if(!cpUpdater.is_respondent){
+	if(!cpUpdater.is_respondent && respondent){
 		// Update sliders for new question
 		new Ajax.Request(site_url + 'forums/ajax_get_slider_info/'+ event_name+'/'+new_question_id);
 	}

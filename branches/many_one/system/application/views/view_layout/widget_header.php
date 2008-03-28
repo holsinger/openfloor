@@ -45,8 +45,6 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 	#dependency userWindow.js
 	-->
 	
-	<?/*<script src="./javascript/prototype6.js" type="text/javascript"></script>
-	<script src="./javascript/scriptaculous6.js" type="text/javascript"></script>*/?>
 	<script src="./javascript/protoculous.js" type="text/javascript"></script>
 	
 	<script type="text/javascript" charset="utf-8"><?= isset($js) ? $js : '' ?></script>
