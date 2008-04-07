@@ -18,7 +18,7 @@ function showBox(id){
 		  }
 		});	
 	} else {
-	Lightview.show({href:'#'+id,options: {autosize: true,topclose: true}});
+	Lightview.show({href:'#'+id,options: {autosize: true,topclose: false}});
 	Field.focus('username');
 	}
 }
@@ -29,7 +29,7 @@ function showUrl(url){
 		  rel: 'ajax',
 		  options: {
 		    autosize: true,
-		    topclose: true,
+		    topclose: false,
 		    ajax: {
 		      method: 'post',
 		      onSuccess: function(transport){

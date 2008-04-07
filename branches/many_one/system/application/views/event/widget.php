@@ -252,7 +252,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 	</div>
 </div>
 
-<div id="loading_reminder_div" class="loading_reminder"><img style="padding-top: 2px;" src="images/openfloor/ajax-loader.gif">LOADING</div>
+<div id="loading_reminder_div" class="loading_reminder"><img style="padding-top: 2px;" src="images/openfloor/ajax-loader.gif"><br/>LOADING</div>
 <script type="text/javascript" charset="utf-8">
 	var my_loading_reminder = new Control.LoadingReminder('loading_reminder_div','left');
 	

@@ -80,9 +80,9 @@ class Comments_library
 			<div class="c_content">
 				<div class="'.$comment_class.'">
 					<div class="cp_info_title">
-						<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by '
-						.anchor('user/profile/'.$info['user_name'],$user_name).
-						' ('.$time_diff.' ago)'.'
+						<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16">&nbsp;&nbsp;by 
+						<a href="javascript:showUrl(\'/user/profile/'.$subcomment['user_name'].'/true\');">'.$subcomment['user_name'].'</a>
+						('.$time_diff.' ago)'.'
 					</div>	
 					<div class="thumb_block">';
 					$this->question_id = $info['fk_question_id'];
@@ -148,9 +148,9 @@ class Comments_library
 					<div class="sc_content">
 						<div class="sc_header">
 							<div class="cp_info_title">
-								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16"/>&nbsp;&nbsp;by '
-								.anchor('user/profile/'.$subcomment['user_name'],$user_name).
-								' ('.$time_diff.' ago)'.'
+								<img class="sc_image" src="./avatars/shrink.php?img='.$avatar_path.'&w=16&h=16"/>&nbsp;&nbsp;by 
+								<a href="javascript:showUrl(\'/user/profile/'.$subcomment['user_name'].'/true\');">'.$subcomment['user_name'].'</a>
+								 ('.$time_diff.' ago)'.'
 							</div>	
 							<div class="thumb_block">';
 								$this->createVoteBox($pod, $voted, $subcomment['comment_id'], $this->question_id, url_title($this->event_name), $this->question_name, $this->ajax,$this->custom_theme);

@@ -12,10 +12,11 @@ $this->load->view('view_layout/header.php', $data);
 <!-- 
 #dependency <?=$this->config->item('custom_theme');?>_event.css
 #lets do some safari css stuff
+<?
 if (strpos(strtolower($this->agent->agent_string()),'safari')>0) {
 	echo "#dependency ".$this->config->item('custom_theme')."_safari.css";
 }
-
+?>
 
 #dependency cpUpdater.js
 #dependency lazy_loader.js
