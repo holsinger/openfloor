@@ -60,7 +60,8 @@ Control.LoadingReminder.prototype = {
 	},
 	ieScroll : function(){
 		var scrolled = document.viewport.getScrollOffsets();
-		if (this.position == 'bottom') $(this.reminder_elem_id).setStyle({ bottom : scrolled[1]+'px'});
+		var winHeight = document.viewport.getHeight();
+		if (this.position == 'bottom') $(this.reminder_elem_id).setStyle({ top: winHeight+'px'});
 		else $(this.reminder_elem_id).setStyle({ top : scrolled[1]+'px'});
 	},
 	isVisible : function(){
