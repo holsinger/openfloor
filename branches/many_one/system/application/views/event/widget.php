@@ -260,10 +260,10 @@ $this->load->view('view_layout/widget_header.php', $data);
 	ask_question.show();
 	
 	if(typeof document.body.style.maxHeight != "undefined"){
-		$('place_footer_div').setStyle(display:"");
-	} else {	
 		var place_footer = new Control.LoadingReminder('place_footer_div','bottom');
 		place_footer.show();
+	} else {
+		$("place_footer_div").setStyle({position:"absolute"});
 	}
 	
 	function SwithDescription(){
