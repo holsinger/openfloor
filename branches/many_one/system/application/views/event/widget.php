@@ -129,7 +129,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 	<? if($event_data['streaming'] && !$event_data["event_finished"]): ?>
 		
 		<div class="widget_section" onClick="Fold('cq_sect','cq_tab');"><span id='cq_tab'>-</span> Current Question</div>
-		<br/>
+		<div><br/><br/></div>
 		<div id='cq_sect'>
 			<div id="current_question">loading...</div>
 			<br/>
