@@ -1,26 +1,3 @@
-/*--------------------------------------------------------------------
-Global CSS
-
-Author:			Ryan Brill <ryan [at] solutionset.com>
-
-Methods: 		RULES ORGANISATION WITHIN CSS FILES
-				Should mirror the html document flow:
-				General
-					Container
-						Header
-							Nav
-						Body
-							Layout Setup
-								Modules
-						Footer
-					Hacks
-					(other)
-----------------------------------------------------------------------*/
-
-/* Global Reset
-----------------------------------------------------------------------*/
-@import url(globalReset.css);
-
 /* Global Styles
 ----------------------------------------------------------------------*/
 body {

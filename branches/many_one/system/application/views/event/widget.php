@@ -119,7 +119,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 			<?=$event_data["event_desc_brief"]?><br />
 		</div>
 		<div id="event_description_full" style="display:none; font-weight: normal;">
-			<br />Candidates: <?=$event_data['participants']?>
+			<?/* <br />Respondents: <?=$event_data['participants']?>*/ ?>
 			<br /><?=$event_data["event_desc"]?>
 		</div>
 		<div><a href="javascript: var none = SwithDescription('show');"  title="See Full Description"><span id="description_text">See full description</span></a><br/></div>
@@ -240,6 +240,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 		</span>
 	</div>
 	<div id="error_div"></div>
+	<div><br/><br/></div>
 	<div id="upcoming_questions"><div class='empty_que'><h2>Loading Questions<h2></div></div>		
 	</div> <!-- end body_lock -->
 	<!-- spacer for floating footer -->
