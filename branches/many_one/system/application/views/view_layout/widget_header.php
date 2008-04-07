@@ -33,7 +33,12 @@ if (isset($data['js_onload']) && is_array($data['js_onload'])) {
 	#dependency openfloor_globalReset.css
 	#dependency openfloor_global.css
 	#dependency lightview.css
-	
+	<?
+	#lets do some safari css stuff
+	if (strpos(strtolower($this->agent->agent_string()),'safari')>0) {
+		echo "#dependency ".$this->config->item('custom_theme')."_safari.css";
+	}
+	?>
 	
 	JAVASCRIPT DEPENDENCIES
 	#dependency init.js

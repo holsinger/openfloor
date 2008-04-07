@@ -1,5 +1,3 @@
-/* @override http://localhost/rp2/css/event.css */
-
 .cp-info {
 	background-color: white;
 	padding: 5px;
@@ -62,8 +60,6 @@ a {
 
 .question-pod-container {
 	background: #cccccc;
-	/*margin-top: 20px;*/
-	padding-bottom:5px;
 
 }
 

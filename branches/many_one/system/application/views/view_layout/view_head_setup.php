@@ -41,7 +41,7 @@
 		username = '<?=$this->userauth->user_name;?>';
 	</script>
 	<!--[if lt IE 7]><link rel="stylesheet" type="text/css" href="<?= $this->config->site_url() ?>css/lt7.css" /><![endif]-->
-
+	
     
 	<?= isset($this->validation->event_date) ? @js_calendar_script('my_form') : '' ; ?>
 </head>

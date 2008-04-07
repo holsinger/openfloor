@@ -92,7 +92,7 @@ class Comments_library
 					$pod .=			
 					'</div>
 					<div class="num_votes">
-						<span class="sc_votes">'.$votes.' VOTES</span>
+						<span class="sc_votes">'.$votes.' </span>
 					</div>		
 				</div>
 				<p style="padding: 5px;">'.$info['comment'].'</p>
@@ -157,7 +157,7 @@ class Comments_library
 								$pod .=			
 							'</div>
 							<div class="num_votes">
-								<span class="sc_votes">'.$votes.' VOTES</span>
+								<span class="sc_votes">'.$votes.' </span>
 							</div>
 									
 						</div>
