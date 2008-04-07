@@ -259,8 +259,12 @@ $this->load->view('view_layout/widget_header.php', $data);
 	var ask_question = new Control.LoadingReminder('ask_question_div','right');
 	ask_question.show();
 	
-	var place_footer = new Control.LoadingReminder('place_footer_div','bottom');
-	place_footer.show();
+	if(typeof document.body.style.maxHeight != "undefined"){
+		$('place_footer').setStyle(display:"");
+	} else {	
+		var place_footer = new Control.LoadingReminder('place_footer_div','bottom');
+		place_footer.show();
+	}
 	
 	function SwithDescription(){
 		if($('event_description_full').getStyle('display') == 'none'){
