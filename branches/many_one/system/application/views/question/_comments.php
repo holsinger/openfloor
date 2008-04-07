@@ -33,7 +33,8 @@ if($this->userauth->isUser()) {
 	<div id="comment_add">
 		<div class="comment_head">
 			<strong>
-			<img src="./avatars/shrink.php?img='.$this->userauth->user_avatar.'&w=16&h=16">&nbsp;&nbsp;'.anchor("user/profile/{$this->userauth->user_name}",$this->userauth->display_name).'
+			<img src="./avatars/shrink.php?img='.$this->userauth->user_avatar.'&w=16&h=16">&nbsp;&nbsp;
+			<a href="javascript:showUrl(\'/user/profile/'.$this->userauth->display_name.'/true\');">'.$this->userauth->display_name.'</a>
 			why not add to the discussion?
 			</strong>
 		</div>
