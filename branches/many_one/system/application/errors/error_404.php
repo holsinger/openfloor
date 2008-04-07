@@ -35,7 +35,7 @@ margin: 			0 0 4px 0;
 		<!--<h1><?php echo $heading; ?></h1>-->
 		<?php 
 		echo $message; 
-		mail('webmaser@openfloortech.com',$heading,$message);
+		#mail('webmaster@openfloortech.com',$heading,$message);
 		?>
 	</div>
 </body>

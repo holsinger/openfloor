@@ -1,4 +1,14 @@
 <?
+//make changes to custom config based on event data
+#$this->config->set_item('item_name', 'item_value');
+//var_dump($data);
+($event_data["option_delete"] == 1) ? $this->config->set_item('custom_show_deleted', 1):$this->config->set_item('custom_show_deleted', 0);
+($event_data["option_respondent"] == 1) ? $this->config->set_item('respondent_interface', 1):$this->config->set_item('respondent_interface', 0);
+
+?>
+
+
+<?
 $cans = ''; 
 foreach($candidates as $v){
 	$cans .= "'{$v['user_id']}', "; 
@@ -119,6 +129,7 @@ $this->load->view('view_layout/widget_header.php', $data);
 	<? if($event_data['streaming'] && !$event_data["event_finished"]): ?>
 		
 		<div class="widget_section" onClick="Fold('cq_sect','cq_tab');"><span id='cq_tab'>-</span> Current Question</div>
+		<br/>
 		<div id='cq_sect'>
 			<div id="current_question">loading...</div>
 			<br/>
@@ -231,8 +242,12 @@ $this->load->view('view_layout/widget_header.php', $data);
 	<div id="error_div"></div>
 	<div id="upcoming_questions"><div class='empty_que'><h2>Loading Questions<h2></div></div>		
 	</div> <!-- end body_lock -->
-	<div id='bottom_lock' style="margin-top: 20px; text-align: center;">
-			<a href="http://www.openfloortech.com"><img src="images/logos/powered_by.gif" border="0" /></a>
+	<!-- spacer for floating footer -->
+	<div><br/><br/><br/><br/><br/></div>
+	
+	<div id="place_footer_div" class="place_footer" >
+		<a href="http://www.openfloortech.com"><img src="images/logos/powered_by_foot.gif" border="0" /></a>
+		<a href="<?= $this->config->site_url();?>forums/widget/<?= $event_data["event_url_name"];?>"><img src ="./images/<?=$this->config->item('custom_theme');?>/refresh.png" alt="Refresh" title="Refresh" /></a>
 	</div>
 </div>
 
@@ -242,6 +257,9 @@ $this->load->view('view_layout/widget_header.php', $data);
 	
 	var ask_question = new Control.LoadingReminder('ask_question_div','right');
 	ask_question.show();
+	
+	var place_footer = new Control.LoadingReminder('place_footer_div','bottom');
+	place_footer.show();
 	
 	function SwithDescription(){
 		if($('event_description_full').getStyle('display') == 'none'){

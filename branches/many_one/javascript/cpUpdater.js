@@ -292,6 +292,15 @@ cpUpdater.nextQuestion = function(id) {
 	cpUpdater.startLazyLoader();
 }
 
+cpUpdater.deleteQuestion = function (question_id) {
+	my_loading_reminder.show();
+	new Ajax.Request(site_url+'forums/DeleteQuestion/'+question_id, {
+		method: 'get',onSuccess : cpUpdater.UpdateQuestionOnSucess 
+	});
+	my_loading_reminder.hide();
+	cpUpdater.startLazyLoader();
+}
+
 cpUpdater.view_tab_section = function(tab_name, question_id, option_1, option_2){
 	if(question_id != cpUpdater.current_question_id){
 		$$('div[class=cp-comments]').invoke('setStyle', {display:'none'});

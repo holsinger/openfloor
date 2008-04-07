@@ -62,7 +62,7 @@ a {
 
 .question-pod-container {
 	background: #cccccc;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 	padding-bottom:5px;
 
 }
@@ -168,7 +168,7 @@ a {
 
 #ucp .current-question-pod {
 	background: #CCCCCC;
-	margin-top: 20px;
+	/*margin-top: 20px;*/
 }
 
 #ucp .question-pod {
@@ -577,4 +577,66 @@ line-height:1.3em;
 	text-align: center;
 	background-color: #CCC;
 	padding: 15px;
+}
+
+/* Floating ask question */
+.ask_question {
+	background:#D9D9D9 url(../images/openfloor/alpha.gif) no-repeat;
+	font-weight:bold;
+	color: #5378c1;
+	width: 101%;
+	line-height: 25px;
+	vertical-align: middle;
+	text-align: center;
+	z-index: 3;
+	font-size: 12px;
+	display: block;
+	position: fixed;
+	cursor:pointer;
+	border-bottom:2px solid #FFF;
+}
+.ask_question h2{
+	margin:0px;
+	font-size: 14px;
+	color:#404040;
+}
+.ask_question a{
+	cursor:pointer;
+	font-size:13;
+	font-weight:bold;
+}
+.ask_question a:hover;{
+	cursor:pointer;
+	text-decoration:underline;
+}
+/** floating footer **/
+.place_footer {
+	background:#D9D9D9;
+	font-weigh:bold;
+	color: #5378c1;
+	width: 100%;
+	line-height: 25px;
+	vertical-align: middle;
+	
+	z-index: 3;
+	font-size: 12px;
+	display: block;
+	position: fixed;
+	cursor:pointer;
+	border-top:2px solid #fff;
+	
+}
+.place_footer h2{
+	margin:0px;
+	font-size: 14px;
+	color:#404040;
+}
+.place_footer a{
+	cursor:pointer;
+	font-size:13;
+	font-weight:bold;
+}
+.place_footer a:hover;{
+	cursor:pointer;
+	text-decoration:underline;
 }

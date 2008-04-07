@@ -26,6 +26,7 @@ Control.LoadingReminder.prototype = {
 		}
 		if (this.position == 'left') $(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', top : '0px', left : '0px' });
 		if (this.position == 'right') $(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', top : '0px', right : '0px' });
+		if (this.position == 'bottom') $(this.reminder_elem_id).setStyle({ position: pop_pos, display: 'none', bottom : '0px', left : '0px' });
 		
 		//not sure what this is for may need to ask clark e but left in it cause errors with widget fixed header
 		//Event.observe($(this.reminder_elem_id), 'mousedown', this.popup_elem_event);
