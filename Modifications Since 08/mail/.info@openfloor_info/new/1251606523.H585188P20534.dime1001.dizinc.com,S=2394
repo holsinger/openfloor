@@ -1,0 +1,55 @@
+Return-path: <no-reply@beanstalkapp.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Sun, 30 Aug 2009 00:28:43 -0400
+Received: from mta2.beanstalkapp.com ([67.228.51.159]:29960)
+	by clone.dimenoc.com with esmtp (Exim 4.69)
+	(envelope-from <no-reply@beanstalkapp.com>)
+	id 1Mhc1z-0005L6-As
+	for info@openfloor.info; Sun, 30 Aug 2009 00:28:43 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=Date:From:To:Message-Id:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding; i=no-reply@beanstalkapp.com;
+ bh=xJyBk705bkEmarROiJt3yhzGt7w=;
+ b=LDHrXKx1TiQXwXvSGLlgjriWGzcNzebDeK7C91C7yUq1sxsVjwcaLNAYhbvbMw41m/WjwsMGwXvl
+   Rze56xve5trj0k1ZNnsile5NieCQBnMfhFjtOAF/Lnx+s1/1pVQV
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=oUz6imi58A/yYX8q914OGe7ac8Ed+ENXWc1ouehCGjsFgOp3ylLgW1QT2lqe4E7s/IMfmKSY8SIG
+   XUcU5iSwq6kNZHdweySXNv9a/5XEmNGT8voZbQqHJh6roUVnXULR;
+Received: from beanstalkapp.com (74.201.255.9) by mta2.beanstalkapp.com id hj86mq0p3rst for <info@openfloor.info>; Sun, 30 Aug 2009 00:26:03 -0500 (envelope-from <no-reply@beanstalkapp.com>)
+X-IADB-IP: 159.51.228.67
+X-IADB-IP-REVERSE: 159.51.228.67
+Date: Sun, 30 Aug 2009 04:28:50 +0000
+From: Beanstalk <no-reply@beanstalkapp.com>
+To: Open Floor <info@openfloor.info>
+Message-Id: <4a9a000290e3a_5b571591f993cefc46081@ey03-s00345.tmail>
+Subject: Migration scheduled within the next 3 hours for openfloor.beanstalkapp.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+This is an important migration announcement sent to all Beanstalk account users.
+
+The account “openfloor.beanstalkapp.com” is scheduled for migration within the next
+few hours. During this time, your account will be inaccessible for about 10 - 30
+minutes while we move your data. You will receive an email when the migration 
+starts and when it is completed.
+
+Here's what you can expect after the migration:
+
+* Faster performance for SVN and the Web Interface
+* Subversion 1.6 support
+* A more scalable environment, ensuring better uptime and response
+
+To read more about this migration, visit:
+
+ http://bit.ly/HwFwi
+ 
+Have questions? Read our migration FAQ:
+ 
+ http://help.beanstalkapp.com/faqs/security-backups/migration-faq-and-troubleshooting
+
+Thanks,
+Beanstalk Support
+ help.beanstalkapp.com
+
+Follow us on Twitter:
+ http://twitter.com/beanstalkapp

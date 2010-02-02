@@ -1,0 +1,324 @@
+AWSTATS DATA FILE 6.9 (build 1.925)
+# If you remove this file, all statistics for date 200912 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2522                
+POS_VISITOR 6196                
+POS_DAY 6885                
+POS_DOMAIN 3189                
+POS_LOGIN 3490                
+POS_ROBOT 3645                
+POS_WORMS 3814                
+POS_EMAILSENDER 3945                
+POS_EMAILRECEIVER 4088                
+POS_SESSION 7258                
+POS_SIDER 7443                
+POS_FILETYPES 4223                
+POS_OS 4423                
+POS_BROWSER 4512                
+POS_SCREENSIZE 4623                
+POS_UNKNOWNREFERER 4697                
+POS_UNKNOWNREFERERBROWSER 4784                
+POS_ORIGIN 4866                
+POS_SEREFERRALS 5002                
+POS_PAGEREFS 5157                
+POS_SEARCHWORDS 5305                
+POS_KEYWORDS 5480                
+POS_MISC 2186                
+POS_ERRORS 5564                
+POS_CLUSTER 3346                
+POS_SIDER_404 5669                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20100101032313 1 0 9458148282942
+FirstTime 0
+LastTime 20091231014316
+LastUpdate 20100102023538 1 0 0 0 0
+TotalVisits 26                  
+TotalUnique 16                  
+MonthHostsKnown 0                   
+MonthHostsUnknown 16                  
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 1 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 7 7 43409 5 7 16805
+1 13 58 193838 5 17 33242
+2 0 0 0 1 1 12278
+3 7 35 254064 2 6 17373
+4 56 228 1896222 8 24 25488
+5 35 231 1686793 5 23 27851
+6 0 0 0 7 12 59073
+7 10 10 50709 5 5 24145
+8 2 2 8840 7 9 32327
+9 2 2 8840 6 7 37354
+10 2 2 8824 6 7 31204
+11 2 2 8824 7 7 42252
+12 19 74 421587 4 14 25561
+13 32 80 206775 2 12 0
+14 2 2 8840 3 4 17490
+15 4 17 35403 0 4 0
+16 0 0 0 3 3 16457
+17 5 20 240775 3 6 10740
+18 9 42 234250 4 12 22348
+19 14 56 350096 0 9 0
+20 0 0 0 4 4 15573
+21 0 0 0 6 6 37837
+22 1 9 100923 0 3 76108
+23 0 0 0 3 4 18843
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 6
+us 107 386 1959843
+cn 88 464 3666258
+ru 14 14 61848
+lu 8 8 48583
+ua 3 3 13640
+gb 2 2 8840
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 1
+googlebot 79 598177 20091230121109 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 8
+php 2 1490 0 0
+css 40 171601 0 0
+png 212 1323038 0 0
+html 100 986475 0 0
+jpg 206 1661252 0 0
+js 104 697331 0 0
+Unknown 120 435505 0 0
+gif 93 482320 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 5
+macosx 364
+winlong 22
+win95 3
+winxp 482
+win2003 6
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 5
+msie6.0 24
+msie5.5 3
+msie7.0 22
+safari 364
+firefox3.0.15 464
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 0
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 0
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 24 24
+From1 0 0
+From2 1 1
+From3 0 0
+From4 197 852
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 1
+google 1 1
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 0
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 1
+openfloor+technology 1
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 2
+technology 1
+openfloor 1
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+403 18 0
+302 106 0
+404 3 2172
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 3
+/user/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,lightview.js,userWindow.js,dynamic_tabs.js 1 -
+http://events.openfloor.info/event/view/openfloor_demoqa 1 -
+/user/javascript/protoculous.js 1 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 16
+98.202.81.18 100 364 1718127 20091231014316
+221.239.1.25 88 464 3666258 20091215221558
+212.117.172.80 8 8 48583 20091230004808
+69.178.19.152 3 18 218661 20091226032910
+91.207.6.26 3 3 13640 20091226074040
+174.50.60.217 2 2 8903 20091230004758
+94.41.4.145 2 2 8840 20091226052919
+94.41.198.119 2 2 8840 20091223091632
+94.41.78.202 2 2 8840 20091215143441
+93.126.2.10 2 2 8840 20091217073658
+94.41.249.165 2 2 8840 20091225080014
+81.30.186.90 2 2 8824 20091202104531
+77.79.152.18 2 2 8824 20091203112756
+94.41.76.140 2 2 8840 20091226051706
+65.190.245.143 1 1 4237 20091217073641
+75.64.248.238 1 1 9915 20091230004702
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 14
+20091202 2 2 8824 1
+20091203 2 2 8824 1
+20091215 90 466 3675098 3
+20091217 58 161 665431 4
+20091218 8 34 70806 2
+20091219 4 17 35403 1
+20091221 5 20 240775 1
+20091223 2 2 8840 1
+20091225 2 2 8840 1
+20091226 10 25 249981 4
+20091228 5 20 240775 1
+20091229 9 42 111839 1
+20091230 12 26 239738 4
+20091231 13 58 193838 1
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 5
+1h+ 1
+15mn-30mn 1
+0s-30s 22
+30s-2mn 1
+2mn-5mn 1
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 43
+/ 90 960237 6 10
+/contact/showForm/contact_us 21 93928 9 10
+/event/create_event 21 145780 0 0
+/user/login 8 45591 6 0
+/fckeditor/editor/fckeditor.html 7 6243 0 1
+/user/profile_ajax/10/3 5 9065 0 0
+/user/profile_ajax/10/2 5 1262 0 0
+/user/profile_ajax/10/1 4 2392 0 1
+/forums/ajax_get_current_question/openfloor_demoqa 4 8 0 0
+/user/profile_ajax/10/4 3 5115 0 0
+/user/profile_ajax/10/5 3 4086 0 0
+/user/profile/b 3 18044 2 0
+/user/profile_ajax/10/10 3 624 0 0
+/user/profile_ajax/288/1 3 940 0 0
+/user/profile_ajax/10/8 3 843 0 0
+/contact/showForm/request_an_event 3 15318 0 0
+/user/profile_ajax/10/6 3 744 0 0
+/contact/showForm/ 2 10080 0 1
+/user/profile_ajax/10/7 2 608 0 0
+/avatars/shrink.php 2 1490 0 0
+/forums/ajax_get_current_question/openfloor_demoqa/pod 2 6368 0 0
+/forums/cp/openfloor_demoqa 2 23678 0 0
+/user/profile/jimmy 2 12364 0 0
+http://events.openfloor.info/contact/showForm/request_an_event 2 8903 1 1
+/user/profile_ajax/274/10 1 420 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1261072823751 1 7302 0 0
+/user/profile_ajax/274/9 1 221 0 0
+/user/profile_ajax/274/2 1 3062 0 0
+/user/password_reset 1 4237 0 0
+/user/profile_ajax/274/6 1 291 0 0
+/user/profile_ajax/274/8 1 308 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1261072793308 1 1 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1261072793706 1 7302 0 0
+/user/profile_ajax/274/3 1 3614 0 0
+/user/profile/8850 1 196 0 0
+/user/profile_ajax/274/1 1 403 0 0
+/user/profile/Daniel 1 6137 0 0
+http://events.openfloor.info/user/password_reset 1 4237 1 1
+/user/profile_ajax/274/5 1 286 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1261072823376 1 1 0 0
+/user/profile_ajax/274/4 1 1138 0 0
+/user/profile_ajax/274/7 1 688 0 0
+http://events.openfloor.info/ 1 9915 1 1
+END_SIDER

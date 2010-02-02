@@ -1,0 +1,127 @@
+/* 
+dropnavIGATION --------------------- */
+ 
+ul#dropnav {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	font-family: "Lucida Grande", Arial, Verdana, sans-serif;
+	font-size: 12px;
+	color: #444;
+	font-weight:bold;
+	background:#e9ebed;
+	height:100%;
+	}
+	
+#dropnav li {
+	display: block; 
+	float: left;
+	margin:0 0;
+	height:28px;
+ 	}
+
+
+#dropnav li a {
+	display: block;
+	color: #555;
+	text-decoration: none;
+	padding: 4px 17px 5px 17px;
+	margin:0;
+	border-bottom: 0;
+	}
+#dropnav li a:hover{
+ 	color: #fff;
+	background:#666;
+ 	}
+	
+#dropnav li ul li a {
+	display: block;
+	color: #555;
+	text-decoration: none;
+	margin:0;
+	line-height:18px;
+	overflow:hidden;
+	border-bottom: 0;
+	}
+#dropnav li ul li a:hover{
+ 	color: #0066ff;
+	background:none;
+ 	}
+
+
+/*
+SON OF SUCKERFISH DROPDOWNS
+See http://www.htmldog.com/articles/suckerfish/dropdowns/
+--------------------- */
+
+/* 2nd and 3rd level menus */
+#dropnav li ul {
+	position: absolute;
+	z-index: 99;
+	left: -999em;
+	width:150px;
+	overflow:hidden;
+	margin: 0px 0 0 -1px;
+	padding: 0;
+	height: auto;
+	border: solid #C7C7C7;
+	border-width: 1px 1px 0;
+	background: #F9F9F9;
+	font-weight:normal;
+	
+}
+
+/* 3rd level menus only */
+#dropnav ul ul {
+	margin: -2em 0 0 150px;
+}
+
+/* 2nd and 3rd level menus */
+#dropnav li li {
+	width: 150px;
+	clear:both;
+	overflow:hidden;
+	border-bottom: 1px solid #DBDBDB;
+	
+}
+
+#dropnav li li a{
+	 padding:5px 5px 0 5px;
+	 margin:0;
+}
+
+/* 2nd and 3rd level menus */
+#dropnav ul a {
+	border-right: 0;
+}
+
+#dropnav li:hover ul ul, #dropnav li:hover ul ul ul, #dropnav li.sfhover ul ul, #dropnav li.sfhover ul ul ul {
+	left: -999em;
+	overflow:hidden;
+}
+
+/* This "unhides" the sub-menus (left: -999em is what hides them) */
+#dropnav li:hover ul, #dropnav li li:hover ul, #dropnav li li li:hover ul, #dropnav li.sfhover ul, #dropnav li li.sfhover ul, #dropnav li li li.sfhover ul {
+	left: auto;
+}
+
+#dropnav li:hover, #dropnav li.sfhover {
+	background: #ECECEC;
+	color:#4aaeee;
+}
+
+/* 2nd and 3rd level menus */
+#dropnav ul li:hover, #dropnav ul ul li:hover, #dropnav ul li.sfhover, #dropnav ul ul li.sfhover {
+	background: #e8e8e8;
+}
+
+/* 2nd and 3rd level menus */
+#dropnav ul li a, #dropnav ul ul li a {
+	background: none;
+	}
+
+/* 2nd level menus only */
+#dropnav a.sub {
+	background: url(../images/arrow-right.gif) right no-repeat; 
+	background-position:190px 12px;
+}

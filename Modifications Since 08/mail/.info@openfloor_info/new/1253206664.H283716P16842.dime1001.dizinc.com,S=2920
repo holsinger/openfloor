@@ -1,0 +1,72 @@
+Return-path: <campaign_56_17015@wildbit.nbrmail.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Thu, 17 Sep 2009 12:57:44 -0400
+Received: from softwaretest.nbrmail.com ([174.36.17.9]:31300)
+	by dime1001.dizinc.com with esmtp (Exim 4.69)
+	(envelope-from <campaign_56_17015@wildbit.nbrmail.com>)
+	id 1MoKIg-0004MX-7a
+	for info@openfloor.info; Thu, 17 Sep 2009 12:57:44 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=From:To:Reply-To:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:List-Unsubscribe:Message-ID; i=info@beanstalkapp.com;
+ bh=t24NhUTOKVp7JWvTYEeVEW4tSIQ=;
+ b=hmDlJigiAFOAeVZgPHe7UkbuRbjNPeMoes1HF/DoiGESNC5nExGTXXC+3f6GjwDm02mje6xK9gi6
+   ud0Z4hRUFP12AwMyoKUNYSswhTj0tt4uFqi5zrPyFeZ/j5I7z3fh
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=soUtF6Sg0aSfPTitN7vFa0tEw6zwI5Fvuc+VgDHQzD3hRIbKPYzdzi218P+R/1x2NBSNVZap93Pa
+   ysgdY++/19AOQ4aXIt+juGbMP8Yjae9Jur3k7oTj5TUII6hyL0ql;
+Received: from singleproc2 (67.228.51.140) by softwaretest.nbrmail.com id hm9s5o0p3rsi for <info@openfloor.info>; Thu, 17 Sep 2009 12:56:36 -0500 (envelope-from <campaign_56_17015@wildbit.nbrmail.com>)
+From: "Beanstalk" <info@beanstalkapp.com> 
+To: "openfloor" <info@openfloor.info>
+Reply-To: info@beanstalkapp.com
+Date: Thu, 17 Sep 2009 12:56:36 -0500
+Subject: Notice: SSL Disabled for Free Accounts
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: aspNetEmail ver 3.1.5.0
+X-N2-RCPT: 56_17015_25223538
+X-Complaints-To: abuse@newsberry.com
+List-Unsubscribe: <http://r.nbrmail.com/Resources/779/17015/56/25223538/unsubscribe.axd>
+Message-ID: <SINGLEPROC2037afb970a1c465ebdb8750f8f0b2f40@singleproc2>
+
+This is being sent to all free account owners on Beanstalk. 
+
+We noticed a number of free accounts that are using Subversion over https (SSL), 
+which is a feature for paid accounts only. With the new migration, we will be 
+releasing an update on Saturday the 19th that will prevent free accounts from 
+using the paid SSL option. 
+
+To avoid disruption of service, please check your working copy and verify that 
+you are using Subversion over http (hint: svn info). If you are using https, you 
+will need to relocate your repository. To learn more about relocation, see this 
+article:
+
+http://svnbook.red-bean.com/en/1.1/re27.html
+
+
+STILL WANT SSL? $10 DISCOUNT!
+
+If you'd like to continue using https and want to upgrade, we're offing a limited 
+coupon for $10 off the first month, expiring on Monday the 21st. When upgrading, 
+insert the coupon code KEEPSSL.
+
+Upgrade at http://openfloor.beanstalkapp.com/account
+
+
+Please reach out if you need help by visiting:
+
+  http://help.beanstalkapp.com
+
+
+Thanks,
+The Beanstalk Team
+
+
+--
+Rather not receive emails from Beanstalk? Unsubscribe:
+
+http://r.nbrmail.com/Resources/779/17015/56/25223538/unsubscribe.axd
+
+
+Email sent using http://newsberry.com
+

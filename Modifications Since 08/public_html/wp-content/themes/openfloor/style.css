@@ -1,0 +1,492 @@
+/* CSS Document */
+/*@import url("css/remix.css");  /* Drop Navigation specific styles */
+/* Global Styles */
+
+
+body{
+	color:#111;
+	font:13px "Arial", "Tahoma", "MS Sans Serif", sans-serif;
+	margin: 42px 0px 0px 0px;
+	background-color: #000;
+}
+img {
+	border:0pt;
+}
+a{
+	text-decoration:none;
+	outline:none;
+	color:#0055A4;
+	}
+a:hover{
+	text-decoration:underline;
+	color:#0055A4;
+	}
+a:active{
+	color:#0055A4;
+}
+h1{
+	color: #444;
+	margin:5px 0;
+	padding:0;
+	font:27px Georgia, "Times New Roman", Times, serif;
+}
+h2{
+	margin:5px 0;
+	padding:0;
+	font:22px Georgia, "Times New Roman", Times, serif;
+	color:#5d87a1;
+}
+h3{
+	margin:22px 0 11px;
+	padding:0;
+	font-size:20px;
+	color:#5d87a1;
+}
+h4{
+	margin:5px 0;
+	padding:0;
+	font-size:16px;
+	color:#5d87a1;
+}
+h5{
+	margin:5px 0;
+	padding:0;
+	font:16px Georgia, "Times New Roman", Times, serif;
+	color: #5d87a1;
+}
+h6{
+	margin:5px 0;
+	padding:0;
+	font-size:14px;
+	color:#5d87a1;
+}
+p{
+	font-size:14px;
+	color:#111;
+	line-height:18px;
+	text-align:justify
+}
+blockquote{
+	margin:3px 0 14px;
+	padding:0 0 0 25px;
+	font:15px Georgia, "Times New Roman", Times, serif;
+	color:#333;
+	line-height:18px;
+	text-align:justify;
+	font-style:italic;
+}
+.boxText h2 {
+	color:#111;
+}
+.boxText h6 {
+	color:#111;
+}
+.nav a:hover{text-decoration: none;}
+ul, ol, li, p, form, hr {margin: 0;}
+ul, ol{padding: 0px 0px 10px 20px;}
+li{padding: 0px 0px 10px 5px;}
+.singlespace li{padding: 0 0 0 5px;}
+p{padding: 0px 0px 20px 0px;}
+div {margin:0; padding:0;}
+img{border:0px;}
+/* Classes */
+.page
+{
+	width: 916px;
+}
+
+.header
+{
+	width: 916px;
+	height: 93px;
+}
+
+.logo
+{
+	float: left;
+	width: 316px;
+	height: 93px;
+}
+
+.nav
+{
+	width: 600 px;
+	height: 93px;
+	background: url(images/navBG.jpg) no-repeat;
+	float: left;
+	text-transform: none;
+	font-weight: normal;
+	font-size: 13px;
+	color: #7A644B;	
+}
+
+.nav ul {margin:0; padding:0; text-align:center;}
+
+.nav li
+{
+	list-style-image: none;
+	display: inline;
+	text-align: center;
+	color: #fff;
+	padding: 5px 10px;
+	margin: 0;
+}
+
+.nav a, .navOff a, .page_item a
+{
+	color: #fff;
+	padding: 0;
+	margin: 0;
+}
+
+li.navOff, li.page_item
+{
+	text-transform: none;
+	font-weight: normal;
+	font-size: 13px;
+	color: #7A644B;
+	padding: 5px 13px;
+}
+
+li.pipe {padding: 5px 0;}
+
+.titleBar
+{
+	height: 30px;
+	background: url(images/titleBarBG.jpg) repeat-x;
+	line-height: 30px;
+	text-align: left
+}
+
+.GradBox
+{
+	background: #dcdddf url(images/gradHome.jpg) repeat-x top;
+	padding: 30px 34px;
+	overflow: auto;
+}
+
+.homeGrayBox
+{
+	float: left;
+	width: 330px;
+	background: url(images/homeGrayBoxBG.jpg) repeat-y;
+	text-align: left;
+}
+
+.boxText
+{
+	padding: 10px 22px;
+}
+
+#GradBoxSpacer
+{
+	float: left;
+	width: 22px;
+}
+
+.homeBlueBox1
+{
+	float: left;
+	width: 495px;
+	background: url(images/homeBlueBox1BG.jpg) repeat-y;
+	text-align: left;
+}
+
+.homeBlueBox2
+{
+	float: left;
+	width: 495px;
+	background: url(images/homeBlueBox2BG.jpg) repeat-y;
+	text-align: left;
+	color: #fff;
+}
+.sideBlueBox1
+{
+	float: left;
+	width: 215px;
+	margin:15px;
+	background: url(images/homeBlueBox1BG.jpg) repeat-y;
+	text-align: left;
+}
+.subBody
+{
+	width: 916px;
+	padding: 20px 0;
+	background-color: #f4f4f4;
+	overflow: auto;
+}
+
+.subNav
+{
+	width: 256px;
+	float: left;	
+	overflow:hidden;
+}
+
+.subNav ul
+{
+	padding:0px;
+	margin:0pt;
+	list-style-type: none;
+	text-align:left;
+}
+
+.subNav li.page_item, . subNav ul li.page_item
+{
+	list-style-type: none;
+	color: #717075;
+	margin: 0;
+}
+
+.subBodyText
+{
+	width: 595px;
+	text-align: left;
+	float: left;
+	overflow: auto;
+	padding: 0 30px;
+	border-left: 2px solid #d3d3d3;
+}
+
+.subNavActive, .subNavItem,
+.subNavActive a, .subNavItem a, .subNav ul li.page_item a 
+{
+	text-decoration: none;
+	color: #717075;
+	text-align: left;
+	padding-left: 25px;
+	line-height: 35px;
+	font-size: 13px;
+}
+
+.subNav ul li.page_item a:hover 
+{
+	text-decoration:underline;
+}
+.subNavActive, /*.subNav li.page_item:hover,*/ .subNav li.current_page_item
+{
+	background: url(images/subNavActiveBG.jpg) no-repeat left;
+	cursor: pointer;
+	list-style-type: none;
+}
+.subNav li.divider{
+	background:url(images/subNavDivider.jpg) no-repeat;
+	width:207px;
+	height:1px;
+	margin:-6px 0px -15px 25px
+}
+#colA, #colB
+{
+	float: left;
+	width: 270px;
+	padding: 20px 30px 35px 40px;
+	text-align: left;	
+}
+
+#colC
+{
+	float: left;
+	width: 160px;
+	padding: 20px 0px 35px 35px;
+	text-align: left;
+}
+
+
+#colA a, #colB a, #colC a
+{
+	text-decoration: underline;
+}
+
+#colA li, #colB li, #colC li
+{
+	list-style-image: url(images/HomeListImage.jpg);
+}
+
+
+
+.copyright, .copyright a
+{
+	font-size: 10px;
+	font-weight: normal;
+	padding: 0 0 0 0;
+	text-decoration: none;
+	text-align: center;
+	color:#fff;
+}
+
+/* Logoworks link back */
+
+
+span.button2:hover
+{
+	background: url(images/navButtonRight.jpg) no-repeat right;
+}
+
+
+span.button1:hover
+{
+	background: #404040 url(images/navButtonLeft.jpg) no-repeat left;
+}
+
+span.buttonActive2
+{
+	background: url(images/navButtonRight.jpg) no-repeat right;
+}
+
+
+span.buttonActive1
+{
+	background: #404040 url(images/navButtonLeft.jpg) no-repeat left;
+}
+/*James ads*/
+#MainHome {
+	background: url(images/homePic.jpg);
+	width:916px;
+	height:250px;
+}
+#MainHome H1{
+	padding: 50px 150px 30px 10px;
+	margin-top:0px;
+}
+.listings{
+	padding:5px 0;
+	overflow:hidden;
+	height:100%
+	margin: 0pt;
+}
+.alignleft{
+	float:left;
+	padding-right:5px;
+	
+}
+.alignright{
+	float:right;
+}
+ul.contlist{
+	width:400px;
+	margin:0;
+}
+ul.contlist li{
+	padding:3px 0 3px 15px;
+	list-style:none;
+	background:url(images/bullet.png) no-repeat;
+	background-position:0 5px
+}
+.clientlist p 
+{
+	width:400px;
+}
+.mainlist,.clear{
+	clear:both
+}
+.mainlist_twopart{
+	width:275px;
+	margin-bottom:20px
+}
+.pro-box{
+	border:1px solid #717075;
+	background:#CCC;
+	padding:8px 0px 0px;
+	margin-left:15px;
+}
+.pro-box p
+{
+	padding-left:10px;
+}
+/* Contact Form ----------------------------------------------------------------*/
+.contactform{
+	overflow:hidden;
+	font-size:12px
+}
+.contactform .textarea,.contactform .input{
+	border:1px solid #ccc;
+	padding:2px;
+	font-size:12px
+}
+.textarea:hover,.input:hover,.textarea:focus,.input:focus {
+	background:#ebebeb
+}
+.contactright .button{
+	margin:0 0 0 140px !important;
+	padding:4px
+}
+.contactleft{
+	width:20%;
+	text-align:left;
+	clear:both;
+	float:left;
+	display:inline;
+	padding:4px;
+	margin:5px 0;
+	font-weight:700
+}
+.contactright{
+	width:70%;
+	text-align:left;
+	float:left;
+	display:inline;
+	padding:4px;
+	margin:5px 0
+}
+.notification{
+	margin:15px;
+	border-top:1px solid #693;
+	border-bottom:1px solid #693;
+	padding:10px 20px;
+	background:#FFC;
+}
+.post-footer{
+	padding:3px;
+	line-height:18px;
+	height:18px;
+	font-size:12px;
+	border-top:1px solid #c6c7c8;
+	border-bottom:1px solid #c6c7c8;
+	margin-bottom:25px;
+	background:#fafafa
+}
+.post-date{
+	font-size:11px;
+	margin-bottom:10px
+}
+.post-comments{
+	background:url(images/i-comments.gif) no-repeat left center;
+	padding-left:17px;
+	float:left;
+	margin-left:10px
+}
+.post-cat{
+	background:url(images/i-category.gif) no-repeat left center;
+	padding-left:17px;
+	margin-left:5px;
+	float:right
+}
+.archive .post-footer{
+	 border-top:none;
+	 background:none;
+}
+.breadcrumb {
+	vertical-align:middle;
+	font-weight:bold;
+}
+.breadcrumb a, .breadcrumb a:hover {
+	color:#717074;
+	text-decoration:none;
+}
+
+.breadcrumb p {
+	display: inline;
+	vertical-align:middle;
+}
+.subNav h4 {
+	margin-left;-20px;
+}
+.boxTextSide
+{
+	padding: 5px 10px;
+}
+.boxTextSide h6
+{
+	color:#111111;
+	font-size:12px;
+}

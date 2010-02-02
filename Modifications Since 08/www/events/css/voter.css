@@ -1,0 +1,122 @@
+html{
+	font-family: tahoma, sans-serif;
+}
+
+.sliderContainer{
+	width: 25px;
+	height: 100px;
+	padding: 2px;
+	/*background-color: #8d8d8d;*/
+	border: 1px solid black;
+	float: left;
+	margin-left: 10px;
+}
+
+.result_div {
+	position: relative;
+	width: 25px;
+	height: 25px;
+	margin-top: 5px;
+	background-image: url('../images/voter/results_img.png');
+	color: white;
+}
+
+.total_result_div {
+	width: 50px;
+	height: 50px;
+	margin-left: 5px;
+}
+
+.arrow_div {
+	position: absolute;
+	width: 15px;
+	height: 15px;
+	background-image: url('../images/voter/slider_array_img.png');
+	cursor: move;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+	visibility: hidden;
+}
+/* ================ */
+/* = Basic Banner = */
+/* ================ */
+.RPSlider_div {
+	position: relative;
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/slider_img.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+/* ================ */
+/* = VOTED METERS = */
+/* ================ */
+.voted_meter_1 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_1.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_2 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_2.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_3 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_3.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_4 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_4.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_5 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_5.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_6 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_6.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_7 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_7.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_8 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_8.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_9 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_9.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}
+.voted_meter_10 {
+	width: 25px;
+	height: 6px;
+	background-image: url('../images/voter/vote_meter_10.png');
+	cursor: pointer;
+	font-size: 0px;  /* Required for IE 6 compatability since it will assume 20px or so */
+}

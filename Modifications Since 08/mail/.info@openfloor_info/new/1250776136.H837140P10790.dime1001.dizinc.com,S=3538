@@ -1,0 +1,78 @@
+Return-path: <campaign_56_16232@wildbit.nbrmail.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Thu, 20 Aug 2009 09:48:56 -0400
+Received: from wildbit.nbrmail.com ([67.228.51.140]:8170)
+	by dime1001.dizinc.com with esmtp (Exim 4.69)
+	(envelope-from <campaign_56_16232@wildbit.nbrmail.com>)
+	id 1Me80X-0002nE-3F
+	for info@openfloor.info; Thu, 20 Aug 2009 09:48:55 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=From:To:Reply-To:Date:Subject:MIME-Version:Content-Type:Content-Transfer-Encoding:List-Unsubscribe:Message-ID; i=info@beanstalkapp.com;
+ bh=tvK2aUPUkElDeU+QhW9UR9TqC7s=;
+ b=TJMBiAVatT/Gi88KsNCXRRaKmBPbD3b5IYveO+L7zoXYrumFggMZrWI5ip245+XOgzYYXY/QggXd
+   2Gt20VjmpMbTiv4jM5dqUSkgsAbdksjTIkKiEJIK/sy6t55O9c/R
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=o6JGxeB65yzIKcAX6q1VXaHP3nCdaMiFpS0BunuKbiHVWcfHV0OAc/bLT2wBqwRl9AZ/qix/4AIj
+   JQz2UGtPlGExglNrIcPVKxHMKmZUzjh5SYU489VwLxuH6al+kT72;
+Received: from singleproc2 (67.228.51.140) by wildbit.nbrmail.com id hhlgri0p3rsh for <info@openfloor.info>; Thu, 20 Aug 2009 09:45:32 -0500 (envelope-from <campaign_56_16232@wildbit.nbrmail.com>)
+From: "Beanstalk" <info@beanstalkapp.com> 
+To: "openfloor" <info@openfloor.info>
+Reply-To: info@beanstalkapp.com
+Date: Thu, 20 Aug 2009 09:45:32 -0500
+Subject: Important: Scheduled Server Migration
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 7bit
+X-Mailer: aspNetEmail ver 3.1.5.0
+X-N2-RCPT: 56_16232_25223538
+X-Complaints-To: abuse@newsberry.com
+List-Unsubscribe: <http://r.nbrmail.com/Resources/779/16232/56/25223538/unsubscribe.axd>
+Message-ID: <SINGLEPROC2fb7ac4ae05d748ee94019258f433d305@singleproc2>
+
+As many of you know from our Tweets and blog post, we're migrating Beanstalk to Rackspace.
+With the migration, we have a fully customized environment that will help us grow and expand
+based on our specific hardware and architecture needs. 
+
+Read more on our blog at http://bit.ly/jdXhv
+
+
+MIGRATION STARTING THIS WEEK
+
+This week, we will start migrating the first set of accounts in batches of 1,000. Here is 
+what you can expect:
+
+1. An email to the owner and admins within three hours before it starts.
+2. An email once it starts, which will block access while we migrate.
+3. An email when it is finished. 
+
+For most accounts, the migration should only take 10 - 30 minutes. For accounts that contain 
+more data, it could take longer. Our plan is to migrate larger accounts during the weekend only 
+to avoid outages during work hours.
+
+MIGRATION NOTES
+
+* A change to DNS is made, so it could take 10 minutes or longer to propagate. 
+* The new servers run Subversion 1.6.4.
+* The web interface will be a bit slow until we migrate all accounts, but SVN should be very fast.
+* Email us right away if you think there is a problem at support@beanstalkapp.com.
+
+We wrote a troubleshooting and FAQ article to help answer questions as well. 
+
+http://bit.ly/5wEpf
+
+
+This migration is very exciting for us. We put a lot of effort into creating the ideal environment. It's 
+been well tested and demonstrates excellent performance, so we are sure you will enjoy the update 
+as well. As with any migration, issues will surely arise, so we will monitor the entire process and react 
+quickly.
+
+If you have questions or concerns, please email support@beanstalkapp.com.
+
+Thanks,
+Chris Nagele
+Founder, Beanstalk
+
+
+Rather not receive emails from Beanstalk? Unsubscribe:
+http://r.nbrmail.com/Resources/779/16232/56/25223538/unsubscribe.axd
+

@@ -1,0 +1,57 @@
+Return-path: <>
+Envelope-to: openfloo@pass90.dizinc.com
+Delivery-date: Wed, 24 Jun 2009 18:23:22 -0400
+Received: from mailnull by pass90.dizinc.com with local (Exim 4.69)
+	id 1MJasD-0007bZ-TV
+	for openfloo@pass90.dizinc.com; Wed, 24 Jun 2009 18:23:22 -0400
+X-Failed-Recipients: openfloo@openfloor.info
+Auto-Submitted: auto-replied
+From: Mail Delivery System <Mailer-Daemon@pass90.dizinc.com>
+To: openfloo@pass90.dizinc.com
+Subject: Mail delivery failed: returning message to sender
+Message-Id: <E1MJasD-0007bZ-TV@pass90.dizinc.com>
+Date: Wed, 24 Jun 2009 18:23:21 -0400
+
+This message was created automatically by mail delivery software.
+
+A message that you sent could not be delivered to one or more of its
+recipients. This is a permanent error. The following address(es) failed:
+
+  openfloo@openfloor.info
+    No Such User Here
+
+------ This is a copy of the message, including all the headers. ------
+
+Return-path: <openfloo@pass90.dizinc.com>
+Received: from openfloo by pass90.dizinc.com with local (Exim 4.69)
+	(envelope-from <openfloo@pass90.dizinc.com>)
+	id 1MJasC-0007bW-V0
+	for openfloo@openfloor.info; Wed, 24 Jun 2009 18:23:21 -0400
+To: openfloo@openfloor.info
+Subject: [openfloor.info] Please moderate: "Hello world!"
+X-PHP-Script: openfloor.info/wp-comments-post.php for 221.196.188.24
+Date: Wed, 24 Jun 2009 18:23:20 -0400
+From: WordPress <wordpress@openfloor.info>
+Message-ID: <adb4f4476ec18727d2a14af6bffe0809@openfloor.info>
+X-Priority: 3
+X-Mailer: PHPMailer (phpmailer.sourceforge.net) [version 2.0.2]
+MIME-Version: 1.0
+Content-Transfer-Encoding: 8bit
+Content-Type: text/plain; charset="UTF-8"
+
+A new comment on the post #1 "Hello world!" is waiting for your approval
+http://openfloor.info/?p=1
+
+Author : Jiazw (IP: 221.196.188.24 , 221.196.188.24)
+E-mail : tjjzw2003@hotmail.com
+URL    : 
+Whois  : http://ws.arin.net/cgi-bin/whois.pl?queryinput=221.196.188.24
+Comment: 
+Word Press
+
+Approve it: http://openfloor.info/wp-admin/comment.php?action=mac&c=4
+Delete it: http://openfloor.info/wp-admin/comment.php?action=cdc&c=4
+Spam it: http://openfloor.info/wp-admin/comment.php?action=cdc&dt=spam&c=4
+Currently 3 comments are waiting for approval. Please visit the moderation panel:
+http://openfloor.info/wp-admin/edit-comments.php?comment_status=moderated
+

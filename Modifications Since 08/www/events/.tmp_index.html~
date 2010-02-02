@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+ <meta http-equiv="Pragma" content="no-cache">
+ <meta http-equiv="Cache-Control" content="no-cache">
+ <meta http-equiv="Expires" content="Sat, 01 Dec 2001 00:00:00 GMT">
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>Welcome</title>
+	
+	<style type="text/css">
+		body, td, p {
+			color: #333;
+			font-family: "Lucida Grande", Arial, sans-serif;
+			font-size: 12px;
+		}
+		
+		h1 {
+			font-size: 24px;
+			font-weight: normal;
+			margin: 10px 0 10px 0;
+		}
+		
+		
+		a { color: #0f75bc; text-decoration: none; }
+		a:hover { text-decoration: underline; }
+		
+		a img { border: none; }
+		
+		#mainWrap {
+			margin: 20px auto;
+			width: 600px;
+		}
+		
+		p { line-height: 16px; }
+		
+		small { font-size: 10px; font-style: italic; }
+		
+		#footer {
+			border: 1px solid #c8c7c7;
+			border-right: none;
+			border-left: none;
+			color: #555;
+			font-size: 11px;
+			line-height: 16px;
+			margin: 25px 0px 0px 0px;
+			height: 60px;
+			padding: 10px 0px 10px 0px;
+		}
+	</style>
+
+	<script type="text/javascript">
+		var baseUrl = window.location.href.substr(7);
+		baseUrl = baseUrl.substr(0, baseUrl.lastIndexOf('/'));
+	</script>
+</head>
+
+<body>
+<div id="mainWrap">
+	<h1>Welcome to http://<script>document.write(baseUrl);</script></h1>
+	<p>
+		This site is under construction.
+	</p>
+	
+	<div id="footer">
+		<div style="float: left;">
+			http://<script>document.write(baseUrl);</script> is powered by <a href="http://www.aptana.com/cloud/">Aptana Cloud</a>.<br />
+			<a href="http://www.aptana.com/cloud/">Learn more</a> about deploying websites and applications to the Cloud.
+		</div>
+		<div style="float: right; width: 120px; text-align: right;">
+			<a href="http://www.aptana.com/cloud/"><script>document.write('<img src="http://private-' + baseUrl + '/error/img_cloud.png" />');</script></a><br />
+			<a href="http://www.aptana.com/studio/"><script>document.write('<img src="http://private-' + baseUrl + '/error/img_builtwith.png" />');</script></a>
+		</div>
+		<div style="clear: both; margin: 0;"></div>
+	</div>
+
+</div>
+
+</body>	
+</html>

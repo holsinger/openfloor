@@ -1,0 +1,277 @@
+AWSTATS DATA FILE 6.9 (build 1.925)
+# If you remove this file, all statistics for date 200912 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2522                
+POS_VISITOR 6134                
+POS_DAY 6471                
+POS_DOMAIN 3067                
+POS_LOGIN 3294                
+POS_ROBOT 3449                
+POS_WORMS 3691                
+POS_EMAILSENDER 3822                
+POS_EMAILRECEIVER 3965                
+POS_SESSION 6787                
+POS_SIDER 6944                
+POS_FILETYPES 4100                
+POS_OS 4240                
+POS_BROWSER 4334                
+POS_SCREENSIZE 4458                
+POS_UNKNOWNREFERER 4532                
+POS_UNKNOWNREFERERBROWSER 4650                
+POS_ORIGIN 4763                
+POS_SEREFERRALS 4896                
+POS_PAGEREFS 5051                
+POS_SEARCHWORDS 5199                
+POS_KEYWORDS 5377                
+POS_MISC 2186                
+POS_ERRORS 5466                
+POS_CLUSTER 3150                
+POS_SIDER_404 5569                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20100101102225 1 0 5314790048057
+FirstTime 0
+LastTime 20091231003953
+LastUpdate 20100102023538 1 0 0 0 0
+TotalVisits 18                  
+TotalUnique 7                   
+MonthHostsKnown 0                   
+MonthHostsUnknown 7                   
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 0 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 1 1 1453 0 0 0
+1 0 0 0 3 5 34674
+2 0 0 0 11 12 0
+3 1 1 0 20 20 4459
+4 0 0 0 0 0 0
+5 0 0 0 0 0 0
+6 2 2 0 5 6 12606
+7 0 0 0 0 0 0
+8 0 0 0 2 2 1866
+9 4 6 28033 13 14 4459
+10 1 1 4459 3 3 4459
+11 1 1 0 5 5 4346
+12 1 1 0 5 5 6325
+13 4 16 61592 3 8 0
+14 1 1 1453 0 0 0
+15 0 0 0 0 0 0
+16 0 0 0 9 9 8191
+17 2 2 9760 0 0 0
+18 1 1 0 4 4 4459
+19 2 2 0 4 4 6325
+20 0 0 0 0 0 0
+21 1 1 0 8 8 8918
+22 0 0 0 0 0 0
+23 0 0 0 4 4 4459
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 1
+us 22 36 106750
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 3
+googlebot 22 87096 20091231130234 0
+bot[+:,\.\;\/\\-] 3 13377 20091227165932 0
+jeeves 1 4459 20091207182146 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 6
+css 3 21984 0 0
+php 12 0 0 0
+png 1 16515 0 0
+html 10 39420 0 0
+jpg 9 28788 0 0
+gif 1 43 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 6
+macosx 4
+winxp 16
+win2000 2
+win98 1
+Unknown 12
+linux 1
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 6
+msie6.0 17
+firefox1.0 1
+firefox2.0.0.6 1
+Unknown 12
+firefox0.9 1
+safari 4
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 1
+WordPress/2.7.1 20091228190147
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 1
+WordPress/2.7.1 20091228190147
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 18 18
+From1 2 2
+From2 1 1
+From3 0 0
+From4 1 15
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 1
+google 1 1
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 0
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 1
+open+floor+technologies 1
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 3
+open 1
+technologies 1
+floor 1
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+302 15 0
+404 66 0
+301 2 614
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 9
+/wp-content/themes/openfloor/images/i-comments.gif 2 http://openfloor.info/
+/wp-content/themes/openfloor/images/i-category.gif 2 http://openfloor.info/
+/index.html 1 -
+/robots.txt 52 -
+/apple-touch-icon.png 1 -
+/m/ 2 -
+/mobi/ 2 -
+/mobile/ 2 -
+/iphone/ 2 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 7
+66.7.214.224 12 12 0 20091228190147
+72.44.56.203 3 5 28033 20091208092954
+69.74.105.4 2 14 61592 20091224132152
+75.125.229.138 2 2 9760 20091202172311
+74.52.245.146 1 1 4459 20091209100756
+64.246.165.10 1 1 1453 20091210140415
+64.246.187.42 1 1 1453 20091231003953
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 14
+20091202 3 3 9760 2
+20091203 1 1 0 1
+20091205 1 1 0 1
+20091207 2 2 0 2
+20091208 4 6 28033 2
+20091209 1 1 4459 1
+20091210 1 1 1453 1
+20091212 1 1 0 1
+20091217 1 1 0 1
+20091218 1 1 0 1
+20091222 1 1 0 1
+20091224 3 15 61592 2
+20091228 1 1 0 1
+20091231 1 1 1453 1
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 2
+0s-30s 17
+30s-2mn 1
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 2
+/wp-cron.php 12 0 12 12
+/ 10 39420 6 6
+END_SIDER

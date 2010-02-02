@@ -1,0 +1,47 @@
+Return-path: <no-reply@beanstalkapp.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Sun, 30 Aug 2009 01:33:37 -0400
+Received: from mta2.beanstalkapp.com ([67.228.51.159]:33137)
+	by clone.dimenoc.com with esmtp (Exim 4.69)
+	(envelope-from <no-reply@beanstalkapp.com>)
+	id 1Mhd2l-0003I6-1e
+	for info@openfloor.info; Sun, 30 Aug 2009 01:33:37 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=Date:From:To:Message-Id:Subject:Mime-Version:Content-Type:Content-Transfer-Encoding; i=no-reply@beanstalkapp.com;
+ bh=E/1yDe4doTx7n9ePRtDJAfm5Prs=;
+ b=R+OBOS1/P3GY8hztBSqWnQEiaXj2x0FWsVDuwfXDvs0r3Dknokh57SyqiVx/0gjUz8gOOtllHcLp
+   wRbxBavCxNz2ry8+0I32dP6yrwrZfIJ2Dz4y6JjYEB6HmgwpARm9
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=gHXNSinx3WzNXyOcTjrSojpzuKRV9H4uDB/gpvTsl4w/6lSAr0sxrZgeSCgkJT9QHzUIFyscaV5z
+   39SFMUi/r19uQ9xG1GHoa43im3892JIqDeyNc9orNCXUr+8YftfL;
+Received: from beanstalkapp.com (74.201.255.9) by mta2.beanstalkapp.com id hj8ea60p3rsl for <info@openfloor.info>; Sun, 30 Aug 2009 01:30:56 -0500 (envelope-from <no-reply@beanstalkapp.com>)
+X-IADB-IP: 159.51.228.67
+X-IADB-IP-REVERSE: 159.51.228.67
+Date: Sun, 30 Aug 2009 05:33:43 +0000
+From: Beanstalk <no-reply@beanstalkapp.com>
+To: Open Floor <info@openfloor.info>
+Message-Id: <4a9a0f37d92e4_5d9915599de5c70090742@ey03-s00345.tmail>
+Subject: Migration Started for openfloor.beanstalkapp.com
+Mime-Version: 1.0
+Content-Type: text/plain; charset=utf-8
+Content-Transfer-Encoding: 7bit
+
+This is an important migration announcement sent to all Beanstalk account users.
+
+The account “openfloor.beanstalkapp.com” is currently being migrated to our new server
+environment. This process should last about 10 — 30 minutes depending on the size of your
+repositories.
+
+If you feel this process is taking longer than it should, please contact support and
+someone will get back to you right away.
+
+Have questions? Read our migration FAQ:
+ 
+ http://help.beanstalkapp.com/faqs/security-backups/migration-faq-and-troubleshooting
+
+Thanks,
+Beanstalk Support
+ help.beanstalkapp.com
+
+Follow us on Twitter:
+ http://twitter.com/beanstalkapp

@@ -1,0 +1,177 @@
+Return-path: <campaign_56_12510@wildbit.nbrmail.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Tue, 21 Apr 2009 13:24:01 -0400
+Received: from wildbit.nbrmail.com ([67.228.51.140]:3337)
+	by pass90.dizinc.com with esmtp (Exim 4.69)
+	(envelope-from <campaign_56_12510@wildbit.nbrmail.com>)
+	id 1LwJhR-0005G8-2w
+	for info@openfloor.info; Tue, 21 Apr 2009 13:24:01 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=From:To:Reply-To:Date:Subject:MIME-Version:Content-Type:List-Unsubscribe:Message-ID; i=info@beanstalkapp.com;
+ bh=ipUDS0UpBJXB0JxbyVUPM21uSw0=;
+ b=zBmM6Xd92ZNgCG3xZc+cRConSsXwuNd85jtRMxTqCfRUvbefCh9NdOLydrGh9rZNRi0FG/tPDwTl
+   GUsHFYQz5OFnNc2cbDTs1QTZ/cW24GP06/mhR2Wesll/KALrJXTr
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=j9HgehzgkPRxGgTOXLxXEG50SeN1tV+FLJSmQ4htiuU2mUreAmuJiTlRio1+NSqn0JVa5TkItymv
+   mZQrUYamHABW/IfPnMeoS+qqkOO+01UuIgIrC17ujoPb64VDMlZo;
+Received: from singleproc2 (67.228.51.140) by wildbit.nbrmail.com id hto7eq0p3rsq for <info@openfloor.info>; Tue, 21 Apr 2009 13:22:36 -0500 (envelope-from <campaign_56_12510@wildbit.nbrmail.com>)
+From: "Beanstalk" <info@beanstalkapp.com> 
+To: "info@openfloor.info" <info@openfloor.info>
+Reply-To: info@beanstalkapp.com
+Date: Tue, 21 Apr 2009 13:22:36 -0500
+Subject: SVN Pack Winners, API, Railsconf
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="_=aspNetEmail=_d244fb9507a244fdae9ad29379c67a6f"
+X-Mailer: aspNetEmail ver 3.1.5.0
+X-N2-RCPT: 56_12510_25223538
+X-Complaints-To: abuse@newsberry.com
+List-Unsubscribe: <http://r.nbrmail.com/Resources/779/12510/56/25223538/unsubscribe.axd>
+Message-ID: <SINGLEPROC276bd0712de0a41a2ab375671a6a1bd10@singleproc2>
+
+--_=aspNetEmail=_d244fb9507a244fdae9ad29379c67a6f
+Content-Type: text/plain;
+	charset="UTF-8"
+
+This is an HTML email, view it online at:
+  http://r.nbrmail.com/Resources/779/12510/56/25223538/onlineversion.axd
+
+
+--
+Email sent to info@openfloor.info using Newsberry. Wildbit is located at 32 Strawberry Street, Philadelphia, PA 19106.
+
+To unsubscribe, go to:
+http://r.nbrmail.com/Resources/779/12510/56/25223538/unsubscribe.axd
+
+--_=aspNetEmail=_d244fb9507a244fdae9ad29379c67a6f
+Content-Type: text/html;
+	charset="UTF-8"
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  
+  <body style="margin: 0; padding: 0; background-color: #534b38;"><img src="http://r.nbrmail.com/openmail.aspx?id=FkWhhQ3LAI2aSg11*43*Yb1nbiO8PhnzwAQ1qHlcawiKFciKTUXvwaDbr*47*7*47*MXjivkI" width="1" height="1" />
+    
+    <div style="background: url(http://www.wildbit.com/assets/beanstalk/bg-page.gif) top center no-repeat; background-color: #534B38;">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td align="center">
+          
+            <table width="600" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td align="center" height="30" style="font: normal 11px/15px Helvetica Neue, Helvetica, Arial, sans-serif; color: #666052;">
+                  If you have trouble viewing this email, view an <a href="http://r.nbrmail.com/Resources/779/12510/56/25223538/onlineversion.axd" style="color: #7D786B;">online version</a>. You can instantly <a href="http://r.nbrmail.com/Resources/779/12510/56/25223538/unsubscribe.axd" style="color: #7D786B;">unsubscribe</a> from our newsletter.
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top" height="100">
+                  <a href="http://r.nbrmail.com/Resources/45664/12510/25223538/openlink.axd" title="Beanstalk — Version Control with a Human Face"><img src="http://www.wildbit.com/assets/beanstalk/beanstalk-logo.gif" alt="Beanstalk" border="0" style="margin-top: 7px;" /></a>
+                </td>
+              </tr>
+              <tr>
+                <td height="9" style="line-height: 0;"><img src="http://www.wildbit.com/assets/beanstalk/border-top.gif" style="display: block;" alt="" /></td>
+              </tr>
+              <tr>
+                <td style="background: url(http://www.wildbit.com/assets/beanstalk/bg-content.gif) no-repeat; background-color: #FFF;">
+                  
+                  <table width="600" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td valign="top">
+                        <div style="width: 370px; margin-left: 30px; padding-top: 21px;">
+                          <h1 style="font: bold 23px/30px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0 0 15px 0;">Announcing the Beanstalk API</h1>
+
+                          <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 0;">We're extremely excited to announce the Beanstalk API. With such a large community of developers, the Beanstalk API has great potential. We hope to see some great ideas and applications grow by making this accessible to our customers. Right now, the API is in BETA, so <a href="mailto:support@beanstalkapp.com" style="color: #006699;">email support</a> and we will give you access.  <br /><br />View the API Docs at <a href="http://r.nbrmail.com/Resources/45665/12510/25223538/openlink.axd" style="color: #006699;">http://api.beanstalkapp.com</a>.</p><br /><br />
+                        </div>                        
+                      </td>
+                      <td valign="top" style="padding-top: 21px;">
+                        <div style="width: 200px; margin-right: -30px; position:relative">
+                          <img src="http://www.wildbit.com/assets/beanstalk/sidebar-top.gif" style="display: block;" alt="" />
+                          
+                          <div style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; border-left: 1px solid #DDD; background-color: #FFF; padding-left: 15px;">
+                            <h2 style="font-size: 17px; margin: 0;">Get in touch</h2>
+
+                            <table width="160" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0;">
+                              <tr>
+                                <td width="21" style="padding-bottom: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td>Follow us on <a href="http://r.nbrmail.com/Resources/45666/12510/25223538/openlink.axd" style="color: #006699;">Twitter</a></td>
+                              </tr>
+                              <tr>
+                                <td width="21"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td>View our <a href="http://r.nbrmail.com/Resources/45667/12510/25223538/openlink.axd" style="color: #006699;">blog</a></td>
+                              </tr>
+                            </table>
+                            
+                            <h2 style="font-size: 17px; margin: 0; margin-bottom: 3px;">Your account</h2>
+                            
+                            <table width="160" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin-top: 15px;">
+                              <tr>
+                                <td width="25"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td><a href="http://r.nbrmail.com/Resources/45668/12510/25223538/openlink.axd" style="color: #006699;">Login</a></td>
+                              </tr>
+                            </table>
+                          </div>
+                          
+                          <img src="http://www.wildbit.com/assets/beanstalk/sidebar-bottom.gif" style="display: block;" alt="" />
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+					
+                  <div style="padding: 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0;">Meet us at Railsconf and Newcomm Forum</h2>
+                    
+                    <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0 0 0;">We're going to <a href="http://r.nbrmail.com/Resources/45669/12510/25223538/openlink.axd" style="color: #006699;">Newcomm Forum</a> (April 27th - 29th in San Francisco) and <a href="http://r.nbrmail.com/Resources/45670/12510/25223538/openlink.axd" style="color: #006699;">Railsconf</a> (May 4th - 7th in Las Vegas). If you're going to either one we'd love to meet up. <a href="http://r.nbrmail.com/Resources/45671/12510/25223538/openlink.axd" style="color: #006699;">Please RSVP</a> and we'll send you an email when we get there. </p>
+                  </div>
+
+                  <div style="padding: 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0;">Read the winning Subversion success stories</h2>
+                    
+                    <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0 0 0;">Thanks to all of you who sent us your stories about how Subversion has (or could!) help your team improve.  Check out the winning entries and <strong>great discounts</strong> from O’Reilly Media, Beanstalk, Versions, and CollabNet. <br /><br />View the winning entries at <a href="http://r.nbrmail.com/Resources/45672/12510/25223538/openlink.axd" style="color: #006699;">http://svnpack.com</a>.</p>
+                  </div>
+
+                  <div style="padding: 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 0;">Great Product Discounts</h2>
+					<p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 0;">We’d like everybody to use Subversion to help their team, so, O’Reilly Media, Beanstalk, Versions and CollabNet are offering special deals that will make it easy for your team to get in the groove. Offers are valid through 4/30/09 unless otherwise noted.  <br /><br /></p>
+                    
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font: bold 13px/21px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333;">
+                      <tr>
+                        <td width="21" valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">30% off O’Reilly's Version Control with SVN (use code VCS2E).</span> <a href="http://r.nbrmail.com/Resources/45673/12510/25223538/openlink.axd" style="color: #006699;">Purchase</a></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">30% off Beanstalk upgrade or sign up (use code SVNPACK).</span> <a href="http://r.nbrmail.com/Resources/45674/12510/25223538/openlink.axd" style="color: #006699;">Sign up</a></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">20% discount for Versions Subversion client (use code SVNPACK).</span> <a href="http://r.nbrmail.com/Resources/45675/12510/25223538/openlink.axd" style="color: #006699;">Purchase</a></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">50% off any web-based training course for Subversion on CollabNet.</span> <a href="http://r.nbrmail.com/Resources/45676/12510/25223538/openlink.axd" style="color: #006699;">Register</a></td>
+                      </tr>
+                    </table>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td height="9" valign="top" style="line-height: 0;"><img src="http://www.wildbit.com/assets/beanstalk/border-bottom.gif" style="display: block;" alt="" /></td>
+              </tr>
+              <tr>
+                <td style="font: normal 11px/15px Helvetica Neue, Helvetica, Arial, sans-serif; padding: 15px 30px; color: #969187;">
+                  This email was sent to <a href="mailto:info@openfloor.info" style="color: #B0AB9F;">info@openfloor.info</a> from Wildbit, located at 32 Strawberry Street, Philadelphia PA 19106. To be removed from future mailings, please <a href="http://r.nbrmail.com/Resources/779/12510/56/25223538/unsubscribe.axd" style="color: #B0AB9F;">unsubscribe</a>. Email sent using <a href="http://r.nbrmail.com/Resources/45677/12510/25223538/openlink.axd" style="color: #B0AB9F;">http://newsberry.com</a>. 
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>
+
+--_=aspNetEmail=_d244fb9507a244fdae9ad29379c67a6f--
+

@@ -1,0 +1,163 @@
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, b, bdo, big, cite, code,
+del, dfn, em, i, img, ins, kbd, q, samp,
+small, strong, sub, sup, tt, var,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+:focus {
+	outline: 0;
+}
+body {
+	color: #000;
+	background: #fff;
+	font-size: 62.5%; /* with this setting, 1em = 10px */
+	line-height: 1.5em;
+}
+
+/* Font Family
+----------------------------------------------------------------------*/
+body,
+textarea,
+pre {
+	font-family: tahoma, arial, helvetica, sans-serif;
+}
+
+/* Font Sizes
+----------------------------------------------------------------------*/
+p, pre,
+ul, ol, dl,
+table,
+form,
+address {
+	font-size: 1.1em;
+}
+ul ul, ul ol, ul dl, ul p, ul table, ul form,
+ol ul, ol ol, ol dl, ol p, ol table, ol form,
+dl ul, dl ol, dl dl, dl p, dl table, dl form,
+table ul, table ol, table dl, table p, table table, table form,
+form ul, form ol, form dl, form p, form table,
+input, textarea, select, button {
+	font-size: 1em;
+}
+h1 {
+	font-size: 2em;
+}
+h2 {
+	font-size: 1.8em;
+}
+h3 {
+	font-size: 1.6em;
+}
+h4 {
+	font-size: 1.4em;
+}
+h5 {
+	font-size: 1.2em;
+}
+h6 {
+	font-size: 1em;
+}
+
+/* Font Styles
+----------------------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+	font-weight: normal;
+}
+cite,
+address {
+	font-style: normal;
+}
+b, strong {
+	font-weight: bold;
+}
+i, em {
+	font-style: italic;
+}
+code {
+	font-family: "Courier New", Courier, monospace;
+}
+sub {
+	vertical-align: sub;
+}
+sup {
+	vertical-align: super;
+}
+
+/* Margins
+----------------------------------------------------------------------*/
+p, pre,
+h1, h2, h3, h4, h5, h6,
+ul, ol, dl,
+table {
+	margin-bottom: 1em;
+}
+ul ul, ul ol, ul dl
+ol ul, ol ol, ol dl,
+dl ul, dl ol, dl dl,
+table table {
+	margin-bottom: 0;
+}
+ul ul, ul ol,
+ol ul, ol ol {
+	margin-left: 1.5em;
+}
+
+/* Lists
+----------------------------------------------------------------------*/
+ol, ul {
+	list-style: none;
+}
+
+/* Tables - tables still need 'cellspacing="0"' in the markup
+----------------------------------------------------------------------*/
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+
+/* Blockquote and Q
+----------------------------------------------------------------------*/
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+
+/* Clearfix  (http: //www.positioniseverything.net/easyclearing.html)
+----------------------------------------------------------------------*/
+.clearfix:after {
+	content: ".";
+	display: block;
+	height: 0;
+	clear: both;
+	visibility: hidden;
+}
+.clearfix {
+	display: inline-block; /* IE/Mac */
+}
+/* Hides from IE-mac \*/
+* html .clearfix {
+	height: 1%;
+}
+.clearfix {
+	display: block;
+}
+/* End hide from IE-mac */

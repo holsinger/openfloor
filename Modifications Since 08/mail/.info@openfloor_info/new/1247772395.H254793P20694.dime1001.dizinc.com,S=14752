@@ -1,0 +1,189 @@
+Return-path: <campaign_56_15329@wildbit.nbrmail.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Thu, 16 Jul 2009 15:26:35 -0400
+Received: from m3.nbrmail.com ([67.228.51.130]:2965)
+	by dime1001.dizinc.com with esmtp (Exim 4.69)
+	(envelope-from <campaign_56_15329@wildbit.nbrmail.com>)
+	id 1MRWbC-0005Nf-VA
+	for info@openfloor.info; Thu, 16 Jul 2009 15:26:35 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=From:To:Reply-To:Date:Subject:MIME-Version:Content-Type:List-Unsubscribe:Message-ID; i=info@beanstalkapp.com;
+ bh=RQKtQo6mzPrau4jtiSq0BgJT2lE=;
+ b=d0VKZIv1xFWta1qL/c/yvrAIwjY41jbCyJujei7SlQJ71LpUeayVbtTFWVAbGTTBw8q62tJvqHbu
+   dGZYaA9lMoUqAyDEJBjlWEYofkFVF8OkTu50h9WgKbgTzp/QbJd1
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=m8gy9zO1DveBh6z1N6IGvQg7vJ0YFzQE7siCo2nRtCvZcp4xF8FMZGfEgDC49qCCvxmrDS1yzeus
+   jIq8ieLXdKVdhAAviaN9D5xM+eE+CDIdHOdbv4Ju/yT9hSx9+wer;
+Received: from singleproc2 (67.228.51.140) by m3.nbrmail.com id hbu67c0p3rsk for <info@openfloor.info>; Thu, 16 Jul 2009 15:23:55 -0500 (envelope-from <campaign_56_15329@wildbit.nbrmail.com>)
+X-IADB-IP: 130.51.228.67
+X-IADB-IP-REVERSE: 130.51.228.67
+From: "Beanstalk" <info@beanstalkapp.com> 
+To: "openfloor" <info@openfloor.info>
+Reply-To: info@beanstalkapp.com
+Date: Thu, 16 Jul 2009 15:23:55 -0500
+Subject: Search, Syntax Highlighting, and Buzz
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="_=aspNetEmail=_f0540c6a5bd14b038ff2097287ef8bbe"
+X-Mailer: aspNetEmail ver 3.1.5.0
+X-N2-RCPT: 56_15329_25223538
+X-Complaints-To: abuse@newsberry.com
+List-Unsubscribe: <http://r.nbrmail.com/Resources/779/15329/56/25223538/unsubscribe.axd>
+Message-ID: <SINGLEPROC27f48cd51ff2d4a058f85c68414941ad3@singleproc2>
+
+--_=aspNetEmail=_f0540c6a5bd14b038ff2097287ef8bbe
+Content-Type: text/plain;
+	charset="UTF-8"
+
+This is an HTML Email. Please view it online:
+
+http://r.nbrmail.com/Resources/779/15329/56/25223538/onlineversion.axd
+
+--_=aspNetEmail=_f0540c6a5bd14b038ff2097287ef8bbe
+Content-Type: text/html;
+	charset="UTF-8"
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  
+  <body style="margin: 0; padding: 0; background-color: #534b38;"><img src="http://r.nbrmail.com/openmail.aspx?id=fUJ43hHiBUGV8KIs*43*fonS8ilRg2RRbWGeRJguXhmRokCJJ3nf*43*Htq1G4pD2QBqyl" width="1" height="1" />
+    
+    <div style="background: url(http://www.wildbit.com/assets/beanstalk/bg-page.gif) top center no-repeat; background-color: #534B38;">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td align="center">
+          
+            <table width="600" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td align="center" height="30" style="font: normal 11px/15px Helvetica Neue, Helvetica, Arial, sans-serif; color: #666052;">
+                  If you have trouble viewing this email, view an <a href="http://r.nbrmail.com/Resources/779/15329/56/25223538/onlineversion.axd" style="color: #7D786B;">online version</a>. You can instantly <a href="http://r.nbrmail.com/Resources/779/15329/56/25223538/unsubscribe.axd" style="color: #7D786B;">unsubscribe</a> from our newsletter.
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top" height="100">
+                  <a href="http://r.nbrmail.com/Resources/55490/15329/25223538/openlink.axd" title="Beanstalk — Version Control with a Human Face"><img src="http://www.wildbit.com/assets/beanstalk/beanstalk-logo.gif" alt="Beanstalk" border="0" style="margin-top: 7px;" /></a>
+                </td>
+              </tr>
+              <tr>
+                <td height="9" style="line-height: 0;"><img src="http://www.wildbit.com/assets/beanstalk/border-top.gif" style="display: block;" alt="" /></td>
+              </tr>
+              <tr>
+                <td style="background: url(http://www.wildbit.com/assets/beanstalk/bg-content.gif) no-repeat; background-color: #FFF;">
+                  
+                  <table width="600" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td valign="top">
+                        <div style="width: 370px; margin-left: 30px; padding-top: 21px;">
+                          <h1 style="font: bold 23px/30px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0 0 15px 0;">New features on Beanstalk</h1>
+
+                          <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 0;">
+                            We recently added two big features to Beanstalk that have been waiting in the backlog for a long time. First, we released <span style="background-color: #ECFFDC; padding: 2px; font-weight: bold;">search tools</span> to search past changesets throughout your repositories.
+													</p>
+													
+													<p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 1em 0 0;">
+                            We also drastically updated our <span style="background-color: #ECFFDC; padding: 2px; font-weight: bold;">syntax highlighting</span>, now supporting over 80 languages!
+													</p>
+                        </div>                        
+                      </td>
+                      <td valign="top" style="padding-top: 21px;">
+                        <div style="width: 200px; margin-right: -30px; position:relative">
+                          <img src="http://www.wildbit.com/assets/beanstalk/sidebar-top.gif" style="display: block;" alt="" />
+                          
+                          <div style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; border-left: 1px solid #DDD; background-color: #FFF; padding-left: 15px;">
+                            <h2 style="font-size: 17px; margin: 0;">Get in touch</h2>
+
+                            <table width="160" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0;">
+                              <tr>
+                                <td width="21" style="padding-bottom: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td>Follow us on <a href="http://r.nbrmail.com/Resources/55491/15329/25223538/openlink.axd" style="color: #006699;">Twitter</a></td>
+                              </tr>
+                              <tr>
+                                <td width="21"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td>View our <a href="http://r.nbrmail.com/Resources/55492/15329/25223538/openlink.axd" style="color: #006699;">blog</a></td>
+                              </tr>
+                            </table>
+                            
+                            <h2 style="font-size: 17px; margin: 0; margin-bottom: 3px;">Like Beanstalk?</h2>
+                            <span style="color: #AAA;">Try out our other product:</span>
+                            
+                            <table width="160" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin-top: 15px;">
+                              <tr>
+                                <td width="25"><img src="http://www.wildbit.com/assets/beanstalk/i-newsberry.gif" alt="Newsberry" /></td>
+                                <td><a href="http://r.nbrmail.com/Resources/55493/15329/25223538/openlink.axd" style="color: #006699;">Newsberry</a></td>
+                              </tr>
+                            </table>
+                          </div>
+                          
+                          <img src="http://www.wildbit.com/assets/beanstalk/sidebar-bottom.gif" style="display: block;" alt="" />
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <div style="padding: 10px 0 30px 30px;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 0;">Repository Search</h2>
+                    
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/21px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333;">
+                      <tr>
+                        <td valign="top">You can now perform a keyword search across repository changesets in Beanstalk. Search can be used across all repositories, for an individual repository, or for specific users. You can even jump to a changeset by inserting the revision number. We have a lot more planned for search, but this is the first step. We hope you like it.<br /><br /> <img src="http://wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /> <a href="http://r.nbrmail.com/Resources/55494/15329/25223538/openlink.axd" style="color: #006699;">Get more tips and tricks</a> about search from the blog post.</td>
+                      	<td valign="top" width="280" align="right"><a href="http://r.nbrmail.com/Resources/55495/15329/25223538/openlink.axd" style="color: #006699;"><img src="http://www.wildbit.com/assets/beanstalk/ss-search.jpg" alt="Screenshot of new Repository Search" style="display: block; padding: 3px; border: 2px solid #DDD; border-width: 2px 0 2px 2px; background-color: #FFF;" /></a></td>
+											</tr>
+                    </table>
+                  </div>
+
+									<div style="padding: 30px 0 30px 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 0;">Code Syntax Highlighting Improved</h2>
+                    
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/21px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333;">
+                      <tr>
+                        <td valign="top">We also just launched a new Code Viewer with support for <span style="background-color: #ECFFDC; padding: 2px; font-weight: bold;">more than 80 (eighty!) language syntaxes</span> and a new improved look. You can see a full list of languages on the <a href="http://r.nbrmail.com/Resources/55496/15329/25223538/openlink.axd" style="color: #006699;">Pygments web-site</a>. It includes stuff like a full family of C languages, Ruby, Python, Java, Scala, Haskell, Scheme, JavaScript, Io, Matlab, Erlang, HTML and many many more. This is a really great update for viewing diffs, changesets, and files within Beanstalk.<br /><br /> <img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /> <a href="http://r.nbrmail.com/Resources/55497/15329/25223538/openlink.axd" style="color: #006699;">Read the full details</a> on the blog.</td>
+                      	<td valign="top" width="280" align="right"><a href="http://r.nbrmail.com/Resources/55498/15329/25223538/openlink.axd" style="color: #006699;"><img src="http://www.wildbit.com/assets/beanstalk/ss-syntax-highlighting.jpg" alt="Screenshot of new Code Syntax Highlighting" style="display: block; padding: 3px; border: 2px solid #DDD; border-width: 2px 0 2px 2px; background-color: #FFF;" /></a></td>
+											</tr>
+                    </table>
+                  </div>
+
+		<div style="padding: 30px 0 30px 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 0;">Deployment Tools Screencasts</h2>
+                    
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/21px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333;">
+                      <tr>
+                        <td valign="top">Considering Beanstalk's FTP Deployment tools? You can now view our three part screencast tour, demostrating how to setup a server, deploy your code, and view the release notes. <br /><br />To view the screencasts, login to your account, go to a repository, and click on the <strong>Releases</strong> tab.</td>
+                      	<td valign="top" width="280" align="right"><img src="http://www.wildbit.com/assets/beanstalk/ss-releases.jpg" alt="Screenshot of new Code Syntax Highlighting" style="display: block; padding: 3px; border: 1px solid #DDD; border-width: 2px 0 2px 2px; background-color: #FFF;" /></td>
+											</tr>
+                    </table>
+                  </div>
+
+                  <div style="padding: 30px 30px 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0;">Buzz, Customers, Testimonials</h2>
+                    
+                    <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0 0 0;">
+											Want to know who uses Beanstalk? We added some buzz and customer logos to our public site to showcase the many companies who love and trust Beanstalk for their source control hosting. Check out <a href="http://r.nbrmail.com/Resources/55499/15329/25223538/openlink.axd" style="color: #006699;">the new landing page</a>.
+										</p>
+										
+										<a href="http://r.nbrmail.com/Resources/55500/15329/25223538/openlink.axd"><img src="http://www.wildbit.com/assets/beanstalk/ss-landing-site.jpg" alt="Screenshot of beanstalkapp.com" style="display: block; margin: 2em 0 0; padding: 3px; border: 1px solid #DDD; background-color: #FFF;"></a>
+                  </div>
+
+                </td>
+              </tr>
+              <tr>
+                <td height="9" valign="top" style="line-height: 0;"><img src="http://www.wildbit.com/assets/beanstalk/border-bottom.gif" style="display: block;" alt="" /></td>
+              </tr>
+              <tr>
+                <td style="font: normal 11px/15px Helvetica Neue, Helvetica, Arial, sans-serif; padding: 15px 30px; color: #969187;">
+                  This email was sent to <a href="mailto:info@openfloor.info" style="color: #B0AB9F;">info@openfloor.info</a> from Wildbit, located at 32 Strawberry Street, Philadelphia PA 19106. To be removed from future mailings, please <a href="http://r.nbrmail.com/Resources/779/15329/56/25223538/unsubscribe.axd" style="color: #B0AB9F;">unsubscribe</a>. Email sent using <a href="http://r.nbrmail.com/Resources/55501/15329/25223538/openlink.axd" style="color: #B0AB9F;">http://newsberry.com</a>. 
+                </td>
+              </tr>
+            </table>
+          
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>
+
+--_=aspNetEmail=_f0540c6a5bd14b038ff2097287ef8bbe--
+

@@ -1,0 +1,207 @@
+Return-path: <campaign_56_12331@wildbit.nbrmail.com>
+Envelope-to: info@openfloor.info
+Delivery-date: Tue, 31 Mar 2009 13:33:20 -0400
+Received: from wildbit.nbrmail.com ([67.228.51.140]:22365)
+	by pass90.dizinc.com with esmtp (Exim 4.69)
+	(envelope-from <campaign_56_12331@wildbit.nbrmail.com>)
+	id 1Lohpv-0007Cn-Ta
+	for info@openfloor.info; Tue, 31 Mar 2009 13:33:20 -0400
+DKIM-Signature: v=1; a=rsa-sha1; c=relaxed/relaxed; s=m; d=beanstalkapp.com;
+ h=From:To:Reply-To:Date:Subject:MIME-Version:Content-Type:List-Unsubscribe:Message-ID; i=info@beanstalkapp.com;
+ bh=iDWC3uywVOXY3GMjewc9ISfcnMU=;
+ b=1SqqO1/Fx9r29p2X+dPbNmOxkFi4FUCHvU4bqvlQ8slL7+0QbBqe0ODs70tEA5d8Z7zf/m7YsLRI
+   3anZogmW9Gdg9p33yYX0lJhYig43+Z2jq4wd7TKSa8ligdhFpi0j
+DomainKey-Signature: a=rsa-sha1; c=nofws; q=dns; s=m; d=beanstalkapp.com;
+ b=Bh2ikkgwm+oHesBFG2+cVs5Bco2leNoQ92Vp9MnONvsSgpexulWgjNrzF6aLiG5V7fwh3WEM9q/Q
+   rN/OBK+sDAySkD6AqIntFozvBiqMjQPnumjexpYgT2L3rd1tmlR4;
+Received: from singleproc2 (67.228.51.140) by wildbit.nbrmail.com id hq9gqm0j0841 for <info@openfloor.info>; Tue, 31 Mar 2009 13:31:50 -0500 (envelope-from <campaign_56_12331@wildbit.nbrmail.com>)
+From: "Beanstalk" <info@beanstalkapp.com> 
+To: "info@openfloor.info" <info@openfloor.info>
+Reply-To: info@beanstalkapp.com
+Date: Tue, 31 Mar 2009 13:31:50 -0500
+Subject: Incidents, Releases, and Upgrades
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+	boundary="_=aspNetEmail=_87653119b80f41ba8578dcf24bcf0697"
+X-Mailer: aspNetEmail ver 3.1.5.0
+X-N2-RCPT: 56_12331_25223538
+X-Complaints-To: abuse@newsberry.com
+List-Unsubscribe: <http://r.nbrmail.com/Resources/779/12331/56/25223538/unsubscribe.axd>
+Message-ID: <SINGLEPROC2f0333ea647014107909d83117c7a80c1@singleproc2>
+
+--_=aspNetEmail=_87653119b80f41ba8578dcf24bcf0697
+Content-Type: text/plain;
+	charset="UTF-8"
+
+This is an HTML email, view it online at:
+http://r.nbrmail.com/Resources/779/12331/56/25223538/onlineversion.axd
+
+Incidents Tools and Improved Deployments
+---------------------------------
+
+Today we released a new feature on Beanstalk called Incidents. Each time we encounter an error with imports, deployments, or integration tools we display a message with a full error report. This will help you recover quickly or report the issue to us for assistance.
+
+Read the full story on our blog:
+  http://bit.ly/vevQu
+
+
+Quick look at new features and updates:
+-------------------------------
+
+* Incidents Tools: View the latest issues in your account and recover.
+* Deployments: Only changed, added, or deleted files are deployed.
+* Browsing: Faster browsing of repositories using AJAX.
+* Server Upgrades: Adding new slices and GFS partitions to improve performance.
+
+
+API Beta Testers Needed
+-------------------
+
+We're also really close to launching the Beanstalk API and actively looking for beta testers. Please email support@beanstalkapp.com if you have ideas for tools or uses and we will add you to the beta list.
+
+
+--
+Email sent to info@openfloor.info using Newsberry. Wildbit is located at 32 Strawberry Street, Philadelphia, PA 19106.
+
+To unsubscribe, go to:
+http://r.nbrmail.com/Resources/779/12331/56/25223538/unsubscribe.axd
+
+--_=aspNetEmail=_87653119b80f41ba8578dcf24bcf0697
+Content-Type: text/html;
+	charset="UTF-8"
+
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  </head>
+  
+  <body style="margin: 0; padding: 0; background-color: #534b38;"><img src="http://r.nbrmail.com/openmail.aspx?id=PLZAnYtyAfCDpzQ47OkBe84uTotN3sakYlNAd63mmHj3YZgG5AWRpOOfBcts3oOa" width="1" height="1" />
+    
+    <div style="background: url(http://www.wildbit.com/assets/beanstalk/bg-page.gif) top center no-repeat; background-color: #534B38;">
+      <table width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td align="center">
+          
+            <table width="600" cellspacing="0" cellpadding="0" border="0">
+              <tr>
+                <td align="center" height="30" style="font: normal 11px/15px Helvetica Neue, Helvetica, Arial, sans-serif; color: #666052;">
+                  If you have trouble viewing this email, view an <a href="http://r.nbrmail.com/Resources/779/12331/56/25223538/onlineversion.axd" style="color: #7D786B;">online version</a>. You can instantly <a href="http://r.nbrmail.com/Resources/779/12331/56/25223538/unsubscribe.axd" style="color: #7D786B;">unsubscribe</a> from our newsletter.
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top" height="100">
+                  <a href="http://r.nbrmail.com/Resources/43822/12331/25223538/openlink.axd" title="Beanstalk — Version Control with a Human Face"><img src="http://www.wildbit.com/assets/beanstalk/beanstalk-logo.gif" alt="Beanstalk" border="0" style="margin-top: 7px;" /></a>
+                </td>
+              </tr>
+              <tr>
+                <td height="9" style="line-height: 0;"><img src="http://www.wildbit.com/assets/beanstalk/border-top.gif" style="display: block;" alt="" /></td>
+              </tr>
+              <tr>
+                <td style="background: url(http://www.wildbit.com/assets/beanstalk/bg-content.gif) no-repeat; background-color: #FFF;">
+                  
+                  <table width="600" cellspacing="0" cellpadding="0" border="0">
+                    <tr>
+                      <td valign="top">
+                        <div style="width: 370px; margin-left: 30px; padding-top: 21px;">
+                          <h1 style="font: bold 23px/30px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0 0 15px 0;">Incidents Tools and improved Deployments</h1>
+
+                          <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 0;">
+                            Today we released a new feature on Beanstalk called Incidents. Each time we encounter an error with imports, deployments, or integration tools we display a message with a full error report. This will help you recover quickly or report the issue to us for assistance.<br /><br /><a href="http://r.nbrmail.com/Resources/43823/12331/25223538/openlink.axd" style="color: #006699;">Read the full story</a> on our blog.
+													</p>
+                        </div>                        
+                      </td>
+                      <td valign="top" style="padding-top: 21px;">
+                        <div style="width: 200px; margin-right: -30px; position:relative">
+                          <img src="http://www.wildbit.com/assets/beanstalk/sidebar-top.gif" style="display: block;" alt="" />
+                          
+                          <div style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; border-left: 1px solid #DDD; background-color: #FFF; padding-left: 15px;">
+                            <h2 style="font-size: 17px; margin: 0;">Get in touch</h2>
+
+                            <table width="160" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0;">
+                              <tr>
+                                <td width="21" style="padding-bottom: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td>Follow us on <a href="http://r.nbrmail.com/Resources/43824/12331/25223538/openlink.axd" style="color: #006699;">Twitter</a></td>
+                              </tr>
+                              <tr>
+                                <td width="21"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                                <td>View our <a href="http://r.nbrmail.com/Resources/43825/12331/25223538/openlink.axd" style="color: #006699;">blog</a></td>
+                              </tr>
+                            </table>
+                            
+                            <h2 style="font-size: 17px; margin: 0; margin-bottom: 3px;">Like Beanstalk?</h2>
+                            <span style="color: #AAA;">Try out our other product:</span>
+                            
+                            <table width="160" cellpadding="0" cellspacing="0" border="0" style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin-top: 15px;">
+                              <tr>
+                                <td width="25"><img src="http://www.wildbit.com/assets/beanstalk/i-newsberry.gif" alt="Newsberry" /></td>
+                                <td><a href="http://r.nbrmail.com/Resources/43826/12331/25223538/openlink.axd" style="color: #006699;">Newsberry</a></td>
+                              </tr>
+                            </table>
+                          </div>
+                          
+                          <img src="http://www.wildbit.com/assets/beanstalk/sidebar-bottom.gif" style="display: block;" alt="" />
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                  
+                  <div style="padding: 10px 30px 30px 30px;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin-top: 0;">Quick look at new features and updates:</h2>
+                    
+                    <table width="100%" cellpadding="0" cellspacing="0" border="0" style="font: bold 13px/21px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333;">
+                      <tr>
+                        <td width="21" valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">Incidents Tools: View the latest issues in your account and recover.</span></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">Deployments: Only changed, added, or deleted files are deployed.</span></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">Browsing: Faster browsing of repositories using AJAX.</span></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">Server Upgrades: Added new slices and GFS partitions to improve performance.</span></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">More frequent offsite backups to Amazon S3 for all accounts.</span></td>
+                      </tr>
+                      <tr>
+                        <td valign="top" style="padding-top: 3px;"><img src="http://www.wildbit.com/assets/beanstalk/i-leaf.gif" alt="" /></td>
+                        <td valign="top" style="padding-bottom: 3px;"><span style="background-color: #ECFFDC; padding: 2px 5px;">Migration to Rails 2.3.</span></td>
+                      </tr>
+                    </table>
+                  </div>
+									
+                  <div style="padding: 30px; border-top: 1px solid #C7D5E1;">
+                    <h2 style="font: bold 17px/25px Helvetica Neue, Helvetica, Arial, sans-serif; margin: 0;">API Beta Testers Needed</h2>
+                    
+                    <p style="font: normal 13px/18px Helvetica Neue, Helvetica, Arial, sans-serif; color: #333; margin: 15px 0 0 0;">
+											We're also really close to <span style="background-color: #ECFFDC; padding: 2px; font-weight: bold;">launching the Beanstalk API</span> and actively looking for beta testers. Please email <a href="mailto:support@beanstalkapp.com" style="color: #006699;">support@beanstalkapp.com</a> if you have ideas for tools or uses and we will add you to the beta list.
+										</p>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td height="9" valign="top" style="line-height: 0;"><img src="http://www.wildbit.com/assets/beanstalk/border-bottom.gif" style="display: block;" alt="" /></td>
+              </tr>
+              <tr>
+                <td style="font: normal 11px/15px Helvetica Neue, Helvetica, Arial, sans-serif; padding: 15px 30px; color: #969187;">
+                  This email was sent to <a href="mailto:info@openfloor.info" style="color: #B0AB9F;">info@openfloor.info</a> from Wildbit, located at 32 Strawberry Street, Philadelphia PA 19106. To be removed from future mailings, please <a href="http://r.nbrmail.com/Resources/779/12331/56/25223538/unsubscribe.axd" style="color: #B0AB9F;">unsubscribe</a>. Email sent using <a href="http://r.nbrmail.com/Resources/43827/12331/25223538/openlink.axd" style="color: #B0AB9F;">http://newsberry.com</a>. 
+                </td>
+              </tr>
+            </table>
+          
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </body>
+</html>
+
+--_=aspNetEmail=_87653119b80f41ba8578dcf24bcf0697--
+

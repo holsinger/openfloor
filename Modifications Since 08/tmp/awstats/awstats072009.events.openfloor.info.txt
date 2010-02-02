@@ -1,0 +1,327 @@
+AWSTATS DATA FILE 6.9 (build 1.925)
+# If you remove this file, all statistics for date 200907 will be lost/reset.
+
+# Position (offset in bytes) in this file of beginning of each section for
+# direct I/O access. If you made changes somewhere in this file, you should
+# also remove completely the MAP section (AWStats will rewrite it at next
+# update).
+BEGIN_MAP 27
+POS_GENERAL 1864                
+POS_TIME 2535                
+POS_VISITOR 6312                
+POS_DAY 6719                
+POS_DOMAIN 3161                
+POS_LOGIN 3421                
+POS_ROBOT 3576                
+POS_WORMS 3782                
+POS_EMAILSENDER 3913                
+POS_EMAILRECEIVER 4056                
+POS_SESSION 6968                
+POS_SIDER 7167                
+POS_FILETYPES 4191                
+POS_OS 4409                
+POS_BROWSER 4479                
+POS_SCREENSIZE 4614                
+POS_UNKNOWNREFERER 4688                
+POS_UNKNOWNREFERERBROWSER 4775                
+POS_ORIGIN 4857                
+POS_SEREFERRALS 4994                
+POS_PAGEREFS 5149                
+POS_SEARCHWORDS 5297                
+POS_KEYWORDS 5543                
+POS_MISC 2199                
+POS_ERRORS 5669                
+POS_CLUSTER 3277                
+POS_SIDER_404 5773                
+END_MAP
+
+# LastLine    = Date of last record processed - Last record line number in last log - Last record offset in last log - Last record signature value
+# FirstTime   = Date of first visit for history file
+# LastTime    = Date of last visit for history file
+# LastUpdate  = Date of last update - Nb of parsed records - Nb of parsed old records - Nb of parsed new records - Nb of parsed corrupted - Nb of parsed dropped
+# TotalVisits = Number of visits
+# TotalUnique = Number of unique visitors
+# MonthHostsKnown   = Number of hosts known
+# MonthHostsUnKnown = Number of hosts unknown
+BEGIN_GENERAL 8
+LastLine 20090804082028 1 0 9467073630270
+FirstTime 20090701074448
+LastTime 20090727203235
+LastUpdate 20090805071040 1 0 0 0 0
+TotalVisits 11                  
+TotalUnique 8                   
+MonthHostsKnown 0                   
+MonthHostsUnknown 8                   
+END_GENERAL
+
+# Misc ID - Pages - Hits - Bandwidth
+BEGIN_MISC 10
+QuickTimeSupport 0 0 0
+JavaEnabled 0 0 0
+JavascriptDisabled 0 0 0
+PDFSupport 0 0 0
+WindowsMediaPlayerSupport 0 0 0
+AddToFavourites 0 2 0
+RealPlayerSupport 0 0 0
+TotalMisc 0 0 0
+DirectorSupport 0 0 0
+FlashSupport 0 0 0
+END_MISC
+
+# Hour - Pages - Hits - Bandwidth - Not viewed Pages - Not viewed Hits - Not viewed Bandwidth
+BEGIN_TIME 24
+0 0 0 0 5 8 31320
+1 1 16 199194 0 2 0
+2 46 253 1707828 5 37 34335
+3 50 386 2974412 13 36 46114
+4 0 0 0 7 11 40682
+5 0 0 0 3 3 15089
+6 0 0 0 2 2 13787
+7 1 1 4638 10 15 61861
+8 0 0 0 5 19 145758
+9 0 0 0 6 8 67558
+10 0 0 0 1 1 34276
+11 0 0 0 1 1 12278
+12 0 0 0 0 3 49360
+13 19 39 323959 5 12 101723
+14 0 0 0 0 0 0
+15 0 0 0 0 0 0
+16 0 0 0 0 3 20402
+17 0 0 0 3 3 10440
+18 0 0 0 2 3 10440
+19 0 0 0 5 5 3620
+20 24 81 736156 0 9 0
+21 15 46 422768 0 6 13303
+22 3 18 220074 3 4 19578
+23 51 232 1346155 5 17 0
+END_TIME
+
+# Domain - Pages - Hits - Bandwidth
+# The 25 first Pages must be first (order not required for others)
+BEGIN_DOMAIN 3
+cn 126 791 6026318
+us 83 280 1904228
+md 1 1 4638
+END_DOMAIN
+
+# Cluster ID - Pages - Hits - Bandwidth
+BEGIN_CLUSTER 0
+END_CLUSTER
+
+# Login - Pages - Hits - Bandwidth - Last visit
+# The 10 first Pages must be first (order not required for others)
+BEGIN_LOGIN 0
+END_LOGIN
+
+# Robot ID - Hits - Bandwidth - Last visit - Hits on robots.txt
+# The 25 first Hits must be first (order not required for others)
+BEGIN_ROBOT 2
+googlebot 83 707151 20090731101536 0
+ia_archiver 2 21153 20090717003120 0
+END_ROBOT
+
+# Worm ID - Hits - Bandwidth - Last visit
+# The 5 first Hits must be first (order not required for others)
+BEGIN_WORMS 0
+END_WORMS
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first Hits must be first (order not required for others)
+BEGIN_EMAILSENDER 0
+END_EMAILSENDER
+
+# EMail - Hits - Bandwidth - Last visit
+# The 20 first hits must be first (order not required for others)
+BEGIN_EMAILRECEIVER 0
+END_EMAILRECEIVER
+
+# Files type - Hits - Bandwidth - Bandwidth without compression - Bandwidth after compression
+BEGIN_FILETYPES 9
+php 8 3725 0 0
+css 60 181884 0 0
+png 283 1865636 0 0
+html 106 1084891 0 0
+jpg 241 2417808 0 0
+js 108 783729 0 0
+Unknown 94 404602 0 0
+gif 170 1102853 0 0
+swf 2 90056 0 0
+END_FILETYPES
+
+# OS ID - Hits
+BEGIN_OS 3
+macosx 153
+winxp 918
+win2000 1
+END_OS
+
+# Browser ID - Hits
+BEGIN_BROWSER 6
+msie6.0 1
+firefox2.0.0.20 81
+firefox3.0.12 39
+msie7.0 791
+safari 114
+firefox3.0.1 46
+END_BROWSER
+
+# Screen size - Hits
+BEGIN_SCREENSIZE 0
+END_SCREENSIZE
+
+# Unknown referer OS - Last visit date
+BEGIN_UNKNOWNREFERER 0
+END_UNKNOWNREFERER
+
+# Unknown referer Browser - Last visit date
+BEGIN_UNKNOWNREFERERBROWSER 0
+END_UNKNOWNREFERERBROWSER
+
+# Origin - Pages - Hits 
+BEGIN_ORIGIN 6
+From0 21 26
+From1 0 0
+From2 3 3
+From3 0 0
+From4 186 1043
+From5 0 0
+END_ORIGIN
+
+# Search engine referers ID - Pages - Hits
+BEGIN_SEREFERRALS 1
+google 3 3
+END_SEREFERRALS
+
+# External page referers - Pages - Hits
+# The 25 first Pages must be first (order not required for others)
+BEGIN_PAGEREFS 0
+END_PAGEREFS
+
+# Search keyphrases - Number of search
+# The 10 first number of search must be first (order not required for others)
+BEGIN_SEARCHWORDS 3
+openfloor+technologies+inc. 1
+runpolitics+and+openfloor+technologies 1
+openfloor+technology 1
+END_SEARCHWORDS
+
+# Search keywords - Number of search
+# The 25 first number of search must be first (order not required for others)
+BEGIN_KEYWORDS 6
+openfloor 3
+technologies 2
+inc. 1
+runpolitics 1
+technology 1
+and 1
+END_KEYWORDS
+
+# Errors - Hits - Bandwidth
+BEGIN_ERRORS 3
+403 7 0
+302 111 0
+404 5 3620
+END_ERRORS
+
+# URL with 404 errors - Hits - Last URL referer
+BEGIN_SIDER_404 5
+/event/view/change_your_life_and_outlook_through_exercise 1 -
+/event/view/openfloor_demoqa 1 -
+/event/view/investor_connexion 1 -
+/event/view/motivation_weight_loss_while_training_for_a_triathlon 1 -
+/event/view/ab_group_demo 1 -
+END_SIDER_404
+
+# Host - Pages - Hits - Bandwidth - Last visit date - [Start date of last visit] - [Last page of last visit]
+# [Start date of last visit] and [Last page of last visit] are saved only if session is not finished
+# The 25 first Hits must be first (order not required for others)
+BEGIN_VISITOR 8
+221.239.1.25 63 318 2130210 20090721232451
+221.198.56.155 50 386 2974412 20090719031854
+24.10.247.189 25 114 421345 20090707023920
+71.199.50.65 24 81 736156 20090727203235
+67.80.223.84 19 39 323959 20090716133641
+155.97.220.164 15 46 422768 20090723210814
+218.68.246.181 13 87 921696 20090707023757
+89.28.14.35 1 1 4638 20090701074448
+END_VISITOR
+
+# Date - Pages - Hits - Bandwidth - Visits
+BEGIN_DAY 8
+20090701 1 1 4638 1
+20090702 3 18 220074 1
+20090707 46 266 1843760 3
+20090716 19 39 323959 1
+20090719 51 389 3037674 2
+20090721 51 232 1346155 1
+20090723 15 46 422768 1
+20090727 24 81 736156 1
+END_DAY
+
+# Session range - Number of visits
+BEGIN_SESSION 6
+5mn-15mn 1
+2mn-5mn 1
+30s-2mn 3
+0s-30s 4
+15mn-30mn 1
+30mn-1h 1
+END_SESSION
+
+# URL - Pages - Bandwidth - Entry - Exit
+# The 25 first Pages must be first (order not required for others)
+BEGIN_SIDER 53
+/ 98 1073996 6 6
+/user/login 13 73314 1 0
+/avatars/shrink.php 8 3725 0 0
+/forums/ajax_get_current_question/openfloor_demoqa 8 8 0 1
+/question/view/change_your_life_and_outlook_through_exercise/test001_22233666_fs_d 6 19884 0 0
+/fckeditor/editor/fckeditor.html 5 6243 0 2
+/contact/showForm/request_an_event 5 22231 0 0
+/forums/ajax_get_current_question/openfloor_demoqa/pod 4 35700 0 0
+/forums/cp/openfloor_demoqa 3 32139 3 0
+/forums/ajax_get_current_question/change_your_life_and_outlook_through_exercise 3 6 0 0
+/event/create_event 3 20202 0 0
+/forums/get_question_info/33 2 1536 0 0
+/question/view/change_your_life_and_outlook_through_exercise/test001_22233666_fs_d/date 2 19686 0 0
+/votes/who/33 2 1470 0 0
+/user/profile_ajax/10/1 2 800 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise 2 23172 0 0
+/event/admin_panel/5 2 9198 0 0
+/event/create_event/5/edit 2 14658 0 0
+/comment/addCommentAction/ 2 14 0 0
+/forums/ajax_get_current_question/change_your_life_and_outlook_through_exercise/pod 2 3860 0 0
+/user/profile/jimmy 2 9254 0 0
+/event/admin_panel_tab_ajax/5/1 2 1984 0 0
+/user/password_reset/na 2 8392 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1248741140866 1 8207 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions_count/1247987918984 1 1 0 0
+/flash/broadcast.swf 1 55780 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1247765797480 1 8207 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1248397704196 1 8207 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1248397694531 1 8207 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1248741140663 1 1 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions/pending/0/1248232836437 1 6876 0 0
+/forums/get_question_info/21 1 812 0 1
+/question/view/change_your_life_and_outlook_through_exercise/any_old_unhealthy_habits_you_had_that_seem_silly_to_look_back_on 1 5387 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1247765767332 1 1 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1248397694196 1 1 0 0
+/user/password_reset 1 4135 0 0
+/forums/ShowAnswer/3 1 101 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions/pending/0/1247987919796 1 7614 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions_count/1248233019296 1 1 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1247765768386 1 8207 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions_count/1248232826437 1 1 0 0
+/contact/showForm/contact_us 1 4679 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions_count/1248233011187 1 1 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions/pending/0/1248232827234 1 6876 0 0
+/forums/get_question_info/32 1 727 0 0
+/votes/who/32 1 740 0 0
+/flash/player.swf 1 34276 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions/asked/0/1248233011984 1 9105 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1248741114585 1 1 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1248741114788 1 8207 0 0
+/user/password_reset_form 1 3930 0 0
+/forums/cp/change_your_life_and_outlook_through_exercise/upcoming_questions/pending/0/1248233020265 1 6876 0 0
+/user/profile/danielwatrous/ 1 4638 1 1
+END_SIDER

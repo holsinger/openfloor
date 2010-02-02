@@ -1,0 +1,237 @@
+# Webalizer V2.01-10 Incremental Data - 01/11/2010 07:24:57
+2010 1 11 7 24 57
+123 64 14 16 4 16 222927 47 15 0
+3 2 29 1 11
+2 0 0 1 0 0
+5 2 1866 3 1 1
+4 2 4459 3 1 1
+1 0 0 1 0 0
+3 0 0 3 0 0
+19 6 25164 3 14 2
+19 16 59480 3 3 2
+41 24 98048 4 14 3
+21 11 29451 5 11 3
+5 2 4459 3 2 2
+3 1 0 3 1 1
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0
+0 0 0 0
+2 0 0 0
+32 18 76705 7
+6 1 1866 2
+5 2 1866 1
+0 0 0 0
+2 1 0 1
+11 6 21343 7
+0 0 0 0
+17 4 20705 12
+0 0 0 0
+0 0 0 0
+18 16 59480 2
+1 0 0 0
+0 0 0 0
+0 0 0 0
+5 2 4459 2
+3 2 4459 1
+3 2 4459 1
+1 0 0 1
+0 0 0 0
+17 10 27585 10
+0 0 0 0
+0
+0
+0
+64
+0
+0
+0
+0
+0
+0
+0
+4
+11
+0
+1
+0
+0
+0
+0
+0
+0
+43
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# -urls- 
+/wp-content/themes/openfloor/images/homeBlueBox1BG.jpg
+0 2 0 858 0 0
+/
+0 23 0 96969 11 2
+/wp-content/themes/openfloor/images/Logo-OpenFloorTechnologies.jpg
+0 3 0 27774 0 0
+/wp-content/themes/openfloor/images/titleBarBG.jpg
+0 2 0 712 0 0
+/wp-content/themes/openfloor/images/titleBarLeft.jpg
+0 2 0 1366 0 0
+/wp-content/themes/openfloor/style.css
+0 3 0 21984 0 0
+/wp-content/themes/openfloor/images/gradHome1.jpg
+0 2 0 9098 0 0
+/wp-content/themes/openfloor/favicon.ico
+0 2 0 1788 0 0
+/wp-content/themes/openfloor/images/homeBlueBox1Top.jpg
+0 2 0 4498 0 0
+/wp-content/themes/openfloor/images/SpacerClear.gif
+0 2 0 86 0 0
+/wp-cron.php
+0 8 0 0 0 0
+/wp-content/themes/openfloor/images/homeBlueBox1Bottom.jpg
+0 2 0 3874 0 0
+/wp-content/themes/openfloor/images/breadGrt.jpg
+0 2 0 932 0 0
+/wp-login.php
+0 6 0 10880 0 0
+/wp-content/themes/openfloor/images/navBG.jpg
+0 2 0 8464 0 0
+/wp-content/themes/openfloor/images/specialist.png
+0 2 0 33030 0 0
+# End Of Table - urls
+# -sites- (monthly)
+crawl-66-249-65-238.googlebot.com
+0 7 2 6325 2 1262545448
+/
+ng.aihit.com
+0 10 5 21343 1 1262940651
+/
+119.131.138.142
+0 1 0 0 0 0
+-
+ips-crawl4.colo-fo.ilg1.verisign.com
+0 15 8 26132 1 1263075065
+/
+c-98-202-141-217.hsd1.ut.comcast.net
+0 29 18 76705 1 1262921563
+/
+38.105.83.6
+0 1 0 0 1 1263194697
+/
+dime1001.dizinc.com
+0 8 8 0 0 0
+-
+ec2-72-44-37-138.compute-1.amazonaws.com
+0 15 4 20705 1 1262774141
+/
+119.131.137.238
+0 1 0 0 0 0
+-
+crawl-6c.cuil.com
+0 7 0 0 0 0
+-
+221.239.1.25
+0 2 0 0 2 1262923235
+-
+174-23-120-192.slkc.qwest.net
+0 17 15 59480 1 1262870836
+/
+crawl-66-249-71-85.googlebot.com
+0 6 2 6325 3 1263155998
+/
+www.whois.sc
+0 4 2 5912 2 1263075854
+/
+# End Of Table - sites (monthly)
+# -sites- (daily)
+38.105.83.6
+0 1 0 0 1 1263194697
+/
+dime1001.dizinc.com
+0 1 1 0 0 0
+-
+crawl-6c.cuil.com
+0 1 0 0 0 0
+-
+# End Of Table - sites (daily)
+# -referrers- 
+http://openfloor.info/
+0 37
+- (Direct Request)
+0 78
+http://whois.domaintools.com/openfloor.info
+0 2
+http://openfloor.info/wp-content/themes/openfloor/style.css
+0 5
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en; rv:1.9.0.13) Gec
+0 3
+Googlebot-Image/1.0
+0 2
+Mozilla/5.0 (X11; U; Linux i686; en-US; rv:1.9.1.3; ips-agent
+0 15
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9
+0 17
+Mozilla/4.0 (compatible; MSIE 7.0;  Windows NT 5.2)
+0 1
+Mozilla/5.0 (Twiceler-0.9 http://www.cuil.com/twiceler/robot.
+0 7
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.8.1.6; t
+0 1
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2
+0 2
+Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.0)
+0 1
+Mozilla/5.0 (iPhone; U; CPU like Mac OS X; en) AppleWebKit/42
+0 13
+Mozilla/5.0 (compatible; aiHitBot/1.0; +http://www.aihit.com/
+0 10
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-us) Appl
+0 29
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.co
+0 11
+WordPress/2.7.1
+0 8
+taptubot *** please read http://www.taptu.com/corp/taptubot *
+0 1
+Mozilla/4.0 (compatible; Windows XP 5.1; MSIE 6)
+0 2
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames

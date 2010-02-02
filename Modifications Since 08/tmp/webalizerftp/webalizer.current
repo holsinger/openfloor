@@ -1,0 +1,156 @@
+# Webalizer V2.01-10 Incremental Data - 01/13/2010 21:32:04
+2010 1 13 21 32 4
+90 90 1 17 0 0 1494859 0 0 1
+1 4 20 5 13
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+12 12 94044 1 0 0
+0 0 0 0 0 0
+40 40 303307 1 0 0
+34 34 1054537 1 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+4 4 42971 1 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+3 3 31088 0
+5 5 156267 0
+21 21 744017 0
+31 31 242637 0
+6 6 67855 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+0 0 0 0
+4 4 42971 0
+5 5 71230 0
+15 15 138794 0
+0
+0
+0
+90
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# -urls- 
+/home/openfloo/public_html/events/system/application/views/event/manage_events_two.php
+0 2 0 7140 0 0
+/home/openfloo/public_html/events/system/application/controllers/classroom.php
+0 8 0 20880 0 0
+/home/openfloo/public_html/events/.tmp_index.html~
+0 8 0 17624 0 0
+/home/openfloo/public_html/events/system/application/views/classroom/add_classroom.php
+0 1 0 1246 0 0
+/home/openfloo/public_html/events/system/application/config/config.php
+0 19 0 196354 0 0
+/home/openfloo/public_html/events/system/application/views/themes/openfloor/header.php
+0 1 0 3321 0 0
+/home/openfloo/public_html/events/system/application/models/classroom_model.php
+0 5 0 20605 0 0
+/home/openfloo/public_html/events/system/application/views/view_create_account.php
+0 2 0 4710 0 0
+/home/openfloo/public_html/events/system/application/controllers/event.php
+0 1 0 35065 0 0
+/home/openfloo/public_html/events/system/application/views/event/manage_events_three.php
+0 2 0 9071 0 0
+/home/openfloo/public_html/events/system/application/views/classroom/enroll_students.php
+0 2 0 3950 0 0
+/home/openfloo/public_html/events/system/application/views/event/view_events.php
+0 1 0 7399 0 0
+/home/openfloo/public_html/events/system/application/views/event/admin_panel.php
+0 4 0 4594 0 0
+/home/openfloo/public_html/events/system/application/controllers/user.php
+0 27 0 1049161 0 0
+/home/openfloo/public_html/events/system/application/views/classroom/view_classroom.php
+0 1 0 1935 0 0
+/home/openfloo/public_html/events/system/application/controllers/forums.php
+0 1 0 51077 0 0
+/home/openfloo/public_html/events/system/application/views/event/manage_events_one.php
+0 5 0 60727 0 0
+# End Of Table - urls
+# -sites- (monthly)
+221.239.1.25
+0 90 90 1494859 0 0
+-
+# End Of Table - sites (monthly)
+# -sites- (daily)
+221.239.1.25
+0 4 4 42971 0 0
+-
+# End Of Table - sites (daily)
+# -referrers- 
+# End Of Table - referrers
+# -agents- 
+# End Of Table - agents
+# -search strings- 
+# End Of Table - search strings
+# -usernames- 
+openfloo
+0 90 90 1494859 1 0
+# End Of Table - usernames

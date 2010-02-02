@@ -1,0 +1,496 @@
+@CHARSET "ISO-8859-1";
+/**********video box**************/
+#blogBar-bar,
+#newsBar-bar,
+#videoControl {
+	width:80%;	
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.statusBox_gsblb,
+.statusBox_gsnb,
+.tagStackBox_gsvsc {
+	text-align:center;
+}
+
+/* text color settings */
+
+/* primary colors */
+.app_gsvsc {                                                    color : #F04A54; }
+.search-form-complete_gsvsc div.search-form-save_gsvsc {        color : #F04A54; }
+div.search-form-save_gsvsc {                                    color : #e0e0e0; }
+div.edit-tag_gsvsc {                                            color : #F04A54; }
+.footerBox_gsvsc a {                                            color : #F04A54; }
+.playerBox_gsvsc a.title_gsvsc {                                color : #F04A54; }
+div.more_gsvsc:hover {                                          color : #F04A54; }
+
+/* selected tag */
+div.tag-selected_gsvsc {                                        color : #053C7C; }
+
+/* hover colors */
+div.tag-control_gsvsc:hover {                                   color : #7777cc; }
+
+/* secondary colors */
+div.tag-control_gsvsc {                                         color : #676767; }
+.searchForm_gsvsc {                                             color : #676767; }
+.searchForm_gsvsc input.gsc-input {                             color : #676767; }
+.search-form-input_gsvsc {                                      color : #676767; }
+div.edit-form-submit-box_gsvsc {                                color : #676767; }
+
+/* image border color */
+.results_gsvsc div.video-result_gsvsc {                  border-color : #0000cc; }
+
+.app_gsvsc td {
+  vertical-align : top;
+  border : none;
+}
+
+div.tag-control_gsvsc {
+  display : inline;
+  font-size : 11px;
+  cursor : pointer;
+  margin-right : 8px;
+}
+
+div.more_gsvsc {
+  display : inline;
+  cursor : pointer;
+  margin-right : 8px;
+  text-decoration : underline;
+}
+
+div.tag-control_gsvsc:hover {
+  text-decoration : underline;
+}
+
+td.tag-control_gsvsc  {
+  padding-top : 2px;
+}
+
+td.tag-control_gsvsc div.tag-control_gsvsc {
+  font-size : 10px;
+  cursor : pointer;
+  margin-right : 8px;
+  font-weight : 400;
+}
+
+
+/*
+ * visibility states of the more
+ * - edit visible while reading
+ * - edit invisible while playing
+ * - more invisible unles playing
+ */
+.reading_gsvsc .more_gsvsc,
+.editing_gsvsc .more_gsvsc,
+.searching_gsvsc .more_gsvsc {
+  display : none;
+}
+
+.playing_gsvsc .more_gsvsc {
+  text-align : center;
+  display : block;
+}
+
+/*
+ * visibility states of the readBox
+ * - visible while reading and searching and playing (default)
+ * - none while editing
+ */
+.readBox_gsvsc {
+  display : block;
+}
+.editing_gsvsc .readBox_gsvsc {
+  display : none;
+}
+
+/*
+ * visibility states of the editBox
+ * - none while reading and searching
+ * - visible while editing (default)
+ */
+.editBox_gsvsc {
+  display : none;
+}
+.editing_gsvsc .editBox_gsvsc {
+  display : block;
+}
+
+/*
+ * visibility states of the tagStack
+ * - visible while reading, searching
+ * - none while playing
+ */
+.tagStack_gsvsc {
+  display : block;
+  margin-top : 4px;
+  margin-bottom : 4px;
+}
+
+.playing_gsvsc .tagStack_gsvsc {
+  display : none;
+}
+
+/*
+ * visibility states of the player
+ * - visible while playing (default)
+ * - none while all other times (default)
+ */
+.playerBox_gsvsc {
+  display : none;
+}
+
+.playing_gsvsc .playerBox_gsvsc {
+  display : block;
+  margin-top : 4px;
+  margin-bottom : 4px;
+  margin-right : -16px;
+  text-align : center;
+}
+
+/* keep a 1.33 ratio
+ * (on widths > 300px, add 20px in height for controls)
+ * small player:        180x135   4:3
+ * medium player:       260x195   4:3
+ * large player:        320x260   4:3 + 20px at bottom
+ * extra large player:  480x380   4:3 + 20px at bottom
+ */
+.playerBox_gsvsc .player_gsvsc {
+  width : 260px;
+  height : 195px;
+}
+
+.playerBox_gsvsc div.title_gsvsc {
+  text-align : center;
+  margin-top : 2px;
+}
+
+.playerBox_gsvsc a.title_gsvsc {
+  text-decoration : underline;
+}
+
+/*
+ * visibility states of the searchForm
+ * - visible while reading, searching
+ * - none while editing, playing
+ */
+.editing_gsvsc .searchForm_gsvsc,
+.playing_gsvsc .searchForm_gsvsc {
+  display : none;
+}
+.reading_gsvsc .searchForm_gsvsc,
+.searching_gsvsc .searchForm_gsvsc {
+  display : block;
+}
+
+/* search form controls */
+.searchForm_gsvsc table.gsc-search-box {
+  border-style : none;
+  border-width : 0px;
+  border-spacing : 0px 0px;
+  width : 100%;
+  margin-bottom : 2px;
+}
+
+.searchForm_gsvsc table.gsc-search-box td {
+  vertical-align : middle;
+}
+
+.searchForm_gsvsc td.gsc-search-button {
+  width : 1%;
+}
+
+.searchForm_gsvsc td.gsc-clear-button {
+  width : 14px;
+}
+
+.searchForm_gsvsc table.gsc-branding {
+  border-style : none;
+  border-width : 0px;
+  border-spacing : 0px 0px;
+  width : 100%;
+}
+
+.searchForm_gsvsc td.gsc-branding-text {
+  vertical-align : top;
+}
+
+.searchForm_gsvsc td.gsc-branding-text div.gsc-branding-text {
+  padding-bottom : 2px;
+  text-align : right;
+  color : #676767;
+  font-size : 10px;
+  margin-right : 2px;
+}
+
+.searchForm_gsvsc td.gsc-branding-img-noclear {
+  width : 51px;
+  vertical-align : bottom;
+}
+
+.searchForm_gsvsc td.gsc-branding-img {
+  width : 65px;
+  vertical-align : bottom;
+}
+
+.searchForm_gsvsc div.gsc-branding-img,
+.searchForm_gsvsc div.gsc-branding-img-noclear,
+.searchForm_gsvsc img.gsc-branding-img,
+.searchForm_gsvsc img.gsc-branding-img-noclear {
+  padding-top : 1px;
+}
+
+.searchForm_gsvsc input.gsc-search-button {
+  margin-left : 4px;
+  cursor : pointer;
+}
+
+.searchForm_gsvsc input.gsc-input {
+  padding-left : 2px;
+  border-style : solid;
+  border-width : 1px;
+  width : 99%;
+}
+
+.searchForm_gsvsc form {
+  margin-top : 2px;
+  margin-bottom : 2px;
+}
+
+div.search-form-save_gsvsc {
+  font-size : 10px;
+  text-align : left;
+  cursor : pointer;
+}
+
+.search-form-complete_gsvsc div.search-form-save_gsvsc {
+  text-decoration : underline;
+}
+
+/* edit form controls */
+.editBox_gsvsc table {
+  width : 100%;
+  padding-top : 4px;
+  padding-bottom : 4px;
+  border : 1px solid #e0e0e0;
+  border-spacing : 0px 0px;
+}
+
+.editBox_gsvsc tr {
+  margin-top : 2px;
+  margin-bottom : 2px;
+}
+
+.editBox_gsvsc tr.odd_gsvsc {
+  background-color : #f9f9f9;
+}
+
+tr.edit-form-delete_gsvsc {
+  display : none;
+}
+
+td.edit-form-input_gsvsc input {
+  font-size : 10px;
+  padding-left : 2px;
+  margin-right : 4px;
+  width : 50%;
+}
+
+div.edit-form-input-box_gsvsc {
+  margin-left : 4px;
+  margin-top : 2px;
+  margin-bottom : 2px;
+}
+
+div.edit-form-submit-box_gsvsc {
+  margin-top : 4px;
+  text-align : left;
+}
+
+div.edit-form-submit-box_gsvsc input {
+  font-size : 10px;
+  margin-right : 6px;
+}
+
+/* footer */
+.footerBox_gsvsc {
+  clear : both;
+  margin-top : 4px;
+  margin-bottom : 0px;
+  text-align : center;
+}
+
+.footerBox_gsvsc table {
+  width : 100%;
+}
+
+.footerBox_gsvsc td.footer-link_gsvsc {
+  text-align : right;
+}
+
+.footerBox_gsvsc td.footer-edit_gsvsc {
+  text-align : left;
+}
+
+.footerBox_gsvsc a {
+  font-size : 10px;
+  cursor : pointer;
+  text-decoration : underline;
+}
+
+/* visibility states
+ * visible while reading,
+ * invisible while playing, editing
+ */
+
+.searching_gsvsc div.edit-tag_gsvsc,
+.reading_gsvsc div.edit-tag_gsvsc {
+  display : block;
+}
+
+.editing_gsvsc div.edit-tag_gsvsc,
+.playing_gsvsc div.edit-tag_gsvsc {
+  display : none;
+}
+
+div.edit-tag_gsvsc {
+  font-size : 11px;
+  cursor : pointer;
+  text-decoration : underline;
+}
+
+
+/* results */
+.results_gsvsc {
+  margin-left : 0px;
+}
+
+/* display states:
+ * off while playing and editing, on everytime else
+ */
+
+.editing_gsvsc .results_gsvsc,
+.playing_gsvsc .results_gsvsc {
+  display : none;
+}
+
+.searching_gsvsc .results_gsvsc,
+.reading_gsvsc .results_gsvsc {
+  display : block;
+}
+
+.results_gsvsc div.video-result_gsvsc {
+  border-width : 1px;
+  border-style : solid;
+  background-color : #000000;
+  height : 79px;
+  width : 104px;
+  text-align : center;
+}
+
+.results_gsvsc div.video-result_gsvsc img {
+  cursor : pointer;
+}
+
+.results_gsvsc table.video-result-table_gsvsc {
+  width : 100%
+}
+
+.results_gsvsc table.video-result-table_gsvsc td {
+  padding : 4px;
+}
+
+.results_gsvsc table.video-result-table_gsvsc-2 td {
+  width : 50%;
+}
+
+.results_gsvsc table.video-result-table_gsvsc-2 td {
+  width : 33%;
+}
+
+/* two column table, align right/left */
+.results_gsvsc table.video-result-table_gsvsc-2 td.video-result-cell_gsvsc-0 div {
+  float : right;
+}
+.results_gsvsc table.video-result-table_gsvsc-2 td.video-result-cell_gsvsc-1 div {
+  float : left;
+}
+
+/* tiny results */
+/* display states:
+ * on while playing, off everytime else
+ */
+.playing_gsvsc .tiny-results_gsvsc {
+  display : block;
+}
+
+.searching_gsvsc .tiny-results_gsvsc,
+.editing_gsvsc .tiny-results_gsvsc,
+.reading_gsvsc .tiny-results_gsvsc {
+  display : none;
+}
+
+.tiny-results_gsvsc {
+  margin-left : 0px;
+}
+
+.tiny-results_gsvsc div.tiny-video-result_gsvsc {
+  border : 1px solid #0000cc;
+  background-color : #000000;
+  height : 41px;
+  width : 54px;
+  text-align : center;
+}
+
+.tiny-results_gsvsc div.tiny-video-result_gsvsc img {
+  cursor : pointer;
+}
+
+.tiny-results_gsvsc table.video-result-table_gsvsc {
+  width : 100%
+}
+
+.tiny-results_gsvsc table.video-result-table_gsvsc td {
+  padding : 4px;
+}
+
+.results_gsvsc table.video-result-table_gsvsc-4 td {
+  width : 25%;
+}
+
+.results_gsvsc table.video-result-table_gsvsc-6 td {
+  width : 16%;
+}
+
+/* tags */
+div.tag_gsvsc {
+  display : inline;
+  margin-right : 6px;
+  cursor : pointer;
+}
+div.tag_gsvsc:hover {
+  text-decoration : underline;
+}
+
+div.tag-selected_gsvsc {
+  font-weight : bold;
+}
+
+div.tag-selected_gsvsc:hover {
+  text-decoration : none;
+}
+
+div.tag_gsvsc-0 {
+  font-size : 10px;
+}
+
+div.tag_gsvsc-1 {
+  font-size : 10px;
+}
+
+div.tag_gsvsc-2 {
+  font-size : 10px;
+}
+
+

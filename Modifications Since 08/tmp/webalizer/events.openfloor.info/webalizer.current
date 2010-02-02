@@ -1,0 +1,552 @@
+# Webalizer V2.01-10 Incremental Data - 01/14/2010 23:08:04
+2010 1 14 23 8 4
+4346 2445 13 142 37 12 25225705 887 55 0
+5 2 408 1 14
+4 1 10639 1 1 1
+4 2 15573 1 3 1
+0 0 0 0 0 0
+285 140 1686401 4 47 6
+873 341 3393195 4 135 8
+1 0 0 1 0 0
+1424 948 9590910 4 322 12
+1254 749 7540796 3 284 5
+3 1 11115 1 1 1
+0 0 0 0 0 0
+3 1 11115 1 1 1
+6 3 25122 2 3 3
+251 174 2050740 5 42 11
+238 85 890099 5 48 7
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+234 140 1532129 44
+658 193 1844511 115
+435 263 2705682 83
+787 459 5418273 116
+570 294 3628731 92
+114 96 515403 65
+3 1 11115 1
+0 0 0 0
+9 4 41809 4
+6 4 31812 5
+0 0 0 0
+0 0 0 0
+4 1 11115 1
+168 123 1333192 28
+71 46 555933 15
+0 0 0 0
+23 6 61398 6
+88 72 888317 18
+0 0 0 0
+2 1 5658 2
+19 12 130301 3
+501 358 2217027 213
+487 266 3141365 53
+167 106 1151934 23
+0
+0
+0
+2445
+0
+0
+0
+0
+0
+0
+0
+0
+341
+0
+1487
+0
+0
+0
+0
+0
+57
+16
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+0
+# -urls- 
+/fckeditor/editor/skins/office2003/fck_editor.css
+0 14 0 15996 0 0
+/user/profile_ajax/274/1
+0 1 0 403 0 0
+/
+0 354 0 4026028 33 22
+/user/create
+0 1 0 4911 0 0
+/javascript/inline_label.js
+0 2 0 491 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/loading.gif
+0 227 0 1899792 0 0
+/images/many_one/bg_contentRoundTopLarge.gif
+0 4 0 1970 0 0
+/css/scal.css
+0 5 0 7926 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916731171
+0 1 0 1 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/next.png
+0 205 0 1877040 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917231171
+0 1 0 1 0 0
+/event/create_event/6
+0 4 0 31267 0 0
+/fckeditor/editor/skins/office2003/fck_strip.gif
+0 7 0 18060 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/slideshow_play.jpg
+0 227 0 1911168 0 0
+/fckeditor/editor/images/spacer.gif
+0 7 0 86 0 0
+/event/admin_panel_tab_ajax/6/1
+0 9 0 6801 0 1
+/event/admin_panel_tab_ajax/6/2
+0 3 0 1881 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1262944879410
+0 1 0 7792 0 0
+/event/admin_panel_tab_ajax/6/3
+0 2 0 744 0 0
+/user/createAccount
+0 2 0 9967 1 1
+/forums/cp/openfloor_demoqa
+0 5 0 61217 0 0
+/logout/
+0 7 0 88909 0 0
+/images/image01.jpg
+0 1 0 754 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916831171
+0 1 0 1 0 0
+/javascript/protoculous.js
+0 205 0 449262 0 0
+/user/webct
+0 6 0 49001 1 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917331171
+0 1 0 1 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1262916433953
+0 1 0 7792 0 0
+/user/profile
+0 3 0 17775 0 0
+/javascript/scal.js
+0 5 0 12891 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916931171
+0 1 0 1 0 0
+/fckeditor/editor/skins/office2003/images/toolbar.start.gif
+0 7 1019517982389636740 198 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917431171
+0 1 0 1 0 0
+/user/profile/danielwatrous/true
+0 1 0 1005 0 0
+/event/create_event/none/ignore
+0 1 0 7888 0 0
+/forums/ajax_get_current_question/openfloor_demoqa/pod
+0 3 0 10287 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917531171
+0 1 0 1 0 0
+/system/application/views/themes/openfloor/logo_head.png
+0 157 0 66308 0 0
+/fckeditor/editor/skins/office2003/images/toolbar.collapse.gif
+0 7 0 304 0 0
+/css/lightview.css,openfloor_globalReset.css,openfloor_global.css,openfloor_event.css
+0 4 72057594037957988 40347 0 0
+/css/lightview.css,openfloor_globalReset.css,openfloor_global.css,tabs.css
+0 13 7308330023623536179 23824 0 0
+/images/openfloor/thumbsDown.png
+0 3 3761118349668215927 1838 0 0
+/fckeditor/editor/skins/office2003/images/toolbar.buttonarrow.gif
+0 7 7146777680424561767 92 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917631171
+0 1 3473455287157337649 1 0 0
+/fckeditor/editor/skins/office2003/images/toolbar.expand.gif
+0 7 3615880538616390002 304 0 0
+/images/many_one/button_add_speaker.png
+0 6 8242431743018139648 2396 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/blank.gif
+0 177 3330750789545506305 1547136 0 0
+/user/profile/Daniel
+0 1 7811334602960548149 6137 0 0
+/feed/events
+0 1 8602282532781686784 3469 0 0
+/css/lightview.css,openfloor_globalReset.css,openfloor_global.css,openfloor_events.css
+0 100 3906310826302111744 145704 0 0
+/fckeditor/editor/skins/office2003/images/toolbar.bg.gif
+0 7 3258126942707265842 146 0 0
+/images/openid-icon-small.gif
+0 9 3342631266946021732 948 0 0
+/user/profile/danielwatrous
+0 1 8747167178029425712 5823 1 0
+/event/show_user_info_ajax/274
+0 2 8026089002193874791 98 0 0
+/images/many_one/bg_contentRoundTop.gif
+0 27 3834301856464645430 7580 0 0
+/avatars/bed37572804fea2f85eaaba4a2291101.jpg
+0 12 3329624889621493297 3241 0 0
+/flash/broadcast.swf
+0 3 19007 111560 0 0
+/classroom/enroll_stu/1
+0 16 3344050771052424300 859803 3 1
+/forums/cp/openfloor_demoqa/upcoming_questions/pending/0/1262916513531
+0 1 4120847733591519790 7792 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917731171
+0 1 7939411232004730223 1 0 0
+/javascript/password_strength_validator.js
+0 2 0 1431 0 0
+/user/createAccountOI
+0 1 18446744073709551615 5687 1 1
+/images/ucp/comments-tab.jpg
+0 3 800527104677645168 30236 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,lightview.js,userWindow.js,cpUpdater.js,lazy_loader.js,loa
+0 4 3330474600898232320 90789 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/overlay.png
+0 41 3977578065578896697 56880 0 0
+/user/profile/danielwatrous/images/image01.jpg
+0 1 3328552046435383347 1005 0 0
+/event/user_name_from_search_ajax
+0 3 3258689875564900608 363 0 0
+/css/tabs.css
+0 1 323023035137 630 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/close_large.jpg
+0 208 3615607894074130432 1888416 0 0
+/images/openfloor/highlight.png
+0 123 21155059958102321 9383 0 0
+/forums/cp/sadf
+0 3 0 10680 0 0
+/images/many_one/bg_contentRoundTopSmall.gif
+0 3 3328781559925389102 1494 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917831171
+0 1 7163376947542189102 1 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262945079041
+0 1 3543824069855622194 1 0 0
+/fckeditor/editor/js/fckeditorcode_ie.js
+0 7 4913679 321578 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916513015
+0 1 32762621198627681 1 0 0
+/event/admin_panel_tab_ajax/7/1
+0 1 8462877727235400038 758 0 1
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262945179014
+0 1 8391173023188647936 1 0 0
+/user/profile/jimmy
+0 9 3330750789545113601 49241 1 0
+/images/openfloor/ajax-loader.gif
+0 5 11805343326258933302 2136 0 0
+/javascript/dynamic_tabs.js
+0 2 3906310826302111744 673 0 0
+/images/many_one/bg_contentRoundBottom.gif
+0 27 3761119449176932352 5595 0 0
+/images/openfloor/thumbsUp.png
+0 3 3329625984855061249 1664 0 0
+/forums/cp/sadf/upcoming_questions_count/1262683015500
+0 1 14920989860665830962 1 0 0
+/classroom/view/1
+0 10 8315947526656964665 57952 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/topclose.png
+0 208 7074654969494778673 1899792 0 0
+/images/many_one/button_ask_question.png
+0 5 7311436964109708403 4770 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/close_innertop.jpg
+0 208 18969 1888416 0 0
+/event/create_event_three/3
+0 1 3329344497060426286 8183 1 0
+/event/create_event_three/6
+0 4 0 33771 0 0
+/event/create_event_three/7
+0 1 0 8419 0 0
+/fckeditor/editor/css/fck_editorarea.css
+0 7 0 3900 0 0
+/event/create_event_two/4
+0 1 0 6090 1 1
+/event/create_event_two/5
+0 1 0 6117 1 1
+/event/create_event_two/6
+0 7 0 43771 0 0
+/event/create_event_two/7
+0 1 0 5950 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262945279036
+0 1 0 1 0 0
+/event/create_event
+0 12 0 102410 0 1
+/images/openfloor/refresh.png
+0 1 0 0 0 0
+/user/profile_ajax/10/1
+0 12 0 6272 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262944879006
+0 1 0 1 0 0
+/forums/cp/sadf/upcoming_questions_count/1262683115516
+0 1 0 1 0 0
+/avatars/shrink.php
+0 3 0 2235 0 0
+/fckeditor/editor/fckeditor.html
+0 7 0 12486 0 1
+/user/login
+0 26 0 175831 1 2
+/event/create_event/3/edit
+0 1 0 8056 0 1
+/fckeditor/editor/skins/office2003/images/toolbar.end.gif
+0 7 0 248 0 0
+/captcha/1262917874.42.jpg
+0 1 0 2494 0 0
+/fckeditor/editor/css/fck_internal.css
+0 7 0 4878 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,lightview.js,userWindow.js,dynamic_tabs.js
+0 18 0 71010 0 0
+/forums/cp/sadf/upcoming_questions_count/1262683215516
+0 1 0 1 0 0
+/fckeditor/fckconfig.js
+0 7 0 20998 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916431171
+0 1 0 1 0 0
+/forums/cp/sadf/upcoming_questions/pending/0/1262683016375
+0 1 0 172 0 0
+/i/nav_sep.gif
+0 19 0 242223 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262944979055
+0 1 0 1 0 0
+/forums/cp/sadf/upcoming_questions_count/1262683315516
+0 1 0 1 0 0
+/event/admin_panel/6
+0 6 0 30279 0 0
+/event/admin_panel/7
+0 1 0 5003 0 0
+/forums/ajax_get_current_question/openfloor_demoqa
+0 192 0 384 1 3
+/user/profile/clifflyon
+0 1 0 5836 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,lightview.js,userWindow.js,scal.js
+0 11 0 54396 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916531171
+0 1 0 1 0 0
+/classroom/add
+0 3 0 15950 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,lightview.js,userWindow.js,inline_label.js,password_streng
+0 4 0 49262 0 0
+/contact/showForm/request_an_event
+0 4 0 20682 1 0
+/user/complete
+0 1 0 4027 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917031171
+0 1 0 1 0 0
+/event/search_candidate/5
+0 1 0 7301 1 1
+/event/search_candidate/6
+0 1 0 7632 0 0
+/forums/cp/sadf/upcoming_questions/pending/0/1262683315688
+0 1 0 172 0 0
+/fckeditor/editor/lang/zh-cn.js
+0 7 0 33310 0 0
+/css/lightview.css,openfloor_globalReset.css,openfloor_global.css
+0 61 0 80262 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/close_small.jpg
+0 207 0 1888416 0 0
+/flash/player.swf
+0 1 0 0 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,../images/lightview/prev.png
+0 227 0 1899792 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262916631171
+0 1 0 1 0 0
+/event
+0 25 0 311140 0 0
+/images/openfloor/upcoming_event_calendar.png
+0 78 0 38973 0 0
+/forums/cp/openfloor_demoqa/upcoming_questions_count/1262917131171
+0 1 0 1 0 0
+/javascript/init.js,ajaxVideo.js,queueUpdater.js,clock.js,effects.js,lightview.js,userWindow.js
+0 169 0 277488 0 0
+/forums/widget/motivation_weight_lose_while_training_for_a_triathlon
+0 2 0 24556 2 1
+# End Of Table - urls
+# -sites- (monthly)
+crawl-66-249-65-227.googlebot.com
+0 18 5 49662 4 1262583874
+-
+c-98-202-141-217.hsd1.ut.comcast.net
+0 65 29 344787 1 1262921526
+/
+67-42-79-140.bois.qwest.net
+0 24 20 244491 1 1262873721
+/
+c-98-202-82-20.hsd1.ut.comcast.net
+0 28 5 55575 1 1263506233
+/
+norton.utah.edu
+0 40 32 392734 1 1263403535
+/
+crawl-66-249-65-37.googlebot.com
+0 4 2 17069 2 1262699156
+/user/profile/clifflyon
+89-28-14-35.starnet.md
+0 1 1 5823 1 1262624077
+/user/profile/danielwatrous
+ec2-75-101-221-99.compute-1.amazonaws.com
+0 14 8 60065 7 1263510484
+/user/login
+crawl-66-249-71-237.googlebot.com
+0 20 11 91537 8 1263508174
+/user/profile/danielwatrous/true
+c-67-182-228-138.hsd1.ut.comcast.net
+0 744 190 2020443 8 1263486462
+/
+221.239.1.25
+0 3220 2020 20621738 19 1263432766
+/
+174-23-120-192.slkc.qwest.net
+0 165 121 1316123 1 1262871248
+/
+crawl-66-249-65-13.googlebot.com
+0 3 1 5658 1 1262721557
+/user/login
+# End Of Table - sites (monthly)
+# -sites- (daily)
+c-98-202-82-20.hsd1.ut.comcast.net
+0 28 5 55575 1 1263506233
+/
+ec2-75-101-221-99.compute-1.amazonaws.com
+0 4 2 17936 1 1263510484
+/user/login
+crawl-66-249-71-237.googlebot.com
+0 3 2 12120 1 1263508174
+/user/profile/danielwatrous/true
+c-67-182-228-138.hsd1.ut.comcast.net
+0 166 54 546332 3 1263486462
+/
+221.239.1.25
+0 37 22 258136 1 1263432766
+/
+# End Of Table - sites (daily)
+# -referrers- 
+- (Direct Request)
+0 251
+http://events.openfloor.info/event/create_event/none/ignore
+0 16
+http://events.openfloor.info/event/create_event
+0 208
+https://vistalab.uen.org/webct/urw/lc8338635021.tp8344533021/ptLaunch.dowebct
+0 1
+http://events.openfloor.info/forums/cp/sadf
+0 28
+http://events.openfloor.info/forums/cp/openfloor_demoqa
+0 315
+http://events.openfloor.info/css/lightview.css,openfloor_globalReset.css,openfloor_global.css,openfloor_event.css
+0 7
+http://events.openfloor.info/css/lightview.css,openfloor_globalReset.css,openfloor_global.css,openfloor_events.css
+0 33
+http://www.google.com/search
+0 1
+http://events.openfloor.info/contact/showForm/request_an_event
+0 84
+http://events.openfloor.info/classroom/add
+0 53
+http://events.openfloor.info/user/complete
+0 17
+http://events.openfloor.info/event/create_event_two/6
+0 124
+http://events.openfloor.info/event/create_event_two/7
+0 16
+http://events.openfloor.info/user/profile
+0 54
+http://events.openfloor.info/fckeditor/editor/fckeditor.html
+0 98
+http://events.openfloor.info/user/profile/danielwatrous
+0 1
+http://events.openfloor.info/user/login
+0 334
+http://events.openfloor.info/user/createAccount
+0 17
+http://events.openfloor.info/event/search_candidate/6
+0 21
+http://events.openfloor.info/user/profile/Daniel
+0 27
+http://events.openfloor.info//
+0 107
+http://events.openfloor.info/classroom/view/1
+0 167
+http://events.openfloor.info/classroom/enroll_stu/1
+0 217
+https://vistalab.uen.org/webct/urw/lc8338635021.tp8344533021/courseMenu.dowebct
+0 4
+http://events.openfloor.info/event/create_event_three/6
+0 75
+http://events.openfloor.info/event/create_event_three/7
+0 15
+http://events.openfloor.info/css/lightview.css,openfloor_globalReset.css,openfloor_global.css
+0 26
+http://events.openfloor.info/logout/
+0 103
+http://events.openfloor.info/
+0 1115
+http://events.openfloor.info/user/create
+0 15
+http://events.openfloor.info/event/create_event/6
+0 82
+http://events.openfloor.info/user/webct
+0 66
+http://events.openfloor.info/user/profile/jimmy
+0 126
+http://events.openfloor.info/event
+0 381
+http://events.openfloor.info/event/admin_panel/6
+0 126
+http://events.openfloor.info/event/admin_panel/7
+0 15
+# End Of Table - referrers
+# -agents- 
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-us) Appl
+0 675
+Googlebot-Image/1.0
+0 14
+Mozilla/5.0 (Windows; U; Windows NT 5.1; zh-CN; rv:1.9.0.16) 
+0 290
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10.6; en-US; rv:1.9
+0 165
+Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 2
+0 2760
+Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US) AppleWebKit/5
+0 194
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_5_8; en-us) Appl
+0 65
+Mozilla/5.0 (Macintosh; U; Intel Mac OS X 10_6_2; en-US) Appl
+0 97
+Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.co
+0 31
+Mozilla/4.0 (compatible; MSIE 5.5; Windows 95; BCD2000)
+0 1
+ia_archiver (+http://www.alexa.com/site/help/webmasters; craw
+0 14
+Mozilla/5.0 (X11; U; FreeBSD i386; en-US; rv:1.8.1) Gecko/200
+0 40
+# End Of Table - agents
+# -search strings- 
+openfloor technologies
+1
+# End Of Table - search strings
+# -usernames- 
+# End Of Table - usernames
